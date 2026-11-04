@@ -1,0 +1,35 @@
+@baseUrl = http://127.0.0.1:4000/api
+@accessToken = PASTE_ACCESS_TOKEN_HERE
+
+### Health
+GET {{baseUrl}}/health
+
+### Login
+POST {{baseUrl}}/admin/auth/login
+Content-Type: application/json
+
+{
+  "email": "YOUR_ADMIN_EMAIL",
+  "password": "YOUR_ADMIN_PASSWORD"
+}
+
+### Current admin
+GET {{baseUrl}}/admin/auth/me
+Authorization: Bearer {{accessToken}}
+
+### Refresh access token
+POST {{baseUrl}}/admin/auth/refresh
+
+### Logout current refresh session
+POST {{baseUrl}}/admin/auth/logout
+
+### Logout all admin sessions
+POST {{baseUrl}}/admin/auth/logout-all
+Authorization: Bearer {{accessToken}}
+
+### Public vocabulary list - published only
+GET {{baseUrl}}/vocabulary
+
+### Admin vocabulary list - drafts and published
+GET {{baseUrl}}/vocabulary/admin
+Authorization: Bearer {{accessToken}}

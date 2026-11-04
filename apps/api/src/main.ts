@@ -1,8 +1,8 @@
 import { StandardSchemaValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-
 import { AppModule } from './app.module.js';
 
 async function bootstrap() {
@@ -10,11 +10,11 @@ async function bootstrap() {
     bufferLogs: true,
   });
 
-  const config = app.get(ConfigService);
+  app.use(cookieParser());
 
+  const config = app.get(ConfigService);
   const port = config.get<number>('PORT', 4000);
   const apiPrefix = config.get<string>('API_PREFIX', 'api');
-
   const corsOrigins = config
     .get<string>(
       'CORS_ORIGINS',
@@ -48,14 +48,10 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix(apiPrefix);
-
   app.enableShutdownHooks();
 
   await app.listen(port, '127.0.0.1');
-
-  console.log(
-    `API running at http://127.0.0.1:${port}/${apiPrefix}`,
-  );
+  console.log(`API running at http://127.0.0.1:${port}/${apiPrefix}`);
 }
 
 void bootstrap();

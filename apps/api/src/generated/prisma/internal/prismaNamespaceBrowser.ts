@@ -455,6 +455,7 @@ export const AdminUserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   role: 'role',
   isActive: 'isActive',
+  authVersion: 'authVersion',
   lastLoginAt: 'lastLoginAt',
   passwordChangedAt: 'passwordChangedAt',
   createdAt: 'createdAt',

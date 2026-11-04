@@ -7,9 +7,11 @@ datasource db {
   provider = "mysql"
 }
 
-/* =========================================================
-   ENUMS
-   ========================================================= */
+/**
+ * =========================================================
+ * ENUMS
+ * =========================================================
+ */
 
 enum AppLevel {
   A1
@@ -131,9 +133,11 @@ enum MasteryLevel {
   MASTERED
 }
 
-/* =========================================================
-   APP / LEVEL
-   ========================================================= */
+/**
+ * =========================================================
+ * APP / LEVEL
+ * =========================================================
+ */
 
 model App {
   id    String   @id @default(cuid())
@@ -147,22 +151,22 @@ model App {
 
   description String? @db.Text
 
-  iconUrl       String? @db.Text
-  primaryColor  String?
+  iconUrl        String? @db.Text
+  primaryColor   String?
   secondaryColor String?
 
   isActive Boolean @default(true)
 
-  courses       Course[]
-  categories    VocabularyCategory[]
-  vocabularies  Vocabulary[]
-  quizzes       Quiz[]
-  mediaAssets   MediaAsset[]
-  subscriptions Subscription[]
-  adConfigs     AdConfig[]
+  courses        Course[]
+  categories     VocabularyCategory[]
+  vocabularies   Vocabulary[]
+  quizzes        Quiz[]
+  mediaAssets    MediaAsset[]
+  subscriptions  Subscription[]
+  adConfigs      AdConfig[]
   flashcardDecks FlashcardDeck[]
-  importJobs    BulkImportJob[]
-  jobs          BackgroundJob[]
+  importJobs     BulkImportJob[]
+  jobs           BackgroundJob[]
 
   config AppConfig?
 
@@ -176,12 +180,12 @@ model AppConfig {
   id    String @id @default(cuid())
   appId String @unique
 
-  adsEnabled          Boolean @default(true)
+  adsEnabled           Boolean @default(true)
   subscriptionsEnabled Boolean @default(true)
-  guestModeEnabled    Boolean @default(true)
-  loginRequired       Boolean @default(false)
+  guestModeEnabled     Boolean @default(true)
+  loginRequired        Boolean @default(false)
 
-  defaultLanguage String @default("en")
+  defaultLanguage    String @default("en")
   supportedLanguages Json?
 
   settings Json?
@@ -192,9 +196,11 @@ model AppConfig {
   updatedAt DateTime @updatedAt
 }
 
-/* =========================================================
-   COURSE / LESSON
-   ========================================================= */
+/**
+ * =========================================================
+ * COURSE / LESSON
+ * =========================================================
+ */
 
 model Course {
   id    String @id @default(cuid())
@@ -278,7 +284,7 @@ model LessonResource {
   type  ResourceType
   title String
 
-  url      String @db.Text
+  url      String  @db.Text
   mimeType String?
   fileSize BigInt?
 
@@ -294,20 +300,22 @@ model LessonResource {
   @@index([lessonId, type])
 }
 
-/* =========================================================
-   MEDIA / R2
-   ========================================================= */
+/**
+ * =========================================================
+ * MEDIA / R2
+ * =========================================================
+ */
 
 model MediaAsset {
-  id    String @id @default(cuid())
+  id    String  @id @default(cuid())
   appId String?
 
   type       MediaType
   visibility MediaVisibility @default(PUBLIC)
 
-  storageProvider String @default("R2")
+  storageProvider String  @default("R2")
   bucket          String?
-  objectKey       String @unique
+  objectKey       String  @unique
 
   publicUrl String? @db.Text
 
@@ -335,9 +343,11 @@ model MediaAsset {
   @@index([visibility])
 }
 
-/* =========================================================
-   VOCABULARY
-   ========================================================= */
+/**
+ * =========================================================
+ * VOCABULARY
+ * =========================================================
+ */
 
 model VocabularyCategory {
   id    String @id @default(cuid())
@@ -367,7 +377,7 @@ model VocabularyCategory {
 }
 
 model Vocabulary {
-  id         String @id @default(cuid())
+  id         String  @id @default(cuid())
   appId      String
   lessonId   String?
   categoryId String?
@@ -408,8 +418,8 @@ model Vocabulary {
 
   audioAsset MediaAsset? @relation("VocabularyAudio", fields: [audioAssetId], references: [id], onDelete: SetNull)
 
-  quizQuestions QuizQuestion[]
-  progress      VocabularyProgress[]
+  quizQuestions  QuizQuestion[]
+  progress       VocabularyProgress[]
   flashcardItems FlashcardDeckItem[]
 
   createdAt DateTime @default(now())
@@ -423,9 +433,11 @@ model Vocabulary {
   @@index([english])
 }
 
-/* =========================================================
-   FLASHCARD
-   ========================================================= */
+/**
+ * =========================================================
+ * FLASHCARD
+ * =========================================================
+ */
 
 model FlashcardDeck {
   id    String @id @default(cuid())
@@ -467,9 +479,11 @@ model FlashcardDeckItem {
   @@index([deckId, sortOrder])
 }
 
-/* =========================================================
-   QUIZ
-   ========================================================= */
+/**
+ * =========================================================
+ * QUIZ
+ * =========================================================
+ */
 
 model Quiz {
   id String @id @default(cuid())
@@ -539,9 +553,11 @@ model QuizQuestion {
   @@index([questionType])
 }
 
-/* =========================================================
-   USER / STUDENT
-   ========================================================= */
+/**
+ * =========================================================
+ * USER / STUDENT
+ * =========================================================
+ */
 
 model User {
   id String @id @default(cuid())
@@ -576,7 +592,7 @@ model LessonProgress {
 
   lastPosition Int?
 
-  completedAt DateTime?
+  completedAt  DateTime?
   lastOpenedAt DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -602,16 +618,16 @@ model VocabularyProgress {
 
   streak Int @default(0)
 
-  masteryScore Int @default(0)
+  masteryScore Int          @default(0)
   masteryLevel MasteryLevel @default(NEW)
 
-  easeFactor Float @default(2.5)
-  intervalDays Int @default(0)
-  repetitionCount Int @default(0)
+  easeFactor      Float @default(2.5)
+  intervalDays    Int   @default(0)
+  repetitionCount Int   @default(0)
 
-  nextReviewAt    DateTime?
-  lastReviewedAt  DateTime?
-  firstLearnedAt  DateTime?
+  nextReviewAt   DateTime?
+  lastReviewedAt DateTime?
+  firstLearnedAt DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -636,7 +652,7 @@ model QuizAttempt {
 
   percentage Float?
 
-  startedAt   DateTime @default(now())
+  startedAt   DateTime  @default(now())
   completedAt DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -655,7 +671,7 @@ model QuizAnswer {
   attemptId  String
   questionId String
 
-  answer    String @db.Text
+  answer    String  @db.Text
   isCorrect Boolean
 
   responseTimeMs Int?
@@ -670,9 +686,11 @@ model QuizAnswer {
   @@index([questionId])
 }
 
-/* =========================================================
-   SUBSCRIPTION
-   ========================================================= */
+/**
+ * =========================================================
+ * SUBSCRIPTION
+ * =========================================================
+ */
 
 model Subscription {
   id String @id @default(cuid())
@@ -682,7 +700,7 @@ model Subscription {
 
   platform SubscriptionPlatform @default(GOOGLE_PLAY)
 
-  provider String
+  provider  String
   productId String
 
   externalId            String?
@@ -707,9 +725,11 @@ model Subscription {
   @@index([originalTransactionId])
 }
 
-/* =========================================================
-   ADVERTISEMENT CONFIG
-   ========================================================= */
+/**
+ * =========================================================
+ * ADVERTISEMENT CONFIG
+ * =========================================================
+ */
 
 model AdConfig {
   id    String @id @default(cuid())
@@ -738,21 +758,24 @@ model AdConfig {
   @@unique([appId, platform, provider])
 }
 
-/* =========================================================
-   ADMIN AUTH
-   ========================================================= */
+/**
+ * =========================================================
+ * ADMIN AUTH
+ * =========================================================
+ */
 
 model AdminUser {
   id String @id @default(cuid())
 
-  email       String @unique
+  email       String  @unique
   displayName String?
 
   passwordHash String @db.Text
 
   role AdminRole @default(CONTENT_EDITOR)
 
-  isActive Boolean @default(true)
+  isActive    Boolean @default(true)
+  authVersion Int     @default(0)
 
   lastLoginAt       DateTime?
   passwordChangedAt DateTime?
@@ -813,9 +836,11 @@ model AdminAuditLog {
   @@index([action])
 }
 
-/* =========================================================
-   BACKGROUND / AI / TTS JOBS
-   ========================================================= */
+/**
+ * =========================================================
+ * BACKGROUND / AI / TTS JOBS
+ * =========================================================
+ */
 
 model BackgroundJob {
   id String @id @default(cuid())
@@ -831,7 +856,7 @@ model BackgroundJob {
   payload Json?
   result  Json?
 
-  attempts Int @default(0)
+  attempts    Int @default(0)
   maxAttempts Int @default(3)
 
   errorMessage String? @db.Text
@@ -849,9 +874,11 @@ model BackgroundJob {
   @@index([entityType, entityId])
 }
 
-/* =========================================================
-   BULK IMPORT
-   ========================================================= */
+/**
+ * =========================================================
+ * BULK IMPORT
+ * =========================================================
+ */
 
 model BulkImportJob {
   id String @id @default(cuid())
