@@ -1,0 +1,22 @@
+{
+  "name": "german-learning-platform",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "workers/*"
+  ],
+  "scripts": {
+    "dev:website": "npm run dev --workspace=@learning/website",
+    "dev:admin": "npm run dev --workspace=@learning/admin",
+    "dev:api": "npm run start:dev --workspace=@learning/api",
+    "build:website": "npm run build --workspace=@learning/website",
+    "build:admin": "npm run build --workspace=@learning/admin",
+    "build:api": "npm run build --workspace=@learning/api"
+  },
+  "engines": {
+    "node": ">=22.22.3",
+    "npm": ">=10"
+  }
+}
