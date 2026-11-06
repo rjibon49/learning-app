@@ -122,7 +122,7 @@ export class AdminAuthController {
     response.cookie(REFRESH_COOKIE, refreshToken, {
       httpOnly: true,
       secure: production,
-      sameSite: 'strict',
+      sameSite: 'lax', // strict থেকে lax করা হয়েছে localhost cross-origin এর জন্য
       path: '/api/admin/auth',
       maxAge: days * 24 * 60 * 60 * 1000,
     });
@@ -133,7 +133,7 @@ export class AdminAuthController {
     response.clearCookie(REFRESH_COOKIE, {
       httpOnly: true,
       secure: production,
-      sameSite: 'strict',
+      sameSite: 'lax', // strict থেকে lax করা হয়েছে
       path: '/api/admin/auth',
     });
   }

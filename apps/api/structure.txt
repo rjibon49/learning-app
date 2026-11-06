@@ -1,0 +1,1381 @@
+Folder PATH listing for volume Kids
+Volume serial number is D8D6-AD70
+D:.
+|   .env
+|   .env.example
+|   .gitattributes
+|   .gitignore
+|   .oxlintrc.json
+|   .prettierrc
+|   AGENTS.md
+|   api.zip
+|   nest-cli.json
+|   package.json
+|   prisma7.config.ts
+|   README.md
+|   skills-lock.json
+|   structure.txt
+|   tsconfig.build.json
+|   tsconfig.build.tsbuildinfo
+|   tsconfig.json
+|   vitest.config.e2e.ts
+|   vitest.config.ts
+|   
++---.agents
+|   \---skills
+|       +---prisma-cli
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           agent-safety.md
+|       |           complete.md
+|       |           db-execute.md
+|       |           db-pull.md
+|       |           db-push.md
+|       |           db-seed.md
+|       |           debug.md
+|       |           dev.md
+|       |           format.md
+|       |           generate.md
+|       |           init.md
+|       |           mcp.md
+|       |           migrate-deploy.md
+|       |           migrate-dev.md
+|       |           migrate-diff.md
+|       |           migrate-reset.md
+|       |           migrate-resolve.md
+|       |           migrate-status.md
+|       |           studio.md
+|       |           validate.md
+|       |           
+|       +---prisma-client-api
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-methods.md
+|       |           constructor.md
+|       |           filters.md
+|       |           model-queries.md
+|       |           query-options.md
+|       |           raw-queries.md
+|       |           relations.md
+|       |           transactions.md
+|       |           
+|       +---prisma-compute
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           app-composer-setup.md
+|       |           app-framework-builds.md
+|       |           automation-create-prisma.md
+|       |           automation-rest-api.md
+|       |           cli-command-map.md
+|       |           debug-deploy-failures.md
+|       |           deploy-cli-and-ci.md
+|       |           deploy-on-push.md
+|       |           ops-services-and-config.md
+|       |           runtime-requirements.md
+|       |           
+|       +---prisma-database-setup
+|       |       SKILL.md
+|       |       
+|       +---prisma-driver-adapter-implementation
+|       |       SKILL.md
+|       |       
+|       +---prisma-mongodb-upgrade
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-api-mapping.md
+|       |           decision-stay-or-migrate.md
+|       |           migrations-mapping.md
+|       |           schema-contract-mapping.md
+|       |           verify-cutover-checklist.md
+|       |           
+|       +---prisma-orm-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           v6-mongodb.md
+|       |           v7-client-setup.md
+|       |           v7-cockroachdb.md
+|       |           v7-mysql.md
+|       |           v7-postgresql.md
+|       |           v7-prisma-postgres.md
+|       |           v7-sqlite.md
+|       |           v7-sqlserver.md
+|       |           
+|       +---prisma-postgres
+|       |       SKILL.md
+|       |       
+|       +---prisma-postgres-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           operations.md
+|       |           provisioning.md
+|       |           vercel-marketplace.md
+|       |           
+|       \---prisma-upgrade-v7
+|           |   SKILL.md
+|           |   
+|           \---references
+|                   accelerate-users.md
+|                   driver-adapters.md
+|                   env-variables.md
+|                   esm-support.md
+|                   prisma-config.md
+|                   removed-features.md
+|                   schema-changes.md
+|                   
++---.claude
+|   \---skills
+|       +---prisma-cli
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           agent-safety.md
+|       |           complete.md
+|       |           db-execute.md
+|       |           db-pull.md
+|       |           db-push.md
+|       |           db-seed.md
+|       |           debug.md
+|       |           dev.md
+|       |           format.md
+|       |           generate.md
+|       |           init.md
+|       |           mcp.md
+|       |           migrate-deploy.md
+|       |           migrate-dev.md
+|       |           migrate-diff.md
+|       |           migrate-reset.md
+|       |           migrate-resolve.md
+|       |           migrate-status.md
+|       |           studio.md
+|       |           validate.md
+|       |           
+|       +---prisma-client-api
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-methods.md
+|       |           constructor.md
+|       |           filters.md
+|       |           model-queries.md
+|       |           query-options.md
+|       |           raw-queries.md
+|       |           relations.md
+|       |           transactions.md
+|       |           
+|       +---prisma-compute
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           app-composer-setup.md
+|       |           app-framework-builds.md
+|       |           automation-create-prisma.md
+|       |           automation-rest-api.md
+|       |           cli-command-map.md
+|       |           debug-deploy-failures.md
+|       |           deploy-cli-and-ci.md
+|       |           deploy-on-push.md
+|       |           ops-services-and-config.md
+|       |           runtime-requirements.md
+|       |           
+|       +---prisma-database-setup
+|       |       SKILL.md
+|       |       
+|       +---prisma-driver-adapter-implementation
+|       |       SKILL.md
+|       |       
+|       +---prisma-mongodb-upgrade
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-api-mapping.md
+|       |           decision-stay-or-migrate.md
+|       |           migrations-mapping.md
+|       |           schema-contract-mapping.md
+|       |           verify-cutover-checklist.md
+|       |           
+|       +---prisma-orm-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           v6-mongodb.md
+|       |           v7-client-setup.md
+|       |           v7-cockroachdb.md
+|       |           v7-mysql.md
+|       |           v7-postgresql.md
+|       |           v7-prisma-postgres.md
+|       |           v7-sqlite.md
+|       |           v7-sqlserver.md
+|       |           
+|       +---prisma-postgres
+|       |       SKILL.md
+|       |       
+|       +---prisma-postgres-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           operations.md
+|       |           provisioning.md
+|       |           vercel-marketplace.md
+|       |           
+|       \---prisma-upgrade-v7
+|           |   SKILL.md
+|           |   
+|           \---references
+|                   accelerate-users.md
+|                   driver-adapters.md
+|                   env-variables.md
+|                   esm-support.md
+|                   prisma-config.md
+|                   removed-features.md
+|                   schema-changes.md
+|                   
++---.windsurf
+|   \---skills
+|       +---prisma-cli
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           agent-safety.md
+|       |           complete.md
+|       |           db-execute.md
+|       |           db-pull.md
+|       |           db-push.md
+|       |           db-seed.md
+|       |           debug.md
+|       |           dev.md
+|       |           format.md
+|       |           generate.md
+|       |           init.md
+|       |           mcp.md
+|       |           migrate-deploy.md
+|       |           migrate-dev.md
+|       |           migrate-diff.md
+|       |           migrate-reset.md
+|       |           migrate-resolve.md
+|       |           migrate-status.md
+|       |           studio.md
+|       |           validate.md
+|       |           
+|       +---prisma-client-api
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-methods.md
+|       |           constructor.md
+|       |           filters.md
+|       |           model-queries.md
+|       |           query-options.md
+|       |           raw-queries.md
+|       |           relations.md
+|       |           transactions.md
+|       |           
+|       +---prisma-compute
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           app-composer-setup.md
+|       |           app-framework-builds.md
+|       |           automation-create-prisma.md
+|       |           automation-rest-api.md
+|       |           cli-command-map.md
+|       |           debug-deploy-failures.md
+|       |           deploy-cli-and-ci.md
+|       |           deploy-on-push.md
+|       |           ops-services-and-config.md
+|       |           runtime-requirements.md
+|       |           
+|       +---prisma-database-setup
+|       |       SKILL.md
+|       |       
+|       +---prisma-driver-adapter-implementation
+|       |       SKILL.md
+|       |       
+|       +---prisma-mongodb-upgrade
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           client-api-mapping.md
+|       |           decision-stay-or-migrate.md
+|       |           migrations-mapping.md
+|       |           schema-contract-mapping.md
+|       |           verify-cutover-checklist.md
+|       |           
+|       +---prisma-orm-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           v6-mongodb.md
+|       |           v7-client-setup.md
+|       |           v7-cockroachdb.md
+|       |           v7-mysql.md
+|       |           v7-postgresql.md
+|       |           v7-prisma-postgres.md
+|       |           v7-sqlite.md
+|       |           v7-sqlserver.md
+|       |           
+|       +---prisma-postgres
+|       |       SKILL.md
+|       |       
+|       +---prisma-postgres-setup
+|       |   |   SKILL.md
+|       |   |   
+|       |   \---references
+|       |           operations.md
+|       |           provisioning.md
+|       |           vercel-marketplace.md
+|       |           
+|       \---prisma-upgrade-v7
+|           |   SKILL.md
+|           |   
+|           \---references
+|                   accelerate-users.md
+|                   driver-adapters.md
+|                   env-variables.md
+|                   esm-support.md
+|                   prisma-config.md
+|                   removed-features.md
+|                   schema-changes.md
+|                   
++---dist
+|   |   app.controller.d.ts
+|   |   app.controller.js
+|   |   app.controller.js.map
+|   |   app.module.d.ts
+|   |   app.module.js
+|   |   app.module.js.map
+|   |   app.service.d.ts
+|   |   app.service.js
+|   |   app.service.js.map
+|   |   env.schema.d.ts
+|   |   env.schema.js
+|   |   env.schema.js.map
+|   |   main.d.ts
+|   |   main.js
+|   |   main.js.map
+|   |   prisma.module.d.ts
+|   |   prisma.module.js
+|   |   prisma.module.js.map
+|   |   prisma.service.d.ts
+|   |   prisma.service.js
+|   |   prisma.service.js.map
+|   |   
+|   +---admin-auth
+|   |       admin-auth.controller.d.ts
+|   |       admin-auth.controller.js
+|   |       admin-auth.controller.js.map
+|   |       admin-auth.module.d.ts
+|   |       admin-auth.module.js
+|   |       admin-auth.module.js.map
+|   |       admin-auth.schemas.d.ts
+|   |       admin-auth.schemas.js
+|   |       admin-auth.schemas.js.map
+|   |       admin-auth.service.d.ts
+|   |       admin-auth.service.js
+|   |       admin-auth.service.js.map
+|   |       admin-auth.types.d.ts
+|   |       admin-auth.types.js
+|   |       admin-auth.types.js.map
+|   |       admin-jwt.guard.d.ts
+|   |       admin-jwt.guard.js
+|   |       admin-jwt.guard.js.map
+|   |       admin-roles.decorator.d.ts
+|   |       admin-roles.decorator.js
+|   |       admin-roles.decorator.js.map
+|   |       admin-roles.guard.d.ts
+|   |       admin-roles.guard.js
+|   |       admin-roles.guard.js.map
+|   |       current-admin.decorator.d.ts
+|   |       current-admin.decorator.js
+|   |       current-admin.decorator.js.map
+|   |       
+|   +---apps
+|   |       apps.controller.d.ts
+|   |       apps.controller.js
+|   |       apps.controller.js.map
+|   |       apps.module.d.ts
+|   |       apps.module.js
+|   |       apps.module.js.map
+|   |       apps.service.d.ts
+|   |       apps.service.js
+|   |       apps.service.js.map
+|   |       
+|   +---courses
+|   |   |   courses.controller.d.ts
+|   |   |   courses.controller.js
+|   |   |   courses.controller.js.map
+|   |   |   courses.service.d.ts
+|   |   |   courses.service.js
+|   |   |   courses.service.js.map
+|   |   |   
+|   |   \---dto
+|   |           course.dto.d.ts
+|   |           course.dto.js
+|   |           course.dto.js.map
+|   |           courses.service.d.ts
+|   |           courses.service.js
+|   |           courses.service.js.map
+|   |           
+|   +---generated
+|   |   \---prisma
+|   |       |   browser.d.ts
+|   |       |   browser.js
+|   |       |   browser.js.map
+|   |       |   client.d.ts
+|   |       |   client.js
+|   |       |   client.js.map
+|   |       |   commonInputTypes.d.ts
+|   |       |   commonInputTypes.js
+|   |       |   commonInputTypes.js.map
+|   |       |   enums.d.ts
+|   |       |   enums.js
+|   |       |   enums.js.map
+|   |       |   models.d.ts
+|   |       |   models.js
+|   |       |   models.js.map
+|   |       |   
+|   |       +---internal
+|   |       |       class.d.ts
+|   |       |       class.js
+|   |       |       class.js.map
+|   |       |       prismaNamespace.d.ts
+|   |       |       prismaNamespace.js
+|   |       |       prismaNamespace.js.map
+|   |       |       prismaNamespaceBrowser.d.ts
+|   |       |       prismaNamespaceBrowser.js
+|   |       |       prismaNamespaceBrowser.js.map
+|   |       |       
+|   |       \---models
+|   |               AdConfig.d.ts
+|   |               AdConfig.js
+|   |               AdConfig.js.map
+|   |               AdminAuditLog.d.ts
+|   |               AdminAuditLog.js
+|   |               AdminAuditLog.js.map
+|   |               AdminRefreshToken.d.ts
+|   |               AdminRefreshToken.js
+|   |               AdminRefreshToken.js.map
+|   |               AdminUser.d.ts
+|   |               AdminUser.js
+|   |               AdminUser.js.map
+|   |               App.d.ts
+|   |               App.js
+|   |               App.js.map
+|   |               AppConfig.d.ts
+|   |               AppConfig.js
+|   |               AppConfig.js.map
+|   |               BackgroundJob.d.ts
+|   |               BackgroundJob.js
+|   |               BackgroundJob.js.map
+|   |               BulkImportJob.d.ts
+|   |               BulkImportJob.js
+|   |               BulkImportJob.js.map
+|   |               Course.d.ts
+|   |               Course.js
+|   |               Course.js.map
+|   |               CourseModule.d.ts
+|   |               CourseModule.js
+|   |               CourseModule.js.map
+|   |               FlashcardDeck.d.ts
+|   |               FlashcardDeck.js
+|   |               FlashcardDeck.js.map
+|   |               FlashcardDeckItem.d.ts
+|   |               FlashcardDeckItem.js
+|   |               FlashcardDeckItem.js.map
+|   |               Lesson.d.ts
+|   |               Lesson.js
+|   |               Lesson.js.map
+|   |               LessonProgress.d.ts
+|   |               LessonProgress.js
+|   |               LessonProgress.js.map
+|   |               LessonResource.d.ts
+|   |               LessonResource.js
+|   |               LessonResource.js.map
+|   |               MediaAsset.d.ts
+|   |               MediaAsset.js
+|   |               MediaAsset.js.map
+|   |               Quiz.d.ts
+|   |               Quiz.js
+|   |               Quiz.js.map
+|   |               QuizAnswer.d.ts
+|   |               QuizAnswer.js
+|   |               QuizAnswer.js.map
+|   |               QuizAttempt.d.ts
+|   |               QuizAttempt.js
+|   |               QuizAttempt.js.map
+|   |               QuizQuestion.d.ts
+|   |               QuizQuestion.js
+|   |               QuizQuestion.js.map
+|   |               Subscription.d.ts
+|   |               Subscription.js
+|   |               Subscription.js.map
+|   |               User.d.ts
+|   |               User.js
+|   |               User.js.map
+|   |               Vocabulary.d.ts
+|   |               Vocabulary.js
+|   |               Vocabulary.js.map
+|   |               VocabularyCategory.d.ts
+|   |               VocabularyCategory.js
+|   |               VocabularyCategory.js.map
+|   |               VocabularyProgress.d.ts
+|   |               VocabularyProgress.js
+|   |               VocabularyProgress.js.map
+|   |               
+|   \---vocabulary
+|           vocabulary.controller.d.ts
+|           vocabulary.controller.js
+|           vocabulary.controller.js.map
+|           vocabulary.module.d.ts
+|           vocabulary.module.js
+|           vocabulary.module.js.map
+|           vocabulary.schemas.d.ts
+|           vocabulary.schemas.js
+|           vocabulary.schemas.js.map
+|           vocabulary.service.d.ts
+|           vocabulary.service.js
+|           vocabulary.service.js.map
+|           
++---docs
+|       AUTH-TEST.http
+|       LOCAL-SETUP.md
+|       
++---node_modules
+|   +---.bin
+|   |       tsc
+|   |       tsc.cmd
+|   |       tsc.ps1
+|   |       tsserver
+|   |       tsserver.cmd
+|   |       tsserver.ps1
+|   |       
+|   +---@nestjs
+|   |   \---schematics
+|   |       |   LICENSE
+|   |       |   package.json
+|   |       |   README.md
+|   |       |   
+|   |       \---dist
+|   |           |   collection.json
+|   |           |   index.d.ts
+|   |           |   index.js
+|   |           |   
+|   |           +---lib
+|   |           |   |   defaults.d.ts
+|   |           |   |   defaults.js
+|   |           |   |   
+|   |           |   +---application
+|   |           |   |   |   application.factory.d.ts
+|   |           |   |   |   application.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |   |   .gitattributes
+|   |           |   |       |   |   .prettierrc
+|   |           |   |       |   |   AGENTS.md
+|   |           |   |       |   |   babel.config.json
+|   |           |   |       |   |   index.js
+|   |           |   |       |   |   jest.config.js
+|   |           |   |       |   |   jsconfig.json
+|   |           |   |       |   |   nest-cli.json
+|   |           |   |       |   |   nodemon.json
+|   |           |   |       |   |   package.json.template
+|   |           |   |       |   |   README.md
+|   |           |   |       |   |   
+|   |           |   |       |   +---src
+|   |           |   |       |   |       app.controller.js
+|   |           |   |       |   |       app.controller.__specFileSuffix__.js
+|   |           |   |       |   |       app.module.js
+|   |           |   |       |   |       app.service.js
+|   |           |   |       |   |       main.js
+|   |           |   |       |   |       
+|   |           |   |       |   \---test
+|   |           |   |       |           app.e2e-__specFileSuffix__.js
+|   |           |   |       |           jest-e2e.json
+|   |           |   |       |           
+|   |           |   |       +---ts
+|   |           |   |       |   |   .gitattributes
+|   |           |   |       |   |   .oxlintrc.json
+|   |           |   |       |   |   .prettierrc
+|   |           |   |       |   |   AGENTS.md
+|   |           |   |       |   |   jest.config.ts
+|   |           |   |       |   |   nest-cli.json
+|   |           |   |       |   |   package.json.template
+|   |           |   |       |   |   README.md
+|   |           |   |       |   |   tsconfig.build.json
+|   |           |   |       |   |   tsconfig.json
+|   |           |   |       |   |   
+|   |           |   |       |   +---src
+|   |           |   |       |   |       app.controller.ts
+|   |           |   |       |   |       app.controller.__specFileSuffix__.ts
+|   |           |   |       |   |       app.module.ts
+|   |           |   |       |   |       app.service.ts
+|   |           |   |       |   |       main.ts
+|   |           |   |       |   |       
+|   |           |   |       |   \---test
+|   |           |   |       |           app.e2e-__specFileSuffix__.ts
+|   |           |   |       |           jest-e2e.json
+|   |           |   |       |           
+|   |           |   |       \---ts-esm
+|   |           |   |           |   .gitattributes
+|   |           |   |           |   .oxlintrc.json
+|   |           |   |           |   .prettierrc
+|   |           |   |           |   AGENTS.md
+|   |           |   |           |   nest-cli.json
+|   |           |   |           |   package.json.template
+|   |           |   |           |   README.md
+|   |           |   |           |   tsconfig.build.json
+|   |           |   |           |   tsconfig.json
+|   |           |   |           |   vitest.config.e2e.ts
+|   |           |   |           |   vitest.config.ts
+|   |           |   |           |   
+|   |           |   |           +---src
+|   |           |   |           |       app.controller.ts
+|   |           |   |           |       app.controller.__specFileSuffix__.ts
+|   |           |   |           |       app.module.ts
+|   |           |   |           |       app.service.ts
+|   |           |   |           |       main.ts
+|   |           |   |           |       
+|   |           |   |           \---test
+|   |           |   |                   app.e2e-__specFileSuffix__.ts
+|   |           |   |                   
+|   |           |   +---class
+|   |           |   |   |   class.factory.d.ts
+|   |           |   |   |   class.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.js
+|   |           |   |       |       __name__.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.ts
+|   |           |   |               __name__.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---configuration
+|   |           |   |   |   configuration.factory.d.ts
+|   |           |   |   |   configuration.factory.js
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       nest-cli.json
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               nest-cli.json
+|   |           |   |               
+|   |           |   +---controller
+|   |           |   |   |   controller.factory.d.ts
+|   |           |   |   |   controller.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.controller.js
+|   |           |   |       |       __name__.controller.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.controller.ts
+|   |           |   |               __name__.controller.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---decorator
+|   |           |   |   |   decorator.factory.d.ts
+|   |           |   |   |   decorator.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.decorator.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.decorator.ts
+|   |           |   |               
+|   |           |   +---filter
+|   |           |   |   |   filter.factory.d.ts
+|   |           |   |   |   filter.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.filter.js
+|   |           |   |       |       __name__.filter.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.filter.ts
+|   |           |   |               __name__.filter.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---gateway
+|   |           |   |   |   gateway.factory.d.ts
+|   |           |   |   |   gateway.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.gateway.js
+|   |           |   |       |       __name__.gateway.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.gateway.ts
+|   |           |   |               __name__.gateway.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---guard
+|   |           |   |   |   guard.factory.d.ts
+|   |           |   |   |   guard.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.guard.js
+|   |           |   |       |       __name__.guard.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.guard.ts
+|   |           |   |               __name__.guard.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---interceptor
+|   |           |   |   |   interceptor.factory.d.ts
+|   |           |   |   |   interceptor.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.interceptor.js
+|   |           |   |       |       __name__.interceptor.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.interceptor.ts
+|   |           |   |               __name__.interceptor.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---interface
+|   |           |   |   |   interface.factory.d.ts
+|   |           |   |   |   interface.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |           __name__.interface.ts
+|   |           |   |           
+|   |           |   +---library
+|   |           |   |   |   library.factory.d.ts
+|   |           |   |   |   library.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |   |   .babelrc
+|   |           |   |       |   |   jsconfig.json
+|   |           |   |       |   |   
+|   |           |   |       |   \---src
+|   |           |   |       |           index.js
+|   |           |   |       |           __name__.module.js
+|   |           |   |       |           __name__.service.js
+|   |           |   |       |           __name__.service.spec.js
+|   |           |   |       |           
+|   |           |   |       \---ts
+|   |           |   |           |   tsconfig.lib.json
+|   |           |   |           |   
+|   |           |   |           \---src
+|   |           |   |                   index.ts
+|   |           |   |                   __name__.module.ts
+|   |           |   |                   __name__.service.ts
+|   |           |   |                   __name__.service.__specFileSuffix__.ts
+|   |           |   |                   
+|   |           |   +---middleware
+|   |           |   |   |   middleware.factory.d.ts
+|   |           |   |   |   middleware.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.middleware.js
+|   |           |   |       |       __name__.middleware.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.middleware.ts
+|   |           |   |               __name__.middleware.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---module
+|   |           |   |   |   module.factory.d.ts
+|   |           |   |   |   module.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.module.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.module.ts
+|   |           |   |               
+|   |           |   +---pipe
+|   |           |   |   |   pipe.factory.d.ts
+|   |           |   |   |   pipe.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.pipe.js
+|   |           |   |       |       __name__.pipe.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.pipe.ts
+|   |           |   |               __name__.pipe.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---provider
+|   |           |   |   |   provider.factory.d.ts
+|   |           |   |   |   provider.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.js
+|   |           |   |       |       __name__.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.ts
+|   |           |   |               __name__.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---readers
+|   |           |   |       file-system.reader.d.ts
+|   |           |   |       file-system.reader.js
+|   |           |   |       index.d.ts
+|   |           |   |       index.js
+|   |           |   |       reader.d.ts
+|   |           |   |       reader.js
+|   |           |   |       
+|   |           |   +---resolver
+|   |           |   |   |   resolver.factory.d.ts
+|   |           |   |   |   resolver.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.resolver.js
+|   |           |   |       |       __name__.resolver.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.resolver.ts
+|   |           |   |               __name__.resolver.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---resource
+|   |           |   |   |   resource.factory.d.ts
+|   |           |   |   |   resource.factory.js
+|   |           |   |   |   schema.json
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       \---ts
+|   |           |   |           |   __name__.controller.ts
+|   |           |   |           |   __name__.controller.__specFileSuffix__.ts
+|   |           |   |           |   __name__.gateway.ts
+|   |           |   |           |   __name__.gateway.__specFileSuffix__.ts
+|   |           |   |           |   __name__.graphql
+|   |           |   |           |   __name__.module.ts
+|   |           |   |           |   __name__.resolver.ts
+|   |           |   |           |   __name__.resolver.__specFileSuffix__.ts
+|   |           |   |           |   __name__.service.ts
+|   |           |   |           |   __name__.service.__specFileSuffix__.ts
+|   |           |   |           |   
+|   |           |   |           +---dto
+|   |           |   |           |       create-__name@singular__.dto.ts
+|   |           |   |           |       create-__name@singular__.input.ts
+|   |           |   |           |       update-__name@singular__.dto.ts
+|   |           |   |           |       update-__name@singular__.input.ts
+|   |           |   |           |       
+|   |           |   |           \---entities
+|   |           |   |                   __name@singular@ent__.ts
+|   |           |   |                   
+|   |           |   +---service
+|   |           |   |   |   schema.json
+|   |           |   |   |   service.factory.d.ts
+|   |           |   |   |   service.factory.js
+|   |           |   |   |   
+|   |           |   |   \---files
+|   |           |   |       +---js
+|   |           |   |       |       __name__.service.js
+|   |           |   |       |       __name__.service.__specFileSuffix__.js
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               __name__.service.ts
+|   |           |   |               __name__.service.__specFileSuffix__.ts
+|   |           |   |               
+|   |           |   +---sub-app
+|   |           |   |   |   schema.json
+|   |           |   |   |   sub-app.factory.d.ts
+|   |           |   |   |   sub-app.factory.js
+|   |           |   |   |   
+|   |           |   |   +---files
+|   |           |   |   |   +---js
+|   |           |   |   |   |   |   .babelrc
+|   |           |   |   |   |   |   index.js
+|   |           |   |   |   |   |   jsconfig.json
+|   |           |   |   |   |   |   
+|   |           |   |   |   |   +---src
+|   |           |   |   |   |   |       app.controller.js
+|   |           |   |   |   |   |       app.controller.__specFileSuffix__.js
+|   |           |   |   |   |   |       app.module.js
+|   |           |   |   |   |   |       app.service.js
+|   |           |   |   |   |   |       main.js
+|   |           |   |   |   |   |       
+|   |           |   |   |   |   \---test
+|   |           |   |   |   |           app.e2e-__specFileSuffix__.js
+|   |           |   |   |   |           jest-e2e.json
+|   |           |   |   |   |           
+|   |           |   |   |   \---ts
+|   |           |   |   |       |   tsconfig.app.json
+|   |           |   |   |       |   
+|   |           |   |   |       +---src
+|   |           |   |   |       |       main.ts
+|   |           |   |   |       |       __name__.controller.ts
+|   |           |   |   |       |       __name__.controller.__specFileSuffix__.ts
+|   |           |   |   |       |       __name__.module.ts
+|   |           |   |   |       |       __name__.service.ts
+|   |           |   |   |       |       
+|   |           |   |   |       \---test
+|   |           |   |   |               app.e2e-__specFileSuffix__.ts
+|   |           |   |   |               jest-e2e.json
+|   |           |   |   |               
+|   |           |   |   \---workspace
+|   |           |   |       +---js
+|   |           |   |       |       .babelrc
+|   |           |   |       |       index.js
+|   |           |   |       |       jsconfig.json
+|   |           |   |       |       
+|   |           |   |       \---ts
+|   |           |   |               tsconfig.app.json
+|   |           |   |               
+|   |           |   \---upgrade
+|   |           |       |   schema.json
+|   |           |       |   upgrade.factory.d.ts
+|   |           |       |   upgrade.factory.js
+|   |           |       |   upgrade.utils.d.ts
+|   |           |       |   upgrade.utils.js
+|   |           |       |   
+|   |           |       \---steps
+|   |           |               cli-config.step.d.ts
+|   |           |               cli-config.step.js
+|   |           |               config.step.d.ts
+|   |           |               config.step.js
+|   |           |               dependencies.step.d.ts
+|   |           |               dependencies.step.js
+|   |           |               diagnostics.step.d.ts
+|   |           |               diagnostics.step.js
+|   |           |               graphql.step.d.ts
+|   |           |               graphql.step.js
+|   |           |               nats.step.d.ts
+|   |           |               nats.step.js
+|   |           |               observe.step.d.ts
+|   |           |               observe.step.js
+|   |           |               preconditions.step.d.ts
+|   |           |               preconditions.step.js
+|   |           |               testing.step.d.ts
+|   |           |               testing.step.js
+|   |           |               tsconfig.step.d.ts
+|   |           |               tsconfig.step.js
+|   |           |               
+|   |           \---utils
+|   |                   dependencies.utils.d.ts
+|   |                   dependencies.utils.js
+|   |                   format-files.rule.d.ts
+|   |                   format-files.rule.js
+|   |                   formatting.d.ts
+|   |                   formatting.js
+|   |                   index.d.ts
+|   |                   index.js
+|   |                   jest-module-mapper.d.ts
+|   |                   jest-module-mapper.js
+|   |                   json-file.util.d.ts
+|   |                   json-file.util.js
+|   |                   metadata.manager.d.ts
+|   |                   metadata.manager.js
+|   |                   module-import.declarator.d.ts
+|   |                   module-import.declarator.js
+|   |                   module-metadata.declarator.d.ts
+|   |                   module-metadata.declarator.js
+|   |                   module.declarator.d.ts
+|   |                   module.declarator.js
+|   |                   module.finder.d.ts
+|   |                   module.finder.js
+|   |                   name.parser.d.ts
+|   |                   name.parser.js
+|   |                   nest-cli-config.util.d.ts
+|   |                   nest-cli-config.util.js
+|   |                   object-sorting.d.ts
+|   |                   object-sorting.js
+|   |                   path.solver.d.ts
+|   |                   path.solver.js
+|   |                   rspack-dependencies.rule.d.ts
+|   |                   rspack-dependencies.rule.js
+|   |                   source-root.helpers.d.ts
+|   |                   source-root.helpers.js
+|   |                   
+|   +---@types
+|   |   \---node
+|   |       |   assert.d.ts
+|   |       |   async_hooks.d.ts
+|   |       |   buffer.buffer.d.ts
+|   |       |   buffer.d.ts
+|   |       |   child_process.d.ts
+|   |       |   cluster.d.ts
+|   |       |   console.d.ts
+|   |       |   constants.d.ts
+|   |       |   crypto.d.ts
+|   |       |   dgram.d.ts
+|   |       |   diagnostics_channel.d.ts
+|   |       |   dns.d.ts
+|   |       |   domain.d.ts
+|   |       |   events.d.ts
+|   |       |   fs.d.ts
+|   |       |   globals.d.ts
+|   |       |   globals.typedarray.d.ts
+|   |       |   http.d.ts
+|   |       |   http2.d.ts
+|   |       |   https.d.ts
+|   |       |   index.d.ts
+|   |       |   inspector.d.ts
+|   |       |   inspector.generated.d.ts
+|   |       |   LICENSE
+|   |       |   module.d.ts
+|   |       |   net.d.ts
+|   |       |   os.d.ts
+|   |       |   package.json
+|   |       |   path.d.ts
+|   |       |   perf_hooks.d.ts
+|   |       |   process.d.ts
+|   |       |   punycode.d.ts
+|   |       |   querystring.d.ts
+|   |       |   readline.d.ts
+|   |       |   README.md
+|   |       |   repl.d.ts
+|   |       |   sea.d.ts
+|   |       |   sqlite.d.ts
+|   |       |   stream.d.ts
+|   |       |   string_decoder.d.ts
+|   |       |   test.d.ts
+|   |       |   timers.d.ts
+|   |       |   tls.d.ts
+|   |       |   trace_events.d.ts
+|   |       |   tty.d.ts
+|   |       |   url.d.ts
+|   |       |   util.d.ts
+|   |       |   v8.d.ts
+|   |       |   vm.d.ts
+|   |       |   wasi.d.ts
+|   |       |   worker_threads.d.ts
+|   |       |   zlib.d.ts
+|   |       |   
+|   |       +---assert
+|   |       |       strict.d.ts
+|   |       |       
+|   |       +---compatibility
+|   |       |       iterators.d.ts
+|   |       |       
+|   |       +---dns
+|   |       |       promises.d.ts
+|   |       |       
+|   |       +---fs
+|   |       |       promises.d.ts
+|   |       |       
+|   |       +---readline
+|   |       |       promises.d.ts
+|   |       |       
+|   |       +---stream
+|   |       |       consumers.d.ts
+|   |       |       promises.d.ts
+|   |       |       web.d.ts
+|   |       |       
+|   |       +---timers
+|   |       |       promises.d.ts
+|   |       |       
+|   |       +---ts5.6
+|   |       |   |   buffer.buffer.d.ts
+|   |       |   |   globals.typedarray.d.ts
+|   |       |   |   index.d.ts
+|   |       |   |   
+|   |       |   \---compatibility
+|   |       |           float16array.d.ts
+|   |       |           
+|   |       +---ts5.7
+|   |       |   |   index.d.ts
+|   |       |   |   
+|   |       |   \---compatibility
+|   |       |           float16array.d.ts
+|   |       |           
+|   |       \---web-globals
+|   |               abortcontroller.d.ts
+|   |               crypto.d.ts
+|   |               domexception.d.ts
+|   |               events.d.ts
+|   |               fetch.d.ts
+|   |               navigator.d.ts
+|   |               storage.d.ts
+|   |               streams.d.ts
+|   |               
+|   \---typescript
+|       |   LICENSE.txt
+|       |   package.json
+|       |   README.md
+|       |   SECURITY.md
+|       |   ThirdPartyNoticeText.txt
+|       |   
+|       +---bin
+|       |       tsc
+|       |       tsserver
+|       |       
+|       \---lib
+|           |   lib.d.ts
+|           |   lib.decorators.d.ts
+|           |   lib.decorators.legacy.d.ts
+|           |   lib.dom.asynciterable.d.ts
+|           |   lib.dom.d.ts
+|           |   lib.dom.iterable.d.ts
+|           |   lib.es2015.collection.d.ts
+|           |   lib.es2015.core.d.ts
+|           |   lib.es2015.d.ts
+|           |   lib.es2015.generator.d.ts
+|           |   lib.es2015.iterable.d.ts
+|           |   lib.es2015.promise.d.ts
+|           |   lib.es2015.proxy.d.ts
+|           |   lib.es2015.reflect.d.ts
+|           |   lib.es2015.symbol.d.ts
+|           |   lib.es2015.symbol.wellknown.d.ts
+|           |   lib.es2016.array.include.d.ts
+|           |   lib.es2016.d.ts
+|           |   lib.es2016.full.d.ts
+|           |   lib.es2016.intl.d.ts
+|           |   lib.es2017.arraybuffer.d.ts
+|           |   lib.es2017.d.ts
+|           |   lib.es2017.date.d.ts
+|           |   lib.es2017.full.d.ts
+|           |   lib.es2017.intl.d.ts
+|           |   lib.es2017.object.d.ts
+|           |   lib.es2017.sharedmemory.d.ts
+|           |   lib.es2017.string.d.ts
+|           |   lib.es2017.typedarrays.d.ts
+|           |   lib.es2018.asyncgenerator.d.ts
+|           |   lib.es2018.asynciterable.d.ts
+|           |   lib.es2018.d.ts
+|           |   lib.es2018.full.d.ts
+|           |   lib.es2018.intl.d.ts
+|           |   lib.es2018.promise.d.ts
+|           |   lib.es2018.regexp.d.ts
+|           |   lib.es2019.array.d.ts
+|           |   lib.es2019.d.ts
+|           |   lib.es2019.full.d.ts
+|           |   lib.es2019.intl.d.ts
+|           |   lib.es2019.object.d.ts
+|           |   lib.es2019.string.d.ts
+|           |   lib.es2019.symbol.d.ts
+|           |   lib.es2020.bigint.d.ts
+|           |   lib.es2020.d.ts
+|           |   lib.es2020.date.d.ts
+|           |   lib.es2020.full.d.ts
+|           |   lib.es2020.intl.d.ts
+|           |   lib.es2020.number.d.ts
+|           |   lib.es2020.promise.d.ts
+|           |   lib.es2020.sharedmemory.d.ts
+|           |   lib.es2020.string.d.ts
+|           |   lib.es2020.symbol.wellknown.d.ts
+|           |   lib.es2021.d.ts
+|           |   lib.es2021.full.d.ts
+|           |   lib.es2021.intl.d.ts
+|           |   lib.es2021.promise.d.ts
+|           |   lib.es2021.string.d.ts
+|           |   lib.es2021.weakref.d.ts
+|           |   lib.es2022.array.d.ts
+|           |   lib.es2022.d.ts
+|           |   lib.es2022.error.d.ts
+|           |   lib.es2022.full.d.ts
+|           |   lib.es2022.intl.d.ts
+|           |   lib.es2022.object.d.ts
+|           |   lib.es2022.regexp.d.ts
+|           |   lib.es2022.string.d.ts
+|           |   lib.es2023.array.d.ts
+|           |   lib.es2023.collection.d.ts
+|           |   lib.es2023.d.ts
+|           |   lib.es2023.full.d.ts
+|           |   lib.es2023.intl.d.ts
+|           |   lib.es2024.arraybuffer.d.ts
+|           |   lib.es2024.collection.d.ts
+|           |   lib.es2024.d.ts
+|           |   lib.es2024.full.d.ts
+|           |   lib.es2024.object.d.ts
+|           |   lib.es2024.promise.d.ts
+|           |   lib.es2024.regexp.d.ts
+|           |   lib.es2024.sharedmemory.d.ts
+|           |   lib.es2024.string.d.ts
+|           |   lib.es2025.collection.d.ts
+|           |   lib.es2025.d.ts
+|           |   lib.es2025.float16.d.ts
+|           |   lib.es2025.full.d.ts
+|           |   lib.es2025.intl.d.ts
+|           |   lib.es2025.iterator.d.ts
+|           |   lib.es2025.promise.d.ts
+|           |   lib.es2025.regexp.d.ts
+|           |   lib.es5.d.ts
+|           |   lib.es6.d.ts
+|           |   lib.esnext.array.d.ts
+|           |   lib.esnext.collection.d.ts
+|           |   lib.esnext.d.ts
+|           |   lib.esnext.date.d.ts
+|           |   lib.esnext.decorators.d.ts
+|           |   lib.esnext.disposable.d.ts
+|           |   lib.esnext.error.d.ts
+|           |   lib.esnext.full.d.ts
+|           |   lib.esnext.intl.d.ts
+|           |   lib.esnext.sharedmemory.d.ts
+|           |   lib.esnext.temporal.d.ts
+|           |   lib.esnext.typedarrays.d.ts
+|           |   lib.scripthost.d.ts
+|           |   lib.webworker.asynciterable.d.ts
+|           |   lib.webworker.d.ts
+|           |   lib.webworker.importscripts.d.ts
+|           |   lib.webworker.iterable.d.ts
+|           |   tsc.js
+|           |   tsserver.js
+|           |   tsserverlibrary.d.ts
+|           |   tsserverlibrary.js
+|           |   typescript.d.ts
+|           |   typescript.js
+|           |   typesMap.json
+|           |   typingsInstaller.js
+|           |   watchGuard.js
+|           |   _tsc.js
+|           |   _tsserver.js
+|           |   _typingsInstaller.js
+|           |   
+|           +---cs
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---de
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---es
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---fr
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---it
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---ja
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---ko
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---pl
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---pt-br
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---ru
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---tr
+|           |       diagnosticMessages.generated.json
+|           |       
+|           +---zh-cn
+|           |       diagnosticMessages.generated.json
+|           |       
+|           \---zh-tw
+|                   diagnosticMessages.generated.json
+|                   
++---prisma
+|   |   schema.prisma
+|   |   seed-admin.ts
+|   |   seed.ts
+|   |   
+|   \---migrations
+|       |   migration_lock.toml
+|       |   
+|       \---20261104162943_init_platform
+|               migration.sql
+|               
++---src
+|   |   app.controller.spec.ts
+|   |   app.controller.ts
+|   |   app.module.ts
+|   |   app.service.ts
+|   |   env.schema.ts
+|   |   main.ts
+|   |   prisma.module.ts
+|   |   prisma.service.ts
+|   |   
+|   +---admin-auth
+|   |       admin-auth.controller.ts
+|   |       admin-auth.module.ts
+|   |       admin-auth.schemas.ts
+|   |       admin-auth.service.ts
+|   |       admin-auth.types.ts
+|   |       admin-jwt.guard.ts
+|   |       admin-roles.decorator.ts
+|   |       admin-roles.guard.ts
+|   |       current-admin.decorator.ts
+|   |       
+|   +---apps
+|   |       apps.controller.ts
+|   |       apps.module.ts
+|   |       apps.service.ts
+|   |       
+|   +---courses
+|   |   |   courses.controller.ts
+|   |   |   courses.service.ts
+|   |   |   
+|   |   \---dto
+|   |           course.dto.ts
+|   |           
+|   +---generated
+|   |   \---prisma
+|   |       |   browser.ts
+|   |       |   client.ts
+|   |       |   commonInputTypes.ts
+|   |       |   enums.ts
+|   |       |   models.ts
+|   |       |   
+|   |       +---internal
+|   |       |       class.ts
+|   |       |       prismaNamespace.ts
+|   |       |       prismaNamespaceBrowser.ts
+|   |       |       
+|   |       \---models
+|   |               AdConfig.ts
+|   |               AdminAuditLog.ts
+|   |               AdminRefreshToken.ts
+|   |               AdminUser.ts
+|   |               App.ts
+|   |               AppConfig.ts
+|   |               BackgroundJob.ts
+|   |               BulkImportJob.ts
+|   |               Course.ts
+|   |               CourseModule.ts
+|   |               FlashcardDeck.ts
+|   |               FlashcardDeckItem.ts
+|   |               Lesson.ts
+|   |               LessonProgress.ts
+|   |               LessonResource.ts
+|   |               MediaAsset.ts
+|   |               Quiz.ts
+|   |               QuizAnswer.ts
+|   |               QuizAttempt.ts
+|   |               QuizQuestion.ts
+|   |               Subscription.ts
+|   |               User.ts
+|   |               Vocabulary.ts
+|   |               VocabularyCategory.ts
+|   |               VocabularyProgress.ts
+|   |               
+|   \---vocabulary
+|           vocabulary.controller.ts
+|           vocabulary.module.ts
+|           vocabulary.schemas.ts
+|           vocabulary.service.ts
+|           
+\---test
+        app.e2e-spec.ts
+        

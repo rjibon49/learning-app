@@ -166,3 +166,8 @@ export type BackgroundJob = Prisma.BackgroundJobModel
  * 
  */
 export type BulkImportJob = Prisma.BulkImportJobModel
+/**
+ * Model SystemSetting
+ * 
+ */
+export type SystemSetting = Prisma.SystemSettingModel

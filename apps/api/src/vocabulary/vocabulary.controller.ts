@@ -17,6 +17,7 @@ import { AdminRolesGuard } from '../admin-auth/admin-roles.guard.js';
 import { AdminRole } from '../generated/prisma/client.js';
 import {
   createCategorySchema,
+  updateCategorySchema,
   createVocabularySchema,
   updateVocabularySchema,
 } from './vocabulary.schemas.js';
@@ -31,6 +32,10 @@ const CONTENT_ROLES = [
 @Controller('vocabulary')
 export class VocabularyController {
   constructor(private readonly vocabularyService: VocabularyService) {}
+
+  // ====================
+  // CATEGORIES
+  // ====================
 
   @UseGuards(AdminJwtGuard, AdminRolesGuard)
   @AdminRoles(...CONTENT_ROLES)
@@ -47,6 +52,28 @@ export class VocabularyController {
   findCategories(@Query('appId') appId?: string) {
     return this.vocabularyService.findCategories(appId);
   }
+
+  @UseGuards(AdminJwtGuard, AdminRolesGuard)
+  @AdminRoles(...CONTENT_ROLES)
+  @Patch('categories/:id')
+  updateCategory(@Param('id') id: string, @Body() body: unknown) {
+    try {
+      return this.vocabularyService.updateCategory(id, updateCategorySchema.parse(body));
+    } catch (error) {
+      this.handleValidationError(error);
+    }
+  }
+
+  @UseGuards(AdminJwtGuard, AdminRolesGuard)
+  @AdminRoles(AdminRole.SUPER_ADMIN, AdminRole.ADMIN)
+  @Delete('categories/:id')
+  deleteCategory(@Param('id') id: string) {
+    return this.vocabularyService.deleteCategory(id);
+  }
+
+  // ====================
+  // VOCABULARY
+  // ====================
 
   @UseGuards(AdminJwtGuard, AdminRolesGuard)
   @AdminRoles(...CONTENT_ROLES)

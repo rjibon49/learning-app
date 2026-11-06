@@ -75,7 +75,8 @@ export const ModelName = {
   AdminRefreshToken: 'AdminRefreshToken',
   AdminAuditLog: 'AdminAuditLog',
   BackgroundJob: 'BackgroundJob',
-  BulkImportJob: 'BulkImportJob'
+  BulkImportJob: 'BulkImportJob',
+  SystemSetting: 'SystemSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -534,6 +535,20 @@ export const BulkImportJobScalarFieldEnum = {
 export type BulkImportJobScalarFieldEnum = (typeof BulkImportJobScalarFieldEnum)[keyof typeof BulkImportJobScalarFieldEnum]
 
 
+export const SystemSettingScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  description: 'description',
+  isPublic: 'isPublic',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SystemSettingScalarFieldEnum = (typeof SystemSettingScalarFieldEnum)[keyof typeof SystemSettingScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -869,4 +884,15 @@ export const BulkImportJobOrderByRelevanceFieldEnum = {
 } as const
 
 export type BulkImportJobOrderByRelevanceFieldEnum = (typeof BulkImportJobOrderByRelevanceFieldEnum)[keyof typeof BulkImportJobOrderByRelevanceFieldEnum]
+
+
+export const SystemSettingOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  description: 'description',
+  updatedBy: 'updatedBy'
+} as const
+
+export type SystemSettingOrderByRelevanceFieldEnum = (typeof SystemSettingOrderByRelevanceFieldEnum)[keyof typeof SystemSettingOrderByRelevanceFieldEnum]
 

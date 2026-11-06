@@ -421,7 +421,8 @@ export const ModelName = {
   AdminRefreshToken: 'AdminRefreshToken',
   AdminAuditLog: 'AdminAuditLog',
   BackgroundJob: 'BackgroundJob',
-  BulkImportJob: 'BulkImportJob'
+  BulkImportJob: 'BulkImportJob',
+  SystemSetting: 'SystemSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -437,7 +438,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "app" | "appConfig" | "course" | "courseModule" | "lesson" | "lessonResource" | "mediaAsset" | "vocabularyCategory" | "vocabulary" | "flashcardDeck" | "flashcardDeckItem" | "quiz" | "quizQuestion" | "user" | "lessonProgress" | "vocabularyProgress" | "quizAttempt" | "quizAnswer" | "subscription" | "adConfig" | "adminUser" | "adminRefreshToken" | "adminAuditLog" | "backgroundJob" | "bulkImportJob"
+    modelProps: "app" | "appConfig" | "course" | "courseModule" | "lesson" | "lessonResource" | "mediaAsset" | "vocabularyCategory" | "vocabulary" | "flashcardDeck" | "flashcardDeckItem" | "quiz" | "quizQuestion" | "user" | "lessonProgress" | "vocabularyProgress" | "quizAttempt" | "quizAnswer" | "subscription" | "adConfig" | "adminUser" | "adminRefreshToken" | "adminAuditLog" | "backgroundJob" | "bulkImportJob" | "systemSetting"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2091,6 +2092,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SystemSetting: {
+      payload: Prisma.$SystemSettingPayload<ExtArgs>
+      fields: Prisma.SystemSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SystemSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SystemSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.SystemSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SystemSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        findMany: {
+          args: Prisma.SystemSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>[]
+        }
+        create: {
+          args: Prisma.SystemSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        createMany: {
+          args: Prisma.SystemSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.SystemSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        update: {
+          args: Prisma.SystemSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.SystemSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SystemSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.SystemSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.SystemSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSystemSetting>
+        }
+        groupBy: {
+          args: Prisma.SystemSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SystemSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemSettingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2570,6 +2637,20 @@ export const BulkImportJobScalarFieldEnum = {
 export type BulkImportJobScalarFieldEnum = (typeof BulkImportJobScalarFieldEnum)[keyof typeof BulkImportJobScalarFieldEnum]
 
 
+export const SystemSettingScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  description: 'description',
+  isPublic: 'isPublic',
+  updatedBy: 'updatedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SystemSettingScalarFieldEnum = (typeof SystemSettingScalarFieldEnum)[keyof typeof SystemSettingScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2905,6 +2986,17 @@ export const BulkImportJobOrderByRelevanceFieldEnum = {
 } as const
 
 export type BulkImportJobOrderByRelevanceFieldEnum = (typeof BulkImportJobOrderByRelevanceFieldEnum)[keyof typeof BulkImportJobOrderByRelevanceFieldEnum]
+
+
+export const SystemSettingOrderByRelevanceFieldEnum = {
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  description: 'description',
+  updatedBy: 'updatedBy'
+} as const
+
+export type SystemSettingOrderByRelevanceFieldEnum = (typeof SystemSettingOrderByRelevanceFieldEnum)[keyof typeof SystemSettingOrderByRelevanceFieldEnum]
 
 
 
@@ -3256,6 +3348,7 @@ export type GlobalOmitConfig = {
   adminAuditLog?: Prisma.AdminAuditLogOmit
   backgroundJob?: Prisma.BackgroundJobOmit
   bulkImportJob?: Prisma.BulkImportJobOmit
+  systemSetting?: Prisma.SystemSettingOmit
 }
 
 /* Types for Logging */

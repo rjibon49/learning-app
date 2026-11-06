@@ -15,10 +15,12 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const port = config.get<number>('PORT', 4000);
   const apiPrefix = config.get<string>('API_PREFIX', 'api');
+  
+  // localhost এবং 127.0.0.1 দুটিকেই ঠিকমতো পার্স করার জন্য আপডেট
   const corsOrigins = config
     .get<string>(
       'CORS_ORIGINS',
-      'http://localhost:3000,http://localhost:3001',
+      'http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001',
     )
     .split(',')
     .map((origin) => origin.trim())
@@ -33,10 +35,20 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: corsOrigins,
+    origin: (
+      origin: string | undefined,
+      callback: (error: Error | null, allow?: boolean) => void,
+    ) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || corsOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true, // This allows HttpOnly cookies to be sent and received
     maxAge: 86400,
   });
 

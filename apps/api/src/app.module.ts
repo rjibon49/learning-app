@@ -9,6 +9,17 @@ import { AppsModule } from './apps/apps.module.js';
 import { envSchema } from './env.schema.js';
 import { PrismaModule } from './prisma.module.js';
 import { VocabularyModule } from './vocabulary/vocabulary.module.js';
+import { CoursesModule } from './courses/courses.module.js';
+import { MediaModule } from './media/media.module.js';
+import { FlashcardsModule } from './flashcards/flashcards.module.js';
+import { QuizzesModule } from './quizzes/quizzes.module.js';
+import { ImportsModule } from './imports/imports.module.js';
+import { UsersModule } from './users/users.module.js';
+import { SettingsModule } from './settings/settings.module.js';
+import { AdminsModule } from './admins/admins.module.js';
+import { AuditLogsModule } from './audit-logs/audit-logs.module.js';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module.js';
+import { AdsModule } from './ads/ads.module.js';
 
 @Module({
   imports: [
@@ -18,10 +29,21 @@ import { VocabularyModule } from './vocabulary/vocabulary.module.js';
       validationSchema: envSchema,
     }),
 
-    PrismaModule,
+    AdminsModule,
     AdminAuthModule,
+    AdsModule,
     AppsModule,
+    AuditLogsModule,
+    CoursesModule,
     VocabularyModule,
+    FlashcardsModule,
+    MediaModule,
+    ImportsModule,
+    PrismaModule,
+    QuizzesModule,
+    SettingsModule,
+    SubscriptionsModule,
+    UsersModule,
 
     ThrottlerModule.forRoot([
       { name: 'short', ttl: 1000, limit: 10 },

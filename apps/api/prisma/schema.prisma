@@ -904,3 +904,25 @@ model BulkImportJob {
 
   @@index([appId, status])
 }
+
+/**
+ * =========================================================
+ * SYSTEM SETTINGS (Global CMS Configuration)
+ * =========================================================
+ */
+
+model SystemSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @db.LongText
+
+  description String? @db.Text
+  isPublic    Boolean @default(false) // If true, can be read without admin auth
+  
+  updatedBy String? // Admin User ID who last updated it
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}

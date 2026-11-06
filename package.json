@@ -18,5 +18,8 @@
   "engines": {
     "node": ">=22.22.3",
     "npm": ">=10"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.4"
   }
 }

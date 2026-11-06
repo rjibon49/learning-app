@@ -6,6 +6,7 @@ import {
 import { PrismaService } from '../prisma.service.js';
 import type {
   CreateCategoryInput,
+  UpdateCategoryInput,
   CreateVocabularyInput,
   UpdateVocabularyInput,
 } from './vocabulary.schemas.js';
@@ -13,6 +14,10 @@ import type {
 @Injectable()
 export class VocabularyService {
   constructor(private readonly prisma: PrismaService) {}
+
+  // ====================
+  // CATEGORIES
+  // ====================
 
   async createCategory(data: CreateCategoryInput) {
     const app = await this.prisma.app.findUnique({ where: { id: data.appId } });
@@ -26,9 +31,28 @@ export class VocabularyService {
         isActive: true,
         ...(appId ? { appId } : {}),
       },
+      include: {
+        _count: { select: { vocabulary: true } },
+      },
       orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
     });
   }
+
+  async updateCategory(id: string, data: UpdateCategoryInput) {
+    return this.prisma.vocabularyCategory.update({
+      where: { id },
+      data,
+    });
+  }
+
+  async deleteCategory(id: string) {
+    await this.prisma.vocabularyCategory.delete({ where: { id } });
+    return { deleted: true, id };
+  }
+
+  // ====================
+  // VOCABULARY
+  // ====================
 
   async createVocabulary(data: CreateVocabularyInput) {
     await this.validateRelations(data);
@@ -41,6 +65,8 @@ export class VocabularyService {
         app: { select: { id: true, level: true, name: true, slug: true } },
         category: true,
         lesson: { select: { id: true, title: true, slug: true } },
+        imageAsset: true,
+        audioAsset: true,
       },
     });
   }
@@ -56,6 +82,8 @@ export class VocabularyService {
       include: {
         app: { select: { id: true, level: true, name: true, slug: true } },
         category: { select: { id: true, name: true, slug: true } },
+        imageAsset: true,
+        audioAsset: true,
       },
       orderBy: { createdAt: 'desc' },
       take: 100,
@@ -78,6 +106,8 @@ export class VocabularyService {
       include: {
         app: { select: { id: true, level: true, name: true, slug: true } },
         category: { select: { id: true, name: true, slug: true } },
+        imageAsset: true,
+        audioAsset: true,
       },
       orderBy: { createdAt: 'desc' },
       take: 100,
@@ -91,7 +121,7 @@ export class VocabularyService {
         isPublished: true,
         status: 'PUBLISHED',
       },
-      include: { app: true, category: true, lesson: true },
+      include: { app: true, category: true, lesson: true, imageAsset: true, audioAsset: true },
     });
 
     if (!vocabulary) throw new NotFoundException('Vocabulary item not found');
@@ -101,7 +131,7 @@ export class VocabularyService {
   async findOneForAdmin(id: string) {
     const vocabulary = await this.prisma.vocabulary.findUnique({
       where: { id },
-      include: { app: true, category: true, lesson: true },
+      include: { app: true, category: true, lesson: true, imageAsset: true, audioAsset: true },
     });
 
     if (!vocabulary) throw new NotFoundException('Vocabulary item not found');
@@ -114,8 +144,7 @@ export class VocabularyService {
     if (data.appId || data.categoryId || data.lessonId) {
       await this.validateRelations({
         appId: data.appId ?? current.appId,
-        categoryId:
-          data.categoryId === undefined ? current.categoryId : data.categoryId,
+        categoryId: data.categoryId === undefined ? current.categoryId : data.categoryId,
         lessonId: data.lessonId === undefined ? current.lessonId : data.lessonId,
       });
     }
@@ -128,6 +157,10 @@ export class VocabularyService {
           ? { status: data.isPublished ? 'PUBLISHED' : 'DRAFT' }
           : {}),
       },
+      include: {
+        imageAsset: true,
+        audioAsset: true,
+      }
     });
   }
 
