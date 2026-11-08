@@ -20,8 +20,20 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  currentStreak: number | null
+  longestStreak: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  currentStreak: number | null
+  longestStreak: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -31,6 +43,12 @@ export type UserMinAggregateOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
+  referralCode: string | null
+  referredById: string | null
+  adFreeUntil: Date | null
+  currentStreak: number | null
+  longestStreak: number | null
+  lastActivityDate: Date | null
   lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +61,12 @@ export type UserMaxAggregateOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
+  referralCode: string | null
+  referredById: string | null
+  adFreeUntil: Date | null
+  currentStreak: number | null
+  longestStreak: number | null
+  lastActivityDate: Date | null
   lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,12 +79,28 @@ export type UserCountAggregateOutputType = {
   passwordHash: number
   role: number
   isActive: number
+  referralCode: number
+  referredById: number
+  adFreeUntil: number
+  currentStreak: number
+  longestStreak: number
+  lastActivityDate: number
   lastLoginAt: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  currentStreak?: true
+  longestStreak?: true
+}
+
+export type UserSumAggregateInputType = {
+  currentStreak?: true
+  longestStreak?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -69,6 +109,12 @@ export type UserMinAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  referralCode?: true
+  referredById?: true
+  adFreeUntil?: true
+  currentStreak?: true
+  longestStreak?: true
+  lastActivityDate?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +127,12 @@ export type UserMaxAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  referralCode?: true
+  referredById?: true
+  adFreeUntil?: true
+  currentStreak?: true
+  longestStreak?: true
+  lastActivityDate?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
@@ -93,6 +145,12 @@ export type UserCountAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  referralCode?: true
+  referredById?: true
+  adFreeUntil?: true
+  currentStreak?: true
+  longestStreak?: true
+  lastActivityDate?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
@@ -137,6 +195,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -167,6 +237,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -178,10 +250,18 @@ export type UserGroupByOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole
   isActive: boolean
+  referralCode: string | null
+  referredById: string | null
+  adFreeUntil: Date | null
+  currentStreak: number
+  longestStreak: number
+  lastActivityDate: Date | null
   lastLoginAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -211,6 +291,12 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  referralCode?: Prisma.StringNullableFilter<"User"> | string | null
+  referredById?: Prisma.StringNullableFilter<"User"> | string | null
+  adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  currentStreak?: Prisma.IntFilter<"User"> | number
+  longestStreak?: Prisma.IntFilter<"User"> | number
+  lastActivityDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -218,6 +304,9 @@ export type UserWhereInput = {
   vocabularyProgress?: Prisma.VocabularyProgressListRelationFilter
   quizAttempts?: Prisma.QuizAttemptListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  activities?: Prisma.UserActivityListRelationFilter
+  referredUsers?: Prisma.UserListRelationFilter
+  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -227,6 +316,12 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredById?: Prisma.SortOrderInput | Prisma.SortOrder
+  adFreeUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+  lastActivityDate?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -234,12 +329,16 @@ export type UserOrderByWithRelationInput = {
   vocabularyProgress?: Prisma.VocabularyProgressOrderByRelationAggregateInput
   quizAttempts?: Prisma.QuizAttemptOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  activities?: Prisma.UserActivityOrderByRelationAggregateInput
+  referredUsers?: Prisma.UserOrderByRelationAggregateInput
+  referrer?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  referralCode?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -247,6 +346,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  referredById?: Prisma.StringNullableFilter<"User"> | string | null
+  adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  currentStreak?: Prisma.IntFilter<"User"> | number
+  longestStreak?: Prisma.IntFilter<"User"> | number
+  lastActivityDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -254,7 +358,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   vocabularyProgress?: Prisma.VocabularyProgressListRelationFilter
   quizAttempts?: Prisma.QuizAttemptListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
-}, "id" | "email">
+  activities?: Prisma.UserActivityListRelationFilter
+  referredUsers?: Prisma.UserListRelationFilter
+  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id" | "email" | "referralCode">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -263,12 +370,20 @@ export type UserOrderByWithAggregationInput = {
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredById?: Prisma.SortOrderInput | Prisma.SortOrder
+  adFreeUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+  lastActivityDate?: Prisma.SortOrderInput | Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -281,6 +396,12 @@ export type UserScalarWhereWithAggregatesInput = {
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  referralCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  referredById?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  adFreeUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  currentStreak?: Prisma.IntWithAggregatesFilter<"User"> | number
+  longestStreak?: Prisma.IntWithAggregatesFilter<"User"> | number
+  lastActivityDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -293,6 +414,11 @@ export type UserCreateInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -300,6 +426,9 @@ export type UserCreateInput = {
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -309,6 +438,12 @@ export type UserUncheckedCreateInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -316,6 +451,8 @@ export type UserUncheckedCreateInput = {
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +462,11 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -332,6 +474,9 @@ export type UserUpdateInput = {
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -341,6 +486,12 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -348,6 +499,8 @@ export type UserUncheckedUpdateInput = {
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -357,6 +510,12 @@ export type UserCreateManyInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -369,6 +528,11 @@ export type UserUpdateManyMutationInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,9 +545,30 @@ export type UserUncheckedUpdateManyInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type UserOrderByRelevanceInput = {
@@ -399,9 +584,20 @@ export type UserCountOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referredById?: Prisma.SortOrder
+  adFreeUntil?: Prisma.SortOrder
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+  lastActivityDate?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -411,6 +607,12 @@ export type UserMaxOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referredById?: Prisma.SortOrder
+  adFreeUntil?: Prisma.SortOrder
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+  lastActivityDate?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -423,14 +625,45 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  referredById?: Prisma.SortOrder
+  adFreeUntil?: Prisma.SortOrder
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+  lastActivityDate?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserSumOrderByAggregateInput = {
+  currentStreak?: Prisma.SortOrder
+  longestStreak?: Prisma.SortOrder
+}
+
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserCreateNestedManyWithoutReferrerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
+  createMany?: Prisma.UserCreateManyReferrerInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserCreateNestedOneWithoutReferredUsersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUncheckedCreateNestedManyWithoutReferrerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
+  createMany?: Prisma.UserCreateManyReferrerInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -439,6 +672,44 @@ export type EnumUserRoleFieldUpdateOperationsInput = {
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type UserUpdateManyWithoutReferrerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutReferrerInput | Prisma.UserUpsertWithWhereUniqueWithoutReferrerInput[]
+  createMany?: Prisma.UserCreateManyReferrerInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput | Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutReferrerInput | Prisma.UserUpdateManyWithWhereWithoutReferrerInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUpdateOneWithoutReferredUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
+  upsert?: Prisma.UserUpsertWithoutReferredUsersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReferredUsersInput, Prisma.UserUpdateWithoutReferredUsersInput>, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
+}
+
+export type UserUncheckedUpdateManyWithoutReferrerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutReferrerInput | Prisma.UserUpsertWithWhereUniqueWithoutReferrerInput[]
+  createMany?: Prisma.UserCreateManyReferrerInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput | Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutReferrerInput | Prisma.UserUpdateManyWithWhereWithoutReferrerInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutLessonProgressInput = {
@@ -497,6 +768,221 @@ export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.UserUpdateWithoutSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
 }
 
+export type UserCreateNestedOneWithoutActivitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActivitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActivitiesInput
+  upsert?: Prisma.UserUpsertWithoutActivitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActivitiesInput, Prisma.UserUpdateWithoutActivitiesInput>, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type UserCreateWithoutReferrerInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+}
+
+export type UserUncheckedCreateWithoutReferrerInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+}
+
+export type UserCreateOrConnectWithoutReferrerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput>
+}
+
+export type UserCreateManyReferrerInputEnvelope = {
+  data: Prisma.UserCreateManyReferrerInput | Prisma.UserCreateManyReferrerInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserCreateWithoutReferredUsersInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+}
+
+export type UserUncheckedCreateWithoutReferredUsersInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReferredUsersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+}
+
+export type UserUpsertWithWhereUniqueWithoutReferrerInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReferrerInput, Prisma.UserUncheckedUpdateWithoutReferrerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutReferrerInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReferrerInput, Prisma.UserUncheckedUpdateWithoutReferrerInput>
+}
+
+export type UserUpdateManyWithWhereWithoutReferrerInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutReferrerInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringNullableFilter<"User"> | string | null
+  displayName?: Prisma.StringNullableFilter<"User"> | string | null
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  isActive?: Prisma.BoolFilter<"User"> | boolean
+  referralCode?: Prisma.StringNullableFilter<"User"> | string | null
+  referredById?: Prisma.StringNullableFilter<"User"> | string | null
+  adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  currentStreak?: Prisma.IntFilter<"User"> | number
+  longestStreak?: Prisma.IntFilter<"User"> | number
+  lastActivityDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+}
+
+export type UserUpsertWithoutReferredUsersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReferredUsersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
+}
+
+export type UserUpdateWithoutReferredUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReferredUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutLessonProgressInput = {
   id?: string
   email?: string | null
@@ -504,12 +990,20 @@ export type UserCreateWithoutLessonProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
 }
 
 export type UserUncheckedCreateWithoutLessonProgressInput = {
@@ -519,12 +1013,20 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
 }
 
 export type UserCreateOrConnectWithoutLessonProgressInput = {
@@ -550,12 +1052,20 @@ export type UserUpdateWithoutLessonProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLessonProgressInput = {
@@ -565,12 +1075,20 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
 }
 
 export type UserCreateWithoutVocabularyProgressInput = {
@@ -580,12 +1098,20 @@ export type UserCreateWithoutVocabularyProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
 }
 
 export type UserUncheckedCreateWithoutVocabularyProgressInput = {
@@ -595,12 +1121,20 @@ export type UserUncheckedCreateWithoutVocabularyProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
 }
 
 export type UserCreateOrConnectWithoutVocabularyProgressInput = {
@@ -626,12 +1160,20 @@ export type UserUpdateWithoutVocabularyProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
@@ -641,12 +1183,20 @@ export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
 }
 
 export type UserCreateWithoutQuizAttemptsInput = {
@@ -656,12 +1206,20 @@ export type UserCreateWithoutQuizAttemptsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
 }
 
 export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -671,12 +1229,20 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
 }
 
 export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -702,12 +1268,20 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -717,12 +1291,20 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -732,12 +1314,20 @@ export type UserCreateWithoutSubscriptionsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -747,12 +1337,20 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -778,12 +1376,20 @@ export type UserUpdateWithoutSubscriptionsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -793,12 +1399,208 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+}
+
+export type UserCreateWithoutActivitiesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+}
+
+export type UserUncheckedCreateWithoutActivitiesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+}
+
+export type UserCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+}
+
+export type UserUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutActivitiesInput, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutActivitiesInput, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type UserUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+}
+
+export type UserCreateManyReferrerInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutReferrerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReferrerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutReferrerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -811,6 +1613,8 @@ export type UserCountOutputType = {
   vocabularyProgress: number
   quizAttempts: number
   subscriptions: number
+  activities: number
+  referredUsers: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -818,6 +1622,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   vocabularyProgress?: boolean | UserCountOutputTypeCountVocabularyProgressArgs
   quizAttempts?: boolean | UserCountOutputTypeCountQuizAttemptsArgs
   subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
+  activities?: boolean | UserCountOutputTypeCountActivitiesArgs
+  referredUsers?: boolean | UserCountOutputTypeCountReferredUsersArgs
 }
 
 /**
@@ -858,6 +1664,20 @@ export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.SubscriptionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserActivityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReferredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -866,6 +1686,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   role?: boolean
   isActive?: boolean
+  referralCode?: boolean
+  referredById?: boolean
+  adFreeUntil?: boolean
+  currentStreak?: boolean
+  longestStreak?: boolean
+  lastActivityDate?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -873,6 +1699,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   vocabularyProgress?: boolean | Prisma.User$vocabularyProgressArgs<ExtArgs>
   quizAttempts?: boolean | Prisma.User$quizAttemptsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
+  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
+  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -885,17 +1714,26 @@ export type UserSelectScalar = {
   passwordHash?: boolean
   role?: boolean
   isActive?: boolean
+  referralCode?: boolean
+  referredById?: boolean
+  adFreeUntil?: boolean
+  currentStreak?: boolean
+  longestStreak?: boolean
+  lastActivityDate?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "role" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "role" | "isActive" | "referralCode" | "referredById" | "adFreeUntil" | "currentStreak" | "longestStreak" | "lastActivityDate" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
   vocabularyProgress?: boolean | Prisma.User$vocabularyProgressArgs<ExtArgs>
   quizAttempts?: boolean | Prisma.User$quizAttemptsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
+  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
+  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -906,6 +1744,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     vocabularyProgress: Prisma.$VocabularyProgressPayload<ExtArgs>[]
     quizAttempts: Prisma.$QuizAttemptPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    activities: Prisma.$UserActivityPayload<ExtArgs>[]
+    referredUsers: Prisma.$UserPayload<ExtArgs>[]
+    referrer: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -914,6 +1755,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordHash: string | null
     role: $Enums.UserRole
     isActive: boolean
+    referralCode: string | null
+    referredById: string | null
+    adFreeUntil: Date | null
+    currentStreak: number
+    longestStreak: number
+    lastActivityDate: Date | null
     lastLoginAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1261,6 +2108,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   vocabularyProgress<T extends Prisma.User$vocabularyProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$vocabularyProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizAttempts<T extends Prisma.User$quizAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quizAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  referredUsers<T extends Prisma.User$referredUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referredUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  referrer<T extends Prisma.User$referrerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referrerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1296,6 +2146,12 @@ export interface UserFieldRefs {
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly referralCode: Prisma.FieldRef<"User", 'String'>
+  readonly referredById: Prisma.FieldRef<"User", 'String'>
+  readonly adFreeUntil: Prisma.FieldRef<"User", 'DateTime'>
+  readonly currentStreak: Prisma.FieldRef<"User", 'Int'>
+  readonly longestStreak: Prisma.FieldRef<"User", 'Int'>
+  readonly lastActivityDate: Prisma.FieldRef<"User", 'DateTime'>
   readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -1740,6 +2596,73 @@ export type User$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
+}
+
+/**
+ * User.activities
+ */
+export type User$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserActivity
+   */
+  select?: Prisma.UserActivitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserActivity
+   */
+  omit?: Prisma.UserActivityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserActivityInclude<ExtArgs> | null
+  where?: Prisma.UserActivityWhereInput
+  orderBy?: Prisma.UserActivityOrderByWithRelationInput | Prisma.UserActivityOrderByWithRelationInput[]
+  cursor?: Prisma.UserActivityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserActivityScalarFieldEnum | Prisma.UserActivityScalarFieldEnum[]
+}
+
+/**
+ * User.referredUsers
+ */
+export type User$referredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * User.referrer
+ */
+export type User$referrerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

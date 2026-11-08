@@ -20,6 +20,8 @@ import { AdminsModule } from './admins/admins.module.js';
 import { AuditLogsModule } from './audit-logs/audit-logs.module.js';
 import { SubscriptionsModule } from './subscriptions/subscriptions.module.js';
 import { AdsModule } from './ads/ads.module.js';
+import { ActivityModule } from './activity/activity.module.js';
+import { PromotionsModule } from './promotions/promotions.module.js';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { AdsModule } from './ads/ads.module.js';
     SettingsModule,
     SubscriptionsModule,
     UsersModule,
+    ActivityModule,
+    PromotionsModule,
 
     ThrottlerModule.forRoot([
       { name: 'short', ttl: 1000, limit: 10 },

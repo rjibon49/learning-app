@@ -1,8 +1,13 @@
+
 import type { RefreshResponseDto } from '@/types/auth';
 
 const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000/api'
 ).replace(/\/+$/, '');
+
+// Keep admin authentication same-origin so the HttpOnly refresh cookie survives
+// reloads, even when the CMS and API use different hosts or subdomains.
+const AUTH_API_BASE_URL = '/api';
 
 let inMemoryAccessToken: string | null = null;
 let refreshPromise: Promise<string | null> | null = null;
@@ -66,7 +71,7 @@ async function parseErrorPayload(response: Response): Promise<ApiClientError> {
       serverMessage = details[0];
     }
   } catch {
-    // Ignore non-JSON error bodies and never expose raw HTML/stack traces
+    // Ignore non-JSON error bodies
   }
 
   const safeServerMsg = response.status < 500 ? serverMessage : undefined;
@@ -75,9 +80,6 @@ async function parseErrorPayload(response: Response): Promise<ApiClientError> {
   return new ApiClientError(response.status, safeMessage, `HTTP_${response.status}`, details);
 }
 
-/**
- * Single-flight token refresh using HttpOnly cookie `admin_refresh_token`.
- */
 export async function refreshAccessToken(): Promise<string | null> {
   if (refreshPromise) {
     return refreshPromise;
@@ -85,9 +87,9 @@ export async function refreshAccessToken(): Promise<string | null> {
 
   refreshPromise = (async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/admin/auth/refresh`, {
+      const response = await fetch(`${AUTH_API_BASE_URL}/admin/auth/refresh`, {
         method: 'POST',
-        credentials: 'include', // Ensures the HttpOnly cookie is sent
+        credentials: 'include',
         headers: {
           Accept: 'application/json',
         },
@@ -95,7 +97,6 @@ export async function refreshAccessToken(): Promise<string | null> {
 
       if (!response.ok) {
         setAccessToken(null);
-        if (unauthorizedHandler) unauthorizedHandler();
         return null;
       }
 
@@ -127,7 +128,10 @@ export async function apiRequest<T>(
   options: ApiRequestOptions = {}
 ): Promise<T> {
   const normalizedPath = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const url = `${API_BASE_URL}${normalizedPath}`;
+  const baseUrl = normalizedPath.startsWith('/admin/auth/')
+    ? AUTH_API_BASE_URL
+    : API_BASE_URL;
+  const url = `${baseUrl}${normalizedPath}`;
   const { headers = {}, skipAuthRefresh = false, ...restOptions } = options;
 
   const buildHeaders = (token: string | null): Record<string, string> => {
@@ -151,7 +155,7 @@ export async function apiRequest<T>(
   try {
     response = await fetch(url, {
       ...restOptions,
-      credentials: 'include', // Critical for sending HttpOnly cookies on normal requests
+      credentials: 'include',
       headers: buildHeaders(inMemoryAccessToken),
     });
   } catch {
@@ -167,12 +171,10 @@ export async function apiRequest<T>(
     normalizedPath.startsWith('/admin/auth/refresh') ||
     normalizedPath.startsWith('/admin/auth/logout');
 
-  // If 401 Unauthorized, try to refresh the token
   if (response.status === 401 && !skipAuthRefresh && !isAuthEndpoint) {
     const newToken = await refreshAccessToken();
 
     if (newToken) {
-      // Retry the original request exactly once with the new access token
       const retryResponse = await fetch(url, {
         ...restOptions,
         credentials: 'include',
@@ -191,7 +193,7 @@ export async function apiRequest<T>(
       }
       return (await retryResponse.json()) as T;
     } else {
-      if (unauthorizedHandler) {
+      if (unauthorizedHandler && !isAuthEndpoint) {
         unauthorizedHandler();
       }
       throw await parseErrorPayload(response);

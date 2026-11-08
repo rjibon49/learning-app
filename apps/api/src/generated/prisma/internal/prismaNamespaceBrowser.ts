@@ -76,7 +76,9 @@ export const ModelName = {
   AdminAuditLog: 'AdminAuditLog',
   BackgroundJob: 'BackgroundJob',
   BulkImportJob: 'BulkImportJob',
-  SystemSetting: 'SystemSetting'
+  SystemSetting: 'SystemSetting',
+  PromoCode: 'PromoCode',
+  UserActivity: 'UserActivity'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -338,6 +340,12 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   role: 'role',
   isActive: 'isActive',
+  referralCode: 'referralCode',
+  referredById: 'referredById',
+  adFreeUntil: 'adFreeUntil',
+  currentStreak: 'currentStreak',
+  longestStreak: 'longestStreak',
+  lastActivityDate: 'lastActivityDate',
   lastLoginAt: 'lastLoginAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -547,6 +555,36 @@ export const SystemSettingScalarFieldEnum = {
 } as const
 
 export type SystemSettingScalarFieldEnum = (typeof SystemSettingScalarFieldEnum)[keyof typeof SystemSettingScalarFieldEnum]
+
+
+export const PromoCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  discountPct: 'discountPct',
+  description: 'description',
+  isActive: 'isActive',
+  validFrom: 'validFrom',
+  validUntil: 'validUntil',
+  maxUses: 'maxUses',
+  currentUses: 'currentUses',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
+
+
+export const UserActivityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  durationMinutes: 'durationMinutes',
+  isStreakCounted: 'isStreakCounted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserActivityScalarFieldEnum = (typeof UserActivityScalarFieldEnum)[keyof typeof UserActivityScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -761,7 +799,9 @@ export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
   displayName: 'displayName',
-  passwordHash: 'passwordHash'
+  passwordHash: 'passwordHash',
+  referralCode: 'referralCode',
+  referredById: 'referredById'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -895,4 +935,21 @@ export const SystemSettingOrderByRelevanceFieldEnum = {
 } as const
 
 export type SystemSettingOrderByRelevanceFieldEnum = (typeof SystemSettingOrderByRelevanceFieldEnum)[keyof typeof SystemSettingOrderByRelevanceFieldEnum]
+
+
+export const PromoCodeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  description: 'description'
+} as const
+
+export type PromoCodeOrderByRelevanceFieldEnum = (typeof PromoCodeOrderByRelevanceFieldEnum)[keyof typeof PromoCodeOrderByRelevanceFieldEnum]
+
+
+export const UserActivityOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type UserActivityOrderByRelevanceFieldEnum = (typeof UserActivityOrderByRelevanceFieldEnum)[keyof typeof UserActivityOrderByRelevanceFieldEnum]
 

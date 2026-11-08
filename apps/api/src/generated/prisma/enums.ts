@@ -118,6 +118,7 @@ export const SubscriptionPlatform = {
   GOOGLE_PLAY: 'GOOGLE_PLAY',
   APPLE_APP_STORE: 'APPLE_APP_STORE',
   WEB: 'WEB',
+  STRIPE: 'STRIPE',
   MANUAL: 'MANUAL'
 } as const
 

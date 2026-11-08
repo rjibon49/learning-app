@@ -41,6 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (isMounted) {
         setAccessToken(null);
         setAdmin(null);
+        // শুধুমাত্র রিস্টোরেশন ফেইলিওর বা সেশন এক্সপায়ার্ড হলে রিডাইরেক্ট করবে
         router.replace('/admin/login');
       }
     });
@@ -48,8 +49,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async function bootstrap() {
       try {
         const restoredAdmin = await tryRestoreAdminSession();
-        if (isMounted) {
+        if (isMounted && restoredAdmin) {
           setAdmin(restoredAdmin);
+        }
+      } catch {
+        if (isMounted) {
+          setAdmin(null);
         }
       } finally {
         if (isMounted) {

@@ -91,7 +91,8 @@ enum SubscriptionStatus {
 enum SubscriptionPlatform {
   GOOGLE_PLAY
   APPLE_APP_STORE
-  WEB
+  WEB        
+  STRIPE      
   MANUAL
 }
 
@@ -571,15 +572,33 @@ model User {
 
   isActive Boolean @default(true)
 
+  // ================= NEW: REFERRAL & REWARD FIELDS =================
+  referralCode String? @unique @db.VarChar(20) // The user's own unique referral code
+  referredById String? // ID of the user who referred this user
+  
+  adFreeUntil  DateTime? // Date until which the user enjoys ad-free experience
+
+  currentStreak Int @default(0) // Current consecutive days of activity
+  longestStreak Int @default(0) // Longest streak achieved
+  lastActivityDate DateTime? @db.Date // Only stores the date (YYYY-MM-DD) to track daily streak
+  // =================================================================
+
   lastLoginAt DateTime?
 
   lessonProgress     LessonProgress[]
   vocabularyProgress VocabularyProgress[]
   quizAttempts       QuizAttempt[]
   subscriptions      Subscription[]
+  activities         UserActivity[] // Relation to new UserActivity model
+
+  referredUsers      User[] @relation("UserReferrals") // Users referred by this user
+  referrer           User?  @relation("UserReferrals", fields: [referredById], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  @@index([referralCode])
+  @@index([referredById])
 }
 
 model LessonProgress {
@@ -925,4 +944,58 @@ model SystemSetting {
   updatedAt DateTime @updatedAt
 
   @@index([key])
+}
+
+/**
+ * =========================================================
+ * PROMOTIONS & DISCOUNTS (NEW)
+ * =========================================================
+ */
+
+model PromoCode {
+  id String @id @default(cuid())
+  
+  code         String  @unique
+  discountPct  Int     // Example: 20 for 20% off
+  description  String? @db.Text
+  
+  isActive     Boolean @default(true)
+  
+  validFrom    DateTime?
+  validUntil   DateTime?
+  
+  maxUses      Int?    // Null means unlimited
+  currentUses  Int     @default(0)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([code])
+  @@index([isActive])
+}
+
+/**
+ * =========================================================
+ * USER ACTIVITY LOG (NEW)
+ * =========================================================
+ */
+
+model UserActivity {
+  id String @id @default(cuid())
+
+  userId String
+  
+  date DateTime @db.Date // The specific day of activity
+  
+  durationMinutes Int @default(0) // Total time spent on this date
+  
+  isStreakCounted Boolean @default(false) // Whether this day's activity was counted towards a streak reward
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date]) // Ensure only one activity record per user per day
+  @@index([userId])
 }

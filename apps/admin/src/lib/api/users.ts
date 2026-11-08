@@ -6,9 +6,18 @@ export interface User {
   displayName: string | null;
   role: string;
   isActive: boolean;
+  
+  referralCode?: string | null;
+  referredById?: string | null;
+  adFreeUntil?: string | null;
+  currentStreak?: number;
+  longestStreak?: number;
+  lastActivityDate?: string | null;
+
   lastLoginAt: string | null;
   createdAt: string;
-  _count: {
+  
+  _count?: {
     lessonProgress: number;
     vocabularyProgress: number;
     quizAttempts: number;

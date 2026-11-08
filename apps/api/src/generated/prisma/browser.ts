@@ -147,3 +147,13 @@ export type BulkImportJob = Prisma.BulkImportJobModel
  * 
  */
 export type SystemSetting = Prisma.SystemSettingModel
+/**
+ * Model PromoCode
+ * 
+ */
+export type PromoCode = Prisma.PromoCodeModel
+/**
+ * Model UserActivity
+ * 
+ */
+export type UserActivity = Prisma.UserActivityModel

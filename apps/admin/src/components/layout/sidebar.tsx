@@ -60,6 +60,7 @@ const NAVIGATION_GROUPS: NavGroup[] = [
     items: [
       { label: 'Ads (AdMob)', href: '/admin/ads', requiresBusiness: true },
       { label: 'Subscriptions', href: '/admin/subscriptions', requiresBusiness: true },
+      { label: 'Promotions & Discounts', href: '/admin/promotions', requiresBusiness: true }, // 👈 নতুন ফিচার এখানে যুক্ত করা হয়েছে
       { label: 'Apps / Levels', href: '/admin/apps' },
     ],
   },

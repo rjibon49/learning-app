@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Plus, Edit2, Trash2, FolderOpen } from 'lucide-react';
+import { Plus, Edit2, Trash2, FolderOpen, ArrowLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useAppLevel } from '@/lib/auth/app-level-context';
 import { 
   getVocabularyCategories, 
@@ -12,17 +13,16 @@ import {
 import type { VocabularyCategory } from '@/types/vocabulary';
 import { EmptyState, ErrorState, LoadingState } from '@/components/feedback/state-views';
 
-// ১. বিদ্যমান টাইপের সাথে _count যুক্ত করে লোকাল টাইপ বানানো হলো
+// Prisma's _count included in the type
 type CategoryWithCount = VocabularyCategory & {
   _count?: { vocabulary: number };
 };
 
 export default function VocabularyCategoriesPage() {
+  const router = useRouter();
   const { selectedApp, isLoadingApps } = useAppLevel();
   
-  // ২. useState এ নতুন CategoryWithCount টাইপ ব্যবহার করা হলো
   const [categories, setCategories] = useState<CategoryWithCount[]>([]);
-  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,7 +30,9 @@ export default function VocabularyCategoriesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [formData, setFormData] = useState({ name: '', slug: '', germanName: '', banglaName: '', sortOrder: 0 });
+  const [formData, setFormData] = useState({ 
+    name: '', slug: '', germanName: '', banglaName: '', sortOrder: 0 
+  });
 
   const loadCategories = useCallback(async () => {
     if (!selectedApp) return;
@@ -49,7 +51,7 @@ export default function VocabularyCategoriesPage() {
     void loadCategories();
   }, [loadCategories]);
 
-  // Auto-generate slug from name
+  // Auto-generate slug from English name
   const handleNameChange = (name: string) => {
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     setFormData((prev) => ({ ...prev, name, slug }));
@@ -67,7 +69,9 @@ export default function VocabularyCategoriesPage() {
       });
     } else {
       setEditingId(null);
-      setFormData({ name: '', slug: '', germanName: '', banglaName: '', sortOrder: categories.length });
+      setFormData({ 
+        name: '', slug: '', germanName: '', banglaName: '', sortOrder: categories.length 
+      });
     }
     setIsModalOpen(true);
   };
@@ -79,11 +83,11 @@ export default function VocabularyCategoriesPage() {
     try {
       if (editingId) {
         const updated = await updateVocabularyCategory(editingId, formData);
-        // ৩. Update এর সময় Type casting করা হলো
-        setCategories(categories.map(c => (c.id === editingId ? { ...updated, _count: c._count } as CategoryWithCount : c)));
+        setCategories(categories.map(c => 
+          c.id === editingId ? { ...updated, _count: c._count } as CategoryWithCount : c
+        ));
       } else {
         const created = await createVocabularyCategory({ ...formData, appId: selectedApp.id });
-        // ৩. Create এর সময় Type casting করা হলো
         setCategories([...categories, { ...created, _count: { vocabulary: 0 } } as CategoryWithCount]);
       }
       setIsModalOpen(false);
@@ -107,13 +111,25 @@ export default function VocabularyCategoriesPage() {
   if (isLoadingApps || !selectedApp) return <LoadingState label="Loading..." />;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">Vocabulary Categories</h1>
-          <p className="text-sm text-slate-500">Manage word groups for {selectedApp.name}</p>
+    <div className="space-y-6 max-w-6xl mx-auto">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+        <div className="flex items-start gap-4">
+          <button
+            onClick={() => router.push('/admin/vocabulary')}
+            className="mt-1 rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            title="Back to Vocabulary"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">Vocabulary Categories</h1>
+            <p className="text-sm text-slate-500 mt-1">Manage word groups for {selectedApp.name}</p>
+          </div>
         </div>
-        <button onClick={() => openModal()} className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800">
+        <button 
+          onClick={() => openModal()} 
+          className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 transition-colors shadow-sm"
+        >
           <Plus className="h-4 w-4" /> Add Category
         </button>
       </div>
@@ -123,7 +139,10 @@ export default function VocabularyCategoriesPage() {
       ) : error ? (
         <ErrorState message={error} onRetry={loadCategories} />
       ) : categories.length === 0 ? (
-        <EmptyState title="No Categories Found" description="Create your first category (e.g. Nouns, Verbs, Animals) to get started." />
+        <EmptyState 
+          title="No Categories Found" 
+          description={`Create your first category (e.g. Nouns, Verbs, Animals) for ${selectedApp.level} to get started.`} 
+        />
       ) : (
         <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <table className="min-w-full divide-y divide-slate-200 text-sm">
@@ -131,7 +150,7 @@ export default function VocabularyCategoriesPage() {
               <tr>
                 <th className="px-6 py-3 text-left font-semibold text-slate-900">Category Details</th>
                 <th className="px-6 py-3 text-left font-semibold text-slate-900">Slug</th>
-                <th className="px-6 py-3 text-center font-semibold text-slate-900">Words</th>
+                <th className="px-6 py-3 text-center font-semibold text-slate-900">Words inside</th>
                 <th className="px-6 py-3 text-right font-semibold text-slate-900">Actions</th>
               </tr>
             </thead>
@@ -140,24 +159,42 @@ export default function VocabularyCategoriesPage() {
                 <tr key={cat.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"><FolderOpen className="h-5 w-5" /></div>
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600">
+                        <FolderOpen className="h-5 w-5" />
+                      </div>
                       <div>
-                        <div className="font-bold text-slate-900">{cat.name}</div>
-                        <div className="text-xs text-slate-500">
-                          {cat.germanName} {cat.germanName && cat.banglaName && '•'} {cat.banglaName}
+                        <div className="font-bold text-slate-900 text-base">{cat.name}</div>
+                        <div className="text-xs font-medium text-slate-500 mt-0.5">
+                          {cat.germanName || '-'} {cat.germanName && cat.banglaName && '•'} {cat.banglaName || '-'}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-slate-600 font-mono text-xs">{cat.slug}</td>
+                  <td className="px-6 py-4">
+                    <span className="inline-flex rounded-md bg-slate-100 px-2 py-1 text-xs font-mono text-slate-600 border border-slate-200">
+                      {cat.slug}
+                    </span>
+                  </td>
                   <td className="px-6 py-4 text-center">
-                    <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-800">
+                    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-bold text-emerald-700 border border-emerald-200">
                       {cat._count?.vocabulary || 0}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button onClick={() => openModal(cat)} className="text-indigo-600 hover:text-indigo-900 mx-2"><Edit2 className="h-4 w-4 inline" /></button>
-                    <button onClick={() => handleDelete(cat.id)} className="text-rose-600 hover:text-rose-900"><Trash2 className="h-4 w-4 inline" /></button>
+                    <button 
+                      onClick={() => openModal(cat)} 
+                      className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors mr-1"
+                      title="Edit Category"
+                    >
+                      <Edit2 className="h-4 w-4" />
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(cat.id)} 
+                      className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors"
+                      title="Delete Category"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -166,33 +203,74 @@ export default function VocabularyCategoriesPage() {
         </div>
       )}
 
-      {/* Modal */}
+      {/* CREATE / EDIT MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <h2 className="text-lg font-bold text-slate-900 mb-4">{editingId ? 'Edit Category' : 'Create Category'}</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md rounded-2xl bg-white shadow-xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h2 className="text-lg font-bold text-slate-900">
+                {editingId ? 'Edit Category' : 'Create New Category'}
+              </h2>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700">Category Name (English)</label>
-                <input required type="text" value={formData.name} onChange={(e) => handleNameChange(e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 p-2 border shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g. Greetings" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Category Name (English) *</label>
+                <input 
+                  required type="text" 
+                  value={formData.name} 
+                  onChange={(e) => handleNameChange(e.target.value)} 
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none text-sm" 
+                  placeholder="e.g. Greetings" 
+                />
               </div>
+              
               <div>
-                <label className="block text-sm font-medium text-slate-700">Slug</label>
-                <input required type="text" value={formData.slug} onChange={(e) => setFormData({ ...formData, slug: e.target.value })} className="mt-1 block w-full rounded-md border-slate-300 p-2 border bg-slate-50 font-mono text-sm shadow-sm" />
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">URL Slug *</label>
+                <input 
+                  required type="text" 
+                  value={formData.slug} 
+                  onChange={(e) => setFormData({ ...formData, slug: e.target.value })} 
+                  className="w-full rounded-md border border-slate-300 bg-slate-50 px-3 py-2 font-mono text-sm focus:border-indigo-500 focus:outline-none" 
+                />
               </div>
+              
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700">German Name</label>
-                  <input type="text" value={formData.germanName} onChange={(e) => setFormData({ ...formData, germanName: e.target.value })} className="mt-1 block w-full rounded-md border-slate-300 p-2 border shadow-sm sm:text-sm" placeholder="e.g. Begrüßungen" />
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">German Name</label>
+                  <input 
+                    type="text" 
+                    value={formData.germanName} 
+                    onChange={(e) => setFormData({ ...formData, germanName: e.target.value })} 
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none text-sm" 
+                    placeholder="e.g. Begrüßungen" 
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700">Bangla Name</label>
-                  <input type="text" value={formData.banglaName} onChange={(e) => setFormData({ ...formData, banglaName: e.target.value })} className="mt-1 block w-full rounded-md border-slate-300 p-2 border shadow-sm sm:text-sm" placeholder="e.g. অভিবাদন" />
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">Bangla Name</label>
+                  <input 
+                    type="text" 
+                    value={formData.banglaName} 
+                    onChange={(e) => setFormData({ ...formData, banglaName: e.target.value })} 
+                    className="w-full rounded-md border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none text-sm" 
+                    placeholder="e.g. অভিবাদন" 
+                  />
                 </div>
               </div>
+              
               <div className="mt-6 flex justify-end gap-3 pt-4 border-t border-slate-100">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-slate-300 hover:bg-slate-50">Cancel</button>
-                <button type="submit" disabled={saving} className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50">
+                <button 
+                  type="button" 
+                  onClick={() => setIsModalOpen(false)} 
+                  className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-700 border border-slate-300 hover:bg-slate-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  disabled={saving} 
+                  className="rounded-md bg-indigo-600 px-6 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 transition-colors disabled:opacity-50"
+                >
                   {saving ? 'Saving...' : editingId ? 'Update Category' : 'Create Category'}
                 </button>
               </div>
