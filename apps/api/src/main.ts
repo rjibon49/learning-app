@@ -62,7 +62,8 @@ async function bootstrap() {
   app.setGlobalPrefix(apiPrefix);
   app.enableShutdownHooks();
 
-  await app.listen(port, '127.0.0.1');
+  // await app.listen(port, '127.0.0.1');
+  await app.listen(4000, '0.0.0.0');
   console.log(`API running at http://127.0.0.1:${port}/${apiPrefix}`);
 }
 
