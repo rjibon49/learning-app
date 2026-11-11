@@ -51,25 +51,40 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Language: 'Language',
+  ProficiencyFramework: 'ProficiencyFramework',
+  ProficiencyLevel: 'ProficiencyLevel',
+  LanguageProficiencyLevel: 'LanguageProficiencyLevel',
   App: 'App',
   AppConfig: 'AppConfig',
   Course: 'Course',
+  CourseApp: 'CourseApp',
   CourseModule: 'CourseModule',
   Lesson: 'Lesson',
+  LessonTranslation: 'LessonTranslation',
   LessonResource: 'LessonResource',
   MediaAsset: 'MediaAsset',
   VocabularyCategory: 'VocabularyCategory',
+  VocabularyCategoryTranslation: 'VocabularyCategoryTranslation',
   Vocabulary: 'Vocabulary',
+  VocabularyTranslation: 'VocabularyTranslation',
+  VocabularyExample: 'VocabularyExample',
   FlashcardDeck: 'FlashcardDeck',
   FlashcardDeckItem: 'FlashcardDeckItem',
   Quiz: 'Quiz',
   QuizQuestion: 'QuizQuestion',
+  QuizOption: 'QuizOption',
   User: 'User',
+  PendingEmailRegistration: 'PendingEmailRegistration',
+  UserSession: 'UserSession',
+  PasswordResetToken: 'PasswordResetToken',
+  UserLanguageEnrollment: 'UserLanguageEnrollment',
   LessonProgress: 'LessonProgress',
   VocabularyProgress: 'VocabularyProgress',
   QuizAttempt: 'QuizAttempt',
   QuizAnswer: 'QuizAnswer',
   Subscription: 'Subscription',
+  PaymentTransaction: 'PaymentTransaction',
   AdConfig: 'AdConfig',
   AdminUser: 'AdminUser',
   AdminRefreshToken: 'AdminRefreshToken',
@@ -78,6 +93,7 @@ export const ModelName = {
   BulkImportJob: 'BulkImportJob',
   SystemSetting: 'SystemSetting',
   PromoCode: 'PromoCode',
+  PromoRedemption: 'PromoRedemption',
   UserActivity: 'UserActivity'
 } as const
 
@@ -97,9 +113,66 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const LanguageScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  nativeName: 'nativeName',
+  direction: 'direction',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LanguageScalarFieldEnum = (typeof LanguageScalarFieldEnum)[keyof typeof LanguageScalarFieldEnum]
+
+
+export const ProficiencyFrameworkScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProficiencyFrameworkScalarFieldEnum = (typeof ProficiencyFrameworkScalarFieldEnum)[keyof typeof ProficiencyFrameworkScalarFieldEnum]
+
+
+export const ProficiencyLevelScalarFieldEnum = {
+  id: 'id',
+  frameworkId: 'frameworkId',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProficiencyLevelScalarFieldEnum = (typeof ProficiencyLevelScalarFieldEnum)[keyof typeof ProficiencyLevelScalarFieldEnum]
+
+
+export const LanguageProficiencyLevelScalarFieldEnum = {
+  id: 'id',
+  languageId: 'languageId',
+  levelId: 'levelId',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LanguageProficiencyLevelScalarFieldEnum = (typeof LanguageProficiencyLevelScalarFieldEnum)[keyof typeof LanguageProficiencyLevelScalarFieldEnum]
+
+
 export const AppScalarFieldEnum = {
   id: 'id',
-  level: 'level',
+  languageId: 'languageId',
+  levelId: 'levelId',
   name: 'name',
   slug: 'slug',
   packageName: 'packageName',
@@ -135,7 +208,8 @@ export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof t
 
 export const CourseScalarFieldEnum = {
   id: 'id',
-  appId: 'appId',
+  languageId: 'languageId',
+  levelId: 'levelId',
   title: 'title',
   slug: 'slug',
   description: 'description',
@@ -146,6 +220,16 @@ export const CourseScalarFieldEnum = {
 } as const
 
 export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const CourseAppScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  appId: 'appId',
+  sortOrder: 'sortOrder'
+} as const
+
+export type CourseAppScalarFieldEnum = (typeof CourseAppScalarFieldEnum)[keyof typeof CourseAppScalarFieldEnum]
 
 
 export const CourseModuleScalarFieldEnum = {
@@ -168,9 +252,6 @@ export const LessonScalarFieldEnum = {
   moduleId: 'moduleId',
   title: 'title',
   slug: 'slug',
-  germanText: 'germanText',
-  englishText: 'englishText',
-  banglaText: 'banglaText',
   sortOrder: 'sortOrder',
   status: 'status',
   estimatedMinutes: 'estimatedMinutes',
@@ -181,9 +262,24 @@ export const LessonScalarFieldEnum = {
 export type LessonScalarFieldEnum = (typeof LessonScalarFieldEnum)[keyof typeof LessonScalarFieldEnum]
 
 
+export const LessonTranslationScalarFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  languageId: 'languageId',
+  title: 'title',
+  content: 'content',
+  format: 'format',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LessonTranslationScalarFieldEnum = (typeof LessonTranslationScalarFieldEnum)[keyof typeof LessonTranslationScalarFieldEnum]
+
+
 export const LessonResourceScalarFieldEnum = {
   id: 'id',
   lessonId: 'lessonId',
+  assetId: 'assetId',
   type: 'type',
   title: 'title',
   url: 'url',
@@ -203,18 +299,25 @@ export const MediaAssetScalarFieldEnum = {
   appId: 'appId',
   type: 'type',
   visibility: 'visibility',
+  status: 'status',
   storageProvider: 'storageProvider',
   bucket: 'bucket',
   objectKey: 'objectKey',
   publicUrl: 'publicUrl',
   originalName: 'originalName',
+  originalMimeType: 'originalMimeType',
   mimeType: 'mimeType',
   fileSize: 'fileSize',
+  originalSize: 'originalSize',
   width: 'width',
   height: 'height',
   duration: 'duration',
+  pageCount: 'pageCount',
   checksumSha256: 'checksumSha256',
   altText: 'altText',
+  optimizedFormat: 'optimizedFormat',
+  processingError: 'processingError',
+  metadata: 'metadata',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -224,11 +327,8 @@ export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof
 
 export const VocabularyCategoryScalarFieldEnum = {
   id: 'id',
-  appId: 'appId',
   name: 'name',
   slug: 'slug',
-  germanName: 'germanName',
-  banglaName: 'banglaName',
   description: 'description',
   sortOrder: 'sortOrder',
   isActive: 'isActive',
@@ -239,33 +339,61 @@ export const VocabularyCategoryScalarFieldEnum = {
 export type VocabularyCategoryScalarFieldEnum = (typeof VocabularyCategoryScalarFieldEnum)[keyof typeof VocabularyCategoryScalarFieldEnum]
 
 
+export const VocabularyCategoryTranslationScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  languageId: 'languageId',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type VocabularyCategoryTranslationScalarFieldEnum = (typeof VocabularyCategoryTranslationScalarFieldEnum)[keyof typeof VocabularyCategoryTranslationScalarFieldEnum]
+
+
 export const VocabularyScalarFieldEnum = {
   id: 'id',
-  appId: 'appId',
+  languageId: 'languageId',
   lessonId: 'lessonId',
   categoryId: 'categoryId',
-  article: 'article',
-  german: 'german',
-  english: 'english',
-  bangla: 'bangla',
-  pronunciationBangla: 'pronunciationBangla',
-  pluralGerman: 'pluralGerman',
-  exampleGerman: 'exampleGerman',
-  exampleEnglish: 'exampleEnglish',
-  exampleBangla: 'exampleBangla',
-  imageUrl: 'imageUrl',
-  audioUrl: 'audioUrl',
-  imageAssetId: 'imageAssetId',
-  audioAssetId: 'audioAssetId',
+  term: 'term',
+  pronunciation: 'pronunciation',
+  partOfSpeech: 'partOfSpeech',
+  grammar: 'grammar',
   difficulty: 'difficulty',
   status: 'status',
   isPublished: 'isPublished',
   notes: 'notes',
+  imageAssetId: 'imageAssetId',
+  audioAssetId: 'audioAssetId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type VocabularyScalarFieldEnum = (typeof VocabularyScalarFieldEnum)[keyof typeof VocabularyScalarFieldEnum]
+
+
+export const VocabularyTranslationScalarFieldEnum = {
+  id: 'id',
+  vocabularyId: 'vocabularyId',
+  languageId: 'languageId',
+  meaning: 'meaning',
+  notes: 'notes',
+  sortOrder: 'sortOrder'
+} as const
+
+export type VocabularyTranslationScalarFieldEnum = (typeof VocabularyTranslationScalarFieldEnum)[keyof typeof VocabularyTranslationScalarFieldEnum]
+
+
+export const VocabularyExampleScalarFieldEnum = {
+  id: 'id',
+  vocabularyId: 'vocabularyId',
+  languageId: 'languageId',
+  text: 'text',
+  translationGroupId: 'translationGroupId',
+  sortOrder: 'sortOrder'
+} as const
+
+export type VocabularyExampleScalarFieldEnum = (typeof VocabularyExampleScalarFieldEnum)[keyof typeof VocabularyExampleScalarFieldEnum]
 
 
 export const FlashcardDeckScalarFieldEnum = {
@@ -300,7 +428,6 @@ export const QuizScalarFieldEnum = {
   lessonId: 'lessonId',
   title: 'title',
   description: 'description',
-  type: 'type',
   difficulty: 'difficulty',
   status: 'status',
   isPublished: 'isPublished',
@@ -324,6 +451,7 @@ export const QuizQuestionScalarFieldEnum = {
   correctAnswer: 'correctAnswer',
   optionsJson: 'optionsJson',
   explanation: 'explanation',
+  settings: 'settings',
   points: 'points',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt',
@@ -333,6 +461,18 @@ export const QuizQuestionScalarFieldEnum = {
 export type QuizQuestionScalarFieldEnum = (typeof QuizQuestionScalarFieldEnum)[keyof typeof QuizQuestionScalarFieldEnum]
 
 
+export const QuizOptionScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text',
+  isCorrect: 'isCorrect',
+  sortOrder: 'sortOrder',
+  metadata: 'metadata'
+} as const
+
+export type QuizOptionScalarFieldEnum = (typeof QuizOptionScalarFieldEnum)[keyof typeof QuizOptionScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -340,6 +480,7 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   role: 'role',
   isActive: 'isActive',
+  emailVerifiedAt: 'emailVerifiedAt',
   referralCode: 'referralCode',
   referredById: 'referredById',
   adFreeUntil: 'adFreeUntil',
@@ -352,6 +493,61 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PendingEmailRegistrationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  displayName: 'displayName',
+  passwordHash: 'passwordHash',
+  otpHash: 'otpHash',
+  expiresAt: 'expiresAt',
+  resendAvailableAt: 'resendAvailableAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PendingEmailRegistrationScalarFieldEnum = (typeof PendingEmailRegistrationScalarFieldEnum)[keyof typeof PendingEmailRegistrationScalarFieldEnum]
+
+
+export const UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+} as const
+
+export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+
+
+export const PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const UserLanguageEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  languageId: 'languageId',
+  levelId: 'levelId',
+  isActive: 'isActive',
+  enrolledAt: 'enrolledAt',
+  lastStudiedAt: 'lastStudiedAt'
+} as const
+
+export type UserLanguageEnrollmentScalarFieldEnum = (typeof UserLanguageEnrollmentScalarFieldEnum)[keyof typeof UserLanguageEnrollmentScalarFieldEnum]
 
 
 export const LessonProgressScalarFieldEnum = {
@@ -438,6 +634,25 @@ export const SubscriptionScalarFieldEnum = {
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
+export const PaymentTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionId: 'subscriptionId',
+  provider: 'provider',
+  externalTransactionId: 'externalTransactionId',
+  status: 'status',
+  amountMinor: 'amountMinor',
+  currency: 'currency',
+  verifiedAt: 'verifiedAt',
+  refundedAt: 'refundedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
+
+
 export const AdConfigScalarFieldEnum = {
   id: 'id',
   appId: 'appId',
@@ -516,6 +731,8 @@ export const BackgroundJobScalarFieldEnum = {
   attempts: 'attempts',
   maxAttempts: 'maxAttempts',
   errorMessage: 'errorMessage',
+  scheduledAt: 'scheduledAt',
+  lockedUntil: 'lockedUntil',
   startedAt: 'startedAt',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
@@ -574,6 +791,16 @@ export const PromoCodeScalarFieldEnum = {
 export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
 
 
+export const PromoRedemptionScalarFieldEnum = {
+  id: 'id',
+  promoCodeId: 'promoCodeId',
+  userId: 'userId',
+  redeemedAt: 'redeemedAt'
+} as const
+
+export type PromoRedemptionScalarFieldEnum = (typeof PromoRedemptionScalarFieldEnum)[keyof typeof PromoRedemptionScalarFieldEnum]
+
+
 export const UserActivityScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -603,29 +830,6 @@ export const NullableJsonNullValueInput = {
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const AppOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  packageName: 'packageName',
-  bundleId: 'bundleId',
-  description: 'description',
-  iconUrl: 'iconUrl',
-  primaryColor: 'primaryColor',
-  secondaryColor: 'secondaryColor'
-} as const
-
-export type AppOrderByRelevanceFieldEnum = (typeof AppOrderByRelevanceFieldEnum)[keyof typeof AppOrderByRelevanceFieldEnum]
-
-
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -643,6 +847,71 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const LanguageOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  nativeName: 'nativeName'
+} as const
+
+export type LanguageOrderByRelevanceFieldEnum = (typeof LanguageOrderByRelevanceFieldEnum)[keyof typeof LanguageOrderByRelevanceFieldEnum]
+
+
+export const ProficiencyFrameworkOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type ProficiencyFrameworkOrderByRelevanceFieldEnum = (typeof ProficiencyFrameworkOrderByRelevanceFieldEnum)[keyof typeof ProficiencyFrameworkOrderByRelevanceFieldEnum]
+
+
+export const ProficiencyLevelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  frameworkId: 'frameworkId',
+  code: 'code',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type ProficiencyLevelOrderByRelevanceFieldEnum = (typeof ProficiencyLevelOrderByRelevanceFieldEnum)[keyof typeof ProficiencyLevelOrderByRelevanceFieldEnum]
+
+
+export const LanguageProficiencyLevelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  languageId: 'languageId',
+  levelId: 'levelId'
+} as const
+
+export type LanguageProficiencyLevelOrderByRelevanceFieldEnum = (typeof LanguageProficiencyLevelOrderByRelevanceFieldEnum)[keyof typeof LanguageProficiencyLevelOrderByRelevanceFieldEnum]
+
+
+export const AppOrderByRelevanceFieldEnum = {
+  id: 'id',
+  languageId: 'languageId',
+  levelId: 'levelId',
+  name: 'name',
+  slug: 'slug',
+  packageName: 'packageName',
+  bundleId: 'bundleId',
+  description: 'description',
+  iconUrl: 'iconUrl',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor'
+} as const
+
+export type AppOrderByRelevanceFieldEnum = (typeof AppOrderByRelevanceFieldEnum)[keyof typeof AppOrderByRelevanceFieldEnum]
+
+
 export const AppConfigOrderByRelevanceFieldEnum = {
   id: 'id',
   appId: 'appId',
@@ -654,13 +923,23 @@ export type AppConfigOrderByRelevanceFieldEnum = (typeof AppConfigOrderByRelevan
 
 export const CourseOrderByRelevanceFieldEnum = {
   id: 'id',
-  appId: 'appId',
+  languageId: 'languageId',
+  levelId: 'levelId',
   title: 'title',
   slug: 'slug',
   description: 'description'
 } as const
 
 export type CourseOrderByRelevanceFieldEnum = (typeof CourseOrderByRelevanceFieldEnum)[keyof typeof CourseOrderByRelevanceFieldEnum]
+
+
+export const CourseAppOrderByRelevanceFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  appId: 'appId'
+} as const
+
+export type CourseAppOrderByRelevanceFieldEnum = (typeof CourseAppOrderByRelevanceFieldEnum)[keyof typeof CourseAppOrderByRelevanceFieldEnum]
 
 
 export const CourseModuleOrderByRelevanceFieldEnum = {
@@ -678,18 +957,27 @@ export const LessonOrderByRelevanceFieldEnum = {
   id: 'id',
   moduleId: 'moduleId',
   title: 'title',
-  slug: 'slug',
-  germanText: 'germanText',
-  englishText: 'englishText',
-  banglaText: 'banglaText'
+  slug: 'slug'
 } as const
 
 export type LessonOrderByRelevanceFieldEnum = (typeof LessonOrderByRelevanceFieldEnum)[keyof typeof LessonOrderByRelevanceFieldEnum]
 
 
+export const LessonTranslationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  lessonId: 'lessonId',
+  languageId: 'languageId',
+  title: 'title',
+  content: 'content'
+} as const
+
+export type LessonTranslationOrderByRelevanceFieldEnum = (typeof LessonTranslationOrderByRelevanceFieldEnum)[keyof typeof LessonTranslationOrderByRelevanceFieldEnum]
+
+
 export const LessonResourceOrderByRelevanceFieldEnum = {
   id: 'id',
   lessonId: 'lessonId',
+  assetId: 'assetId',
   title: 'title',
   url: 'url',
   mimeType: 'mimeType'
@@ -706,9 +994,12 @@ export const MediaAssetOrderByRelevanceFieldEnum = {
   objectKey: 'objectKey',
   publicUrl: 'publicUrl',
   originalName: 'originalName',
+  originalMimeType: 'originalMimeType',
   mimeType: 'mimeType',
   checksumSha256: 'checksumSha256',
-  altText: 'altText'
+  altText: 'altText',
+  optimizedFormat: 'optimizedFormat',
+  processingError: 'processingError'
 } as const
 
 export type MediaAssetOrderByRelevanceFieldEnum = (typeof MediaAssetOrderByRelevanceFieldEnum)[keyof typeof MediaAssetOrderByRelevanceFieldEnum]
@@ -716,39 +1007,61 @@ export type MediaAssetOrderByRelevanceFieldEnum = (typeof MediaAssetOrderByRelev
 
 export const VocabularyCategoryOrderByRelevanceFieldEnum = {
   id: 'id',
-  appId: 'appId',
   name: 'name',
   slug: 'slug',
-  germanName: 'germanName',
-  banglaName: 'banglaName',
   description: 'description'
 } as const
 
 export type VocabularyCategoryOrderByRelevanceFieldEnum = (typeof VocabularyCategoryOrderByRelevanceFieldEnum)[keyof typeof VocabularyCategoryOrderByRelevanceFieldEnum]
 
 
+export const VocabularyCategoryTranslationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  languageId: 'languageId',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type VocabularyCategoryTranslationOrderByRelevanceFieldEnum = (typeof VocabularyCategoryTranslationOrderByRelevanceFieldEnum)[keyof typeof VocabularyCategoryTranslationOrderByRelevanceFieldEnum]
+
+
 export const VocabularyOrderByRelevanceFieldEnum = {
   id: 'id',
-  appId: 'appId',
+  languageId: 'languageId',
   lessonId: 'lessonId',
   categoryId: 'categoryId',
-  article: 'article',
-  german: 'german',
-  english: 'english',
-  bangla: 'bangla',
-  pronunciationBangla: 'pronunciationBangla',
-  pluralGerman: 'pluralGerman',
-  exampleGerman: 'exampleGerman',
-  exampleEnglish: 'exampleEnglish',
-  exampleBangla: 'exampleBangla',
-  imageUrl: 'imageUrl',
-  audioUrl: 'audioUrl',
+  term: 'term',
+  pronunciation: 'pronunciation',
+  partOfSpeech: 'partOfSpeech',
+  notes: 'notes',
   imageAssetId: 'imageAssetId',
-  audioAssetId: 'audioAssetId',
-  notes: 'notes'
+  audioAssetId: 'audioAssetId'
 } as const
 
 export type VocabularyOrderByRelevanceFieldEnum = (typeof VocabularyOrderByRelevanceFieldEnum)[keyof typeof VocabularyOrderByRelevanceFieldEnum]
+
+
+export const VocabularyTranslationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  vocabularyId: 'vocabularyId',
+  languageId: 'languageId',
+  meaning: 'meaning',
+  notes: 'notes'
+} as const
+
+export type VocabularyTranslationOrderByRelevanceFieldEnum = (typeof VocabularyTranslationOrderByRelevanceFieldEnum)[keyof typeof VocabularyTranslationOrderByRelevanceFieldEnum]
+
+
+export const VocabularyExampleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  vocabularyId: 'vocabularyId',
+  languageId: 'languageId',
+  text: 'text',
+  translationGroupId: 'translationGroupId'
+} as const
+
+export type VocabularyExampleOrderByRelevanceFieldEnum = (typeof VocabularyExampleOrderByRelevanceFieldEnum)[keyof typeof VocabularyExampleOrderByRelevanceFieldEnum]
 
 
 export const FlashcardDeckOrderByRelevanceFieldEnum = {
@@ -795,6 +1108,15 @@ export const QuizQuestionOrderByRelevanceFieldEnum = {
 export type QuizQuestionOrderByRelevanceFieldEnum = (typeof QuizQuestionOrderByRelevanceFieldEnum)[keyof typeof QuizQuestionOrderByRelevanceFieldEnum]
 
 
+export const QuizOptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text'
+} as const
+
+export type QuizOptionOrderByRelevanceFieldEnum = (typeof QuizOptionOrderByRelevanceFieldEnum)[keyof typeof QuizOptionOrderByRelevanceFieldEnum]
+
+
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
@@ -805,6 +1127,47 @@ export const UserOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const PendingEmailRegistrationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  email: 'email',
+  displayName: 'displayName',
+  passwordHash: 'passwordHash',
+  otpHash: 'otpHash'
+} as const
+
+export type PendingEmailRegistrationOrderByRelevanceFieldEnum = (typeof PendingEmailRegistrationOrderByRelevanceFieldEnum)[keyof typeof PendingEmailRegistrationOrderByRelevanceFieldEnum]
+
+
+export const UserSessionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent'
+} as const
+
+export type UserSessionOrderByRelevanceFieldEnum = (typeof UserSessionOrderByRelevanceFieldEnum)[keyof typeof UserSessionOrderByRelevanceFieldEnum]
+
+
+export const PasswordResetTokenOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash'
+} as const
+
+export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const UserLanguageEnrollmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  languageId: 'languageId',
+  levelId: 'levelId'
+} as const
+
+export type UserLanguageEnrollmentOrderByRelevanceFieldEnum = (typeof UserLanguageEnrollmentOrderByRelevanceFieldEnum)[keyof typeof UserLanguageEnrollmentOrderByRelevanceFieldEnum]
 
 
 export const LessonProgressOrderByRelevanceFieldEnum = {
@@ -855,6 +1218,18 @@ export const SubscriptionOrderByRelevanceFieldEnum = {
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
+
+
+export const PaymentTransactionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionId: 'subscriptionId',
+  provider: 'provider',
+  externalTransactionId: 'externalTransactionId',
+  currency: 'currency'
+} as const
+
+export type PaymentTransactionOrderByRelevanceFieldEnum = (typeof PaymentTransactionOrderByRelevanceFieldEnum)[keyof typeof PaymentTransactionOrderByRelevanceFieldEnum]
 
 
 export const AdConfigOrderByRelevanceFieldEnum = {
@@ -944,6 +1319,15 @@ export const PromoCodeOrderByRelevanceFieldEnum = {
 } as const
 
 export type PromoCodeOrderByRelevanceFieldEnum = (typeof PromoCodeOrderByRelevanceFieldEnum)[keyof typeof PromoCodeOrderByRelevanceFieldEnum]
+
+
+export const PromoRedemptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  promoCodeId: 'promoCodeId',
+  userId: 'userId'
+} as const
+
+export type PromoRedemptionOrderByRelevanceFieldEnum = (typeof PromoRedemptionOrderByRelevanceFieldEnum)[keyof typeof PromoRedemptionOrderByRelevanceFieldEnum]
 
 
 export const UserActivityOrderByRelevanceFieldEnum = {

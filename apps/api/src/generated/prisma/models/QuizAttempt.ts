@@ -317,8 +317,8 @@ export type QuizAttemptScalarWhereWithAggregatesInput = {
 
 export type QuizAttemptCreateInput = {
   id?: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -331,8 +331,8 @@ export type QuizAttemptUncheckedCreateInput = {
   id?: string
   userId: string
   quizId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -367,8 +367,8 @@ export type QuizAttemptCreateManyInput = {
   id?: string
   userId: string
   quizId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -568,8 +568,8 @@ export type QuizAttemptUpdateOneRequiredWithoutAnswersNestedInput = {
 
 export type QuizAttemptCreateWithoutQuizInput = {
   id?: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -580,8 +580,8 @@ export type QuizAttemptCreateWithoutQuizInput = {
 export type QuizAttemptUncheckedCreateWithoutQuizInput = {
   id?: string
   userId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -630,8 +630,8 @@ export type QuizAttemptScalarWhereInput = {
 
 export type QuizAttemptCreateWithoutUserInput = {
   id?: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -642,8 +642,8 @@ export type QuizAttemptCreateWithoutUserInput = {
 export type QuizAttemptUncheckedCreateWithoutUserInput = {
   id?: string
   quizId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -678,8 +678,8 @@ export type QuizAttemptUpdateManyWithWhereWithoutUserInput = {
 
 export type QuizAttemptCreateWithoutAnswersInput = {
   id?: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -691,8 +691,8 @@ export type QuizAttemptUncheckedCreateWithoutAnswersInput = {
   id?: string
   userId: string
   quizId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -739,8 +739,8 @@ export type QuizAttemptUncheckedUpdateWithoutAnswersInput = {
 export type QuizAttemptCreateManyQuizInput = {
   id?: string
   userId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null
@@ -781,8 +781,8 @@ export type QuizAttemptUncheckedUpdateManyWithoutQuizInput = {
 export type QuizAttemptCreateManyUserInput = {
   id?: string
   quizId: string
-  score: number
-  total: number
+  score?: number
+  total?: number
   percentage?: number | null
   startedAt?: Date | string
   completedAt?: Date | string | null

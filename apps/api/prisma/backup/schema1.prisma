@@ -1,0 +1,1039 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+/**
+ * =========================================================
+ * ENUMS
+ * =========================================================
+ */
+
+enum AppLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+  CONTENT_EDITOR
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  CONTENT_EDITOR
+}
+
+enum PublicationStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ResourceType {
+  PDF
+  AUDIO
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum MediaType {
+  IMAGE
+  AUDIO
+  PDF
+  VIDEO
+  DOCUMENT
+}
+
+enum MediaVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum QuizType {
+  IMAGE_TO_GERMAN
+  ENGLISH_TO_GERMAN
+  BANGLA_TO_GERMAN
+  AUDIO_TO_GERMAN
+  GERMAN_TO_ENGLISH
+  GERMAN_TO_BANGLA
+  ARTICLE
+  MULTIPLE_CHOICE
+  MATCHING
+  FILL_BLANK
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  TRIAL
+}
+
+enum SubscriptionPlatform {
+  GOOGLE_PLAY
+  APPLE_APP_STORE
+  WEB        
+  STRIPE      
+  MANUAL
+}
+
+enum AdProvider {
+  ADMOB
+  OTHER
+}
+
+enum JobType {
+  GENERATE_AUDIO
+  GENERATE_TRANSLATION
+  GENERATE_EXAMPLE
+  GENERATE_QUIZ
+  PROCESS_PDF
+  PROCESS_IMAGE
+  BULK_IMPORT
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ImportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  PARTIAL
+}
+
+enum MasteryLevel {
+  NEW
+  LEARNING
+  REVIEW
+  MASTERED
+}
+
+/**
+ * =========================================================
+ * APP / LEVEL
+ * =========================================================
+ */
+
+model App {
+  id    String   @id @default(cuid())
+  level AppLevel @unique
+
+  name String
+  slug String @unique
+
+  packageName String? @unique
+  bundleId    String? @unique
+
+  description String? @db.Text
+
+  iconUrl        String? @db.Text
+  primaryColor   String?
+  secondaryColor String?
+
+  isActive Boolean @default(true)
+
+  courses        Course[]
+  categories     VocabularyCategory[]
+  vocabularies   Vocabulary[]
+  quizzes        Quiz[]
+  mediaAssets    MediaAsset[]
+  subscriptions  Subscription[]
+  adConfigs      AdConfig[]
+  flashcardDecks FlashcardDeck[]
+  importJobs     BulkImportJob[]
+  jobs           BackgroundJob[]
+
+  config AppConfig?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+model AppConfig {
+  id    String @id @default(cuid())
+  appId String @unique
+
+  adsEnabled           Boolean @default(true)
+  subscriptionsEnabled Boolean @default(true)
+  guestModeEnabled     Boolean @default(true)
+  loginRequired        Boolean @default(false)
+
+  defaultLanguage    String @default("en")
+  supportedLanguages Json?
+
+  settings Json?
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/**
+ * =========================================================
+ * COURSE / LESSON
+ * =========================================================
+ */
+
+model Course {
+  id    String @id @default(cuid())
+  appId String
+
+  title       String
+  slug        String
+  description String? @db.Text
+
+  status    PublicationStatus @default(DRAFT)
+  sortOrder Int               @default(0)
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  modules CourseModule[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([appId, slug])
+  @@index([appId, status])
+}
+
+model CourseModule {
+  id       String @id @default(cuid())
+  courseId String
+
+  title       String
+  slug        String
+  description String? @db.Text
+
+  sortOrder Int               @default(0)
+  status    PublicationStatus @default(DRAFT)
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  lessons Lesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([courseId, slug])
+  @@index([courseId, sortOrder])
+}
+
+model Lesson {
+  id       String @id @default(cuid())
+  moduleId String
+
+  title String
+  slug  String
+
+  germanText  String? @db.LongText
+  englishText String? @db.LongText
+  banglaText  String? @db.LongText
+
+  sortOrder Int               @default(0)
+  status    PublicationStatus @default(DRAFT)
+
+  estimatedMinutes Int?
+
+  module CourseModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  resources  LessonResource[]
+  vocabulary Vocabulary[]
+  quizzes    Quiz[]
+  progress   LessonProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([moduleId, slug])
+  @@index([moduleId, sortOrder])
+  @@index([status])
+}
+
+model LessonResource {
+  id       String @id @default(cuid())
+  lessonId String
+
+  type  ResourceType
+  title String
+
+  url      String  @db.Text
+  mimeType String?
+  fileSize BigInt?
+
+  pageCount Int?
+
+  sortOrder Int @default(0)
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([lessonId, type])
+}
+
+/**
+ * =========================================================
+ * MEDIA / R2
+ * =========================================================
+ */
+
+model MediaAsset {
+  id    String  @id @default(cuid())
+  appId String?
+
+  type       MediaType
+  visibility MediaVisibility @default(PUBLIC)
+
+  storageProvider String  @default("R2")
+  bucket          String?
+  objectKey       String  @unique
+
+  publicUrl String? @db.Text
+
+  originalName String?
+  mimeType     String?
+  fileSize     BigInt?
+
+  width    Int?
+  height   Int?
+  duration Int?
+
+  checksumSha256 String? @db.VarChar(64)
+
+  altText String? @db.Text
+
+  app App? @relation(fields: [appId], references: [id], onDelete: SetNull)
+
+  vocabularyImages Vocabulary[] @relation("VocabularyImage")
+  vocabularyAudios Vocabulary[] @relation("VocabularyAudio")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appId, type])
+  @@index([visibility])
+}
+
+/**
+ * =========================================================
+ * VOCABULARY
+ * =========================================================
+ */
+
+model VocabularyCategory {
+  id    String @id @default(cuid())
+  appId String
+
+  name String
+  slug String
+
+  germanName String?
+  banglaName String?
+
+  description String? @db.Text
+
+  sortOrder Int @default(0)
+
+  isActive Boolean @default(true)
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  vocabulary Vocabulary[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([appId, slug])
+  @@index([appId, sortOrder])
+}
+
+model Vocabulary {
+  id         String  @id @default(cuid())
+  appId      String
+  lessonId   String?
+  categoryId String?
+
+  article String?
+  german  String
+  english String
+  bangla  String
+
+  pronunciationBangla String?
+
+  pluralGerman String?
+
+  exampleGerman  String? @db.Text
+  exampleEnglish String? @db.Text
+  exampleBangla  String? @db.Text
+
+  imageUrl String? @db.Text
+  audioUrl String? @db.Text
+
+  imageAssetId String?
+  audioAssetId String?
+
+  difficulty Difficulty @default(EASY)
+
+  status      PublicationStatus @default(DRAFT)
+  isPublished Boolean           @default(false)
+
+  notes String? @db.Text
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+
+  category VocabularyCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  imageAsset MediaAsset? @relation("VocabularyImage", fields: [imageAssetId], references: [id], onDelete: SetNull)
+
+  audioAsset MediaAsset? @relation("VocabularyAudio", fields: [audioAssetId], references: [id], onDelete: SetNull)
+
+  quizQuestions  QuizQuestion[]
+  progress       VocabularyProgress[]
+  flashcardItems FlashcardDeckItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appId, isPublished])
+  @@index([appId, status])
+  @@index([lessonId])
+  @@index([categoryId])
+  @@index([german])
+  @@index([english])
+}
+
+/**
+ * =========================================================
+ * FLASHCARD
+ * =========================================================
+ */
+
+model FlashcardDeck {
+  id    String @id @default(cuid())
+  appId String
+
+  title       String
+  description String? @db.Text
+
+  difficulty Difficulty @default(EASY)
+
+  isPublished Boolean @default(false)
+
+  sortOrder Int @default(0)
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  items FlashcardDeckItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appId, isPublished])
+}
+
+model FlashcardDeckItem {
+  id           String @id @default(cuid())
+  deckId       String
+  vocabularyId String
+
+  sortOrder Int @default(0)
+
+  deck FlashcardDeck @relation(fields: [deckId], references: [id], onDelete: Cascade)
+
+  vocabulary Vocabulary @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([deckId, vocabularyId])
+  @@index([deckId, sortOrder])
+}
+
+/**
+ * =========================================================
+ * QUIZ
+ * =========================================================
+ */
+
+model Quiz {
+  id String @id @default(cuid())
+
+  appId    String
+  lessonId String?
+
+  title       String
+  description String? @db.Text
+
+  type       QuizType
+  difficulty Difficulty @default(EASY)
+
+  status      PublicationStatus @default(DRAFT)
+  isPublished Boolean           @default(false)
+
+  timeLimitSeconds Int?
+  passingScore     Int?
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appId, type])
+  @@index([appId, status])
+  @@index([lessonId])
+}
+
+model QuizQuestion {
+  id     String @id @default(cuid())
+  quizId String
+
+  vocabularyId String?
+
+  questionType QuizType @default(MULTIPLE_CHOICE)
+
+  questionText String? @db.Text
+  imageUrl     String? @db.Text
+  audioUrl     String? @db.Text
+
+  correctAnswer String @db.Text
+
+  optionsJson Json?
+  explanation String? @db.Text
+
+  points Int @default(1)
+
+  sortOrder Int @default(0)
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  vocabulary Vocabulary? @relation(fields: [vocabularyId], references: [id], onDelete: SetNull)
+
+  answers QuizAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([quizId, sortOrder])
+  @@index([vocabularyId])
+  @@index([questionType])
+}
+
+/**
+ * =========================================================
+ * USER / STUDENT
+ * =========================================================
+ */
+
+model User {
+  id String @id @default(cuid())
+
+  email       String? @unique
+  displayName String?
+
+  passwordHash String? @db.Text
+
+  role UserRole @default(USER)
+
+  isActive Boolean @default(true)
+
+  // ================= NEW: REFERRAL & REWARD FIELDS =================
+  referralCode String? @unique @db.VarChar(20) // The user's own unique referral code
+  referredById String? // ID of the user who referred this user
+  
+  adFreeUntil  DateTime? // Date until which the user enjoys ad-free experience
+
+  currentStreak Int @default(0) // Current consecutive days of activity
+  longestStreak Int @default(0) // Longest streak achieved
+  lastActivityDate DateTime? @db.Date // Only stores the date (YYYY-MM-DD) to track daily streak
+  // =================================================================
+
+  lastLoginAt DateTime?
+
+  lessonProgress     LessonProgress[]
+  vocabularyProgress VocabularyProgress[]
+  quizAttempts       QuizAttempt[]
+  subscriptions      Subscription[]
+  activities         UserActivity[] // Relation to new UserActivity model
+
+  referredUsers      User[] @relation("UserReferrals") // Users referred by this user
+  referrer           User?  @relation("UserReferrals", fields: [referredById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([referralCode])
+  @@index([referredById])
+}
+
+model LessonProgress {
+  id String @id @default(cuid())
+
+  userId   String
+  lessonId String
+
+  completion Int @default(0)
+
+  lastPosition Int?
+
+  completedAt  DateTime?
+  lastOpenedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+  @@index([lessonId])
+  @@index([userId])
+}
+
+model VocabularyProgress {
+  id String @id @default(cuid())
+
+  userId       String
+  vocabularyId String
+
+  correctCount Int @default(0)
+  wrongCount   Int @default(0)
+
+  streak Int @default(0)
+
+  masteryScore Int          @default(0)
+  masteryLevel MasteryLevel @default(NEW)
+
+  easeFactor      Float @default(2.5)
+  intervalDays    Int   @default(0)
+  repetitionCount Int   @default(0)
+
+  nextReviewAt   DateTime?
+  lastReviewedAt DateTime?
+  firstLearnedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  vocabulary Vocabulary @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, vocabularyId])
+  @@index([userId, nextReviewAt])
+  @@index([nextReviewAt])
+}
+
+model QuizAttempt {
+  id String @id @default(cuid())
+
+  userId String
+  quizId String
+
+  score Int
+  total Int
+
+  percentage Float?
+
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  answers QuizAnswer[]
+
+  @@index([userId, quizId])
+  @@index([quizId])
+}
+
+model QuizAnswer {
+  id String @id @default(cuid())
+
+  attemptId  String
+  questionId String
+
+  answer    String  @db.Text
+  isCorrect Boolean
+
+  responseTimeMs Int?
+
+  attempt QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  question QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([attemptId])
+  @@index([questionId])
+}
+
+/**
+ * =========================================================
+ * SUBSCRIPTION
+ * =========================================================
+ */
+
+model Subscription {
+  id String @id @default(cuid())
+
+  userId String
+  appId  String
+
+  platform SubscriptionPlatform @default(GOOGLE_PLAY)
+
+  provider  String
+  productId String
+
+  externalId            String?
+  originalTransactionId String?
+
+  status SubscriptionStatus
+
+  startedAt DateTime
+  expiresAt DateTime?
+
+  autoRenew Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, appId, status])
+  @@index([externalId])
+  @@index([originalTransactionId])
+}
+
+/**
+ * =========================================================
+ * ADVERTISEMENT CONFIG
+ * =========================================================
+ */
+
+model AdConfig {
+  id    String @id @default(cuid())
+  appId String
+
+  provider AdProvider @default(ADMOB)
+
+  platform String
+
+  appAdId String?
+
+  bannerAdUnitId       String?
+  interstitialAdUnitId String?
+  rewardedAdUnitId     String?
+  nativeAdUnitId       String?
+
+  isEnabled Boolean @default(true)
+
+  settings Json?
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([appId, platform, provider])
+}
+
+/**
+ * =========================================================
+ * ADMIN AUTH
+ * =========================================================
+ */
+
+model AdminUser {
+  id String @id @default(cuid())
+
+  email       String  @unique
+  displayName String?
+
+  passwordHash String @db.Text
+
+  role AdminRole @default(CONTENT_EDITOR)
+
+  isActive    Boolean @default(true)
+  authVersion Int     @default(0)
+
+  lastLoginAt       DateTime?
+  passwordChangedAt DateTime?
+
+  refreshTokens AdminRefreshToken[]
+  auditLogs     AdminAuditLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role, isActive])
+}
+
+model AdminRefreshToken {
+  id String @id @default(cuid())
+
+  adminId String
+
+  tokenHash String @unique
+  familyId  String
+
+  expiresAt DateTime
+  revokedAt DateTime?
+
+  ipAddress String? @db.VarChar(64)
+  userAgent String? @db.VarChar(500)
+
+  admin AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([adminId])
+  @@index([familyId])
+  @@index([expiresAt])
+  @@index([adminId, revokedAt])
+}
+
+model AdminAuditLog {
+  id String @id @default(cuid())
+
+  adminId String?
+
+  action     String
+  entityType String?
+  entityId   String?
+
+  ipAddress String? @db.VarChar(64)
+  userAgent String? @db.VarChar(500)
+
+  metadata Json?
+
+  admin AdminUser? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([adminId, createdAt])
+  @@index([entityType, entityId])
+  @@index([action])
+}
+
+/**
+ * =========================================================
+ * BACKGROUND / AI / TTS JOBS
+ * =========================================================
+ */
+
+model BackgroundJob {
+  id String @id @default(cuid())
+
+  appId String?
+
+  type   JobType
+  status JobStatus @default(PENDING)
+
+  entityType String?
+  entityId   String?
+
+  payload Json?
+  result  Json?
+
+  attempts    Int @default(0)
+  maxAttempts Int @default(3)
+
+  errorMessage String? @db.Text
+
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  app App? @relation(fields: [appId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, type])
+  @@index([appId])
+  @@index([entityType, entityId])
+}
+
+/**
+ * =========================================================
+ * BULK IMPORT
+ * =========================================================
+ */
+
+model BulkImportJob {
+  id String @id @default(cuid())
+
+  appId String
+
+  filename String?
+
+  status ImportStatus @default(PENDING)
+
+  totalRows     Int @default(0)
+  processedRows Int @default(0)
+  successRows   Int @default(0)
+  failedRows    Int @default(0)
+
+  errorReport Json?
+  metadata    Json?
+
+  app App @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appId, status])
+}
+
+/**
+ * =========================================================
+ * SYSTEM SETTINGS (Global CMS Configuration)
+ * =========================================================
+ */
+
+model SystemSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @db.LongText
+
+  description String? @db.Text
+  isPublic    Boolean @default(false) // If true, can be read without admin auth
+  
+  updatedBy String? // Admin User ID who last updated it
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+/**
+ * =========================================================
+ * PROMOTIONS & DISCOUNTS (NEW)
+ * =========================================================
+ */
+
+model PromoCode {
+  id String @id @default(cuid())
+  
+  code         String  @unique
+  discountPct  Int     // Example: 20 for 20% off
+  description  String? @db.Text
+  
+  isActive     Boolean @default(true)
+  
+  validFrom    DateTime?
+  validUntil   DateTime?
+  
+  maxUses      Int?    // Null means unlimited
+  currentUses  Int     @default(0)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([code])
+  @@index([isActive])
+}
+
+/**
+ * =========================================================
+ * USER ACTIVITY LOG (NEW)
+ * =========================================================
+ */
+
+model UserActivity {
+  id String @id @default(cuid())
+
+  userId String
+  
+  date DateTime @db.Date // The specific day of activity
+  
+  durationMinutes Int @default(0) // Total time spent on this date
+  
+  isStreakCounted Boolean @default(false) // Whether this day's activity was counted towards a streak reward
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date]) // Ensure only one activity record per user per day
+  @@index([userId])
+}
+
+
+/**
+ * =========================================================
+ * PENDING EMAIL REGISTRATION
+ * =========================================================
+ *
+ * An actual User account is created only after
+ * successful verification.
+ *
+ * OTP values are never stored as plaintext.
+ * Pending records should be periodically cleaned up.
+ */
+
+model PendingEmailRegistration {
+  id String @id @default(cuid())
+
+  email String @unique @db.VarChar(191)
+
+  displayName String @db.VarChar(120)
+
+  passwordHash String @db.Text
+
+  otpHash String @db.VarChar(64)
+
+  expiresAt DateTime
+
+  resendAvailableAt DateTime
+
+  attempts Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+
+  @@index([expiresAt])
+  @@index([createdAt])
+}

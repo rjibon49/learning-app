@@ -1,56 +1,163 @@
+
 import { z } from 'zod';
 
+export const vocabularyIdSchema = z.cuid();
+
+const slug = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .min(2)
+  .max(120)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+
+const nullableId = vocabularyIdSchema.nullable().optional();
+
+const nullableText = (max: number) =>
+  z.string().trim().max(max).nullable().optional();
+
+const sortOrder = z.number().int().min(0).max(1000000);
+
+const publicationStatus = z.enum([
+  'DRAFT',
+  'REVIEW',
+  'PUBLISHED',
+  'ARCHIVED',
+]);
+
 export const createCategorySchema = z.object({
-  appId: z.string().min(1),
   name: z.string().trim().min(1).max(120),
-  slug: z
+  slug,
+  description: nullableText(10000),
+  sortOrder: sortOrder.default(0),
+  isActive: z.boolean().default(true),
+}).strict();
+
+export const updateCategorySchema =
+  createCategorySchema.partial().strict();
+
+export const categoryTranslationSchema = z.object({
+  languageId: vocabularyIdSchema,
+  name: z.string().trim().min(1).max(120),
+  description: nullableText(10000),
+}).strict();
+
+export const createVocabularySchema = z.object({
+  languageId: vocabularyIdSchema,
+  lessonId: nullableId,
+  categoryId: nullableId,
+
+  term: z.string().trim().min(1).max(500),
+
+  pronunciation: nullableText(500),
+  partOfSpeech: nullableText(80),
+
+  // Examples:
+  // { "gender": "masculine", "article": "der" }
+  // { "plural": "Bären" }
+  // { "script": "kanji" }
+  grammar: z.record(
+    z.string(),
+    z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.null(),
+      z.array(z.string()),
+    ]),
+  ).nullable().optional(),
+
+  difficulty: z.enum([
+    'EASY',
+    'MEDIUM',
+    'HARD',
+  ]).default('EASY'),
+
+  status: publicationStatus.default('DRAFT'),
+  notes: nullableText(10000),
+
+  imageAssetId: nullableId,
+  audioAssetId: nullableId,
+}).strict();
+
+export const updateVocabularySchema =
+  createVocabularySchema
+    .omit({ languageId: true })
+    .partial()
+    .strict();
+
+export const vocabularyTranslationSchema = z.object({
+  languageId: vocabularyIdSchema,
+  meaning: z.string().trim().min(1).max(10000),
+  notes: nullableText(10000),
+  sortOrder: sortOrder.default(0),
+}).strict();
+
+export const vocabularyExampleSchema = z.object({
+  languageId: vocabularyIdSchema,
+  text: z.string().trim().min(1).max(10000),
+  translationGroupId: z
     .string()
     .trim()
     .min(1)
-    .max(120)
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    .max(100)
+    .nullable()
+    .optional(),
+  sortOrder: sortOrder.default(0),
+}).strict();
 
-  germanName: z.string().trim().max(120).optional(),
-  banglaName: z.string().trim().max(120).optional(),
+export const updateVocabularyExampleSchema =
+  vocabularyExampleSchema.partial().strict();
 
-  sortOrder: z.number().int().min(0).default(0),
-});
+export const vocabularyListQuerySchema = z.object({
+  language: z.string()
+    .trim()
+    .toLowerCase()
+    .max(16)
+    .optional(),
 
-export const updateCategorySchema = createCategorySchema.partial();
+  languageId: vocabularyIdSchema.optional(),
+  appId: vocabularyIdSchema.optional(),
+  lessonId: vocabularyIdSchema.optional(),
+  categoryId: vocabularyIdSchema.optional(),
 
-export const createVocabularySchema = z.object({
-  appId: z.string().min(1),
+  difficulty: z.enum([
+    'EASY',
+    'MEDIUM',
+    'HARD',
+  ]).optional(),
 
-  lessonId: z.string().min(1).optional().nullable(),
-  categoryId: z.string().min(1).optional().nullable(),
+  status: publicationStatus.optional(),
 
-  article: z.enum(['der', 'die', 'das']).optional().nullable(),
+  search: z.string().trim().max(100).optional(),
 
-  german: z.string().trim().min(1).max(255),
-  english: z.string().trim().min(1).max(255),
-  bangla: z.string().trim().min(1).max(255),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+}).strict();
 
-  pronunciationBangla: z.string().trim().max(255).optional().nullable(),
-  pluralGerman: z.string().trim().max(255).optional().nullable(),
+export type CreateCategoryInput =
+  z.infer<typeof createCategorySchema>;
 
-  exampleGerman: z.string().trim().max(2000).optional().nullable(),
-  exampleEnglish: z.string().trim().max(2000).optional().nullable(),
-  exampleBangla: z.string().trim().max(2000).optional().nullable(),
+export type UpdateCategoryInput =
+  z.infer<typeof updateCategorySchema>;
 
-  imageUrl: z.string().url().optional().nullable(),
-  audioUrl: z.string().url().optional().nullable(),
-  
-  // Media Asset Linking
-  imageAssetId: z.string().optional().nullable(),
-  audioAssetId: z.string().optional().nullable(),
+export type CategoryTranslationInput =
+  z.infer<typeof categoryTranslationSchema>;
 
-  difficulty: z.enum(['EASY', 'MEDIUM', 'HARD']).default('EASY'),
-  isPublished: z.boolean().default(false),
-});
+export type CreateVocabularyInput =
+  z.infer<typeof createVocabularySchema>;
 
-export const updateVocabularySchema = createVocabularySchema.partial();
+export type UpdateVocabularyInput =
+  z.infer<typeof updateVocabularySchema>;
 
-export type CreateCategoryInput = z.infer<typeof createCategorySchema>;
-export type UpdateCategoryInput = z.infer<typeof updateCategorySchema>;
-export type CreateVocabularyInput = z.infer<typeof createVocabularySchema>;
-export type UpdateVocabularyInput = z.infer<typeof updateVocabularySchema>;
+export type VocabularyTranslationInput =
+  z.infer<typeof vocabularyTranslationSchema>;
+
+export type VocabularyExampleInput =
+  z.infer<typeof vocabularyExampleSchema>;
+
+export type UpdateVocabularyExampleInput =
+  z.infer<typeof updateVocabularyExampleSchema>;
+
+export type VocabularyListQuery =
+  z.infer<typeof vocabularyListQuerySchema>;

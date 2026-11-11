@@ -1,102 +1,104 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service.js';
+
+import type { Prisma } from '../generated/prisma/client.js';
+import type { ActivityListInput } from './activity.schemas.js';
 
 @Injectable()
 export class ActivityService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+  ) {}
 
-  // 1. Create or Update Daily Log (Post)
-  async logDailyActivity(userId: string, durationMinutes: number) {
-    const today = new Date();
-    today.setUTCHours(0, 0, 0, 0);
+  private where(
+    input: ActivityListInput,
+    userId?: string,
+  ): Prisma.UserActivityWhereInput {
+    return {
+      ...(userId
+        ? { userId }
+        : input.userId
+          ? { userId: input.userId }
+          : {}),
+      ...(
+        input.from || input.to
+          ? {
+              date: {
+                ...(input.from
+                  ? { gte: new Date(`${input.from}T00:00:00.000Z`) }
+                  : {}),
+                ...(input.to
+                  ? { lte: new Date(`${input.to}T00:00:00.000Z`) }
+                  : {}),
+              },
+            }
+          : {}
+      ),
+    };
+  }
 
-    const settings = await this.prisma.systemSetting.findMany({
-      where: { key: { in: ['STREAK_REQUIRED_DAYS', 'STREAK_REWARD_DAYS', 'DAILY_MINUTES_REQUIRED'] } },
-    });
-    const getSetting = (key: string, def: number) => Number(settings.find(s => s.key === key)?.value || def);
+  async findMyActivities(
+    userId: string,
+    query: ActivityListInput,
+  ) {
+    return this.list(query, userId, false);
+  }
 
-    const requiredDays = getSetting('STREAK_REQUIRED_DAYS', 7);
-    const rewardDays = getSetting('STREAK_REWARD_DAYS', 3);
-    const requiredMinutes = getSetting('DAILY_MINUTES_REQUIRED', 5);
+  async findAllActivitiesAdmin(
+    query: ActivityListInput,
+  ) {
+    return this.list(query, undefined, true);
+  }
 
-    let activity = await this.prisma.userActivity.findUnique({
-      where: { userId_date: { userId, date: today } },
-    });
+  private async list(
+    query: ActivityListInput,
+    userId?: string,
+    includeUser = false,
+  ) {
+    const where = this.where(query, userId);
 
-    if (activity) {
-      activity = await this.prisma.userActivity.update({
-        where: { id: activity.id },
-        data: { durationMinutes: activity.durationMinutes + durationMinutes },
-      });
-    } else {
-      activity = await this.prisma.userActivity.create({
-        data: { userId, date: today, durationMinutes },
-      });
-    }
-
-    if (!activity.isStreakCounted && activity.durationMinutes >= requiredMinutes) {
-      await this.prisma.userActivity.update({
-        where: { id: activity.id },
-        data: { isStreakCounted: true },
-      });
-
-      const user = await this.prisma.user.findUnique({ where: { id: userId } });
-      const newStreak = (user?.currentStreak || 0) + 1;
-      const newLongest = Math.max(newStreak, user?.longestStreak || 0);
-
-      let adFreeUpdate = user?.adFreeUntil;
-
-      if (newStreak % requiredDays === 0) {
-        const baseDate = adFreeUpdate && adFreeUpdate > new Date() ? adFreeUpdate : new Date();
-        adFreeUpdate = new Date(baseDate.getTime() + rewardDays * 24 * 60 * 60 * 1000);
-      }
-
-      await this.prisma.user.update({
-        where: { id: userId },
-        data: {
-          currentStreak: newStreak,
-          longestStreak: newLongest,
-          lastActivityDate: today,
-          adFreeUntil: adFreeUpdate,
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.userActivity.findMany({
+        where,
+        select: {
+          id: true,
+          userId: true,
+          date: true,
+          durationMinutes: true,
+          isStreakCounted: true,
+          createdAt: true,
+          updatedAt: true,
+          ...(includeUser
+            ? {
+                user: {
+                  select: {
+                    id: true,
+                    email: true,
+                    displayName: true,
+                  },
+                },
+              }
+            : {}),
         },
-      });
+        orderBy: [
+          { date: 'desc' },
+          { id: 'desc' },
+        ],
+        skip: (query.page - 1) * query.limit,
+        take: query.limit,
+      }),
+      this.prisma.userActivity.count({ where }),
+    ]);
 
-      return { message: 'Activity logged, streak updated!', newStreak, adFreeUntil: adFreeUpdate };
-    }
-
-    return { message: 'Activity logged.', duration: activity.durationMinutes };
-  }
-
-  // 2. Read All Activities for a User (Get)
-  async getUserActivities(userId: string) {
-    return this.prisma.userActivity.findMany({
-      where: { userId },
-      orderBy: { date: 'desc' },
-      take: 30, // Last 30 days
-    });
-  }
-
-  // 3. Read All Activities Admin (Get)
-  async getAllActivities() {
-    return this.prisma.userActivity.findMany({
-      orderBy: { date: 'desc' },
-      take: 100,
-      include: { user: { select: { displayName: true, email: true } } }
-    });
-  }
-
-  // 4. Update specific log manually (Admin) (Patch)
-  async updateActivityLog(id: string, durationMinutes: number) {
-    const activity = await this.prisma.userActivity.findUnique({ where: { id } });
-    if (!activity) throw new NotFoundException('Activity log not found');
-    return this.prisma.userActivity.update({
-      where: { id },
-      data: { durationMinutes },
-    });
-  }
-
-  // 5. Delete specific log manually (Admin) (Delete)
-  async deleteActivityLog(id: string) {
-    return this.prisma.userActivity.delete({ where: { id } });
+    return {
+      data,
+      pagination: {
+        page: query.page,
+        limit: query.limit,
+        total,
+        totalPages: Math.ceil(total / query.limit),
+      },
+    };
   }
 }

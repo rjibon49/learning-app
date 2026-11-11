@@ -1,7 +1,12 @@
+
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import {
+  ThrottlerGuard,
+  ThrottlerModule,
+} from '@nestjs/throttler';
+
 import { AdminAuthModule } from './admin-auth/admin-auth.module.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
@@ -22,18 +27,70 @@ import { SubscriptionsModule } from './subscriptions/subscriptions.module.js';
 import { AdsModule } from './ads/ads.module.js';
 import { ActivityModule } from './activity/activity.module.js';
 import { PromotionsModule } from './promotions/promotions.module.js';
+import { LanguagesModule } from './languages/languages.module.js';
+import { ProgressModule } from './progress/progress.module.js';
+import { DocumentsModule } from './documents/documents.module.js';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      validationSchema: envSchema,
+
+      // Supports running from both the API folder
+      // and the monorepo root.
+      envFilePath: [
+        '.env',
+        'apps/api/.env',
+      ],
+
+      validate: (
+        environment: Record<string, unknown>,
+      ): Record<string, unknown> => {
+        const result = envSchema.safeParse(environment);
+
+        if (!result.success) {
+          const issues = result.error.issues
+            .map(
+              (item) =>
+                `${item.path.join('.')}: ${item.message}`,
+            )
+            .join('; ');
+
+          throw new Error(
+            `Invalid environment configuration: ${issues}`,
+          );
+        }
+
+        // Preserve other existing environment variables.
+        return {
+          ...environment,
+          ...result.data,
+        };
+      },
     }),
 
+    ThrottlerModule.forRoot([
+      {
+        name: 'short',
+        ttl: 1000,
+        limit: 10,
+      },
+      {
+        name: 'medium',
+        ttl: 10000,
+        limit: 50,
+      },
+      {
+        name: 'long',
+        ttl: 60000,
+        limit: 200,
+      },
+    ]),
+
+    PrismaModule,
     AdminsModule,
     AdminAuthModule,
-    AdsModule,
     AppsModule,
     AuditLogsModule,
     CoursesModule,
@@ -41,21 +98,20 @@ import { PromotionsModule } from './promotions/promotions.module.js';
     FlashcardsModule,
     MediaModule,
     ImportsModule,
-    PrismaModule,
     QuizzesModule,
     SettingsModule,
     SubscriptionsModule,
     UsersModule,
+    AdsModule,
     ActivityModule,
     PromotionsModule,
-
-    ThrottlerModule.forRoot([
-      { name: 'short', ttl: 1000, limit: 10 },
-      { name: 'medium', ttl: 10000, limit: 50 },
-      { name: 'long', ttl: 60000, limit: 200 },
-    ]),
+    LanguagesModule,
+    ProgressModule,
+    DocumentsModule,
   ],
+
   controllers: [AppController],
+
   providers: [
     AppService,
     {

@@ -43,6 +43,7 @@ export type UserMinAggregateOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
+  emailVerifiedAt: Date | null
   referralCode: string | null
   referredById: string | null
   adFreeUntil: Date | null
@@ -61,6 +62,7 @@ export type UserMaxAggregateOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
+  emailVerifiedAt: Date | null
   referralCode: string | null
   referredById: string | null
   adFreeUntil: Date | null
@@ -79,6 +81,7 @@ export type UserCountAggregateOutputType = {
   passwordHash: number
   role: number
   isActive: number
+  emailVerifiedAt: number
   referralCode: number
   referredById: number
   adFreeUntil: number
@@ -109,6 +112,7 @@ export type UserMinAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  emailVerifiedAt?: true
   referralCode?: true
   referredById?: true
   adFreeUntil?: true
@@ -127,6 +131,7 @@ export type UserMaxAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  emailVerifiedAt?: true
   referralCode?: true
   referredById?: true
   adFreeUntil?: true
@@ -145,6 +150,7 @@ export type UserCountAggregateInputType = {
   passwordHash?: true
   role?: true
   isActive?: true
+  emailVerifiedAt?: true
   referralCode?: true
   referredById?: true
   adFreeUntil?: true
@@ -250,6 +256,7 @@ export type UserGroupByOutputType = {
   passwordHash: string | null
   role: $Enums.UserRole
   isActive: boolean
+  emailVerifiedAt: Date | null
   referralCode: string | null
   referredById: string | null
   adFreeUntil: Date | null
@@ -291,6 +298,7 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   referralCode?: Prisma.StringNullableFilter<"User"> | string | null
   referredById?: Prisma.StringNullableFilter<"User"> | string | null
   adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -300,13 +308,18 @@ export type UserWhereInput = {
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  referredUsers?: Prisma.UserListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  passwordResets?: Prisma.PasswordResetTokenListRelationFilter
+  enrollments?: Prisma.UserLanguageEnrollmentListRelationFilter
   lessonProgress?: Prisma.LessonProgressListRelationFilter
   vocabularyProgress?: Prisma.VocabularyProgressListRelationFilter
   quizAttempts?: Prisma.QuizAttemptListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  payments?: Prisma.PaymentTransactionListRelationFilter
   activities?: Prisma.UserActivityListRelationFilter
-  referredUsers?: Prisma.UserListRelationFilter
-  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  promoRedemptions?: Prisma.PromoRedemptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -316,6 +329,7 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
   referredById?: Prisma.SortOrderInput | Prisma.SortOrder
   adFreeUntil?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -325,13 +339,18 @@ export type UserOrderByWithRelationInput = {
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  referrer?: Prisma.UserOrderByWithRelationInput
+  referredUsers?: Prisma.UserOrderByRelationAggregateInput
+  sessions?: Prisma.UserSessionOrderByRelationAggregateInput
+  passwordResets?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  enrollments?: Prisma.UserLanguageEnrollmentOrderByRelationAggregateInput
   lessonProgress?: Prisma.LessonProgressOrderByRelationAggregateInput
   vocabularyProgress?: Prisma.VocabularyProgressOrderByRelationAggregateInput
   quizAttempts?: Prisma.QuizAttemptOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  payments?: Prisma.PaymentTransactionOrderByRelationAggregateInput
   activities?: Prisma.UserActivityOrderByRelationAggregateInput
-  referredUsers?: Prisma.UserOrderByRelationAggregateInput
-  referrer?: Prisma.UserOrderByWithRelationInput
+  promoRedemptions?: Prisma.PromoRedemptionOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -346,6 +365,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   referredById?: Prisma.StringNullableFilter<"User"> | string | null
   adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   currentStreak?: Prisma.IntFilter<"User"> | number
@@ -354,13 +374,18 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  referredUsers?: Prisma.UserListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  passwordResets?: Prisma.PasswordResetTokenListRelationFilter
+  enrollments?: Prisma.UserLanguageEnrollmentListRelationFilter
   lessonProgress?: Prisma.LessonProgressListRelationFilter
   vocabularyProgress?: Prisma.VocabularyProgressListRelationFilter
   quizAttempts?: Prisma.QuizAttemptListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  payments?: Prisma.PaymentTransactionListRelationFilter
   activities?: Prisma.UserActivityListRelationFilter
-  referredUsers?: Prisma.UserListRelationFilter
-  referrer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  promoRedemptions?: Prisma.PromoRedemptionListRelationFilter
 }, "id" | "email" | "referralCode">
 
 export type UserOrderByWithAggregationInput = {
@@ -370,6 +395,7 @@ export type UserOrderByWithAggregationInput = {
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
   referredById?: Prisma.SortOrderInput | Prisma.SortOrder
   adFreeUntil?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -396,6 +422,7 @@ export type UserScalarWhereWithAggregatesInput = {
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  emailVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   referralCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   referredById?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   adFreeUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -414,6 +441,7 @@ export type UserCreateInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -422,13 +450,18 @@ export type UserCreateInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -438,6 +471,7 @@ export type UserUncheckedCreateInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -447,12 +481,17 @@ export type UserUncheckedCreateInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -462,6 +501,7 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -470,13 +510,18 @@ export type UserUpdateInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -486,6 +531,7 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -495,12 +541,17 @@ export type UserUncheckedUpdateInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -510,6 +561,7 @@ export type UserCreateManyInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -528,6 +580,7 @@ export type UserUpdateManyMutationInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -545,6 +598,7 @@ export type UserUncheckedUpdateManyInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -556,15 +610,15 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserListRelationFilter = {
   every?: Prisma.UserWhereInput
   some?: Prisma.UserWhereInput
   none?: Prisma.UserWhereInput
-}
-
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserOrderByRelationAggregateInput = {
@@ -584,6 +638,7 @@ export type UserCountOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   referralCode?: Prisma.SortOrder
   referredById?: Prisma.SortOrder
   adFreeUntil?: Prisma.SortOrder
@@ -607,6 +662,7 @@ export type UserMaxOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   referralCode?: Prisma.SortOrder
   referredById?: Prisma.SortOrder
   adFreeUntil?: Prisma.SortOrder
@@ -625,6 +681,7 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   referralCode?: Prisma.SortOrder
   referredById?: Prisma.SortOrder
   adFreeUntil?: Prisma.SortOrder
@@ -646,17 +703,17 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserCreateNestedOneWithoutReferredUsersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserCreateNestedManyWithoutReferrerInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
   createMany?: Prisma.UserCreateManyReferrerInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserCreateNestedOneWithoutReferredUsersInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
-  connect?: Prisma.UserWhereUniqueInput
 }
 
 export type UserUncheckedCreateNestedManyWithoutReferrerInput = {
@@ -674,6 +731,16 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type UserUpdateOneWithoutReferredUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
+  upsert?: Prisma.UserUpsertWithoutReferredUsersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReferredUsersInput, Prisma.UserUpdateWithoutReferredUsersInput>, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
+}
+
 export type UserUpdateManyWithoutReferrerNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
@@ -688,16 +755,6 @@ export type UserUpdateManyWithoutReferrerNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type UserUpdateOneWithoutReferredUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferredUsersInput
-  upsert?: Prisma.UserUpsertWithoutReferredUsersInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReferredUsersInput, Prisma.UserUpdateWithoutReferredUsersInput>, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
-}
-
 export type UserUncheckedUpdateManyWithoutReferrerNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReferrerInput, Prisma.UserUncheckedCreateWithoutReferrerInput> | Prisma.UserCreateWithoutReferrerInput[] | Prisma.UserUncheckedCreateWithoutReferrerInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferrerInput | Prisma.UserCreateOrConnectWithoutReferrerInput[]
@@ -710,6 +767,48 @@ export type UserUncheckedUpdateManyWithoutReferrerNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput | Prisma.UserUpdateWithWhereUniqueWithoutReferrerInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutReferrerInput | Prisma.UserUpdateManyWithWhereWithoutReferrerInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserCreateNestedOneWithoutPasswordResetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPasswordResetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetsInput
+  upsert?: Prisma.UserUpsertWithoutPasswordResetsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetsInput, Prisma.UserUpdateWithoutPasswordResetsInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
+}
+
+export type UserCreateNestedOneWithoutEnrollmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEnrollmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEnrollmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEnrollmentsInput
+  upsert?: Prisma.UserUpsertWithoutEnrollmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.UserUpdateWithoutEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>
 }
 
 export type UserCreateNestedOneWithoutLessonProgressInput = {
@@ -768,6 +867,34 @@ export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.UserUpdateWithoutSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionsInput>
 }
 
+export type UserCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type UserCreateNestedOneWithoutPromoRedemptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPromoRedemptionsInput, Prisma.UserUncheckedCreateWithoutPromoRedemptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPromoRedemptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPromoRedemptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPromoRedemptionsInput, Prisma.UserUncheckedCreateWithoutPromoRedemptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPromoRedemptionsInput
+  upsert?: Prisma.UserUpsertWithoutPromoRedemptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPromoRedemptionsInput, Prisma.UserUpdateWithoutPromoRedemptionsInput>, Prisma.UserUncheckedUpdateWithoutPromoRedemptionsInput>
+}
+
 export type UserCreateNestedOneWithoutActivitiesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutActivitiesInput, Prisma.UserUncheckedCreateWithoutActivitiesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutActivitiesInput
@@ -782,13 +909,14 @@ export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActivitiesInput, Prisma.UserUpdateWithoutActivitiesInput>, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
 }
 
-export type UserCreateWithoutReferrerInput = {
+export type UserCreateWithoutReferredUsersInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -797,12 +925,80 @@ export type UserCreateWithoutReferrerInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReferredUsersInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReferredUsersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+}
+
+export type UserCreateWithoutReferrerInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReferrerInput = {
@@ -812,6 +1008,7 @@ export type UserUncheckedCreateWithoutReferrerInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -820,12 +1017,17 @@ export type UserUncheckedCreateWithoutReferrerInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReferrerInput = {
@@ -838,55 +1040,73 @@ export type UserCreateManyReferrerInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type UserCreateWithoutReferredUsersInput = {
-  id?: string
-  email?: string | null
-  displayName?: string | null
-  passwordHash?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  referralCode?: string | null
-  adFreeUntil?: Date | string | null
-  currentStreak?: number
-  longestStreak?: number
-  lastActivityDate?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
-  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
-  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
-}
-
-export type UserUncheckedCreateWithoutReferredUsersInput = {
-  id?: string
-  email?: string | null
-  displayName?: string | null
-  passwordHash?: string | null
-  role?: $Enums.UserRole
-  isActive?: boolean
-  referralCode?: string | null
-  referredById?: string | null
-  adFreeUntil?: Date | string | null
-  currentStreak?: number
-  longestStreak?: number
-  lastActivityDate?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
-  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
-  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutReferredUsersInput = {
-  where: Prisma.UserWhereUniqueInput
+export type UserUpsertWithoutReferredUsersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
   create: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReferredUsersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
+}
+
+export type UserUpdateWithoutReferredUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReferredUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutReferrerInput = {
@@ -915,6 +1135,7 @@ export type UserScalarWhereInput = {
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   referralCode?: Prisma.StringNullableFilter<"User"> | string | null
   referredById?: Prisma.StringNullableFilter<"User"> | string | null
   adFreeUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -926,70 +1147,14 @@ export type UserScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
-export type UserUpsertWithoutReferredUsersInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutReferredUsersInput, Prisma.UserUncheckedCreateWithoutReferredUsersInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutReferredUsersInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutReferredUsersInput, Prisma.UserUncheckedUpdateWithoutReferredUsersInput>
-}
-
-export type UserUpdateWithoutReferredUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
-  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
-  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
-  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
-}
-
-export type UserUncheckedUpdateWithoutReferredUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
-  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
-  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
-  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutLessonProgressInput = {
+export type UserCreateWithoutSessionsInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -998,21 +1163,27 @@ export type UserCreateWithoutLessonProgressInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutLessonProgressInput = {
+export type UserUncheckedCreateWithoutSessionsInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -1022,11 +1193,412 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPasswordResetsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPasswordResetsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPasswordResetsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+}
+
+export type UserUpsertWithoutPasswordResetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetsInput, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetsInput, Prisma.UserUncheckedCreateWithoutPasswordResetsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPasswordResetsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetsInput, Prisma.UserUncheckedUpdateWithoutPasswordResetsInput>
+}
+
+export type UserUpdateWithoutPasswordResetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPasswordResetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutEnrollmentsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutEnrollmentsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutEnrollmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>
+}
+
+export type UserUpsertWithoutEnrollmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEnrollmentsInput, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEnrollmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEnrollmentsInput, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>
+}
+
+export type UserUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutLessonProgressInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutLessonProgressInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLessonProgressInput = {
@@ -1052,6 +1624,7 @@ export type UserUpdateWithoutLessonProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1060,12 +1633,17 @@ export type UserUpdateWithoutLessonProgressInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLessonProgressInput = {
@@ -1075,6 +1653,7 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1084,11 +1663,16 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVocabularyProgressInput = {
@@ -1098,6 +1682,7 @@ export type UserCreateWithoutVocabularyProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -1106,12 +1691,17 @@ export type UserCreateWithoutVocabularyProgressInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVocabularyProgressInput = {
@@ -1121,6 +1711,7 @@ export type UserUncheckedCreateWithoutVocabularyProgressInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -1130,11 +1721,16 @@ export type UserUncheckedCreateWithoutVocabularyProgressInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVocabularyProgressInput = {
@@ -1160,6 +1756,7 @@ export type UserUpdateWithoutVocabularyProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1168,12 +1765,17 @@ export type UserUpdateWithoutVocabularyProgressInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
@@ -1183,6 +1785,7 @@ export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1192,11 +1795,16 @@ export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuizAttemptsInput = {
@@ -1206,6 +1814,7 @@ export type UserCreateWithoutQuizAttemptsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -1214,12 +1823,17 @@ export type UserCreateWithoutQuizAttemptsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -1229,6 +1843,7 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -1238,11 +1853,16 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -1268,6 +1888,7 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1276,12 +1897,17 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -1291,6 +1917,7 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1300,11 +1927,16 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -1314,6 +1946,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -1322,12 +1955,17 @@ export type UserCreateWithoutSubscriptionsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -1337,6 +1975,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -1346,11 +1985,16 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -1376,6 +2020,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1384,12 +2029,17 @@ export type UserUpdateWithoutSubscriptionsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1399,6 +2049,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1408,20 +2059,26 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutActivitiesInput = {
+export type UserCreateWithoutPaymentsInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -1430,21 +2087,27 @@ export type UserCreateWithoutActivitiesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
-  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
-  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutActivitiesInput = {
+export type UserUncheckedCreateWithoutPaymentsInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   referredById?: string | null
   adFreeUntil?: Date | string | null
@@ -1454,11 +2117,280 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
   quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+}
+
+export type UserUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsInput, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsInput, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type UserUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPromoRedemptionsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPromoRedemptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPromoRedemptionsInput, Prisma.UserUncheckedCreateWithoutPromoRedemptionsInput>
+}
+
+export type UserUpsertWithoutPromoRedemptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPromoRedemptionsInput, Prisma.UserUncheckedUpdateWithoutPromoRedemptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPromoRedemptionsInput, Prisma.UserUncheckedCreateWithoutPromoRedemptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPromoRedemptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPromoRedemptionsInput, Prisma.UserUncheckedUpdateWithoutPromoRedemptionsInput>
+}
+
+export type UserUpdateWithoutPromoRedemptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutActivitiesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutActivitiesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -1484,6 +2416,7 @@ export type UserUpdateWithoutActivitiesInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1492,12 +2425,17 @@ export type UserUpdateWithoutActivitiesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
-  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -1507,6 +2445,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1516,11 +2455,16 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyReferrerInput = {
@@ -1530,6 +2474,7 @@ export type UserCreateManyReferrerInput = {
   passwordHash?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
+  emailVerifiedAt?: Date | string | null
   referralCode?: string | null
   adFreeUntil?: Date | string | null
   currentStreak?: number
@@ -1547,6 +2492,7 @@ export type UserUpdateWithoutReferrerInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1555,12 +2501,17 @@ export type UserUpdateWithoutReferrerInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferrerInput = {
@@ -1570,6 +2521,7 @@ export type UserUncheckedUpdateWithoutReferrerInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1578,12 +2530,17 @@ export type UserUncheckedUpdateWithoutReferrerInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
   quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
-  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutReferrerInput = {
@@ -1593,6 +2550,7 @@ export type UserUncheckedUpdateManyWithoutReferrerInput = {
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1609,21 +2567,31 @@ export type UserUncheckedUpdateManyWithoutReferrerInput = {
  */
 
 export type UserCountOutputType = {
+  referredUsers: number
+  sessions: number
+  passwordResets: number
+  enrollments: number
   lessonProgress: number
   vocabularyProgress: number
   quizAttempts: number
   subscriptions: number
+  payments: number
   activities: number
-  referredUsers: number
+  promoRedemptions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referredUsers?: boolean | UserCountOutputTypeCountReferredUsersArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  passwordResets?: boolean | UserCountOutputTypeCountPasswordResetsArgs
+  enrollments?: boolean | UserCountOutputTypeCountEnrollmentsArgs
   lessonProgress?: boolean | UserCountOutputTypeCountLessonProgressArgs
   vocabularyProgress?: boolean | UserCountOutputTypeCountVocabularyProgressArgs
   quizAttempts?: boolean | UserCountOutputTypeCountQuizAttemptsArgs
   subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
+  payments?: boolean | UserCountOutputTypeCountPaymentsArgs
   activities?: boolean | UserCountOutputTypeCountActivitiesArgs
-  referredUsers?: boolean | UserCountOutputTypeCountReferredUsersArgs
+  promoRedemptions?: boolean | UserCountOutputTypeCountPromoRedemptionsArgs
 }
 
 /**
@@ -1634,6 +2602,34 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReferredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPasswordResetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PasswordResetTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserLanguageEnrollmentWhereInput
 }
 
 /**
@@ -1667,6 +2663,13 @@ export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentTransactionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserActivityWhereInput
 }
@@ -1674,8 +2677,8 @@ export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountReferredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
+export type UserCountOutputTypeCountPromoRedemptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromoRedemptionWhereInput
 }
 
 
@@ -1686,6 +2689,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   role?: boolean
   isActive?: boolean
+  emailVerifiedAt?: boolean
   referralCode?: boolean
   referredById?: boolean
   adFreeUntil?: boolean
@@ -1695,13 +2699,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
+  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  passwordResets?: boolean | Prisma.User$passwordResetsArgs<ExtArgs>
+  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
   lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
   vocabularyProgress?: boolean | Prisma.User$vocabularyProgressArgs<ExtArgs>
   quizAttempts?: boolean | Prisma.User$quizAttemptsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
-  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
-  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
+  promoRedemptions?: boolean | Prisma.User$promoRedemptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1714,6 +2723,7 @@ export type UserSelectScalar = {
   passwordHash?: boolean
   role?: boolean
   isActive?: boolean
+  emailVerifiedAt?: boolean
   referralCode?: boolean
   referredById?: boolean
   adFreeUntil?: boolean
@@ -1725,28 +2735,38 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "role" | "isActive" | "referralCode" | "referredById" | "adFreeUntil" | "currentStreak" | "longestStreak" | "lastActivityDate" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "role" | "isActive" | "emailVerifiedAt" | "referralCode" | "referredById" | "adFreeUntil" | "currentStreak" | "longestStreak" | "lastActivityDate" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
+  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  passwordResets?: boolean | Prisma.User$passwordResetsArgs<ExtArgs>
+  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
   lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
   vocabularyProgress?: boolean | Prisma.User$vocabularyProgressArgs<ExtArgs>
   quizAttempts?: boolean | Prisma.User$quizAttemptsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.User$subscriptionsArgs<ExtArgs>
+  payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
-  referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
-  referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
+  promoRedemptions?: boolean | Prisma.User$promoRedemptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    referrer: Prisma.$UserPayload<ExtArgs> | null
+    referredUsers: Prisma.$UserPayload<ExtArgs>[]
+    sessions: Prisma.$UserSessionPayload<ExtArgs>[]
+    passwordResets: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    enrollments: Prisma.$UserLanguageEnrollmentPayload<ExtArgs>[]
     lessonProgress: Prisma.$LessonProgressPayload<ExtArgs>[]
     vocabularyProgress: Prisma.$VocabularyProgressPayload<ExtArgs>[]
     quizAttempts: Prisma.$QuizAttemptPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    payments: Prisma.$PaymentTransactionPayload<ExtArgs>[]
     activities: Prisma.$UserActivityPayload<ExtArgs>[]
-    referredUsers: Prisma.$UserPayload<ExtArgs>[]
-    referrer: Prisma.$UserPayload<ExtArgs> | null
+    promoRedemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1755,6 +2775,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordHash: string | null
     role: $Enums.UserRole
     isActive: boolean
+    emailVerifiedAt: Date | null
     referralCode: string | null
     referredById: string | null
     adFreeUntil: Date | null
@@ -2104,13 +3125,18 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  referrer<T extends Prisma.User$referrerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referrerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  referredUsers<T extends Prisma.User$referredUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referredUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  passwordResets<T extends Prisma.User$passwordResetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  enrollments<T extends Prisma.User$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLanguageEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lessonProgress<T extends Prisma.User$lessonProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lessonProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vocabularyProgress<T extends Prisma.User$vocabularyProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$vocabularyProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizAttempts<T extends Prisma.User$quizAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$quizAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.User$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  referredUsers<T extends Prisma.User$referredUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referredUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  referrer<T extends Prisma.User$referrerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referrerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  promoRedemptions<T extends Prisma.User$promoRedemptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$promoRedemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2146,6 +3172,7 @@ export interface UserFieldRefs {
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly emailVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly referralCode: Prisma.FieldRef<"User", 'String'>
   readonly referredById: Prisma.FieldRef<"User", 'String'>
   readonly adFreeUntil: Prisma.FieldRef<"User", 'DateTime'>
@@ -2503,6 +3530,121 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.referrer
+ */
+export type User$referrerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * User.referredUsers
+ */
+export type User$referredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserSession
+   */
+  select?: Prisma.UserSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserSession
+   */
+  omit?: Prisma.UserSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserSessionInclude<ExtArgs> | null
+  where?: Prisma.UserSessionWhereInput
+  orderBy?: Prisma.UserSessionOrderByWithRelationInput | Prisma.UserSessionOrderByWithRelationInput[]
+  cursor?: Prisma.UserSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserSessionScalarFieldEnum | Prisma.UserSessionScalarFieldEnum[]
+}
+
+/**
+ * User.passwordResets
+ */
+export type User$passwordResetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PasswordResetToken
+   */
+  select?: Prisma.PasswordResetTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PasswordResetToken
+   */
+  omit?: Prisma.PasswordResetTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PasswordResetTokenInclude<ExtArgs> | null
+  where?: Prisma.PasswordResetTokenWhereInput
+  orderBy?: Prisma.PasswordResetTokenOrderByWithRelationInput | Prisma.PasswordResetTokenOrderByWithRelationInput[]
+  cursor?: Prisma.PasswordResetTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.enrollments
+ */
+export type User$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserLanguageEnrollment
+   */
+  select?: Prisma.UserLanguageEnrollmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserLanguageEnrollment
+   */
+  omit?: Prisma.UserLanguageEnrollmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserLanguageEnrollmentInclude<ExtArgs> | null
+  where?: Prisma.UserLanguageEnrollmentWhereInput
+  orderBy?: Prisma.UserLanguageEnrollmentOrderByWithRelationInput | Prisma.UserLanguageEnrollmentOrderByWithRelationInput[]
+  cursor?: Prisma.UserLanguageEnrollmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserLanguageEnrollmentScalarFieldEnum | Prisma.UserLanguageEnrollmentScalarFieldEnum[]
+}
+
+/**
  * User.lessonProgress
  */
 export type User$lessonProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2599,6 +3741,30 @@ export type User$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * User.payments
+ */
+export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentTransaction
+   */
+  select?: Prisma.PaymentTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentTransaction
+   */
+  omit?: Prisma.PaymentTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentTransactionInclude<ExtArgs> | null
+  where?: Prisma.PaymentTransactionWhereInput
+  orderBy?: Prisma.PaymentTransactionOrderByWithRelationInput | Prisma.PaymentTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentTransactionScalarFieldEnum | Prisma.PaymentTransactionScalarFieldEnum[]
+}
+
+/**
  * User.activities
  */
 export type User$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2623,46 +3789,27 @@ export type User$activitiesArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * User.referredUsers
+ * User.promoRedemptions
  */
-export type User$referredUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$promoRedemptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the PromoRedemption
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.PromoRedemptionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the PromoRedemption
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.PromoRedemptionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.PromoRedemptionInclude<ExtArgs> | null
+  where?: Prisma.PromoRedemptionWhereInput
+  orderBy?: Prisma.PromoRedemptionOrderByWithRelationInput | Prisma.PromoRedemptionOrderByWithRelationInput[]
+  cursor?: Prisma.PromoRedemptionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
-}
-
-/**
- * User.referrer
- */
-export type User$referrerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  distinct?: Prisma.PromoRedemptionScalarFieldEnum | Prisma.PromoRedemptionScalarFieldEnum[]
 }
 
 /**

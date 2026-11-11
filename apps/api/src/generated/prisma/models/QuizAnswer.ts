@@ -251,6 +251,7 @@ export type QuizAnswerOrderByWithRelationInput = {
 
 export type QuizAnswerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  attemptId_questionId?: Prisma.QuizAnswerAttemptIdQuestionIdCompoundUniqueInput
   AND?: Prisma.QuizAnswerWhereInput | Prisma.QuizAnswerWhereInput[]
   OR?: Prisma.QuizAnswerWhereInput[]
   NOT?: Prisma.QuizAnswerWhereInput | Prisma.QuizAnswerWhereInput[]
@@ -262,7 +263,7 @@ export type QuizAnswerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"QuizAnswer"> | Date | string
   attempt?: Prisma.XOR<Prisma.QuizAttemptScalarRelationFilter, Prisma.QuizAttemptWhereInput>
   question?: Prisma.XOR<Prisma.QuizQuestionScalarRelationFilter, Prisma.QuizQuestionWhereInput>
-}, "id">
+}, "id" | "attemptId_questionId">
 
 export type QuizAnswerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -374,6 +375,11 @@ export type QuizAnswerOrderByRelevanceInput = {
   fields: Prisma.QuizAnswerOrderByRelevanceFieldEnum | Prisma.QuizAnswerOrderByRelevanceFieldEnum[]
   sort: Prisma.SortOrder
   search: string
+}
+
+export type QuizAnswerAttemptIdQuestionIdCompoundUniqueInput = {
+  attemptId: string
+  questionId: string
 }
 
 export type QuizAnswerCountOrderByAggregateInput = {

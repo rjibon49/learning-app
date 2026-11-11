@@ -1,3 +1,4 @@
+
 import type { AdminRole } from '../generated/prisma/client.js';
 
 export type AdminJwtPayload = {
@@ -5,6 +6,7 @@ export type AdminJwtPayload = {
   email: string;
   role: AdminRole;
   ver: number;
+  typ: 'admin';
 };
 
 export type AuthenticatedAdmin = {
@@ -12,4 +14,9 @@ export type AuthenticatedAdmin = {
   email: string;
   displayName: string | null;
   role: AdminRole;
+};
+
+export type AdminRequestMetadata = {
+  ipAddress?: string | null;
+  userAgent?: string | null;
 };

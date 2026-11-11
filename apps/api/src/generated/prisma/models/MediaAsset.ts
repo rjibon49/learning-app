@@ -28,16 +28,20 @@ export type AggregateMediaAsset = {
 
 export type MediaAssetAvgAggregateOutputType = {
   fileSize: number | null
+  originalSize: number | null
   width: number | null
   height: number | null
   duration: number | null
+  pageCount: number | null
 }
 
 export type MediaAssetSumAggregateOutputType = {
   fileSize: bigint | null
+  originalSize: bigint | null
   width: number | null
   height: number | null
   duration: number | null
+  pageCount: number | null
 }
 
 export type MediaAssetMinAggregateOutputType = {
@@ -45,18 +49,24 @@ export type MediaAssetMinAggregateOutputType = {
   appId: string | null
   type: $Enums.MediaType | null
   visibility: $Enums.MediaVisibility | null
+  status: $Enums.MediaProcessingStatus | null
   storageProvider: string | null
   bucket: string | null
   objectKey: string | null
   publicUrl: string | null
   originalName: string | null
+  originalMimeType: string | null
   mimeType: string | null
   fileSize: bigint | null
+  originalSize: bigint | null
   width: number | null
   height: number | null
   duration: number | null
+  pageCount: number | null
   checksumSha256: string | null
   altText: string | null
+  optimizedFormat: string | null
+  processingError: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,18 +76,24 @@ export type MediaAssetMaxAggregateOutputType = {
   appId: string | null
   type: $Enums.MediaType | null
   visibility: $Enums.MediaVisibility | null
+  status: $Enums.MediaProcessingStatus | null
   storageProvider: string | null
   bucket: string | null
   objectKey: string | null
   publicUrl: string | null
   originalName: string | null
+  originalMimeType: string | null
   mimeType: string | null
   fileSize: bigint | null
+  originalSize: bigint | null
   width: number | null
   height: number | null
   duration: number | null
+  pageCount: number | null
   checksumSha256: string | null
   altText: string | null
+  optimizedFormat: string | null
+  processingError: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -87,18 +103,25 @@ export type MediaAssetCountAggregateOutputType = {
   appId: number
   type: number
   visibility: number
+  status: number
   storageProvider: number
   bucket: number
   objectKey: number
   publicUrl: number
   originalName: number
+  originalMimeType: number
   mimeType: number
   fileSize: number
+  originalSize: number
   width: number
   height: number
   duration: number
+  pageCount: number
   checksumSha256: number
   altText: number
+  optimizedFormat: number
+  processingError: number
+  metadata: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -107,16 +130,20 @@ export type MediaAssetCountAggregateOutputType = {
 
 export type MediaAssetAvgAggregateInputType = {
   fileSize?: true
+  originalSize?: true
   width?: true
   height?: true
   duration?: true
+  pageCount?: true
 }
 
 export type MediaAssetSumAggregateInputType = {
   fileSize?: true
+  originalSize?: true
   width?: true
   height?: true
   duration?: true
+  pageCount?: true
 }
 
 export type MediaAssetMinAggregateInputType = {
@@ -124,18 +151,24 @@ export type MediaAssetMinAggregateInputType = {
   appId?: true
   type?: true
   visibility?: true
+  status?: true
   storageProvider?: true
   bucket?: true
   objectKey?: true
   publicUrl?: true
   originalName?: true
+  originalMimeType?: true
   mimeType?: true
   fileSize?: true
+  originalSize?: true
   width?: true
   height?: true
   duration?: true
+  pageCount?: true
   checksumSha256?: true
   altText?: true
+  optimizedFormat?: true
+  processingError?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -145,18 +178,24 @@ export type MediaAssetMaxAggregateInputType = {
   appId?: true
   type?: true
   visibility?: true
+  status?: true
   storageProvider?: true
   bucket?: true
   objectKey?: true
   publicUrl?: true
   originalName?: true
+  originalMimeType?: true
   mimeType?: true
   fileSize?: true
+  originalSize?: true
   width?: true
   height?: true
   duration?: true
+  pageCount?: true
   checksumSha256?: true
   altText?: true
+  optimizedFormat?: true
+  processingError?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -166,18 +205,25 @@ export type MediaAssetCountAggregateInputType = {
   appId?: true
   type?: true
   visibility?: true
+  status?: true
   storageProvider?: true
   bucket?: true
   objectKey?: true
   publicUrl?: true
   originalName?: true
+  originalMimeType?: true
   mimeType?: true
   fileSize?: true
+  originalSize?: true
   width?: true
   height?: true
   duration?: true
+  pageCount?: true
   checksumSha256?: true
   altText?: true
+  optimizedFormat?: true
+  processingError?: true
+  metadata?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -274,18 +320,25 @@ export type MediaAssetGroupByOutputType = {
   appId: string | null
   type: $Enums.MediaType
   visibility: $Enums.MediaVisibility
+  status: $Enums.MediaProcessingStatus
   storageProvider: string
   bucket: string | null
   objectKey: string
   publicUrl: string | null
   originalName: string | null
+  originalMimeType: string | null
   mimeType: string | null
   fileSize: bigint | null
+  originalSize: bigint | null
   width: number | null
   height: number | null
   duration: number | null
+  pageCount: number | null
   checksumSha256: string | null
   altText: string | null
+  optimizedFormat: string | null
+  processingError: string | null
+  metadata: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: MediaAssetCountAggregateOutputType | null
@@ -318,23 +371,31 @@ export type MediaAssetWhereInput = {
   appId?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   type?: Prisma.EnumMediaTypeFilter<"MediaAsset"> | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFilter<"MediaAsset"> | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFilter<"MediaAsset"> | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFilter<"MediaAsset"> | string
   bucket?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   objectKey?: Prisma.StringFilter<"MediaAsset"> | string
   publicUrl?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   originalName?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  originalMimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   mimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
+  originalSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
   width?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   height?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   duration?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
+  pageCount?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   checksumSha256?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   altText?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  optimizedFormat?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  processingError?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"MediaAsset">
   createdAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
   app?: Prisma.XOR<Prisma.AppNullableScalarRelationFilter, Prisma.AppWhereInput> | null
   vocabularyImages?: Prisma.VocabularyListRelationFilter
   vocabularyAudios?: Prisma.VocabularyListRelationFilter
+  lessonResources?: Prisma.LessonResourceListRelationFilter
 }
 
 export type MediaAssetOrderByWithRelationInput = {
@@ -342,23 +403,31 @@ export type MediaAssetOrderByWithRelationInput = {
   appId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
   bucket?: Prisma.SortOrderInput | Prisma.SortOrder
   objectKey?: Prisma.SortOrder
   publicUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   originalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  originalMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  originalSize?: Prisma.SortOrderInput | Prisma.SortOrder
   width?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
   checksumSha256?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
+  optimizedFormat?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingError?: Prisma.SortOrderInput | Prisma.SortOrder
+  metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   app?: Prisma.AppOrderByWithRelationInput
   vocabularyImages?: Prisma.VocabularyOrderByRelationAggregateInput
   vocabularyAudios?: Prisma.VocabularyOrderByRelationAggregateInput
+  lessonResources?: Prisma.LessonResourceOrderByRelationAggregateInput
   _relevance?: Prisma.MediaAssetOrderByRelevanceInput
 }
 
@@ -371,22 +440,30 @@ export type MediaAssetWhereUniqueInput = Prisma.AtLeast<{
   appId?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   type?: Prisma.EnumMediaTypeFilter<"MediaAsset"> | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFilter<"MediaAsset"> | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFilter<"MediaAsset"> | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFilter<"MediaAsset"> | string
   bucket?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   publicUrl?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   originalName?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  originalMimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   mimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
+  originalSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
   width?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   height?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   duration?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
+  pageCount?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   checksumSha256?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   altText?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  optimizedFormat?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  processingError?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"MediaAsset">
   createdAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
   app?: Prisma.XOR<Prisma.AppNullableScalarRelationFilter, Prisma.AppWhereInput> | null
   vocabularyImages?: Prisma.VocabularyListRelationFilter
   vocabularyAudios?: Prisma.VocabularyListRelationFilter
+  lessonResources?: Prisma.LessonResourceListRelationFilter
 }, "id" | "objectKey">
 
 export type MediaAssetOrderByWithAggregationInput = {
@@ -394,18 +471,25 @@ export type MediaAssetOrderByWithAggregationInput = {
   appId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
   bucket?: Prisma.SortOrderInput | Prisma.SortOrder
   objectKey?: Prisma.SortOrder
   publicUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   originalName?: Prisma.SortOrderInput | Prisma.SortOrder
+  originalMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  originalSize?: Prisma.SortOrderInput | Prisma.SortOrder
   width?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
   checksumSha256?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
+  optimizedFormat?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingError?: Prisma.SortOrderInput | Prisma.SortOrder
+  metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MediaAssetCountOrderByAggregateInput
@@ -423,18 +507,25 @@ export type MediaAssetScalarWhereWithAggregatesInput = {
   appId?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   type?: Prisma.EnumMediaTypeWithAggregatesFilter<"MediaAsset"> | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityWithAggregatesFilter<"MediaAsset"> | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusWithAggregatesFilter<"MediaAsset"> | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringWithAggregatesFilter<"MediaAsset"> | string
   bucket?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   objectKey?: Prisma.StringWithAggregatesFilter<"MediaAsset"> | string
   publicUrl?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   originalName?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
+  originalMimeType?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   fileSize?: Prisma.BigIntNullableWithAggregatesFilter<"MediaAsset"> | bigint | number | null
+  originalSize?: Prisma.BigIntNullableWithAggregatesFilter<"MediaAsset"> | bigint | number | null
   width?: Prisma.IntNullableWithAggregatesFilter<"MediaAsset"> | number | null
   height?: Prisma.IntNullableWithAggregatesFilter<"MediaAsset"> | number | null
   duration?: Prisma.IntNullableWithAggregatesFilter<"MediaAsset"> | number | null
+  pageCount?: Prisma.IntNullableWithAggregatesFilter<"MediaAsset"> | number | null
   checksumSha256?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
   altText?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
+  optimizedFormat?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
+  processingError?: Prisma.StringNullableWithAggregatesFilter<"MediaAsset"> | string | null
+  metadata?: Prisma.JsonNullableWithAggregatesFilter<"MediaAsset">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MediaAsset"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MediaAsset"> | Date | string
 }
@@ -443,23 +534,31 @@ export type MediaAssetCreateInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   app?: Prisma.AppCreateNestedOneWithoutMediaAssetsInput
   vocabularyImages?: Prisma.VocabularyCreateNestedManyWithoutImageAssetInput
   vocabularyAudios?: Prisma.VocabularyCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetUncheckedCreateInput = {
@@ -467,45 +566,61 @@ export type MediaAssetUncheckedCreateInput = {
   appId?: string | null
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedCreateNestedManyWithoutImageAssetInput
   vocabularyAudios?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   app?: Prisma.AppUpdateOneWithoutMediaAssetsNestedInput
   vocabularyImages?: Prisma.VocabularyUpdateManyWithoutImageAssetNestedInput
   vocabularyAudios?: Prisma.VocabularyUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUncheckedUpdateInput = {
@@ -513,22 +628,30 @@ export type MediaAssetUncheckedUpdateInput = {
   appId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedUpdateManyWithoutImageAssetNestedInput
   vocabularyAudios?: Prisma.VocabularyUncheckedUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUncheckedUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetCreateManyInput = {
@@ -536,18 +659,25 @@ export type MediaAssetCreateManyInput = {
   appId?: string | null
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -556,18 +686,25 @@ export type MediaAssetUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -577,18 +714,25 @@ export type MediaAssetUncheckedUpdateManyInput = {
   appId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -603,6 +747,11 @@ export type MediaAssetOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type MediaAssetNullableScalarRelationFilter = {
+  is?: Prisma.MediaAssetWhereInput | null
+  isNot?: Prisma.MediaAssetWhereInput | null
+}
+
 export type MediaAssetOrderByRelevanceInput = {
   fields: Prisma.MediaAssetOrderByRelevanceFieldEnum | Prisma.MediaAssetOrderByRelevanceFieldEnum[]
   sort: Prisma.SortOrder
@@ -614,27 +763,36 @@ export type MediaAssetCountOrderByAggregateInput = {
   appId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
   bucket?: Prisma.SortOrder
   objectKey?: Prisma.SortOrder
   publicUrl?: Prisma.SortOrder
   originalName?: Prisma.SortOrder
+  originalMimeType?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
+  originalSize?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
   checksumSha256?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  optimizedFormat?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
+  metadata?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type MediaAssetAvgOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
+  originalSize?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
 }
 
 export type MediaAssetMaxOrderByAggregateInput = {
@@ -642,18 +800,24 @@ export type MediaAssetMaxOrderByAggregateInput = {
   appId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
   bucket?: Prisma.SortOrder
   objectKey?: Prisma.SortOrder
   publicUrl?: Prisma.SortOrder
   originalName?: Prisma.SortOrder
+  originalMimeType?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
+  originalSize?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
   checksumSha256?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  optimizedFormat?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -663,32 +827,35 @@ export type MediaAssetMinOrderByAggregateInput = {
   appId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   storageProvider?: Prisma.SortOrder
   bucket?: Prisma.SortOrder
   objectKey?: Prisma.SortOrder
   publicUrl?: Prisma.SortOrder
   originalName?: Prisma.SortOrder
+  originalMimeType?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
+  originalSize?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  pageCount?: Prisma.SortOrder
   checksumSha256?: Prisma.SortOrder
   altText?: Prisma.SortOrder
+  optimizedFormat?: Prisma.SortOrder
+  processingError?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type MediaAssetSumOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
+  originalSize?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   duration?: Prisma.SortOrder
-}
-
-export type MediaAssetNullableScalarRelationFilter = {
-  is?: Prisma.MediaAssetWhereInput | null
-  isNot?: Prisma.MediaAssetWhereInput | null
+  pageCount?: Prisma.SortOrder
 }
 
 export type MediaAssetCreateNestedManyWithoutAppInput = {
@@ -733,12 +900,32 @@ export type MediaAssetUncheckedUpdateManyWithoutAppNestedInput = {
   deleteMany?: Prisma.MediaAssetScalarWhereInput | Prisma.MediaAssetScalarWhereInput[]
 }
 
+export type MediaAssetCreateNestedOneWithoutLessonResourcesInput = {
+  create?: Prisma.XOR<Prisma.MediaAssetCreateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedCreateWithoutLessonResourcesInput>
+  connectOrCreate?: Prisma.MediaAssetCreateOrConnectWithoutLessonResourcesInput
+  connect?: Prisma.MediaAssetWhereUniqueInput
+}
+
+export type MediaAssetUpdateOneWithoutLessonResourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaAssetCreateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedCreateWithoutLessonResourcesInput>
+  connectOrCreate?: Prisma.MediaAssetCreateOrConnectWithoutLessonResourcesInput
+  upsert?: Prisma.MediaAssetUpsertWithoutLessonResourcesInput
+  disconnect?: Prisma.MediaAssetWhereInput | boolean
+  delete?: Prisma.MediaAssetWhereInput | boolean
+  connect?: Prisma.MediaAssetWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaAssetUpdateToOneWithWhereWithoutLessonResourcesInput, Prisma.MediaAssetUpdateWithoutLessonResourcesInput>, Prisma.MediaAssetUncheckedUpdateWithoutLessonResourcesInput>
+}
+
 export type EnumMediaTypeFieldUpdateOperationsInput = {
   set?: $Enums.MediaType
 }
 
 export type EnumMediaVisibilityFieldUpdateOperationsInput = {
   set?: $Enums.MediaVisibility
+}
+
+export type EnumMediaProcessingStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MediaProcessingStatus
 }
 
 export type MediaAssetCreateNestedOneWithoutVocabularyImagesInput = {
@@ -777,44 +964,60 @@ export type MediaAssetCreateWithoutAppInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyImages?: Prisma.VocabularyCreateNestedManyWithoutImageAssetInput
   vocabularyAudios?: Prisma.VocabularyCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetUncheckedCreateWithoutAppInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedCreateNestedManyWithoutImageAssetInput
   vocabularyAudios?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetCreateOrConnectWithoutAppInput = {
@@ -851,42 +1054,193 @@ export type MediaAssetScalarWhereInput = {
   appId?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   type?: Prisma.EnumMediaTypeFilter<"MediaAsset"> | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFilter<"MediaAsset"> | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFilter<"MediaAsset"> | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFilter<"MediaAsset"> | string
   bucket?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   objectKey?: Prisma.StringFilter<"MediaAsset"> | string
   publicUrl?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   originalName?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  originalMimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   mimeType?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
+  originalSize?: Prisma.BigIntNullableFilter<"MediaAsset"> | bigint | number | null
   width?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   height?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   duration?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
+  pageCount?: Prisma.IntNullableFilter<"MediaAsset"> | number | null
   checksumSha256?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
   altText?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  optimizedFormat?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  processingError?: Prisma.StringNullableFilter<"MediaAsset"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"MediaAsset">
   createdAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MediaAsset"> | Date | string
+}
+
+export type MediaAssetCreateWithoutLessonResourcesInput = {
+  id?: string
+  type: $Enums.MediaType
+  visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
+  storageProvider?: string
+  bucket?: string | null
+  objectKey: string
+  publicUrl?: string | null
+  originalName?: string | null
+  originalMimeType?: string | null
+  mimeType?: string | null
+  fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
+  width?: number | null
+  height?: number | null
+  duration?: number | null
+  pageCount?: number | null
+  checksumSha256?: string | null
+  altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  app?: Prisma.AppCreateNestedOneWithoutMediaAssetsInput
+  vocabularyImages?: Prisma.VocabularyCreateNestedManyWithoutImageAssetInput
+  vocabularyAudios?: Prisma.VocabularyCreateNestedManyWithoutAudioAssetInput
+}
+
+export type MediaAssetUncheckedCreateWithoutLessonResourcesInput = {
+  id?: string
+  appId?: string | null
+  type: $Enums.MediaType
+  visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
+  storageProvider?: string
+  bucket?: string | null
+  objectKey: string
+  publicUrl?: string | null
+  originalName?: string | null
+  originalMimeType?: string | null
+  mimeType?: string | null
+  fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
+  width?: number | null
+  height?: number | null
+  duration?: number | null
+  pageCount?: number | null
+  checksumSha256?: string | null
+  altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vocabularyImages?: Prisma.VocabularyUncheckedCreateNestedManyWithoutImageAssetInput
+  vocabularyAudios?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAudioAssetInput
+}
+
+export type MediaAssetCreateOrConnectWithoutLessonResourcesInput = {
+  where: Prisma.MediaAssetWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaAssetCreateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedCreateWithoutLessonResourcesInput>
+}
+
+export type MediaAssetUpsertWithoutLessonResourcesInput = {
+  update: Prisma.XOR<Prisma.MediaAssetUpdateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedUpdateWithoutLessonResourcesInput>
+  create: Prisma.XOR<Prisma.MediaAssetCreateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedCreateWithoutLessonResourcesInput>
+  where?: Prisma.MediaAssetWhereInput
+}
+
+export type MediaAssetUpdateToOneWithWhereWithoutLessonResourcesInput = {
+  where?: Prisma.MediaAssetWhereInput
+  data: Prisma.XOR<Prisma.MediaAssetUpdateWithoutLessonResourcesInput, Prisma.MediaAssetUncheckedUpdateWithoutLessonResourcesInput>
+}
+
+export type MediaAssetUpdateWithoutLessonResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  objectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  app?: Prisma.AppUpdateOneWithoutMediaAssetsNestedInput
+  vocabularyImages?: Prisma.VocabularyUpdateManyWithoutImageAssetNestedInput
+  vocabularyAudios?: Prisma.VocabularyUpdateManyWithoutAudioAssetNestedInput
+}
+
+export type MediaAssetUncheckedUpdateWithoutLessonResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  appId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
+  storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  objectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vocabularyImages?: Prisma.VocabularyUncheckedUpdateManyWithoutImageAssetNestedInput
+  vocabularyAudios?: Prisma.VocabularyUncheckedUpdateManyWithoutAudioAssetNestedInput
 }
 
 export type MediaAssetCreateWithoutVocabularyImagesInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   app?: Prisma.AppCreateNestedOneWithoutMediaAssetsInput
   vocabularyAudios?: Prisma.VocabularyCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetUncheckedCreateWithoutVocabularyImagesInput = {
@@ -894,21 +1248,29 @@ export type MediaAssetUncheckedCreateWithoutVocabularyImagesInput = {
   appId?: string | null
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyAudios?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAudioAssetInput
+  lessonResources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetCreateOrConnectWithoutVocabularyImagesInput = {
@@ -920,22 +1282,30 @@ export type MediaAssetCreateWithoutVocabularyAudiosInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   app?: Prisma.AppCreateNestedOneWithoutMediaAssetsInput
   vocabularyImages?: Prisma.VocabularyCreateNestedManyWithoutImageAssetInput
+  lessonResources?: Prisma.LessonResourceCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetUncheckedCreateWithoutVocabularyAudiosInput = {
@@ -943,21 +1313,29 @@ export type MediaAssetUncheckedCreateWithoutVocabularyAudiosInput = {
   appId?: string | null
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedCreateNestedManyWithoutImageAssetInput
+  lessonResources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutAssetInput
 }
 
 export type MediaAssetCreateOrConnectWithoutVocabularyAudiosInput = {
@@ -980,22 +1358,30 @@ export type MediaAssetUpdateWithoutVocabularyImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   app?: Prisma.AppUpdateOneWithoutMediaAssetsNestedInput
   vocabularyAudios?: Prisma.VocabularyUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUncheckedUpdateWithoutVocabularyImagesInput = {
@@ -1003,21 +1389,29 @@ export type MediaAssetUncheckedUpdateWithoutVocabularyImagesInput = {
   appId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyAudios?: Prisma.VocabularyUncheckedUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUncheckedUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUpsertWithoutVocabularyAudiosInput = {
@@ -1035,22 +1429,30 @@ export type MediaAssetUpdateWithoutVocabularyAudiosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   app?: Prisma.AppUpdateOneWithoutMediaAssetsNestedInput
   vocabularyImages?: Prisma.VocabularyUpdateManyWithoutImageAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUncheckedUpdateWithoutVocabularyAudiosInput = {
@@ -1058,39 +1460,54 @@ export type MediaAssetUncheckedUpdateWithoutVocabularyAudiosInput = {
   appId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedUpdateManyWithoutImageAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUncheckedUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetCreateManyAppInput = {
   id?: string
   type: $Enums.MediaType
   visibility?: $Enums.MediaVisibility
+  status?: $Enums.MediaProcessingStatus
   storageProvider?: string
   bucket?: string | null
   objectKey: string
   publicUrl?: string | null
   originalName?: string | null
+  originalMimeType?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
+  originalSize?: bigint | number | null
   width?: number | null
   height?: number | null
   duration?: number | null
+  pageCount?: number | null
   checksumSha256?: string | null
   altText?: string | null
+  optimizedFormat?: string | null
+  processingError?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1099,62 +1516,85 @@ export type MediaAssetUpdateWithoutAppInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyImages?: Prisma.VocabularyUpdateManyWithoutImageAssetNestedInput
   vocabularyAudios?: Prisma.VocabularyUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUncheckedUpdateWithoutAppInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vocabularyImages?: Prisma.VocabularyUncheckedUpdateManyWithoutImageAssetNestedInput
   vocabularyAudios?: Prisma.VocabularyUncheckedUpdateManyWithoutAudioAssetNestedInput
+  lessonResources?: Prisma.LessonResourceUncheckedUpdateManyWithoutAssetNestedInput
 }
 
 export type MediaAssetUncheckedUpdateManyWithoutAppInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   visibility?: Prisma.EnumMediaVisibilityFieldUpdateOperationsInput | $Enums.MediaVisibility
+  status?: Prisma.EnumMediaProcessingStatusFieldUpdateOperationsInput | $Enums.MediaProcessingStatus
   storageProvider?: Prisma.StringFieldUpdateOperationsInput | string
   bucket?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objectKey?: Prisma.StringFieldUpdateOperationsInput | string
   publicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  originalSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   checksumSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  optimizedFormat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processingError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1167,11 +1607,13 @@ export type MediaAssetUncheckedUpdateManyWithoutAppInput = {
 export type MediaAssetCountOutputType = {
   vocabularyImages: number
   vocabularyAudios: number
+  lessonResources: number
 }
 
 export type MediaAssetCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vocabularyImages?: boolean | MediaAssetCountOutputTypeCountVocabularyImagesArgs
   vocabularyAudios?: boolean | MediaAssetCountOutputTypeCountVocabularyAudiosArgs
+  lessonResources?: boolean | MediaAssetCountOutputTypeCountLessonResourcesArgs
 }
 
 /**
@@ -1198,29 +1640,44 @@ export type MediaAssetCountOutputTypeCountVocabularyAudiosArgs<ExtArgs extends r
   where?: Prisma.VocabularyWhereInput
 }
 
+/**
+ * MediaAssetCountOutputType without action
+ */
+export type MediaAssetCountOutputTypeCountLessonResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LessonResourceWhereInput
+}
+
 
 export type MediaAssetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   appId?: boolean
   type?: boolean
   visibility?: boolean
+  status?: boolean
   storageProvider?: boolean
   bucket?: boolean
   objectKey?: boolean
   publicUrl?: boolean
   originalName?: boolean
+  originalMimeType?: boolean
   mimeType?: boolean
   fileSize?: boolean
+  originalSize?: boolean
   width?: boolean
   height?: boolean
   duration?: boolean
+  pageCount?: boolean
   checksumSha256?: boolean
   altText?: boolean
+  optimizedFormat?: boolean
+  processingError?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   app?: boolean | Prisma.MediaAsset$appArgs<ExtArgs>
   vocabularyImages?: boolean | Prisma.MediaAsset$vocabularyImagesArgs<ExtArgs>
   vocabularyAudios?: boolean | Prisma.MediaAsset$vocabularyAudiosArgs<ExtArgs>
+  lessonResources?: boolean | Prisma.MediaAsset$lessonResourcesArgs<ExtArgs>
   _count?: boolean | Prisma.MediaAssetCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mediaAsset"]>
 
@@ -1231,27 +1688,35 @@ export type MediaAssetSelectScalar = {
   appId?: boolean
   type?: boolean
   visibility?: boolean
+  status?: boolean
   storageProvider?: boolean
   bucket?: boolean
   objectKey?: boolean
   publicUrl?: boolean
   originalName?: boolean
+  originalMimeType?: boolean
   mimeType?: boolean
   fileSize?: boolean
+  originalSize?: boolean
   width?: boolean
   height?: boolean
   duration?: boolean
+  pageCount?: boolean
   checksumSha256?: boolean
   altText?: boolean
+  optimizedFormat?: boolean
+  processingError?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MediaAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "type" | "visibility" | "storageProvider" | "bucket" | "objectKey" | "publicUrl" | "originalName" | "mimeType" | "fileSize" | "width" | "height" | "duration" | "checksumSha256" | "altText" | "createdAt" | "updatedAt", ExtArgs["result"]["mediaAsset"]>
+export type MediaAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "type" | "visibility" | "status" | "storageProvider" | "bucket" | "objectKey" | "publicUrl" | "originalName" | "originalMimeType" | "mimeType" | "fileSize" | "originalSize" | "width" | "height" | "duration" | "pageCount" | "checksumSha256" | "altText" | "optimizedFormat" | "processingError" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["mediaAsset"]>
 export type MediaAssetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   app?: boolean | Prisma.MediaAsset$appArgs<ExtArgs>
   vocabularyImages?: boolean | Prisma.MediaAsset$vocabularyImagesArgs<ExtArgs>
   vocabularyAudios?: boolean | Prisma.MediaAsset$vocabularyAudiosArgs<ExtArgs>
+  lessonResources?: boolean | Prisma.MediaAsset$lessonResourcesArgs<ExtArgs>
   _count?: boolean | Prisma.MediaAssetCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1261,24 +1726,32 @@ export type $MediaAssetPayload<ExtArgs extends runtime.Types.Extensions.Internal
     app: Prisma.$AppPayload<ExtArgs> | null
     vocabularyImages: Prisma.$VocabularyPayload<ExtArgs>[]
     vocabularyAudios: Prisma.$VocabularyPayload<ExtArgs>[]
+    lessonResources: Prisma.$LessonResourcePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     appId: string | null
     type: $Enums.MediaType
     visibility: $Enums.MediaVisibility
+    status: $Enums.MediaProcessingStatus
     storageProvider: string
     bucket: string | null
     objectKey: string
     publicUrl: string | null
     originalName: string | null
+    originalMimeType: string | null
     mimeType: string | null
     fileSize: bigint | null
+    originalSize: bigint | null
     width: number | null
     height: number | null
     duration: number | null
+    pageCount: number | null
     checksumSha256: string | null
     altText: string | null
+    optimizedFormat: string | null
+    processingError: string | null
+    metadata: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["mediaAsset"]>
@@ -1624,6 +2097,7 @@ export interface Prisma__MediaAssetClient<T, Null = never, ExtArgs extends runti
   app<T extends Prisma.MediaAsset$appArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaAsset$appArgs<ExtArgs>>): Prisma.Prisma__AppClient<runtime.Types.Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vocabularyImages<T extends Prisma.MediaAsset$vocabularyImagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaAsset$vocabularyImagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vocabularyAudios<T extends Prisma.MediaAsset$vocabularyAudiosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaAsset$vocabularyAudiosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lessonResources<T extends Prisma.MediaAsset$lessonResourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaAsset$lessonResourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1657,18 +2131,25 @@ export interface MediaAssetFieldRefs {
   readonly appId: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly type: Prisma.FieldRef<"MediaAsset", 'MediaType'>
   readonly visibility: Prisma.FieldRef<"MediaAsset", 'MediaVisibility'>
+  readonly status: Prisma.FieldRef<"MediaAsset", 'MediaProcessingStatus'>
   readonly storageProvider: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly bucket: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly objectKey: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly publicUrl: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly originalName: Prisma.FieldRef<"MediaAsset", 'String'>
+  readonly originalMimeType: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly mimeType: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly fileSize: Prisma.FieldRef<"MediaAsset", 'BigInt'>
+  readonly originalSize: Prisma.FieldRef<"MediaAsset", 'BigInt'>
   readonly width: Prisma.FieldRef<"MediaAsset", 'Int'>
   readonly height: Prisma.FieldRef<"MediaAsset", 'Int'>
   readonly duration: Prisma.FieldRef<"MediaAsset", 'Int'>
+  readonly pageCount: Prisma.FieldRef<"MediaAsset", 'Int'>
   readonly checksumSha256: Prisma.FieldRef<"MediaAsset", 'String'>
   readonly altText: Prisma.FieldRef<"MediaAsset", 'String'>
+  readonly optimizedFormat: Prisma.FieldRef<"MediaAsset", 'String'>
+  readonly processingError: Prisma.FieldRef<"MediaAsset", 'String'>
+  readonly metadata: Prisma.FieldRef<"MediaAsset", 'Json'>
   readonly createdAt: Prisma.FieldRef<"MediaAsset", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MediaAsset", 'DateTime'>
 }
@@ -2083,6 +2564,30 @@ export type MediaAsset$vocabularyAudiosArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.VocabularyScalarFieldEnum | Prisma.VocabularyScalarFieldEnum[]
+}
+
+/**
+ * MediaAsset.lessonResources
+ */
+export type MediaAsset$lessonResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LessonResource
+   */
+  select?: Prisma.LessonResourceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LessonResource
+   */
+  omit?: Prisma.LessonResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LessonResourceInclude<ExtArgs> | null
+  where?: Prisma.LessonResourceWhereInput
+  orderBy?: Prisma.LessonResourceOrderByWithRelationInput | Prisma.LessonResourceOrderByWithRelationInput[]
+  cursor?: Prisma.LessonResourceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LessonResourceScalarFieldEnum | Prisma.LessonResourceScalarFieldEnum[]
 }
 
 /**

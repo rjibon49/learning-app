@@ -9,15 +9,12 @@
 * 🟢 You can import this file directly.
 */
 
-export const AppLevel = {
-  A1: 'A1',
-  A2: 'A2',
-  B1: 'B1',
-  B2: 'B2',
-  C1: 'C1'
+export const WritingDirection = {
+  LTR: 'LTR',
+  RTL: 'RTL'
 } as const
 
-export type AppLevel = (typeof AppLevel)[keyof typeof AppLevel]
+export type WritingDirection = (typeof WritingDirection)[keyof typeof WritingDirection]
 
 
 export const UserRole = {
@@ -79,20 +76,33 @@ export const MediaVisibility = {
 export type MediaVisibility = (typeof MediaVisibility)[keyof typeof MediaVisibility]
 
 
-export const QuizType = {
-  IMAGE_TO_GERMAN: 'IMAGE_TO_GERMAN',
-  ENGLISH_TO_GERMAN: 'ENGLISH_TO_GERMAN',
-  BANGLA_TO_GERMAN: 'BANGLA_TO_GERMAN',
-  AUDIO_TO_GERMAN: 'AUDIO_TO_GERMAN',
-  GERMAN_TO_ENGLISH: 'GERMAN_TO_ENGLISH',
-  GERMAN_TO_BANGLA: 'GERMAN_TO_BANGLA',
-  ARTICLE: 'ARTICLE',
-  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-  MATCHING: 'MATCHING',
-  FILL_BLANK: 'FILL_BLANK'
+export const MediaProcessingStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  FAILED: 'FAILED'
 } as const
 
-export type QuizType = (typeof QuizType)[keyof typeof QuizType]
+export type MediaProcessingStatus = (typeof MediaProcessingStatus)[keyof typeof MediaProcessingStatus]
+
+
+export const QuestionType = {
+  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
+  IMAGE_TO_TARGET: 'IMAGE_TO_TARGET',
+  TEXT_TO_TARGET: 'TEXT_TO_TARGET',
+  AUDIO_TO_TARGET: 'AUDIO_TO_TARGET',
+  TARGET_TO_TRANSLATION: 'TARGET_TO_TRANSLATION',
+  TRANSLATION_TO_TARGET: 'TRANSLATION_TO_TARGET',
+  MATCHING: 'MATCHING',
+  FILL_BLANK: 'FILL_BLANK',
+  ARTICLE: 'ARTICLE',
+  LISTEN_AND_TYPE: 'LISTEN_AND_TYPE',
+  SPEAKING: 'SPEAKING',
+  ORDERING: 'ORDERING',
+  TRUE_FALSE: 'TRUE_FALSE'
+} as const
+
+export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType]
 
 
 export const Difficulty = {
@@ -104,11 +114,23 @@ export const Difficulty = {
 export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty]
 
 
+export const ContentFormat = {
+  TEXT: 'TEXT',
+  MARKDOWN: 'MARKDOWN',
+  HTML: 'HTML',
+  JSON: 'JSON'
+} as const
+
+export type ContentFormat = (typeof ContentFormat)[keyof typeof ContentFormat]
+
+
 export const SubscriptionStatus = {
+  PENDING: 'PENDING',
   ACTIVE: 'ACTIVE',
   EXPIRED: 'EXPIRED',
   CANCELLED: 'CANCELLED',
-  TRIAL: 'TRIAL'
+  TRIAL: 'TRIAL',
+  REFUNDED: 'REFUNDED'
 } as const
 
 export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
@@ -123,6 +145,17 @@ export const SubscriptionPlatform = {
 } as const
 
 export type SubscriptionPlatform = (typeof SubscriptionPlatform)[keyof typeof SubscriptionPlatform]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
 export const AdProvider = {
@@ -140,6 +173,7 @@ export const JobType = {
   GENERATE_QUIZ: 'GENERATE_QUIZ',
   PROCESS_PDF: 'PROCESS_PDF',
   PROCESS_IMAGE: 'PROCESS_IMAGE',
+  PROCESS_DOCUMENT: 'PROCESS_DOCUMENT',
   BULK_IMPORT: 'BULK_IMPORT'
 } as const
 

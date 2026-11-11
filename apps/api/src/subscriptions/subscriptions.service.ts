@@ -1,119 +1,447 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
+
 import { PrismaService } from '../prisma.service.js';
-import { SubscriptionStatus, SubscriptionPlatform } from '../generated/prisma/client.js';
-import type { CreateSubscriptionDto, UpdateSubscriptionDto, CheckoutSubscriptionDto } from './dto/subscription.dto.js';
+
+import type {
+  Prisma,
+} from '../generated/prisma/client.js';
+
+import type {
+  CheckoutDto,
+  SubscriptionListDto,
+} from './dto/subscription.dto.js';
 
 @Injectable()
 export class SubscriptionsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+  ) {}
 
-  async findAllSubscriptions(appId?: string) {
-    return this.prisma.subscription.findMany({
-      where: appId ? { appId } : undefined,
-      orderBy: { createdAt: 'desc' },
-      include: {
-        user: { select: { id: true, email: true, displayName: true } },
-        app: { select: { id: true, name: true } },
-      },
-    });
-  }
+  private async getPrice(planType: 'MONTHLY' | 'YEARLY') {
+    const key =
+      planType === 'MONTHLY'
+        ? 'SUBSCRIPTION_MONTHLY_USD_CENTS'
+        : 'SUBSCRIPTION_YEARLY_USD_CENTS';
 
-  async createSubscription(dto: CreateSubscriptionDto) {
-    return this.prisma.subscription.create({ data: dto as any });
-  }
-
-  // চেকআউট এবং প্রোমো কোড ডিসকাউন্ট সহ সাবস্ক্রিপশন ক্রিয়েট ও অ্যাড-ফ্রি আপডেট
-  async checkoutSubscription(dto: CheckoutSubscriptionDto) {
-    const user = await this.prisma.user.findUnique({ where: { id: dto.userId } });
-    if (!user) throw new NotFoundException('User not found');
-
-    const app = await this.prisma.app.findUnique({ where: { id: dto.appId } });
-    if (!app) throw new NotFoundException('App not found');
-
-    // সিস্টেম সেটিংস থেকে অ্যাড-ফ্রি সাবস্ক্রিপশনের প্রাইস আনা (ডিফল্ট মানসহ)
-    const settings = await this.prisma.systemSetting.findMany({
-      where: { key: { in: ['AD_FREE_MONTHLY_PRICE', 'AD_FREE_YEARLY_PRICE'] } },
-    });
-
-    const monthlyPrice = Number(settings.find(s => s.key === 'AD_FREE_MONTHLY_PRICE')?.value || 1.99);
-    const yearlyPrice = Number(settings.find(s => s.key === 'AD_FREE_YEARLY_PRICE')?.value || 14.99);
-
-    const originalPrice = dto.planType === 'YEARLY' ? yearlyPrice : monthlyPrice;
-    let discountAmount = 0;
-    let finalPrice = originalPrice;
-
-    // প্রোমো কোড ভ্যালিডেশন ও ডিসকাউন্ট হিসাব
-    if (dto.promoCode) {
-      const promo = await this.prisma.promoCode.findUnique({ where: { code: dto.promoCode.toUpperCase() } });
-      if (!promo || !promo.isActive) throw new BadRequestException('Invalid or inactive promo code.');
-
-      const now = new Date();
-      if ((promo.validFrom && promo.validFrom > now) || (promo.validUntil && promo.validUntil < now)) {
-        throw new BadRequestException('Promo code has expired or is not active yet.');
-      }
-      if (promo.maxUses && promo.currentUses >= promo.maxUses) {
-        throw new BadRequestException('Promo code usage limit has reached.');
-      }
-
-      discountAmount = Number(((originalPrice * promo.discountPct) / 100).toFixed(2));
-      finalPrice = Number((originalPrice - discountAmount).toFixed(2));
-
-      // কোডের ব্যবহার ১ বাড়িয়ে দেওয়া
-      await this.prisma.promoCode.update({
-        where: { id: promo.id },
-        data: { currentUses: { increment: 1 } },
+    const setting =
+      await this.prisma.systemSetting.findUnique({
+        where: { key },
+        select: { value: true },
       });
+
+    if (!setting) {
+      throw new ServiceUnavailableException(
+        'Subscription pricing is not configured',
+      );
     }
 
-    // মেয়াদ হিসাব (মাসিক ৩০ দিন, বাৎসরিক ৩৬৫ দিন)
-    const startedAt = new Date();
-    const expiresAt = new Date();
-    if (dto.planType === 'YEARLY') {
-      expiresAt.setDate(expiresAt.getDate() + 365);
-    } else {
-      expiresAt.setDate(expiresAt.getDate() + 30);
+    const value = setting.value.trim();
+
+    if (!/^[1-9][0-9]*$/.test(value)) {
+      throw new ServiceUnavailableException(
+        'Subscription price is invalid',
+      );
     }
 
-    // সাবস্ক্রিপشن তৈরি এবং ইউজারের adFreeUntil ডেট আপডেট করা
-    const [subscription] = await this.prisma.$transaction([
-      this.prisma.subscription.create({
-        data: {
-          userId: dto.userId,
-          appId: dto.appId,
-          platform: dto.platform || SubscriptionPlatform.WEB,
-          provider: 'STRIPE_OR_MANUAL',
-          productId: `ad_free_${dto.planType.toLowerCase()}`,
-          status: SubscriptionStatus.ACTIVE,
-          startedAt,
-          expiresAt,
-          autoRenew: true,
-          externalId: dto.externalId || null,
-        },
-      }),
-      this.prisma.user.update({
-        where: { id: dto.userId },
-        data: { adFreeUntil: expiresAt },
-      }),
-    ]);
+    const amountMinor = BigInt(value);
+
+    if (amountMinor > 100000000n) {
+      throw new ServiceUnavailableException(
+        'Subscription price exceeds allowed range',
+      );
+    }
 
     return {
-      message: 'Subscription checkout successful!',
-      originalPrice,
-      discountAmount,
-      finalPrice,
-      subscription,
+      productId:
+        `ad_free_${planType.toLowerCase()}`,
+      planType,
+      amountMinor,
+      currency: 'USD',
     };
   }
 
-  async updateSubscription(id: string, dto: UpdateSubscriptionDto) {
-    const sub = await this.prisma.subscription.findUnique({ where: { id } });
-    if (!sub) throw new NotFoundException('Subscription not found');
-    return this.prisma.subscription.update({ where: { id }, data: dto as any });
+  async getPlans() {
+    const monthly = await this.getPrice('MONTHLY');
+    const yearly = await this.getPrice('YEARLY');
+
+    return [
+      {
+        planType: monthly.planType,
+        productId: monthly.productId,
+        amountMinor: Number(monthly.amountMinor),
+        currency: monthly.currency,
+      },
+      {
+        planType: yearly.planType,
+        productId: yearly.productId,
+        amountMinor: Number(yearly.amountMinor),
+        currency: yearly.currency,
+      },
+    ];
   }
 
-  async deleteSubscription(id: string) {
-    const sub = await this.prisma.subscription.findUnique({ where: { id } });
-    if (!sub) throw new NotFoundException('Subscription not found');
-    await this.prisma.subscription.delete({ where: { id } });
+  // =========================================
+  // Learner: Create checkout intent
+  // =========================================
+
+  async checkout(userId: string, input: CheckoutDto) {
+    const app = await this.prisma.app.findUnique({
+      where: { id: input.appId },
+      include: { config: true },
+    });
+
+    if (
+      !app ||
+      !app.isActive ||
+      !app.config?.subscriptionsEnabled
+    ) {
+      throw new BadRequestException(
+        'Subscriptions are unavailable for this app',
+      );
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        isActive: true,
+        emailVerifiedAt: true,
+      },
+    });
+
+    if (!user?.isActive || !user.emailVerifiedAt) {
+      throw new BadRequestException(
+        'Verified learner account required',
+      );
+    }
+
+    const price = await this.getPrice(input.planType);
+
+    const provider = 'INTERNAL_CHECKOUT';
+
+    const checkoutId = input.checkoutRequestId;
+
+    // A repeated request returns its original intent.
+    const existing =
+      await this.prisma.paymentTransaction.findUnique({
+        where: {
+          provider_externalTransactionId: {
+            provider,
+            externalTransactionId: checkoutId,
+          },
+        },
+        include: { subscription: true },
+      });
+
+    if (existing) {
+      if (
+        existing.userId !== userId ||
+        existing.subscription?.appId !== input.appId ||
+        existing.subscription.productId !== price.productId
+      ) {
+        throw new ConflictException(
+          'Checkout request ID is already in use',
+        );
+      }
+
+      return {
+        checkoutId,
+        paymentId: existing.id,
+        subscriptionId: existing.subscriptionId,
+        status: existing.status,
+        amountMinor: Number(existing.amountMinor),
+        currency: existing.currency,
+        paymentReady: false,
+      };
+    }
+
+    try {
+      return await this.prisma.$transaction(
+        async (tx) => {
+          const subscription =
+            await tx.subscription.create({
+              data: {
+                userId,
+                appId: input.appId,
+                platform: 'WEB',
+                provider,
+                productId: price.productId,
+                status: 'PENDING',
+                startedAt: null,
+                expiresAt: null,
+                autoRenew: false,
+              },
+            });
+
+          const payment =
+            await tx.paymentTransaction.create({
+              data: {
+                userId,
+                subscriptionId: subscription.id,
+                provider,
+                externalTransactionId: checkoutId,
+                status: 'PENDING',
+                amountMinor: price.amountMinor,
+                currency: price.currency,
+              },
+            });
+
+          return {
+            checkoutId,
+            paymentId: payment.id,
+            subscriptionId: subscription.id,
+            status: payment.status,
+            amountMinor: Number(payment.amountMinor),
+            currency: payment.currency,
+
+            // No payment gateway is connected yet.
+            paymentReady: false,
+          };
+        },
+      );
+    } catch (error: unknown) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        error.code === 'P2002'
+      ) {
+        // Concurrent duplicate checkout requests:
+        // the caller can retry with the same ID.
+        throw new ConflictException(
+          'Checkout already exists. Retry using the same request ID.',
+        );
+      }
+
+      throw error;
+    }
+  }
+
+  // =========================================
+  // Learner: Subscription history
+  // =========================================
+
+  async mySubscriptions(
+    userId: string,
+    query: SubscriptionListDto,
+  ) {
+    const where: Prisma.SubscriptionWhereInput = {
+      userId,
+
+      ...(query.appId
+        ? { appId: query.appId }
+        : {}),
+
+      ...(query.status
+        ? { status: query.status }
+        : {}),
+    };
+
+    const [data, total] =
+      await this.prisma.$transaction([
+        this.prisma.subscription.findMany({
+          where,
+          select: {
+            id: true,
+            appId: true,
+            platform: true,
+            provider: true,
+            productId: true,
+            status: true,
+            startedAt: true,
+            expiresAt: true,
+            autoRenew: true,
+            createdAt: true,
+            app: {
+              select: {
+                name: true,
+                slug: true,
+              },
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+          skip: (query.page - 1) * query.limit,
+          take: query.limit,
+        }),
+
+        this.prisma.subscription.count({ where }),
+      ]);
+
+    return {
+      data,
+      pagination: {
+        page: query.page,
+        limit: query.limit,
+        total,
+        totalPages: Math.ceil(total / query.limit),
+      },
+    };
+  }
+
+  // =========================================
+  // Learner: Effective entitlements
+  // =========================================
+
+  async getEntitlement(
+    userId: string,
+    appId: string,
+  ) {
+    const app = await this.prisma.app.findUnique({
+      where: { id: appId },
+      include: { config: true },
+    });
+
+    if (!app?.isActive) {
+      throw new NotFoundException('App not found');
+    }
+
+    const now = new Date();
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { adFreeUntil: true },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Learner not found');
+    }
+
+    // Never trust ACTIVE status alone:
+    // require a verified provider payment.
+    const subscription =
+      await this.prisma.subscription.findFirst({
+        where: {
+          userId,
+          appId,
+          status: 'ACTIVE',
+          startedAt: { lte: now },
+          expiresAt: { gt: now },
+          payments: {
+            some: {
+              status: 'VERIFIED',
+              verifiedAt: { not: null },
+              refundedAt: null,
+            },
+          },
+        },
+        orderBy: { expiresAt: 'desc' },
+        select: {
+          id: true,
+          expiresAt: true,
+        },
+      });
+
+    const subscriptionEnd =
+      subscription?.expiresAt ?? null;
+
+    const rewardEnd =
+      user.adFreeUntil &&
+      user.adFreeUntil > now
+        ? user.adFreeUntil
+        : null;
+
+    const eligible =
+      Boolean(subscriptionEnd) ||
+      Boolean(rewardEnd);
+
+    const candidates = [
+      subscriptionEnd,
+      rewardEnd,
+    ].filter((value): value is Date => value !== null);
+
+    const adFreeUntil = candidates.length
+      ? new Date(
+          Math.max(...candidates.map(
+            (value) => value.getTime(),
+          )),
+        )
+      : null;
+
+    return {
+      appId,
+      adFree: eligible,
+      adFreeUntil,
+      subscriptionActive: Boolean(subscriptionEnd),
+      subscriptionsEnabled:
+        app.config?.subscriptionsEnabled ?? false,
+      adsEnabled:
+        (app.config?.adsEnabled ?? true) && !eligible,
+    };
+  }
+
+  // =========================================
+  // Admin: Reporting
+  // =========================================
+
+  async findAllAdmin(query: SubscriptionListDto) {
+    const where: Prisma.SubscriptionWhereInput = {
+      ...(query.appId
+        ? { appId: query.appId }
+        : {}),
+      ...(query.status
+        ? { status: query.status }
+        : {}),
+    };
+
+    const [data, total] =
+      await this.prisma.$transaction([
+        this.prisma.subscription.findMany({
+          where,
+          include: {
+            user: {
+              select: {
+                id: true,
+                email: true,
+                displayName: true,
+              },
+            },
+            app: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            payments: {
+              select: {
+                id: true,
+                provider: true,
+                status: true,
+                amountMinor: true,
+                currency: true,
+                verifiedAt: true,
+                createdAt: true,
+              },
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+          skip: (query.page - 1) * query.limit,
+          take: query.limit,
+        }),
+        this.prisma.subscription.count({ where }),
+      ]);
+
+    return {
+      data: data.map((subscription) => ({
+        ...subscription,
+        payments: subscription.payments.map(
+          (payment) => ({
+            ...payment,
+            amountMinor: payment.amountMinor.toString(),
+          }),
+        ),
+      })),
+      pagination: {
+        page: query.page,
+        limit: query.limit,
+        total,
+        totalPages: Math.ceil(total / query.limit),
+      },
+    };
   }
 }

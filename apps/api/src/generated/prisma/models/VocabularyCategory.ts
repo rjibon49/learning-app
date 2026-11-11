@@ -36,11 +36,8 @@ export type VocabularyCategorySumAggregateOutputType = {
 
 export type VocabularyCategoryMinAggregateOutputType = {
   id: string | null
-  appId: string | null
   name: string | null
   slug: string | null
-  germanName: string | null
-  banglaName: string | null
   description: string | null
   sortOrder: number | null
   isActive: boolean | null
@@ -50,11 +47,8 @@ export type VocabularyCategoryMinAggregateOutputType = {
 
 export type VocabularyCategoryMaxAggregateOutputType = {
   id: string | null
-  appId: string | null
   name: string | null
   slug: string | null
-  germanName: string | null
-  banglaName: string | null
   description: string | null
   sortOrder: number | null
   isActive: boolean | null
@@ -64,11 +58,8 @@ export type VocabularyCategoryMaxAggregateOutputType = {
 
 export type VocabularyCategoryCountAggregateOutputType = {
   id: number
-  appId: number
   name: number
   slug: number
-  germanName: number
-  banglaName: number
   description: number
   sortOrder: number
   isActive: number
@@ -88,11 +79,8 @@ export type VocabularyCategorySumAggregateInputType = {
 
 export type VocabularyCategoryMinAggregateInputType = {
   id?: true
-  appId?: true
   name?: true
   slug?: true
-  germanName?: true
-  banglaName?: true
   description?: true
   sortOrder?: true
   isActive?: true
@@ -102,11 +90,8 @@ export type VocabularyCategoryMinAggregateInputType = {
 
 export type VocabularyCategoryMaxAggregateInputType = {
   id?: true
-  appId?: true
   name?: true
   slug?: true
-  germanName?: true
-  banglaName?: true
   description?: true
   sortOrder?: true
   isActive?: true
@@ -116,11 +101,8 @@ export type VocabularyCategoryMaxAggregateInputType = {
 
 export type VocabularyCategoryCountAggregateInputType = {
   id?: true
-  appId?: true
   name?: true
   slug?: true
-  germanName?: true
-  banglaName?: true
   description?: true
   sortOrder?: true
   isActive?: true
@@ -217,11 +199,8 @@ export type VocabularyCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensio
 
 export type VocabularyCategoryGroupByOutputType = {
   id: string
-  appId: string
   name: string
   slug: string
-  germanName: string | null
-  banglaName: string | null
   description: string | null
   sortOrder: number
   isActive: boolean
@@ -254,64 +233,51 @@ export type VocabularyCategoryWhereInput = {
   OR?: Prisma.VocabularyCategoryWhereInput[]
   NOT?: Prisma.VocabularyCategoryWhereInput | Prisma.VocabularyCategoryWhereInput[]
   id?: Prisma.StringFilter<"VocabularyCategory"> | string
-  appId?: Prisma.StringFilter<"VocabularyCategory"> | string
   name?: Prisma.StringFilter<"VocabularyCategory"> | string
   slug?: Prisma.StringFilter<"VocabularyCategory"> | string
-  germanName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
-  banglaName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
   description?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
   sortOrder?: Prisma.IntFilter<"VocabularyCategory"> | number
   isActive?: Prisma.BoolFilter<"VocabularyCategory"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
-  app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
+  translations?: Prisma.VocabularyCategoryTranslationListRelationFilter
   vocabulary?: Prisma.VocabularyListRelationFilter
 }
 
 export type VocabularyCategoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanName?: Prisma.SortOrderInput | Prisma.SortOrder
-  banglaName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  app?: Prisma.AppOrderByWithRelationInput
+  translations?: Prisma.VocabularyCategoryTranslationOrderByRelationAggregateInput
   vocabulary?: Prisma.VocabularyOrderByRelationAggregateInput
   _relevance?: Prisma.VocabularyCategoryOrderByRelevanceInput
 }
 
 export type VocabularyCategoryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  appId_slug?: Prisma.VocabularyCategoryAppIdSlugCompoundUniqueInput
+  slug?: string
   AND?: Prisma.VocabularyCategoryWhereInput | Prisma.VocabularyCategoryWhereInput[]
   OR?: Prisma.VocabularyCategoryWhereInput[]
   NOT?: Prisma.VocabularyCategoryWhereInput | Prisma.VocabularyCategoryWhereInput[]
-  appId?: Prisma.StringFilter<"VocabularyCategory"> | string
   name?: Prisma.StringFilter<"VocabularyCategory"> | string
-  slug?: Prisma.StringFilter<"VocabularyCategory"> | string
-  germanName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
-  banglaName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
   description?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
   sortOrder?: Prisma.IntFilter<"VocabularyCategory"> | number
   isActive?: Prisma.BoolFilter<"VocabularyCategory"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
-  app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
+  translations?: Prisma.VocabularyCategoryTranslationListRelationFilter
   vocabulary?: Prisma.VocabularyListRelationFilter
-}, "id" | "appId_slug">
+}, "id" | "slug">
 
 export type VocabularyCategoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanName?: Prisma.SortOrderInput | Prisma.SortOrder
-  banglaName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -329,11 +295,8 @@ export type VocabularyCategoryScalarWhereWithAggregatesInput = {
   OR?: Prisma.VocabularyCategoryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VocabularyCategoryScalarWhereWithAggregatesInput | Prisma.VocabularyCategoryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"VocabularyCategory"> | string
-  appId?: Prisma.StringWithAggregatesFilter<"VocabularyCategory"> | string
   name?: Prisma.StringWithAggregatesFilter<"VocabularyCategory"> | string
   slug?: Prisma.StringWithAggregatesFilter<"VocabularyCategory"> | string
-  germanName?: Prisma.StringNullableWithAggregatesFilter<"VocabularyCategory"> | string | null
-  banglaName?: Prisma.StringNullableWithAggregatesFilter<"VocabularyCategory"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"VocabularyCategory"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"VocabularyCategory"> | number
   isActive?: Prisma.BoolWithAggregatesFilter<"VocabularyCategory"> | boolean
@@ -345,29 +308,25 @@ export type VocabularyCategoryCreateInput = {
   id?: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutCategoriesInput
+  translations?: Prisma.VocabularyCategoryTranslationCreateNestedManyWithoutCategoryInput
   vocabulary?: Prisma.VocabularyCreateNestedManyWithoutCategoryInput
 }
 
 export type VocabularyCategoryUncheckedCreateInput = {
   id?: string
-  appId: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyCategoryTranslationUncheckedCreateNestedManyWithoutCategoryInput
   vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -375,39 +334,32 @@ export type VocabularyCategoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutCategoriesNestedInput
+  translations?: Prisma.VocabularyCategoryTranslationUpdateManyWithoutCategoryNestedInput
   vocabulary?: Prisma.VocabularyUpdateManyWithoutCategoryNestedInput
 }
 
 export type VocabularyCategoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyCategoryTranslationUncheckedUpdateManyWithoutCategoryNestedInput
   vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type VocabularyCategoryCreateManyInput = {
   id?: string
-  appId: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
@@ -419,8 +371,6 @@ export type VocabularyCategoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -430,26 +380,13 @@ export type VocabularyCategoryUpdateManyMutationInput = {
 
 export type VocabularyCategoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type VocabularyCategoryListRelationFilter = {
-  every?: Prisma.VocabularyCategoryWhereInput
-  some?: Prisma.VocabularyCategoryWhereInput
-  none?: Prisma.VocabularyCategoryWhereInput
-}
-
-export type VocabularyCategoryOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type VocabularyCategoryOrderByRelevanceInput = {
@@ -458,18 +395,10 @@ export type VocabularyCategoryOrderByRelevanceInput = {
   search: string
 }
 
-export type VocabularyCategoryAppIdSlugCompoundUniqueInput = {
-  appId: string
-  slug: string
-}
-
 export type VocabularyCategoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanName?: Prisma.SortOrder
-  banglaName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -483,11 +412,8 @@ export type VocabularyCategoryAvgOrderByAggregateInput = {
 
 export type VocabularyCategoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanName?: Prisma.SortOrder
-  banglaName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -497,11 +423,8 @@ export type VocabularyCategoryMaxOrderByAggregateInput = {
 
 export type VocabularyCategoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanName?: Prisma.SortOrder
-  banglaName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -513,51 +436,28 @@ export type VocabularyCategorySumOrderByAggregateInput = {
   sortOrder?: Prisma.SortOrder
 }
 
+export type VocabularyCategoryScalarRelationFilter = {
+  is?: Prisma.VocabularyCategoryWhereInput
+  isNot?: Prisma.VocabularyCategoryWhereInput
+}
+
 export type VocabularyCategoryNullableScalarRelationFilter = {
   is?: Prisma.VocabularyCategoryWhereInput | null
   isNot?: Prisma.VocabularyCategoryWhereInput | null
 }
 
-export type VocabularyCategoryCreateNestedManyWithoutAppInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput> | Prisma.VocabularyCategoryCreateWithoutAppInput[] | Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput | Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput[]
-  createMany?: Prisma.VocabularyCategoryCreateManyAppInputEnvelope
-  connect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
+export type VocabularyCategoryCreateNestedOneWithoutTranslationsInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutTranslationsInput
+  connect?: Prisma.VocabularyCategoryWhereUniqueInput
 }
 
-export type VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput> | Prisma.VocabularyCategoryCreateWithoutAppInput[] | Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput | Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput[]
-  createMany?: Prisma.VocabularyCategoryCreateManyAppInputEnvelope
-  connect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-}
-
-export type VocabularyCategoryUpdateManyWithoutAppNestedInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput> | Prisma.VocabularyCategoryCreateWithoutAppInput[] | Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput | Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput[]
-  upsert?: Prisma.VocabularyCategoryUpsertWithWhereUniqueWithoutAppInput | Prisma.VocabularyCategoryUpsertWithWhereUniqueWithoutAppInput[]
-  createMany?: Prisma.VocabularyCategoryCreateManyAppInputEnvelope
-  set?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  disconnect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  delete?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  connect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  update?: Prisma.VocabularyCategoryUpdateWithWhereUniqueWithoutAppInput | Prisma.VocabularyCategoryUpdateWithWhereUniqueWithoutAppInput[]
-  updateMany?: Prisma.VocabularyCategoryUpdateManyWithWhereWithoutAppInput | Prisma.VocabularyCategoryUpdateManyWithWhereWithoutAppInput[]
-  deleteMany?: Prisma.VocabularyCategoryScalarWhereInput | Prisma.VocabularyCategoryScalarWhereInput[]
-}
-
-export type VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput> | Prisma.VocabularyCategoryCreateWithoutAppInput[] | Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput | Prisma.VocabularyCategoryCreateOrConnectWithoutAppInput[]
-  upsert?: Prisma.VocabularyCategoryUpsertWithWhereUniqueWithoutAppInput | Prisma.VocabularyCategoryUpsertWithWhereUniqueWithoutAppInput[]
-  createMany?: Prisma.VocabularyCategoryCreateManyAppInputEnvelope
-  set?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  disconnect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  delete?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  connect?: Prisma.VocabularyCategoryWhereUniqueInput | Prisma.VocabularyCategoryWhereUniqueInput[]
-  update?: Prisma.VocabularyCategoryUpdateWithWhereUniqueWithoutAppInput | Prisma.VocabularyCategoryUpdateWithWhereUniqueWithoutAppInput[]
-  updateMany?: Prisma.VocabularyCategoryUpdateManyWithWhereWithoutAppInput | Prisma.VocabularyCategoryUpdateManyWithWhereWithoutAppInput[]
-  deleteMany?: Prisma.VocabularyCategoryScalarWhereInput | Prisma.VocabularyCategoryScalarWhereInput[]
+export type VocabularyCategoryUpdateOneRequiredWithoutTranslationsNestedInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.VocabularyCategoryCreateOrConnectWithoutTranslationsInput
+  upsert?: Prisma.VocabularyCategoryUpsertWithoutTranslationsInput
+  connect?: Prisma.VocabularyCategoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VocabularyCategoryUpdateToOneWithWhereWithoutTranslationsInput, Prisma.VocabularyCategoryUpdateWithoutTranslationsInput>, Prisma.VocabularyCategoryUncheckedUpdateWithoutTranslationsInput>
 }
 
 export type VocabularyCategoryCreateNestedOneWithoutVocabularyInput = {
@@ -576,12 +476,10 @@ export type VocabularyCategoryUpdateOneWithoutVocabularyNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VocabularyCategoryUpdateToOneWithWhereWithoutVocabularyInput, Prisma.VocabularyCategoryUpdateWithoutVocabularyInput>, Prisma.VocabularyCategoryUncheckedUpdateWithoutVocabularyInput>
 }
 
-export type VocabularyCategoryCreateWithoutAppInput = {
+export type VocabularyCategoryCreateWithoutTranslationsInput = {
   id?: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
@@ -590,12 +488,10 @@ export type VocabularyCategoryCreateWithoutAppInput = {
   vocabulary?: Prisma.VocabularyCreateNestedManyWithoutCategoryInput
 }
 
-export type VocabularyCategoryUncheckedCreateWithoutAppInput = {
+export type VocabularyCategoryUncheckedCreateWithoutTranslationsInput = {
   id?: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
@@ -604,75 +500,68 @@ export type VocabularyCategoryUncheckedCreateWithoutAppInput = {
   vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutCategoryInput
 }
 
-export type VocabularyCategoryCreateOrConnectWithoutAppInput = {
+export type VocabularyCategoryCreateOrConnectWithoutTranslationsInput = {
   where: Prisma.VocabularyCategoryWhereUniqueInput
-  create: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput>
+  create: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedCreateWithoutTranslationsInput>
 }
 
-export type VocabularyCategoryCreateManyAppInputEnvelope = {
-  data: Prisma.VocabularyCategoryCreateManyAppInput | Prisma.VocabularyCategoryCreateManyAppInput[]
-  skipDuplicates?: boolean
+export type VocabularyCategoryUpsertWithoutTranslationsInput = {
+  update: Prisma.XOR<Prisma.VocabularyCategoryUpdateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedUpdateWithoutTranslationsInput>
+  create: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedCreateWithoutTranslationsInput>
+  where?: Prisma.VocabularyCategoryWhereInput
 }
 
-export type VocabularyCategoryUpsertWithWhereUniqueWithoutAppInput = {
-  where: Prisma.VocabularyCategoryWhereUniqueInput
-  update: Prisma.XOR<Prisma.VocabularyCategoryUpdateWithoutAppInput, Prisma.VocabularyCategoryUncheckedUpdateWithoutAppInput>
-  create: Prisma.XOR<Prisma.VocabularyCategoryCreateWithoutAppInput, Prisma.VocabularyCategoryUncheckedCreateWithoutAppInput>
+export type VocabularyCategoryUpdateToOneWithWhereWithoutTranslationsInput = {
+  where?: Prisma.VocabularyCategoryWhereInput
+  data: Prisma.XOR<Prisma.VocabularyCategoryUpdateWithoutTranslationsInput, Prisma.VocabularyCategoryUncheckedUpdateWithoutTranslationsInput>
 }
 
-export type VocabularyCategoryUpdateWithWhereUniqueWithoutAppInput = {
-  where: Prisma.VocabularyCategoryWhereUniqueInput
-  data: Prisma.XOR<Prisma.VocabularyCategoryUpdateWithoutAppInput, Prisma.VocabularyCategoryUncheckedUpdateWithoutAppInput>
+export type VocabularyCategoryUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vocabulary?: Prisma.VocabularyUpdateManyWithoutCategoryNestedInput
 }
 
-export type VocabularyCategoryUpdateManyWithWhereWithoutAppInput = {
-  where: Prisma.VocabularyCategoryScalarWhereInput
-  data: Prisma.XOR<Prisma.VocabularyCategoryUpdateManyMutationInput, Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppInput>
-}
-
-export type VocabularyCategoryScalarWhereInput = {
-  AND?: Prisma.VocabularyCategoryScalarWhereInput | Prisma.VocabularyCategoryScalarWhereInput[]
-  OR?: Prisma.VocabularyCategoryScalarWhereInput[]
-  NOT?: Prisma.VocabularyCategoryScalarWhereInput | Prisma.VocabularyCategoryScalarWhereInput[]
-  id?: Prisma.StringFilter<"VocabularyCategory"> | string
-  appId?: Prisma.StringFilter<"VocabularyCategory"> | string
-  name?: Prisma.StringFilter<"VocabularyCategory"> | string
-  slug?: Prisma.StringFilter<"VocabularyCategory"> | string
-  germanName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
-  banglaName?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
-  description?: Prisma.StringNullableFilter<"VocabularyCategory"> | string | null
-  sortOrder?: Prisma.IntFilter<"VocabularyCategory"> | number
-  isActive?: Prisma.BoolFilter<"VocabularyCategory"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"VocabularyCategory"> | Date | string
+export type VocabularyCategoryUncheckedUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type VocabularyCategoryCreateWithoutVocabularyInput = {
   id?: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutCategoriesInput
+  translations?: Prisma.VocabularyCategoryTranslationCreateNestedManyWithoutCategoryInput
 }
 
 export type VocabularyCategoryUncheckedCreateWithoutVocabularyInput = {
   id?: string
-  appId: string
   name: string
   slug: string
-  germanName?: string | null
-  banglaName?: string | null
   description?: string | null
   sortOrder?: number
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyCategoryTranslationUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type VocabularyCategoryCreateOrConnectWithoutVocabularyInput = {
@@ -695,82 +584,24 @@ export type VocabularyCategoryUpdateWithoutVocabularyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutCategoriesNestedInput
+  translations?: Prisma.VocabularyCategoryTranslationUpdateManyWithoutCategoryNestedInput
 }
 
 export type VocabularyCategoryUncheckedUpdateWithoutVocabularyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type VocabularyCategoryCreateManyAppInput = {
-  id?: string
-  name: string
-  slug: string
-  germanName?: string | null
-  banglaName?: string | null
-  description?: string | null
-  sortOrder?: number
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type VocabularyCategoryUpdateWithoutAppInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutCategoryNestedInput
-}
-
-export type VocabularyCategoryUncheckedUpdateWithoutAppInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutCategoryNestedInput
-}
-
-export type VocabularyCategoryUncheckedUpdateManyWithoutAppInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyCategoryTranslationUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 
@@ -779,10 +610,12 @@ export type VocabularyCategoryUncheckedUpdateManyWithoutAppInput = {
  */
 
 export type VocabularyCategoryCountOutputType = {
+  translations: number
   vocabulary: number
 }
 
 export type VocabularyCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  translations?: boolean | VocabularyCategoryCountOutputTypeCountTranslationsArgs
   vocabulary?: boolean | VocabularyCategoryCountOutputTypeCountVocabularyArgs
 }
 
@@ -799,6 +632,13 @@ export type VocabularyCategoryCountOutputTypeDefaultArgs<ExtArgs extends runtime
 /**
  * VocabularyCategoryCountOutputType without action
  */
+export type VocabularyCategoryCountOutputTypeCountTranslationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VocabularyCategoryTranslationWhereInput
+}
+
+/**
+ * VocabularyCategoryCountOutputType without action
+ */
 export type VocabularyCategoryCountOutputTypeCountVocabularyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VocabularyWhereInput
 }
@@ -806,17 +646,14 @@ export type VocabularyCategoryCountOutputTypeCountVocabularyArgs<ExtArgs extends
 
 export type VocabularyCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  appId?: boolean
   name?: boolean
   slug?: boolean
-  germanName?: boolean
-  banglaName?: boolean
   description?: boolean
   sortOrder?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
+  translations?: boolean | Prisma.VocabularyCategory$translationsArgs<ExtArgs>
   vocabulary?: boolean | Prisma.VocabularyCategory$vocabularyArgs<ExtArgs>
   _count?: boolean | Prisma.VocabularyCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vocabularyCategory"]>
@@ -825,11 +662,8 @@ export type VocabularyCategorySelect<ExtArgs extends runtime.Types.Extensions.In
 
 export type VocabularyCategorySelectScalar = {
   id?: boolean
-  appId?: boolean
   name?: boolean
   slug?: boolean
-  germanName?: boolean
-  banglaName?: boolean
   description?: boolean
   sortOrder?: boolean
   isActive?: boolean
@@ -837,9 +671,9 @@ export type VocabularyCategorySelectScalar = {
   updatedAt?: boolean
 }
 
-export type VocabularyCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "name" | "slug" | "germanName" | "banglaName" | "description" | "sortOrder" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["vocabularyCategory"]>
+export type VocabularyCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "sortOrder" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["vocabularyCategory"]>
 export type VocabularyCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
+  translations?: boolean | Prisma.VocabularyCategory$translationsArgs<ExtArgs>
   vocabulary?: boolean | Prisma.VocabularyCategory$vocabularyArgs<ExtArgs>
   _count?: boolean | Prisma.VocabularyCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -847,16 +681,13 @@ export type VocabularyCategoryInclude<ExtArgs extends runtime.Types.Extensions.I
 export type $VocabularyCategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VocabularyCategory"
   objects: {
-    app: Prisma.$AppPayload<ExtArgs>
+    translations: Prisma.$VocabularyCategoryTranslationPayload<ExtArgs>[]
     vocabulary: Prisma.$VocabularyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    appId: string
     name: string
     slug: string
-    germanName: string | null
-    banglaName: string | null
     description: string | null
     sortOrder: number
     isActive: boolean
@@ -1202,7 +1033,7 @@ readonly fields: VocabularyCategoryFieldRefs;
  */
 export interface Prisma__VocabularyCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  app<T extends Prisma.AppDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AppDefaultArgs<ExtArgs>>): Prisma.Prisma__AppClient<runtime.Types.Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  translations<T extends Prisma.VocabularyCategory$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VocabularyCategory$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyCategoryTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vocabulary<T extends Prisma.VocabularyCategory$vocabularyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VocabularyCategory$vocabularyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1234,11 +1065,8 @@ export interface Prisma__VocabularyCategoryClient<T, Null = never, ExtArgs exten
  */
 export interface VocabularyCategoryFieldRefs {
   readonly id: Prisma.FieldRef<"VocabularyCategory", 'String'>
-  readonly appId: Prisma.FieldRef<"VocabularyCategory", 'String'>
   readonly name: Prisma.FieldRef<"VocabularyCategory", 'String'>
   readonly slug: Prisma.FieldRef<"VocabularyCategory", 'String'>
-  readonly germanName: Prisma.FieldRef<"VocabularyCategory", 'String'>
-  readonly banglaName: Prisma.FieldRef<"VocabularyCategory", 'String'>
   readonly description: Prisma.FieldRef<"VocabularyCategory", 'String'>
   readonly sortOrder: Prisma.FieldRef<"VocabularyCategory", 'Int'>
   readonly isActive: Prisma.FieldRef<"VocabularyCategory", 'Boolean'>
@@ -1589,6 +1417,30 @@ export type VocabularyCategoryDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many VocabularyCategories to delete.
    */
   limit?: number
+}
+
+/**
+ * VocabularyCategory.translations
+ */
+export type VocabularyCategory$translationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VocabularyCategoryTranslation
+   */
+  select?: Prisma.VocabularyCategoryTranslationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VocabularyCategoryTranslation
+   */
+  omit?: Prisma.VocabularyCategoryTranslationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VocabularyCategoryTranslationInclude<ExtArgs> | null
+  where?: Prisma.VocabularyCategoryTranslationWhereInput
+  orderBy?: Prisma.VocabularyCategoryTranslationOrderByWithRelationInput | Prisma.VocabularyCategoryTranslationOrderByWithRelationInput[]
+  cursor?: Prisma.VocabularyCategoryTranslationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VocabularyCategoryTranslationScalarFieldEnum | Prisma.VocabularyCategoryTranslationScalarFieldEnum[]
 }
 
 /**

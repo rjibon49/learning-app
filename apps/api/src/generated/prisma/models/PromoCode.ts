@@ -272,6 +272,7 @@ export type PromoCodeWhereInput = {
   currentUses?: Prisma.IntFilter<"PromoCode"> | number
   createdAt?: Prisma.DateTimeFilter<"PromoCode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PromoCode"> | Date | string
+  redemptions?: Prisma.PromoRedemptionListRelationFilter
 }
 
 export type PromoCodeOrderByWithRelationInput = {
@@ -286,6 +287,7 @@ export type PromoCodeOrderByWithRelationInput = {
   currentUses?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  redemptions?: Prisma.PromoRedemptionOrderByRelationAggregateInput
   _relevance?: Prisma.PromoCodeOrderByRelevanceInput
 }
 
@@ -304,6 +306,7 @@ export type PromoCodeWhereUniqueInput = Prisma.AtLeast<{
   currentUses?: Prisma.IntFilter<"PromoCode"> | number
   createdAt?: Prisma.DateTimeFilter<"PromoCode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PromoCode"> | Date | string
+  redemptions?: Prisma.PromoRedemptionListRelationFilter
 }, "id" | "code">
 
 export type PromoCodeOrderByWithAggregationInput = {
@@ -354,6 +357,7 @@ export type PromoCodeCreateInput = {
   currentUses?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  redemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutPromoCodeInput
 }
 
 export type PromoCodeUncheckedCreateInput = {
@@ -368,6 +372,7 @@ export type PromoCodeUncheckedCreateInput = {
   currentUses?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  redemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutPromoCodeInput
 }
 
 export type PromoCodeUpdateInput = {
@@ -382,6 +387,7 @@ export type PromoCodeUpdateInput = {
   currentUses?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  redemptions?: Prisma.PromoRedemptionUpdateManyWithoutPromoCodeNestedInput
 }
 
 export type PromoCodeUncheckedUpdateInput = {
@@ -396,6 +402,7 @@ export type PromoCodeUncheckedUpdateInput = {
   currentUses?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  redemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutPromoCodeNestedInput
 }
 
 export type PromoCodeCreateManyInput = {
@@ -500,6 +507,126 @@ export type PromoCodeSumOrderByAggregateInput = {
   currentUses?: Prisma.SortOrder
 }
 
+export type PromoCodeScalarRelationFilter = {
+  is?: Prisma.PromoCodeWhereInput
+  isNot?: Prisma.PromoCodeWhereInput
+}
+
+export type PromoCodeCreateNestedOneWithoutRedemptionsInput = {
+  create?: Prisma.XOR<Prisma.PromoCodeCreateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedCreateWithoutRedemptionsInput>
+  connectOrCreate?: Prisma.PromoCodeCreateOrConnectWithoutRedemptionsInput
+  connect?: Prisma.PromoCodeWhereUniqueInput
+}
+
+export type PromoCodeUpdateOneRequiredWithoutRedemptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PromoCodeCreateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedCreateWithoutRedemptionsInput>
+  connectOrCreate?: Prisma.PromoCodeCreateOrConnectWithoutRedemptionsInput
+  upsert?: Prisma.PromoCodeUpsertWithoutRedemptionsInput
+  connect?: Prisma.PromoCodeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PromoCodeUpdateToOneWithWhereWithoutRedemptionsInput, Prisma.PromoCodeUpdateWithoutRedemptionsInput>, Prisma.PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+}
+
+export type PromoCodeCreateWithoutRedemptionsInput = {
+  id?: string
+  code: string
+  discountPct: number
+  description?: string | null
+  isActive?: boolean
+  validFrom?: Date | string | null
+  validUntil?: Date | string | null
+  maxUses?: number | null
+  currentUses?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PromoCodeUncheckedCreateWithoutRedemptionsInput = {
+  id?: string
+  code: string
+  discountPct: number
+  description?: string | null
+  isActive?: boolean
+  validFrom?: Date | string | null
+  validUntil?: Date | string | null
+  maxUses?: number | null
+  currentUses?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PromoCodeCreateOrConnectWithoutRedemptionsInput = {
+  where: Prisma.PromoCodeWhereUniqueInput
+  create: Prisma.XOR<Prisma.PromoCodeCreateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedCreateWithoutRedemptionsInput>
+}
+
+export type PromoCodeUpsertWithoutRedemptionsInput = {
+  update: Prisma.XOR<Prisma.PromoCodeUpdateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+  create: Prisma.XOR<Prisma.PromoCodeCreateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedCreateWithoutRedemptionsInput>
+  where?: Prisma.PromoCodeWhereInput
+}
+
+export type PromoCodeUpdateToOneWithWhereWithoutRedemptionsInput = {
+  where?: Prisma.PromoCodeWhereInput
+  data: Prisma.XOR<Prisma.PromoCodeUpdateWithoutRedemptionsInput, Prisma.PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+}
+
+export type PromoCodeUpdateWithoutRedemptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  discountPct?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  maxUses?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentUses?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PromoCodeUncheckedUpdateWithoutRedemptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  discountPct?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  maxUses?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentUses?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type PromoCodeCountOutputType
+ */
+
+export type PromoCodeCountOutputType = {
+  redemptions: number
+}
+
+export type PromoCodeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  redemptions?: boolean | PromoCodeCountOutputTypeCountRedemptionsArgs
+}
+
+/**
+ * PromoCodeCountOutputType without action
+ */
+export type PromoCodeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromoCodeCountOutputType
+   */
+  select?: Prisma.PromoCodeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PromoCodeCountOutputType without action
+ */
+export type PromoCodeCountOutputTypeCountRedemptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromoRedemptionWhereInput
+}
 
 
 export type PromoCodeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -514,6 +641,8 @@ export type PromoCodeSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   currentUses?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  redemptions?: boolean | Prisma.PromoCode$redemptionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PromoCodeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["promoCode"]>
 
 
@@ -533,10 +662,16 @@ export type PromoCodeSelectScalar = {
 }
 
 export type PromoCodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "discountPct" | "description" | "isActive" | "validFrom" | "validUntil" | "maxUses" | "currentUses" | "createdAt" | "updatedAt", ExtArgs["result"]["promoCode"]>
+export type PromoCodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  redemptions?: boolean | Prisma.PromoCode$redemptionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PromoCodeCountOutputTypeDefaultArgs<ExtArgs>
+}
 
 export type $PromoCodePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PromoCode"
-  objects: {}
+  objects: {
+    redemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     code: string
@@ -889,6 +1024,7 @@ readonly fields: PromoCodeFieldRefs;
  */
 export interface Prisma__PromoCodeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  redemptions<T extends Prisma.PromoCode$redemptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PromoCode$redemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -946,6 +1082,10 @@ export type PromoCodeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * Filter, which PromoCode to fetch.
    */
   where: Prisma.PromoCodeWhereUniqueInput
@@ -964,6 +1104,10 @@ export type PromoCodeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * Filter, which PromoCode to fetch.
    */
   where: Prisma.PromoCodeWhereUniqueInput
@@ -981,6 +1125,10 @@ export type PromoCodeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the PromoCode
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
   /**
    * Filter, which PromoCode to fetch.
    */
@@ -1030,6 +1178,10 @@ export type PromoCodeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * Filter, which PromoCode to fetch.
    */
   where?: Prisma.PromoCodeWhereInput
@@ -1077,6 +1229,10 @@ export type PromoCodeFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the PromoCode
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
   /**
    * Filter, which PromoCodes to fetch.
    */
@@ -1126,6 +1282,10 @@ export type PromoCodeCreateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * The data needed to create a PromoCode.
    */
   data: Prisma.XOR<Prisma.PromoCodeCreateInput, Prisma.PromoCodeUncheckedCreateInput>
@@ -1154,6 +1314,10 @@ export type PromoCodeUpdateArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the PromoCode
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
   /**
    * The data needed to update a PromoCode.
    */
@@ -1195,6 +1359,10 @@ export type PromoCodeUpsertArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * The filter to search for the PromoCode to update in case it exists.
    */
   where: Prisma.PromoCodeWhereUniqueInput
@@ -1221,6 +1389,10 @@ export type PromoCodeDeleteArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
+  /**
    * Filter which PromoCode to delete.
    */
   where: Prisma.PromoCodeWhereUniqueInput
@@ -1241,6 +1413,30 @@ export type PromoCodeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * PromoCode.redemptions
+ */
+export type PromoCode$redemptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromoRedemption
+   */
+  select?: Prisma.PromoRedemptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromoRedemption
+   */
+  omit?: Prisma.PromoRedemptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoRedemptionInclude<ExtArgs> | null
+  where?: Prisma.PromoRedemptionWhereInput
+  orderBy?: Prisma.PromoRedemptionOrderByWithRelationInput | Prisma.PromoRedemptionOrderByWithRelationInput[]
+  cursor?: Prisma.PromoRedemptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromoRedemptionScalarFieldEnum | Prisma.PromoRedemptionScalarFieldEnum[]
+}
+
+/**
  * PromoCode without action
  */
 export type PromoCodeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1252,4 +1448,8 @@ export type PromoCodeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the PromoCode
    */
   omit?: Prisma.PromoCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromoCodeInclude<ExtArgs> | null
 }

@@ -46,6 +46,8 @@ export type BackgroundJobMinAggregateOutputType = {
   attempts: number | null
   maxAttempts: number | null
   errorMessage: string | null
+  scheduledAt: Date | null
+  lockedUntil: Date | null
   startedAt: Date | null
   completedAt: Date | null
   createdAt: Date | null
@@ -62,6 +64,8 @@ export type BackgroundJobMaxAggregateOutputType = {
   attempts: number | null
   maxAttempts: number | null
   errorMessage: string | null
+  scheduledAt: Date | null
+  lockedUntil: Date | null
   startedAt: Date | null
   completedAt: Date | null
   createdAt: Date | null
@@ -80,6 +84,8 @@ export type BackgroundJobCountAggregateOutputType = {
   attempts: number
   maxAttempts: number
   errorMessage: number
+  scheduledAt: number
+  lockedUntil: number
   startedAt: number
   completedAt: number
   createdAt: number
@@ -108,6 +114,8 @@ export type BackgroundJobMinAggregateInputType = {
   attempts?: true
   maxAttempts?: true
   errorMessage?: true
+  scheduledAt?: true
+  lockedUntil?: true
   startedAt?: true
   completedAt?: true
   createdAt?: true
@@ -124,6 +132,8 @@ export type BackgroundJobMaxAggregateInputType = {
   attempts?: true
   maxAttempts?: true
   errorMessage?: true
+  scheduledAt?: true
+  lockedUntil?: true
   startedAt?: true
   completedAt?: true
   createdAt?: true
@@ -142,6 +152,8 @@ export type BackgroundJobCountAggregateInputType = {
   attempts?: true
   maxAttempts?: true
   errorMessage?: true
+  scheduledAt?: true
+  lockedUntil?: true
   startedAt?: true
   completedAt?: true
   createdAt?: true
@@ -247,6 +259,8 @@ export type BackgroundJobGroupByOutputType = {
   attempts: number
   maxAttempts: number
   errorMessage: string | null
+  scheduledAt: Date
+  lockedUntil: Date | null
   startedAt: Date | null
   completedAt: Date | null
   createdAt: Date
@@ -288,6 +302,8 @@ export type BackgroundJobWhereInput = {
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   maxAttempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
+  scheduledAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  lockedUntil?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
@@ -307,6 +323,8 @@ export type BackgroundJobOrderByWithRelationInput = {
   attempts?: Prisma.SortOrder
   maxAttempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -330,6 +348,8 @@ export type BackgroundJobWhereUniqueInput = Prisma.AtLeast<{
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   maxAttempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
+  scheduledAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  lockedUntil?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
@@ -349,6 +369,8 @@ export type BackgroundJobOrderByWithAggregationInput = {
   attempts?: Prisma.SortOrder
   maxAttempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -375,6 +397,8 @@ export type BackgroundJobScalarWhereWithAggregatesInput = {
   attempts?: Prisma.IntWithAggregatesFilter<"BackgroundJob"> | number
   maxAttempts?: Prisma.IntWithAggregatesFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableWithAggregatesFilter<"BackgroundJob"> | string | null
+  scheduledAt?: Prisma.DateTimeWithAggregatesFilter<"BackgroundJob"> | Date | string
+  lockedUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"BackgroundJob"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BackgroundJob"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BackgroundJob"> | Date | string
@@ -392,6 +416,8 @@ export type BackgroundJobCreateInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -411,6 +437,8 @@ export type BackgroundJobUncheckedCreateInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -428,6 +456,8 @@ export type BackgroundJobUpdateInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,6 +477,8 @@ export type BackgroundJobUncheckedUpdateInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,6 +497,8 @@ export type BackgroundJobCreateManyInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -482,6 +516,8 @@ export type BackgroundJobUpdateManyMutationInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -500,6 +536,8 @@ export type BackgroundJobUncheckedUpdateManyInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -534,6 +572,8 @@ export type BackgroundJobCountOrderByAggregateInput = {
   attempts?: Prisma.SortOrder
   maxAttempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -555,6 +595,8 @@ export type BackgroundJobMaxOrderByAggregateInput = {
   attempts?: Prisma.SortOrder
   maxAttempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -571,6 +613,8 @@ export type BackgroundJobMinOrderByAggregateInput = {
   attempts?: Prisma.SortOrder
   maxAttempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
   startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -643,6 +687,8 @@ export type BackgroundJobCreateWithoutAppInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -660,6 +706,8 @@ export type BackgroundJobUncheckedCreateWithoutAppInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -707,6 +755,8 @@ export type BackgroundJobScalarWhereInput = {
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   maxAttempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
+  scheduledAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  lockedUntil?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
@@ -724,6 +774,8 @@ export type BackgroundJobCreateManyAppInput = {
   attempts?: number
   maxAttempts?: number
   errorMessage?: string | null
+  scheduledAt?: Date | string
+  lockedUntil?: Date | string | null
   startedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
@@ -741,6 +793,8 @@ export type BackgroundJobUpdateWithoutAppInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -758,6 +812,8 @@ export type BackgroundJobUncheckedUpdateWithoutAppInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -775,6 +831,8 @@ export type BackgroundJobUncheckedUpdateManyWithoutAppInput = {
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   maxAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -795,6 +853,8 @@ export type BackgroundJobSelect<ExtArgs extends runtime.Types.Extensions.Interna
   attempts?: boolean
   maxAttempts?: boolean
   errorMessage?: boolean
+  scheduledAt?: boolean
+  lockedUntil?: boolean
   startedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
@@ -816,13 +876,15 @@ export type BackgroundJobSelectScalar = {
   attempts?: boolean
   maxAttempts?: boolean
   errorMessage?: boolean
+  scheduledAt?: boolean
+  lockedUntil?: boolean
   startedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BackgroundJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "type" | "status" | "entityType" | "entityId" | "payload" | "result" | "attempts" | "maxAttempts" | "errorMessage" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["backgroundJob"]>
+export type BackgroundJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "type" | "status" | "entityType" | "entityId" | "payload" | "result" | "attempts" | "maxAttempts" | "errorMessage" | "scheduledAt" | "lockedUntil" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["backgroundJob"]>
 export type BackgroundJobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   app?: boolean | Prisma.BackgroundJob$appArgs<ExtArgs>
 }
@@ -844,6 +906,8 @@ export type $BackgroundJobPayload<ExtArgs extends runtime.Types.Extensions.Inter
     attempts: number
     maxAttempts: number
     errorMessage: string | null
+    scheduledAt: Date
+    lockedUntil: Date | null
     startedAt: Date | null
     completedAt: Date | null
     createdAt: Date
@@ -1229,6 +1293,8 @@ export interface BackgroundJobFieldRefs {
   readonly attempts: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly maxAttempts: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly errorMessage: Prisma.FieldRef<"BackgroundJob", 'String'>
+  readonly scheduledAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
+  readonly lockedUntil: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
   readonly startedAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>

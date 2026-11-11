@@ -1,12 +1,33 @@
+
 import { Module } from '@nestjs/common';
-import { AdsController } from './ads.controller.js';
-import { AdsService } from './ads.service.js';
+
 import { PrismaModule } from '../prisma.module.js';
-import { AdminAuthModule } from '../admin-auth/admin-auth.module.js';
+import { LearnerAuthModule } from
+  '../learner-auth/learner-auth.module.js';
+import { AdminAuthModule } from
+  '../admin-auth/admin-auth.module.js';
+
+import { SubscriptionsModule } from
+  '../subscriptions/subscriptions.module.js';
+
+import {
+  PublicAdsController,
+  AdminAdsController,
+} from './ads.controller.js';
+
+import { AdsService } from './ads.service.js';
 
 @Module({
-  imports: [PrismaModule, AdminAuthModule],
-  controllers: [AdsController],
+  imports: [
+    PrismaModule,
+    LearnerAuthModule,
+    AdminAuthModule,
+    SubscriptionsModule,
+  ],
+  controllers: [
+    PublicAdsController,
+    AdminAdsController,
+  ],
   providers: [AdsService],
   exports: [AdsService],
 })

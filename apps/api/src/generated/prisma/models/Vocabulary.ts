@@ -26,78 +26,55 @@ export type AggregateVocabulary = {
 
 export type VocabularyMinAggregateOutputType = {
   id: string | null
-  appId: string | null
+  languageId: string | null
   lessonId: string | null
   categoryId: string | null
-  article: string | null
-  german: string | null
-  english: string | null
-  bangla: string | null
-  pronunciationBangla: string | null
-  pluralGerman: string | null
-  exampleGerman: string | null
-  exampleEnglish: string | null
-  exampleBangla: string | null
-  imageUrl: string | null
-  audioUrl: string | null
-  imageAssetId: string | null
-  audioAssetId: string | null
+  term: string | null
+  pronunciation: string | null
+  partOfSpeech: string | null
   difficulty: $Enums.Difficulty | null
   status: $Enums.PublicationStatus | null
   isPublished: boolean | null
   notes: string | null
+  imageAssetId: string | null
+  audioAssetId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type VocabularyMaxAggregateOutputType = {
   id: string | null
-  appId: string | null
+  languageId: string | null
   lessonId: string | null
   categoryId: string | null
-  article: string | null
-  german: string | null
-  english: string | null
-  bangla: string | null
-  pronunciationBangla: string | null
-  pluralGerman: string | null
-  exampleGerman: string | null
-  exampleEnglish: string | null
-  exampleBangla: string | null
-  imageUrl: string | null
-  audioUrl: string | null
-  imageAssetId: string | null
-  audioAssetId: string | null
+  term: string | null
+  pronunciation: string | null
+  partOfSpeech: string | null
   difficulty: $Enums.Difficulty | null
   status: $Enums.PublicationStatus | null
   isPublished: boolean | null
   notes: string | null
+  imageAssetId: string | null
+  audioAssetId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type VocabularyCountAggregateOutputType = {
   id: number
-  appId: number
+  languageId: number
   lessonId: number
   categoryId: number
-  article: number
-  german: number
-  english: number
-  bangla: number
-  pronunciationBangla: number
-  pluralGerman: number
-  exampleGerman: number
-  exampleEnglish: number
-  exampleBangla: number
-  imageUrl: number
-  audioUrl: number
-  imageAssetId: number
-  audioAssetId: number
+  term: number
+  pronunciation: number
+  partOfSpeech: number
+  grammar: number
   difficulty: number
   status: number
   isPublished: number
   notes: number
+  imageAssetId: number
+  audioAssetId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -106,78 +83,55 @@ export type VocabularyCountAggregateOutputType = {
 
 export type VocabularyMinAggregateInputType = {
   id?: true
-  appId?: true
+  languageId?: true
   lessonId?: true
   categoryId?: true
-  article?: true
-  german?: true
-  english?: true
-  bangla?: true
-  pronunciationBangla?: true
-  pluralGerman?: true
-  exampleGerman?: true
-  exampleEnglish?: true
-  exampleBangla?: true
-  imageUrl?: true
-  audioUrl?: true
-  imageAssetId?: true
-  audioAssetId?: true
+  term?: true
+  pronunciation?: true
+  partOfSpeech?: true
   difficulty?: true
   status?: true
   isPublished?: true
   notes?: true
+  imageAssetId?: true
+  audioAssetId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type VocabularyMaxAggregateInputType = {
   id?: true
-  appId?: true
+  languageId?: true
   lessonId?: true
   categoryId?: true
-  article?: true
-  german?: true
-  english?: true
-  bangla?: true
-  pronunciationBangla?: true
-  pluralGerman?: true
-  exampleGerman?: true
-  exampleEnglish?: true
-  exampleBangla?: true
-  imageUrl?: true
-  audioUrl?: true
-  imageAssetId?: true
-  audioAssetId?: true
+  term?: true
+  pronunciation?: true
+  partOfSpeech?: true
   difficulty?: true
   status?: true
   isPublished?: true
   notes?: true
+  imageAssetId?: true
+  audioAssetId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type VocabularyCountAggregateInputType = {
   id?: true
-  appId?: true
+  languageId?: true
   lessonId?: true
   categoryId?: true
-  article?: true
-  german?: true
-  english?: true
-  bangla?: true
-  pronunciationBangla?: true
-  pluralGerman?: true
-  exampleGerman?: true
-  exampleEnglish?: true
-  exampleBangla?: true
-  imageUrl?: true
-  audioUrl?: true
-  imageAssetId?: true
-  audioAssetId?: true
+  term?: true
+  pronunciation?: true
+  partOfSpeech?: true
+  grammar?: true
   difficulty?: true
   status?: true
   isPublished?: true
   notes?: true
+  imageAssetId?: true
+  audioAssetId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -257,26 +211,19 @@ export type VocabularyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type VocabularyGroupByOutputType = {
   id: string
-  appId: string
+  languageId: string
   lessonId: string | null
   categoryId: string | null
-  article: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla: string | null
-  pluralGerman: string | null
-  exampleGerman: string | null
-  exampleEnglish: string | null
-  exampleBangla: string | null
-  imageUrl: string | null
-  audioUrl: string | null
-  imageAssetId: string | null
-  audioAssetId: string | null
+  term: string
+  pronunciation: string | null
+  partOfSpeech: string | null
+  grammar: runtime.JsonValue | null
   difficulty: $Enums.Difficulty
   status: $Enums.PublicationStatus
   isPublished: boolean
   notes: string | null
+  imageAssetId: string | null
+  audioAssetId: string | null
   createdAt: Date
   updatedAt: Date
   _count: VocabularyCountAggregateOutputType | null
@@ -304,33 +251,28 @@ export type VocabularyWhereInput = {
   OR?: Prisma.VocabularyWhereInput[]
   NOT?: Prisma.VocabularyWhereInput | Prisma.VocabularyWhereInput[]
   id?: Prisma.StringFilter<"Vocabulary"> | string
-  appId?: Prisma.StringFilter<"Vocabulary"> | string
+  languageId?: Prisma.StringFilter<"Vocabulary"> | string
   lessonId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   categoryId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  article?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  german?: Prisma.StringFilter<"Vocabulary"> | string
-  english?: Prisma.StringFilter<"Vocabulary"> | string
-  bangla?: Prisma.StringFilter<"Vocabulary"> | string
-  pronunciationBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  pluralGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleEnglish?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  term?: Prisma.StringFilter<"Vocabulary"> | string
+  pronunciation?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  partOfSpeech?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  grammar?: Prisma.JsonNullableFilter<"Vocabulary">
   difficulty?: Prisma.EnumDifficultyFilter<"Vocabulary"> | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFilter<"Vocabulary"> | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFilter<"Vocabulary"> | boolean
   notes?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
-  app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
+  language?: Prisma.XOR<Prisma.LanguageScalarRelationFilter, Prisma.LanguageWhereInput>
   lesson?: Prisma.XOR<Prisma.LessonNullableScalarRelationFilter, Prisma.LessonWhereInput> | null
   category?: Prisma.XOR<Prisma.VocabularyCategoryNullableScalarRelationFilter, Prisma.VocabularyCategoryWhereInput> | null
   imageAsset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
   audioAsset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
+  translations?: Prisma.VocabularyTranslationListRelationFilter
+  examples?: Prisma.VocabularyExampleListRelationFilter
   quizQuestions?: Prisma.QuizQuestionListRelationFilter
   progress?: Prisma.VocabularyProgressListRelationFilter
   flashcardItems?: Prisma.FlashcardDeckItemListRelationFilter
@@ -338,33 +280,28 @@ export type VocabularyWhereInput = {
 
 export type VocabularyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
   lessonId?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  article?: Prisma.SortOrderInput | Prisma.SortOrder
-  german?: Prisma.SortOrder
-  english?: Prisma.SortOrder
-  bangla?: Prisma.SortOrder
-  pronunciationBangla?: Prisma.SortOrderInput | Prisma.SortOrder
-  pluralGerman?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleGerman?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleEnglish?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleBangla?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  term?: Prisma.SortOrder
+  pronunciation?: Prisma.SortOrderInput | Prisma.SortOrder
+  partOfSpeech?: Prisma.SortOrderInput | Prisma.SortOrder
+  grammar?: Prisma.SortOrderInput | Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  audioAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  app?: Prisma.AppOrderByWithRelationInput
+  language?: Prisma.LanguageOrderByWithRelationInput
   lesson?: Prisma.LessonOrderByWithRelationInput
   category?: Prisma.VocabularyCategoryOrderByWithRelationInput
   imageAsset?: Prisma.MediaAssetOrderByWithRelationInput
   audioAsset?: Prisma.MediaAssetOrderByWithRelationInput
+  translations?: Prisma.VocabularyTranslationOrderByRelationAggregateInput
+  examples?: Prisma.VocabularyExampleOrderByRelationAggregateInput
   quizQuestions?: Prisma.QuizQuestionOrderByRelationAggregateInput
   progress?: Prisma.VocabularyProgressOrderByRelationAggregateInput
   flashcardItems?: Prisma.FlashcardDeckItemOrderByRelationAggregateInput
@@ -376,33 +313,28 @@ export type VocabularyWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VocabularyWhereInput | Prisma.VocabularyWhereInput[]
   OR?: Prisma.VocabularyWhereInput[]
   NOT?: Prisma.VocabularyWhereInput | Prisma.VocabularyWhereInput[]
-  appId?: Prisma.StringFilter<"Vocabulary"> | string
+  languageId?: Prisma.StringFilter<"Vocabulary"> | string
   lessonId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   categoryId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  article?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  german?: Prisma.StringFilter<"Vocabulary"> | string
-  english?: Prisma.StringFilter<"Vocabulary"> | string
-  bangla?: Prisma.StringFilter<"Vocabulary"> | string
-  pronunciationBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  pluralGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleEnglish?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  term?: Prisma.StringFilter<"Vocabulary"> | string
+  pronunciation?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  partOfSpeech?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  grammar?: Prisma.JsonNullableFilter<"Vocabulary">
   difficulty?: Prisma.EnumDifficultyFilter<"Vocabulary"> | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFilter<"Vocabulary"> | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFilter<"Vocabulary"> | boolean
   notes?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
-  app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
+  language?: Prisma.XOR<Prisma.LanguageScalarRelationFilter, Prisma.LanguageWhereInput>
   lesson?: Prisma.XOR<Prisma.LessonNullableScalarRelationFilter, Prisma.LessonWhereInput> | null
   category?: Prisma.XOR<Prisma.VocabularyCategoryNullableScalarRelationFilter, Prisma.VocabularyCategoryWhereInput> | null
   imageAsset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
   audioAsset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
+  translations?: Prisma.VocabularyTranslationListRelationFilter
+  examples?: Prisma.VocabularyExampleListRelationFilter
   quizQuestions?: Prisma.QuizQuestionListRelationFilter
   progress?: Prisma.VocabularyProgressListRelationFilter
   flashcardItems?: Prisma.FlashcardDeckItemListRelationFilter
@@ -410,26 +342,19 @@ export type VocabularyWhereUniqueInput = Prisma.AtLeast<{
 
 export type VocabularyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
   lessonId?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  article?: Prisma.SortOrderInput | Prisma.SortOrder
-  german?: Prisma.SortOrder
-  english?: Prisma.SortOrder
-  bangla?: Prisma.SortOrder
-  pronunciationBangla?: Prisma.SortOrderInput | Prisma.SortOrder
-  pluralGerman?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleGerman?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleEnglish?: Prisma.SortOrderInput | Prisma.SortOrder
-  exampleBangla?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  term?: Prisma.SortOrder
+  pronunciation?: Prisma.SortOrderInput | Prisma.SortOrder
+  partOfSpeech?: Prisma.SortOrderInput | Prisma.SortOrder
+  grammar?: Prisma.SortOrderInput | Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  audioAssetId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.VocabularyCountOrderByAggregateInput
@@ -442,54 +367,42 @@ export type VocabularyScalarWhereWithAggregatesInput = {
   OR?: Prisma.VocabularyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VocabularyScalarWhereWithAggregatesInput | Prisma.VocabularyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
-  appId?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
+  languageId?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
   lessonId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
   categoryId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  article?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  german?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
-  english?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
-  bangla?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
-  pronunciationBangla?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  pluralGerman?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  exampleGerman?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  exampleEnglish?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  exampleBangla?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  audioUrl?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  imageAssetId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
-  audioAssetId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  term?: Prisma.StringWithAggregatesFilter<"Vocabulary"> | string
+  pronunciation?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  partOfSpeech?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  grammar?: Prisma.JsonNullableWithAggregatesFilter<"Vocabulary">
   difficulty?: Prisma.EnumDifficultyWithAggregatesFilter<"Vocabulary"> | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusWithAggregatesFilter<"Vocabulary"> | $Enums.PublicationStatus
   isPublished?: Prisma.BoolWithAggregatesFilter<"Vocabulary"> | boolean
   notes?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  imageAssetId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
+  audioAssetId?: Prisma.StringNullableWithAggregatesFilter<"Vocabulary"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Vocabulary"> | Date | string
 }
 
 export type VocabularyCreateInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
@@ -497,28 +410,23 @@ export type VocabularyCreateInput = {
 
 export type VocabularyUncheckedCreateInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
@@ -526,28 +434,23 @@ export type VocabularyUncheckedCreateInput = {
 
 export type VocabularyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
@@ -555,28 +458,23 @@ export type VocabularyUpdateInput = {
 
 export type VocabularyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
@@ -584,43 +482,29 @@ export type VocabularyUncheckedUpdateInput = {
 
 export type VocabularyCreateManyInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type VocabularyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -631,26 +515,19 @@ export type VocabularyUpdateManyMutationInput = {
 
 export type VocabularyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -673,78 +550,55 @@ export type VocabularyOrderByRelevanceInput = {
 
 export type VocabularyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  article?: Prisma.SortOrder
-  german?: Prisma.SortOrder
-  english?: Prisma.SortOrder
-  bangla?: Prisma.SortOrder
-  pronunciationBangla?: Prisma.SortOrder
-  pluralGerman?: Prisma.SortOrder
-  exampleGerman?: Prisma.SortOrder
-  exampleEnglish?: Prisma.SortOrder
-  exampleBangla?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
-  imageAssetId?: Prisma.SortOrder
-  audioAssetId?: Prisma.SortOrder
+  term?: Prisma.SortOrder
+  pronunciation?: Prisma.SortOrder
+  partOfSpeech?: Prisma.SortOrder
+  grammar?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  imageAssetId?: Prisma.SortOrder
+  audioAssetId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type VocabularyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  article?: Prisma.SortOrder
-  german?: Prisma.SortOrder
-  english?: Prisma.SortOrder
-  bangla?: Prisma.SortOrder
-  pronunciationBangla?: Prisma.SortOrder
-  pluralGerman?: Prisma.SortOrder
-  exampleGerman?: Prisma.SortOrder
-  exampleEnglish?: Prisma.SortOrder
-  exampleBangla?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
-  imageAssetId?: Prisma.SortOrder
-  audioAssetId?: Prisma.SortOrder
+  term?: Prisma.SortOrder
+  pronunciation?: Prisma.SortOrder
+  partOfSpeech?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  imageAssetId?: Prisma.SortOrder
+  audioAssetId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type VocabularyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  appId?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  article?: Prisma.SortOrder
-  german?: Prisma.SortOrder
-  english?: Prisma.SortOrder
-  bangla?: Prisma.SortOrder
-  pronunciationBangla?: Prisma.SortOrder
-  pluralGerman?: Prisma.SortOrder
-  exampleGerman?: Prisma.SortOrder
-  exampleEnglish?: Prisma.SortOrder
-  exampleBangla?: Prisma.SortOrder
-  imageUrl?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
-  imageAssetId?: Prisma.SortOrder
-  audioAssetId?: Prisma.SortOrder
+  term?: Prisma.SortOrder
+  pronunciation?: Prisma.SortOrder
+  partOfSpeech?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  imageAssetId?: Prisma.SortOrder
+  audioAssetId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -759,45 +613,45 @@ export type VocabularyNullableScalarRelationFilter = {
   isNot?: Prisma.VocabularyWhereInput | null
 }
 
-export type VocabularyCreateNestedManyWithoutAppInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput> | Prisma.VocabularyCreateWithoutAppInput[] | Prisma.VocabularyUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutAppInput | Prisma.VocabularyCreateOrConnectWithoutAppInput[]
-  createMany?: Prisma.VocabularyCreateManyAppInputEnvelope
+export type VocabularyCreateNestedManyWithoutLanguageInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput> | Prisma.VocabularyCreateWithoutLanguageInput[] | Prisma.VocabularyUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutLanguageInput | Prisma.VocabularyCreateOrConnectWithoutLanguageInput[]
+  createMany?: Prisma.VocabularyCreateManyLanguageInputEnvelope
   connect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
 }
 
-export type VocabularyUncheckedCreateNestedManyWithoutAppInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput> | Prisma.VocabularyCreateWithoutAppInput[] | Prisma.VocabularyUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutAppInput | Prisma.VocabularyCreateOrConnectWithoutAppInput[]
-  createMany?: Prisma.VocabularyCreateManyAppInputEnvelope
+export type VocabularyUncheckedCreateNestedManyWithoutLanguageInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput> | Prisma.VocabularyCreateWithoutLanguageInput[] | Prisma.VocabularyUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutLanguageInput | Prisma.VocabularyCreateOrConnectWithoutLanguageInput[]
+  createMany?: Prisma.VocabularyCreateManyLanguageInputEnvelope
   connect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
 }
 
-export type VocabularyUpdateManyWithoutAppNestedInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput> | Prisma.VocabularyCreateWithoutAppInput[] | Prisma.VocabularyUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutAppInput | Prisma.VocabularyCreateOrConnectWithoutAppInput[]
-  upsert?: Prisma.VocabularyUpsertWithWhereUniqueWithoutAppInput | Prisma.VocabularyUpsertWithWhereUniqueWithoutAppInput[]
-  createMany?: Prisma.VocabularyCreateManyAppInputEnvelope
+export type VocabularyUpdateManyWithoutLanguageNestedInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput> | Prisma.VocabularyCreateWithoutLanguageInput[] | Prisma.VocabularyUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutLanguageInput | Prisma.VocabularyCreateOrConnectWithoutLanguageInput[]
+  upsert?: Prisma.VocabularyUpsertWithWhereUniqueWithoutLanguageInput | Prisma.VocabularyUpsertWithWhereUniqueWithoutLanguageInput[]
+  createMany?: Prisma.VocabularyCreateManyLanguageInputEnvelope
   set?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   disconnect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   delete?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   connect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
-  update?: Prisma.VocabularyUpdateWithWhereUniqueWithoutAppInput | Prisma.VocabularyUpdateWithWhereUniqueWithoutAppInput[]
-  updateMany?: Prisma.VocabularyUpdateManyWithWhereWithoutAppInput | Prisma.VocabularyUpdateManyWithWhereWithoutAppInput[]
+  update?: Prisma.VocabularyUpdateWithWhereUniqueWithoutLanguageInput | Prisma.VocabularyUpdateWithWhereUniqueWithoutLanguageInput[]
+  updateMany?: Prisma.VocabularyUpdateManyWithWhereWithoutLanguageInput | Prisma.VocabularyUpdateManyWithWhereWithoutLanguageInput[]
   deleteMany?: Prisma.VocabularyScalarWhereInput | Prisma.VocabularyScalarWhereInput[]
 }
 
-export type VocabularyUncheckedUpdateManyWithoutAppNestedInput = {
-  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput> | Prisma.VocabularyCreateWithoutAppInput[] | Prisma.VocabularyUncheckedCreateWithoutAppInput[]
-  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutAppInput | Prisma.VocabularyCreateOrConnectWithoutAppInput[]
-  upsert?: Prisma.VocabularyUpsertWithWhereUniqueWithoutAppInput | Prisma.VocabularyUpsertWithWhereUniqueWithoutAppInput[]
-  createMany?: Prisma.VocabularyCreateManyAppInputEnvelope
+export type VocabularyUncheckedUpdateManyWithoutLanguageNestedInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput> | Prisma.VocabularyCreateWithoutLanguageInput[] | Prisma.VocabularyUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutLanguageInput | Prisma.VocabularyCreateOrConnectWithoutLanguageInput[]
+  upsert?: Prisma.VocabularyUpsertWithWhereUniqueWithoutLanguageInput | Prisma.VocabularyUpsertWithWhereUniqueWithoutLanguageInput[]
+  createMany?: Prisma.VocabularyCreateManyLanguageInputEnvelope
   set?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   disconnect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   delete?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
   connect?: Prisma.VocabularyWhereUniqueInput | Prisma.VocabularyWhereUniqueInput[]
-  update?: Prisma.VocabularyUpdateWithWhereUniqueWithoutAppInput | Prisma.VocabularyUpdateWithWhereUniqueWithoutAppInput[]
-  updateMany?: Prisma.VocabularyUpdateManyWithWhereWithoutAppInput | Prisma.VocabularyUpdateManyWithWhereWithoutAppInput[]
+  update?: Prisma.VocabularyUpdateWithWhereUniqueWithoutLanguageInput | Prisma.VocabularyUpdateWithWhereUniqueWithoutLanguageInput[]
+  updateMany?: Prisma.VocabularyUpdateManyWithWhereWithoutLanguageInput | Prisma.VocabularyUpdateManyWithWhereWithoutLanguageInput[]
   deleteMany?: Prisma.VocabularyScalarWhereInput | Prisma.VocabularyScalarWhereInput[]
 }
 
@@ -973,6 +827,34 @@ export type EnumDifficultyFieldUpdateOperationsInput = {
   set?: $Enums.Difficulty
 }
 
+export type VocabularyCreateNestedOneWithoutTranslationsInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutTranslationsInput, Prisma.VocabularyUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutTranslationsInput
+  connect?: Prisma.VocabularyWhereUniqueInput
+}
+
+export type VocabularyUpdateOneRequiredWithoutTranslationsNestedInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutTranslationsInput, Prisma.VocabularyUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutTranslationsInput
+  upsert?: Prisma.VocabularyUpsertWithoutTranslationsInput
+  connect?: Prisma.VocabularyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VocabularyUpdateToOneWithWhereWithoutTranslationsInput, Prisma.VocabularyUpdateWithoutTranslationsInput>, Prisma.VocabularyUncheckedUpdateWithoutTranslationsInput>
+}
+
+export type VocabularyCreateNestedOneWithoutExamplesInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutExamplesInput, Prisma.VocabularyUncheckedCreateWithoutExamplesInput>
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutExamplesInput
+  connect?: Prisma.VocabularyWhereUniqueInput
+}
+
+export type VocabularyUpdateOneRequiredWithoutExamplesNestedInput = {
+  create?: Prisma.XOR<Prisma.VocabularyCreateWithoutExamplesInput, Prisma.VocabularyUncheckedCreateWithoutExamplesInput>
+  connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutExamplesInput
+  upsert?: Prisma.VocabularyUpsertWithoutExamplesInput
+  connect?: Prisma.VocabularyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VocabularyUpdateToOneWithWhereWithoutExamplesInput, Prisma.VocabularyUpdateWithoutExamplesInput>, Prisma.VocabularyUncheckedUpdateWithoutExamplesInput>
+}
+
 export type VocabularyCreateNestedOneWithoutFlashcardItemsInput = {
   create?: Prisma.XOR<Prisma.VocabularyCreateWithoutFlashcardItemsInput, Prisma.VocabularyUncheckedCreateWithoutFlashcardItemsInput>
   connectOrCreate?: Prisma.VocabularyCreateOrConnectWithoutFlashcardItemsInput
@@ -1017,86 +899,76 @@ export type VocabularyUpdateOneRequiredWithoutProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VocabularyUpdateToOneWithWhereWithoutProgressInput, Prisma.VocabularyUpdateWithoutProgressInput>, Prisma.VocabularyUncheckedUpdateWithoutProgressInput>
 }
 
-export type VocabularyCreateWithoutAppInput = {
+export type VocabularyCreateWithoutLanguageInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
 }
 
-export type VocabularyUncheckedCreateWithoutAppInput = {
+export type VocabularyUncheckedCreateWithoutLanguageInput = {
   id?: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
 }
 
-export type VocabularyCreateOrConnectWithoutAppInput = {
+export type VocabularyCreateOrConnectWithoutLanguageInput = {
   where: Prisma.VocabularyWhereUniqueInput
-  create: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput>
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput>
 }
 
-export type VocabularyCreateManyAppInputEnvelope = {
-  data: Prisma.VocabularyCreateManyAppInput | Prisma.VocabularyCreateManyAppInput[]
+export type VocabularyCreateManyLanguageInputEnvelope = {
+  data: Prisma.VocabularyCreateManyLanguageInput | Prisma.VocabularyCreateManyLanguageInput[]
   skipDuplicates?: boolean
 }
 
-export type VocabularyUpsertWithWhereUniqueWithoutAppInput = {
+export type VocabularyUpsertWithWhereUniqueWithoutLanguageInput = {
   where: Prisma.VocabularyWhereUniqueInput
-  update: Prisma.XOR<Prisma.VocabularyUpdateWithoutAppInput, Prisma.VocabularyUncheckedUpdateWithoutAppInput>
-  create: Prisma.XOR<Prisma.VocabularyCreateWithoutAppInput, Prisma.VocabularyUncheckedCreateWithoutAppInput>
+  update: Prisma.XOR<Prisma.VocabularyUpdateWithoutLanguageInput, Prisma.VocabularyUncheckedUpdateWithoutLanguageInput>
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutLanguageInput, Prisma.VocabularyUncheckedCreateWithoutLanguageInput>
 }
 
-export type VocabularyUpdateWithWhereUniqueWithoutAppInput = {
+export type VocabularyUpdateWithWhereUniqueWithoutLanguageInput = {
   where: Prisma.VocabularyWhereUniqueInput
-  data: Prisma.XOR<Prisma.VocabularyUpdateWithoutAppInput, Prisma.VocabularyUncheckedUpdateWithoutAppInput>
+  data: Prisma.XOR<Prisma.VocabularyUpdateWithoutLanguageInput, Prisma.VocabularyUncheckedUpdateWithoutLanguageInput>
 }
 
-export type VocabularyUpdateManyWithWhereWithoutAppInput = {
+export type VocabularyUpdateManyWithWhereWithoutLanguageInput = {
   where: Prisma.VocabularyScalarWhereInput
-  data: Prisma.XOR<Prisma.VocabularyUpdateManyMutationInput, Prisma.VocabularyUncheckedUpdateManyWithoutAppInput>
+  data: Prisma.XOR<Prisma.VocabularyUpdateManyMutationInput, Prisma.VocabularyUncheckedUpdateManyWithoutLanguageInput>
 }
 
 export type VocabularyScalarWhereInput = {
@@ -1104,53 +976,41 @@ export type VocabularyScalarWhereInput = {
   OR?: Prisma.VocabularyScalarWhereInput[]
   NOT?: Prisma.VocabularyScalarWhereInput | Prisma.VocabularyScalarWhereInput[]
   id?: Prisma.StringFilter<"Vocabulary"> | string
-  appId?: Prisma.StringFilter<"Vocabulary"> | string
+  languageId?: Prisma.StringFilter<"Vocabulary"> | string
   lessonId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   categoryId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  article?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  german?: Prisma.StringFilter<"Vocabulary"> | string
-  english?: Prisma.StringFilter<"Vocabulary"> | string
-  bangla?: Prisma.StringFilter<"Vocabulary"> | string
-  pronunciationBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  pluralGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleGerman?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleEnglish?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  exampleBangla?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
-  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  term?: Prisma.StringFilter<"Vocabulary"> | string
+  pronunciation?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  partOfSpeech?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  grammar?: Prisma.JsonNullableFilter<"Vocabulary">
   difficulty?: Prisma.EnumDifficultyFilter<"Vocabulary"> | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFilter<"Vocabulary"> | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFilter<"Vocabulary"> | boolean
   notes?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  imageAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
+  audioAssetId?: Prisma.StringNullableFilter<"Vocabulary"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Vocabulary"> | Date | string
 }
 
 export type VocabularyCreateWithoutLessonInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
@@ -1158,27 +1018,22 @@ export type VocabularyCreateWithoutLessonInput = {
 
 export type VocabularyUncheckedCreateWithoutLessonInput = {
   id?: string
-  appId: string
+  languageId: string
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
@@ -1212,27 +1067,22 @@ export type VocabularyUpdateManyWithWhereWithoutLessonInput = {
 
 export type VocabularyCreateWithoutImageAssetInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
@@ -1240,27 +1090,22 @@ export type VocabularyCreateWithoutImageAssetInput = {
 
 export type VocabularyUncheckedCreateWithoutImageAssetInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
@@ -1278,27 +1123,22 @@ export type VocabularyCreateManyImageAssetInputEnvelope = {
 
 export type VocabularyCreateWithoutAudioAssetInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
@@ -1306,27 +1146,22 @@ export type VocabularyCreateWithoutAudioAssetInput = {
 
 export type VocabularyUncheckedCreateWithoutAudioAssetInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
@@ -1376,27 +1211,22 @@ export type VocabularyUpdateManyWithWhereWithoutAudioAssetInput = {
 
 export type VocabularyCreateWithoutCategoryInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
@@ -1404,27 +1234,22 @@ export type VocabularyCreateWithoutCategoryInput = {
 
 export type VocabularyUncheckedCreateWithoutCategoryInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
@@ -1456,58 +1281,264 @@ export type VocabularyUpdateManyWithWhereWithoutCategoryInput = {
   data: Prisma.XOR<Prisma.VocabularyUpdateManyMutationInput, Prisma.VocabularyUncheckedUpdateManyWithoutCategoryInput>
 }
 
-export type VocabularyCreateWithoutFlashcardItemsInput = {
+export type VocabularyCreateWithoutTranslationsInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
+  quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
+  progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
+  flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
+}
+
+export type VocabularyUncheckedCreateWithoutTranslationsInput = {
+  id?: string
+  languageId: string
+  lessonId?: string | null
+  categoryId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: $Enums.Difficulty
+  status?: $Enums.PublicationStatus
+  isPublished?: boolean
+  notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
+  quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
+  progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
+  flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
+}
+
+export type VocabularyCreateOrConnectWithoutTranslationsInput = {
+  where: Prisma.VocabularyWhereUniqueInput
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutTranslationsInput, Prisma.VocabularyUncheckedCreateWithoutTranslationsInput>
+}
+
+export type VocabularyUpsertWithoutTranslationsInput = {
+  update: Prisma.XOR<Prisma.VocabularyUpdateWithoutTranslationsInput, Prisma.VocabularyUncheckedUpdateWithoutTranslationsInput>
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutTranslationsInput, Prisma.VocabularyUncheckedCreateWithoutTranslationsInput>
+  where?: Prisma.VocabularyWhereInput
+}
+
+export type VocabularyUpdateToOneWithWhereWithoutTranslationsInput = {
+  where?: Prisma.VocabularyWhereInput
+  data: Prisma.XOR<Prisma.VocabularyUpdateWithoutTranslationsInput, Prisma.VocabularyUncheckedUpdateWithoutTranslationsInput>
+}
+
+export type VocabularyUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
+  category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
+  imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
+  audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
+  quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
+  progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
+  flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
+}
+
+export type VocabularyUncheckedUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
+  quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
+  progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
+  flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
+}
+
+export type VocabularyCreateWithoutExamplesInput = {
+  id?: string
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: $Enums.Difficulty
+  status?: $Enums.PublicationStatus
+  isPublished?: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
+  category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
+  imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
+  audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
+  progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
+  flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
+}
+
+export type VocabularyUncheckedCreateWithoutExamplesInput = {
+  id?: string
+  languageId: string
+  lessonId?: string | null
+  categoryId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: $Enums.Difficulty
+  status?: $Enums.PublicationStatus
+  isPublished?: boolean
+  notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
+  progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
+  flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
+}
+
+export type VocabularyCreateOrConnectWithoutExamplesInput = {
+  where: Prisma.VocabularyWhereUniqueInput
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutExamplesInput, Prisma.VocabularyUncheckedCreateWithoutExamplesInput>
+}
+
+export type VocabularyUpsertWithoutExamplesInput = {
+  update: Prisma.XOR<Prisma.VocabularyUpdateWithoutExamplesInput, Prisma.VocabularyUncheckedUpdateWithoutExamplesInput>
+  create: Prisma.XOR<Prisma.VocabularyCreateWithoutExamplesInput, Prisma.VocabularyUncheckedCreateWithoutExamplesInput>
+  where?: Prisma.VocabularyWhereInput
+}
+
+export type VocabularyUpdateToOneWithWhereWithoutExamplesInput = {
+  where?: Prisma.VocabularyWhereInput
+  data: Prisma.XOR<Prisma.VocabularyUpdateWithoutExamplesInput, Prisma.VocabularyUncheckedUpdateWithoutExamplesInput>
+}
+
+export type VocabularyUpdateWithoutExamplesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
+  category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
+  imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
+  audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
+  progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
+  flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
+}
+
+export type VocabularyUncheckedUpdateWithoutExamplesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
+  progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
+  flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
+}
+
+export type VocabularyCreateWithoutFlashcardItemsInput = {
+  id?: string
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  difficulty?: $Enums.Difficulty
+  status?: $Enums.PublicationStatus
+  isPublished?: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
+  category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
+  imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
+  audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
 }
 
 export type VocabularyUncheckedCreateWithoutFlashcardItemsInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
 }
@@ -1530,112 +1561,92 @@ export type VocabularyUpdateToOneWithWhereWithoutFlashcardItemsInput = {
 
 export type VocabularyUpdateWithoutFlashcardItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
 }
 
 export type VocabularyUncheckedUpdateWithoutFlashcardItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
 }
 
 export type VocabularyCreateWithoutQuizQuestionsInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
 }
 
 export type VocabularyUncheckedCreateWithoutQuizQuestionsInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   progress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
 }
@@ -1658,112 +1669,92 @@ export type VocabularyUpdateToOneWithWhereWithoutQuizQuestionsInput = {
 
 export type VocabularyUpdateWithoutQuizQuestionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
 }
 
 export type VocabularyUncheckedUpdateWithoutQuizQuestionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
 }
 
 export type VocabularyCreateWithoutProgressInput = {
   id?: string
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  app: Prisma.AppCreateNestedOneWithoutVocabulariesInput
-  lesson?: Prisma.LessonCreateNestedOneWithoutVocabularyInput
+  language: Prisma.LanguageCreateNestedOneWithoutVocabulariesInput
+  lesson?: Prisma.LessonCreateNestedOneWithoutVocabulariesInput
   category?: Prisma.VocabularyCategoryCreateNestedOneWithoutVocabularyInput
   imageAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyImagesInput
   audioAsset?: Prisma.MediaAssetCreateNestedOneWithoutVocabularyAudiosInput
+  translations?: Prisma.VocabularyTranslationCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemCreateNestedManyWithoutVocabularyInput
 }
 
 export type VocabularyUncheckedCreateWithoutProgressInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedCreateNestedManyWithoutVocabularyInput
+  examples?: Prisma.VocabularyExampleUncheckedCreateNestedManyWithoutVocabularyInput
   quizQuestions?: Prisma.QuizQuestionUncheckedCreateNestedManyWithoutVocabularyInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedCreateNestedManyWithoutVocabularyInput
 }
@@ -1786,214 +1777,168 @@ export type VocabularyUpdateToOneWithWhereWithoutProgressInput = {
 
 export type VocabularyUpdateWithoutProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
 }
 
 export type VocabularyUncheckedUpdateWithoutProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
 }
 
-export type VocabularyCreateManyAppInput = {
+export type VocabularyCreateManyLanguageInput = {
   id?: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type VocabularyUpdateWithoutAppInput = {
+export type VocabularyUpdateWithoutLanguageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
 }
 
-export type VocabularyUncheckedUpdateWithoutAppInput = {
+export type VocabularyUncheckedUpdateWithoutLanguageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
 }
 
-export type VocabularyUncheckedUpdateManyWithoutAppInput = {
+export type VocabularyUncheckedUpdateManyWithoutLanguageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VocabularyCreateManyLessonInput = {
   id?: string
-  appId: string
+  languageId: string
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type VocabularyUpdateWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
@@ -2001,27 +1946,22 @@ export type VocabularyUpdateWithoutLessonInput = {
 
 export type VocabularyUncheckedUpdateWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
@@ -2029,102 +1969,76 @@ export type VocabularyUncheckedUpdateWithoutLessonInput = {
 
 export type VocabularyUncheckedUpdateManyWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VocabularyCreateManyImageAssetInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type VocabularyCreateManyAudioAssetInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
   categoryId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type VocabularyUpdateWithoutImageAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
@@ -2132,27 +2046,22 @@ export type VocabularyUpdateWithoutImageAssetInput = {
 
 export type VocabularyUncheckedUpdateWithoutImageAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
@@ -2160,52 +2069,40 @@ export type VocabularyUncheckedUpdateWithoutImageAssetInput = {
 
 export type VocabularyUncheckedUpdateManyWithoutImageAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VocabularyUpdateWithoutAudioAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   category?: Prisma.VocabularyCategoryUpdateOneWithoutVocabularyNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
@@ -2213,27 +2110,22 @@ export type VocabularyUpdateWithoutAudioAssetInput = {
 
 export type VocabularyUncheckedUpdateWithoutAudioAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
@@ -2241,77 +2133,58 @@ export type VocabularyUncheckedUpdateWithoutAudioAssetInput = {
 
 export type VocabularyUncheckedUpdateManyWithoutAudioAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VocabularyCreateManyCategoryInput = {
   id?: string
-  appId: string
+  languageId: string
   lessonId?: string | null
-  article?: string | null
-  german: string
-  english: string
-  bangla: string
-  pronunciationBangla?: string | null
-  pluralGerman?: string | null
-  exampleGerman?: string | null
-  exampleEnglish?: string | null
-  exampleBangla?: string | null
-  imageUrl?: string | null
-  audioUrl?: string | null
-  imageAssetId?: string | null
-  audioAssetId?: string | null
+  term: string
+  pronunciation?: string | null
+  partOfSpeech?: string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: $Enums.Difficulty
   status?: $Enums.PublicationStatus
   isPublished?: boolean
   notes?: string | null
+  imageAssetId?: string | null
+  audioAssetId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type VocabularyUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  app?: Prisma.AppUpdateOneRequiredWithoutVocabulariesNestedInput
-  lesson?: Prisma.LessonUpdateOneWithoutVocabularyNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutVocabulariesNestedInput
+  lesson?: Prisma.LessonUpdateOneWithoutVocabulariesNestedInput
   imageAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyImagesNestedInput
   audioAsset?: Prisma.MediaAssetUpdateOneWithoutVocabularyAudiosNestedInput
+  translations?: Prisma.VocabularyTranslationUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUpdateManyWithoutVocabularyNestedInput
@@ -2319,27 +2192,22 @@ export type VocabularyUpdateWithoutCategoryInput = {
 
 export type VocabularyUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.VocabularyTranslationUncheckedUpdateManyWithoutVocabularyNestedInput
+  examples?: Prisma.VocabularyExampleUncheckedUpdateManyWithoutVocabularyNestedInput
   quizQuestions?: Prisma.QuizQuestionUncheckedUpdateManyWithoutVocabularyNestedInput
   progress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutVocabularyNestedInput
   flashcardItems?: Prisma.FlashcardDeckItemUncheckedUpdateManyWithoutVocabularyNestedInput
@@ -2347,25 +2215,18 @@ export type VocabularyUncheckedUpdateWithoutCategoryInput = {
 
 export type VocabularyUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  article?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  german?: Prisma.StringFieldUpdateOperationsInput | string
-  english?: Prisma.StringFieldUpdateOperationsInput | string
-  bangla?: Prisma.StringFieldUpdateOperationsInput | string
-  pronunciationBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pluralGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleGerman?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleEnglish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  exampleBangla?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  term?: Prisma.StringFieldUpdateOperationsInput | string
+  pronunciation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partOfSpeech?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grammar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   difficulty?: Prisma.EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  audioAssetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2376,12 +2237,16 @@ export type VocabularyUncheckedUpdateManyWithoutCategoryInput = {
  */
 
 export type VocabularyCountOutputType = {
+  translations: number
+  examples: number
   quizQuestions: number
   progress: number
   flashcardItems: number
 }
 
 export type VocabularyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  translations?: boolean | VocabularyCountOutputTypeCountTranslationsArgs
+  examples?: boolean | VocabularyCountOutputTypeCountExamplesArgs
   quizQuestions?: boolean | VocabularyCountOutputTypeCountQuizQuestionsArgs
   progress?: boolean | VocabularyCountOutputTypeCountProgressArgs
   flashcardItems?: boolean | VocabularyCountOutputTypeCountFlashcardItemsArgs
@@ -2395,6 +2260,20 @@ export type VocabularyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the VocabularyCountOutputType
    */
   select?: Prisma.VocabularyCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * VocabularyCountOutputType without action
+ */
+export type VocabularyCountOutputTypeCountTranslationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VocabularyTranslationWhereInput
+}
+
+/**
+ * VocabularyCountOutputType without action
+ */
+export type VocabularyCountOutputTypeCountExamplesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VocabularyExampleWhereInput
 }
 
 /**
@@ -2421,33 +2300,28 @@ export type VocabularyCountOutputTypeCountFlashcardItemsArgs<ExtArgs extends run
 
 export type VocabularySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  appId?: boolean
+  languageId?: boolean
   lessonId?: boolean
   categoryId?: boolean
-  article?: boolean
-  german?: boolean
-  english?: boolean
-  bangla?: boolean
-  pronunciationBangla?: boolean
-  pluralGerman?: boolean
-  exampleGerman?: boolean
-  exampleEnglish?: boolean
-  exampleBangla?: boolean
-  imageUrl?: boolean
-  audioUrl?: boolean
-  imageAssetId?: boolean
-  audioAssetId?: boolean
+  term?: boolean
+  pronunciation?: boolean
+  partOfSpeech?: boolean
+  grammar?: boolean
   difficulty?: boolean
   status?: boolean
   isPublished?: boolean
   notes?: boolean
+  imageAssetId?: boolean
+  audioAssetId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
+  language?: boolean | Prisma.LanguageDefaultArgs<ExtArgs>
   lesson?: boolean | Prisma.Vocabulary$lessonArgs<ExtArgs>
   category?: boolean | Prisma.Vocabulary$categoryArgs<ExtArgs>
   imageAsset?: boolean | Prisma.Vocabulary$imageAssetArgs<ExtArgs>
   audioAsset?: boolean | Prisma.Vocabulary$audioAssetArgs<ExtArgs>
+  translations?: boolean | Prisma.Vocabulary$translationsArgs<ExtArgs>
+  examples?: boolean | Prisma.Vocabulary$examplesArgs<ExtArgs>
   quizQuestions?: boolean | Prisma.Vocabulary$quizQuestionsArgs<ExtArgs>
   progress?: boolean | Prisma.Vocabulary$progressArgs<ExtArgs>
   flashcardItems?: boolean | Prisma.Vocabulary$flashcardItemsArgs<ExtArgs>
@@ -2458,37 +2332,32 @@ export type VocabularySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type VocabularySelectScalar = {
   id?: boolean
-  appId?: boolean
+  languageId?: boolean
   lessonId?: boolean
   categoryId?: boolean
-  article?: boolean
-  german?: boolean
-  english?: boolean
-  bangla?: boolean
-  pronunciationBangla?: boolean
-  pluralGerman?: boolean
-  exampleGerman?: boolean
-  exampleEnglish?: boolean
-  exampleBangla?: boolean
-  imageUrl?: boolean
-  audioUrl?: boolean
-  imageAssetId?: boolean
-  audioAssetId?: boolean
+  term?: boolean
+  pronunciation?: boolean
+  partOfSpeech?: boolean
+  grammar?: boolean
   difficulty?: boolean
   status?: boolean
   isPublished?: boolean
   notes?: boolean
+  imageAssetId?: boolean
+  audioAssetId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type VocabularyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "appId" | "lessonId" | "categoryId" | "article" | "german" | "english" | "bangla" | "pronunciationBangla" | "pluralGerman" | "exampleGerman" | "exampleEnglish" | "exampleBangla" | "imageUrl" | "audioUrl" | "imageAssetId" | "audioAssetId" | "difficulty" | "status" | "isPublished" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["vocabulary"]>
+export type VocabularyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "languageId" | "lessonId" | "categoryId" | "term" | "pronunciation" | "partOfSpeech" | "grammar" | "difficulty" | "status" | "isPublished" | "notes" | "imageAssetId" | "audioAssetId" | "createdAt" | "updatedAt", ExtArgs["result"]["vocabulary"]>
 export type VocabularyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
+  language?: boolean | Prisma.LanguageDefaultArgs<ExtArgs>
   lesson?: boolean | Prisma.Vocabulary$lessonArgs<ExtArgs>
   category?: boolean | Prisma.Vocabulary$categoryArgs<ExtArgs>
   imageAsset?: boolean | Prisma.Vocabulary$imageAssetArgs<ExtArgs>
   audioAsset?: boolean | Prisma.Vocabulary$audioAssetArgs<ExtArgs>
+  translations?: boolean | Prisma.Vocabulary$translationsArgs<ExtArgs>
+  examples?: boolean | Prisma.Vocabulary$examplesArgs<ExtArgs>
   quizQuestions?: boolean | Prisma.Vocabulary$quizQuestionsArgs<ExtArgs>
   progress?: boolean | Prisma.Vocabulary$progressArgs<ExtArgs>
   flashcardItems?: boolean | Prisma.Vocabulary$flashcardItemsArgs<ExtArgs>
@@ -2498,37 +2367,32 @@ export type VocabularyInclude<ExtArgs extends runtime.Types.Extensions.InternalA
 export type $VocabularyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Vocabulary"
   objects: {
-    app: Prisma.$AppPayload<ExtArgs>
+    language: Prisma.$LanguagePayload<ExtArgs>
     lesson: Prisma.$LessonPayload<ExtArgs> | null
     category: Prisma.$VocabularyCategoryPayload<ExtArgs> | null
     imageAsset: Prisma.$MediaAssetPayload<ExtArgs> | null
     audioAsset: Prisma.$MediaAssetPayload<ExtArgs> | null
+    translations: Prisma.$VocabularyTranslationPayload<ExtArgs>[]
+    examples: Prisma.$VocabularyExamplePayload<ExtArgs>[]
     quizQuestions: Prisma.$QuizQuestionPayload<ExtArgs>[]
     progress: Prisma.$VocabularyProgressPayload<ExtArgs>[]
     flashcardItems: Prisma.$FlashcardDeckItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    appId: string
+    languageId: string
     lessonId: string | null
     categoryId: string | null
-    article: string | null
-    german: string
-    english: string
-    bangla: string
-    pronunciationBangla: string | null
-    pluralGerman: string | null
-    exampleGerman: string | null
-    exampleEnglish: string | null
-    exampleBangla: string | null
-    imageUrl: string | null
-    audioUrl: string | null
-    imageAssetId: string | null
-    audioAssetId: string | null
+    term: string
+    pronunciation: string | null
+    partOfSpeech: string | null
+    grammar: runtime.JsonValue | null
     difficulty: $Enums.Difficulty
     status: $Enums.PublicationStatus
     isPublished: boolean
     notes: string | null
+    imageAssetId: string | null
+    audioAssetId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["vocabulary"]>
@@ -2871,11 +2735,13 @@ readonly fields: VocabularyFieldRefs;
  */
 export interface Prisma__VocabularyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  app<T extends Prisma.AppDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AppDefaultArgs<ExtArgs>>): Prisma.Prisma__AppClient<runtime.Types.Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  language<T extends Prisma.LanguageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LanguageDefaultArgs<ExtArgs>>): Prisma.Prisma__LanguageClient<runtime.Types.Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lesson<T extends Prisma.Vocabulary$lessonArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$lessonArgs<ExtArgs>>): Prisma.Prisma__LessonClient<runtime.Types.Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.Vocabulary$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$categoryArgs<ExtArgs>>): Prisma.Prisma__VocabularyCategoryClient<runtime.Types.Result.GetResult<Prisma.$VocabularyCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   imageAsset<T extends Prisma.Vocabulary$imageAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$imageAssetArgs<ExtArgs>>): Prisma.Prisma__MediaAssetClient<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   audioAsset<T extends Prisma.Vocabulary$audioAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$audioAssetArgs<ExtArgs>>): Prisma.Prisma__MediaAssetClient<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  translations<T extends Prisma.Vocabulary$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  examples<T extends Prisma.Vocabulary$examplesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$examplesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyExamplePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizQuestions<T extends Prisma.Vocabulary$quizQuestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$quizQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progress<T extends Prisma.Vocabulary$progressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$progressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   flashcardItems<T extends Prisma.Vocabulary$flashcardItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vocabulary$flashcardItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlashcardDeckItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2909,26 +2775,19 @@ export interface Prisma__VocabularyClient<T, Null = never, ExtArgs extends runti
  */
 export interface VocabularyFieldRefs {
   readonly id: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly appId: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly languageId: Prisma.FieldRef<"Vocabulary", 'String'>
   readonly lessonId: Prisma.FieldRef<"Vocabulary", 'String'>
   readonly categoryId: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly article: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly german: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly english: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly bangla: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly pronunciationBangla: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly pluralGerman: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly exampleGerman: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly exampleEnglish: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly exampleBangla: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly imageUrl: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly audioUrl: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly imageAssetId: Prisma.FieldRef<"Vocabulary", 'String'>
-  readonly audioAssetId: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly term: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly pronunciation: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly partOfSpeech: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly grammar: Prisma.FieldRef<"Vocabulary", 'Json'>
   readonly difficulty: Prisma.FieldRef<"Vocabulary", 'Difficulty'>
   readonly status: Prisma.FieldRef<"Vocabulary", 'PublicationStatus'>
   readonly isPublished: Prisma.FieldRef<"Vocabulary", 'Boolean'>
   readonly notes: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly imageAssetId: Prisma.FieldRef<"Vocabulary", 'String'>
+  readonly audioAssetId: Prisma.FieldRef<"Vocabulary", 'String'>
   readonly createdAt: Prisma.FieldRef<"Vocabulary", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Vocabulary", 'DateTime'>
 }
@@ -3352,6 +3211,54 @@ export type Vocabulary$audioAssetArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.MediaAssetInclude<ExtArgs> | null
   where?: Prisma.MediaAssetWhereInput
+}
+
+/**
+ * Vocabulary.translations
+ */
+export type Vocabulary$translationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VocabularyTranslation
+   */
+  select?: Prisma.VocabularyTranslationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VocabularyTranslation
+   */
+  omit?: Prisma.VocabularyTranslationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VocabularyTranslationInclude<ExtArgs> | null
+  where?: Prisma.VocabularyTranslationWhereInput
+  orderBy?: Prisma.VocabularyTranslationOrderByWithRelationInput | Prisma.VocabularyTranslationOrderByWithRelationInput[]
+  cursor?: Prisma.VocabularyTranslationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VocabularyTranslationScalarFieldEnum | Prisma.VocabularyTranslationScalarFieldEnum[]
+}
+
+/**
+ * Vocabulary.examples
+ */
+export type Vocabulary$examplesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VocabularyExample
+   */
+  select?: Prisma.VocabularyExampleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VocabularyExample
+   */
+  omit?: Prisma.VocabularyExampleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VocabularyExampleInclude<ExtArgs> | null
+  where?: Prisma.VocabularyExampleWhereInput
+  orderBy?: Prisma.VocabularyExampleOrderByWithRelationInput | Prisma.VocabularyExampleOrderByWithRelationInput[]
+  cursor?: Prisma.VocabularyExampleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VocabularyExampleScalarFieldEnum | Prisma.VocabularyExampleScalarFieldEnum[]
 }
 
 /**

@@ -41,9 +41,6 @@ export type LessonMinAggregateOutputType = {
   moduleId: string | null
   title: string | null
   slug: string | null
-  germanText: string | null
-  englishText: string | null
-  banglaText: string | null
   sortOrder: number | null
   status: $Enums.PublicationStatus | null
   estimatedMinutes: number | null
@@ -56,9 +53,6 @@ export type LessonMaxAggregateOutputType = {
   moduleId: string | null
   title: string | null
   slug: string | null
-  germanText: string | null
-  englishText: string | null
-  banglaText: string | null
   sortOrder: number | null
   status: $Enums.PublicationStatus | null
   estimatedMinutes: number | null
@@ -71,9 +65,6 @@ export type LessonCountAggregateOutputType = {
   moduleId: number
   title: number
   slug: number
-  germanText: number
-  englishText: number
-  banglaText: number
   sortOrder: number
   status: number
   estimatedMinutes: number
@@ -98,9 +89,6 @@ export type LessonMinAggregateInputType = {
   moduleId?: true
   title?: true
   slug?: true
-  germanText?: true
-  englishText?: true
-  banglaText?: true
   sortOrder?: true
   status?: true
   estimatedMinutes?: true
@@ -113,9 +101,6 @@ export type LessonMaxAggregateInputType = {
   moduleId?: true
   title?: true
   slug?: true
-  germanText?: true
-  englishText?: true
-  banglaText?: true
   sortOrder?: true
   status?: true
   estimatedMinutes?: true
@@ -128,9 +113,6 @@ export type LessonCountAggregateInputType = {
   moduleId?: true
   title?: true
   slug?: true
-  germanText?: true
-  englishText?: true
-  banglaText?: true
   sortOrder?: true
   status?: true
   estimatedMinutes?: true
@@ -230,9 +212,6 @@ export type LessonGroupByOutputType = {
   moduleId: string
   title: string
   slug: string
-  germanText: string | null
-  englishText: string | null
-  banglaText: string | null
   sortOrder: number
   status: $Enums.PublicationStatus
   estimatedMinutes: number | null
@@ -268,17 +247,15 @@ export type LessonWhereInput = {
   moduleId?: Prisma.StringFilter<"Lesson"> | string
   title?: Prisma.StringFilter<"Lesson"> | string
   slug?: Prisma.StringFilter<"Lesson"> | string
-  germanText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  englishText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  banglaText?: Prisma.StringNullableFilter<"Lesson"> | string | null
   sortOrder?: Prisma.IntFilter<"Lesson"> | number
   status?: Prisma.EnumPublicationStatusFilter<"Lesson"> | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.IntNullableFilter<"Lesson"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Lesson"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lesson"> | Date | string
   module?: Prisma.XOR<Prisma.CourseModuleScalarRelationFilter, Prisma.CourseModuleWhereInput>
+  translations?: Prisma.LessonTranslationListRelationFilter
   resources?: Prisma.LessonResourceListRelationFilter
-  vocabulary?: Prisma.VocabularyListRelationFilter
+  vocabularies?: Prisma.VocabularyListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
   progress?: Prisma.LessonProgressListRelationFilter
 }
@@ -288,17 +265,15 @@ export type LessonOrderByWithRelationInput = {
   moduleId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanText?: Prisma.SortOrderInput | Prisma.SortOrder
-  englishText?: Prisma.SortOrderInput | Prisma.SortOrder
-  banglaText?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   status?: Prisma.SortOrder
   estimatedMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   module?: Prisma.CourseModuleOrderByWithRelationInput
+  translations?: Prisma.LessonTranslationOrderByRelationAggregateInput
   resources?: Prisma.LessonResourceOrderByRelationAggregateInput
-  vocabulary?: Prisma.VocabularyOrderByRelationAggregateInput
+  vocabularies?: Prisma.VocabularyOrderByRelationAggregateInput
   quizzes?: Prisma.QuizOrderByRelationAggregateInput
   progress?: Prisma.LessonProgressOrderByRelationAggregateInput
   _relevance?: Prisma.LessonOrderByRelevanceInput
@@ -313,17 +288,15 @@ export type LessonWhereUniqueInput = Prisma.AtLeast<{
   moduleId?: Prisma.StringFilter<"Lesson"> | string
   title?: Prisma.StringFilter<"Lesson"> | string
   slug?: Prisma.StringFilter<"Lesson"> | string
-  germanText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  englishText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  banglaText?: Prisma.StringNullableFilter<"Lesson"> | string | null
   sortOrder?: Prisma.IntFilter<"Lesson"> | number
   status?: Prisma.EnumPublicationStatusFilter<"Lesson"> | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.IntNullableFilter<"Lesson"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Lesson"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lesson"> | Date | string
   module?: Prisma.XOR<Prisma.CourseModuleScalarRelationFilter, Prisma.CourseModuleWhereInput>
+  translations?: Prisma.LessonTranslationListRelationFilter
   resources?: Prisma.LessonResourceListRelationFilter
-  vocabulary?: Prisma.VocabularyListRelationFilter
+  vocabularies?: Prisma.VocabularyListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
   progress?: Prisma.LessonProgressListRelationFilter
 }, "id" | "moduleId_slug">
@@ -333,9 +306,6 @@ export type LessonOrderByWithAggregationInput = {
   moduleId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanText?: Prisma.SortOrderInput | Prisma.SortOrder
-  englishText?: Prisma.SortOrderInput | Prisma.SortOrder
-  banglaText?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   status?: Prisma.SortOrder
   estimatedMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -356,9 +326,6 @@ export type LessonScalarWhereWithAggregatesInput = {
   moduleId?: Prisma.StringWithAggregatesFilter<"Lesson"> | string
   title?: Prisma.StringWithAggregatesFilter<"Lesson"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Lesson"> | string
-  germanText?: Prisma.StringNullableWithAggregatesFilter<"Lesson"> | string | null
-  englishText?: Prisma.StringNullableWithAggregatesFilter<"Lesson"> | string | null
-  banglaText?: Prisma.StringNullableWithAggregatesFilter<"Lesson"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"Lesson"> | number
   status?: Prisma.EnumPublicationStatusWithAggregatesFilter<"Lesson"> | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.IntNullableWithAggregatesFilter<"Lesson"> | number | null
@@ -370,17 +337,15 @@ export type LessonCreateInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
 }
@@ -390,16 +355,14 @@ export type LessonUncheckedCreateInput = {
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
 }
@@ -408,17 +371,15 @@ export type LessonUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
 }
@@ -428,16 +389,14 @@ export type LessonUncheckedUpdateInput = {
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
 }
@@ -447,9 +406,6 @@ export type LessonCreateManyInput = {
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
@@ -461,9 +417,6 @@ export type LessonUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -476,9 +429,6 @@ export type LessonUncheckedUpdateManyInput = {
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -512,9 +462,6 @@ export type LessonCountOrderByAggregateInput = {
   moduleId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanText?: Prisma.SortOrder
-  englishText?: Prisma.SortOrder
-  banglaText?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   status?: Prisma.SortOrder
   estimatedMinutes?: Prisma.SortOrder
@@ -532,9 +479,6 @@ export type LessonMaxOrderByAggregateInput = {
   moduleId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanText?: Prisma.SortOrder
-  englishText?: Prisma.SortOrder
-  banglaText?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   status?: Prisma.SortOrder
   estimatedMinutes?: Prisma.SortOrder
@@ -547,9 +491,6 @@ export type LessonMinOrderByAggregateInput = {
   moduleId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
-  germanText?: Prisma.SortOrder
-  englishText?: Prisma.SortOrder
-  banglaText?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   status?: Prisma.SortOrder
   estimatedMinutes?: Prisma.SortOrder
@@ -622,6 +563,20 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type LessonCreateNestedOneWithoutTranslationsInput = {
+  create?: Prisma.XOR<Prisma.LessonCreateWithoutTranslationsInput, Prisma.LessonUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutTranslationsInput
+  connect?: Prisma.LessonWhereUniqueInput
+}
+
+export type LessonUpdateOneRequiredWithoutTranslationsNestedInput = {
+  create?: Prisma.XOR<Prisma.LessonCreateWithoutTranslationsInput, Prisma.LessonUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutTranslationsInput
+  upsert?: Prisma.LessonUpsertWithoutTranslationsInput
+  connect?: Prisma.LessonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LessonUpdateToOneWithWhereWithoutTranslationsInput, Prisma.LessonUpdateWithoutTranslationsInput>, Prisma.LessonUncheckedUpdateWithoutTranslationsInput>
+}
+
 export type LessonCreateNestedOneWithoutResourcesInput = {
   create?: Prisma.XOR<Prisma.LessonCreateWithoutResourcesInput, Prisma.LessonUncheckedCreateWithoutResourcesInput>
   connectOrCreate?: Prisma.LessonCreateOrConnectWithoutResourcesInput
@@ -636,20 +591,20 @@ export type LessonUpdateOneRequiredWithoutResourcesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LessonUpdateToOneWithWhereWithoutResourcesInput, Prisma.LessonUpdateWithoutResourcesInput>, Prisma.LessonUncheckedUpdateWithoutResourcesInput>
 }
 
-export type LessonCreateNestedOneWithoutVocabularyInput = {
-  create?: Prisma.XOR<Prisma.LessonCreateWithoutVocabularyInput, Prisma.LessonUncheckedCreateWithoutVocabularyInput>
-  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutVocabularyInput
+export type LessonCreateNestedOneWithoutVocabulariesInput = {
+  create?: Prisma.XOR<Prisma.LessonCreateWithoutVocabulariesInput, Prisma.LessonUncheckedCreateWithoutVocabulariesInput>
+  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutVocabulariesInput
   connect?: Prisma.LessonWhereUniqueInput
 }
 
-export type LessonUpdateOneWithoutVocabularyNestedInput = {
-  create?: Prisma.XOR<Prisma.LessonCreateWithoutVocabularyInput, Prisma.LessonUncheckedCreateWithoutVocabularyInput>
-  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutVocabularyInput
-  upsert?: Prisma.LessonUpsertWithoutVocabularyInput
+export type LessonUpdateOneWithoutVocabulariesNestedInput = {
+  create?: Prisma.XOR<Prisma.LessonCreateWithoutVocabulariesInput, Prisma.LessonUncheckedCreateWithoutVocabulariesInput>
+  connectOrCreate?: Prisma.LessonCreateOrConnectWithoutVocabulariesInput
+  upsert?: Prisma.LessonUpsertWithoutVocabulariesInput
   disconnect?: Prisma.LessonWhereInput | boolean
   delete?: Prisma.LessonWhereInput | boolean
   connect?: Prisma.LessonWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LessonUpdateToOneWithWhereWithoutVocabularyInput, Prisma.LessonUpdateWithoutVocabularyInput>, Prisma.LessonUncheckedUpdateWithoutVocabularyInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LessonUpdateToOneWithWhereWithoutVocabulariesInput, Prisma.LessonUpdateWithoutVocabulariesInput>, Prisma.LessonUncheckedUpdateWithoutVocabulariesInput>
 }
 
 export type LessonCreateNestedOneWithoutQuizzesInput = {
@@ -686,16 +641,14 @@ export type LessonCreateWithoutModuleInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
 }
@@ -704,16 +657,14 @@ export type LessonUncheckedCreateWithoutModuleInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
 }
@@ -752,9 +703,6 @@ export type LessonScalarWhereInput = {
   moduleId?: Prisma.StringFilter<"Lesson"> | string
   title?: Prisma.StringFilter<"Lesson"> | string
   slug?: Prisma.StringFilter<"Lesson"> | string
-  germanText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  englishText?: Prisma.StringNullableFilter<"Lesson"> | string | null
-  banglaText?: Prisma.StringNullableFilter<"Lesson"> | string | null
   sortOrder?: Prisma.IntFilter<"Lesson"> | number
   status?: Prisma.EnumPublicationStatusFilter<"Lesson"> | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.IntNullableFilter<"Lesson"> | number | null
@@ -762,20 +710,98 @@ export type LessonScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Lesson"> | Date | string
 }
 
-export type LessonCreateWithoutResourcesInput = {
+export type LessonCreateWithoutTranslationsInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
-  vocabulary?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
+  progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
+}
+
+export type LessonUncheckedCreateWithoutTranslationsInput = {
+  id?: string
+  moduleId: string
+  title: string
+  slug: string
+  sortOrder?: number
+  status?: $Enums.PublicationStatus
+  estimatedMinutes?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
+  progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
+}
+
+export type LessonCreateOrConnectWithoutTranslationsInput = {
+  where: Prisma.LessonWhereUniqueInput
+  create: Prisma.XOR<Prisma.LessonCreateWithoutTranslationsInput, Prisma.LessonUncheckedCreateWithoutTranslationsInput>
+}
+
+export type LessonUpsertWithoutTranslationsInput = {
+  update: Prisma.XOR<Prisma.LessonUpdateWithoutTranslationsInput, Prisma.LessonUncheckedUpdateWithoutTranslationsInput>
+  create: Prisma.XOR<Prisma.LessonCreateWithoutTranslationsInput, Prisma.LessonUncheckedCreateWithoutTranslationsInput>
+  where?: Prisma.LessonWhereInput
+}
+
+export type LessonUpdateToOneWithWhereWithoutTranslationsInput = {
+  where?: Prisma.LessonWhereInput
+  data: Prisma.XOR<Prisma.LessonUpdateWithoutTranslationsInput, Prisma.LessonUncheckedUpdateWithoutTranslationsInput>
+}
+
+export type LessonUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
+  resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
+  progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
+}
+
+export type LessonUncheckedUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  moduleId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
+  estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
+  progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
+}
+
+export type LessonCreateWithoutResourcesInput = {
+  id?: string
+  title: string
+  slug: string
+  sortOrder?: number
+  status?: $Enums.PublicationStatus
+  estimatedMinutes?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
 }
@@ -785,15 +811,13 @@ export type LessonUncheckedCreateWithoutResourcesInput = {
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
 }
@@ -818,16 +842,14 @@ export type LessonUpdateWithoutResourcesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
 }
@@ -837,102 +859,92 @@ export type LessonUncheckedUpdateWithoutResourcesInput = {
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
 }
 
-export type LessonCreateWithoutVocabularyInput = {
+export type LessonCreateWithoutVocabulariesInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
 }
 
-export type LessonUncheckedCreateWithoutVocabularyInput = {
+export type LessonUncheckedCreateWithoutVocabulariesInput = {
   id?: string
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
 }
 
-export type LessonCreateOrConnectWithoutVocabularyInput = {
+export type LessonCreateOrConnectWithoutVocabulariesInput = {
   where: Prisma.LessonWhereUniqueInput
-  create: Prisma.XOR<Prisma.LessonCreateWithoutVocabularyInput, Prisma.LessonUncheckedCreateWithoutVocabularyInput>
+  create: Prisma.XOR<Prisma.LessonCreateWithoutVocabulariesInput, Prisma.LessonUncheckedCreateWithoutVocabulariesInput>
 }
 
-export type LessonUpsertWithoutVocabularyInput = {
-  update: Prisma.XOR<Prisma.LessonUpdateWithoutVocabularyInput, Prisma.LessonUncheckedUpdateWithoutVocabularyInput>
-  create: Prisma.XOR<Prisma.LessonCreateWithoutVocabularyInput, Prisma.LessonUncheckedCreateWithoutVocabularyInput>
+export type LessonUpsertWithoutVocabulariesInput = {
+  update: Prisma.XOR<Prisma.LessonUpdateWithoutVocabulariesInput, Prisma.LessonUncheckedUpdateWithoutVocabulariesInput>
+  create: Prisma.XOR<Prisma.LessonCreateWithoutVocabulariesInput, Prisma.LessonUncheckedCreateWithoutVocabulariesInput>
   where?: Prisma.LessonWhereInput
 }
 
-export type LessonUpdateToOneWithWhereWithoutVocabularyInput = {
+export type LessonUpdateToOneWithWhereWithoutVocabulariesInput = {
   where?: Prisma.LessonWhereInput
-  data: Prisma.XOR<Prisma.LessonUpdateWithoutVocabularyInput, Prisma.LessonUncheckedUpdateWithoutVocabularyInput>
+  data: Prisma.XOR<Prisma.LessonUpdateWithoutVocabulariesInput, Prisma.LessonUncheckedUpdateWithoutVocabulariesInput>
 }
 
-export type LessonUpdateWithoutVocabularyInput = {
+export type LessonUpdateWithoutVocabulariesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
 }
 
-export type LessonUncheckedUpdateWithoutVocabularyInput = {
+export type LessonUncheckedUpdateWithoutVocabulariesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
@@ -942,17 +954,15 @@ export type LessonCreateWithoutQuizzesInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressCreateNestedManyWithoutLessonInput
 }
 
@@ -961,16 +971,14 @@ export type LessonUncheckedCreateWithoutQuizzesInput = {
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
   progress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutLessonInput
 }
 
@@ -994,17 +1002,15 @@ export type LessonUpdateWithoutQuizzesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
 }
 
@@ -1013,16 +1019,14 @@ export type LessonUncheckedUpdateWithoutQuizzesInput = {
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
 }
 
@@ -1030,17 +1034,15 @@ export type LessonCreateWithoutProgressInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   module: Prisma.CourseModuleCreateNestedOneWithoutLessonsInput
+  translations?: Prisma.LessonTranslationCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutLessonInput
 }
 
@@ -1049,16 +1051,14 @@ export type LessonUncheckedCreateWithoutProgressInput = {
   moduleId: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  translations?: Prisma.LessonTranslationUncheckedCreateNestedManyWithoutLessonInput
   resources?: Prisma.LessonResourceUncheckedCreateNestedManyWithoutLessonInput
-  vocabulary?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
+  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutLessonInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutLessonInput
 }
 
@@ -1082,17 +1082,15 @@ export type LessonUpdateWithoutProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   module?: Prisma.CourseModuleUpdateOneRequiredWithoutLessonsNestedInput
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
 }
 
@@ -1101,16 +1099,14 @@ export type LessonUncheckedUpdateWithoutProgressInput = {
   moduleId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
 }
 
@@ -1118,9 +1114,6 @@ export type LessonCreateManyModuleInput = {
   id?: string
   title: string
   slug: string
-  germanText?: string | null
-  englishText?: string | null
-  banglaText?: string | null
   sortOrder?: number
   status?: $Enums.PublicationStatus
   estimatedMinutes?: number | null
@@ -1132,16 +1125,14 @@ export type LessonUpdateWithoutModuleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUpdateManyWithoutLessonNestedInput
 }
@@ -1150,16 +1141,14 @@ export type LessonUncheckedUpdateWithoutModuleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  translations?: Prisma.LessonTranslationUncheckedUpdateManyWithoutLessonNestedInput
   resources?: Prisma.LessonResourceUncheckedUpdateManyWithoutLessonNestedInput
-  vocabulary?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
+  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutLessonNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutLessonNestedInput
   progress?: Prisma.LessonProgressUncheckedUpdateManyWithoutLessonNestedInput
 }
@@ -1168,9 +1157,6 @@ export type LessonUncheckedUpdateManyWithoutModuleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
-  germanText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  englishText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  banglaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPublicationStatusFieldUpdateOperationsInput | $Enums.PublicationStatus
   estimatedMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1184,15 +1170,17 @@ export type LessonUncheckedUpdateManyWithoutModuleInput = {
  */
 
 export type LessonCountOutputType = {
+  translations: number
   resources: number
-  vocabulary: number
+  vocabularies: number
   quizzes: number
   progress: number
 }
 
 export type LessonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  translations?: boolean | LessonCountOutputTypeCountTranslationsArgs
   resources?: boolean | LessonCountOutputTypeCountResourcesArgs
-  vocabulary?: boolean | LessonCountOutputTypeCountVocabularyArgs
+  vocabularies?: boolean | LessonCountOutputTypeCountVocabulariesArgs
   quizzes?: boolean | LessonCountOutputTypeCountQuizzesArgs
   progress?: boolean | LessonCountOutputTypeCountProgressArgs
 }
@@ -1210,6 +1198,13 @@ export type LessonCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * LessonCountOutputType without action
  */
+export type LessonCountOutputTypeCountTranslationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LessonTranslationWhereInput
+}
+
+/**
+ * LessonCountOutputType without action
+ */
 export type LessonCountOutputTypeCountResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LessonResourceWhereInput
 }
@@ -1217,7 +1212,7 @@ export type LessonCountOutputTypeCountResourcesArgs<ExtArgs extends runtime.Type
 /**
  * LessonCountOutputType without action
  */
-export type LessonCountOutputTypeCountVocabularyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type LessonCountOutputTypeCountVocabulariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VocabularyWhereInput
 }
 
@@ -1241,17 +1236,15 @@ export type LessonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   moduleId?: boolean
   title?: boolean
   slug?: boolean
-  germanText?: boolean
-  englishText?: boolean
-  banglaText?: boolean
   sortOrder?: boolean
   status?: boolean
   estimatedMinutes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   module?: boolean | Prisma.CourseModuleDefaultArgs<ExtArgs>
+  translations?: boolean | Prisma.Lesson$translationsArgs<ExtArgs>
   resources?: boolean | Prisma.Lesson$resourcesArgs<ExtArgs>
-  vocabulary?: boolean | Prisma.Lesson$vocabularyArgs<ExtArgs>
+  vocabularies?: boolean | Prisma.Lesson$vocabulariesArgs<ExtArgs>
   quizzes?: boolean | Prisma.Lesson$quizzesArgs<ExtArgs>
   progress?: boolean | Prisma.Lesson$progressArgs<ExtArgs>
   _count?: boolean | Prisma.LessonCountOutputTypeDefaultArgs<ExtArgs>
@@ -1264,9 +1257,6 @@ export type LessonSelectScalar = {
   moduleId?: boolean
   title?: boolean
   slug?: boolean
-  germanText?: boolean
-  englishText?: boolean
-  banglaText?: boolean
   sortOrder?: boolean
   status?: boolean
   estimatedMinutes?: boolean
@@ -1274,11 +1264,12 @@ export type LessonSelectScalar = {
   updatedAt?: boolean
 }
 
-export type LessonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "moduleId" | "title" | "slug" | "germanText" | "englishText" | "banglaText" | "sortOrder" | "status" | "estimatedMinutes" | "createdAt" | "updatedAt", ExtArgs["result"]["lesson"]>
+export type LessonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "moduleId" | "title" | "slug" | "sortOrder" | "status" | "estimatedMinutes" | "createdAt" | "updatedAt", ExtArgs["result"]["lesson"]>
 export type LessonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   module?: boolean | Prisma.CourseModuleDefaultArgs<ExtArgs>
+  translations?: boolean | Prisma.Lesson$translationsArgs<ExtArgs>
   resources?: boolean | Prisma.Lesson$resourcesArgs<ExtArgs>
-  vocabulary?: boolean | Prisma.Lesson$vocabularyArgs<ExtArgs>
+  vocabularies?: boolean | Prisma.Lesson$vocabulariesArgs<ExtArgs>
   quizzes?: boolean | Prisma.Lesson$quizzesArgs<ExtArgs>
   progress?: boolean | Prisma.Lesson$progressArgs<ExtArgs>
   _count?: boolean | Prisma.LessonCountOutputTypeDefaultArgs<ExtArgs>
@@ -1288,8 +1279,9 @@ export type $LessonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Lesson"
   objects: {
     module: Prisma.$CourseModulePayload<ExtArgs>
+    translations: Prisma.$LessonTranslationPayload<ExtArgs>[]
     resources: Prisma.$LessonResourcePayload<ExtArgs>[]
-    vocabulary: Prisma.$VocabularyPayload<ExtArgs>[]
+    vocabularies: Prisma.$VocabularyPayload<ExtArgs>[]
     quizzes: Prisma.$QuizPayload<ExtArgs>[]
     progress: Prisma.$LessonProgressPayload<ExtArgs>[]
   }
@@ -1298,9 +1290,6 @@ export type $LessonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     moduleId: string
     title: string
     slug: string
-    germanText: string | null
-    englishText: string | null
-    banglaText: string | null
     sortOrder: number
     status: $Enums.PublicationStatus
     estimatedMinutes: number | null
@@ -1647,8 +1636,9 @@ readonly fields: LessonFieldRefs;
 export interface Prisma__LessonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   module<T extends Prisma.CourseModuleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseModuleDefaultArgs<ExtArgs>>): Prisma.Prisma__CourseModuleClient<runtime.Types.Result.GetResult<Prisma.$CourseModulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  translations<T extends Prisma.Lesson$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resources<T extends Prisma.Lesson$resourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  vocabulary<T extends Prisma.Lesson$vocabularyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$vocabularyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vocabularies<T extends Prisma.Lesson$vocabulariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$vocabulariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizzes<T extends Prisma.Lesson$quizzesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$quizzesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progress<T extends Prisma.Lesson$progressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lesson$progressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1684,9 +1674,6 @@ export interface LessonFieldRefs {
   readonly moduleId: Prisma.FieldRef<"Lesson", 'String'>
   readonly title: Prisma.FieldRef<"Lesson", 'String'>
   readonly slug: Prisma.FieldRef<"Lesson", 'String'>
-  readonly germanText: Prisma.FieldRef<"Lesson", 'String'>
-  readonly englishText: Prisma.FieldRef<"Lesson", 'String'>
-  readonly banglaText: Prisma.FieldRef<"Lesson", 'String'>
   readonly sortOrder: Prisma.FieldRef<"Lesson", 'Int'>
   readonly status: Prisma.FieldRef<"Lesson", 'PublicationStatus'>
   readonly estimatedMinutes: Prisma.FieldRef<"Lesson", 'Int'>
@@ -2040,6 +2027,30 @@ export type LessonDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Lesson.translations
+ */
+export type Lesson$translationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LessonTranslation
+   */
+  select?: Prisma.LessonTranslationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LessonTranslation
+   */
+  omit?: Prisma.LessonTranslationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LessonTranslationInclude<ExtArgs> | null
+  where?: Prisma.LessonTranslationWhereInput
+  orderBy?: Prisma.LessonTranslationOrderByWithRelationInput | Prisma.LessonTranslationOrderByWithRelationInput[]
+  cursor?: Prisma.LessonTranslationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LessonTranslationScalarFieldEnum | Prisma.LessonTranslationScalarFieldEnum[]
+}
+
+/**
  * Lesson.resources
  */
 export type Lesson$resourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2064,9 +2075,9 @@ export type Lesson$resourcesArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Lesson.vocabulary
+ * Lesson.vocabularies
  */
-export type Lesson$vocabularyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Lesson$vocabulariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Vocabulary
    */

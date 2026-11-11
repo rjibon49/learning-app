@@ -31,8 +31,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Apps
- * const apps = await prisma.app.findMany()
+ * // Fetch zero or more Languages
+ * const languages = await prisma.language.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,6 +41,26 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model Language
+ * 
+ */
+export type Language = Prisma.LanguageModel
+/**
+ * Model ProficiencyFramework
+ * 
+ */
+export type ProficiencyFramework = Prisma.ProficiencyFrameworkModel
+/**
+ * Model ProficiencyLevel
+ * 
+ */
+export type ProficiencyLevel = Prisma.ProficiencyLevelModel
+/**
+ * Model LanguageProficiencyLevel
+ * 
+ */
+export type LanguageProficiencyLevel = Prisma.LanguageProficiencyLevelModel
 /**
  * Model App
  * 
@@ -57,6 +77,11 @@ export type AppConfig = Prisma.AppConfigModel
  */
 export type Course = Prisma.CourseModel
 /**
+ * Model CourseApp
+ * 
+ */
+export type CourseApp = Prisma.CourseAppModel
+/**
  * Model CourseModule
  * 
  */
@@ -66,6 +91,11 @@ export type CourseModule = Prisma.CourseModuleModel
  * 
  */
 export type Lesson = Prisma.LessonModel
+/**
+ * Model LessonTranslation
+ * 
+ */
+export type LessonTranslation = Prisma.LessonTranslationModel
 /**
  * Model LessonResource
  * 
@@ -82,10 +112,25 @@ export type MediaAsset = Prisma.MediaAssetModel
  */
 export type VocabularyCategory = Prisma.VocabularyCategoryModel
 /**
+ * Model VocabularyCategoryTranslation
+ * 
+ */
+export type VocabularyCategoryTranslation = Prisma.VocabularyCategoryTranslationModel
+/**
  * Model Vocabulary
  * 
  */
 export type Vocabulary = Prisma.VocabularyModel
+/**
+ * Model VocabularyTranslation
+ * 
+ */
+export type VocabularyTranslation = Prisma.VocabularyTranslationModel
+/**
+ * Model VocabularyExample
+ * 
+ */
+export type VocabularyExample = Prisma.VocabularyExampleModel
 /**
  * Model FlashcardDeck
  * 
@@ -107,10 +152,35 @@ export type Quiz = Prisma.QuizModel
  */
 export type QuizQuestion = Prisma.QuizQuestionModel
 /**
+ * Model QuizOption
+ * 
+ */
+export type QuizOption = Prisma.QuizOptionModel
+/**
  * Model User
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model PendingEmailRegistration
+ * 
+ */
+export type PendingEmailRegistration = Prisma.PendingEmailRegistrationModel
+/**
+ * Model UserSession
+ * 
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model UserLanguageEnrollment
+ * 
+ */
+export type UserLanguageEnrollment = Prisma.UserLanguageEnrollmentModel
 /**
  * Model LessonProgress
  * 
@@ -136,6 +206,11 @@ export type QuizAnswer = Prisma.QuizAnswerModel
  * 
  */
 export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model PaymentTransaction
+ * 
+ */
+export type PaymentTransaction = Prisma.PaymentTransactionModel
 /**
  * Model AdConfig
  * 
@@ -176,6 +251,11 @@ export type SystemSetting = Prisma.SystemSettingModel
  * 
  */
 export type PromoCode = Prisma.PromoCodeModel
+/**
+ * Model PromoRedemption
+ * 
+ */
+export type PromoRedemption = Prisma.PromoRedemptionModel
 /**
  * Model UserActivity
  * 

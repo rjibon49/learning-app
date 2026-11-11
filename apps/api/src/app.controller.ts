@@ -1,10 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+
+import {
+  Controller,
+  Get,
+  ServiceUnavailableException,
+} from '@nestjs/common';
 
 import { PrismaService } from './prisma.service.js';
 
 @Controller()
 export class AppController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Get('health')
   async getHealth() {
@@ -18,12 +25,12 @@ export class AppController {
         timestamp: new Date().toISOString(),
       };
     } catch {
-      return {
+      throw new ServiceUnavailableException({
         status: 'degraded',
         service: 'learning-api',
         database: 'disconnected',
         timestamp: new Date().toISOString(),
-      };
+      });
     }
   }
 }

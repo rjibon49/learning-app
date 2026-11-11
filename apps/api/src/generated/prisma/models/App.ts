@@ -26,7 +26,8 @@ export type AggregateApp = {
 
 export type AppMinAggregateOutputType = {
   id: string | null
-  level: $Enums.AppLevel | null
+  languageId: string | null
+  levelId: string | null
   name: string | null
   slug: string | null
   packageName: string | null
@@ -42,7 +43,8 @@ export type AppMinAggregateOutputType = {
 
 export type AppMaxAggregateOutputType = {
   id: string | null
-  level: $Enums.AppLevel | null
+  languageId: string | null
+  levelId: string | null
   name: string | null
   slug: string | null
   packageName: string | null
@@ -58,7 +60,8 @@ export type AppMaxAggregateOutputType = {
 
 export type AppCountAggregateOutputType = {
   id: number
-  level: number
+  languageId: number
+  levelId: number
   name: number
   slug: number
   packageName: number
@@ -76,7 +79,8 @@ export type AppCountAggregateOutputType = {
 
 export type AppMinAggregateInputType = {
   id?: true
-  level?: true
+  languageId?: true
+  levelId?: true
   name?: true
   slug?: true
   packageName?: true
@@ -92,7 +96,8 @@ export type AppMinAggregateInputType = {
 
 export type AppMaxAggregateInputType = {
   id?: true
-  level?: true
+  languageId?: true
+  levelId?: true
   name?: true
   slug?: true
   packageName?: true
@@ -108,7 +113,8 @@ export type AppMaxAggregateInputType = {
 
 export type AppCountAggregateInputType = {
   id?: true
-  level?: true
+  languageId?: true
+  levelId?: true
   name?: true
   slug?: true
   packageName?: true
@@ -197,7 +203,8 @@ export type AppGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type AppGroupByOutputType = {
   id: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId: string | null
   name: string
   slug: string
   packageName: string | null
@@ -234,7 +241,8 @@ export type AppWhereInput = {
   OR?: Prisma.AppWhereInput[]
   NOT?: Prisma.AppWhereInput | Prisma.AppWhereInput[]
   id?: Prisma.StringFilter<"App"> | string
-  level?: Prisma.EnumAppLevelFilter<"App"> | $Enums.AppLevel
+  languageId?: Prisma.StringFilter<"App"> | string
+  levelId?: Prisma.StringNullableFilter<"App"> | string | null
   name?: Prisma.StringFilter<"App"> | string
   slug?: Prisma.StringFilter<"App"> | string
   packageName?: Prisma.StringNullableFilter<"App"> | string | null
@@ -246,9 +254,10 @@ export type AppWhereInput = {
   isActive?: Prisma.BoolFilter<"App"> | boolean
   createdAt?: Prisma.DateTimeFilter<"App"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"App"> | Date | string
-  courses?: Prisma.CourseListRelationFilter
-  categories?: Prisma.VocabularyCategoryListRelationFilter
-  vocabularies?: Prisma.VocabularyListRelationFilter
+  language?: Prisma.XOR<Prisma.LanguageScalarRelationFilter, Prisma.LanguageWhereInput>
+  level?: Prisma.XOR<Prisma.ProficiencyLevelNullableScalarRelationFilter, Prisma.ProficiencyLevelWhereInput> | null
+  config?: Prisma.XOR<Prisma.AppConfigNullableScalarRelationFilter, Prisma.AppConfigWhereInput> | null
+  courseLinks?: Prisma.CourseAppListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
   mediaAssets?: Prisma.MediaAssetListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
@@ -256,12 +265,12 @@ export type AppWhereInput = {
   flashcardDecks?: Prisma.FlashcardDeckListRelationFilter
   importJobs?: Prisma.BulkImportJobListRelationFilter
   jobs?: Prisma.BackgroundJobListRelationFilter
-  config?: Prisma.XOR<Prisma.AppConfigNullableScalarRelationFilter, Prisma.AppConfigWhereInput> | null
 }
 
 export type AppOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
+  levelId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   packageName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -273,9 +282,10 @@ export type AppOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  courses?: Prisma.CourseOrderByRelationAggregateInput
-  categories?: Prisma.VocabularyCategoryOrderByRelationAggregateInput
-  vocabularies?: Prisma.VocabularyOrderByRelationAggregateInput
+  language?: Prisma.LanguageOrderByWithRelationInput
+  level?: Prisma.ProficiencyLevelOrderByWithRelationInput
+  config?: Prisma.AppConfigOrderByWithRelationInput
+  courseLinks?: Prisma.CourseAppOrderByRelationAggregateInput
   quizzes?: Prisma.QuizOrderByRelationAggregateInput
   mediaAssets?: Prisma.MediaAssetOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
@@ -283,19 +293,19 @@ export type AppOrderByWithRelationInput = {
   flashcardDecks?: Prisma.FlashcardDeckOrderByRelationAggregateInput
   importJobs?: Prisma.BulkImportJobOrderByRelationAggregateInput
   jobs?: Prisma.BackgroundJobOrderByRelationAggregateInput
-  config?: Prisma.AppConfigOrderByWithRelationInput
   _relevance?: Prisma.AppOrderByRelevanceInput
 }
 
 export type AppWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  level?: $Enums.AppLevel
   slug?: string
   packageName?: string
   bundleId?: string
   AND?: Prisma.AppWhereInput | Prisma.AppWhereInput[]
   OR?: Prisma.AppWhereInput[]
   NOT?: Prisma.AppWhereInput | Prisma.AppWhereInput[]
+  languageId?: Prisma.StringFilter<"App"> | string
+  levelId?: Prisma.StringNullableFilter<"App"> | string | null
   name?: Prisma.StringFilter<"App"> | string
   description?: Prisma.StringNullableFilter<"App"> | string | null
   iconUrl?: Prisma.StringNullableFilter<"App"> | string | null
@@ -304,9 +314,10 @@ export type AppWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"App"> | boolean
   createdAt?: Prisma.DateTimeFilter<"App"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"App"> | Date | string
-  courses?: Prisma.CourseListRelationFilter
-  categories?: Prisma.VocabularyCategoryListRelationFilter
-  vocabularies?: Prisma.VocabularyListRelationFilter
+  language?: Prisma.XOR<Prisma.LanguageScalarRelationFilter, Prisma.LanguageWhereInput>
+  level?: Prisma.XOR<Prisma.ProficiencyLevelNullableScalarRelationFilter, Prisma.ProficiencyLevelWhereInput> | null
+  config?: Prisma.XOR<Prisma.AppConfigNullableScalarRelationFilter, Prisma.AppConfigWhereInput> | null
+  courseLinks?: Prisma.CourseAppListRelationFilter
   quizzes?: Prisma.QuizListRelationFilter
   mediaAssets?: Prisma.MediaAssetListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
@@ -314,12 +325,12 @@ export type AppWhereUniqueInput = Prisma.AtLeast<{
   flashcardDecks?: Prisma.FlashcardDeckListRelationFilter
   importJobs?: Prisma.BulkImportJobListRelationFilter
   jobs?: Prisma.BackgroundJobListRelationFilter
-  config?: Prisma.XOR<Prisma.AppConfigNullableScalarRelationFilter, Prisma.AppConfigWhereInput> | null
-}, "id" | "level" | "slug" | "packageName" | "bundleId">
+}, "id" | "slug" | "packageName" | "bundleId">
 
 export type AppOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
+  levelId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   packageName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -341,7 +352,8 @@ export type AppScalarWhereWithAggregatesInput = {
   OR?: Prisma.AppScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AppScalarWhereWithAggregatesInput | Prisma.AppScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"App"> | string
-  level?: Prisma.EnumAppLevelWithAggregatesFilter<"App"> | $Enums.AppLevel
+  languageId?: Prisma.StringWithAggregatesFilter<"App"> | string
+  levelId?: Prisma.StringNullableWithAggregatesFilter<"App"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"App"> | string
   slug?: Prisma.StringWithAggregatesFilter<"App"> | string
   packageName?: Prisma.StringNullableWithAggregatesFilter<"App"> | string | null
@@ -357,7 +369,6 @@ export type AppScalarWhereWithAggregatesInput = {
 
 export type AppCreateInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -369,9 +380,10 @@ export type AppCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
@@ -379,12 +391,12 @@ export type AppCreateInput = {
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -396,9 +408,8 @@ export type AppUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
@@ -406,12 +417,10 @@ export type AppUncheckedCreateInput = {
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -423,9 +432,10 @@ export type AppUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
@@ -433,12 +443,12 @@ export type AppUpdateInput = {
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -450,9 +460,8 @@ export type AppUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
@@ -460,12 +469,12 @@ export type AppUncheckedUpdateInput = {
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateManyInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -481,7 +490,6 @@ export type AppCreateManyInput = {
 
 export type AppUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -497,7 +505,8 @@ export type AppUpdateManyMutationInput = {
 
 export type AppUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -511,6 +520,16 @@ export type AppUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type AppListRelationFilter = {
+  every?: Prisma.AppWhereInput
+  some?: Prisma.AppWhereInput
+  none?: Prisma.AppWhereInput
+}
+
+export type AppOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type AppOrderByRelevanceInput = {
   fields: Prisma.AppOrderByRelevanceFieldEnum | Prisma.AppOrderByRelevanceFieldEnum[]
   sort: Prisma.SortOrder
@@ -519,7 +538,8 @@ export type AppOrderByRelevanceInput = {
 
 export type AppCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
+  levelId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   packageName?: Prisma.SortOrder
@@ -535,7 +555,8 @@ export type AppCountOrderByAggregateInput = {
 
 export type AppMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
+  levelId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   packageName?: Prisma.SortOrder
@@ -551,7 +572,8 @@ export type AppMaxOrderByAggregateInput = {
 
 export type AppMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  level?: Prisma.SortOrder
+  languageId?: Prisma.SortOrder
+  levelId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   packageName?: Prisma.SortOrder
@@ -575,24 +597,88 @@ export type AppNullableScalarRelationFilter = {
   isNot?: Prisma.AppWhereInput | null
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type AppCreateNestedManyWithoutLanguageInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput> | Prisma.AppCreateWithoutLanguageInput[] | Prisma.AppUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLanguageInput | Prisma.AppCreateOrConnectWithoutLanguageInput[]
+  createMany?: Prisma.AppCreateManyLanguageInputEnvelope
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
 }
 
-export type EnumAppLevelFieldUpdateOperationsInput = {
-  set?: $Enums.AppLevel
+export type AppUncheckedCreateNestedManyWithoutLanguageInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput> | Prisma.AppCreateWithoutLanguageInput[] | Prisma.AppUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLanguageInput | Prisma.AppCreateOrConnectWithoutLanguageInput[]
+  createMany?: Prisma.AppCreateManyLanguageInputEnvelope
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type AppUpdateManyWithoutLanguageNestedInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput> | Prisma.AppCreateWithoutLanguageInput[] | Prisma.AppUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLanguageInput | Prisma.AppCreateOrConnectWithoutLanguageInput[]
+  upsert?: Prisma.AppUpsertWithWhereUniqueWithoutLanguageInput | Prisma.AppUpsertWithWhereUniqueWithoutLanguageInput[]
+  createMany?: Prisma.AppCreateManyLanguageInputEnvelope
+  set?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  disconnect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  delete?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  update?: Prisma.AppUpdateWithWhereUniqueWithoutLanguageInput | Prisma.AppUpdateWithWhereUniqueWithoutLanguageInput[]
+  updateMany?: Prisma.AppUpdateManyWithWhereWithoutLanguageInput | Prisma.AppUpdateManyWithWhereWithoutLanguageInput[]
+  deleteMany?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type AppUncheckedUpdateManyWithoutLanguageNestedInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput> | Prisma.AppCreateWithoutLanguageInput[] | Prisma.AppUncheckedCreateWithoutLanguageInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLanguageInput | Prisma.AppCreateOrConnectWithoutLanguageInput[]
+  upsert?: Prisma.AppUpsertWithWhereUniqueWithoutLanguageInput | Prisma.AppUpsertWithWhereUniqueWithoutLanguageInput[]
+  createMany?: Prisma.AppCreateManyLanguageInputEnvelope
+  set?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  disconnect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  delete?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  update?: Prisma.AppUpdateWithWhereUniqueWithoutLanguageInput | Prisma.AppUpdateWithWhereUniqueWithoutLanguageInput[]
+  updateMany?: Prisma.AppUpdateManyWithWhereWithoutLanguageInput | Prisma.AppUpdateManyWithWhereWithoutLanguageInput[]
+  deleteMany?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type AppCreateNestedManyWithoutLevelInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput> | Prisma.AppCreateWithoutLevelInput[] | Prisma.AppUncheckedCreateWithoutLevelInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLevelInput | Prisma.AppCreateOrConnectWithoutLevelInput[]
+  createMany?: Prisma.AppCreateManyLevelInputEnvelope
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+}
+
+export type AppUncheckedCreateNestedManyWithoutLevelInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput> | Prisma.AppCreateWithoutLevelInput[] | Prisma.AppUncheckedCreateWithoutLevelInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLevelInput | Prisma.AppCreateOrConnectWithoutLevelInput[]
+  createMany?: Prisma.AppCreateManyLevelInputEnvelope
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+}
+
+export type AppUpdateManyWithoutLevelNestedInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput> | Prisma.AppCreateWithoutLevelInput[] | Prisma.AppUncheckedCreateWithoutLevelInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLevelInput | Prisma.AppCreateOrConnectWithoutLevelInput[]
+  upsert?: Prisma.AppUpsertWithWhereUniqueWithoutLevelInput | Prisma.AppUpsertWithWhereUniqueWithoutLevelInput[]
+  createMany?: Prisma.AppCreateManyLevelInputEnvelope
+  set?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  disconnect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  delete?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  update?: Prisma.AppUpdateWithWhereUniqueWithoutLevelInput | Prisma.AppUpdateWithWhereUniqueWithoutLevelInput[]
+  updateMany?: Prisma.AppUpdateManyWithWhereWithoutLevelInput | Prisma.AppUpdateManyWithWhereWithoutLevelInput[]
+  deleteMany?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
+}
+
+export type AppUncheckedUpdateManyWithoutLevelNestedInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput> | Prisma.AppCreateWithoutLevelInput[] | Prisma.AppUncheckedCreateWithoutLevelInput[]
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutLevelInput | Prisma.AppCreateOrConnectWithoutLevelInput[]
+  upsert?: Prisma.AppUpsertWithWhereUniqueWithoutLevelInput | Prisma.AppUpsertWithWhereUniqueWithoutLevelInput[]
+  createMany?: Prisma.AppCreateManyLevelInputEnvelope
+  set?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  disconnect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  delete?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  connect?: Prisma.AppWhereUniqueInput | Prisma.AppWhereUniqueInput[]
+  update?: Prisma.AppUpdateWithWhereUniqueWithoutLevelInput | Prisma.AppUpdateWithWhereUniqueWithoutLevelInput[]
+  updateMany?: Prisma.AppUpdateManyWithWhereWithoutLevelInput | Prisma.AppUpdateManyWithWhereWithoutLevelInput[]
+  deleteMany?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
 }
 
 export type AppCreateNestedOneWithoutConfigInput = {
@@ -609,18 +695,18 @@ export type AppUpdateOneRequiredWithoutConfigNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutConfigInput, Prisma.AppUpdateWithoutConfigInput>, Prisma.AppUncheckedUpdateWithoutConfigInput>
 }
 
-export type AppCreateNestedOneWithoutCoursesInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutCoursesInput, Prisma.AppUncheckedCreateWithoutCoursesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCoursesInput
+export type AppCreateNestedOneWithoutCourseLinksInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutCourseLinksInput, Prisma.AppUncheckedCreateWithoutCourseLinksInput>
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCourseLinksInput
   connect?: Prisma.AppWhereUniqueInput
 }
 
-export type AppUpdateOneRequiredWithoutCoursesNestedInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutCoursesInput, Prisma.AppUncheckedCreateWithoutCoursesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCoursesInput
-  upsert?: Prisma.AppUpsertWithoutCoursesInput
+export type AppUpdateOneRequiredWithoutCourseLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.AppCreateWithoutCourseLinksInput, Prisma.AppUncheckedCreateWithoutCourseLinksInput>
+  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCourseLinksInput
+  upsert?: Prisma.AppUpsertWithoutCourseLinksInput
   connect?: Prisma.AppWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutCoursesInput, Prisma.AppUpdateWithoutCoursesInput>, Prisma.AppUncheckedUpdateWithoutCoursesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutCourseLinksInput, Prisma.AppUpdateWithoutCourseLinksInput>, Prisma.AppUncheckedUpdateWithoutCourseLinksInput>
 }
 
 export type AppCreateNestedOneWithoutMediaAssetsInput = {
@@ -637,34 +723,6 @@ export type AppUpdateOneWithoutMediaAssetsNestedInput = {
   delete?: Prisma.AppWhereInput | boolean
   connect?: Prisma.AppWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutMediaAssetsInput, Prisma.AppUpdateWithoutMediaAssetsInput>, Prisma.AppUncheckedUpdateWithoutMediaAssetsInput>
-}
-
-export type AppCreateNestedOneWithoutCategoriesInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutCategoriesInput, Prisma.AppUncheckedCreateWithoutCategoriesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCategoriesInput
-  connect?: Prisma.AppWhereUniqueInput
-}
-
-export type AppUpdateOneRequiredWithoutCategoriesNestedInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutCategoriesInput, Prisma.AppUncheckedCreateWithoutCategoriesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutCategoriesInput
-  upsert?: Prisma.AppUpsertWithoutCategoriesInput
-  connect?: Prisma.AppWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutCategoriesInput, Prisma.AppUpdateWithoutCategoriesInput>, Prisma.AppUncheckedUpdateWithoutCategoriesInput>
-}
-
-export type AppCreateNestedOneWithoutVocabulariesInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutVocabulariesInput, Prisma.AppUncheckedCreateWithoutVocabulariesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutVocabulariesInput
-  connect?: Prisma.AppWhereUniqueInput
-}
-
-export type AppUpdateOneRequiredWithoutVocabulariesNestedInput = {
-  create?: Prisma.XOR<Prisma.AppCreateWithoutVocabulariesInput, Prisma.AppUncheckedCreateWithoutVocabulariesInput>
-  connectOrCreate?: Prisma.AppCreateOrConnectWithoutVocabulariesInput
-  upsert?: Prisma.AppUpsertWithoutVocabulariesInput
-  connect?: Prisma.AppWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutVocabulariesInput, Prisma.AppUpdateWithoutVocabulariesInput>, Prisma.AppUncheckedUpdateWithoutVocabulariesInput>
 }
 
 export type AppCreateNestedOneWithoutFlashcardDecksInput = {
@@ -687,10 +745,12 @@ export type AppCreateNestedOneWithoutQuizzesInput = {
   connect?: Prisma.AppWhereUniqueInput
 }
 
-export type AppUpdateOneRequiredWithoutQuizzesNestedInput = {
+export type AppUpdateOneWithoutQuizzesNestedInput = {
   create?: Prisma.XOR<Prisma.AppCreateWithoutQuizzesInput, Prisma.AppUncheckedCreateWithoutQuizzesInput>
   connectOrCreate?: Prisma.AppCreateOrConnectWithoutQuizzesInput
   upsert?: Prisma.AppUpsertWithoutQuizzesInput
+  disconnect?: Prisma.AppWhereInput | boolean
+  delete?: Prisma.AppWhereInput | boolean
   connect?: Prisma.AppWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutQuizzesInput, Prisma.AppUpdateWithoutQuizzesInput>, Prisma.AppUncheckedUpdateWithoutQuizzesInput>
 }
@@ -753,9 +813,8 @@ export type AppUpdateOneRequiredWithoutImportJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AppUpdateToOneWithWhereWithoutImportJobsInput, Prisma.AppUpdateWithoutImportJobsInput>, Prisma.AppUncheckedUpdateWithoutImportJobsInput>
 }
 
-export type AppCreateWithoutConfigInput = {
+export type AppCreateWithoutLanguageInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -767,9 +826,181 @@ export type AppCreateWithoutConfigInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
+  adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
+  flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
+  importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
+  jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
+}
+
+export type AppUncheckedCreateWithoutLanguageInput = {
+  id?: string
+  levelId?: string | null
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
+  adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
+  flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
+  importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
+  jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
+}
+
+export type AppCreateOrConnectWithoutLanguageInput = {
+  where: Prisma.AppWhereUniqueInput
+  create: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput>
+}
+
+export type AppCreateManyLanguageInputEnvelope = {
+  data: Prisma.AppCreateManyLanguageInput | Prisma.AppCreateManyLanguageInput[]
+  skipDuplicates?: boolean
+}
+
+export type AppUpsertWithWhereUniqueWithoutLanguageInput = {
+  where: Prisma.AppWhereUniqueInput
+  update: Prisma.XOR<Prisma.AppUpdateWithoutLanguageInput, Prisma.AppUncheckedUpdateWithoutLanguageInput>
+  create: Prisma.XOR<Prisma.AppCreateWithoutLanguageInput, Prisma.AppUncheckedCreateWithoutLanguageInput>
+}
+
+export type AppUpdateWithWhereUniqueWithoutLanguageInput = {
+  where: Prisma.AppWhereUniqueInput
+  data: Prisma.XOR<Prisma.AppUpdateWithoutLanguageInput, Prisma.AppUncheckedUpdateWithoutLanguageInput>
+}
+
+export type AppUpdateManyWithWhereWithoutLanguageInput = {
+  where: Prisma.AppScalarWhereInput
+  data: Prisma.XOR<Prisma.AppUpdateManyMutationInput, Prisma.AppUncheckedUpdateManyWithoutLanguageInput>
+}
+
+export type AppScalarWhereInput = {
+  AND?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
+  OR?: Prisma.AppScalarWhereInput[]
+  NOT?: Prisma.AppScalarWhereInput | Prisma.AppScalarWhereInput[]
+  id?: Prisma.StringFilter<"App"> | string
+  languageId?: Prisma.StringFilter<"App"> | string
+  levelId?: Prisma.StringNullableFilter<"App"> | string | null
+  name?: Prisma.StringFilter<"App"> | string
+  slug?: Prisma.StringFilter<"App"> | string
+  packageName?: Prisma.StringNullableFilter<"App"> | string | null
+  bundleId?: Prisma.StringNullableFilter<"App"> | string | null
+  description?: Prisma.StringNullableFilter<"App"> | string | null
+  iconUrl?: Prisma.StringNullableFilter<"App"> | string | null
+  primaryColor?: Prisma.StringNullableFilter<"App"> | string | null
+  secondaryColor?: Prisma.StringNullableFilter<"App"> | string | null
+  isActive?: Prisma.BoolFilter<"App"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"App"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"App"> | Date | string
+}
+
+export type AppCreateWithoutLevelInput = {
+  id?: string
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
+  quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
+  adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
+  flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
+  importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
+  jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
+}
+
+export type AppUncheckedCreateWithoutLevelInput = {
+  id?: string
+  languageId: string
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
+  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
+  adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
+  flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
+  importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
+  jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
+}
+
+export type AppCreateOrConnectWithoutLevelInput = {
+  where: Prisma.AppWhereUniqueInput
+  create: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput>
+}
+
+export type AppCreateManyLevelInputEnvelope = {
+  data: Prisma.AppCreateManyLevelInput | Prisma.AppCreateManyLevelInput[]
+  skipDuplicates?: boolean
+}
+
+export type AppUpsertWithWhereUniqueWithoutLevelInput = {
+  where: Prisma.AppWhereUniqueInput
+  update: Prisma.XOR<Prisma.AppUpdateWithoutLevelInput, Prisma.AppUncheckedUpdateWithoutLevelInput>
+  create: Prisma.XOR<Prisma.AppCreateWithoutLevelInput, Prisma.AppUncheckedCreateWithoutLevelInput>
+}
+
+export type AppUpdateWithWhereUniqueWithoutLevelInput = {
+  where: Prisma.AppWhereUniqueInput
+  data: Prisma.XOR<Prisma.AppUpdateWithoutLevelInput, Prisma.AppUncheckedUpdateWithoutLevelInput>
+}
+
+export type AppUpdateManyWithWhereWithoutLevelInput = {
+  where: Prisma.AppScalarWhereInput
+  data: Prisma.XOR<Prisma.AppUpdateManyMutationInput, Prisma.AppUncheckedUpdateManyWithoutLevelInput>
+}
+
+export type AppCreateWithoutConfigInput = {
+  id?: string
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
@@ -781,7 +1012,8 @@ export type AppCreateWithoutConfigInput = {
 
 export type AppUncheckedCreateWithoutConfigInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -793,9 +1025,7 @@ export type AppUncheckedCreateWithoutConfigInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
@@ -823,7 +1053,6 @@ export type AppUpdateToOneWithWhereWithoutConfigInput = {
 
 export type AppUpdateWithoutConfigInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -835,9 +1064,9 @@ export type AppUpdateWithoutConfigInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
@@ -849,7 +1078,8 @@ export type AppUpdateWithoutConfigInput = {
 
 export type AppUncheckedUpdateWithoutConfigInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -861,9 +1091,7 @@ export type AppUncheckedUpdateWithoutConfigInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
@@ -873,9 +1101,8 @@ export type AppUncheckedUpdateWithoutConfigInput = {
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
 }
 
-export type AppCreateWithoutCoursesInput = {
+export type AppCreateWithoutCourseLinksInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -887,8 +1114,9 @@ export type AppCreateWithoutCoursesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
@@ -896,12 +1124,12 @@ export type AppCreateWithoutCoursesInput = {
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
-export type AppUncheckedCreateWithoutCoursesInput = {
+export type AppUncheckedCreateWithoutCourseLinksInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -913,8 +1141,7 @@ export type AppUncheckedCreateWithoutCoursesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
@@ -922,28 +1149,26 @@ export type AppUncheckedCreateWithoutCoursesInput = {
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
-export type AppCreateOrConnectWithoutCoursesInput = {
+export type AppCreateOrConnectWithoutCourseLinksInput = {
   where: Prisma.AppWhereUniqueInput
-  create: Prisma.XOR<Prisma.AppCreateWithoutCoursesInput, Prisma.AppUncheckedCreateWithoutCoursesInput>
+  create: Prisma.XOR<Prisma.AppCreateWithoutCourseLinksInput, Prisma.AppUncheckedCreateWithoutCourseLinksInput>
 }
 
-export type AppUpsertWithoutCoursesInput = {
-  update: Prisma.XOR<Prisma.AppUpdateWithoutCoursesInput, Prisma.AppUncheckedUpdateWithoutCoursesInput>
-  create: Prisma.XOR<Prisma.AppCreateWithoutCoursesInput, Prisma.AppUncheckedCreateWithoutCoursesInput>
+export type AppUpsertWithoutCourseLinksInput = {
+  update: Prisma.XOR<Prisma.AppUpdateWithoutCourseLinksInput, Prisma.AppUncheckedUpdateWithoutCourseLinksInput>
+  create: Prisma.XOR<Prisma.AppCreateWithoutCourseLinksInput, Prisma.AppUncheckedCreateWithoutCourseLinksInput>
   where?: Prisma.AppWhereInput
 }
 
-export type AppUpdateToOneWithWhereWithoutCoursesInput = {
+export type AppUpdateToOneWithWhereWithoutCourseLinksInput = {
   where?: Prisma.AppWhereInput
-  data: Prisma.XOR<Prisma.AppUpdateWithoutCoursesInput, Prisma.AppUncheckedUpdateWithoutCoursesInput>
+  data: Prisma.XOR<Prisma.AppUpdateWithoutCourseLinksInput, Prisma.AppUncheckedUpdateWithoutCourseLinksInput>
 }
 
-export type AppUpdateWithoutCoursesInput = {
+export type AppUpdateWithoutCourseLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -955,8 +1180,9 @@ export type AppUpdateWithoutCoursesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
@@ -964,12 +1190,12 @@ export type AppUpdateWithoutCoursesInput = {
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
-export type AppUncheckedUpdateWithoutCoursesInput = {
+export type AppUncheckedUpdateWithoutCourseLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -981,8 +1207,7 @@ export type AppUncheckedUpdateWithoutCoursesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
@@ -990,12 +1215,10 @@ export type AppUncheckedUpdateWithoutCoursesInput = {
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutMediaAssetsInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1007,21 +1230,22 @@ export type AppCreateWithoutMediaAssetsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutMediaAssetsInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1033,16 +1257,14 @@ export type AppUncheckedCreateWithoutMediaAssetsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutMediaAssetsInput = {
@@ -1063,7 +1285,6 @@ export type AppUpdateToOneWithWhereWithoutMediaAssetsInput = {
 
 export type AppUpdateWithoutMediaAssetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1075,21 +1296,22 @@ export type AppUpdateWithoutMediaAssetsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutMediaAssetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1101,261 +1323,18 @@ export type AppUncheckedUpdateWithoutMediaAssetsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
-}
-
-export type AppCreateWithoutCategoriesInput = {
-  id?: string
-  level: $Enums.AppLevel
-  name: string
-  slug: string
-  packageName?: string | null
-  bundleId?: string | null
-  description?: string | null
-  iconUrl?: string | null
-  primaryColor?: string | null
-  secondaryColor?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
-  quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
-  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
-  adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
-  flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
-  importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
-  jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
-}
-
-export type AppUncheckedCreateWithoutCategoriesInput = {
-  id?: string
-  level: $Enums.AppLevel
-  name: string
-  slug: string
-  packageName?: string | null
-  bundleId?: string | null
-  description?: string | null
-  iconUrl?: string | null
-  primaryColor?: string | null
-  secondaryColor?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
-  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
-  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
-  adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
-  flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
-  importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
-  jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
-}
-
-export type AppCreateOrConnectWithoutCategoriesInput = {
-  where: Prisma.AppWhereUniqueInput
-  create: Prisma.XOR<Prisma.AppCreateWithoutCategoriesInput, Prisma.AppUncheckedCreateWithoutCategoriesInput>
-}
-
-export type AppUpsertWithoutCategoriesInput = {
-  update: Prisma.XOR<Prisma.AppUpdateWithoutCategoriesInput, Prisma.AppUncheckedUpdateWithoutCategoriesInput>
-  create: Prisma.XOR<Prisma.AppCreateWithoutCategoriesInput, Prisma.AppUncheckedCreateWithoutCategoriesInput>
-  where?: Prisma.AppWhereInput
-}
-
-export type AppUpdateToOneWithWhereWithoutCategoriesInput = {
-  where?: Prisma.AppWhereInput
-  data: Prisma.XOR<Prisma.AppUpdateWithoutCategoriesInput, Prisma.AppUncheckedUpdateWithoutCategoriesInput>
-}
-
-export type AppUpdateWithoutCategoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
-  quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
-  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
-  adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
-  flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
-  importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
-  jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
-}
-
-export type AppUncheckedUpdateWithoutCategoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
-  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
-  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
-  adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
-  flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
-  importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
-  jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
-}
-
-export type AppCreateWithoutVocabulariesInput = {
-  id?: string
-  level: $Enums.AppLevel
-  name: string
-  slug: string
-  packageName?: string | null
-  bundleId?: string | null
-  description?: string | null
-  iconUrl?: string | null
-  primaryColor?: string | null
-  secondaryColor?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
-  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
-  adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
-  flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
-  importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
-  jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
-}
-
-export type AppUncheckedCreateWithoutVocabulariesInput = {
-  id?: string
-  level: $Enums.AppLevel
-  name: string
-  slug: string
-  packageName?: string | null
-  bundleId?: string | null
-  description?: string | null
-  iconUrl?: string | null
-  primaryColor?: string | null
-  secondaryColor?: string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
-  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
-  adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
-  flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
-  importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
-  jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
-}
-
-export type AppCreateOrConnectWithoutVocabulariesInput = {
-  where: Prisma.AppWhereUniqueInput
-  create: Prisma.XOR<Prisma.AppCreateWithoutVocabulariesInput, Prisma.AppUncheckedCreateWithoutVocabulariesInput>
-}
-
-export type AppUpsertWithoutVocabulariesInput = {
-  update: Prisma.XOR<Prisma.AppUpdateWithoutVocabulariesInput, Prisma.AppUncheckedUpdateWithoutVocabulariesInput>
-  create: Prisma.XOR<Prisma.AppCreateWithoutVocabulariesInput, Prisma.AppUncheckedCreateWithoutVocabulariesInput>
-  where?: Prisma.AppWhereInput
-}
-
-export type AppUpdateToOneWithWhereWithoutVocabulariesInput = {
-  where?: Prisma.AppWhereInput
-  data: Prisma.XOR<Prisma.AppUpdateWithoutVocabulariesInput, Prisma.AppUncheckedUpdateWithoutVocabulariesInput>
-}
-
-export type AppUpdateWithoutVocabulariesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
-  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
-  adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
-  flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
-  importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
-  jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
-}
-
-export type AppUncheckedUpdateWithoutVocabulariesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
-  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
-  adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
-  flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
-  importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
-  jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutFlashcardDecksInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1367,21 +1346,22 @@ export type AppCreateWithoutFlashcardDecksInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutFlashcardDecksInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1393,16 +1373,14 @@ export type AppUncheckedCreateWithoutFlashcardDecksInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutFlashcardDecksInput = {
@@ -1423,7 +1401,6 @@ export type AppUpdateToOneWithWhereWithoutFlashcardDecksInput = {
 
 export type AppUpdateWithoutFlashcardDecksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1435,21 +1412,22 @@ export type AppUpdateWithoutFlashcardDecksInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutFlashcardDecksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1461,21 +1439,18 @@ export type AppUncheckedUpdateWithoutFlashcardDecksInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutQuizzesInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1487,21 +1462,22 @@ export type AppCreateWithoutQuizzesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutQuizzesInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1513,16 +1489,14 @@ export type AppUncheckedCreateWithoutQuizzesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutQuizzesInput = {
@@ -1543,7 +1517,6 @@ export type AppUpdateToOneWithWhereWithoutQuizzesInput = {
 
 export type AppUpdateWithoutQuizzesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1555,21 +1528,22 @@ export type AppUpdateWithoutQuizzesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutQuizzesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1581,21 +1555,18 @@ export type AppUncheckedUpdateWithoutQuizzesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutSubscriptionsInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1607,21 +1578,22 @@ export type AppCreateWithoutSubscriptionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutSubscriptionsInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1633,16 +1605,14 @@ export type AppUncheckedCreateWithoutSubscriptionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutSubscriptionsInput = {
@@ -1663,7 +1633,6 @@ export type AppUpdateToOneWithWhereWithoutSubscriptionsInput = {
 
 export type AppUpdateWithoutSubscriptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1675,21 +1644,22 @@ export type AppUpdateWithoutSubscriptionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutSubscriptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1701,21 +1671,18 @@ export type AppUncheckedUpdateWithoutSubscriptionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutAdConfigsInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1727,21 +1694,22 @@ export type AppCreateWithoutAdConfigsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutAdConfigsInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1753,16 +1721,14 @@ export type AppUncheckedCreateWithoutAdConfigsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutAdConfigsInput = {
@@ -1783,7 +1749,6 @@ export type AppUpdateToOneWithWhereWithoutAdConfigsInput = {
 
 export type AppUpdateWithoutAdConfigsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1795,21 +1760,22 @@ export type AppUpdateWithoutAdConfigsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutAdConfigsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1821,21 +1787,18 @@ export type AppUncheckedUpdateWithoutAdConfigsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutJobsInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1847,21 +1810,22 @@ export type AppCreateWithoutJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutJobsInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1873,16 +1837,14 @@ export type AppUncheckedCreateWithoutJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   importJobs?: Prisma.BulkImportJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutJobsInput = {
@@ -1903,7 +1865,6 @@ export type AppUpdateToOneWithWhereWithoutJobsInput = {
 
 export type AppUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1915,21 +1876,22 @@ export type AppUpdateWithoutJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1941,21 +1903,18 @@ export type AppUncheckedUpdateWithoutJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
 }
 
 export type AppCreateWithoutImportJobsInput = {
   id?: string
-  level: $Enums.AppLevel
   name: string
   slug: string
   packageName?: string | null
@@ -1967,21 +1926,22 @@ export type AppCreateWithoutImportJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyCreateNestedManyWithoutAppInput
+  language: Prisma.LanguageCreateNestedOneWithoutAppsInput
+  level?: Prisma.ProficiencyLevelCreateNestedOneWithoutAppsInput
+  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigCreateNestedOneWithoutAppInput
 }
 
 export type AppUncheckedCreateWithoutImportJobsInput = {
   id?: string
-  level: $Enums.AppLevel
+  languageId: string
+  levelId?: string | null
   name: string
   slug: string
   packageName?: string | null
@@ -1993,16 +1953,14 @@ export type AppUncheckedCreateWithoutImportJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutAppInput
-  categories?: Prisma.VocabularyCategoryUncheckedCreateNestedManyWithoutAppInput
-  vocabularies?: Prisma.VocabularyUncheckedCreateNestedManyWithoutAppInput
+  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
+  courseLinks?: Prisma.CourseAppUncheckedCreateNestedManyWithoutAppInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutAppInput
   mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutAppInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutAppInput
   adConfigs?: Prisma.AdConfigUncheckedCreateNestedManyWithoutAppInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedCreateNestedManyWithoutAppInput
   jobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutAppInput
-  config?: Prisma.AppConfigUncheckedCreateNestedOneWithoutAppInput
 }
 
 export type AppCreateOrConnectWithoutImportJobsInput = {
@@ -2023,7 +1981,6 @@ export type AppUpdateToOneWithWhereWithoutImportJobsInput = {
 
 export type AppUpdateWithoutImportJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2035,21 +1992,22 @@ export type AppUpdateWithoutImportJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUpdateManyWithoutAppNestedInput
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
-  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
 }
 
 export type AppUncheckedUpdateWithoutImportJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  level?: Prisma.EnumAppLevelFieldUpdateOperationsInput | $Enums.AppLevel
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2061,16 +2019,178 @@ export type AppUncheckedUpdateWithoutImportJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  courses?: Prisma.CourseUncheckedUpdateManyWithoutAppNestedInput
-  categories?: Prisma.VocabularyCategoryUncheckedUpdateManyWithoutAppNestedInput
-  vocabularies?: Prisma.VocabularyUncheckedUpdateManyWithoutAppNestedInput
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
   quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
   mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
   adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
   flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
   jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
+}
+
+export type AppCreateManyLanguageInput = {
+  id?: string
+  levelId?: string | null
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AppUpdateWithoutLanguageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  level?: Prisma.ProficiencyLevelUpdateOneWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
+  adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
+  flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
+  importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
+  jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
+}
+
+export type AppUncheckedUpdateWithoutLanguageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
+  adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
+  flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
+  importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
+  jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
+}
+
+export type AppUncheckedUpdateManyWithoutLanguageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  levelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AppCreateManyLevelInput = {
+  id?: string
+  languageId: string
+  name: string
+  slug: string
+  packageName?: string | null
+  bundleId?: string | null
+  description?: string | null
+  iconUrl?: string | null
+  primaryColor?: string | null
+  secondaryColor?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AppUpdateWithoutLevelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  language?: Prisma.LanguageUpdateOneRequiredWithoutAppsNestedInput
+  config?: Prisma.AppConfigUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUpdateManyWithoutAppNestedInput
+  quizzes?: Prisma.QuizUpdateManyWithoutAppNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutAppNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutAppNestedInput
+  adConfigs?: Prisma.AdConfigUpdateManyWithoutAppNestedInput
+  flashcardDecks?: Prisma.FlashcardDeckUpdateManyWithoutAppNestedInput
+  importJobs?: Prisma.BulkImportJobUpdateManyWithoutAppNestedInput
+  jobs?: Prisma.BackgroundJobUpdateManyWithoutAppNestedInput
+}
+
+export type AppUncheckedUpdateWithoutLevelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  config?: Prisma.AppConfigUncheckedUpdateOneWithoutAppNestedInput
+  courseLinks?: Prisma.CourseAppUncheckedUpdateManyWithoutAppNestedInput
+  quizzes?: Prisma.QuizUncheckedUpdateManyWithoutAppNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutAppNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutAppNestedInput
+  adConfigs?: Prisma.AdConfigUncheckedUpdateManyWithoutAppNestedInput
+  flashcardDecks?: Prisma.FlashcardDeckUncheckedUpdateManyWithoutAppNestedInput
+  importJobs?: Prisma.BulkImportJobUncheckedUpdateManyWithoutAppNestedInput
+  jobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutAppNestedInput
+}
+
+export type AppUncheckedUpdateManyWithoutLevelInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  languageId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  packageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bundleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -2079,9 +2199,7 @@ export type AppUncheckedUpdateWithoutImportJobsInput = {
  */
 
 export type AppCountOutputType = {
-  courses: number
-  categories: number
-  vocabularies: number
+  courseLinks: number
   quizzes: number
   mediaAssets: number
   subscriptions: number
@@ -2092,9 +2210,7 @@ export type AppCountOutputType = {
 }
 
 export type AppCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  courses?: boolean | AppCountOutputTypeCountCoursesArgs
-  categories?: boolean | AppCountOutputTypeCountCategoriesArgs
-  vocabularies?: boolean | AppCountOutputTypeCountVocabulariesArgs
+  courseLinks?: boolean | AppCountOutputTypeCountCourseLinksArgs
   quizzes?: boolean | AppCountOutputTypeCountQuizzesArgs
   mediaAssets?: boolean | AppCountOutputTypeCountMediaAssetsArgs
   subscriptions?: boolean | AppCountOutputTypeCountSubscriptionsArgs
@@ -2117,22 +2233,8 @@ export type AppCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
 /**
  * AppCountOutputType without action
  */
-export type AppCountOutputTypeCountCoursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CourseWhereInput
-}
-
-/**
- * AppCountOutputType without action
- */
-export type AppCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VocabularyCategoryWhereInput
-}
-
-/**
- * AppCountOutputType without action
- */
-export type AppCountOutputTypeCountVocabulariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VocabularyWhereInput
+export type AppCountOutputTypeCountCourseLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CourseAppWhereInput
 }
 
 /**
@@ -2187,7 +2289,8 @@ export type AppCountOutputTypeCountJobsArgs<ExtArgs extends runtime.Types.Extens
 
 export type AppSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  level?: boolean
+  languageId?: boolean
+  levelId?: boolean
   name?: boolean
   slug?: boolean
   packageName?: boolean
@@ -2199,9 +2302,10 @@ export type AppSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  courses?: boolean | Prisma.App$coursesArgs<ExtArgs>
-  categories?: boolean | Prisma.App$categoriesArgs<ExtArgs>
-  vocabularies?: boolean | Prisma.App$vocabulariesArgs<ExtArgs>
+  language?: boolean | Prisma.LanguageDefaultArgs<ExtArgs>
+  level?: boolean | Prisma.App$levelArgs<ExtArgs>
+  config?: boolean | Prisma.App$configArgs<ExtArgs>
+  courseLinks?: boolean | Prisma.App$courseLinksArgs<ExtArgs>
   quizzes?: boolean | Prisma.App$quizzesArgs<ExtArgs>
   mediaAssets?: boolean | Prisma.App$mediaAssetsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.App$subscriptionsArgs<ExtArgs>
@@ -2209,7 +2313,6 @@ export type AppSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   flashcardDecks?: boolean | Prisma.App$flashcardDecksArgs<ExtArgs>
   importJobs?: boolean | Prisma.App$importJobsArgs<ExtArgs>
   jobs?: boolean | Prisma.App$jobsArgs<ExtArgs>
-  config?: boolean | Prisma.App$configArgs<ExtArgs>
   _count?: boolean | Prisma.AppCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["app"]>
 
@@ -2217,7 +2320,8 @@ export type AppSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 
 export type AppSelectScalar = {
   id?: boolean
-  level?: boolean
+  languageId?: boolean
+  levelId?: boolean
   name?: boolean
   slug?: boolean
   packageName?: boolean
@@ -2231,11 +2335,12 @@ export type AppSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AppOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "level" | "name" | "slug" | "packageName" | "bundleId" | "description" | "iconUrl" | "primaryColor" | "secondaryColor" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["app"]>
+export type AppOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "languageId" | "levelId" | "name" | "slug" | "packageName" | "bundleId" | "description" | "iconUrl" | "primaryColor" | "secondaryColor" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["app"]>
 export type AppInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  courses?: boolean | Prisma.App$coursesArgs<ExtArgs>
-  categories?: boolean | Prisma.App$categoriesArgs<ExtArgs>
-  vocabularies?: boolean | Prisma.App$vocabulariesArgs<ExtArgs>
+  language?: boolean | Prisma.LanguageDefaultArgs<ExtArgs>
+  level?: boolean | Prisma.App$levelArgs<ExtArgs>
+  config?: boolean | Prisma.App$configArgs<ExtArgs>
+  courseLinks?: boolean | Prisma.App$courseLinksArgs<ExtArgs>
   quizzes?: boolean | Prisma.App$quizzesArgs<ExtArgs>
   mediaAssets?: boolean | Prisma.App$mediaAssetsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.App$subscriptionsArgs<ExtArgs>
@@ -2243,16 +2348,16 @@ export type AppInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   flashcardDecks?: boolean | Prisma.App$flashcardDecksArgs<ExtArgs>
   importJobs?: boolean | Prisma.App$importJobsArgs<ExtArgs>
   jobs?: boolean | Prisma.App$jobsArgs<ExtArgs>
-  config?: boolean | Prisma.App$configArgs<ExtArgs>
   _count?: boolean | Prisma.AppCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $AppPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "App"
   objects: {
-    courses: Prisma.$CoursePayload<ExtArgs>[]
-    categories: Prisma.$VocabularyCategoryPayload<ExtArgs>[]
-    vocabularies: Prisma.$VocabularyPayload<ExtArgs>[]
+    language: Prisma.$LanguagePayload<ExtArgs>
+    level: Prisma.$ProficiencyLevelPayload<ExtArgs> | null
+    config: Prisma.$AppConfigPayload<ExtArgs> | null
+    courseLinks: Prisma.$CourseAppPayload<ExtArgs>[]
     quizzes: Prisma.$QuizPayload<ExtArgs>[]
     mediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
@@ -2260,11 +2365,11 @@ export type $AppPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     flashcardDecks: Prisma.$FlashcardDeckPayload<ExtArgs>[]
     importJobs: Prisma.$BulkImportJobPayload<ExtArgs>[]
     jobs: Prisma.$BackgroundJobPayload<ExtArgs>[]
-    config: Prisma.$AppConfigPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    level: $Enums.AppLevel
+    languageId: string
+    levelId: string | null
     name: string
     slug: string
     packageName: string | null
@@ -2616,9 +2721,10 @@ readonly fields: AppFieldRefs;
  */
 export interface Prisma__AppClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  courses<T extends Prisma.App$coursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  categories<T extends Prisma.App$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  vocabularies<T extends Prisma.App$vocabulariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$vocabulariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VocabularyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  language<T extends Prisma.LanguageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LanguageDefaultArgs<ExtArgs>>): Prisma.Prisma__LanguageClient<runtime.Types.Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  level<T extends Prisma.App$levelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$levelArgs<ExtArgs>>): Prisma.Prisma__ProficiencyLevelClient<runtime.Types.Result.GetResult<Prisma.$ProficiencyLevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  config<T extends Prisma.App$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$configArgs<ExtArgs>>): Prisma.Prisma__AppConfigClient<runtime.Types.Result.GetResult<Prisma.$AppConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  courseLinks<T extends Prisma.App$courseLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$courseLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseAppPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quizzes<T extends Prisma.App$quizzesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$quizzesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mediaAssets<T extends Prisma.App$mediaAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$mediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.App$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2626,7 +2732,6 @@ export interface Prisma__AppClient<T, Null = never, ExtArgs extends runtime.Type
   flashcardDecks<T extends Prisma.App$flashcardDecksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$flashcardDecksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlashcardDeckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   importJobs<T extends Prisma.App$importJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$importJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BulkImportJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   jobs<T extends Prisma.App$jobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BackgroundJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  config<T extends Prisma.App$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.App$configArgs<ExtArgs>>): Prisma.Prisma__AppConfigClient<runtime.Types.Result.GetResult<Prisma.$AppConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2657,7 +2762,8 @@ export interface Prisma__AppClient<T, Null = never, ExtArgs extends runtime.Type
  */
 export interface AppFieldRefs {
   readonly id: Prisma.FieldRef<"App", 'String'>
-  readonly level: Prisma.FieldRef<"App", 'AppLevel'>
+  readonly languageId: Prisma.FieldRef<"App", 'String'>
+  readonly levelId: Prisma.FieldRef<"App", 'String'>
   readonly name: Prisma.FieldRef<"App", 'String'>
   readonly slug: Prisma.FieldRef<"App", 'String'>
   readonly packageName: Prisma.FieldRef<"App", 'String'>
@@ -3017,75 +3123,65 @@ export type AppDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * App.courses
+ * App.level
  */
-export type App$coursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type App$levelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Course
+   * Select specific fields to fetch from the ProficiencyLevel
    */
-  select?: Prisma.CourseSelect<ExtArgs> | null
+  select?: Prisma.ProficiencyLevelSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Course
+   * Omit specific fields from the ProficiencyLevel
    */
-  omit?: Prisma.CourseOmit<ExtArgs> | null
+  omit?: Prisma.ProficiencyLevelOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CourseInclude<ExtArgs> | null
-  where?: Prisma.CourseWhereInput
-  orderBy?: Prisma.CourseOrderByWithRelationInput | Prisma.CourseOrderByWithRelationInput[]
-  cursor?: Prisma.CourseWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CourseScalarFieldEnum | Prisma.CourseScalarFieldEnum[]
+  include?: Prisma.ProficiencyLevelInclude<ExtArgs> | null
+  where?: Prisma.ProficiencyLevelWhereInput
 }
 
 /**
- * App.categories
+ * App.config
  */
-export type App$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type App$configArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the VocabularyCategory
+   * Select specific fields to fetch from the AppConfig
    */
-  select?: Prisma.VocabularyCategorySelect<ExtArgs> | null
+  select?: Prisma.AppConfigSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the VocabularyCategory
+   * Omit specific fields from the AppConfig
    */
-  omit?: Prisma.VocabularyCategoryOmit<ExtArgs> | null
+  omit?: Prisma.AppConfigOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.VocabularyCategoryInclude<ExtArgs> | null
-  where?: Prisma.VocabularyCategoryWhereInput
-  orderBy?: Prisma.VocabularyCategoryOrderByWithRelationInput | Prisma.VocabularyCategoryOrderByWithRelationInput[]
-  cursor?: Prisma.VocabularyCategoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.VocabularyCategoryScalarFieldEnum | Prisma.VocabularyCategoryScalarFieldEnum[]
+  include?: Prisma.AppConfigInclude<ExtArgs> | null
+  where?: Prisma.AppConfigWhereInput
 }
 
 /**
- * App.vocabularies
+ * App.courseLinks
  */
-export type App$vocabulariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type App$courseLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Vocabulary
+   * Select specific fields to fetch from the CourseApp
    */
-  select?: Prisma.VocabularySelect<ExtArgs> | null
+  select?: Prisma.CourseAppSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Vocabulary
+   * Omit specific fields from the CourseApp
    */
-  omit?: Prisma.VocabularyOmit<ExtArgs> | null
+  omit?: Prisma.CourseAppOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.VocabularyInclude<ExtArgs> | null
-  where?: Prisma.VocabularyWhereInput
-  orderBy?: Prisma.VocabularyOrderByWithRelationInput | Prisma.VocabularyOrderByWithRelationInput[]
-  cursor?: Prisma.VocabularyWhereUniqueInput
+  include?: Prisma.CourseAppInclude<ExtArgs> | null
+  where?: Prisma.CourseAppWhereInput
+  orderBy?: Prisma.CourseAppOrderByWithRelationInput | Prisma.CourseAppOrderByWithRelationInput[]
+  cursor?: Prisma.CourseAppWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.VocabularyScalarFieldEnum | Prisma.VocabularyScalarFieldEnum[]
+  distinct?: Prisma.CourseAppScalarFieldEnum | Prisma.CourseAppScalarFieldEnum[]
 }
 
 /**
@@ -3254,25 +3350,6 @@ export type App$jobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   take?: number
   skip?: number
   distinct?: Prisma.BackgroundJobScalarFieldEnum | Prisma.BackgroundJobScalarFieldEnum[]
-}
-
-/**
- * App.config
- */
-export type App$configArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AppConfig
-   */
-  select?: Prisma.AppConfigSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AppConfig
-   */
-  omit?: Prisma.AppConfigOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AppConfigInclude<ExtArgs> | null
-  where?: Prisma.AppConfigWhereInput
 }
 
 /**

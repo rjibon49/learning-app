@@ -41,6 +41,7 @@ export type LessonResourceSumAggregateOutputType = {
 export type LessonResourceMinAggregateOutputType = {
   id: string | null
   lessonId: string | null
+  assetId: string | null
   type: $Enums.ResourceType | null
   title: string | null
   url: string | null
@@ -55,6 +56,7 @@ export type LessonResourceMinAggregateOutputType = {
 export type LessonResourceMaxAggregateOutputType = {
   id: string | null
   lessonId: string | null
+  assetId: string | null
   type: $Enums.ResourceType | null
   title: string | null
   url: string | null
@@ -69,6 +71,7 @@ export type LessonResourceMaxAggregateOutputType = {
 export type LessonResourceCountAggregateOutputType = {
   id: number
   lessonId: number
+  assetId: number
   type: number
   title: number
   url: number
@@ -97,6 +100,7 @@ export type LessonResourceSumAggregateInputType = {
 export type LessonResourceMinAggregateInputType = {
   id?: true
   lessonId?: true
+  assetId?: true
   type?: true
   title?: true
   url?: true
@@ -111,6 +115,7 @@ export type LessonResourceMinAggregateInputType = {
 export type LessonResourceMaxAggregateInputType = {
   id?: true
   lessonId?: true
+  assetId?: true
   type?: true
   title?: true
   url?: true
@@ -125,6 +130,7 @@ export type LessonResourceMaxAggregateInputType = {
 export type LessonResourceCountAggregateInputType = {
   id?: true
   lessonId?: true
+  assetId?: true
   type?: true
   title?: true
   url?: true
@@ -226,9 +232,10 @@ export type LessonResourceGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type LessonResourceGroupByOutputType = {
   id: string
   lessonId: string
+  assetId: string | null
   type: $Enums.ResourceType
   title: string
-  url: string
+  url: string | null
   mimeType: string | null
   fileSize: bigint | null
   pageCount: number | null
@@ -263,9 +270,10 @@ export type LessonResourceWhereInput = {
   NOT?: Prisma.LessonResourceWhereInput | Prisma.LessonResourceWhereInput[]
   id?: Prisma.StringFilter<"LessonResource"> | string
   lessonId?: Prisma.StringFilter<"LessonResource"> | string
+  assetId?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   type?: Prisma.EnumResourceTypeFilter<"LessonResource"> | $Enums.ResourceType
   title?: Prisma.StringFilter<"LessonResource"> | string
-  url?: Prisma.StringFilter<"LessonResource"> | string
+  url?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   mimeType?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"LessonResource"> | bigint | number | null
   pageCount?: Prisma.IntNullableFilter<"LessonResource"> | number | null
@@ -273,14 +281,16 @@ export type LessonResourceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"LessonResource"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LessonResource"> | Date | string
   lesson?: Prisma.XOR<Prisma.LessonScalarRelationFilter, Prisma.LessonWhereInput>
+  asset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
 }
 
 export type LessonResourceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
+  assetId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  url?: Prisma.SortOrder
+  url?: Prisma.SortOrderInput | Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
   pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -288,6 +298,7 @@ export type LessonResourceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lesson?: Prisma.LessonOrderByWithRelationInput
+  asset?: Prisma.MediaAssetOrderByWithRelationInput
   _relevance?: Prisma.LessonResourceOrderByRelevanceInput
 }
 
@@ -297,9 +308,10 @@ export type LessonResourceWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LessonResourceWhereInput[]
   NOT?: Prisma.LessonResourceWhereInput | Prisma.LessonResourceWhereInput[]
   lessonId?: Prisma.StringFilter<"LessonResource"> | string
+  assetId?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   type?: Prisma.EnumResourceTypeFilter<"LessonResource"> | $Enums.ResourceType
   title?: Prisma.StringFilter<"LessonResource"> | string
-  url?: Prisma.StringFilter<"LessonResource"> | string
+  url?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   mimeType?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"LessonResource"> | bigint | number | null
   pageCount?: Prisma.IntNullableFilter<"LessonResource"> | number | null
@@ -307,14 +319,16 @@ export type LessonResourceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"LessonResource"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LessonResource"> | Date | string
   lesson?: Prisma.XOR<Prisma.LessonScalarRelationFilter, Prisma.LessonWhereInput>
+  asset?: Prisma.XOR<Prisma.MediaAssetNullableScalarRelationFilter, Prisma.MediaAssetWhereInput> | null
 }, "id">
 
 export type LessonResourceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
+  assetId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  url?: Prisma.SortOrder
+  url?: Prisma.SortOrderInput | Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
   pageCount?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -334,9 +348,10 @@ export type LessonResourceScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LessonResourceScalarWhereWithAggregatesInput | Prisma.LessonResourceScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"LessonResource"> | string
   lessonId?: Prisma.StringWithAggregatesFilter<"LessonResource"> | string
+  assetId?: Prisma.StringNullableWithAggregatesFilter<"LessonResource"> | string | null
   type?: Prisma.EnumResourceTypeWithAggregatesFilter<"LessonResource"> | $Enums.ResourceType
   title?: Prisma.StringWithAggregatesFilter<"LessonResource"> | string
-  url?: Prisma.StringWithAggregatesFilter<"LessonResource"> | string
+  url?: Prisma.StringNullableWithAggregatesFilter<"LessonResource"> | string | null
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"LessonResource"> | string | null
   fileSize?: Prisma.BigIntNullableWithAggregatesFilter<"LessonResource"> | bigint | number | null
   pageCount?: Prisma.IntNullableWithAggregatesFilter<"LessonResource"> | number | null
@@ -349,7 +364,7 @@ export type LessonResourceCreateInput = {
   id?: string
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
@@ -357,14 +372,16 @@ export type LessonResourceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lesson: Prisma.LessonCreateNestedOneWithoutResourcesInput
+  asset?: Prisma.MediaAssetCreateNestedOneWithoutLessonResourcesInput
 }
 
 export type LessonResourceUncheckedCreateInput = {
   id?: string
   lessonId: string
+  assetId?: string | null
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
@@ -377,7 +394,7 @@ export type LessonResourceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -385,14 +402,16 @@ export type LessonResourceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lesson?: Prisma.LessonUpdateOneRequiredWithoutResourcesNestedInput
+  asset?: Prisma.MediaAssetUpdateOneWithoutLessonResourcesNestedInput
 }
 
 export type LessonResourceUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -404,9 +423,10 @@ export type LessonResourceUncheckedUpdateInput = {
 export type LessonResourceCreateManyInput = {
   id?: string
   lessonId: string
+  assetId?: string | null
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
@@ -419,7 +439,7 @@ export type LessonResourceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -431,9 +451,10 @@ export type LessonResourceUpdateManyMutationInput = {
 export type LessonResourceUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   lessonId?: Prisma.StringFieldUpdateOperationsInput | string
+  assetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -461,6 +482,7 @@ export type LessonResourceOrderByRelevanceInput = {
 export type LessonResourceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
+  assetId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -481,6 +503,7 @@ export type LessonResourceAvgOrderByAggregateInput = {
 export type LessonResourceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
+  assetId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -495,6 +518,7 @@ export type LessonResourceMaxOrderByAggregateInput = {
 export type LessonResourceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lessonId?: Prisma.SortOrder
+  assetId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
@@ -566,24 +590,68 @@ export type NullableBigIntFieldUpdateOperationsInput = {
   divide?: bigint | number
 }
 
+export type LessonResourceCreateNestedManyWithoutAssetInput = {
+  create?: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput> | Prisma.LessonResourceCreateWithoutAssetInput[] | Prisma.LessonResourceUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.LessonResourceCreateOrConnectWithoutAssetInput | Prisma.LessonResourceCreateOrConnectWithoutAssetInput[]
+  createMany?: Prisma.LessonResourceCreateManyAssetInputEnvelope
+  connect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+}
+
+export type LessonResourceUncheckedCreateNestedManyWithoutAssetInput = {
+  create?: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput> | Prisma.LessonResourceCreateWithoutAssetInput[] | Prisma.LessonResourceUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.LessonResourceCreateOrConnectWithoutAssetInput | Prisma.LessonResourceCreateOrConnectWithoutAssetInput[]
+  createMany?: Prisma.LessonResourceCreateManyAssetInputEnvelope
+  connect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+}
+
+export type LessonResourceUpdateManyWithoutAssetNestedInput = {
+  create?: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput> | Prisma.LessonResourceCreateWithoutAssetInput[] | Prisma.LessonResourceUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.LessonResourceCreateOrConnectWithoutAssetInput | Prisma.LessonResourceCreateOrConnectWithoutAssetInput[]
+  upsert?: Prisma.LessonResourceUpsertWithWhereUniqueWithoutAssetInput | Prisma.LessonResourceUpsertWithWhereUniqueWithoutAssetInput[]
+  createMany?: Prisma.LessonResourceCreateManyAssetInputEnvelope
+  set?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  disconnect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  delete?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  connect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  update?: Prisma.LessonResourceUpdateWithWhereUniqueWithoutAssetInput | Prisma.LessonResourceUpdateWithWhereUniqueWithoutAssetInput[]
+  updateMany?: Prisma.LessonResourceUpdateManyWithWhereWithoutAssetInput | Prisma.LessonResourceUpdateManyWithWhereWithoutAssetInput[]
+  deleteMany?: Prisma.LessonResourceScalarWhereInput | Prisma.LessonResourceScalarWhereInput[]
+}
+
+export type LessonResourceUncheckedUpdateManyWithoutAssetNestedInput = {
+  create?: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput> | Prisma.LessonResourceCreateWithoutAssetInput[] | Prisma.LessonResourceUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.LessonResourceCreateOrConnectWithoutAssetInput | Prisma.LessonResourceCreateOrConnectWithoutAssetInput[]
+  upsert?: Prisma.LessonResourceUpsertWithWhereUniqueWithoutAssetInput | Prisma.LessonResourceUpsertWithWhereUniqueWithoutAssetInput[]
+  createMany?: Prisma.LessonResourceCreateManyAssetInputEnvelope
+  set?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  disconnect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  delete?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  connect?: Prisma.LessonResourceWhereUniqueInput | Prisma.LessonResourceWhereUniqueInput[]
+  update?: Prisma.LessonResourceUpdateWithWhereUniqueWithoutAssetInput | Prisma.LessonResourceUpdateWithWhereUniqueWithoutAssetInput[]
+  updateMany?: Prisma.LessonResourceUpdateManyWithWhereWithoutAssetInput | Prisma.LessonResourceUpdateManyWithWhereWithoutAssetInput[]
+  deleteMany?: Prisma.LessonResourceScalarWhereInput | Prisma.LessonResourceScalarWhereInput[]
+}
+
 export type LessonResourceCreateWithoutLessonInput = {
   id?: string
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
   sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  asset?: Prisma.MediaAssetCreateNestedOneWithoutLessonResourcesInput
 }
 
 export type LessonResourceUncheckedCreateWithoutLessonInput = {
   id?: string
+  assetId?: string | null
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
@@ -624,9 +692,10 @@ export type LessonResourceScalarWhereInput = {
   NOT?: Prisma.LessonResourceScalarWhereInput | Prisma.LessonResourceScalarWhereInput[]
   id?: Prisma.StringFilter<"LessonResource"> | string
   lessonId?: Prisma.StringFilter<"LessonResource"> | string
+  assetId?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   type?: Prisma.EnumResourceTypeFilter<"LessonResource"> | $Enums.ResourceType
   title?: Prisma.StringFilter<"LessonResource"> | string
-  url?: Prisma.StringFilter<"LessonResource"> | string
+  url?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   mimeType?: Prisma.StringNullableFilter<"LessonResource"> | string | null
   fileSize?: Prisma.BigIntNullableFilter<"LessonResource"> | bigint | number | null
   pageCount?: Prisma.IntNullableFilter<"LessonResource"> | number | null
@@ -635,11 +704,66 @@ export type LessonResourceScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"LessonResource"> | Date | string
 }
 
-export type LessonResourceCreateManyLessonInput = {
+export type LessonResourceCreateWithoutAssetInput = {
   id?: string
   type: $Enums.ResourceType
   title: string
-  url: string
+  url?: string | null
+  mimeType?: string | null
+  fileSize?: bigint | number | null
+  pageCount?: number | null
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lesson: Prisma.LessonCreateNestedOneWithoutResourcesInput
+}
+
+export type LessonResourceUncheckedCreateWithoutAssetInput = {
+  id?: string
+  lessonId: string
+  type: $Enums.ResourceType
+  title: string
+  url?: string | null
+  mimeType?: string | null
+  fileSize?: bigint | number | null
+  pageCount?: number | null
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LessonResourceCreateOrConnectWithoutAssetInput = {
+  where: Prisma.LessonResourceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput>
+}
+
+export type LessonResourceCreateManyAssetInputEnvelope = {
+  data: Prisma.LessonResourceCreateManyAssetInput | Prisma.LessonResourceCreateManyAssetInput[]
+  skipDuplicates?: boolean
+}
+
+export type LessonResourceUpsertWithWhereUniqueWithoutAssetInput = {
+  where: Prisma.LessonResourceWhereUniqueInput
+  update: Prisma.XOR<Prisma.LessonResourceUpdateWithoutAssetInput, Prisma.LessonResourceUncheckedUpdateWithoutAssetInput>
+  create: Prisma.XOR<Prisma.LessonResourceCreateWithoutAssetInput, Prisma.LessonResourceUncheckedCreateWithoutAssetInput>
+}
+
+export type LessonResourceUpdateWithWhereUniqueWithoutAssetInput = {
+  where: Prisma.LessonResourceWhereUniqueInput
+  data: Prisma.XOR<Prisma.LessonResourceUpdateWithoutAssetInput, Prisma.LessonResourceUncheckedUpdateWithoutAssetInput>
+}
+
+export type LessonResourceUpdateManyWithWhereWithoutAssetInput = {
+  where: Prisma.LessonResourceScalarWhereInput
+  data: Prisma.XOR<Prisma.LessonResourceUpdateManyMutationInput, Prisma.LessonResourceUncheckedUpdateManyWithoutAssetInput>
+}
+
+export type LessonResourceCreateManyLessonInput = {
+  id?: string
+  assetId?: string | null
+  type: $Enums.ResourceType
+  title: string
+  url?: string | null
   mimeType?: string | null
   fileSize?: bigint | number | null
   pageCount?: number | null
@@ -652,20 +776,22 @@ export type LessonResourceUpdateWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  asset?: Prisma.MediaAssetUpdateOneWithoutLessonResourcesNestedInput
 }
 
 export type LessonResourceUncheckedUpdateWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  assetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -676,9 +802,66 @@ export type LessonResourceUncheckedUpdateWithoutLessonInput = {
 
 export type LessonResourceUncheckedUpdateManyWithoutLessonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  assetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LessonResourceCreateManyAssetInput = {
+  id?: string
+  lessonId: string
+  type: $Enums.ResourceType
+  title: string
+  url?: string | null
+  mimeType?: string | null
+  fileSize?: bigint | number | null
+  pageCount?: number | null
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type LessonResourceUpdateWithoutAssetInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lesson?: Prisma.LessonUpdateOneRequiredWithoutResourcesNestedInput
+}
+
+export type LessonResourceUncheckedUpdateWithoutAssetInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  lessonId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type LessonResourceUncheckedUpdateManyWithoutAssetInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  lessonId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumResourceTypeFieldUpdateOperationsInput | $Enums.ResourceType
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileSize?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   pageCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -692,6 +875,7 @@ export type LessonResourceUncheckedUpdateManyWithoutLessonInput = {
 export type LessonResourceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   lessonId?: boolean
+  assetId?: boolean
   type?: boolean
   title?: boolean
   url?: boolean
@@ -702,6 +886,7 @@ export type LessonResourceSelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   lesson?: boolean | Prisma.LessonDefaultArgs<ExtArgs>
+  asset?: boolean | Prisma.LessonResource$assetArgs<ExtArgs>
 }, ExtArgs["result"]["lessonResource"]>
 
 
@@ -709,6 +894,7 @@ export type LessonResourceSelect<ExtArgs extends runtime.Types.Extensions.Intern
 export type LessonResourceSelectScalar = {
   id?: boolean
   lessonId?: boolean
+  assetId?: boolean
   type?: boolean
   title?: boolean
   url?: boolean
@@ -720,22 +906,25 @@ export type LessonResourceSelectScalar = {
   updatedAt?: boolean
 }
 
-export type LessonResourceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lessonId" | "type" | "title" | "url" | "mimeType" | "fileSize" | "pageCount" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["lessonResource"]>
+export type LessonResourceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lessonId" | "assetId" | "type" | "title" | "url" | "mimeType" | "fileSize" | "pageCount" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["lessonResource"]>
 export type LessonResourceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lesson?: boolean | Prisma.LessonDefaultArgs<ExtArgs>
+  asset?: boolean | Prisma.LessonResource$assetArgs<ExtArgs>
 }
 
 export type $LessonResourcePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LessonResource"
   objects: {
     lesson: Prisma.$LessonPayload<ExtArgs>
+    asset: Prisma.$MediaAssetPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     lessonId: string
+    assetId: string | null
     type: $Enums.ResourceType
     title: string
-    url: string
+    url: string | null
     mimeType: string | null
     fileSize: bigint | null
     pageCount: number | null
@@ -1083,6 +1272,7 @@ readonly fields: LessonResourceFieldRefs;
 export interface Prisma__LessonResourceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   lesson<T extends Prisma.LessonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LessonDefaultArgs<ExtArgs>>): Prisma.Prisma__LessonClient<runtime.Types.Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  asset<T extends Prisma.LessonResource$assetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LessonResource$assetArgs<ExtArgs>>): Prisma.Prisma__MediaAssetClient<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1114,6 +1304,7 @@ export interface Prisma__LessonResourceClient<T, Null = never, ExtArgs extends r
 export interface LessonResourceFieldRefs {
   readonly id: Prisma.FieldRef<"LessonResource", 'String'>
   readonly lessonId: Prisma.FieldRef<"LessonResource", 'String'>
+  readonly assetId: Prisma.FieldRef<"LessonResource", 'String'>
   readonly type: Prisma.FieldRef<"LessonResource", 'ResourceType'>
   readonly title: Prisma.FieldRef<"LessonResource", 'String'>
   readonly url: Prisma.FieldRef<"LessonResource", 'String'>
@@ -1468,6 +1659,25 @@ export type LessonResourceDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many LessonResources to delete.
    */
   limit?: number
+}
+
+/**
+ * LessonResource.asset
+ */
+export type LessonResource$assetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaAsset
+   */
+  select?: Prisma.MediaAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaAsset
+   */
+  omit?: Prisma.MediaAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaAssetInclude<ExtArgs> | null
+  where?: Prisma.MediaAssetWhereInput
 }
 
 /**
