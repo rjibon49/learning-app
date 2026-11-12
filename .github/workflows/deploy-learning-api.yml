@@ -1,0 +1,73 @@
+
+name: Deploy Learning API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+      - "workers/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy-learning-api.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: learning-api-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy NestJS API to Hostinger VPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Configure Secure SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.LEARNING_VPS_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.LEARNING_VPS_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+
+          umask 077
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+
+          printf '%s\n' "$DEPLOY_KEY" \
+            > "$HOME/.ssh/learning_deploy_key"
+
+          printf '%s\n' "$KNOWN_HOSTS" \
+            > "$HOME/.ssh/known_hosts"
+
+          chmod 600 "$HOME/.ssh/learning_deploy_key"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Deploy Learning API
+        env:
+          VPS_HOST: ${{ secrets.LEARNING_VPS_HOST }}
+        run: |
+          set -euo pipefail
+
+          ssh \
+            -i "$HOME/.ssh/learning_deploy_key" \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=15 \
+            learningdeploy@"$VPS_HOST" \
+            "sudo -n /usr/local/sbin/deploy-learning-api"
+
+      - name: Deployment Summary
+        if: success()
+        run: |
+          echo "### Learning API Deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "Status: Successful" >> "$GITHUB_STEP_SUMMARY"
+          echo "Branch: main" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "API: https://learning-api.mochiflix.com/api/health" >> "$GITHUB_STEP_SUMMARY"
