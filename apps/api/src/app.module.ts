@@ -30,6 +30,7 @@ import { PromotionsModule } from './promotions/promotions.module.js';
 import { LanguagesModule } from './languages/languages.module.js';
 import { ProgressModule } from './progress/progress.module.js';
 import { DocumentsModule } from './documents/documents.module.js';
+import { WebAdsModule } from "./web-ads/web-ads.module.js";
 
 @Module({
   imports: [
@@ -108,6 +109,7 @@ import { DocumentsModule } from './documents/documents.module.js';
     LanguagesModule,
     ProgressModule,
     DocumentsModule,
+    WebAdsModule,
   ],
 
   controllers: [AppController],

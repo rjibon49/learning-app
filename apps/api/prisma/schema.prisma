@@ -1278,3 +1278,107 @@ model UserActivity {
 
   @@unique([userId, date])
 }
+
+// =============================================
+// WEBSITE ADVERTISEMENT MANAGEMENT
+// =============================================
+
+enum WebAdKind {
+  LOCAL_IMAGE
+  ADSENSE
+  GAM
+}
+
+enum WebAdStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum WebAdEventKind {
+  IMPRESSION
+  CLICK
+}
+
+model WebAdPlacement {
+  id String @id @default(cuid())
+
+  // e.g. "learning-web"
+  siteKey String @db.VarChar(80)
+
+  // e.g. "home_top", "lesson_middle"
+  key String @db.VarChar(100)
+
+  name   String @db.VarChar(150)
+  width  Int?
+  height Int?
+
+  isActive Boolean @default(true)
+
+  campaigns WebAdCampaign[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([siteKey, key])
+  @@index([siteKey, isActive])
+}
+
+model WebAdCampaign {
+  id          String @id @default(cuid())
+  placementId String
+
+  name   String      @db.VarChar(180)
+  kind   WebAdKind
+  status WebAdStatus @default(DRAFT)
+
+  // LOCAL_IMAGE
+  mediaAssetId   String?
+  destinationUrl String? @db.Text
+  altText        String? @db.VarChar(300)
+
+  // ADSENSE or GAM
+  providerClient String? @db.VarChar(150)
+  providerSlot   String? @db.VarChar(200)
+
+  // Scheduling and delivery
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  priority Int @default(0)
+  weight   Int @default(1)
+
+  // Null means all languages or all pages
+  languageCode String? @db.VarChar(16)
+  pagePrefix   String? @db.VarChar(300)
+
+  placement WebAdPlacement @relation(fields: [placementId], references: [id], onDelete: Restrict)
+
+  events WebAdEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([placementId, status, priority])
+  @@index([startsAt, endsAt])
+  @@index([languageCode])
+}
+
+model WebAdEvent {
+  id         String @id @default(cuid())
+  campaignId String
+
+  // Signed delivery token identifier
+  tokenId String @db.VarChar(64)
+
+  kind WebAdEventKind
+
+  campaign WebAdCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([campaignId, tokenId, kind])
+  @@index([campaignId, kind, createdAt])
+  @@index([createdAt])
+}
