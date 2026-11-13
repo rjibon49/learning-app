@@ -1,65 +1,109 @@
-//src/app/admin/layout.tsx
 
-'use client';
+"use client";
 
-import React, { useEffect, Suspense } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { AuthProvider, useAuth } from '@/lib/auth/auth-context';
-import { AdminShell } from '@/components/layout/admin-shell';
+import {
+  Suspense,
+  useEffect,
+  type ReactNode,
+} from "react";
 
-function AdminGuard({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuth();
-  const router = useRouter();
+import {
+  usePathname,
+  useRouter,
+} from "next/navigation";
+
+import {
+  AuthProvider,
+  useAuth,
+} from "@/lib/auth/auth-context";
+
+import { AdminShell } from "@/components/layout/admin-shell";
+
+const LOGIN_PATH = "/admin/login";
+const DASHBOARD_PATH = "/admin/dashboard";
+
+function LoadingScreen({
+  message = "Verifying admin session...",
+}: {
+  message?: string;
+}) {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-50">
+      <div className="text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-slate-300 border-t-slate-900" />
+        <p className="mt-3 text-sm font-medium text-slate-500">
+          {message}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AdminGuard({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const {
+    isAuthenticated,
+    isLoading,
+  } = useAuth();
+
   const pathname = usePathname();
+  const router = useRouter();
 
-  const isLoginPage = pathname === '/admin/login';
+  const isLoginPage = pathname === LOGIN_PATH;
 
   useEffect(() => {
-    // লোডিং শেষ, সেশন নেই এবং লগিন পেজেও নেই -> লগিন পেজে পাঠিয়ে দিন
-    if (!isLoading && !isAuthenticated && !isLoginPage) {
-      router.replace('/admin/login');
+    if (isLoading) return;
+
+    if (!isAuthenticated && !isLoginPage) {
+      router.replace(LOGIN_PATH);
+      return;
     }
-  }, [isLoading, isAuthenticated, isLoginPage, router]);
 
-  // সেশন চেক করার সময় ফুল-স্ক্রিন লোডিং দেখান
+    if (isAuthenticated && isLoginPage) {
+      router.replace(DASHBOARD_PATH);
+    }
+  }, [
+    isLoading,
+    isAuthenticated,
+    isLoginPage,
+    router,
+  ]);
+
   if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  if (!isAuthenticated) {
+    if (isLoginPage) {
+      return <>{children}</>;
+    }
+
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-slate-50">
-        <div className="text-sm font-medium text-slate-500">Verifying session...</div>
-      </div>
+      <LoadingScreen message="Redirecting to login..." />
     );
   }
 
-  // সেশন না থাকলে এবং লগিন পেজে না থাকলে রিডাইরেক্ট হওয়া পর্যন্ত এই মেসেজ দেখান (Next.js Error Fix)
-  if (!isAuthenticated && !isLoginPage) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center bg-slate-50">
-        <div className="text-sm font-medium text-slate-500">Redirecting to login...</div>
-      </div>
-    );
-  }
-
-  // লগিন পেজ হলে AdminShell (সাইডবার/হেডার) ছাড়া শুধু children রেন্ডার করুন 
   if (isLoginPage) {
-    return <>{children}</>;
+    return (
+      <LoadingScreen message="Opening dashboard..." />
+    );
   }
 
-  // সেশন থাকলে মেইন AdminShell সহ পেজ রেন্ডার করুন
   return <AdminShell>{children}</AdminShell>;
 }
 
 export default function AdminRootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    // সম্পূর্ণ অ্যাপ বা লেআউটকে AuthProvider দিয়ে মুড়িয়ে দিন
     <AuthProvider>
-      <Suspense fallback={<div className="flex min-h-screen items-center justify-center text-slate-500">Loading layout...</div>}>
-        <AdminGuard>
-          {children}
-        </AdminGuard>
+      <Suspense fallback={<LoadingScreen />}>
+        <AdminGuard>{children}</AdminGuard>
       </Suspense>
     </AuthProvider>
   );

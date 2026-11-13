@@ -40,6 +40,11 @@ export type PendingEmailRegistrationMinAggregateOutputType = {
   displayName: string | null
   passwordHash: string | null
   otpHash: string | null
+  phoneNumber: string | null
+  marketingEmailOptIn: boolean | null
+  marketingWhatsappOptIn: boolean | null
+  marketingSmsOptIn: boolean | null
+  consentPolicyVersion: string | null
   expiresAt: Date | null
   resendAvailableAt: Date | null
   attempts: number | null
@@ -53,6 +58,11 @@ export type PendingEmailRegistrationMaxAggregateOutputType = {
   displayName: string | null
   passwordHash: string | null
   otpHash: string | null
+  phoneNumber: string | null
+  marketingEmailOptIn: boolean | null
+  marketingWhatsappOptIn: boolean | null
+  marketingSmsOptIn: boolean | null
+  consentPolicyVersion: string | null
   expiresAt: Date | null
   resendAvailableAt: Date | null
   attempts: number | null
@@ -66,6 +76,11 @@ export type PendingEmailRegistrationCountAggregateOutputType = {
   displayName: number
   passwordHash: number
   otpHash: number
+  phoneNumber: number
+  marketingEmailOptIn: number
+  marketingWhatsappOptIn: number
+  marketingSmsOptIn: number
+  consentPolicyVersion: number
   expiresAt: number
   resendAvailableAt: number
   attempts: number
@@ -89,6 +104,11 @@ export type PendingEmailRegistrationMinAggregateInputType = {
   displayName?: true
   passwordHash?: true
   otpHash?: true
+  phoneNumber?: true
+  marketingEmailOptIn?: true
+  marketingWhatsappOptIn?: true
+  marketingSmsOptIn?: true
+  consentPolicyVersion?: true
   expiresAt?: true
   resendAvailableAt?: true
   attempts?: true
@@ -102,6 +122,11 @@ export type PendingEmailRegistrationMaxAggregateInputType = {
   displayName?: true
   passwordHash?: true
   otpHash?: true
+  phoneNumber?: true
+  marketingEmailOptIn?: true
+  marketingWhatsappOptIn?: true
+  marketingSmsOptIn?: true
+  consentPolicyVersion?: true
   expiresAt?: true
   resendAvailableAt?: true
   attempts?: true
@@ -115,6 +140,11 @@ export type PendingEmailRegistrationCountAggregateInputType = {
   displayName?: true
   passwordHash?: true
   otpHash?: true
+  phoneNumber?: true
+  marketingEmailOptIn?: true
+  marketingWhatsappOptIn?: true
+  marketingSmsOptIn?: true
+  consentPolicyVersion?: true
   expiresAt?: true
   resendAvailableAt?: true
   attempts?: true
@@ -215,6 +245,11 @@ export type PendingEmailRegistrationGroupByOutputType = {
   displayName: string
   passwordHash: string
   otpHash: string
+  phoneNumber: string | null
+  marketingEmailOptIn: boolean
+  marketingWhatsappOptIn: boolean
+  marketingSmsOptIn: boolean
+  consentPolicyVersion: string | null
   expiresAt: Date
   resendAvailableAt: Date
   attempts: number
@@ -251,6 +286,11 @@ export type PendingEmailRegistrationWhereInput = {
   displayName?: Prisma.StringFilter<"PendingEmailRegistration"> | string
   passwordHash?: Prisma.StringFilter<"PendingEmailRegistration"> | string
   otpHash?: Prisma.StringFilter<"PendingEmailRegistration"> | string
+  phoneNumber?: Prisma.StringNullableFilter<"PendingEmailRegistration"> | string | null
+  marketingEmailOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  marketingSmsOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  consentPolicyVersion?: Prisma.StringNullableFilter<"PendingEmailRegistration"> | string | null
   expiresAt?: Prisma.DateTimeFilter<"PendingEmailRegistration"> | Date | string
   resendAvailableAt?: Prisma.DateTimeFilter<"PendingEmailRegistration"> | Date | string
   attempts?: Prisma.IntFilter<"PendingEmailRegistration"> | number
@@ -264,6 +304,11 @@ export type PendingEmailRegistrationOrderByWithRelationInput = {
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   otpHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  marketingEmailOptIn?: Prisma.SortOrder
+  marketingWhatsappOptIn?: Prisma.SortOrder
+  marketingSmsOptIn?: Prisma.SortOrder
+  consentPolicyVersion?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   resendAvailableAt?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
@@ -281,6 +326,11 @@ export type PendingEmailRegistrationWhereUniqueInput = Prisma.AtLeast<{
   displayName?: Prisma.StringFilter<"PendingEmailRegistration"> | string
   passwordHash?: Prisma.StringFilter<"PendingEmailRegistration"> | string
   otpHash?: Prisma.StringFilter<"PendingEmailRegistration"> | string
+  phoneNumber?: Prisma.StringNullableFilter<"PendingEmailRegistration"> | string | null
+  marketingEmailOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  marketingSmsOptIn?: Prisma.BoolFilter<"PendingEmailRegistration"> | boolean
+  consentPolicyVersion?: Prisma.StringNullableFilter<"PendingEmailRegistration"> | string | null
   expiresAt?: Prisma.DateTimeFilter<"PendingEmailRegistration"> | Date | string
   resendAvailableAt?: Prisma.DateTimeFilter<"PendingEmailRegistration"> | Date | string
   attempts?: Prisma.IntFilter<"PendingEmailRegistration"> | number
@@ -294,6 +344,11 @@ export type PendingEmailRegistrationOrderByWithAggregationInput = {
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   otpHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  marketingEmailOptIn?: Prisma.SortOrder
+  marketingWhatsappOptIn?: Prisma.SortOrder
+  marketingSmsOptIn?: Prisma.SortOrder
+  consentPolicyVersion?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   resendAvailableAt?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
@@ -315,6 +370,11 @@ export type PendingEmailRegistrationScalarWhereWithAggregatesInput = {
   displayName?: Prisma.StringWithAggregatesFilter<"PendingEmailRegistration"> | string
   passwordHash?: Prisma.StringWithAggregatesFilter<"PendingEmailRegistration"> | string
   otpHash?: Prisma.StringWithAggregatesFilter<"PendingEmailRegistration"> | string
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"PendingEmailRegistration"> | string | null
+  marketingEmailOptIn?: Prisma.BoolWithAggregatesFilter<"PendingEmailRegistration"> | boolean
+  marketingWhatsappOptIn?: Prisma.BoolWithAggregatesFilter<"PendingEmailRegistration"> | boolean
+  marketingSmsOptIn?: Prisma.BoolWithAggregatesFilter<"PendingEmailRegistration"> | boolean
+  consentPolicyVersion?: Prisma.StringNullableWithAggregatesFilter<"PendingEmailRegistration"> | string | null
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"PendingEmailRegistration"> | Date | string
   resendAvailableAt?: Prisma.DateTimeWithAggregatesFilter<"PendingEmailRegistration"> | Date | string
   attempts?: Prisma.IntWithAggregatesFilter<"PendingEmailRegistration"> | number
@@ -328,6 +388,11 @@ export type PendingEmailRegistrationCreateInput = {
   displayName: string
   passwordHash: string
   otpHash: string
+  phoneNumber?: string | null
+  marketingEmailOptIn?: boolean
+  marketingWhatsappOptIn?: boolean
+  marketingSmsOptIn?: boolean
+  consentPolicyVersion?: string | null
   expiresAt: Date | string
   resendAvailableAt: Date | string
   attempts?: number
@@ -341,6 +406,11 @@ export type PendingEmailRegistrationUncheckedCreateInput = {
   displayName: string
   passwordHash: string
   otpHash: string
+  phoneNumber?: string | null
+  marketingEmailOptIn?: boolean
+  marketingWhatsappOptIn?: boolean
+  marketingSmsOptIn?: boolean
+  consentPolicyVersion?: string | null
   expiresAt: Date | string
   resendAvailableAt: Date | string
   attempts?: number
@@ -354,6 +424,11 @@ export type PendingEmailRegistrationUpdateInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marketingEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingSmsOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentPolicyVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resendAvailableAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
@@ -367,6 +442,11 @@ export type PendingEmailRegistrationUncheckedUpdateInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marketingEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingSmsOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentPolicyVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resendAvailableAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
@@ -380,6 +460,11 @@ export type PendingEmailRegistrationCreateManyInput = {
   displayName: string
   passwordHash: string
   otpHash: string
+  phoneNumber?: string | null
+  marketingEmailOptIn?: boolean
+  marketingWhatsappOptIn?: boolean
+  marketingSmsOptIn?: boolean
+  consentPolicyVersion?: string | null
   expiresAt: Date | string
   resendAvailableAt: Date | string
   attempts?: number
@@ -393,6 +478,11 @@ export type PendingEmailRegistrationUpdateManyMutationInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marketingEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingSmsOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentPolicyVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resendAvailableAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
@@ -406,6 +496,11 @@ export type PendingEmailRegistrationUncheckedUpdateManyInput = {
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  marketingEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingWhatsappOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  marketingSmsOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  consentPolicyVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resendAvailableAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
@@ -425,6 +520,11 @@ export type PendingEmailRegistrationCountOrderByAggregateInput = {
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   otpHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  marketingEmailOptIn?: Prisma.SortOrder
+  marketingWhatsappOptIn?: Prisma.SortOrder
+  marketingSmsOptIn?: Prisma.SortOrder
+  consentPolicyVersion?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   resendAvailableAt?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
@@ -442,6 +542,11 @@ export type PendingEmailRegistrationMaxOrderByAggregateInput = {
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   otpHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  marketingEmailOptIn?: Prisma.SortOrder
+  marketingWhatsappOptIn?: Prisma.SortOrder
+  marketingSmsOptIn?: Prisma.SortOrder
+  consentPolicyVersion?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   resendAvailableAt?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
@@ -455,6 +560,11 @@ export type PendingEmailRegistrationMinOrderByAggregateInput = {
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   otpHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  marketingEmailOptIn?: Prisma.SortOrder
+  marketingWhatsappOptIn?: Prisma.SortOrder
+  marketingSmsOptIn?: Prisma.SortOrder
+  consentPolicyVersion?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   resendAvailableAt?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
@@ -474,6 +584,11 @@ export type PendingEmailRegistrationSelect<ExtArgs extends runtime.Types.Extensi
   displayName?: boolean
   passwordHash?: boolean
   otpHash?: boolean
+  phoneNumber?: boolean
+  marketingEmailOptIn?: boolean
+  marketingWhatsappOptIn?: boolean
+  marketingSmsOptIn?: boolean
+  consentPolicyVersion?: boolean
   expiresAt?: boolean
   resendAvailableAt?: boolean
   attempts?: boolean
@@ -489,6 +604,11 @@ export type PendingEmailRegistrationSelectScalar = {
   displayName?: boolean
   passwordHash?: boolean
   otpHash?: boolean
+  phoneNumber?: boolean
+  marketingEmailOptIn?: boolean
+  marketingWhatsappOptIn?: boolean
+  marketingSmsOptIn?: boolean
+  consentPolicyVersion?: boolean
   expiresAt?: boolean
   resendAvailableAt?: boolean
   attempts?: boolean
@@ -496,7 +616,7 @@ export type PendingEmailRegistrationSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PendingEmailRegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "otpHash" | "expiresAt" | "resendAvailableAt" | "attempts" | "createdAt" | "updatedAt", ExtArgs["result"]["pendingEmailRegistration"]>
+export type PendingEmailRegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "otpHash" | "phoneNumber" | "marketingEmailOptIn" | "marketingWhatsappOptIn" | "marketingSmsOptIn" | "consentPolicyVersion" | "expiresAt" | "resendAvailableAt" | "attempts" | "createdAt" | "updatedAt", ExtArgs["result"]["pendingEmailRegistration"]>
 
 export type $PendingEmailRegistrationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PendingEmailRegistration"
@@ -507,6 +627,11 @@ export type $PendingEmailRegistrationPayload<ExtArgs extends runtime.Types.Exten
     displayName: string
     passwordHash: string
     otpHash: string
+    phoneNumber: string | null
+    marketingEmailOptIn: boolean
+    marketingWhatsappOptIn: boolean
+    marketingSmsOptIn: boolean
+    consentPolicyVersion: string | null
     expiresAt: Date
     resendAvailableAt: Date
     attempts: number
@@ -886,6 +1011,11 @@ export interface PendingEmailRegistrationFieldRefs {
   readonly displayName: Prisma.FieldRef<"PendingEmailRegistration", 'String'>
   readonly passwordHash: Prisma.FieldRef<"PendingEmailRegistration", 'String'>
   readonly otpHash: Prisma.FieldRef<"PendingEmailRegistration", 'String'>
+  readonly phoneNumber: Prisma.FieldRef<"PendingEmailRegistration", 'String'>
+  readonly marketingEmailOptIn: Prisma.FieldRef<"PendingEmailRegistration", 'Boolean'>
+  readonly marketingWhatsappOptIn: Prisma.FieldRef<"PendingEmailRegistration", 'Boolean'>
+  readonly marketingSmsOptIn: Prisma.FieldRef<"PendingEmailRegistration", 'Boolean'>
+  readonly consentPolicyVersion: Prisma.FieldRef<"PendingEmailRegistration", 'String'>
   readonly expiresAt: Prisma.FieldRef<"PendingEmailRegistration", 'DateTime'>
   readonly resendAvailableAt: Prisma.FieldRef<"PendingEmailRegistration", 'DateTime'>
   readonly attempts: Prisma.FieldRef<"PendingEmailRegistration", 'Int'>

@@ -261,3 +261,108 @@ export type PromoRedemption = Prisma.PromoRedemptionModel
  * 
  */
 export type UserActivity = Prisma.UserActivityModel
+/**
+ * Model WebAdPlacement
+ * 
+ */
+export type WebAdPlacement = Prisma.WebAdPlacementModel
+/**
+ * Model WebAdCampaign
+ * 
+ */
+export type WebAdCampaign = Prisma.WebAdCampaignModel
+/**
+ * Model WebAdEvent
+ * 
+ */
+export type WebAdEvent = Prisma.WebAdEventModel
+/**
+ * Model ConsentPolicy
+ * 
+ */
+export type ConsentPolicy = Prisma.ConsentPolicyModel
+/**
+ * Model MarketingConsent
+ * 
+ */
+export type MarketingConsent = Prisma.MarketingConsentModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
+ * Model NotificationProviderConfig
+ * 
+ */
+export type NotificationProviderConfig = Prisma.NotificationProviderConfigModel
+/**
+ * Model NotificationTemplate
+ * 
+ */
+export type NotificationTemplate = Prisma.NotificationTemplateModel
+/**
+ * Model NotificationTemplateTranslation
+ * 
+ */
+export type NotificationTemplateTranslation = Prisma.NotificationTemplateTranslationModel
+/**
+ * Model AudienceSegment
+ * 
+ */
+export type AudienceSegment = Prisma.AudienceSegmentModel
+/**
+ * Model Announcement
+ * 
+ */
+export type Announcement = Prisma.AnnouncementModel
+/**
+ * Model AnnouncementTranslation
+ * 
+ */
+export type AnnouncementTranslation = Prisma.AnnouncementTranslationModel
+/**
+ * Model AnnouncementPlacement
+ * 
+ */
+export type AnnouncementPlacement = Prisma.AnnouncementPlacementModel
+/**
+ * Model AnnouncementTarget
+ * 
+ */
+export type AnnouncementTarget = Prisma.AnnouncementTargetModel
+/**
+ * Model AnnouncementPromotion
+ * 
+ */
+export type AnnouncementPromotion = Prisma.AnnouncementPromotionModel
+/**
+ * Model UserNotification
+ * 
+ */
+export type UserNotification = Prisma.UserNotificationModel
+/**
+ * Model PushDevice
+ * 
+ */
+export type PushDevice = Prisma.PushDeviceModel
+/**
+ * Model NotificationDelivery
+ * 
+ */
+export type NotificationDelivery = Prisma.NotificationDeliveryModel
+/**
+ * Model AnnouncementInteraction
+ * 
+ */
+export type AnnouncementInteraction = Prisma.AnnouncementInteractionModel
+/**
+ * Model SubscriptionCancellationRequest
+ * 
+ */
+export type SubscriptionCancellationRequest = Prisma.SubscriptionCancellationRequestModel
+/**
+ * Model RefundRequest
+ * 
+ */
+export type RefundRequest = Prisma.RefundRequestModel

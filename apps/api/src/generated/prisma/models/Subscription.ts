@@ -37,6 +37,10 @@ export type SubscriptionMinAggregateOutputType = {
   startedAt: Date | null
   expiresAt: Date | null
   autoRenew: boolean | null
+  cancelAtPeriodEnd: boolean | null
+  cancelRequestedAt: Date | null
+  cancelledAt: Date | null
+  cancellationReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,6 +58,10 @@ export type SubscriptionMaxAggregateOutputType = {
   startedAt: Date | null
   expiresAt: Date | null
   autoRenew: boolean | null
+  cancelAtPeriodEnd: boolean | null
+  cancelRequestedAt: Date | null
+  cancelledAt: Date | null
+  cancellationReason: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,6 +79,10 @@ export type SubscriptionCountAggregateOutputType = {
   startedAt: number
   expiresAt: number
   autoRenew: number
+  cancelAtPeriodEnd: number
+  cancelRequestedAt: number
+  cancelledAt: number
+  cancellationReason: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -90,6 +102,10 @@ export type SubscriptionMinAggregateInputType = {
   startedAt?: true
   expiresAt?: true
   autoRenew?: true
+  cancelAtPeriodEnd?: true
+  cancelRequestedAt?: true
+  cancelledAt?: true
+  cancellationReason?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,6 +123,10 @@ export type SubscriptionMaxAggregateInputType = {
   startedAt?: true
   expiresAt?: true
   autoRenew?: true
+  cancelAtPeriodEnd?: true
+  cancelRequestedAt?: true
+  cancelledAt?: true
+  cancellationReason?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -124,6 +144,10 @@ export type SubscriptionCountAggregateInputType = {
   startedAt?: true
   expiresAt?: true
   autoRenew?: true
+  cancelAtPeriodEnd?: true
+  cancelRequestedAt?: true
+  cancelledAt?: true
+  cancellationReason?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -214,6 +238,10 @@ export type SubscriptionGroupByOutputType = {
   startedAt: Date | null
   expiresAt: Date | null
   autoRenew: boolean
+  cancelAtPeriodEnd: boolean
+  cancelRequestedAt: Date | null
+  cancelledAt: Date | null
+  cancellationReason: string | null
   createdAt: Date
   updatedAt: Date
   _count: SubscriptionCountAggregateOutputType | null
@@ -252,11 +280,17 @@ export type SubscriptionWhereInput = {
   startedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   autoRenew?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelRequestedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancelledAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancellationReason?: Prisma.StringNullableFilter<"Subscription"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
   payments?: Prisma.PaymentTransactionListRelationFilter
+  refundRequests?: Prisma.RefundRequestListRelationFilter
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestListRelationFilter
 }
 
 export type SubscriptionOrderByWithRelationInput = {
@@ -272,11 +306,17 @@ export type SubscriptionOrderByWithRelationInput = {
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   autoRenew?: Prisma.SortOrder
+  cancelAtPeriodEnd?: Prisma.SortOrder
+  cancelRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelledAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancellationReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   app?: Prisma.AppOrderByWithRelationInput
   payments?: Prisma.PaymentTransactionOrderByRelationAggregateInput
+  refundRequests?: Prisma.RefundRequestOrderByRelationAggregateInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestOrderByRelationAggregateInput
   _relevance?: Prisma.SubscriptionOrderByRelevanceInput
 }
 
@@ -296,11 +336,17 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   startedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   autoRenew?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelRequestedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancelledAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancellationReason?: Prisma.StringNullableFilter<"Subscription"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   app?: Prisma.XOR<Prisma.AppScalarRelationFilter, Prisma.AppWhereInput>
   payments?: Prisma.PaymentTransactionListRelationFilter
+  refundRequests?: Prisma.RefundRequestListRelationFilter
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestListRelationFilter
 }, "id">
 
 export type SubscriptionOrderByWithAggregationInput = {
@@ -316,6 +362,10 @@ export type SubscriptionOrderByWithAggregationInput = {
   startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   autoRenew?: Prisma.SortOrder
+  cancelAtPeriodEnd?: Prisma.SortOrder
+  cancelRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelledAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancellationReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SubscriptionCountOrderByAggregateInput
@@ -339,6 +389,10 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
   startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
   autoRenew?: Prisma.BoolWithAggregatesFilter<"Subscription"> | boolean
+  cancelAtPeriodEnd?: Prisma.BoolWithAggregatesFilter<"Subscription"> | boolean
+  cancelRequestedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+  cancelledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+  cancellationReason?: Prisma.StringNullableWithAggregatesFilter<"Subscription"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string
 }
@@ -354,11 +408,17 @@ export type SubscriptionCreateInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
   app: Prisma.AppCreateNestedOneWithoutSubscriptionsInput
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionUncheckedCreateInput = {
@@ -374,9 +434,15 @@ export type SubscriptionUncheckedCreateInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionUpdateInput = {
@@ -390,11 +456,17 @@ export type SubscriptionUpdateInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
   app?: Prisma.AppUpdateOneRequiredWithoutSubscriptionsNestedInput
   payments?: Prisma.PaymentTransactionUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateInput = {
@@ -410,9 +482,15 @@ export type SubscriptionUncheckedUpdateInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionCreateManyInput = {
@@ -428,6 +506,10 @@ export type SubscriptionCreateManyInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -443,6 +525,10 @@ export type SubscriptionUpdateManyMutationInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -460,6 +546,10 @@ export type SubscriptionUncheckedUpdateManyInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -493,6 +583,10 @@ export type SubscriptionCountOrderByAggregateInput = {
   startedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   autoRenew?: Prisma.SortOrder
+  cancelAtPeriodEnd?: Prisma.SortOrder
+  cancelRequestedAt?: Prisma.SortOrder
+  cancelledAt?: Prisma.SortOrder
+  cancellationReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -510,6 +604,10 @@ export type SubscriptionMaxOrderByAggregateInput = {
   startedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   autoRenew?: Prisma.SortOrder
+  cancelAtPeriodEnd?: Prisma.SortOrder
+  cancelRequestedAt?: Prisma.SortOrder
+  cancelledAt?: Prisma.SortOrder
+  cancellationReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -527,6 +625,10 @@ export type SubscriptionMinOrderByAggregateInput = {
   startedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   autoRenew?: Prisma.SortOrder
+  cancelAtPeriodEnd?: Prisma.SortOrder
+  cancelRequestedAt?: Prisma.SortOrder
+  cancelledAt?: Prisma.SortOrder
+  cancellationReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -534,6 +636,11 @@ export type SubscriptionMinOrderByAggregateInput = {
 export type SubscriptionNullableScalarRelationFilter = {
   is?: Prisma.SubscriptionWhereInput | null
   isNot?: Prisma.SubscriptionWhereInput | null
+}
+
+export type SubscriptionScalarRelationFilter = {
+  is?: Prisma.SubscriptionWhereInput
+  isNot?: Prisma.SubscriptionWhereInput
 }
 
 export type SubscriptionCreateNestedManyWithoutAppInput = {
@@ -644,6 +751,36 @@ export type SubscriptionUpdateOneWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutPaymentsInput, Prisma.SubscriptionUpdateWithoutPaymentsInput>, Prisma.SubscriptionUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type SubscriptionCreateNestedOneWithoutCancellationRequestsInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutCancellationRequestsInput>
+  connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutCancellationRequestsInput
+  connect?: Prisma.SubscriptionWhereUniqueInput
+}
+
+export type SubscriptionUpdateOneRequiredWithoutCancellationRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutCancellationRequestsInput>
+  connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutCancellationRequestsInput
+  upsert?: Prisma.SubscriptionUpsertWithoutCancellationRequestsInput
+  connect?: Prisma.SubscriptionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutCancellationRequestsInput, Prisma.SubscriptionUpdateWithoutCancellationRequestsInput>, Prisma.SubscriptionUncheckedUpdateWithoutCancellationRequestsInput>
+}
+
+export type SubscriptionCreateNestedOneWithoutRefundRequestsInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutRefundRequestsInput>
+  connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutRefundRequestsInput
+  connect?: Prisma.SubscriptionWhereUniqueInput
+}
+
+export type SubscriptionUpdateOneWithoutRefundRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutRefundRequestsInput>
+  connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutRefundRequestsInput
+  upsert?: Prisma.SubscriptionUpsertWithoutRefundRequestsInput
+  disconnect?: Prisma.SubscriptionWhereInput | boolean
+  delete?: Prisma.SubscriptionWhereInput | boolean
+  connect?: Prisma.SubscriptionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutRefundRequestsInput, Prisma.SubscriptionUpdateWithoutRefundRequestsInput>, Prisma.SubscriptionUncheckedUpdateWithoutRefundRequestsInput>
+}
+
 export type SubscriptionCreateWithoutAppInput = {
   id?: string
   platform?: $Enums.SubscriptionPlatform
@@ -655,10 +792,16 @@ export type SubscriptionCreateWithoutAppInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionUncheckedCreateWithoutAppInput = {
@@ -673,9 +816,15 @@ export type SubscriptionUncheckedCreateWithoutAppInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionCreateOrConnectWithoutAppInput = {
@@ -720,6 +869,10 @@ export type SubscriptionScalarWhereInput = {
   startedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
   autoRenew?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFilter<"Subscription"> | boolean
+  cancelRequestedAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancelledAt?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null
+  cancellationReason?: Prisma.StringNullableFilter<"Subscription"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string
 }
@@ -735,10 +888,16 @@ export type SubscriptionCreateWithoutUserInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   app: Prisma.AppCreateNestedOneWithoutSubscriptionsInput
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionUncheckedCreateWithoutUserInput = {
@@ -753,9 +912,15 @@ export type SubscriptionUncheckedCreateWithoutUserInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionCreateOrConnectWithoutUserInput = {
@@ -795,10 +960,16 @@ export type SubscriptionCreateWithoutPaymentsInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
   app: Prisma.AppCreateNestedOneWithoutSubscriptionsInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionUncheckedCreateWithoutPaymentsInput = {
@@ -814,8 +985,14 @@ export type SubscriptionUncheckedCreateWithoutPaymentsInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedCreateNestedManyWithoutSubscriptionInput
 }
 
 export type SubscriptionCreateOrConnectWithoutPaymentsInput = {
@@ -845,10 +1022,16 @@ export type SubscriptionUpdateWithoutPaymentsInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
   app?: Prisma.AppUpdateOneRequiredWithoutSubscriptionsNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutPaymentsInput = {
@@ -864,8 +1047,230 @@ export type SubscriptionUncheckedUpdateWithoutPaymentsInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+}
+
+export type SubscriptionCreateWithoutCancellationRequestsInput = {
+  id?: string
+  platform?: $Enums.SubscriptionPlatform
+  provider: string
+  productId: string
+  externalId?: string | null
+  originalTransactionId?: string | null
+  status?: $Enums.SubscriptionStatus
+  startedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
+  app: Prisma.AppCreateNestedOneWithoutSubscriptionsInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutSubscriptionInput
+}
+
+export type SubscriptionUncheckedCreateWithoutCancellationRequestsInput = {
+  id?: string
+  userId: string
+  appId: string
+  platform?: $Enums.SubscriptionPlatform
+  provider: string
+  productId: string
+  externalId?: string | null
+  originalTransactionId?: string | null
+  status?: $Enums.SubscriptionStatus
+  startedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+}
+
+export type SubscriptionCreateOrConnectWithoutCancellationRequestsInput = {
+  where: Prisma.SubscriptionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubscriptionCreateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutCancellationRequestsInput>
+}
+
+export type SubscriptionUpsertWithoutCancellationRequestsInput = {
+  update: Prisma.XOR<Prisma.SubscriptionUpdateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedUpdateWithoutCancellationRequestsInput>
+  create: Prisma.XOR<Prisma.SubscriptionCreateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutCancellationRequestsInput>
+  where?: Prisma.SubscriptionWhereInput
+}
+
+export type SubscriptionUpdateToOneWithWhereWithoutCancellationRequestsInput = {
+  where?: Prisma.SubscriptionWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionUpdateWithoutCancellationRequestsInput, Prisma.SubscriptionUncheckedUpdateWithoutCancellationRequestsInput>
+}
+
+export type SubscriptionUpdateWithoutCancellationRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSubscriptionPlatformFieldUpdateOperationsInput | $Enums.SubscriptionPlatform
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  app?: Prisma.AppUpdateOneRequiredWithoutSubscriptionsNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutSubscriptionNestedInput
+}
+
+export type SubscriptionUncheckedUpdateWithoutCancellationRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSubscriptionPlatformFieldUpdateOperationsInput | $Enums.SubscriptionPlatform
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+}
+
+export type SubscriptionCreateWithoutRefundRequestsInput = {
+  id?: string
+  platform?: $Enums.SubscriptionPlatform
+  provider: string
+  productId: string
+  externalId?: string | null
+  originalTransactionId?: string | null
+  status?: $Enums.SubscriptionStatus
+  startedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutSubscriptionsInput
+  app: Prisma.AppCreateNestedOneWithoutSubscriptionsInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestCreateNestedManyWithoutSubscriptionInput
+}
+
+export type SubscriptionUncheckedCreateWithoutRefundRequestsInput = {
+  id?: string
+  userId: string
+  appId: string
+  platform?: $Enums.SubscriptionPlatform
+  provider: string
+  productId: string
+  externalId?: string | null
+  originalTransactionId?: string | null
+  status?: $Enums.SubscriptionStatus
+  startedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutSubscriptionInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedCreateNestedManyWithoutSubscriptionInput
+}
+
+export type SubscriptionCreateOrConnectWithoutRefundRequestsInput = {
+  where: Prisma.SubscriptionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubscriptionCreateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutRefundRequestsInput>
+}
+
+export type SubscriptionUpsertWithoutRefundRequestsInput = {
+  update: Prisma.XOR<Prisma.SubscriptionUpdateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedUpdateWithoutRefundRequestsInput>
+  create: Prisma.XOR<Prisma.SubscriptionCreateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedCreateWithoutRefundRequestsInput>
+  where?: Prisma.SubscriptionWhereInput
+}
+
+export type SubscriptionUpdateToOneWithWhereWithoutRefundRequestsInput = {
+  where?: Prisma.SubscriptionWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionUpdateWithoutRefundRequestsInput, Prisma.SubscriptionUncheckedUpdateWithoutRefundRequestsInput>
+}
+
+export type SubscriptionUpdateWithoutRefundRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSubscriptionPlatformFieldUpdateOperationsInput | $Enums.SubscriptionPlatform
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  app?: Prisma.AppUpdateOneRequiredWithoutSubscriptionsNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUpdateManyWithoutSubscriptionNestedInput
+}
+
+export type SubscriptionUncheckedUpdateWithoutRefundRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  appId?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSubscriptionPlatformFieldUpdateOperationsInput | $Enums.SubscriptionPlatform
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionCreateManyAppInput = {
@@ -880,6 +1285,10 @@ export type SubscriptionCreateManyAppInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -895,10 +1304,16 @@ export type SubscriptionUpdateWithoutAppInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSubscriptionsNestedInput
   payments?: Prisma.PaymentTransactionUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutAppInput = {
@@ -913,9 +1328,15 @@ export type SubscriptionUncheckedUpdateWithoutAppInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateManyWithoutAppInput = {
@@ -930,6 +1351,10 @@ export type SubscriptionUncheckedUpdateManyWithoutAppInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -946,6 +1371,10 @@ export type SubscriptionCreateManyUserInput = {
   startedAt?: Date | string | null
   expiresAt?: Date | string | null
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -961,10 +1390,16 @@ export type SubscriptionUpdateWithoutUserInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   app?: Prisma.AppUpdateOneRequiredWithoutSubscriptionsNestedInput
   payments?: Prisma.PaymentTransactionUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateWithoutUserInput = {
@@ -979,9 +1414,15 @@ export type SubscriptionUncheckedUpdateWithoutUserInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutSubscriptionNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
+  cancellationRequests?: Prisma.SubscriptionCancellationRequestUncheckedUpdateManyWithoutSubscriptionNestedInput
 }
 
 export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
@@ -996,6 +1437,10 @@ export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autoRenew?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelAtPeriodEnd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cancelRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1007,10 +1452,14 @@ export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
 
 export type SubscriptionCountOutputType = {
   payments: number
+  refundRequests: number
+  cancellationRequests: number
 }
 
 export type SubscriptionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payments?: boolean | SubscriptionCountOutputTypeCountPaymentsArgs
+  refundRequests?: boolean | SubscriptionCountOutputTypeCountRefundRequestsArgs
+  cancellationRequests?: boolean | SubscriptionCountOutputTypeCountCancellationRequestsArgs
 }
 
 /**
@@ -1030,6 +1479,20 @@ export type SubscriptionCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime
   where?: Prisma.PaymentTransactionWhereInput
 }
 
+/**
+ * SubscriptionCountOutputType without action
+ */
+export type SubscriptionCountOutputTypeCountRefundRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefundRequestWhereInput
+}
+
+/**
+ * SubscriptionCountOutputType without action
+ */
+export type SubscriptionCountOutputTypeCountCancellationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionCancellationRequestWhereInput
+}
+
 
 export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1044,11 +1507,17 @@ export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   startedAt?: boolean
   expiresAt?: boolean
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: boolean
+  cancelledAt?: boolean
+  cancellationReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.Subscription$paymentsArgs<ExtArgs>
+  refundRequests?: boolean | Prisma.Subscription$refundRequestsArgs<ExtArgs>
+  cancellationRequests?: boolean | Prisma.Subscription$cancellationRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscription"]>
 
@@ -1067,15 +1536,21 @@ export type SubscriptionSelectScalar = {
   startedAt?: boolean
   expiresAt?: boolean
   autoRenew?: boolean
+  cancelAtPeriodEnd?: boolean
+  cancelRequestedAt?: boolean
+  cancelledAt?: boolean
+  cancellationReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "appId" | "platform" | "provider" | "productId" | "externalId" | "originalTransactionId" | "status" | "startedAt" | "expiresAt" | "autoRenew" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "appId" | "platform" | "provider" | "productId" | "externalId" | "originalTransactionId" | "status" | "startedAt" | "expiresAt" | "autoRenew" | "cancelAtPeriodEnd" | "cancelRequestedAt" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
 export type SubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   app?: boolean | Prisma.AppDefaultArgs<ExtArgs>
   payments?: boolean | Prisma.Subscription$paymentsArgs<ExtArgs>
+  refundRequests?: boolean | Prisma.Subscription$refundRequestsArgs<ExtArgs>
+  cancellationRequests?: boolean | Prisma.Subscription$cancellationRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1085,6 +1560,8 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     user: Prisma.$UserPayload<ExtArgs>
     app: Prisma.$AppPayload<ExtArgs>
     payments: Prisma.$PaymentTransactionPayload<ExtArgs>[]
+    refundRequests: Prisma.$RefundRequestPayload<ExtArgs>[]
+    cancellationRequests: Prisma.$SubscriptionCancellationRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1099,6 +1576,10 @@ export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.Intern
     startedAt: Date | null
     expiresAt: Date | null
     autoRenew: boolean
+    cancelAtPeriodEnd: boolean
+    cancelRequestedAt: Date | null
+    cancelledAt: Date | null
+    cancellationReason: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["subscription"]>
@@ -1444,6 +1925,8 @@ export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends run
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   app<T extends Prisma.AppDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AppDefaultArgs<ExtArgs>>): Prisma.Prisma__AppClient<runtime.Types.Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.Subscription$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refundRequests<T extends Prisma.Subscription$refundRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$refundRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cancellationRequests<T extends Prisma.Subscription$cancellationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$cancellationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionCancellationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1485,6 +1968,10 @@ export interface SubscriptionFieldRefs {
   readonly startedAt: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly expiresAt: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly autoRenew: Prisma.FieldRef<"Subscription", 'Boolean'>
+  readonly cancelAtPeriodEnd: Prisma.FieldRef<"Subscription", 'Boolean'>
+  readonly cancelRequestedAt: Prisma.FieldRef<"Subscription", 'DateTime'>
+  readonly cancelledAt: Prisma.FieldRef<"Subscription", 'DateTime'>
+  readonly cancellationReason: Prisma.FieldRef<"Subscription", 'String'>
   readonly createdAt: Prisma.FieldRef<"Subscription", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Subscription", 'DateTime'>
 }
@@ -1856,6 +2343,54 @@ export type Subscription$paymentsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.PaymentTransactionScalarFieldEnum | Prisma.PaymentTransactionScalarFieldEnum[]
+}
+
+/**
+ * Subscription.refundRequests
+ */
+export type Subscription$refundRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefundRequest
+   */
+  select?: Prisma.RefundRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefundRequest
+   */
+  omit?: Prisma.RefundRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefundRequestInclude<ExtArgs> | null
+  where?: Prisma.RefundRequestWhereInput
+  orderBy?: Prisma.RefundRequestOrderByWithRelationInput | Prisma.RefundRequestOrderByWithRelationInput[]
+  cursor?: Prisma.RefundRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefundRequestScalarFieldEnum | Prisma.RefundRequestScalarFieldEnum[]
+}
+
+/**
+ * Subscription.cancellationRequests
+ */
+export type Subscription$cancellationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubscriptionCancellationRequest
+   */
+  select?: Prisma.SubscriptionCancellationRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubscriptionCancellationRequest
+   */
+  omit?: Prisma.SubscriptionCancellationRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionCancellationRequestInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionCancellationRequestWhereInput
+  orderBy?: Prisma.SubscriptionCancellationRequestOrderByWithRelationInput | Prisma.SubscriptionCancellationRequestOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionCancellationRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubscriptionCancellationRequestScalarFieldEnum | Prisma.SubscriptionCancellationRequestScalarFieldEnum[]
 }
 
 /**

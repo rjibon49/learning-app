@@ -266,6 +266,7 @@ export type AdminUserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenListRelationFilter
   auditLogs?: Prisma.AdminAuditLogListRelationFilter
+  approvedRefunds?: Prisma.RefundRequestListRelationFilter
 }
 
 export type AdminUserOrderByWithRelationInput = {
@@ -282,6 +283,7 @@ export type AdminUserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   refreshTokens?: Prisma.AdminRefreshTokenOrderByRelationAggregateInput
   auditLogs?: Prisma.AdminAuditLogOrderByRelationAggregateInput
+  approvedRefunds?: Prisma.RefundRequestOrderByRelationAggregateInput
   _relevance?: Prisma.AdminUserOrderByRelevanceInput
 }
 
@@ -302,6 +304,7 @@ export type AdminUserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"AdminUser"> | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenListRelationFilter
   auditLogs?: Prisma.AdminAuditLogListRelationFilter
+  approvedRefunds?: Prisma.RefundRequestListRelationFilter
 }, "id" | "email">
 
 export type AdminUserOrderByWithAggregationInput = {
@@ -354,6 +357,7 @@ export type AdminUserCreateInput = {
   updatedAt?: Date | string
   refreshTokens?: Prisma.AdminRefreshTokenCreateNestedManyWithoutAdminInput
   auditLogs?: Prisma.AdminAuditLogCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserUncheckedCreateInput = {
@@ -370,6 +374,7 @@ export type AdminUserUncheckedCreateInput = {
   updatedAt?: Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUncheckedCreateNestedManyWithoutAdminInput
   auditLogs?: Prisma.AdminAuditLogUncheckedCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserUpdateInput = {
@@ -386,6 +391,7 @@ export type AdminUserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUpdateManyWithoutAdminNestedInput
   auditLogs?: Prisma.AdminAuditLogUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type AdminUserUncheckedUpdateInput = {
@@ -402,6 +408,7 @@ export type AdminUserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUncheckedUpdateManyWithoutAdminNestedInput
   auditLogs?: Prisma.AdminAuditLogUncheckedUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type AdminUserCreateManyInput = {
@@ -546,6 +553,22 @@ export type AdminUserUpdateOneWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.AdminUserUpdateWithoutAuditLogsInput>, Prisma.AdminUserUncheckedUpdateWithoutAuditLogsInput>
 }
 
+export type AdminUserCreateNestedOneWithoutApprovedRefundsInput = {
+  create?: Prisma.XOR<Prisma.AdminUserCreateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedCreateWithoutApprovedRefundsInput>
+  connectOrCreate?: Prisma.AdminUserCreateOrConnectWithoutApprovedRefundsInput
+  connect?: Prisma.AdminUserWhereUniqueInput
+}
+
+export type AdminUserUpdateOneWithoutApprovedRefundsNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminUserCreateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedCreateWithoutApprovedRefundsInput>
+  connectOrCreate?: Prisma.AdminUserCreateOrConnectWithoutApprovedRefundsInput
+  upsert?: Prisma.AdminUserUpsertWithoutApprovedRefundsInput
+  disconnect?: Prisma.AdminUserWhereInput | boolean
+  delete?: Prisma.AdminUserWhereInput | boolean
+  connect?: Prisma.AdminUserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUserUpdateToOneWithWhereWithoutApprovedRefundsInput, Prisma.AdminUserUpdateWithoutApprovedRefundsInput>, Prisma.AdminUserUncheckedUpdateWithoutApprovedRefundsInput>
+}
+
 export type AdminUserCreateWithoutRefreshTokensInput = {
   id?: string
   email: string
@@ -559,6 +582,7 @@ export type AdminUserCreateWithoutRefreshTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   auditLogs?: Prisma.AdminAuditLogCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserUncheckedCreateWithoutRefreshTokensInput = {
@@ -574,6 +598,7 @@ export type AdminUserUncheckedCreateWithoutRefreshTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   auditLogs?: Prisma.AdminAuditLogUncheckedCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserCreateOrConnectWithoutRefreshTokensInput = {
@@ -605,6 +630,7 @@ export type AdminUserUpdateWithoutRefreshTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AdminAuditLogUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type AdminUserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -620,6 +646,7 @@ export type AdminUserUncheckedUpdateWithoutRefreshTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   auditLogs?: Prisma.AdminAuditLogUncheckedUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type AdminUserCreateWithoutAuditLogsInput = {
@@ -635,6 +662,7 @@ export type AdminUserCreateWithoutAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   refreshTokens?: Prisma.AdminRefreshTokenCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserUncheckedCreateWithoutAuditLogsInput = {
@@ -650,6 +678,7 @@ export type AdminUserUncheckedCreateWithoutAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUncheckedCreateNestedManyWithoutAdminInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type AdminUserCreateOrConnectWithoutAuditLogsInput = {
@@ -681,6 +710,7 @@ export type AdminUserUpdateWithoutAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type AdminUserUncheckedUpdateWithoutAuditLogsInput = {
@@ -696,6 +726,87 @@ export type AdminUserUncheckedUpdateWithoutAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   refreshTokens?: Prisma.AdminRefreshTokenUncheckedUpdateManyWithoutAdminNestedInput
+  approvedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type AdminUserCreateWithoutApprovedRefundsInput = {
+  id?: string
+  email: string
+  displayName?: string | null
+  passwordHash: string
+  role?: $Enums.AdminRole
+  isActive?: boolean
+  authVersion?: number
+  lastLoginAt?: Date | string | null
+  passwordChangedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  refreshTokens?: Prisma.AdminRefreshTokenCreateNestedManyWithoutAdminInput
+  auditLogs?: Prisma.AdminAuditLogCreateNestedManyWithoutAdminInput
+}
+
+export type AdminUserUncheckedCreateWithoutApprovedRefundsInput = {
+  id?: string
+  email: string
+  displayName?: string | null
+  passwordHash: string
+  role?: $Enums.AdminRole
+  isActive?: boolean
+  authVersion?: number
+  lastLoginAt?: Date | string | null
+  passwordChangedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  refreshTokens?: Prisma.AdminRefreshTokenUncheckedCreateNestedManyWithoutAdminInput
+  auditLogs?: Prisma.AdminAuditLogUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type AdminUserCreateOrConnectWithoutApprovedRefundsInput = {
+  where: Prisma.AdminUserWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminUserCreateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedCreateWithoutApprovedRefundsInput>
+}
+
+export type AdminUserUpsertWithoutApprovedRefundsInput = {
+  update: Prisma.XOR<Prisma.AdminUserUpdateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedUpdateWithoutApprovedRefundsInput>
+  create: Prisma.XOR<Prisma.AdminUserCreateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedCreateWithoutApprovedRefundsInput>
+  where?: Prisma.AdminUserWhereInput
+}
+
+export type AdminUserUpdateToOneWithWhereWithoutApprovedRefundsInput = {
+  where?: Prisma.AdminUserWhereInput
+  data: Prisma.XOR<Prisma.AdminUserUpdateWithoutApprovedRefundsInput, Prisma.AdminUserUncheckedUpdateWithoutApprovedRefundsInput>
+}
+
+export type AdminUserUpdateWithoutApprovedRefundsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  authVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refreshTokens?: Prisma.AdminRefreshTokenUpdateManyWithoutAdminNestedInput
+  auditLogs?: Prisma.AdminAuditLogUpdateManyWithoutAdminNestedInput
+}
+
+export type AdminUserUncheckedUpdateWithoutApprovedRefundsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  authVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refreshTokens?: Prisma.AdminRefreshTokenUncheckedUpdateManyWithoutAdminNestedInput
+  auditLogs?: Prisma.AdminAuditLogUncheckedUpdateManyWithoutAdminNestedInput
 }
 
 
@@ -706,11 +817,13 @@ export type AdminUserUncheckedUpdateWithoutAuditLogsInput = {
 export type AdminUserCountOutputType = {
   refreshTokens: number
   auditLogs: number
+  approvedRefunds: number
 }
 
 export type AdminUserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshTokens?: boolean | AdminUserCountOutputTypeCountRefreshTokensArgs
   auditLogs?: boolean | AdminUserCountOutputTypeCountAuditLogsArgs
+  approvedRefunds?: boolean | AdminUserCountOutputTypeCountApprovedRefundsArgs
 }
 
 /**
@@ -737,6 +850,13 @@ export type AdminUserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.T
   where?: Prisma.AdminAuditLogWhereInput
 }
 
+/**
+ * AdminUserCountOutputType without action
+ */
+export type AdminUserCountOutputTypeCountApprovedRefundsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefundRequestWhereInput
+}
+
 
 export type AdminUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -752,6 +872,7 @@ export type AdminUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
   refreshTokens?: boolean | Prisma.AdminUser$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.AdminUser$auditLogsArgs<ExtArgs>
+  approvedRefunds?: boolean | Prisma.AdminUser$approvedRefundsArgs<ExtArgs>
   _count?: boolean | Prisma.AdminUserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adminUser"]>
 
@@ -775,6 +896,7 @@ export type AdminUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type AdminUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshTokens?: boolean | Prisma.AdminUser$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.AdminUser$auditLogsArgs<ExtArgs>
+  approvedRefunds?: boolean | Prisma.AdminUser$approvedRefundsArgs<ExtArgs>
   _count?: boolean | Prisma.AdminUserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -783,6 +905,7 @@ export type $AdminUserPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     refreshTokens: Prisma.$AdminRefreshTokenPayload<ExtArgs>[]
     auditLogs: Prisma.$AdminAuditLogPayload<ExtArgs>[]
+    approvedRefunds: Prisma.$RefundRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1138,6 +1261,7 @@ export interface Prisma__AdminUserClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   refreshTokens<T extends Prisma.AdminUser$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminUser$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminRefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.AdminUser$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminUser$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  approvedRefunds<T extends Prisma.AdminUser$approvedRefundsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AdminUser$approvedRefundsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1571,6 +1695,30 @@ export type AdminUser$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.AdminAuditLogScalarFieldEnum | Prisma.AdminAuditLogScalarFieldEnum[]
+}
+
+/**
+ * AdminUser.approvedRefunds
+ */
+export type AdminUser$approvedRefundsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefundRequest
+   */
+  select?: Prisma.RefundRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefundRequest
+   */
+  omit?: Prisma.RefundRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefundRequestInclude<ExtArgs> | null
+  where?: Prisma.RefundRequestWhereInput
+  orderBy?: Prisma.RefundRequestOrderByWithRelationInput | Prisma.RefundRequestOrderByWithRelationInput[]
+  cursor?: Prisma.RefundRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefundRequestScalarFieldEnum | Prisma.RefundRequestScalarFieldEnum[]
 }
 
 /**

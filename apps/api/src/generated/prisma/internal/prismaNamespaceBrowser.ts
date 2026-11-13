@@ -94,7 +94,28 @@ export const ModelName = {
   SystemSetting: 'SystemSetting',
   PromoCode: 'PromoCode',
   PromoRedemption: 'PromoRedemption',
-  UserActivity: 'UserActivity'
+  UserActivity: 'UserActivity',
+  WebAdPlacement: 'WebAdPlacement',
+  WebAdCampaign: 'WebAdCampaign',
+  WebAdEvent: 'WebAdEvent',
+  ConsentPolicy: 'ConsentPolicy',
+  MarketingConsent: 'MarketingConsent',
+  NotificationPreference: 'NotificationPreference',
+  NotificationProviderConfig: 'NotificationProviderConfig',
+  NotificationTemplate: 'NotificationTemplate',
+  NotificationTemplateTranslation: 'NotificationTemplateTranslation',
+  AudienceSegment: 'AudienceSegment',
+  Announcement: 'Announcement',
+  AnnouncementTranslation: 'AnnouncementTranslation',
+  AnnouncementPlacement: 'AnnouncementPlacement',
+  AnnouncementTarget: 'AnnouncementTarget',
+  AnnouncementPromotion: 'AnnouncementPromotion',
+  UserNotification: 'UserNotification',
+  PushDevice: 'PushDevice',
+  NotificationDelivery: 'NotificationDelivery',
+  AnnouncementInteraction: 'AnnouncementInteraction',
+  SubscriptionCancellationRequest: 'SubscriptionCancellationRequest',
+  RefundRequest: 'RefundRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -478,6 +499,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   displayName: 'displayName',
   passwordHash: 'passwordHash',
+  phoneNumber: 'phoneNumber',
   role: 'role',
   isActive: 'isActive',
   emailVerifiedAt: 'emailVerifiedAt',
@@ -501,6 +523,11 @@ export const PendingEmailRegistrationScalarFieldEnum = {
   displayName: 'displayName',
   passwordHash: 'passwordHash',
   otpHash: 'otpHash',
+  phoneNumber: 'phoneNumber',
+  marketingEmailOptIn: 'marketingEmailOptIn',
+  marketingWhatsappOptIn: 'marketingWhatsappOptIn',
+  marketingSmsOptIn: 'marketingSmsOptIn',
+  consentPolicyVersion: 'consentPolicyVersion',
   expiresAt: 'expiresAt',
   resendAvailableAt: 'resendAvailableAt',
   attempts: 'attempts',
@@ -627,6 +654,10 @@ export const SubscriptionScalarFieldEnum = {
   startedAt: 'startedAt',
   expiresAt: 'expiresAt',
   autoRenew: 'autoRenew',
+  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+  cancelRequestedAt: 'cancelRequestedAt',
+  cancelledAt: 'cancelledAt',
+  cancellationReason: 'cancellationReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -814,6 +845,338 @@ export const UserActivityScalarFieldEnum = {
 export type UserActivityScalarFieldEnum = (typeof UserActivityScalarFieldEnum)[keyof typeof UserActivityScalarFieldEnum]
 
 
+export const WebAdPlacementScalarFieldEnum = {
+  id: 'id',
+  siteKey: 'siteKey',
+  key: 'key',
+  name: 'name',
+  width: 'width',
+  height: 'height',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WebAdPlacementScalarFieldEnum = (typeof WebAdPlacementScalarFieldEnum)[keyof typeof WebAdPlacementScalarFieldEnum]
+
+
+export const WebAdCampaignScalarFieldEnum = {
+  id: 'id',
+  placementId: 'placementId',
+  name: 'name',
+  kind: 'kind',
+  status: 'status',
+  mediaAssetId: 'mediaAssetId',
+  destinationUrl: 'destinationUrl',
+  altText: 'altText',
+  providerClient: 'providerClient',
+  providerSlot: 'providerSlot',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  priority: 'priority',
+  weight: 'weight',
+  languageCode: 'languageCode',
+  pagePrefix: 'pagePrefix',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WebAdCampaignScalarFieldEnum = (typeof WebAdCampaignScalarFieldEnum)[keyof typeof WebAdCampaignScalarFieldEnum]
+
+
+export const WebAdEventScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  tokenId: 'tokenId',
+  kind: 'kind',
+  createdAt: 'createdAt'
+} as const
+
+export type WebAdEventScalarFieldEnum = (typeof WebAdEventScalarFieldEnum)[keyof typeof WebAdEventScalarFieldEnum]
+
+
+export const ConsentPolicyScalarFieldEnum = {
+  id: 'id',
+  version: 'version',
+  title: 'title',
+  documentUrl: 'documentUrl',
+  contentHash: 'contentHash',
+  isActive: 'isActive',
+  effectiveAt: 'effectiveAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ConsentPolicyScalarFieldEnum = (typeof ConsentPolicyScalarFieldEnum)[keyof typeof ConsentPolicyScalarFieldEnum]
+
+
+export const MarketingConsentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  policyId: 'policyId',
+  channel: 'channel',
+  purpose: 'purpose',
+  granted: 'granted',
+  source: 'source',
+  policyVersion: 'policyVersion',
+  recordedAt: 'recordedAt',
+  metadata: 'metadata'
+} as const
+
+export type MarketingConsentScalarFieldEnum = (typeof MarketingConsentScalarFieldEnum)[keyof typeof MarketingConsentScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  channel: 'channel',
+  purpose: 'purpose',
+  enabled: 'enabled',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
+
+
+export const NotificationProviderConfigScalarFieldEnum = {
+  id: 'id',
+  channel: 'channel',
+  providerKey: 'providerKey',
+  displayName: 'displayName',
+  isEnabled: 'isEnabled',
+  isTestMode: 'isTestMode',
+  credentialRef: 'credentialRef',
+  settingsJson: 'settingsJson',
+  lastCheckedAt: 'lastCheckedAt',
+  lastCheckOk: 'lastCheckOk',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationProviderConfigScalarFieldEnum = (typeof NotificationProviderConfigScalarFieldEnum)[keyof typeof NotificationProviderConfigScalarFieldEnum]
+
+
+export const NotificationTemplateScalarFieldEnum = {
+  id: 'id',
+  templateKey: 'templateKey',
+  channel: 'channel',
+  purpose: 'purpose',
+  providerConfigId: 'providerConfigId',
+  providerTemplateId: 'providerTemplateId',
+  isActive: 'isActive',
+  parametersJson: 'parametersJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationTemplateScalarFieldEnum = (typeof NotificationTemplateScalarFieldEnum)[keyof typeof NotificationTemplateScalarFieldEnum]
+
+
+export const NotificationTemplateTranslationScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  locale: 'locale',
+  title: 'title',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationTemplateTranslationScalarFieldEnum = (typeof NotificationTemplateTranslationScalarFieldEnum)[keyof typeof NotificationTemplateTranslationScalarFieldEnum]
+
+
+export const AudienceSegmentScalarFieldEnum = {
+  id: 'id',
+  segmentKey: 'segmentKey',
+  name: 'name',
+  description: 'description',
+  rulesVersion: 'rulesVersion',
+  rulesJson: 'rulesJson',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AudienceSegmentScalarFieldEnum = (typeof AudienceSegmentScalarFieldEnum)[keyof typeof AudienceSegmentScalarFieldEnum]
+
+
+export const AnnouncementScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  kind: 'kind',
+  purpose: 'purpose',
+  status: 'status',
+  priority: 'priority',
+  isDismissible: 'isDismissible',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  actionType: 'actionType',
+  actionValue: 'actionValue',
+  imageAssetId: 'imageAssetId',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
+
+
+export const AnnouncementTranslationScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  locale: 'locale',
+  title: 'title',
+  message: 'message',
+  actionLabel: 'actionLabel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnouncementTranslationScalarFieldEnum = (typeof AnnouncementTranslationScalarFieldEnum)[keyof typeof AnnouncementTranslationScalarFieldEnum]
+
+
+export const AnnouncementPlacementScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  channel: 'channel',
+  placementKey: 'placementKey',
+  isEnabled: 'isEnabled',
+  displayRulesJson: 'displayRulesJson'
+} as const
+
+export type AnnouncementPlacementScalarFieldEnum = (typeof AnnouncementPlacementScalarFieldEnum)[keyof typeof AnnouncementPlacementScalarFieldEnum]
+
+
+export const AnnouncementTargetScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  segmentId: 'segmentId',
+  exclude: 'exclude'
+} as const
+
+export type AnnouncementTargetScalarFieldEnum = (typeof AnnouncementTargetScalarFieldEnum)[keyof typeof AnnouncementTargetScalarFieldEnum]
+
+
+export const AnnouncementPromotionScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  promoCodeId: 'promoCodeId'
+} as const
+
+export type AnnouncementPromotionScalarFieldEnum = (typeof AnnouncementPromotionScalarFieldEnum)[keyof typeof AnnouncementPromotionScalarFieldEnum]
+
+
+export const UserNotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  announcementId: 'announcementId',
+  readAt: 'readAt',
+  dismissedAt: 'dismissedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserNotificationScalarFieldEnum = (typeof UserNotificationScalarFieldEnum)[keyof typeof UserNotificationScalarFieldEnum]
+
+
+export const PushDeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  channel: 'channel',
+  platform: 'platform',
+  tokenHash: 'tokenHash',
+  tokenCiphertext: 'tokenCiphertext',
+  isActive: 'isActive',
+  lastSeenAt: 'lastSeenAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PushDeviceScalarFieldEnum = (typeof PushDeviceScalarFieldEnum)[keyof typeof PushDeviceScalarFieldEnum]
+
+
+export const NotificationDeliveryScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  templateId: 'templateId',
+  userId: 'userId',
+  providerConfigId: 'providerConfigId',
+  channel: 'channel',
+  purpose: 'purpose',
+  status: 'status',
+  dedupeKey: 'dedupeKey',
+  recipientHash: 'recipientHash',
+  providerMessageId: 'providerMessageId',
+  attempts: 'attempts',
+  maxAttempts: 'maxAttempts',
+  lockOwner: 'lockOwner',
+  lockedUntil: 'lockedUntil',
+  claimVersion: 'claimVersion',
+  scheduledAt: 'scheduledAt',
+  nextRetryAt: 'nextRetryAt',
+  sentAt: 'sentAt',
+  deliveredAt: 'deliveredAt',
+  acknowledgedAt: 'acknowledgedAt',
+  errorCode: 'errorCode',
+  errorMessage: 'errorMessage',
+  payloadJson: 'payloadJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationDeliveryScalarFieldEnum = (typeof NotificationDeliveryScalarFieldEnum)[keyof typeof NotificationDeliveryScalarFieldEnum]
+
+
+export const AnnouncementInteractionScalarFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  userId: 'userId',
+  kind: 'kind',
+  dedupeKey: 'dedupeKey',
+  contextJson: 'contextJson',
+  createdAt: 'createdAt'
+} as const
+
+export type AnnouncementInteractionScalarFieldEnum = (typeof AnnouncementInteractionScalarFieldEnum)[keyof typeof AnnouncementInteractionScalarFieldEnum]
+
+
+export const SubscriptionCancellationRequestScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  status: 'status',
+  initiatedBy: 'initiatedBy',
+  reason: 'reason',
+  idempotencyKey: 'idempotencyKey',
+  providerReference: 'providerReference',
+  requestedAt: 'requestedAt',
+  confirmedAt: 'confirmedAt',
+  errorCode: 'errorCode',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionCancellationRequestScalarFieldEnum = (typeof SubscriptionCancellationRequestScalarFieldEnum)[keyof typeof SubscriptionCancellationRequestScalarFieldEnum]
+
+
+export const RefundRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paymentId: 'paymentId',
+  subscriptionId: 'subscriptionId',
+  status: 'status',
+  reason: 'reason',
+  adminNote: 'adminNote',
+  amountMinor: 'amountMinor',
+  currency: 'currency',
+  providerRefundId: 'providerRefundId',
+  reviewedByAdminId: 'reviewedByAdminId',
+  requestedAt: 'requestedAt',
+  reviewedAt: 'reviewedAt',
+  resolvedAt: 'resolvedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RefundRequestScalarFieldEnum = (typeof RefundRequestScalarFieldEnum)[keyof typeof RefundRequestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -828,6 +1191,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const JsonNullValueFilter = {
@@ -1122,6 +1492,7 @@ export const UserOrderByRelevanceFieldEnum = {
   email: 'email',
   displayName: 'displayName',
   passwordHash: 'passwordHash',
+  phoneNumber: 'phoneNumber',
   referralCode: 'referralCode',
   referredById: 'referredById'
 } as const
@@ -1134,7 +1505,9 @@ export const PendingEmailRegistrationOrderByRelevanceFieldEnum = {
   email: 'email',
   displayName: 'displayName',
   passwordHash: 'passwordHash',
-  otpHash: 'otpHash'
+  otpHash: 'otpHash',
+  phoneNumber: 'phoneNumber',
+  consentPolicyVersion: 'consentPolicyVersion'
 } as const
 
 export type PendingEmailRegistrationOrderByRelevanceFieldEnum = (typeof PendingEmailRegistrationOrderByRelevanceFieldEnum)[keyof typeof PendingEmailRegistrationOrderByRelevanceFieldEnum]
@@ -1214,7 +1587,8 @@ export const SubscriptionOrderByRelevanceFieldEnum = {
   provider: 'provider',
   productId: 'productId',
   externalId: 'externalId',
-  originalTransactionId: 'originalTransactionId'
+  originalTransactionId: 'originalTransactionId',
+  cancellationReason: 'cancellationReason'
 } as const
 
 export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
@@ -1336,4 +1710,235 @@ export const UserActivityOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserActivityOrderByRelevanceFieldEnum = (typeof UserActivityOrderByRelevanceFieldEnum)[keyof typeof UserActivityOrderByRelevanceFieldEnum]
+
+
+export const WebAdPlacementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  siteKey: 'siteKey',
+  key: 'key',
+  name: 'name'
+} as const
+
+export type WebAdPlacementOrderByRelevanceFieldEnum = (typeof WebAdPlacementOrderByRelevanceFieldEnum)[keyof typeof WebAdPlacementOrderByRelevanceFieldEnum]
+
+
+export const WebAdCampaignOrderByRelevanceFieldEnum = {
+  id: 'id',
+  placementId: 'placementId',
+  name: 'name',
+  mediaAssetId: 'mediaAssetId',
+  destinationUrl: 'destinationUrl',
+  altText: 'altText',
+  providerClient: 'providerClient',
+  providerSlot: 'providerSlot',
+  languageCode: 'languageCode',
+  pagePrefix: 'pagePrefix'
+} as const
+
+export type WebAdCampaignOrderByRelevanceFieldEnum = (typeof WebAdCampaignOrderByRelevanceFieldEnum)[keyof typeof WebAdCampaignOrderByRelevanceFieldEnum]
+
+
+export const WebAdEventOrderByRelevanceFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  tokenId: 'tokenId'
+} as const
+
+export type WebAdEventOrderByRelevanceFieldEnum = (typeof WebAdEventOrderByRelevanceFieldEnum)[keyof typeof WebAdEventOrderByRelevanceFieldEnum]
+
+
+export const ConsentPolicyOrderByRelevanceFieldEnum = {
+  id: 'id',
+  version: 'version',
+  title: 'title',
+  documentUrl: 'documentUrl',
+  contentHash: 'contentHash'
+} as const
+
+export type ConsentPolicyOrderByRelevanceFieldEnum = (typeof ConsentPolicyOrderByRelevanceFieldEnum)[keyof typeof ConsentPolicyOrderByRelevanceFieldEnum]
+
+
+export const MarketingConsentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  policyId: 'policyId',
+  source: 'source',
+  policyVersion: 'policyVersion'
+} as const
+
+export type MarketingConsentOrderByRelevanceFieldEnum = (typeof MarketingConsentOrderByRelevanceFieldEnum)[keyof typeof MarketingConsentOrderByRelevanceFieldEnum]
+
+
+export const NotificationPreferenceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+} as const
+
+export type NotificationPreferenceOrderByRelevanceFieldEnum = (typeof NotificationPreferenceOrderByRelevanceFieldEnum)[keyof typeof NotificationPreferenceOrderByRelevanceFieldEnum]
+
+
+export const NotificationProviderConfigOrderByRelevanceFieldEnum = {
+  id: 'id',
+  providerKey: 'providerKey',
+  displayName: 'displayName',
+  credentialRef: 'credentialRef'
+} as const
+
+export type NotificationProviderConfigOrderByRelevanceFieldEnum = (typeof NotificationProviderConfigOrderByRelevanceFieldEnum)[keyof typeof NotificationProviderConfigOrderByRelevanceFieldEnum]
+
+
+export const NotificationTemplateOrderByRelevanceFieldEnum = {
+  id: 'id',
+  templateKey: 'templateKey',
+  providerConfigId: 'providerConfigId',
+  providerTemplateId: 'providerTemplateId'
+} as const
+
+export type NotificationTemplateOrderByRelevanceFieldEnum = (typeof NotificationTemplateOrderByRelevanceFieldEnum)[keyof typeof NotificationTemplateOrderByRelevanceFieldEnum]
+
+
+export const NotificationTemplateTranslationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  locale: 'locale',
+  title: 'title',
+  body: 'body'
+} as const
+
+export type NotificationTemplateTranslationOrderByRelevanceFieldEnum = (typeof NotificationTemplateTranslationOrderByRelevanceFieldEnum)[keyof typeof NotificationTemplateTranslationOrderByRelevanceFieldEnum]
+
+
+export const AudienceSegmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  segmentKey: 'segmentKey',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type AudienceSegmentOrderByRelevanceFieldEnum = (typeof AudienceSegmentOrderByRelevanceFieldEnum)[keyof typeof AudienceSegmentOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  actionType: 'actionType',
+  actionValue: 'actionValue',
+  imageAssetId: 'imageAssetId'
+} as const
+
+export type AnnouncementOrderByRelevanceFieldEnum = (typeof AnnouncementOrderByRelevanceFieldEnum)[keyof typeof AnnouncementOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementTranslationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  locale: 'locale',
+  title: 'title',
+  message: 'message',
+  actionLabel: 'actionLabel'
+} as const
+
+export type AnnouncementTranslationOrderByRelevanceFieldEnum = (typeof AnnouncementTranslationOrderByRelevanceFieldEnum)[keyof typeof AnnouncementTranslationOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementPlacementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  placementKey: 'placementKey'
+} as const
+
+export type AnnouncementPlacementOrderByRelevanceFieldEnum = (typeof AnnouncementPlacementOrderByRelevanceFieldEnum)[keyof typeof AnnouncementPlacementOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementTargetOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  segmentId: 'segmentId'
+} as const
+
+export type AnnouncementTargetOrderByRelevanceFieldEnum = (typeof AnnouncementTargetOrderByRelevanceFieldEnum)[keyof typeof AnnouncementTargetOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementPromotionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  promoCodeId: 'promoCodeId'
+} as const
+
+export type AnnouncementPromotionOrderByRelevanceFieldEnum = (typeof AnnouncementPromotionOrderByRelevanceFieldEnum)[keyof typeof AnnouncementPromotionOrderByRelevanceFieldEnum]
+
+
+export const UserNotificationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  announcementId: 'announcementId'
+} as const
+
+export type UserNotificationOrderByRelevanceFieldEnum = (typeof UserNotificationOrderByRelevanceFieldEnum)[keyof typeof UserNotificationOrderByRelevanceFieldEnum]
+
+
+export const PushDeviceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  platform: 'platform',
+  tokenHash: 'tokenHash',
+  tokenCiphertext: 'tokenCiphertext'
+} as const
+
+export type PushDeviceOrderByRelevanceFieldEnum = (typeof PushDeviceOrderByRelevanceFieldEnum)[keyof typeof PushDeviceOrderByRelevanceFieldEnum]
+
+
+export const NotificationDeliveryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  templateId: 'templateId',
+  userId: 'userId',
+  providerConfigId: 'providerConfigId',
+  dedupeKey: 'dedupeKey',
+  recipientHash: 'recipientHash',
+  providerMessageId: 'providerMessageId',
+  lockOwner: 'lockOwner',
+  errorCode: 'errorCode',
+  errorMessage: 'errorMessage'
+} as const
+
+export type NotificationDeliveryOrderByRelevanceFieldEnum = (typeof NotificationDeliveryOrderByRelevanceFieldEnum)[keyof typeof NotificationDeliveryOrderByRelevanceFieldEnum]
+
+
+export const AnnouncementInteractionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  announcementId: 'announcementId',
+  userId: 'userId',
+  dedupeKey: 'dedupeKey'
+} as const
+
+export type AnnouncementInteractionOrderByRelevanceFieldEnum = (typeof AnnouncementInteractionOrderByRelevanceFieldEnum)[keyof typeof AnnouncementInteractionOrderByRelevanceFieldEnum]
+
+
+export const SubscriptionCancellationRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  initiatedBy: 'initiatedBy',
+  reason: 'reason',
+  idempotencyKey: 'idempotencyKey',
+  providerReference: 'providerReference',
+  errorCode: 'errorCode'
+} as const
+
+export type SubscriptionCancellationRequestOrderByRelevanceFieldEnum = (typeof SubscriptionCancellationRequestOrderByRelevanceFieldEnum)[keyof typeof SubscriptionCancellationRequestOrderByRelevanceFieldEnum]
+
+
+export const RefundRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paymentId: 'paymentId',
+  subscriptionId: 'subscriptionId',
+  reason: 'reason',
+  adminNote: 'adminNote',
+  currency: 'currency',
+  providerRefundId: 'providerRefundId',
+  reviewedByAdminId: 'reviewedByAdminId'
+} as const
+
+export type RefundRequestOrderByRelevanceFieldEnum = (typeof RefundRequestOrderByRelevanceFieldEnum)[keyof typeof RefundRequestOrderByRelevanceFieldEnum]
 

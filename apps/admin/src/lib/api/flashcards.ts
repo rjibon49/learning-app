@@ -1,13 +1,23 @@
-import { apiRequest } from './client';
+
+import { apiRequest } from "@/lib/api/client";
+
+import type {
+  Difficulty,
+  Paginated,
+} from "@/lib/api/quizzes";
 
 export interface FlashcardDeck {
   id: string;
   appId: string;
   title: string;
-  description?: string | null;
-  difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+  description: string | null;
+  difficulty: Difficulty;
   isPublished: boolean;
   sortOrder: number;
+  app?: {
+    name: string;
+    language?: { code: string; name: string };
+  };
   _count?: { items: number };
 }
 
@@ -18,42 +28,156 @@ export interface FlashcardDeckItem {
   sortOrder: number;
   vocabulary: {
     id: string;
-    german: string;
-    english: string;
-    bangla: string;
-    article?: string | null;
-    imageUrl?: string | null;
+    term: string;
+    pronunciation?: string | null;
+    partOfSpeech?: string | null;
+    grammar?: Record<string, unknown> | null;
+    translations?: Array<{
+      id: string;
+      meaning: string;
+      language?: {
+        code: string;
+        name: string;
+      };
+    }>;
   };
 }
 
-export async function getDecks(appId?: string): Promise<FlashcardDeck[]> {
-  const query = appId ? `?appId=${encodeURIComponent(appId)}` : '';
-  return apiRequest<FlashcardDeck[]>(`/flashcards/decks${query}`);
+export interface DeckInput {
+  appId: string;
+  title: string;
+  description?: string | null;
+  difficulty?: Difficulty;
+  isPublished?: boolean;
+  sortOrder?: number;
 }
 
-export async function createDeck(payload: Partial<FlashcardDeck>): Promise<FlashcardDeck> {
-  return apiRequest<FlashcardDeck>('/flashcards/decks', { method: 'POST', body: JSON.stringify(payload) });
+export interface DeckQuery {
+  appId?: string;
+  search?: string;
+  difficulty?: Difficulty;
+  page?: number;
+  limit?: number;
 }
 
-export async function updateDeck(id: string, payload: Partial<FlashcardDeck>): Promise<FlashcardDeck> {
-  return apiRequest<FlashcardDeck>(`/flashcards/decks/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(payload) });
+function encode(value: string) {
+  return encodeURIComponent(value);
 }
 
-export async function deleteDeck(id: string): Promise<void> {
-  return apiRequest<void>(`/flashcards/decks/${encodeURIComponent(id)}`, { method: 'DELETE' });
+function buildQuery(values: Record<string, unknown>) {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(values)) {
+    if (value !== undefined && value !== "") {
+      params.set(key, String(value));
+    }
+  }
+
+  return params.toString();
 }
 
-export async function getDeckItems(deckId: string): Promise<FlashcardDeckItem[]> {
-  return apiRequest<FlashcardDeckItem[]>(`/flashcards/decks/${encodeURIComponent(deckId)}/items`);
+export function getDecksPage(
+  query: DeckQuery = {},
+): Promise<Paginated<FlashcardDeck>> {
+  return apiRequest(
+    `/admin/flashcards/decks?${buildQuery({
+      page: 1,
+      limit: 10,
+      ...query,
+    })}`,
+  );
 }
 
-export async function addDeckItems(deckId: string, vocabularyIds: string[]): Promise<FlashcardDeckItem[]> {
-  return apiRequest<FlashcardDeckItem[]>(`/flashcards/decks/${encodeURIComponent(deckId)}/items`, {
-    method: 'POST',
-    body: JSON.stringify({ vocabularyIds }),
+export async function getDecks(
+  appId?: string,
+): Promise<FlashcardDeck[]> {
+  const result = await getDecksPage({
+    appId,
+    page: 1,
+    limit: 100,
+  });
+  return result.data;
+}
+
+export function getDeck(
+  deckId: string,
+): Promise<FlashcardDeck> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}`,
+  );
+}
+
+export function createDeck(
+  input: DeckInput,
+): Promise<FlashcardDeck> {
+  return apiRequest("/admin/flashcards/decks", {
+    method: "POST",
+    body: JSON.stringify(input),
   });
 }
 
-export async function removeDeckItem(itemId: string): Promise<void> {
-  return apiRequest<void>(`/flashcards/items/${encodeURIComponent(itemId)}`, { method: 'DELETE' });
+export function updateDeck(
+  deckId: string,
+  input: Partial<Omit<DeckInput, "appId">>,
+): Promise<FlashcardDeck> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(input),
+    },
+  );
+}
+
+export function deleteDeck(
+  deckId: string,
+): Promise<FlashcardDeck> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}`,
+    { method: "DELETE" },
+  );
+}
+
+export function getDeckItemsPage(
+  deckId: string,
+  page = 1,
+  limit = 20,
+): Promise<Paginated<FlashcardDeckItem>> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}/items?page=${page}&limit=${limit}`,
+  );
+}
+
+export async function getDeckItems(
+  deckId: string,
+): Promise<FlashcardDeckItem[]> {
+  const result = await getDeckItemsPage(
+    deckId,
+    1,
+    100,
+  );
+  return result.data;
+}
+
+export function addDeckItems(
+  deckId: string,
+  vocabularyIds: string[],
+): Promise<unknown> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}/items`,
+    {
+      method: "POST",
+      body: JSON.stringify({ vocabularyIds }),
+    },
+  );
+}
+
+export function removeDeckItem(
+  deckId: string,
+  itemId: string,
+): Promise<unknown> {
+  return apiRequest(
+    `/admin/flashcards/decks/${encode(deckId)}/items/${encode(itemId)}`,
+    { method: "DELETE" },
+  );
 }

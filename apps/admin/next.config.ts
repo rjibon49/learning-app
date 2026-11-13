@@ -1,21 +1,24 @@
+import type { NextConfig } from 'next';
 
-import type { NextConfig } from "next";
+// Server-side only: browsers communicate with this Next.js origin.
+const upstream = (
+  process.env.LEARNING_API_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  'https://learning-api.mochiflix.com/api'
+).replace(/\/+$/, '');
+
+if (!/^https:\/\//.test(upstream) && process.env.NODE_ENV === 'production') {
+  throw new Error('LEARNING_API_URL must use HTTPS in production');
+}
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // /api/admin/auth/* is handled by our server-side Route Handler,
+  // which validates incoming browser origins before proxying cookies.
   async rewrites() {
-    const apiBaseUrl = (
-      process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000/api'
-    ).replace(/\/+$/, '');
-
-    // Proxy auth through the CMS origin so browsers can reliably retain the
-    // HttpOnly refresh cookie, without exposing it to JavaScript.
     return [
       {
-        source: '/api/admin/auth/:path*',
-        destination: `${apiBaseUrl}/admin/auth/:path*`,
+        source: '/api/backend/:path*',
+        destination: `${upstream}/:path*`,
       },
     ];
   },

@@ -31,6 +31,9 @@ import { LanguagesModule } from './languages/languages.module.js';
 import { ProgressModule } from './progress/progress.module.js';
 import { DocumentsModule } from './documents/documents.module.js';
 import { WebAdsModule } from "./web-ads/web-ads.module.js";
+import { ConsentModule } from './consent/consent.module.js';
+import { AnnouncementsModule } from './announcements/announcements.module.js';
+import { NotificationsModule } from './notifications/notifications.module.js';
 
 @Module({
   imports: [
@@ -110,6 +113,9 @@ import { WebAdsModule } from "./web-ads/web-ads.module.js";
     ProgressModule,
     DocumentsModule,
     WebAdsModule,
+    ConsentModule,
+    AnnouncementsModule,
+    NotificationsModule,
   ],
 
   controllers: [AppController],

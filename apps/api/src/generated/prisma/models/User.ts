@@ -41,6 +41,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   displayName: string | null
   passwordHash: string | null
+  phoneNumber: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
   emailVerifiedAt: Date | null
@@ -60,6 +61,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   displayName: string | null
   passwordHash: string | null
+  phoneNumber: string | null
   role: $Enums.UserRole | null
   isActive: boolean | null
   emailVerifiedAt: Date | null
@@ -79,6 +81,7 @@ export type UserCountAggregateOutputType = {
   email: number
   displayName: number
   passwordHash: number
+  phoneNumber: number
   role: number
   isActive: number
   emailVerifiedAt: number
@@ -110,6 +113,7 @@ export type UserMinAggregateInputType = {
   email?: true
   displayName?: true
   passwordHash?: true
+  phoneNumber?: true
   role?: true
   isActive?: true
   emailVerifiedAt?: true
@@ -129,6 +133,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   displayName?: true
   passwordHash?: true
+  phoneNumber?: true
   role?: true
   isActive?: true
   emailVerifiedAt?: true
@@ -148,6 +153,7 @@ export type UserCountAggregateInputType = {
   email?: true
   displayName?: true
   passwordHash?: true
+  phoneNumber?: true
   role?: true
   isActive?: true
   emailVerifiedAt?: true
@@ -254,6 +260,7 @@ export type UserGroupByOutputType = {
   email: string | null
   displayName: string | null
   passwordHash: string | null
+  phoneNumber: string | null
   role: $Enums.UserRole
   isActive: boolean
   emailVerifiedAt: Date | null
@@ -296,6 +303,7 @@ export type UserWhereInput = {
   email?: Prisma.StringNullableFilter<"User"> | string | null
   displayName?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -320,6 +328,13 @@ export type UserWhereInput = {
   payments?: Prisma.PaymentTransactionListRelationFilter
   activities?: Prisma.UserActivityListRelationFilter
   promoRedemptions?: Prisma.PromoRedemptionListRelationFilter
+  marketingConsents?: Prisma.MarketingConsentListRelationFilter
+  notificationPreferences?: Prisma.NotificationPreferenceListRelationFilter
+  userNotifications?: Prisma.UserNotificationListRelationFilter
+  pushDevices?: Prisma.PushDeviceListRelationFilter
+  notificationDeliveries?: Prisma.NotificationDeliveryListRelationFilter
+  announcementInteractions?: Prisma.AnnouncementInteractionListRelationFilter
+  refundRequests?: Prisma.RefundRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -327,6 +342,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -351,6 +367,13 @@ export type UserOrderByWithRelationInput = {
   payments?: Prisma.PaymentTransactionOrderByRelationAggregateInput
   activities?: Prisma.UserActivityOrderByRelationAggregateInput
   promoRedemptions?: Prisma.PromoRedemptionOrderByRelationAggregateInput
+  marketingConsents?: Prisma.MarketingConsentOrderByRelationAggregateInput
+  notificationPreferences?: Prisma.NotificationPreferenceOrderByRelationAggregateInput
+  userNotifications?: Prisma.UserNotificationOrderByRelationAggregateInput
+  pushDevices?: Prisma.PushDeviceOrderByRelationAggregateInput
+  notificationDeliveries?: Prisma.NotificationDeliveryOrderByRelationAggregateInput
+  announcementInteractions?: Prisma.AnnouncementInteractionOrderByRelationAggregateInput
+  refundRequests?: Prisma.RefundRequestOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -363,6 +386,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   displayName?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -386,6 +410,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   payments?: Prisma.PaymentTransactionListRelationFilter
   activities?: Prisma.UserActivityListRelationFilter
   promoRedemptions?: Prisma.PromoRedemptionListRelationFilter
+  marketingConsents?: Prisma.MarketingConsentListRelationFilter
+  notificationPreferences?: Prisma.NotificationPreferenceListRelationFilter
+  userNotifications?: Prisma.UserNotificationListRelationFilter
+  pushDevices?: Prisma.PushDeviceListRelationFilter
+  notificationDeliveries?: Prisma.NotificationDeliveryListRelationFilter
+  announcementInteractions?: Prisma.AnnouncementInteractionListRelationFilter
+  refundRequests?: Prisma.RefundRequestListRelationFilter
 }, "id" | "email" | "referralCode">
 
 export type UserOrderByWithAggregationInput = {
@@ -393,6 +424,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,6 +452,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   displayName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   emailVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -439,6 +472,7 @@ export type UserCreateInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -462,6 +496,13 @@ export type UserCreateInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -469,6 +510,7 @@ export type UserUncheckedCreateInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -492,6 +534,13 @@ export type UserUncheckedCreateInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -499,6 +548,7 @@ export type UserUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -522,6 +572,13 @@ export type UserUpdateInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -529,6 +586,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -552,6 +610,13 @@ export type UserUncheckedUpdateInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -559,6 +624,7 @@ export type UserCreateManyInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -578,6 +644,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -596,6 +663,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -636,6 +704,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
@@ -660,6 +729,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
@@ -679,6 +749,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
@@ -909,11 +980,114 @@ export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActivitiesInput, Prisma.UserUpdateWithoutActivitiesInput>, Prisma.UserUncheckedUpdateWithoutActivitiesInput>
 }
 
+export type UserCreateNestedOneWithoutMarketingConsentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketingConsentsInput, Prisma.UserUncheckedCreateWithoutMarketingConsentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketingConsentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMarketingConsentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketingConsentsInput, Prisma.UserUncheckedCreateWithoutMarketingConsentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketingConsentsInput
+  upsert?: Prisma.UserUpsertWithoutMarketingConsentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarketingConsentsInput, Prisma.UserUpdateWithoutMarketingConsentsInput>, Prisma.UserUncheckedUpdateWithoutMarketingConsentsInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationPreferencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferencesInput, Prisma.UserUncheckedCreateWithoutNotificationPreferencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPreferencesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationPreferencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferencesInput, Prisma.UserUncheckedCreateWithoutNotificationPreferencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPreferencesInput
+  upsert?: Prisma.UserUpsertWithoutNotificationPreferencesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationPreferencesInput, Prisma.UserUpdateWithoutNotificationPreferencesInput>, Prisma.UserUncheckedUpdateWithoutNotificationPreferencesInput>
+}
+
+export type UserCreateNestedOneWithoutUserNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserNotificationsInput, Prisma.UserUncheckedCreateWithoutUserNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUserNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserNotificationsInput, Prisma.UserUncheckedCreateWithoutUserNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutUserNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserNotificationsInput, Prisma.UserUpdateWithoutUserNotificationsInput>, Prisma.UserUncheckedUpdateWithoutUserNotificationsInput>
+}
+
+export type UserCreateNestedOneWithoutPushDevicesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushDevicesInput, Prisma.UserUncheckedCreateWithoutPushDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushDevicesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushDevicesInput, Prisma.UserUncheckedCreateWithoutPushDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushDevicesInput
+  upsert?: Prisma.UserUpsertWithoutPushDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushDevicesInput, Prisma.UserUpdateWithoutPushDevicesInput>, Prisma.UserUncheckedUpdateWithoutPushDevicesInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationDeliveriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedCreateWithoutNotificationDeliveriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationDeliveriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutNotificationDeliveriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedCreateWithoutNotificationDeliveriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationDeliveriesInput
+  upsert?: Prisma.UserUpsertWithoutNotificationDeliveriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationDeliveriesInput, Prisma.UserUpdateWithoutNotificationDeliveriesInput>, Prisma.UserUncheckedUpdateWithoutNotificationDeliveriesInput>
+}
+
+export type UserCreateNestedOneWithoutAnnouncementInteractionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedCreateWithoutAnnouncementInteractionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementInteractionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutAnnouncementInteractionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedCreateWithoutAnnouncementInteractionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementInteractionsInput
+  upsert?: Prisma.UserUpsertWithoutAnnouncementInteractionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnouncementInteractionsInput, Prisma.UserUpdateWithoutAnnouncementInteractionsInput>, Prisma.UserUncheckedUpdateWithoutAnnouncementInteractionsInput>
+}
+
+export type UserCreateNestedOneWithoutRefundRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefundRequestsInput, Prisma.UserUncheckedCreateWithoutRefundRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefundRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRefundRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefundRequestsInput, Prisma.UserUncheckedCreateWithoutRefundRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefundRequestsInput
+  upsert?: Prisma.UserUpsertWithoutRefundRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefundRequestsInput, Prisma.UserUpdateWithoutRefundRequestsInput>, Prisma.UserUncheckedUpdateWithoutRefundRequestsInput>
+}
+
 export type UserCreateWithoutReferredUsersInput = {
   id?: string
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -936,6 +1110,13 @@ export type UserCreateWithoutReferredUsersInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReferredUsersInput = {
@@ -943,6 +1124,7 @@ export type UserUncheckedCreateWithoutReferredUsersInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -965,6 +1147,13 @@ export type UserUncheckedCreateWithoutReferredUsersInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReferredUsersInput = {
@@ -977,6 +1166,7 @@ export type UserCreateWithoutReferrerInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -999,6 +1189,13 @@ export type UserCreateWithoutReferrerInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReferrerInput = {
@@ -1006,6 +1203,7 @@ export type UserUncheckedCreateWithoutReferrerInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1028,6 +1226,13 @@ export type UserUncheckedCreateWithoutReferrerInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReferrerInput = {
@@ -1056,6 +1261,7 @@ export type UserUpdateWithoutReferredUsersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1078,6 +1284,13 @@ export type UserUpdateWithoutReferredUsersInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferredUsersInput = {
@@ -1085,6 +1298,7 @@ export type UserUncheckedUpdateWithoutReferredUsersInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1107,6 +1321,13 @@ export type UserUncheckedUpdateWithoutReferredUsersInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutReferrerInput = {
@@ -1133,6 +1354,7 @@ export type UserScalarWhereInput = {
   email?: Prisma.StringNullableFilter<"User"> | string | null
   displayName?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   isActive?: Prisma.BoolFilter<"User"> | boolean
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -1152,6 +1374,7 @@ export type UserCreateWithoutSessionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1174,6 +1397,13 @@ export type UserCreateWithoutSessionsInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1181,6 +1411,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1203,6 +1434,13 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1226,6 +1464,7 @@ export type UserUpdateWithoutSessionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1248,6 +1487,13 @@ export type UserUpdateWithoutSessionsInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1255,6 +1501,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1277,6 +1524,13 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetsInput = {
@@ -1284,6 +1538,7 @@ export type UserCreateWithoutPasswordResetsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1306,6 +1561,13 @@ export type UserCreateWithoutPasswordResetsInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetsInput = {
@@ -1313,6 +1575,7 @@ export type UserUncheckedCreateWithoutPasswordResetsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1335,6 +1598,13 @@ export type UserUncheckedCreateWithoutPasswordResetsInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetsInput = {
@@ -1358,6 +1628,7 @@ export type UserUpdateWithoutPasswordResetsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1380,6 +1651,13 @@ export type UserUpdateWithoutPasswordResetsInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetsInput = {
@@ -1387,6 +1665,7 @@ export type UserUncheckedUpdateWithoutPasswordResetsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1409,6 +1688,13 @@ export type UserUncheckedUpdateWithoutPasswordResetsInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEnrollmentsInput = {
@@ -1416,6 +1702,7 @@ export type UserCreateWithoutEnrollmentsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1438,6 +1725,13 @@ export type UserCreateWithoutEnrollmentsInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -1445,6 +1739,7 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1467,6 +1762,13 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -1490,6 +1792,7 @@ export type UserUpdateWithoutEnrollmentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1512,6 +1815,13 @@ export type UserUpdateWithoutEnrollmentsInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -1519,6 +1829,7 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1541,6 +1852,13 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLessonProgressInput = {
@@ -1548,6 +1866,7 @@ export type UserCreateWithoutLessonProgressInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1570,6 +1889,13 @@ export type UserCreateWithoutLessonProgressInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLessonProgressInput = {
@@ -1577,6 +1903,7 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1599,6 +1926,13 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLessonProgressInput = {
@@ -1622,6 +1956,7 @@ export type UserUpdateWithoutLessonProgressInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1644,6 +1979,13 @@ export type UserUpdateWithoutLessonProgressInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLessonProgressInput = {
@@ -1651,6 +1993,7 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1673,6 +2016,13 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVocabularyProgressInput = {
@@ -1680,6 +2030,7 @@ export type UserCreateWithoutVocabularyProgressInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1702,6 +2053,13 @@ export type UserCreateWithoutVocabularyProgressInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVocabularyProgressInput = {
@@ -1709,6 +2067,7 @@ export type UserUncheckedCreateWithoutVocabularyProgressInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1731,6 +2090,13 @@ export type UserUncheckedCreateWithoutVocabularyProgressInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVocabularyProgressInput = {
@@ -1754,6 +2120,7 @@ export type UserUpdateWithoutVocabularyProgressInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1776,6 +2143,13 @@ export type UserUpdateWithoutVocabularyProgressInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
@@ -1783,6 +2157,7 @@ export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1805,6 +2180,13 @@ export type UserUncheckedUpdateWithoutVocabularyProgressInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuizAttemptsInput = {
@@ -1812,6 +2194,7 @@ export type UserCreateWithoutQuizAttemptsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1834,6 +2217,13 @@ export type UserCreateWithoutQuizAttemptsInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -1841,6 +2231,7 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1863,6 +2254,13 @@ export type UserUncheckedCreateWithoutQuizAttemptsInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -1886,6 +2284,7 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1908,6 +2307,13 @@ export type UserUpdateWithoutQuizAttemptsInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -1915,6 +2321,7 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1937,6 +2344,13 @@ export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionsInput = {
@@ -1944,6 +2358,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1966,6 +2381,13 @@ export type UserCreateWithoutSubscriptionsInput = {
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionsInput = {
@@ -1973,6 +2395,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -1995,6 +2418,13 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionsInput = {
@@ -2018,6 +2448,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2040,6 +2471,13 @@ export type UserUpdateWithoutSubscriptionsInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionsInput = {
@@ -2047,6 +2485,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2069,6 +2508,13 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2076,6 +2522,7 @@ export type UserCreateWithoutPaymentsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2098,6 +2545,13 @@ export type UserCreateWithoutPaymentsInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2105,6 +2559,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2127,6 +2582,13 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2150,6 +2612,7 @@ export type UserUpdateWithoutPaymentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2172,6 +2635,13 @@ export type UserUpdateWithoutPaymentsInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2179,6 +2649,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2201,6 +2672,13 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPromoRedemptionsInput = {
@@ -2208,6 +2686,7 @@ export type UserCreateWithoutPromoRedemptionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2230,6 +2709,13 @@ export type UserCreateWithoutPromoRedemptionsInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
@@ -2237,6 +2723,7 @@ export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2259,6 +2746,13 @@ export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPromoRedemptionsInput = {
@@ -2282,6 +2776,7 @@ export type UserUpdateWithoutPromoRedemptionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2304,6 +2799,13 @@ export type UserUpdateWithoutPromoRedemptionsInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
@@ -2311,6 +2813,7 @@ export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2333,6 +2836,13 @@ export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -2340,6 +2850,7 @@ export type UserCreateWithoutActivitiesInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2362,6 +2873,13 @@ export type UserCreateWithoutActivitiesInput = {
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2369,6 +2887,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2391,6 +2910,13 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -2414,6 +2940,7 @@ export type UserUpdateWithoutActivitiesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2436,6 +2963,13 @@ export type UserUpdateWithoutActivitiesInput = {
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -2443,6 +2977,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2465,6 +3000,1161 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMarketingConsentsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMarketingConsentsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMarketingConsentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketingConsentsInput, Prisma.UserUncheckedCreateWithoutMarketingConsentsInput>
+}
+
+export type UserUpsertWithoutMarketingConsentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMarketingConsentsInput, Prisma.UserUncheckedUpdateWithoutMarketingConsentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketingConsentsInput, Prisma.UserUncheckedCreateWithoutMarketingConsentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMarketingConsentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMarketingConsentsInput, Prisma.UserUncheckedUpdateWithoutMarketingConsentsInput>
+}
+
+export type UserUpdateWithoutMarketingConsentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMarketingConsentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationPreferencesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationPreferencesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationPreferencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferencesInput, Prisma.UserUncheckedCreateWithoutNotificationPreferencesInput>
+}
+
+export type UserUpsertWithoutNotificationPreferencesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPreferencesInput, Prisma.UserUncheckedUpdateWithoutNotificationPreferencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPreferencesInput, Prisma.UserUncheckedCreateWithoutNotificationPreferencesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationPreferencesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPreferencesInput, Prisma.UserUncheckedUpdateWithoutNotificationPreferencesInput>
+}
+
+export type UserUpdateWithoutNotificationPreferencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationPreferencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUserNotificationsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUserNotificationsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUserNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserNotificationsInput, Prisma.UserUncheckedCreateWithoutUserNotificationsInput>
+}
+
+export type UserUpsertWithoutUserNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserNotificationsInput, Prisma.UserUncheckedUpdateWithoutUserNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserNotificationsInput, Prisma.UserUncheckedCreateWithoutUserNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserNotificationsInput, Prisma.UserUncheckedUpdateWithoutUserNotificationsInput>
+}
+
+export type UserUpdateWithoutUserNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushDevicesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPushDevicesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPushDevicesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushDevicesInput, Prisma.UserUncheckedCreateWithoutPushDevicesInput>
+}
+
+export type UserUpsertWithoutPushDevicesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushDevicesInput, Prisma.UserUncheckedUpdateWithoutPushDevicesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushDevicesInput, Prisma.UserUncheckedCreateWithoutPushDevicesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushDevicesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushDevicesInput, Prisma.UserUncheckedUpdateWithoutPushDevicesInput>
+}
+
+export type UserUpdateWithoutPushDevicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushDevicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationDeliveriesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationDeliveriesInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationDeliveriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedCreateWithoutNotificationDeliveriesInput>
+}
+
+export type UserUpsertWithoutNotificationDeliveriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedUpdateWithoutNotificationDeliveriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedCreateWithoutNotificationDeliveriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationDeliveriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationDeliveriesInput, Prisma.UserUncheckedUpdateWithoutNotificationDeliveriesInput>
+}
+
+export type UserUpdateWithoutNotificationDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAnnouncementInteractionsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAnnouncementInteractionsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAnnouncementInteractionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedCreateWithoutAnnouncementInteractionsInput>
+}
+
+export type UserUpsertWithoutAnnouncementInteractionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedUpdateWithoutAnnouncementInteractionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedCreateWithoutAnnouncementInteractionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAnnouncementInteractionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementInteractionsInput, Prisma.UserUncheckedUpdateWithoutAnnouncementInteractionsInput>
+}
+
+export type UserUpdateWithoutAnnouncementInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAnnouncementInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRefundRequestsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referrer?: Prisma.UserCreateNestedOneWithoutReferredUsersInput
+  referredUsers?: Prisma.UserCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRefundRequestsInput = {
+  id?: string
+  email?: string | null
+  displayName?: string | null
+  passwordHash?: string | null
+  phoneNumber?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  emailVerifiedAt?: Date | string | null
+  referralCode?: string | null
+  referredById?: string | null
+  adFreeUntil?: Date | string | null
+  currentStreak?: number
+  longestStreak?: number
+  lastActivityDate?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  referredUsers?: Prisma.UserUncheckedCreateNestedManyWithoutReferrerInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedCreateNestedManyWithoutUserInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentTransactionUncheckedCreateNestedManyWithoutUserInput
+  activities?: Prisma.UserActivityUncheckedCreateNestedManyWithoutUserInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  userNotifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  pushDevices?: Prisma.PushDeviceUncheckedCreateNestedManyWithoutUserInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutUserInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRefundRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefundRequestsInput, Prisma.UserUncheckedCreateWithoutRefundRequestsInput>
+}
+
+export type UserUpsertWithoutRefundRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRefundRequestsInput, Prisma.UserUncheckedUpdateWithoutRefundRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefundRequestsInput, Prisma.UserUncheckedCreateWithoutRefundRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRefundRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRefundRequestsInput, Prisma.UserUncheckedUpdateWithoutRefundRequestsInput>
+}
+
+export type UserUpdateWithoutRefundRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referrer?: Prisma.UserUpdateOneWithoutReferredUsersNestedInput
+  referredUsers?: Prisma.UserUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRefundRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referredById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adFreeUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  currentStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  longestStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  lastActivityDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referredUsers?: Prisma.UserUncheckedUpdateManyWithoutReferrerNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.UserLanguageEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+  vocabularyProgress?: Prisma.VocabularyProgressUncheckedUpdateManyWithoutUserNestedInput
+  quizAttempts?: Prisma.QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
+  activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
+  promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyReferrerInput = {
@@ -2472,6 +4162,7 @@ export type UserCreateManyReferrerInput = {
   email?: string | null
   displayName?: string | null
   passwordHash?: string | null
+  phoneNumber?: string | null
   role?: $Enums.UserRole
   isActive?: boolean
   emailVerifiedAt?: Date | string | null
@@ -2490,6 +4181,7 @@ export type UserUpdateWithoutReferrerInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2512,6 +4204,13 @@ export type UserUpdateWithoutReferrerInput = {
   payments?: Prisma.PaymentTransactionUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferrerInput = {
@@ -2519,6 +4218,7 @@ export type UserUncheckedUpdateWithoutReferrerInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2541,6 +4241,13 @@ export type UserUncheckedUpdateWithoutReferrerInput = {
   payments?: Prisma.PaymentTransactionUncheckedUpdateManyWithoutUserNestedInput
   activities?: Prisma.UserActivityUncheckedUpdateManyWithoutUserNestedInput
   promoRedemptions?: Prisma.PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  marketingConsents?: Prisma.MarketingConsentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  userNotifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  pushDevices?: Prisma.PushDeviceUncheckedUpdateManyWithoutUserNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutUserNestedInput
+  announcementInteractions?: Prisma.AnnouncementInteractionUncheckedUpdateManyWithoutUserNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutReferrerInput = {
@@ -2548,6 +4255,7 @@ export type UserUncheckedUpdateManyWithoutReferrerInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2578,6 +4286,13 @@ export type UserCountOutputType = {
   payments: number
   activities: number
   promoRedemptions: number
+  marketingConsents: number
+  notificationPreferences: number
+  userNotifications: number
+  pushDevices: number
+  notificationDeliveries: number
+  announcementInteractions: number
+  refundRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2592,6 +4307,13 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
   activities?: boolean | UserCountOutputTypeCountActivitiesArgs
   promoRedemptions?: boolean | UserCountOutputTypeCountPromoRedemptionsArgs
+  marketingConsents?: boolean | UserCountOutputTypeCountMarketingConsentsArgs
+  notificationPreferences?: boolean | UserCountOutputTypeCountNotificationPreferencesArgs
+  userNotifications?: boolean | UserCountOutputTypeCountUserNotificationsArgs
+  pushDevices?: boolean | UserCountOutputTypeCountPushDevicesArgs
+  notificationDeliveries?: boolean | UserCountOutputTypeCountNotificationDeliveriesArgs
+  announcementInteractions?: boolean | UserCountOutputTypeCountAnnouncementInteractionsArgs
+  refundRequests?: boolean | UserCountOutputTypeCountRefundRequestsArgs
 }
 
 /**
@@ -2681,12 +4403,62 @@ export type UserCountOutputTypeCountPromoRedemptionsArgs<ExtArgs extends runtime
   where?: Prisma.PromoRedemptionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMarketingConsentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketingConsentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationPreferencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationPreferenceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserNotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PushDeviceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationDeliveryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAnnouncementInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementInteractionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRefundRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefundRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   displayName?: boolean
   passwordHash?: boolean
+  phoneNumber?: boolean
   role?: boolean
   isActive?: boolean
   emailVerifiedAt?: boolean
@@ -2711,6 +4483,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   promoRedemptions?: boolean | Prisma.User$promoRedemptionsArgs<ExtArgs>
+  marketingConsents?: boolean | Prisma.User$marketingConsentsArgs<ExtArgs>
+  notificationPreferences?: boolean | Prisma.User$notificationPreferencesArgs<ExtArgs>
+  userNotifications?: boolean | Prisma.User$userNotificationsArgs<ExtArgs>
+  pushDevices?: boolean | Prisma.User$pushDevicesArgs<ExtArgs>
+  notificationDeliveries?: boolean | Prisma.User$notificationDeliveriesArgs<ExtArgs>
+  announcementInteractions?: boolean | Prisma.User$announcementInteractionsArgs<ExtArgs>
+  refundRequests?: boolean | Prisma.User$refundRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2721,6 +4500,7 @@ export type UserSelectScalar = {
   email?: boolean
   displayName?: boolean
   passwordHash?: boolean
+  phoneNumber?: boolean
   role?: boolean
   isActive?: boolean
   emailVerifiedAt?: boolean
@@ -2735,7 +4515,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "role" | "isActive" | "emailVerifiedAt" | "referralCode" | "referredById" | "adFreeUntil" | "currentStreak" | "longestStreak" | "lastActivityDate" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "phoneNumber" | "role" | "isActive" | "emailVerifiedAt" | "referralCode" | "referredById" | "adFreeUntil" | "currentStreak" | "longestStreak" | "lastActivityDate" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   referrer?: boolean | Prisma.User$referrerArgs<ExtArgs>
   referredUsers?: boolean | Prisma.User$referredUsersArgs<ExtArgs>
@@ -2749,6 +4529,13 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   promoRedemptions?: boolean | Prisma.User$promoRedemptionsArgs<ExtArgs>
+  marketingConsents?: boolean | Prisma.User$marketingConsentsArgs<ExtArgs>
+  notificationPreferences?: boolean | Prisma.User$notificationPreferencesArgs<ExtArgs>
+  userNotifications?: boolean | Prisma.User$userNotificationsArgs<ExtArgs>
+  pushDevices?: boolean | Prisma.User$pushDevicesArgs<ExtArgs>
+  notificationDeliveries?: boolean | Prisma.User$notificationDeliveriesArgs<ExtArgs>
+  announcementInteractions?: boolean | Prisma.User$announcementInteractionsArgs<ExtArgs>
+  refundRequests?: boolean | Prisma.User$refundRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -2767,12 +4554,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     payments: Prisma.$PaymentTransactionPayload<ExtArgs>[]
     activities: Prisma.$UserActivityPayload<ExtArgs>[]
     promoRedemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
+    marketingConsents: Prisma.$MarketingConsentPayload<ExtArgs>[]
+    notificationPreferences: Prisma.$NotificationPreferencePayload<ExtArgs>[]
+    userNotifications: Prisma.$UserNotificationPayload<ExtArgs>[]
+    pushDevices: Prisma.$PushDevicePayload<ExtArgs>[]
+    notificationDeliveries: Prisma.$NotificationDeliveryPayload<ExtArgs>[]
+    announcementInteractions: Prisma.$AnnouncementInteractionPayload<ExtArgs>[]
+    refundRequests: Prisma.$RefundRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string | null
     displayName: string | null
     passwordHash: string | null
+    phoneNumber: string | null
     role: $Enums.UserRole
     isActive: boolean
     emailVerifiedAt: Date | null
@@ -3137,6 +4932,13 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   promoRedemptions<T extends Prisma.User$promoRedemptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$promoRedemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketingConsents<T extends Prisma.User$marketingConsentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$marketingConsentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketingConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationPreferences<T extends Prisma.User$notificationPreferencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationPreferencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPreferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userNotifications<T extends Prisma.User$userNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushDevices<T extends Prisma.User$pushDevicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushDevicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushDevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationDeliveries<T extends Prisma.User$notificationDeliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  announcementInteractions<T extends Prisma.User$announcementInteractionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementInteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementInteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refundRequests<T extends Prisma.User$refundRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refundRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3170,6 +4972,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly displayName: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
+  readonly phoneNumber: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly emailVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -3810,6 +5613,174 @@ export type User$promoRedemptionsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.PromoRedemptionScalarFieldEnum | Prisma.PromoRedemptionScalarFieldEnum[]
+}
+
+/**
+ * User.marketingConsents
+ */
+export type User$marketingConsentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketingConsent
+   */
+  select?: Prisma.MarketingConsentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketingConsent
+   */
+  omit?: Prisma.MarketingConsentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketingConsentInclude<ExtArgs> | null
+  where?: Prisma.MarketingConsentWhereInput
+  orderBy?: Prisma.MarketingConsentOrderByWithRelationInput | Prisma.MarketingConsentOrderByWithRelationInput[]
+  cursor?: Prisma.MarketingConsentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketingConsentScalarFieldEnum | Prisma.MarketingConsentScalarFieldEnum[]
+}
+
+/**
+ * User.notificationPreferences
+ */
+export type User$notificationPreferencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationPreference
+   */
+  select?: Prisma.NotificationPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationPreference
+   */
+  omit?: Prisma.NotificationPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationPreferenceInclude<ExtArgs> | null
+  where?: Prisma.NotificationPreferenceWhereInput
+  orderBy?: Prisma.NotificationPreferenceOrderByWithRelationInput | Prisma.NotificationPreferenceOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationPreferenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationPreferenceScalarFieldEnum | Prisma.NotificationPreferenceScalarFieldEnum[]
+}
+
+/**
+ * User.userNotifications
+ */
+export type User$userNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserNotification
+   */
+  select?: Prisma.UserNotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserNotification
+   */
+  omit?: Prisma.UserNotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserNotificationInclude<ExtArgs> | null
+  where?: Prisma.UserNotificationWhereInput
+  orderBy?: Prisma.UserNotificationOrderByWithRelationInput | Prisma.UserNotificationOrderByWithRelationInput[]
+  cursor?: Prisma.UserNotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserNotificationScalarFieldEnum | Prisma.UserNotificationScalarFieldEnum[]
+}
+
+/**
+ * User.pushDevices
+ */
+export type User$pushDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PushDevice
+   */
+  select?: Prisma.PushDeviceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PushDevice
+   */
+  omit?: Prisma.PushDeviceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PushDeviceInclude<ExtArgs> | null
+  where?: Prisma.PushDeviceWhereInput
+  orderBy?: Prisma.PushDeviceOrderByWithRelationInput | Prisma.PushDeviceOrderByWithRelationInput[]
+  cursor?: Prisma.PushDeviceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PushDeviceScalarFieldEnum | Prisma.PushDeviceScalarFieldEnum[]
+}
+
+/**
+ * User.notificationDeliveries
+ */
+export type User$notificationDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationDelivery
+   */
+  select?: Prisma.NotificationDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationDelivery
+   */
+  omit?: Prisma.NotificationDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationDeliveryInclude<ExtArgs> | null
+  where?: Prisma.NotificationDeliveryWhereInput
+  orderBy?: Prisma.NotificationDeliveryOrderByWithRelationInput | Prisma.NotificationDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationDeliveryScalarFieldEnum | Prisma.NotificationDeliveryScalarFieldEnum[]
+}
+
+/**
+ * User.announcementInteractions
+ */
+export type User$announcementInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AnnouncementInteraction
+   */
+  select?: Prisma.AnnouncementInteractionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AnnouncementInteraction
+   */
+  omit?: Prisma.AnnouncementInteractionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementInteractionInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementInteractionWhereInput
+  orderBy?: Prisma.AnnouncementInteractionOrderByWithRelationInput | Prisma.AnnouncementInteractionOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementInteractionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementInteractionScalarFieldEnum | Prisma.AnnouncementInteractionScalarFieldEnum[]
+}
+
+/**
+ * User.refundRequests
+ */
+export type User$refundRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefundRequest
+   */
+  select?: Prisma.RefundRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefundRequest
+   */
+  omit?: Prisma.RefundRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefundRequestInclude<ExtArgs> | null
+  where?: Prisma.RefundRequestWhereInput
+  orderBy?: Prisma.RefundRequestOrderByWithRelationInput | Prisma.RefundRequestOrderByWithRelationInput[]
+  cursor?: Prisma.RefundRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefundRequestScalarFieldEnum | Prisma.RefundRequestScalarFieldEnum[]
 }
 
 /**

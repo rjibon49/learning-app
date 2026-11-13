@@ -3,15 +3,19 @@ import {
   BadRequestException,
   Injectable,
 } from '@nestjs/common';
+
 import { ConfigService } from '@nestjs/config';
+
 import {
   createHmac,
   randomInt,
   timingSafeEqual,
 } from 'node:crypto';
+
 import * as argon2 from 'argon2';
 
 import { PrismaService } from '../prisma.service.js';
+
 import { RegistrationMailService } from './registration-mail.service.js';
 
 import type {
@@ -44,6 +48,10 @@ export class RegistrationService {
     }
   }
 
+  // ==========================================
+  // EMAIL OTP HASHING
+  // ==========================================
+
   private hashOtp(
     email: string,
     code: string,
@@ -67,6 +75,35 @@ export class RegistrationService {
     return timingSafeEqual(stored, supplied);
   }
 
+  // ==========================================
+  // ACTIVE CONSENT POLICY
+  // ==========================================
+
+  private async getActiveConsentPolicy() {
+    const now = new Date();
+
+    return this.prisma.consentPolicy.findFirst({
+      where: {
+        isActive: true,
+        OR: [
+          { effectiveAt: null },
+          { effectiveAt: { lte: now } },
+        ],
+      },
+      select: {
+        id: true,
+        version: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  // ==========================================
+  // REGISTRATION
+  // ==========================================
+
   async register(
     input: RegisterInput,
   ): Promise<{ message: string }> {
@@ -77,12 +114,13 @@ export class RegistrationService {
         'If registration is available, a verification code will be sent.',
     };
 
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email },
-      select: { id: true },
-    });
+    const existingUser =
+      await this.prisma.user.findUnique({
+        where: { email },
+        select: { id: true },
+      });
 
-    // Avoid exposing whether an account exists.
+    // Avoid exposing existing account emails.
     if (existingUser) {
       return genericResponse;
     }
@@ -99,6 +137,29 @@ export class RegistrationService {
       existingPending.resendAvailableAt > now
     ) {
       return genericResponse;
+    }
+
+    const marketing = input.marketing;
+
+    const requestedMarketingConsent =
+      marketing.email ||
+      marketing.whatsapp ||
+      marketing.sms;
+
+    const consentPolicy =
+      requestedMarketingConsent
+        ? await this.getActiveConsentPolicy()
+        : null;
+
+    // Marketing consent must reference a
+    // real, currently active policy.
+    if (
+      requestedMarketingConsent &&
+      !consentPolicy
+    ) {
+      throw new BadRequestException(
+        'Marketing consent is not yet available. Please uncheck marketing preferences and continue registration.',
+      );
     }
 
     const code = randomInt(0, 1000000)
@@ -125,6 +186,8 @@ export class RegistrationService {
       now.getTime() + this.resendCooldownMs,
     );
 
+    // Only requested and verified choices
+    // are stored as true.
     await this.prisma.pendingEmailRegistration.upsert({
       where: { email },
 
@@ -136,6 +199,15 @@ export class RegistrationService {
         expiresAt,
         resendAvailableAt,
         attempts: 0,
+
+        phoneNumber: input.phoneNumber ?? null,
+
+        marketingEmailOptIn: marketing.email,
+        marketingWhatsappOptIn: marketing.whatsapp,
+        marketingSmsOptIn: marketing.sms,
+
+        consentPolicyVersion:
+          consentPolicy?.version ?? null,
       },
 
       update: {
@@ -145,13 +217,30 @@ export class RegistrationService {
         expiresAt,
         resendAvailableAt,
         attempts: 0,
+
+        phoneNumber: input.phoneNumber ?? null,
+
+        marketingEmailOptIn: marketing.email,
+        marketingWhatsappOptIn: marketing.whatsapp,
+        marketingSmsOptIn: marketing.sms,
+
+        consentPolicyVersion:
+          consentPolicy?.version ?? null,
       },
     });
 
-    await this.mail.sendVerificationCode(email, code);
+    // Existing email OTP delivery.
+    await this.mail.sendVerificationCode(
+      email,
+      code,
+    );
 
     return genericResponse;
   }
+
+  // ==========================================
+  // EMAIL VERIFICATION
+  // ==========================================
 
   async verifyEmail(
     input: VerifyEmailInput,
@@ -180,7 +269,7 @@ export class RegistrationService {
       );
     }
 
-    // Atomically count the verification attempt.
+    // Atomically count each verification attempt.
     const attemptUpdate =
       await this.prisma.pendingEmailRegistration.updateMany({
         where: {
@@ -216,8 +305,23 @@ export class RegistrationService {
       );
     }
 
-    // The pending record is consumed in the same
-    // transaction that creates the verified user.
+    // Resolve policy used during registration.
+    // It may no longer be active, but its
+    // historical version must be preserved.
+    const policy = pending.consentPolicyVersion
+      ? await this.prisma.consentPolicy.findUnique({
+          where: {
+            version: pending.consentPolicyVersion,
+          },
+          select: { id: true },
+        })
+      : null;
+
+    const consentVersion =
+      pending.consentPolicyVersion ?? 'none';
+
+    // Registration and consent history are
+    // committed within one transaction.
     await this.prisma.$transaction(async (tx) => {
       const deleted =
         await tx.pendingEmailRegistration.deleteMany({
@@ -237,18 +341,55 @@ export class RegistrationService {
         );
       }
 
-      await tx.user.create({
+      const user = await tx.user.create({
         data: {
           email: pending.email,
           displayName: pending.displayName,
           passwordHash: pending.passwordHash,
 
+          phoneNumber: pending.phoneNumber,
+
           role: 'USER',
           isActive: true,
 
-          // Email OTP verification completed.
           emailVerifiedAt: new Date(),
         },
+        select: { id: true },
+      });
+
+      await tx.marketingConsent.createMany({
+        data: [
+          {
+            userId: user.id,
+            policyId: policy?.id ?? null,
+            channel: 'EMAIL',
+            purpose: 'MARKETING',
+            granted:
+              pending.marketingEmailOptIn,
+            source: 'REGISTRATION',
+            policyVersion: consentVersion,
+          },
+          {
+            userId: user.id,
+            policyId: policy?.id ?? null,
+            channel: 'WHATSAPP',
+            purpose: 'MARKETING',
+            granted:
+              pending.marketingWhatsappOptIn,
+            source: 'REGISTRATION',
+            policyVersion: consentVersion,
+          },
+          {
+            userId: user.id,
+            policyId: policy?.id ?? null,
+            channel: 'SMS',
+            purpose: 'MARKETING',
+            granted:
+              pending.marketingSmsOptIn,
+            source: 'REGISTRATION',
+            policyVersion: consentVersion,
+          },
+        ],
       });
     });
 
