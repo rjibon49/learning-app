@@ -6,9 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
+  BarChart3,
+  Bell,
   BookOpen,
-  ChartNoAxesCombined,
   ChevronRight,
+  ClipboardList,
+  CreditCard,
   FileStack,
   FolderOpen,
   Globe2,
@@ -16,8 +19,11 @@ import {
   Languages,
   LayoutDashboard,
   LayoutGrid,
+  Mail,
   Megaphone,
   Monitor,
+  ReceiptText,
+  RefreshCcw,
   Settings,
   ShieldCheck,
   Smartphone,
@@ -32,10 +38,17 @@ import {
 import { useAuth } from "@/lib/auth/auth-context";
 import { Permissions } from "@/lib/auth/permissions";
 
+// =====================================================
+// TYPES
+// =====================================================
+
 type NavigationPermission =
   | "DEFAULT"
   | "BUSINESS"
   | "SUPER_ADMIN";
+
+type AdminRoleType =
+  NonNullable<ReturnType<typeof useAuth>["admin"]>["role"];
 
 interface NavItem {
   label: string;
@@ -53,7 +66,14 @@ interface NavGroup {
   items: NavItem[];
 }
 
+// =====================================================
+// NAVIGATION CONFIGURATION
+// =====================================================
+
 const NAVIGATION_GROUPS: NavGroup[] = [
+  // ===================================================
+  // OVERVIEW
+  // ===================================================
   {
     groupLabel: "Overview",
     items: [
@@ -64,6 +84,10 @@ const NAVIGATION_GROUPS: NavGroup[] = [
       },
     ],
   },
+
+  // ===================================================
+  // LANGUAGES & APPLICATIONS
+  // ===================================================
   {
     groupLabel: "Languages & Applications",
     items: [
@@ -79,6 +103,10 @@ const NAVIGATION_GROUPS: NavGroup[] = [
       },
     ],
   },
+
+  // ===================================================
+  // CONTENT MANAGEMENT
+  // ===================================================
   {
     groupLabel: "Content Management",
     items: [
@@ -86,7 +114,6 @@ const NAVIGATION_GROUPS: NavGroup[] = [
         label: "Vocabulary",
         href: "/admin/vocabulary",
         icon: BookOpen,
-        exact: true,
       },
       {
         label: "Categories",
@@ -120,6 +147,10 @@ const NAVIGATION_GROUPS: NavGroup[] = [
       },
     ],
   },
+
+  // ===================================================
+  // MEDIA & IMPORTS
+  // ===================================================
   {
     groupLabel: "Media & Imports",
     items: [
@@ -135,6 +166,61 @@ const NAVIGATION_GROUPS: NavGroup[] = [
       },
     ],
   },
+
+  // ===================================================
+  // GLOBAL ANNOUNCEMENTS
+  // ===================================================
+  {
+    groupLabel: "Announcements & Notifications",
+    items: [
+      {
+        label: "Announcements",
+        href: "/admin/announcements",
+        permission: "BUSINESS",
+        icon: Megaphone,
+      },
+      {
+        label: "Audience Segments",
+        href: "/admin/audiences",
+        permission: "BUSINESS",
+        icon: Users,
+      },
+      {
+        label: "Notification Templates",
+        href: "/admin/notification-templates",
+        permission: "BUSINESS",
+        icon: Mail,
+      },
+      {
+        label: "Notification Providers",
+        href: "/admin/notification-providers",
+        permission: "SUPER_ADMIN",
+        icon: Bell,
+      },
+      {
+        label: "Consent Policies",
+        href: "/admin/consent-policies",
+        permission: "BUSINESS",
+        icon: ShieldCheck,
+      },
+      {
+        label: "Notification Queue",
+        href: "/admin/notification-queue",
+        permission: "BUSINESS",
+        icon: ClipboardList,
+      },
+      {
+        label: "Notification Reports",
+        href: "/admin/notification-reports",
+        permission: "BUSINESS",
+        icon: BarChart3,
+      },
+    ],
+  },
+
+  // ===================================================
+  // BUSINESS & MONETIZATION
+  // ===================================================
   {
     groupLabel: "Business & Monetization",
     items: [
@@ -168,22 +254,39 @@ const NAVIGATION_GROUPS: NavGroup[] = [
         label: "Ad Reports",
         href: "/admin/ads/web/reports",
         permission: "BUSINESS",
-        icon: ChartNoAxesCombined,
+        icon: BarChart3,
       },
       {
         label: "Subscriptions",
         href: "/admin/subscriptions",
         permission: "BUSINESS",
-        icon: TicketPercent,
+        icon: CreditCard,
+        exact: true,
+      },
+      {
+        label: "Subscription Cancellations",
+        href: "/admin/subscriptions/cancellations",
+        permission: "BUSINESS",
+        icon: RefreshCcw,
+      },
+      {
+        label: "Refund Requests",
+        href: "/admin/refunds",
+        permission: "BUSINESS",
+        icon: ReceiptText,
       },
       {
         label: "Promotions & Discounts",
         href: "/admin/promotions",
         permission: "BUSINESS",
-        icon: Tags,
+        icon: TicketPercent,
       },
     ],
   },
+
+  // ===================================================
+  // ADMINISTRATION & SECURITY
+  // ===================================================
   {
     groupLabel: "Administration & Security",
     items: [
@@ -215,13 +318,13 @@ const NAVIGATION_GROUPS: NavGroup[] = [
   },
 ];
 
-// ==========================================
+// =====================================================
 // PERMISSION CHECK
-// ==========================================
+// =====================================================
 
 function canView(
   permission: NavigationPermission | undefined,
-  role: NonNullable<ReturnType<typeof useAuth>["admin"]>["role"] | undefined,
+  role: AdminRoleType | undefined,
 ): boolean {
   if (permission === "SUPER_ADMIN") {
     return Permissions.canManageSystem(role);
@@ -234,27 +337,45 @@ function canView(
   return true;
 }
 
-// ==========================================
-// ACTIVE ROUTE CHECK
-// ==========================================
+// =====================================================
+// ACTIVE ROUTE MATCHING
+// =====================================================
 
 function isRouteActive(
   pathname: string,
   item: NavItem,
+  visibleItems: NavItem[],
 ): boolean {
-  if (item.exact) {
-    return pathname === item.href;
+  if (pathname === item.href) {
+    return true;
   }
 
-  return (
-    pathname === item.href ||
-    pathname.startsWith(`${item.href}/`)
+  if (item.exact) {
+    return false;
+  }
+
+  if (!pathname.startsWith(`${item.href}/`)) {
+    return false;
+  }
+
+  // If a more specific visible navigation item
+  // matches, do not also highlight its parent.
+  const hasMoreSpecificMatch = visibleItems.some(
+    (other) =>
+      other.href !== item.href &&
+      other.href.startsWith(`${item.href}/`) &&
+      (
+        pathname === other.href ||
+        pathname.startsWith(`${other.href}/`)
+      ),
   );
+
+  return !hasMoreSpecificMatch;
 }
 
-// ==========================================
-// SIDEBAR COMPONENT
-// ==========================================
+// =====================================================
+// SIDEBAR
+// =====================================================
 
 export function Sidebar({
   isOpenMobile,
@@ -270,7 +391,9 @@ export function Sidebar({
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* =====================================
+          MOBILE OVERLAY
+      ====================================== */}
 
       {isOpenMobile && (
         <button
@@ -288,7 +411,9 @@ export function Sidebar({
             : "-translate-x-full"
         }`}
       >
-        {/* Sidebar Header */}
+        {/* =====================================
+            HEADER
+        ====================================== */}
 
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-200 px-4">
           <Link
@@ -321,7 +446,9 @@ export function Sidebar({
           </button>
         </div>
 
-        {/* Navigation */}
+        {/* =====================================
+            NAVIGATION
+        ====================================== */}
 
         <nav
           aria-label="Admin navigation"
@@ -347,6 +474,7 @@ export function Sidebar({
                     const active = isRouteActive(
                       pathname,
                       item,
+                      visibleItems,
                     );
 
                     const Icon = item.icon;
@@ -402,7 +530,9 @@ export function Sidebar({
           })}
         </nav>
 
-        {/* Sidebar Footer */}
+        {/* =====================================
+            FOOTER
+        ====================================== */}
 
         <div className="shrink-0 border-t border-slate-200 bg-slate-50 px-4 py-3">
           <div className="flex items-center gap-2">
