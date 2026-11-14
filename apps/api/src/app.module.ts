@@ -34,6 +34,7 @@ import { WebAdsModule } from "./web-ads/web-ads.module.js";
 import { ConsentModule } from './consent/consent.module.js';
 import { AnnouncementsModule } from './announcements/announcements.module.js';
 import { NotificationsModule } from './notifications/notifications.module.js';
+import { BillingManagementModule } from './billing/billing.module.js';
 
 @Module({
   imports: [
@@ -116,6 +117,7 @@ import { NotificationsModule } from './notifications/notifications.module.js';
     ConsentModule,
     AnnouncementsModule,
     NotificationsModule,
+    BillingManagementModule,
   ],
 
   controllers: [AppController],

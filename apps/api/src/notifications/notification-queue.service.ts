@@ -365,9 +365,15 @@ export class NotificationQueueService {
     const item = await this.findOne(id);
 
     if (item.status !== 'FAILED') {
-      throw new ConflictException(
-        'Only failed notifications can be retried.',
-      );
+      throw new ConflictException('Only failed notifications can be retried.');
+    }
+
+    // Only an explicit, deterministic temporary provider rejection is safe to resend.
+    // SMTP timeouts, expired leases and worker exceptions may have sent the email.
+    // Such states must remain permanently blocked from manual or automatic retry
+    // until a separate, audited reconciliation workflow is implemented.
+    if (item.errorCode !== 'PROVIDER_TEMPORARY') {
+      throw new ConflictException('Delivery requires reconciliation or is not retryable.');
     }
 
     if (item.attempts >= item.maxAttempts) {
@@ -392,6 +398,7 @@ export class NotificationQueueService {
         where: {
           id,
           status: 'FAILED',
+          errorCode: 'PROVIDER_TEMPORARY',
           attempts: { lt: item.maxAttempts },
         },
         data: {
