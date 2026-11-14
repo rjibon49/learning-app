@@ -474,9 +474,10 @@ model MediaAsset {
 
   app App? @relation(fields: [appId], references: [id], onDelete: SetNull)
 
-  vocabularyImages Vocabulary[]     @relation("VocabularyImage")
-  vocabularyAudios Vocabulary[]     @relation("VocabularyAudio")
-  lessonResources  LessonResource[]
+  vocabularyImages   Vocabulary[]     @relation("VocabularyImage")
+  vocabularyAudios   Vocabulary[]     @relation("VocabularyAudio")
+  lessonResources    LessonResource[]
+  announcementImages Announcement[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -742,6 +743,7 @@ model User {
   email        String? @unique @db.VarChar(191)
   displayName  String?
   passwordHash String? @db.Text
+  phoneNumber  String? @db.VarChar(20) // E.164, optional; no phone OTP
 
   role UserRole @default(USER)
 
@@ -767,19 +769,27 @@ model User {
   passwordResets PasswordResetToken[]
   enrollments    UserLanguageEnrollment[]
 
-  lessonProgress     LessonProgress[]
-  vocabularyProgress VocabularyProgress[]
-  quizAttempts       QuizAttempt[]
-  subscriptions      Subscription[]
-  payments           PaymentTransaction[]
-  activities         UserActivity[]
-  promoRedemptions   PromoRedemption[]
+  lessonProgress           LessonProgress[]
+  vocabularyProgress       VocabularyProgress[]
+  quizAttempts             QuizAttempt[]
+  subscriptions            Subscription[]
+  payments                 PaymentTransaction[]
+  activities               UserActivity[]
+  promoRedemptions         PromoRedemption[]
+  marketingConsents        MarketingConsent[]
+  notificationPreferences  NotificationPreference[]
+  userNotifications        UserNotification[]
+  pushDevices              PushDevice[]
+  notificationDeliveries   NotificationDelivery[]
+  announcementInteractions AnnouncementInteraction[]
+  refundRequests           RefundRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([referredById])
   @@index([isActive])
+  @@index([phoneNumber])
 }
 
 model PendingEmailRegistration {
@@ -790,6 +800,13 @@ model PendingEmailRegistration {
 
   passwordHash String @db.Text
   otpHash      String @db.VarChar(64)
+
+  // Capture optional phone and marketing choices before email verification.
+  phoneNumber            String? @db.VarChar(20)
+  marketingEmailOptIn    Boolean @default(false)
+  marketingWhatsappOptIn Boolean @default(false)
+  marketingSmsOptIn      Boolean @default(false)
+  consentPolicyVersion   String? @db.VarChar(40)
 
   expiresAt         DateTime
   resendAvailableAt DateTime
@@ -987,11 +1004,19 @@ model Subscription {
   expiresAt DateTime?
   autoRenew Boolean   @default(false)
 
+  // Cancellation is not the same as immediately revoking paid access.
+  cancelAtPeriodEnd  Boolean   @default(false)
+  cancelRequestedAt  DateTime?
+  cancelledAt        DateTime?
+  cancellationReason String?   @db.VarChar(500)
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   app App @relation(fields: [appId], references: [id], onDelete: Restrict)
 
-  payments PaymentTransaction[]
+  payments             PaymentTransaction[]
+  refundRequests       RefundRequest[]
+  cancellationRequests SubscriptionCancellationRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1018,6 +1043,8 @@ model PaymentTransaction {
   refundedAt DateTime?
 
   metadata Json?
+
+  refundRequests RefundRequest[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Restrict)
 
@@ -1078,8 +1105,9 @@ model AdminUser {
   lastLoginAt       DateTime?
   passwordChangedAt DateTime?
 
-  refreshTokens AdminRefreshToken[]
-  auditLogs     AdminAuditLog[]
+  refreshTokens   AdminRefreshToken[]
+  auditLogs       AdminAuditLog[]
+  approvedRefunds RefundRequest[]     @relation("RefundReviewedBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1233,7 +1261,8 @@ model PromoCode {
   maxUses     Int?
   currentUses Int  @default(0)
 
-  redemptions PromoRedemption[]
+  redemptions   PromoRedemption[]
+  announcements AnnouncementPromotion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1381,4 +1410,470 @@ model WebAdEvent {
   @@unique([campaignId, tokenId, kind])
   @@index([campaignId, kind, createdAt])
   @@index([createdAt])
+}
+
+// ============================================================
+// GLOBAL ANNOUNCEMENTS, NOTIFICATIONS & MARKETING
+// Additive schema: uses existing Users, Media, Promotions and Payments.
+// All provider channels default disabled until configured.
+// Secrets must stay OUT of Prisma rows; use credentialRef to a
+// protected secret store or encrypted secret provider.
+// ============================================================
+
+enum NotificationChannel {
+  WEBSITE_BANNER
+  IN_APP
+  NOTIFICATION_BELL
+  EMAIL
+  MOBILE_PUSH
+  WEB_PUSH
+  WHATSAPP
+  SMS
+}
+
+enum NotificationPurpose {
+  MARKETING
+  TRANSACTIONAL
+  SYSTEM
+}
+
+enum AnnouncementStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  PAUSED
+  ARCHIVED
+}
+
+enum AnnouncementKind {
+  PROMOTION
+  COURSE_UPDATE
+  SUBSCRIPTION
+  MAINTENANCE
+  SECURITY
+  GENERAL
+}
+
+enum NotificationDeliveryStatus {
+  QUEUED
+  PROCESSING
+  SENT
+  DELIVERED
+  FAILED
+  SKIPPED
+  CANCELLED
+}
+
+enum AnnouncementInteractionKind {
+  VIEW
+  CLICK
+  DISMISS
+}
+
+enum SubscriptionCancellationStatus {
+  REQUESTED
+  PROCESSING
+  CONFIRMED
+  FAILED
+}
+
+enum RefundRequestStatus {
+  REQUESTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  PROCESSING
+  REFUNDED
+  FAILED
+  CANCELLED
+}
+
+model ConsentPolicy {
+  id          String    @id @default(cuid())
+  version     String    @unique @db.VarChar(40)
+  title       String    @db.VarChar(180)
+  documentUrl String?   @db.Text
+  contentHash String?   @db.VarChar(64)
+  isActive    Boolean   @default(false)
+  effectiveAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  consents MarketingConsent[]
+
+  @@index([isActive, effectiveAt])
+}
+
+// Append-only consent records. Latest choice by recordedAt governs
+// marketing eligibility; no implied consent from email possession.
+model MarketingConsent {
+  id            String              @id @default(cuid())
+  userId        String
+  policyId      String?
+  channel       NotificationChannel
+  purpose       NotificationPurpose @default(MARKETING)
+  granted       Boolean             @default(false)
+  source        String              @db.VarChar(80)
+  policyVersion String              @db.VarChar(40)
+  recordedAt    DateTime            @default(now())
+  metadata      Json?
+
+  user   User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  policy ConsentPolicy? @relation(fields: [policyId], references: [id], onDelete: SetNull)
+
+  @@index([userId, channel, purpose, recordedAt])
+  @@index([channel, purpose, granted])
+}
+
+// Explicit user notification preferences are not a replacement
+// for marketing consent; both checks are required for marketing.
+model NotificationPreference {
+  id        String              @id @default(cuid())
+  userId    String
+  channel   NotificationChannel
+  purpose   NotificationPurpose
+  enabled   Boolean             @default(true)
+  updatedAt DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, channel, purpose])
+}
+
+// Feature switch, adapter name, template namespace and reference to
+// encrypted credentials. Never store tokens/API keys in settingsJson.
+model NotificationProviderConfig {
+  id            String              @id @default(cuid())
+  channel       NotificationChannel
+  providerKey   String              @db.VarChar(80)
+  displayName   String              @db.VarChar(120)
+  isEnabled     Boolean             @default(false)
+  isTestMode    Boolean             @default(true)
+  credentialRef String?             @db.VarChar(191)
+  settingsJson  Json?
+  lastCheckedAt DateTime?
+  lastCheckOk   Boolean?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  deliveries NotificationDelivery[]
+  templates  NotificationTemplate[]
+
+  @@unique([channel, providerKey])
+  @@index([channel, isEnabled])
+}
+
+model NotificationTemplate {
+  id                 String              @id @default(cuid())
+  templateKey        String              @unique @db.VarChar(100)
+  channel            NotificationChannel
+  purpose            NotificationPurpose @default(MARKETING)
+  providerConfigId   String?
+  providerTemplateId String?             @db.VarChar(191)
+  isActive           Boolean             @default(false)
+  parametersJson     Json?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  providerConfig NotificationProviderConfig?       @relation(fields: [providerConfigId], references: [id], onDelete: SetNull)
+  translations   NotificationTemplateTranslation[]
+  deliveries     NotificationDelivery[]
+
+  @@index([channel, purpose, isActive])
+}
+
+model NotificationTemplateTranslation {
+  id         String   @id @default(cuid())
+  templateId String
+  locale     String   @db.VarChar(16)
+  title      String?  @db.VarChar(220)
+  body       String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  template NotificationTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@unique([templateId, locale])
+}
+
+// Targeting is configured with a versioned, server-validated rule AST:
+// appId, languageId, levelId, platform, subscription, enrollment,
+// activity and country only when those fields are genuinely available.
+// Never execute arbitrary expressions or SQL from rulesJson.
+model AudienceSegment {
+  id           String   @id @default(cuid())
+  segmentKey   String   @unique @db.VarChar(100)
+  name         String   @db.VarChar(160)
+  description  String?  @db.Text
+  rulesVersion Int      @default(1)
+  rulesJson    Json
+  isActive     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  targets AnnouncementTarget[]
+
+  @@index([isActive])
+}
+
+model Announcement {
+  id            String              @id @default(cuid())
+  slug          String              @unique @db.VarChar(160)
+  kind          AnnouncementKind    @default(GENERAL)
+  purpose       NotificationPurpose @default(MARKETING)
+  status        AnnouncementStatus  @default(DRAFT)
+  priority      Int                 @default(0)
+  isDismissible Boolean             @default(true)
+  startsAt      DateTime?
+  endsAt        DateTime?
+  actionType    String?             @db.VarChar(40)
+  actionValue   String?             @db.Text
+  imageAssetId  String?
+  metadata      Json?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  imageAsset        MediaAsset?               @relation(fields: [imageAssetId], references: [id], onDelete: SetNull)
+  translations      AnnouncementTranslation[]
+  placements        AnnouncementPlacement[]
+  targets           AnnouncementTarget[]
+  promotions        AnnouncementPromotion[]
+  userNotifications UserNotification[]
+  deliveries        NotificationDelivery[]
+  interactions      AnnouncementInteraction[]
+
+  @@index([status, startsAt, endsAt])
+  @@index([kind, priority])
+}
+
+model AnnouncementTranslation {
+  id             String   @id @default(cuid())
+  announcementId String
+  locale         String   @db.VarChar(16)
+  title          String   @db.VarChar(220)
+  message        String   @db.Text
+  actionLabel    String?  @db.VarChar(120)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+
+  @@unique([announcementId, locale])
+}
+
+model AnnouncementPlacement {
+  id               String              @id @default(cuid())
+  announcementId   String
+  channel          NotificationChannel
+  placementKey     String              @db.VarChar(100)
+  isEnabled        Boolean             @default(true)
+  displayRulesJson Json?
+
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+
+  @@unique([announcementId, channel, placementKey])
+  @@index([channel, placementKey, isEnabled])
+}
+
+// Multiple include/exclude segments can be attached to an announcement.
+model AnnouncementTarget {
+  id             String  @id @default(cuid())
+  announcementId String
+  segmentId      String
+  exclude        Boolean @default(false)
+
+  announcement Announcement    @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  segment      AudienceSegment @relation(fields: [segmentId], references: [id], onDelete: Restrict)
+
+  @@unique([announcementId, segmentId])
+  @@index([segmentId, exclude])
+}
+
+model AnnouncementPromotion {
+  id             String @id @default(cuid())
+  announcementId String
+  promoCodeId    String
+
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  promoCode    PromoCode    @relation(fields: [promoCodeId], references: [id], onDelete: Restrict)
+
+  @@unique([announcementId, promoCodeId])
+  @@index([promoCodeId])
+}
+
+model UserNotification {
+  id             String    @id @default(cuid())
+  userId         String
+  announcementId String
+  readAt         DateTime?
+  dismissedAt    DateTime?
+  createdAt      DateTime  @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, announcementId])
+  @@index([userId, readAt, createdAt])
+}
+
+model PushDevice {
+  id              String              @id @default(cuid())
+  userId          String
+  channel         NotificationChannel
+  platform        String              @db.VarChar(30)
+  tokenHash       String              @unique @db.VarChar(64)
+  tokenCiphertext String              @db.Text
+  isActive        Boolean             @default(true)
+  lastSeenAt      DateTime?
+  revokedAt       DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, channel, isActive])
+}
+
+// Dedupe key and queue state allow retries and safe provider callbacks.
+// Recipient must be resolved by backend from eligible users + consent.
+model NotificationDelivery {
+  id                String                     @id @default(cuid())
+  announcementId    String?
+  templateId        String?
+  userId            String?
+  providerConfigId  String?
+  channel           NotificationChannel
+  purpose           NotificationPurpose
+  status            NotificationDeliveryStatus @default(QUEUED)
+
+  dedupeKey         String  @unique @db.VarChar(191)
+  recipientHash     String? @db.VarChar(64)
+  providerMessageId String? @db.VarChar(191)
+
+  // ==========================================
+  // DELIVERY ATTEMPTS
+  // ==========================================
+
+  attempts    Int @default(0)
+  maxAttempts Int @default(3)
+
+  // ==========================================
+  // RELIABLE WORKER LOCKING
+  // ==========================================
+
+  lockOwner    String?   @db.VarChar(100)
+  lockedUntil  DateTime?
+  claimVersion Int       @default(0)
+
+  // ==========================================
+  // DELIVERY SCHEDULING
+  // ==========================================
+
+  scheduledAt DateTime @default(now())
+  nextRetryAt DateTime?
+
+  // ==========================================
+  // DELIVERY TIMESTAMPS
+  // ==========================================
+
+  sentAt         DateTime?
+  deliveredAt    DateTime?
+  acknowledgedAt DateTime?
+
+  // ==========================================
+  // ERRORS & PAYLOAD
+  // ==========================================
+
+  errorCode    String? @db.VarChar(100)
+  errorMessage String? @db.Text
+  payloadJson  Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ==========================================
+  // RELATIONS
+  // ==========================================
+
+  announcement Announcement? @relation(fields: [announcementId], references: [id], onDelete: SetNull)
+
+  template NotificationTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  providerConfig NotificationProviderConfig? @relation(fields: [providerConfigId], references: [id], onDelete: SetNull)
+
+  // ==========================================
+  // INDEXES
+  // ==========================================
+
+  @@index([status, scheduledAt, nextRetryAt])
+  @@index([status, lockedUntil])
+  @@index([userId, createdAt])
+  @@index([providerMessageId])
+  @@index([announcementId, channel])
+}
+
+model AnnouncementInteraction {
+  id             String                      @id @default(cuid())
+  announcementId String
+  userId         String?
+  kind           AnnouncementInteractionKind
+  dedupeKey      String?                     @unique @db.VarChar(191)
+  contextJson    Json?
+  createdAt      DateTime                    @default(now())
+
+  announcement Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  user         User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([announcementId, kind, createdAt])
+  @@index([userId, createdAt])
+}
+
+// Provider-confirmed cancellation is distinct from cancelling locally.
+model SubscriptionCancellationRequest {
+  id                String                         @id @default(cuid())
+  subscriptionId    String
+  status            SubscriptionCancellationStatus @default(REQUESTED)
+  initiatedBy       String                         @default("USER") @db.VarChar(30)
+  reason            String?                        @db.VarChar(500)
+  idempotencyKey    String                         @unique @db.VarChar(191)
+  providerReference String?                        @db.VarChar(191)
+  requestedAt       DateTime                       @default(now())
+  confirmedAt       DateTime?
+  errorCode         String?                        @db.VarChar(100)
+  updatedAt         DateTime                       @updatedAt
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Restrict)
+
+  @@index([subscriptionId, status, requestedAt])
+}
+
+// App Store / Google Play / web processor refunds are distinct flows.
+// Status must be changed only after the correct provider confirms it.
+model RefundRequest {
+  id                String              @id @default(cuid())
+  userId            String
+  paymentId         String
+  subscriptionId    String?
+  status            RefundRequestStatus @default(REQUESTED)
+  reason            String              @db.Text
+  adminNote         String?             @db.Text
+  amountMinor       BigInt
+  currency          String              @db.VarChar(3)
+  providerRefundId  String?             @db.VarChar(191)
+  reviewedByAdminId String?
+  requestedAt       DateTime            @default(now())
+  reviewedAt        DateTime?
+  resolvedAt        DateTime?
+  updatedAt         DateTime            @updatedAt
+
+  user         User               @relation(fields: [userId], references: [id], onDelete: Restrict)
+  payment      PaymentTransaction @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  subscription Subscription?      @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  reviewedBy   AdminUser?         @relation("RefundReviewedBy", fields: [reviewedByAdminId], references: [id], onDelete: SetNull)
+
+  @@index([userId, status, requestedAt])
+  @@index([paymentId, status])
+  @@index([subscriptionId])
+  @@index([providerRefundId])
 }

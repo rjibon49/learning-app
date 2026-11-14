@@ -210,3 +210,122 @@ export const MasteryLevel = {
 } as const
 
 export type MasteryLevel = (typeof MasteryLevel)[keyof typeof MasteryLevel]
+
+
+export const WebAdKind = {
+  LOCAL_IMAGE: 'LOCAL_IMAGE',
+  ADSENSE: 'ADSENSE',
+  GAM: 'GAM'
+} as const
+
+export type WebAdKind = (typeof WebAdKind)[keyof typeof WebAdKind]
+
+
+export const WebAdStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type WebAdStatus = (typeof WebAdStatus)[keyof typeof WebAdStatus]
+
+
+export const WebAdEventKind = {
+  IMPRESSION: 'IMPRESSION',
+  CLICK: 'CLICK'
+} as const
+
+export type WebAdEventKind = (typeof WebAdEventKind)[keyof typeof WebAdEventKind]
+
+
+export const NotificationChannel = {
+  WEBSITE_BANNER: 'WEBSITE_BANNER',
+  IN_APP: 'IN_APP',
+  NOTIFICATION_BELL: 'NOTIFICATION_BELL',
+  EMAIL: 'EMAIL',
+  MOBILE_PUSH: 'MOBILE_PUSH',
+  WEB_PUSH: 'WEB_PUSH',
+  WHATSAPP: 'WHATSAPP',
+  SMS: 'SMS'
+} as const
+
+export type NotificationChannel = (typeof NotificationChannel)[keyof typeof NotificationChannel]
+
+
+export const NotificationPurpose = {
+  MARKETING: 'MARKETING',
+  TRANSACTIONAL: 'TRANSACTIONAL',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type NotificationPurpose = (typeof NotificationPurpose)[keyof typeof NotificationPurpose]
+
+
+export const AnnouncementStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  PUBLISHED: 'PUBLISHED',
+  PAUSED: 'PAUSED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type AnnouncementStatus = (typeof AnnouncementStatus)[keyof typeof AnnouncementStatus]
+
+
+export const AnnouncementKind = {
+  PROMOTION: 'PROMOTION',
+  COURSE_UPDATE: 'COURSE_UPDATE',
+  SUBSCRIPTION: 'SUBSCRIPTION',
+  MAINTENANCE: 'MAINTENANCE',
+  SECURITY: 'SECURITY',
+  GENERAL: 'GENERAL'
+} as const
+
+export type AnnouncementKind = (typeof AnnouncementKind)[keyof typeof AnnouncementKind]
+
+
+export const NotificationDeliveryStatus = {
+  QUEUED: 'QUEUED',
+  PROCESSING: 'PROCESSING',
+  SENT: 'SENT',
+  DELIVERED: 'DELIVERED',
+  FAILED: 'FAILED',
+  SKIPPED: 'SKIPPED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type NotificationDeliveryStatus = (typeof NotificationDeliveryStatus)[keyof typeof NotificationDeliveryStatus]
+
+
+export const AnnouncementInteractionKind = {
+  VIEW: 'VIEW',
+  CLICK: 'CLICK',
+  DISMISS: 'DISMISS'
+} as const
+
+export type AnnouncementInteractionKind = (typeof AnnouncementInteractionKind)[keyof typeof AnnouncementInteractionKind]
+
+
+export const SubscriptionCancellationStatus = {
+  REQUESTED: 'REQUESTED',
+  PROCESSING: 'PROCESSING',
+  CONFIRMED: 'CONFIRMED',
+  FAILED: 'FAILED'
+} as const
+
+export type SubscriptionCancellationStatus = (typeof SubscriptionCancellationStatus)[keyof typeof SubscriptionCancellationStatus]
+
+
+export const RefundRequestStatus = {
+  REQUESTED: 'REQUESTED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  PROCESSING: 'PROCESSING',
+  REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type RefundRequestStatus = (typeof RefundRequestStatus)[keyof typeof RefundRequestStatus]

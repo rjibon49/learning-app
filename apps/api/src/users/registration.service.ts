@@ -1,261 +1,94 @@
-
-import {
-  BadRequestException,
-  Injectable,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  createHmac,
-  randomInt,
-  timingSafeEqual,
-} from 'node:crypto';
+import { createHmac, randomInt, timingSafeEqual } from 'node:crypto';
 import * as argon2 from 'argon2';
-
 import { PrismaService } from '../prisma.service.js';
 import { RegistrationMailService } from './registration-mail.service.js';
-
-import type {
-  RegisterInput,
-  VerifyEmailInput,
-} from './registration.schemas.js';
+import type { RegisterInput, VerifyEmailInput } from './registration.schemas.js';
 
 @Injectable()
 export class RegistrationService {
-  private readonly otpSecret: string;
-
-  private readonly otpValidityMs = 10 * 60 * 1000;
-  private readonly resendCooldownMs = 60 * 1000;
+  private readonly secret: string;
+  private readonly lifetime = 10 * 60 * 1000;
+  private readonly cooldown = 60_000;
   private readonly maxAttempts = 5;
-
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly config: ConfigService,
-    private readonly mail: RegistrationMailService,
-  ) {
-    this.otpSecret =
-      this.config.getOrThrow<string>(
-        'REGISTRATION_OTP_SECRET',
-      );
-
-    if (this.otpSecret.length < 32) {
-      throw new Error(
-        'REGISTRATION_OTP_SECRET must contain at least 32 characters',
-      );
-    }
+  constructor(private readonly db: PrismaService, config: ConfigService, private readonly mail: RegistrationMailService) {
+    this.secret = config.getOrThrow<string>('REGISTRATION_OTP_SECRET');
+    if (this.secret.length < 32) throw new Error('REGISTRATION_OTP_SECRET must contain at least 32 characters');
   }
-
-  private hashOtp(
-    email: string,
-    code: string,
-  ): string {
-    return createHmac('sha256', this.otpSecret)
-      .update(`${email}:${code}`)
-      .digest('hex');
+  private hash(email: string, otp: string) {
+    return createHmac('sha256', this.secret).update(`${email}:${otp}`).digest('hex');
   }
-
-  private isCorrectCode(
-    storedHash: string,
-    suppliedHash: string,
-  ): boolean {
-    const stored = Buffer.from(storedHash, 'hex');
-    const supplied = Buffer.from(suppliedHash, 'hex');
-
-    if (stored.length !== supplied.length) {
-      return false;
-    }
-
-    return timingSafeEqual(stored, supplied);
-  }
-
-  async register(
-    input: RegisterInput,
-  ): Promise<{ message: string }> {
+  async register(input: RegisterInput): Promise<{ message: string }> {
     const email = input.email;
-
-    const genericResponse = {
-      message:
-        'If registration is available, a verification code will be sent.',
-    };
-
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email },
-      select: { id: true },
-    });
-
-    // Avoid exposing whether an account exists.
-    if (existingUser) {
-      return genericResponse;
-    }
-
+    const reply = { message: 'If registration is available, a verification code will be sent.' };
+    if (await this.db.user.findUnique({ where: { email }, select: { id: true } })) return reply;
     const now = new Date();
-
-    const existingPending =
-      await this.prisma.pendingEmailRegistration.findUnique({
-        where: { email },
-      });
-
-    if (
-      existingPending &&
-      existingPending.resendAvailableAt > now
-    ) {
-      return genericResponse;
-    }
-
-    const code = randomInt(0, 1000000)
-      .toString()
-      .padStart(6, '0');
-
-    const otpHash = this.hashOtp(email, code);
-
-    const passwordHash = await argon2.hash(
-      input.password,
-      {
-        type: argon2.argon2id,
-        memoryCost: 19456,
-        timeCost: 2,
-        parallelism: 1,
-      },
-    );
-
-    const expiresAt = new Date(
-      now.getTime() + this.otpValidityMs,
-    );
-
-    const resendAvailableAt = new Date(
-      now.getTime() + this.resendCooldownMs,
-    );
-
-    await this.prisma.pendingEmailRegistration.upsert({
-      where: { email },
-
-      create: {
-        email,
-        displayName: input.displayName,
-        passwordHash,
-        otpHash,
-        expiresAt,
-        resendAvailableAt,
-        attempts: 0,
-      },
-
-      update: {
-        displayName: input.displayName,
-        passwordHash,
-        otpHash,
-        expiresAt,
-        resendAvailableAt,
-        attempts: 0,
-      },
-    });
-
-    await this.mail.sendVerificationCode(email, code);
-
-    return genericResponse;
+    const pending = await this.db.pendingEmailRegistration.findUnique({ where: { email } });
+    if (pending && pending.resendAvailableAt > now) return reply;
+    const optIn = input.marketing.email || input.marketing.whatsapp || input.marketing.sms;
+    const policy = optIn ? await this.db.consentPolicy.findFirst({
+      where: { isActive: true, OR: [{ effectiveAt: null }, { effectiveAt: { lte: now } }] },
+      orderBy: [{ effectiveAt: 'desc' }, { createdAt: 'desc' }], select: { version: true },
+    }) : null;
+    if (optIn && !policy) throw new BadRequestException('Active marketing consent policy required for opt-in');
+    const otp = String(randomInt(1_000_000)).padStart(6, '0');
+    const passwordHash = await argon2.hash(input.password, { type: argon2.argon2id, memoryCost: 19456, timeCost: 2, parallelism: 1 });
+    await this.db.pendingEmailRegistration.upsert({ where: { email }, create: {
+      email, displayName: input.displayName, passwordHash, otpHash: this.hash(email, otp),
+      expiresAt: new Date(now.getTime() + this.lifetime), resendAvailableAt: new Date(now.getTime() + this.cooldown),
+      attempts: 0, phoneNumber: input.phoneNumber ?? null,
+      marketingEmailOptIn: input.marketing.email, marketingWhatsappOptIn: input.marketing.whatsapp,
+      marketingSmsOptIn: input.marketing.sms, consentPolicyVersion: policy?.version ?? null,
+    }, update: {
+      displayName: input.displayName, passwordHash, otpHash: this.hash(email, otp),
+      expiresAt: new Date(now.getTime() + this.lifetime), resendAvailableAt: new Date(now.getTime() + this.cooldown),
+      attempts: 0, phoneNumber: input.phoneNumber ?? null,
+      marketingEmailOptIn: input.marketing.email, marketingWhatsappOptIn: input.marketing.whatsapp,
+      marketingSmsOptIn: input.marketing.sms, consentPolicyVersion: policy?.version ?? null,
+    }});
+    await this.mail.sendVerificationCode(email, otp);
+    return reply;
   }
-
-  async verifyEmail(
-    input: VerifyEmailInput,
-  ): Promise<{
-    success: boolean;
-    message: string;
-  }> {
-    const email = input.email;
+  async verifyEmail(input: VerifyEmailInput): Promise<{ success: boolean; message: string }> {
     const now = new Date();
-
-    const pending =
-      await this.prisma.pendingEmailRegistration.findUnique({
-        where: { email },
-      });
-
-    const invalidCodeMessage =
-      'Invalid or expired verification code';
-
-    if (
-      !pending ||
-      pending.expiresAt <= now ||
-      pending.attempts >= this.maxAttempts
-    ) {
-      throw new BadRequestException(
-        invalidCodeMessage,
-      );
-    }
-
-    // Atomically count the verification attempt.
-    const attemptUpdate =
-      await this.prisma.pendingEmailRegistration.updateMany({
-        where: {
-          id: pending.id,
-          otpHash: pending.otpHash,
-          expiresAt: { gt: now },
-          attempts: { lt: this.maxAttempts },
-        },
-        data: {
-          attempts: { increment: 1 },
-        },
-      });
-
-    if (attemptUpdate.count !== 1) {
-      throw new BadRequestException(
-        invalidCodeMessage,
-      );
-    }
-
-    const suppliedHash = this.hashOtp(
-      email,
-      input.code,
-    );
-
-    if (
-      !this.isCorrectCode(
-        pending.otpHash,
-        suppliedHash,
-      )
-    ) {
-      throw new BadRequestException(
-        invalidCodeMessage,
-      );
-    }
-
-    // The pending record is consumed in the same
-    // transaction that creates the verified user.
-    await this.prisma.$transaction(async (tx) => {
-      const deleted =
-        await tx.pendingEmailRegistration.deleteMany({
-          where: {
-            id: pending.id,
-            otpHash: pending.otpHash,
-            expiresAt: { gt: new Date() },
-            attempts: {
-              lte: this.maxAttempts,
-            },
-          },
-        });
-
-      if (deleted.count !== 1) {
-        throw new BadRequestException(
-          invalidCodeMessage,
-        );
-      }
-
-      await tx.user.create({
-        data: {
-          email: pending.email,
-          displayName: pending.displayName,
-          passwordHash: pending.passwordHash,
-
-          role: 'USER',
-          isActive: true,
-
-          // Email OTP verification completed.
-          emailVerifiedAt: new Date(),
-        },
-      });
+    const pending = await this.db.pendingEmailRegistration.findUnique({ where: { email: input.email } });
+    const bad = 'Invalid or expired verification code';
+    if (!pending || pending.expiresAt <= now || pending.attempts >= this.maxAttempts) throw new BadRequestException(bad);
+    const increment = await this.db.pendingEmailRegistration.updateMany({ where: {
+      id: pending.id, otpHash: pending.otpHash, expiresAt: { gt: now }, attempts: { lt: this.maxAttempts },
+    }, data: { attempts: { increment: 1 } } });
+    if (increment.count !== 1) throw new BadRequestException(bad);
+    const expected = Buffer.from(pending.otpHash, 'hex');
+    const actual = Buffer.from(this.hash(input.email, input.code), 'hex');
+    if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) throw new BadRequestException(bad);
+    const policy = pending.consentPolicyVersion ? await this.db.consentPolicy.findUnique({
+      where: { version: pending.consentPolicyVersion }, select: { id: true },
+    }) : null;
+    await this.db.$transaction(async tx => {
+      const consumed = await tx.pendingEmailRegistration.deleteMany({ where: {
+        id: pending.id, otpHash: pending.otpHash, expiresAt: { gt: new Date() },
+        attempts: { lte: this.maxAttempts },
+      }});
+      if (consumed.count !== 1) throw new BadRequestException(bad);
+      const user = await tx.user.create({ data: {
+        email: pending.email, displayName: pending.displayName, passwordHash: pending.passwordHash,
+        phoneNumber: pending.phoneNumber, role: 'USER', isActive: true, emailVerifiedAt: new Date(),
+      }, select: { id: true } });
+      const choices = [
+        { channel: 'EMAIL' as const, granted: pending.marketingEmailOptIn },
+        { channel: 'WHATSAPP' as const, granted: pending.marketingWhatsappOptIn },
+        { channel: 'SMS' as const, granted: pending.marketingSmsOptIn },
+      ];
+      await tx.marketingConsent.createMany({ data: choices.map(({ channel, granted }) => ({
+        userId: user.id, policyId: policy?.id ?? null, channel, purpose: 'MARKETING' as const,
+        granted, source: 'REGISTRATION', policyVersion: pending.consentPolicyVersion ?? 'none',
+      })) });
+      // Required by fail-closed send policy. Consent alone never grants permission.
+      await tx.notificationPreference.createMany({ data: choices.map(({ channel, granted }) => ({
+        userId: user.id, channel, purpose: 'MARKETING' as const, enabled: granted,
+      })) });
     });
-
-    return {
-      success: true,
-      message:
-        'Email verified. Your account is now active.',
-    };
+    return { success: true, message: 'Email verified. Your account is now active.' };
   }
 }

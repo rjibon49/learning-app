@@ -1,0 +1,17 @@
+# Phase 8 additions — merge selectively into your own secure .env; DO NOT replace existing .env.
+# These defaults intentionally disable dispatch. Do not commit actual secrets.
+NOTIFICATION_QUEUE_WORKER_ENABLED=false
+NOTIFICATION_DELIVERY_WORKER_ENABLED=false
+NOTIFICATION_WORKER_PROCESS=false
+NOTIFY_EMAIL_SEND_ENABLED=false
+NOTIFY_UNSUBSCRIBE_READY=false
+# HTTPS public API origin; include hostname only, no /api suffix.
+NOTIFY_PUBLIC_BASE_URL=https://learning-api.example.com
+# Generate a unique random secret (at least 32 characters); never use a placeholder in production.
+NOTIFY_UNSUBSCRIBE_SECRET=REPLACE_WITH_LONG_RANDOM_SECRET
+# Fill only when SMTP sending is separately approved/tested.
+# NOTIFY_SMTP_HOST=
+# NOTIFY_SMTP_PORT=587
+# NOTIFY_SMTP_USER=
+# NOTIFY_SMTP_PASSWORD=
+# NOTIFY_SMTP_FROM=
