@@ -15,14 +15,26 @@ const ALLOWED: Record<string, string[]> = {
 };
 
 function sameOrigin(request: NextRequest): boolean {
+  const allowedOrigin =
+    process.env.ADMIN_PUBLIC_ORIGIN ??
+    'https://learning-admin.mochiflix.com';
+
   const origin = request.headers.get('origin');
-  if (origin) return origin === request.nextUrl.origin;
-  const referer = request.headers.get('referer');
-  if (referer) {
-    try { return new URL(referer).origin === request.nextUrl.origin; }
-    catch { return false; }
+
+  if (origin) {
+    return origin === allowedOrigin;
   }
-  // Require a browser Origin or Referer for state-changing requests.
+
+  const referer = request.headers.get('referer');
+
+  if (referer) {
+    try {
+      return new URL(referer).origin === allowedOrigin;
+    } catch {
+      return false;
+    }
+  }
+
   return false;
 }
 
