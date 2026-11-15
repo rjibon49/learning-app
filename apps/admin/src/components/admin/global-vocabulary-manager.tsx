@@ -631,7 +631,7 @@ function MediaLibraryPicker({
   const [gridPage, setGridPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [pendingFile, setPendingFile] = useState<File | null>(null);
@@ -659,32 +659,23 @@ function MediaLibraryPicker({
   }, []);
 
   useEffect(() => {
-  let active = true;
-
-  void getMediaPage({
-    page: 1,
-    limit: 60,
-  })
-    .then((response) => {
-      if (!active) return;
-
-      setAssets(response.data);
-      setPage(response.pagination.page);
-      setTotalPages(response.pagination.totalPages);
-      setLoading(false);
-    })
-    .catch((err: unknown) => {
-      if (!active) return;
-
-      setError(getError(err));
-      setLoading(false);
-    });
-
-  return () => {
-    active = false;
-    loadId.current += 1;
-  };
-}, []);
+    let active = true;
+    const requestId = ++loadId.current;
+    void getMediaPage({ page: 1, limit: 60 })
+      .then((response) => {
+        if (!active || requestId !== loadId.current) return;
+        setAssets(response.data);
+        setPage(response.pagination.page);
+        setTotalPages(response.pagination.totalPages);
+        setLoading(false);
+      })
+      .catch((err: unknown) => {
+        if (!active || requestId !== loadId.current) return;
+        setError(getError(err));
+        setLoading(false);
+      });
+    return () => { active = false; loadId.current += 1; };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -834,7 +825,7 @@ function MediaLibraryPicker({
             <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 py-12 text-center text-sm text-slate-500">No READY {type.toLowerCase()} assets on this page. Use the page controls or upload a file.</div>
           ) : (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {filtered.map((asset) => (
+              {visibleAssets.map((asset) => (
                 <div key={asset.id} className={`min-w-0 space-y-2 rounded-xl border p-3 transition hover:border-indigo-300 ${asset.id === selectedId ? "border-indigo-500 bg-indigo-50" : "border-slate-200"}`}>
                   <MediaPreview key={asset.id} assetId={asset.id} type={type} className="h-32 w-full" />
                   <p title={asset.originalName ?? asset.objectKey} className="truncate text-xs font-medium text-slate-800">{asset.originalName ?? asset.objectKey}</p>
@@ -879,11 +870,7 @@ function MediaLibraryPicker({
                 if (safeGridPage > 1) {
                   setGridPage(safeGridPage - 1);
                 } else if (page > 1) {
-                  void load(page - 1).then(() => {
-                    // Navigate to previous server batch.
-                    // The last local grid page can be selected
-                    // using Next/Previous after loading.
-                  });
+                  void load(page - 1);
                 }
               }}
               className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"

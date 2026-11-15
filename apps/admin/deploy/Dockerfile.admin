@@ -1,0 +1,26 @@
+# Build context: monorepo root; docker build -f apps/admin/deploy/Dockerfile.admin .
+FROM node:22-bookworm-slim AS build
+WORKDIR /workspace
+ENV NEXT_TELEMETRY_DISABLED=1
+COPY package.json package-lock.json ./
+COPY apps/api/package.json ./apps/api/package.json
+COPY apps/admin/package.json ./apps/admin/package.json
+COPY apps/website/package.json ./apps/website/package.json
+COPY apps/mobile/package.json ./apps/mobile/package.json
+COPY packages ./packages
+COPY workers ./workers
+RUN npm ci --no-audit --no-fund
+COPY apps/admin ./apps/admin
+ENV LEARNING_API_URL=https://learning-api.mochiflix.com/api
+WORKDIR /workspace/apps/admin
+RUN npm run build
+
+FROM node:22-bookworm-slim AS runtime
+WORKDIR /workspace
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 HOSTNAME=0.0.0.0 PORT=3000
+ENV LEARNING_API_URL=https://learning-api.mochiflix.com/api
+COPY --from=build --chown=node:node /workspace /workspace
+USER node
+WORKDIR /workspace/apps/admin
+EXPOSE 3000
+CMD ["../../node_modules/.bin/next", "start", "-H", "0.0.0.0", "-p", "3000"]
