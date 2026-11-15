@@ -368,7 +368,14 @@ export function CourseHierarchyManager({
         };
 
         if (editingId) {
-          await updateCourse(editingId, input);
+          const {
+            languageId: _languageId,
+            ...updatePayload
+          } = input;
+
+          void _languageId;
+
+          await updateCourse(editingId, updatePayload);
         } else {
           const created = await createCourse(input);
 
@@ -376,7 +383,7 @@ export function CourseHierarchyManager({
             await setCourseApps(created.id, [selectedApp.id]);
           } catch (err) {
             setNotice(
-              `Course created, but linking to ${selectedApp.name} failed: ${errorText(err)}`,
+              `Course created, but linking to ${selectedApp.name} failed: ${errorText(err)}`
             );
           }
         }
