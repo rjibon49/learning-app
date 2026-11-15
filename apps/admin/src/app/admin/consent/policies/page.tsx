@@ -1,6 +1,6 @@
 'use client';
 import { ApiCollectionManager } from '@/components/operations/ApiCollectionManager';
-export default function Page(){ return <ApiCollectionManager config={{ title: 'Consent Policies', description: 'Publish versioned policies; do not overwrite previously accepted content', endpoint: '/admin/consent/policies', canCreate: true, canEdit: true, fields: [{ key: 'version', label: 'Version', kind: 'text', required: true },
+export default function Page(){ return <ApiCollectionManager config={{ title: 'Consent Policies', description: 'Publish versioned policies; do not overwrite previously accepted content', endpoint: '/admin/consent/policies', canCreate: true, canEdit: true, editOmit: ['version'], fields: [{ key: 'version', label: 'Version', kind: 'text', required: true },
 { key: 'title', label: 'Title', kind: 'text', required: true },
 { key: 'documentUrl', label: 'Published HTTPS URL', kind: 'text', required: true },
 { key: 'contentHash', label: 'SHA256 Hash', kind: 'text', required: true },

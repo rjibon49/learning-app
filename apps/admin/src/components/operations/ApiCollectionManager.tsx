@@ -2,12 +2,14 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { apiRequest } from '@/lib/api/client';
 
-type Field = { key: string; label: string; kind?: 'text' | 'number' | 'checkbox' | 'textarea' | 'json'; required?: boolean; placeholder?: string };
+type Field = { key: string; label: string; kind?: 'text' | 'number' | 'checkbox' | 'textarea' | 'json' | 'select'; required?: boolean; placeholder?: string; options?: string[]; initial?: string };
 type ListResult = unknown[] | { data?: unknown[]; pagination?: { page: number; totalPages: number; total: number } };
 export type CollectionConfig = {
   title: string; description: string; endpoint: string; fields: Field[];
   actions?: { label: string; suffix: string; method?: 'POST' | 'PATCH'; confirm?: boolean }[];
   canCreate?: boolean; canEdit?: boolean;
+  /** API PATCH schemas may disallow immutable create-only keys. */
+  editOmit?: string[];
 };
 function record(v: unknown): Record<string, unknown> { return v && typeof v === 'object' && !Array.isArray(v) ? v as Record<string, unknown> : {}; }
 function stringify(v: unknown) { if (typeof v === 'string') return v; if (v == null) return ''; return JSON.stringify(v, null, 2); }
@@ -41,7 +43,7 @@ export function ApiCollectionManager({ config }: { config: CollectionConfig }) {
   function begin(row?: Record<string, unknown>) {
     const value: Record<string, string> = {};
     for (const field of config.fields) {
-      value[field.key] = row ? stringify(row[field.key]) : field.kind === 'checkbox' ? 'false' : field.kind === 'json' ? '[]' : '';
+      value[field.key] = row ? stringify(row[field.key]) : (field.initial ?? (field.kind === 'checkbox' ? 'false' : field.kind === 'json' ? '[]' : ''));
     }
     setEditing(row ? String(row.id) : null); setForm(value); setMessage('');
   }
@@ -52,6 +54,7 @@ export function ApiCollectionManager({ config }: { config: CollectionConfig }) {
       const body: Record<string, unknown> = {};
       for (const field of config.fields) {
         const raw = form[field.key] ?? '';
+        if (editing && config.editOmit?.includes(field.key)) continue;
         if (!raw.trim() && !field.required) continue;
         body[field.key] = normalize(raw, field);
       }
@@ -75,11 +78,13 @@ export function ApiCollectionManager({ config }: { config: CollectionConfig }) {
     {message && <p role="status" className="rounded border px-3 py-2 text-sm">{message}</p>}
     <div className="grid gap-5 lg:grid-cols-[350px_minmax(0,1fr)]">
       <section className="rounded-xl border bg-white p-4">
-        <div className="mb-4 flex items-center justify-between"><h2 className="font-semibold">{editing ? 'Edit' : 'Create'}</h2><button type="button" onClick={() => begin()} className="rounded border px-3 py-1 text-sm">New</button></div>
-        {config.canCreate !== false && <form onSubmit={e => void save(e)} className="space-y-3">
-          {config.fields.map(f => <label key={f.key} className="block text-sm"><span className="mb-1 block font-medium">{f.label}</span>
+        <div className="mb-4 flex items-center justify-between"><h2 className="font-semibold">{editing ? 'Edit' : 'Create'}</h2>{config.canCreate !== false && <button type="button" onClick={() => begin()} className="rounded border px-3 py-1 text-sm">New</button>}</div>
+        {(config.canCreate !== false || (editing && config.canEdit !== false)) && <form onSubmit={e => void save(e)} className="space-y-3">
+          {config.fields.filter(f => !(editing && config.editOmit?.includes(f.key))).map(f => <label key={f.key} className="block text-sm"><span className="mb-1 block font-medium">{f.label}</span>
             {f.kind === 'textarea' || f.kind === 'json' ?
               <textarea rows={f.kind === 'json' ? 5 : 3} className="w-full rounded border p-2 font-mono text-xs" required={f.required} placeholder={f.placeholder} value={form[f.key] ?? ''} onChange={e => setForm(v => ({...v,[f.key]:e.target.value}))}/> :
+              f.kind === 'select' ?
+              <select className="w-full rounded border p-2" required={f.required} value={form[f.key] ?? ''} onChange={e=>setForm(v=>({...v,[f.key]:e.target.value}))}><option value="">Select...</option>{(f.options ?? []).map(opt=><option key={opt} value={opt}>{opt}</option>)}</select> :
               f.kind === 'checkbox' ?
               <input type="checkbox" checked={form[f.key] === 'true'} onChange={e => setForm(v => ({...v,[f.key]:String(e.target.checked)}))}/> :
               <input className="w-full rounded border p-2" type={f.kind === 'number' ? 'number' : 'text'} required={f.required} placeholder={f.placeholder} value={form[f.key] ?? ''} onChange={e => setForm(v => ({...v,[f.key]:e.target.value}))}/>}

@@ -1,10 +1,10 @@
-
 "use client";
 
 import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
@@ -21,6 +21,11 @@ import {
   Search,
   RefreshCw,
   Plus,
+  Loader2,
+  CheckCircle2,
+  BookOpen,
+  Pencil,
+  FileImage,
 } from "lucide-react";
 
 import { useAuth } from "@/lib/auth/auth-context";
@@ -38,7 +43,7 @@ import {
 } from "@/lib/api/courses";
 
 import {
-  getMediaAssets,
+  getMediaPage,
   uploadMedia,
   getMediaAccess,
   type MediaAsset,
@@ -518,6 +523,100 @@ function LessonSelector({
 // MEDIA LIBRARY PICKER
 // ==================================================
 
+// ==================================================
+// SIGNED R2 MEDIA PREVIEWS
+// ==================================================
+
+/** Preview URLs are obtained via authenticated API calls, not guessed from R2 object keys. */
+function MediaPreview({
+  assetId,
+  type,
+  className = "",
+}: {
+  assetId: string;
+  type: MediaPickerType;
+  className?: string;
+}) {
+  const [url, setUrl] = useState<string | null>(null);
+  const [pending, setPending] = useState(true);
+  const [failed, setFailed] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const anchor = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const element = anchor.current;
+    if (!element) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Browser fallback: the preview still works without IntersectionObserver.
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "180px" },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [assetId]);
+
+  useEffect(() => {
+    let active = true;
+    if (!assetId || !visible) return;
+
+    void (async () => {
+      try {
+        const access = await getMediaAccess(assetId);
+        if (active) setUrl(access.url);
+      } catch {
+        if (active) setFailed(true);
+      } finally {
+        if (active) setPending(false);
+      }
+    })();
+    return () => { active = false; };
+  }, [assetId, visible]);
+
+  return (
+    <div
+      ref={anchor}
+      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-slate-100 ${className}`}
+    >
+      {!visible ? (
+        <button
+          type="button"
+          aria-label="Load media preview"
+          onClick={() => setVisible(true)}
+          className="flex h-full w-full items-center justify-center text-slate-400"
+        >
+          {type === "IMAGE" ? <ImageIcon className="h-8 w-8" /> : <FileAudio className="h-8 w-8" />}
+        </button>
+      ) : pending ? (
+        <Loader2 className="h-6 w-6 animate-spin text-indigo-600" />
+      ) : url && type === "IMAGE" ? (
+        // Signed API media URLs may be short-lived and are not Next Image optimizer origins.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={url}
+          alt="Media asset preview"
+          className="h-full w-full object-contain"
+          onError={() => { setFailed(true); setUrl(null); }}
+        />
+      ) : url && type === "AUDIO" ? (
+        <audio controls preload="none" src={url} className="w-full" />
+      ) : (
+        <div className="flex flex-col items-center gap-1 p-2 text-center text-xs text-slate-500">
+          {type === "IMAGE" ? <ImageIcon className="h-7 w-7" /> : <FileAudio className="h-7 w-7" />}
+          {failed && <span>Preview unavailable</span>}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function MediaLibraryPicker({
   type,
   appId,
@@ -527,105 +626,142 @@ function MediaLibraryPicker({
 }: MediaPickerProps) {
   const [assets, setAssets] = useState<MediaAsset[]>([]);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const MEDIA_GRID_LIMIT = 8;
 
+  const [gridPage, setGridPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
-
-  const [previewUrl, setPreviewUrl] = useState<
-    Record<string, string>
-  >({});
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [localUrl, setLocalUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const loadId = useRef(0);
 
   const load = useCallback(async (targetPage: number) => {
+    const request = ++loadId.current;
     setLoading(true);
     setError("");
-
     try {
-      const data = await getMediaAssets(
-        undefined,
-        targetPage,
-        100,
-      );
-
-      setAssets(data);
-      setPage(targetPage);
+      // Media API pagination is server-side; filter media types client-side.
+      const response = await getMediaPage({ page: targetPage, limit: 60 });
+      if (request !== loadId.current) return;
+      setAssets(response.data);
+      setPage(response.pagination.page);
+      setTotalPages(response.pagination.totalPages);
+      setGridPage(1);
     } catch (err) {
-      setError(getError(err));
+      if (request === loadId.current) setError(getError(err));
     } finally {
-      setLoading(false);
+      if (request === loadId.current) setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    void load(1);
-  }, [load]);
+  let active = true;
+
+  void getMediaPage({
+    page: 1,
+    limit: 60,
+  })
+    .then((response) => {
+      if (!active) return;
+
+      setAssets(response.data);
+      setPage(response.pagination.page);
+      setTotalPages(response.pagination.totalPages);
+      setLoading(false);
+    })
+    .catch((err: unknown) => {
+      if (!active) return;
+
+      setError(getError(err));
+      setLoading(false);
+    });
+
+  return () => {
+    active = false;
+    loadId.current += 1;
+  };
+}, []);
+
+  useEffect(() => {
+    return () => {
+      if (localUrl) URL.revokeObjectURL(localUrl);
+    };
+  }, [localUrl]);
+
+  useEffect(() => {
+    function onEscape(event: KeyboardEvent) {
+      if (event.key === "Escape" && !uploading) onClose();
+    }
+    document.addEventListener("keydown", onEscape);
+    return () => document.removeEventListener("keydown", onEscape);
+  }, [onClose, uploading]);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
-
-    return assets.filter((asset) => {
-      if (asset.type !== type) return false;
-      if (asset.status !== "READY") return false;
-
-      if (!query) return true;
-
-      return (
-        asset.originalName ??
-        asset.objectKey ??
-        ""
-      ).toLowerCase().includes(query);
-    });
+    return assets.filter((asset) =>
+      asset.type === type && asset.status === "READY" &&
+      (!query || `${asset.originalName ?? ""} ${asset.objectKey ?? ""}`.toLowerCase().includes(query))
+    );
   }, [assets, search, type]);
 
-  async function previewAsset(asset: MediaAsset) {
-    try {
-      const access = await getMediaAccess(asset.id);
+  const gridTotalPages = Math.max(
+    1,
+    Math.ceil(filtered.length / MEDIA_GRID_LIMIT)
+  );
 
-      setPreviewUrl((previous) => ({
-        ...previous,
-        [asset.id]: access.url,
-      }));
-    } catch (err) {
-      setError(getError(err));
+  const safeGridPage = Math.min(
+    gridPage,
+    gridTotalPages
+  );
+
+  const visibleAssets = useMemo(() => {
+    const start = (safeGridPage - 1) * MEDIA_GRID_LIMIT;
+
+    return filtered.slice(
+      start,
+      start + MEDIA_GRID_LIMIT
+    );
+  }, [filtered, safeGridPage]);
+
+  function chooseFile(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+    event.target.value = "";
+    if (!file) return;
+    if (type === "IMAGE" && !file.type.startsWith("image/")) {
+      setError("Choose a supported image file.");
+      return;
     }
+    if (type === "AUDIO" && !file.type.startsWith("audio/")) {
+      setError("Choose an audio file.");
+      return;
+    }
+    setError("");
+    setPendingFile(file);
+    setLocalUrl(URL.createObjectURL(file));
   }
 
-  async function handleUpload(
-    event: ChangeEvent<HTMLInputElement>,
-  ) {
-    const file = event.target.files?.[0];
-
-    if (!file) return;
-
+  async function uploadSelectedFile() {
+    if (!pendingFile || uploading) return;
     setUploading(true);
     setError("");
-
     try {
-      const asset = await uploadMedia(
-        file,
-        appId,
-        "PRIVATE",
-      );
-
-      if (
-        asset.type === type &&
-        asset.status === "READY"
-      ) {
+      const asset = await uploadMedia(pendingFile, appId, "PRIVATE");
+      setPendingFile(null);
+      setLocalUrl(null);
+      if (asset.type === type && asset.status === "READY") {
         onSelect(asset);
         return;
       }
-
-      setError(
-        "Upload completed, but processing is not READY. Refresh the library shortly.",
-      );
-
+      setError("Upload accepted. Processing is not READY yet; refresh the library and select it when processing finishes.");
       await load(1);
     } catch (err) {
       setError(getError(err));
     } finally {
       setUploading(false);
-      event.target.value = "";
     }
   }
 
@@ -633,179 +769,153 @@ function MediaLibraryPicker({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Select ${type.toLowerCase()}`}
-      className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/70 p-3"
+      aria-label={`Choose ${type.toLowerCase()}`}
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/75 p-3 sm:p-6"
     >
-      <div className="flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b p-4">
+      <div className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-200 p-4 sm:p-5">
           <div>
-            <h2 className="text-lg font-bold">
-              Choose{" "}
-              {type === "IMAGE" ? "Image" : "Audio"}
+            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900">
+              {type === "IMAGE" ? <ImageIcon className="h-5 w-5 text-indigo-600" /> : <FileAudio className="h-5 w-5 text-indigo-600" />}
+              {type === "IMAGE" ? "Choose vocabulary image" : "Choose vocabulary audio"}
             </h2>
-            <p className="text-xs text-slate-500">
-              Cloudflare R2 Media Library
-            </p>
+            <p className="mt-1 text-xs text-slate-500">Preview your files before selecting. Private R2 media uses signed preview access.</p>
           </div>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-lg border p-2"
-            aria-label="Close picker"
-          >
+          <button type="button" disabled={uploading} onClick={onClose} aria-label="Close media picker" className="rounded-xl border border-slate-200 p-2.5 text-slate-600 hover:bg-slate-50 disabled:opacity-50">
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="space-y-3 border-b p-4">
-          <div className="flex flex-wrap gap-3">
-            <input
-              value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
-              placeholder="Search filenames on this page..."
-              className="min-w-0 flex-1 rounded-lg border px-3 py-2 text-sm"
-            />
-
-            <button
-              type="button"
-              onClick={() => void load(page)}
-              className="rounded-lg border px-3 py-2 text-sm"
-            >
-              <RefreshCw className="h-4 w-4" />
+        <div className="space-y-3 border-b border-slate-200 p-4 sm:p-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="relative min-w-[180px] flex-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <input type="search" value={search} onChange={(event) => { setSearch(event.target.value); setGridPage(1); }} placeholder="Search names on this page..." aria-label="Search media" className="w-full rounded-xl border border-slate-200 py-2.5 pl-9 pr-3 text-sm outline-none focus:border-indigo-400" />
+            </div>
+            <button type="button" disabled={loading} onClick={() => void load(page)} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 text-sm hover:bg-slate-50">
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Refresh
             </button>
-
-            <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white">
-              <Upload className="h-4 w-4" />
-              {uploading ? "Uploading..." : "Upload from PC"}
-
-              <input
-                type="file"
-                disabled={uploading}
-                className="hidden"
-                accept={
-                  type === "IMAGE"
-                    ? "image/jpeg,image/png,image/webp,image/avif,image/tiff"
-                    : "audio/*"
-                }
-                onChange={(event) =>
-                  void handleUpload(event)
-                }
-              />
-            </label>
+            <button type="button" disabled={uploading} onClick={() => fileInputRef.current?.click()} className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50">
+              <Upload className="h-4 w-4" /> Upload from PC
+            </button>
+            <input ref={fileInputRef} className="sr-only" type="file" accept={type === "IMAGE" ? "image/jpeg,image/png,image/webp,image/avif,image/tiff" : "audio/*"} onChange={chooseFile} />
           </div>
 
-          {error && (
-            <p
-              role="alert"
-              className="rounded-lg bg-red-50 p-3 text-sm text-red-600"
-            >
-              {error}
-            </p>
+          {pendingFile && (
+            <div className="grid items-center gap-3 rounded-xl border border-indigo-200 bg-indigo-50/60 p-3 sm:grid-cols-[150px_1fr]">
+              <div className="flex h-32 items-center justify-center overflow-hidden rounded-lg bg-white">
+                {localUrl && type === "IMAGE" ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={localUrl} alt="Selected local file preview" className="h-full w-full object-contain" />
+                ) : localUrl ? (
+                  <audio src={localUrl} controls preload="metadata" className="w-full" />
+                ) : <Loader2 className="h-5 w-5 animate-spin" />}
+              </div>
+              <div className="min-w-0 space-y-2">
+                <p className="break-all text-sm font-semibold text-slate-900">{pendingFile.name}</p>
+                <p className="text-xs text-slate-500">{(pendingFile.size / 1024 / 1024).toFixed(2)} MB · Local preview — not uploaded yet</p>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" disabled={uploading} onClick={() => void uploadSelectedFile()} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white disabled:opacity-50">
+                    {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                    {uploading ? "Uploading..." : "Confirm upload"}
+                  </button>
+                  <button type="button" disabled={uploading} onClick={() => { setPendingFile(null); setLocalUrl(null); }} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold disabled:opacity-50">Discard</button>
+                </div>
+              </div>
+            </div>
           )}
+          {error && <p role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">{error}</p>}
         </div>
 
-        <div className="min-h-56 flex-1 overflow-y-auto p-4">
+        <div className="min-h-48 flex-1 overflow-y-auto p-4 sm:p-5">
           {loading ? (
-            <p className="py-10 text-center text-sm text-slate-500">
-              Loading media library...
-            </p>
+            <div className="flex items-center justify-center gap-2 py-12 text-sm text-slate-500"><Loader2 className="h-5 w-5 animate-spin" /> Loading media...</div>
           ) : filtered.length === 0 ? (
-            <p className="py-10 text-center text-sm text-slate-500">
-              No READY {type.toLowerCase()} files found.
-            </p>
+            <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50 py-12 text-center text-sm text-slate-500">No READY {type.toLowerCase()} assets on this page. Use the page controls or upload a file.</div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {filtered.map((asset) => (
-                <div
-                  key={asset.id}
-                  className={
-                    "space-y-3 rounded-xl border p-3 " +
-                    (
-                      asset.id === selectedId
-                        ? "border-indigo-500 bg-indigo-50"
-                        : "border-slate-200"
-                    )
-                  }
-                >
-                  <div className="flex h-24 items-center justify-center overflow-hidden rounded-lg bg-slate-100">
-                    {type === "IMAGE" &&
-                    previewUrl[asset.id] ? (
-                      // Signed private R2 URL.
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={previewUrl[asset.id]}
-                        alt={asset.originalName ?? "Media"}
-                        className="h-full w-full object-contain"
-                      />
-                    ) : type === "IMAGE" ? (
-                      <ImageIcon className="h-9 w-9 text-indigo-500" />
-                    ) : previewUrl[asset.id] ? (
-                      <audio
-                        controls
-                        src={previewUrl[asset.id]}
-                        className="w-full"
-                      />
-                    ) : (
-                      <FileAudio className="h-9 w-9 text-amber-500" />
-                    )}
-                  </div>
-
-                  <p className="break-all text-xs font-medium">
-                    {asset.originalName ?? asset.objectKey}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      onClick={() => onSelect(asset)}
-                      className="rounded-md bg-indigo-600 px-2 py-1.5 text-xs text-white"
-                    >
-                      {asset.id === selectedId
-                        ? "Selected"
-                        : "Select"}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() =>
-                        void previewAsset(asset)
-                      }
-                      className="rounded-md border px-2 py-1.5 text-xs"
-                    >
-                      Preview
-                    </button>
-                  </div>
+                <div key={asset.id} className={`min-w-0 space-y-2 rounded-xl border p-3 transition hover:border-indigo-300 ${asset.id === selectedId ? "border-indigo-500 bg-indigo-50" : "border-slate-200"}`}>
+                  <MediaPreview key={asset.id} assetId={asset.id} type={type} className="h-32 w-full" />
+                  <p title={asset.originalName ?? asset.objectKey} className="truncate text-xs font-medium text-slate-800">{asset.originalName ?? asset.objectKey}</p>
+                  <p className="text-[11px] text-slate-500">{asset.visibility} · {asset.width && asset.height ? `${asset.width} × ${asset.height}` : asset.mimeType ?? type}</p>
+                  <button type="button" onClick={() => onSelect(asset)} className={`flex w-full items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs font-semibold ${asset.id === selectedId ? "bg-emerald-100 text-emerald-800" : "bg-indigo-600 text-white hover:bg-indigo-700"}`}>
+                    {asset.id === selectedId ? <><CheckCircle2 className="h-3.5 w-3.5" /> Selected</> : "Use this file"}
+                  </button>
                 </div>
               ))}
             </div>
           )}
         </div>
 
-        <div className="flex items-center justify-between border-t p-4">
-          <button
-            type="button"
-            disabled={loading || page <= 1}
-            onClick={() => void load(page - 1)}
-            className="rounded-lg border px-3 py-2 text-sm disabled:opacity-40"
-          >
-            Previous
-          </button>
+        <div className="flex flex-col gap-3 border-t border-slate-200 bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div className="text-xs text-slate-500">
+            <span className="font-semibold text-slate-800">
+              {filtered.length === 0
+                ? "0"
+                : (safeGridPage - 1) * MEDIA_GRID_LIMIT + 1}
+              {" – "}
+              {Math.min(
+                safeGridPage * MEDIA_GRID_LIMIT,
+                filtered.length
+              )}
+            </span>
+            {" of "}
+            {filtered.length}
+            {" matching files in library batch "}
+            {page}
+            {" of "}
+            {Math.max(1, totalPages)}
+          </div>
 
-          <span className="text-sm text-slate-500">
-            Page {page}
-          </span>
+          <div className="flex items-center justify-between gap-2">
+            <button
+              type="button"
+              disabled={
+                loading ||
+                (page <= 1 && safeGridPage <= 1)
+              }
+              onClick={() => {
+                if (safeGridPage > 1) {
+                  setGridPage(safeGridPage - 1);
+                } else if (page > 1) {
+                  void load(page - 1).then(() => {
+                    // Navigate to previous server batch.
+                    // The last local grid page can be selected
+                    // using Next/Previous after loading.
+                  });
+                }
+              }}
+              className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Previous
+            </button>
 
-          <button
-            type="button"
-            disabled={loading || assets.length < 100}
-            onClick={() => void load(page + 1)}
-            className="rounded-lg border px-3 py-2 text-sm disabled:opacity-40"
-          >
-            Next
-          </button>
+            <span className="min-w-20 text-center text-xs font-semibold text-slate-600">
+              {safeGridPage} / {gridTotalPages}
+            </span>
+
+            <button
+              type="button"
+              disabled={
+                loading ||
+                (
+                  safeGridPage >= gridTotalPages &&
+                  page >= totalPages
+                )
+              }
+              onClick={() => {
+                if (safeGridPage < gridTotalPages) {
+                  setGridPage(safeGridPage + 1);
+                } else if (page < totalPages) {
+                  void load(page + 1);
+                }
+              }}
+              className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -956,9 +1066,59 @@ export function GlobalVocabularyManager({
     limit,
   ]);
 
-  useEffect(() => {
-    void loadVocabulary();
-  }, [loadVocabulary]);
+  const selectedAppId = selectedApp?.id;
+
+useEffect(() => {
+  let active = true;
+
+  if (!selectedAppId) {
+    void Promise.resolve().then(() => {
+      if (!active) return;
+
+      setItems([]);
+      setPagination(EMPTY_PAGINATION);
+      setLoading(false);
+    });
+
+    return () => {
+      active = false;
+    };
+  }
+
+  void listGlobalVocabulary({
+    appId: selectedAppId,
+    search: search.trim() || undefined,
+    status: statusFilter || undefined,
+    categoryId: categoryFilter || undefined,
+    page,
+    limit,
+  })
+    .then((response) => {
+      if (!active) return;
+
+      setItems(response.data);
+      setPagination(response.pagination);
+      setError("");
+      setLoading(false);
+    })
+    .catch((err: unknown) => {
+      if (!active) return;
+
+      setError(getError(err));
+      setLoading(false);
+    });
+
+  return () => {
+    active = false;
+  };
+}, [
+  selectedAppId,
+  search,
+  statusFilter,
+  categoryFilter,
+  page,
+  limit,
+]);
 
   useEffect(() => {
     let active = true;
@@ -1021,10 +1181,28 @@ export function GlobalVocabularyManager({
   );
 
   useEffect(() => {
-    if (initialEditId) {
-      void openEditor(initialEditId);
-    }
-  }, [initialEditId, openEditor]);
+  if (!initialEditId) return;
+
+  let active = true;
+
+  void getGlobalVocabulary(initialEditId)
+    .then((record) => {
+      if (!active) return;
+
+      setDetail(record);
+      setForm(toForm(record));
+      setError("");
+    })
+    .catch((err: unknown) => {
+      if (!active) return;
+
+      setError(getError(err));
+    });
+
+  return () => {
+    active = false;
+  };
+}, [initialEditId]);
 
   function createNew() {
     setEditingId(null);
@@ -1353,18 +1531,17 @@ export function GlobalVocabularyManager({
   }
 
   return (
-    <div className="mx-auto max-w-7xl space-y-6">
+    <div className="mx-auto max-w-7xl space-y-6 pb-10">
       {/* PAGE HEADER */}
 
-      <header className="flex flex-wrap items-center justify-between gap-3">
+      <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
-            Global Vocabulary
+          <h1 className="flex items-center gap-2 text-2xl font-bold text-slate-900">
+            <BookOpen className="h-6 w-6 text-indigo-600" /> Global Vocabulary
           </h1>
 
           <p className="mt-1 text-sm text-slate-500">
-            {selectedApp.language.name} ·{" "}
-            {selectedApp.name}
+            Manage terms, translations, examples, grammar and media · {selectedApp.language.name} · {selectedApp.name}
           </p>
         </div>
 
@@ -1418,7 +1595,7 @@ export function GlobalVocabularyManager({
 
       {/* FILTERS */}
 
-      <div className="grid gap-3 rounded-xl border bg-white p-4 md:grid-cols-3">
+      <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-3">
         <input
           aria-label="Search vocabulary"
           value={search}
@@ -1471,9 +1648,18 @@ export function GlobalVocabularyManager({
         </select>
       </div>
 
+      <div className="grid gap-3 md:grid-cols-2">
+        <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-4 text-xs leading-5 text-indigo-900">
+          <span className="font-bold">Global vocabulary:</span> Terms are shared across levels of the same language. Use the lesson selector to link a term to a specific lesson.
+        </div>
+        <div className="rounded-xl border border-emerald-100 bg-emerald-50/60 p-4 text-xs leading-5 text-emerald-900">
+          <span className="font-bold">Media preview:</span> Uploaded images can be previewed before saving, and existing private images load through authenticated R2 access.
+        </div>
+      </div>
+
       {/* VOCABULARY LIST */}
 
-      <section className="overflow-hidden rounded-xl border bg-white">
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase text-slate-500">
@@ -1589,10 +1775,10 @@ export function GlobalVocabularyManager({
       {/* VOCABULARY EDITOR */}
 
       {editorOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3">
-          <div className="max-h-[94vh] w-full max-w-4xl space-y-5 overflow-y-auto rounded-xl bg-white p-5">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/70 p-3 sm:p-5">
+          <div className="max-h-[94vh] w-full max-w-5xl space-y-5 overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-lg font-bold">
+              <h2 className="flex items-center gap-2 text-lg font-bold"><Pencil className="h-5 w-5 text-indigo-600" />
                 {editingId
                   ? "Edit Vocabulary"
                   : "Create Vocabulary"}
@@ -1793,86 +1979,36 @@ export function GlobalVocabularyManager({
                 }
               />
 
-              {/* MEDIA PICKERS */}
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <section className="space-y-2 rounded-xl border p-4">
-                  <h3 className="text-sm font-bold">
-                    Vocabulary Image
-                  </h3>
-
-                  <p className="break-all text-xs text-slate-500">
-                    {selectedImage?.originalName ||
-                      (
-                        form.imageAssetId
-                          ? "Existing image attached"
-                          : "No image selected"
-                      )}
+              {/* MEDIA PICKERS — PREVIEW ATTACHED IMAGES / AUDIO */}
+              <div className="grid gap-4 md:grid-cols-2">
+                <section className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/50 p-4">
+                  <div className="flex items-center gap-2"><ImageIcon className="h-4 w-4 text-indigo-600" /><h3 className="text-sm font-bold text-slate-900">Vocabulary Image</h3></div>
+                  {form.imageAssetId ? (
+                    <MediaPreview key={`image-${form.imageAssetId}`} assetId={form.imageAssetId} type="IMAGE" className="h-44 w-full border border-slate-200 bg-white" />
+                  ) : (
+                    <div className="flex h-44 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-white text-slate-400"><FileImage className="h-9 w-9" /><span className="text-xs">No image attached</span></div>
+                  )}
+                  <p className="truncate text-xs text-slate-500" title={selectedImage?.originalName ?? form.imageAssetId}>
+                    {selectedImage?.originalName ?? (form.imageAssetId ? "Saved image attached" : "Select an existing image or upload a new one")}
                   </p>
-
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMediaPickerType("IMAGE")
-                      }
-                      className="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-semibold text-indigo-700"
-                    >
-                      Choose Image
-                    </button>
-
-                    {form.imageAssetId && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setField("imageAssetId", "");
-                          setSelectedImage(null);
-                        }}
-                        className="rounded-lg border px-3 py-2 text-xs"
-                      >
-                        Remove
-                      </button>
-                    )}
+                  <div className="flex flex-wrap gap-2">
+                    <button type="button" disabled={!canWrite} onClick={() => setMediaPickerType("IMAGE")} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-700"><ImageIcon className="h-3.5 w-3.5" /> Choose / Upload</button>
+                    {form.imageAssetId && <button type="button" disabled={!canWrite} onClick={() => { setField("imageAssetId", ""); setSelectedImage(null); }} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs disabled:opacity-50">Remove</button>}
                   </div>
                 </section>
-
-                <section className="space-y-2 rounded-xl border p-4">
-                  <h3 className="text-sm font-bold">
-                    Vocabulary Audio
-                  </h3>
-
-                  <p className="break-all text-xs text-slate-500">
-                    {selectedAudio?.originalName ||
-                      (
-                        form.audioAssetId
-                          ? "Existing audio attached"
-                          : "No audio selected"
-                      )}
+                <section className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/50 p-4">
+                  <div className="flex items-center gap-2"><FileAudio className="h-4 w-4 text-indigo-600" /><h3 className="text-sm font-bold text-slate-900">Pronunciation Audio</h3></div>
+                  {form.audioAssetId ? (
+                    <MediaPreview key={`audio-${form.audioAssetId}`} assetId={form.audioAssetId} type="AUDIO" className="h-44 w-full border border-slate-200 bg-white p-2" />
+                  ) : (
+                    <div className="flex h-44 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-white text-slate-400"><FileAudio className="h-9 w-9" /><span className="text-xs">No audio attached</span></div>
+                  )}
+                  <p className="truncate text-xs text-slate-500" title={selectedAudio?.originalName ?? form.audioAssetId}>
+                    {selectedAudio?.originalName ?? (form.audioAssetId ? "Saved audio attached" : "Choose a recording from the media library")}
                   </p>
-
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMediaPickerType("AUDIO")
-                      }
-                      className="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-semibold text-indigo-700"
-                    >
-                      Choose Audio
-                    </button>
-
-                    {form.audioAssetId && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setField("audioAssetId", "");
-                          setSelectedAudio(null);
-                        }}
-                        className="rounded-lg border px-3 py-2 text-xs"
-                      >
-                        Remove
-                      </button>
-                    )}
+                  <div className="flex flex-wrap gap-2">
+                    <button type="button" disabled={!canWrite} onClick={() => setMediaPickerType("AUDIO")} className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-700"><FileAudio className="h-3.5 w-3.5" /> Choose / Upload</button>
+                    {form.audioAssetId && <button type="button" disabled={!canWrite} onClick={() => { setField("audioAssetId", ""); setSelectedAudio(null); }} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs disabled:opacity-50">Remove</button>}
                   </div>
                 </section>
               </div>
