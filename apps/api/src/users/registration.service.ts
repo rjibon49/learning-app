@@ -50,6 +50,58 @@ export class RegistrationService {
     await this.mail.sendVerificationCode(email, otp);
     return reply;
   }
+
+
+async resendVerificationCode(
+  email: string,
+): Promise<{ message: string }> {
+  const reply = {
+    message:
+      "If verification is pending and resend is available, a new code will be sent.",
+  };
+
+  const now = new Date();
+
+  const pending =
+    await this.db.pendingEmailRegistration.findUnique({
+      where: { email },
+    });
+
+  if (!pending) return reply;
+
+  // Never send a new code before the cooldown expires.
+  if (pending.resendAvailableAt > now) {
+    return reply;
+  }
+
+  const otp = String(randomInt(1_000_000)).padStart(6, "0");
+
+  // Atomic condition prevents concurrent resend requests
+  // from generating several valid verification codes.
+  const updated =
+    await this.db.pendingEmailRegistration.updateMany({
+      where: {
+        id: pending.id,
+        resendAvailableAt: { lte: now },
+      },
+      data: {
+        otpHash: this.hash(email, otp),
+        expiresAt: new Date(now.getTime() + this.lifetime),
+        resendAvailableAt: new Date(
+          now.getTime() + this.cooldown,
+        ),
+        attempts: 0,
+      },
+    });
+
+  if (updated.count !== 1) return reply;
+
+  await this.mail.sendVerificationCode(email, otp);
+
+  return reply;
+}
+
+
   async verifyEmail(input: VerifyEmailInput): Promise<{ success: boolean; message: string }> {
     const now = new Date();
     const pending = await this.db.pendingEmailRegistration.findUnique({ where: { email: input.email } });
