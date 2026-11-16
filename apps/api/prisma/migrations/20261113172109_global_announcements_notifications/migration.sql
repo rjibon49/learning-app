@@ -1,18 +1,18 @@
 -- AlterTable
-ALTER TABLE `PendingEmailRegistration` ADD COLUMN `consentPolicyVersion` VARCHAR(40) NULL,
+ALTER TABLE `pendingemailregistration` ADD COLUMN `consentPolicyVersion` VARCHAR(40) NULL,
     ADD COLUMN `marketingEmailOptIn` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `marketingSmsOptIn` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `marketingWhatsappOptIn` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `phoneNumber` VARCHAR(20) NULL;
 
 -- AlterTable
-ALTER TABLE `Subscription` ADD COLUMN `cancelAtPeriodEnd` BOOLEAN NOT NULL DEFAULT false,
+ALTER TABLE `subscription` ADD COLUMN `cancelAtPeriodEnd` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `cancelRequestedAt` DATETIME(3) NULL,
     ADD COLUMN `cancellationReason` VARCHAR(500) NULL,
     ADD COLUMN `cancelledAt` DATETIME(3) NULL;
 
 -- AlterTable
-ALTER TABLE `User` ADD COLUMN `phoneNumber` VARCHAR(20) NULL;
+ALTER TABLE `user` ADD COLUMN `phoneNumber` VARCHAR(20) NULL;
 
 -- CreateTable
 CREATE TABLE `ConsentPolicy` (

@@ -13,6 +13,8 @@ import {
   verifyEmailSchema,
 } from './registration.schemas.js';
 
+import { z } from "zod";
+
 @Controller('auth')
 export class RegistrationController {
   constructor(
@@ -54,4 +56,30 @@ export class RegistrationController {
 
     return this.registration.verifyEmail(result.data);
   }
+
+@Post("resend-verification")
+@Throttle({
+  short: { limit: 3, ttl: 60000 },
+  medium: { limit: 5, ttl: 600000 },
+  long: { limit: 10, ttl: 3600000 },
+})
+async resendVerification(@Body() body: unknown) {
+  const schema = z.strictObject({
+    email: z.string().trim().toLowerCase().email().max(191),
+  });
+
+  const result = schema.safeParse(body);
+
+  if (!result.success) {
+    throw new BadRequestException(
+      z.flattenError(result.error),
+    );
+  }
+
+  return this.registration.resendVerificationCode(
+    result.data.email,
+  );
 }
+
+}
+

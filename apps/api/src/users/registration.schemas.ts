@@ -5,7 +5,7 @@ const phone = z.union([z.string().trim().regex(/^\+[1-9]\d{7,14}$/), z.literal('
 export const registerSchema = z.strictObject({
   email,
   displayName: z.string().trim().min(2).max(120),
-  password: z.string().min(12).max(128),
+  password: z.string().min(8).max(128),
   phoneNumber: phone,
   marketing: z.strictObject({
     email: z.boolean().default(false), whatsapp: z.boolean().default(false), sms: z.boolean().default(false),

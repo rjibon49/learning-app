@@ -1,196 +1,358 @@
-'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, Plus, Trash2, Search, Image as ImageIcon } from 'lucide-react';
-import { getDeckItems, addDeckItems, removeDeckItem, type FlashcardDeckItem } from '@/lib/api/flashcards';
-import { getAdminVocabularyList as getVocabularyList } from '@/lib/api/vocabulary';
-import { useAppLevel } from '@/lib/auth/app-level-context';
-import { LoadingState } from '@/components/feedback/state-views';
+"use client";
 
-// Local Vocabulary Interface
-export interface Vocabulary {
-  id: string;
-  article?: string | null;
-  german: string;
-  english: string;
-  bangla: string;
-  imageUrl?: string | null;
-}
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-export default function ManageDeckItemsPage() {
-  const params = useParams();
-  const router = useRouter();
-  const deckId = params.deckId as string;
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
+import { useAuth } from "@/lib/auth/auth-context";
+import { useAppLevel } from "@/lib/auth/app-level-context";
+import { Pagination } from "@/components/ui/pagination";
+
+import {
+  getDeck,
+  getDeckItemsPage,
+  addDeckItems,
+  removeDeckItem,
+  type FlashcardDeck,
+  type FlashcardDeckItem,
+} from "@/lib/api/flashcards";
+
+import {
+  listGlobalVocabulary,
+  type GlobalVocabularyItem,
+} from "@/lib/api/global-vocabulary";
+
+import type { PaginationMeta } from "@/lib/api/quizzes";
+
+const emptyPagination: PaginationMeta = {
+  page: 1,
+  limit: 10,
+  total: 0,
+  totalPages: 0,
+};
+
+export default function DeckItemsPage() {
+  const params = useParams<{ deckId: string }>();
+  const deckId = params.deckId;
+  const { admin } = useAuth();
   const { selectedApp } = useAppLevel();
 
+  const [deck, setDeck] = useState<FlashcardDeck | null>(null);
   const [items, setItems] = useState<FlashcardDeckItem[]>([]);
-  const [allVocab, setAllVocab] = useState<Vocabulary[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] =
+    useState<PaginationMeta>(emptyPagination);
 
-  // Selection Modal
-  const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
-  const [selectedVocabIds, setSelectedVocabIds] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [submitting, setSubmitting] = useState(false);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
-  const loadData = async () => {
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [words, setWords] = useState<GlobalVocabularyItem[]>([]);
+  const [wordPagination, setWordPagination] =
+    useState<PaginationMeta>(emptyPagination);
+  const [wordPage, setWordPage] = useState(1);
+  const [wordSearch, setWordSearch] = useState("");
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const canEdit = Boolean(admin) && deck?.isPublished === false;
+
+  const reload = useCallback(async () => {
+    setLoading(true);
+    setError("");
+
     try {
-      const deckItems = await getDeckItems(deckId);
-      setItems(deckItems);
-      if (selectedApp) {
-        const vocabList = await getVocabularyList(selectedApp.id);
-        setAllVocab(vocabList);
-      }
+      const [deckData, result] = await Promise.all([
+        getDeck(deckId),
+        getDeckItemsPage(deckId, page, limit),
+      ]);
+      setDeck(deckData);
+      setItems(result.data);
+      setPagination(result.pagination);
     } catch (err) {
-      alert('Failed to load flashcard items');
+      setError(
+        err instanceof Error ? err.message : "Unable to load deck",
+      );
     } finally {
       setLoading(false);
     }
-  };
+  }, [deckId, page, limit]);
 
   useEffect(() => {
-    if (deckId && selectedApp) loadData();
-  }, [deckId, selectedApp]);
+    void reload();
+  }, [reload]);
 
-  const handleAddWords = async () => {
-    if (selectedVocabIds.length === 0) return;
-    setSubmitting(true);
+  const loadVocabulary = useCallback(async () => {
+    if (!selectedApp || !pickerOpen) return;
+
     try {
-      await addDeckItems(deckId, selectedVocabIds);
-      setSelectedVocabIds([]);
-      setIsSelectModalOpen(false);
-      await loadData();
+      const result = await listGlobalVocabulary({
+        languageId: selectedApp.languageId,
+        search: wordSearch.trim() || undefined,
+        page: wordPage,
+        limit: 20,
+      });
+
+      setWords(result.data);
+      setWordPagination(result.pagination);
     } catch (err) {
-      alert('Failed to add words to deck');
+      setError(
+        err instanceof Error ? err.message : "Vocabulary search failed",
+      );
+    }
+  }, [selectedApp, pickerOpen, wordSearch, wordPage]);
+
+  useEffect(() => {
+    void loadVocabulary();
+  }, [loadVocabulary]);
+
+  async function addWords() {
+    if (!canEdit || selectedIds.length === 0) return;
+
+    setSaving(true);
+    setError("");
+
+    try {
+      await addDeckItems(deckId, selectedIds);
+      setSelectedIds([]);
+      setPickerOpen(false);
+      setMessage("Vocabulary added to deck.");
+      await reload();
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Unable to add vocabulary",
+      );
     } finally {
-      setSubmitting(false);
+      setSaving(false);
     }
-  };
+  }
 
-  const handleRemoveItem = async (itemId: string) => {
-    if (!confirm('Remove this word from deck?')) return;
+  async function removeWord(itemId: string) {
+    if (!canEdit || !window.confirm("Remove this word from the deck?")) {
+      return;
+    }
+
     try {
-      await removeDeckItem(itemId);
-      setItems(items.filter(i => i.id !== itemId));
+      await removeDeckItem(deckId, itemId);
+      await reload();
     } catch (err) {
-      alert('Failed to remove item');
+      setError(
+        err instanceof Error ? err.message : "Unable to remove word",
+      );
     }
-  };
+  }
 
-  if (loading) return <LoadingState label="Loading deck items..." />;
-
-  // Filter out already added words
-  const addedVocabIds = new Set(items.map(i => i.vocabularyId));
-  const availableVocab = allVocab.filter(v => !addedVocabIds.has(v.id) && (
-    v.german.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    v.english.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    v.bangla.includes(searchQuery)
-  ));
+  function toggleId(id: string) {
+    setSelectedIds((old) =>
+      old.includes(id)
+        ? old.filter((item) => item !== id)
+        : [...old, id],
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <button onClick={() => router.back()} className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900">
-        <ArrowLeft className="h-4 w-4" /> Back to Decks
-      </button>
+    <div className="mx-auto max-w-6xl space-y-6">
+      <Link
+        href="/admin/flashcards"
+        className="text-sm font-semibold text-indigo-600"
+      >
+        ← Back to Flashcard Decks
+      </Link>
 
-      <div className="flex justify-between items-center">
+      <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Manage Deck Words</h1>
-          <p className="text-sm text-slate-500 mt-1">Add vocabulary words to this flashcard deck.</p>
+          <h1 className="text-2xl font-bold">
+            {deck?.title ?? "Flashcard Deck"}
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            {deck?.isPublished ? "Published" : "Draft"} · Vocabulary cards
+          </p>
         </div>
-        <button onClick={() => setIsSelectModalOpen(true)} className="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-indigo-500">
-          <Plus className="h-4 w-4" /> Add Words from Vocabulary
-        </button>
-      </div>
 
-      {/* ITEMS LIST */}
-      {items.length === 0 ? (
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-12 text-center text-slate-500">
-          No words added to this deck yet. Click "Add Words from Vocabulary" to start.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((item, index) => (
-            <div key={item.id} className="relative rounded-lg border border-slate-200 bg-white p-4 shadow-sm flex items-start gap-4">
-              {item.vocabulary.imageUrl ? (
-                <img src={item.vocabulary.imageUrl} alt="" className="h-14 w-14 rounded object-cover border border-slate-100 flex-shrink-0" />
-              ) : (
-                <div className="h-14 w-14 rounded bg-slate-100 flex items-center justify-center text-slate-400 flex-shrink-0">
-                  <ImageIcon className="h-6 w-6" />
-                </div>
-              )}
-              
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-slate-400">#{index + 1}</span>
-                  <span className="font-bold text-slate-900 text-base">{item.vocabulary.article} {item.vocabulary.german}</span>
-                </div>
-                <div className="text-xs text-slate-600 mt-0.5 truncate">EN: {item.vocabulary.english}</div>
-                <div className="text-xs text-indigo-600 font-medium mt-0.5 truncate">BN: {item.vocabulary.bangla}</div>
-              </div>
+        {canEdit && (
+          <button
+            type="button"
+            onClick={() => setPickerOpen(true)}
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white"
+          >
+            + Add Vocabulary
+          </button>
+        )}
+      </header>
 
-              <button onClick={() => handleRemoveItem(item.id)} className="text-slate-400 hover:text-rose-600 p-1">
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </div>
-          ))}
-        </div>
+      {deck?.isPublished && (
+        <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+          This deck is published. Unpublish it before adding or removing cards.
+        </p>
       )}
 
-      {/* VOCABULARY SELECTION MODAL */}
-      {isSelectModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-          <div className="w-full max-w-2xl rounded-2xl bg-white shadow-xl overflow-hidden flex flex-col max-h-[80vh]">
-            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-              <h2 className="text-lg font-bold text-slate-900">Select Vocabulary Words</h2>
-              <button onClick={() => setIsSelectModalOpen(false)} className="text-slate-400 hover:text-slate-600">✕</button>
-            </div>
-            
-            <div className="p-4 border-b border-slate-100 bg-slate-50">
-              <div className="flex items-center gap-2 bg-white rounded-md border border-slate-200 px-3 py-2">
-                <Search className="h-4 w-4 text-slate-400" />
-                <input type="text" placeholder="Search by german, english or bangla..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full text-sm outline-none" />
+      {error && (
+        <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+          {error}
+        </p>
+      )}
+
+      {message && (
+        <p role="status" className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">
+          {message}
+        </p>
+      )}
+
+      <section className="rounded-xl border bg-white p-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => {
+            const vocab = item.vocabulary;
+            const grammar = vocab.grammar ?? {};
+            const article = typeof grammar.article === "string"
+              ? grammar.article : "";
+
+            return (
+              <div key={item.id}
+                className="space-y-2 rounded-xl border p-4">
+                <p className="text-lg font-semibold">
+                  {article} {vocab.term}
+                </p>
+
+                <p className="text-xs text-slate-500">
+                  {vocab.pronunciation ?? vocab.partOfSpeech ?? ""}
+                </p>
+
+                <div className="space-y-1">
+                  {vocab.translations?.slice(0, 3).map((translation) => (
+                    <p key={translation.id} className="text-sm">
+                      <span className="font-semibold">
+                        {translation.language?.code?.toUpperCase() ?? "Translation"}:
+                      </span>{" "}
+                      {translation.meaning}
+                    </p>
+                  ))}
+                </div>
+
+                {canEdit && (
+                  <button
+                    type="button"
+                    onClick={() => void removeWord(item.id)}
+                    className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
+            );
+          })}
+        </div>
+
+        {!loading && items.length === 0 && (
+          <p className="p-8 text-center text-sm text-slate-500">
+            This deck has no vocabulary cards yet.
+          </p>
+        )}
+
+        <div className="mt-4">
+          <Pagination
+            pagination={pagination}
+            onPageChange={setPage}
+            onPageSizeChange={(size) => {
+              setLimit(size);
+              setPage(1);
+            }}
+            isLoading={loading}
+          />
+        </div>
+      </section>
+
+      {pickerOpen && canEdit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3">
+          <div className="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white">
+            <header className="flex items-center justify-between border-b p-4">
+              <h2 className="text-lg font-bold">
+                Select Vocabulary
+              </h2>
+              <button
+                type="button"
+                onClick={() => setPickerOpen(false)}
+                aria-label="Close vocabulary picker"
+                className="rounded-lg border px-3 py-1.5"
+              >
+                Close
+              </button>
+            </header>
+
+            <div className="border-b p-4">
+              <input
+                value={wordSearch}
+                onChange={(event) => {
+                  setWordPage(1);
+                  setWordSearch(event.target.value);
+                }}
+                placeholder="Search terms..."
+                className="w-full rounded-lg border p-2.5 text-sm"
+              />
             </div>
 
-            <div className="p-4 overflow-y-auto flex-1 space-y-2">
-              {availableVocab.length === 0 ? (
-                <div className="text-center py-8 text-slate-500 text-sm">No available vocabulary found.</div>
-              ) : (
-                availableVocab.map((vocab) => {
-                  const isSelected = selectedVocabIds.includes(vocab.id);
-                  return (
-                    <div 
-                      key={vocab.id} 
-                      onClick={() => {
-                        if (isSelected) setSelectedVocabIds(selectedVocabIds.filter(id => id !== vocab.id));
-                        else setSelectedVocabIds([...selectedVocabIds, vocab.id]);
-                      }}
-                      className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${isSelected ? 'border-indigo-600 bg-indigo-50/50' : 'border-slate-200 hover:bg-slate-50'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <input type="checkbox" checked={isSelected} onChange={() => {}} className="rounded text-indigo-600 focus:ring-indigo-500 h-4 w-4" />
-                        <div>
-                          <div className="font-bold text-slate-900 text-sm">{vocab.article} {vocab.german}</div>
-                          <div className="text-xs text-slate-500">{vocab.english} • {vocab.bangla}</div>
-                        </div>
-                      </div>
+            <div className="min-h-40 flex-1 space-y-2 overflow-y-auto p-4">
+              {words.map((word) => {
+                const selected = selectedIds.includes(word.id);
+
+                return (
+                  <label key={word.id}
+                    className="flex cursor-pointer items-center gap-3 rounded-lg border p-3">
+                    <input
+                      type="checkbox"
+                      checked={selected}
+                      onChange={() => toggleId(word.id)}
+                    />
+
+                    <div>
+                      <p className="font-medium">{word.term}</p>
+                      <p className="text-xs text-slate-500">
+                        {word.translations?.[0]?.meaning ?? "No translation"}
+                        {" · "}
+                        {word.status}
+                      </p>
                     </div>
-                  );
-                })
+                  </label>
+                );
+              })}
+
+              {words.length === 0 && (
+                <p className="p-5 text-center text-sm text-slate-500">
+                  No matching vocabulary found.
+                </p>
               )}
             </div>
 
-            <div className="flex items-center justify-between border-t border-slate-100 px-6 py-4 bg-slate-50">
-              <span className="text-xs font-medium text-slate-600">{selectedVocabIds.length} words selected</span>
-              <div className="flex gap-2">
-                <button onClick={() => setIsSelectModalOpen(false)} className="px-4 py-2 text-sm font-semibold text-slate-600">Cancel</button>
-                <button onClick={handleAddWords} disabled={submitting || selectedVocabIds.length === 0} className="rounded-md bg-indigo-600 px-6 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 disabled:opacity-50">
-                  {submitting ? 'Adding...' : 'Add Selected Words'}
-                </button>
-              </div>
+            <div className="border-t p-4">
+              <Pagination
+                pagination={wordPagination}
+                onPageChange={setWordPage}
+                onPageSizeChange={() => setWordPage(1)}
+              />
             </div>
+
+            <footer className="flex items-center justify-between gap-2 border-t p-4">
+              <span className="text-xs text-slate-500">
+                {selectedIds.length} selected
+              </span>
+
+              <button
+                type="button"
+                onClick={() => void addWords()}
+                disabled={saving || selectedIds.length === 0}
+                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white disabled:opacity-50"
+              >
+                {saving ? "Adding..." : "Add Selected"}
+              </button>
+            </footer>
           </div>
         </div>
       )}

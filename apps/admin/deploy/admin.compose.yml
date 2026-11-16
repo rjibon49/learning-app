@@ -1,0 +1,37 @@
+# Isolated stack: DOES NOT modify or recreate the Learning API, MySQL, Redis or other services.
+# Set ADMIN_HOSTNAME via --env-file /docker/learning-app/secrets/admin.compose.env.
+name: learning-admin-stack
+services:
+  admin:
+    image: learning-admin:release
+    container_name: learning-admin
+    restart: unless-stopped
+    mem_limit: 1536m
+    pids_limit: 256
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - learning-edge
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/admin/login').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=learning-edge"
+      - "traefik.http.routers.learning-admin.rule=Host(`${ADMIN_HOSTNAME:?Configure ADMIN_HOSTNAME}`)"
+      - "traefik.http.routers.learning-admin.entrypoints=websecure"
+      - "traefik.http.routers.learning-admin.tls=true"
+      - "traefik.http.routers.learning-admin.tls.certresolver=letsencrypt"
+      - "traefik.http.services.learning-admin.loadbalancer.server.port=3000"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  learning-edge:
+    external: true
+    name: learning-edge

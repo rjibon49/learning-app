@@ -1,121 +1,91 @@
-
 import type { RefreshResponseDto } from '@/types/auth';
 
-const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:4000/api'
-).replace(/\/+$/, '');
+// Browser uses the same-origin Next.js rewrite; no public API URL is needed.
+const DATA_BASE = '/api/backend';
+const AUTH_BASE = '/api';
 
-// Keep admin authentication same-origin so the HttpOnly refresh cookie survives
-// reloads, even when the CMS and API use different hosts or subdomains.
-const AUTH_API_BASE_URL = '/api';
-
-let inMemoryAccessToken: string | null = null;
-let refreshPromise: Promise<string | null> | null = null;
-let unauthorizedHandler: (() => void) | null = null;
+let accessToken: string | null = null;
+let refreshInFlight: Promise<string | null> | null = null;
+let expiredHandler: (() => void) | null = null;
 
 export function setAccessToken(token: string | null): void {
-  inMemoryAccessToken = token;
+  accessToken = token;
 }
-
-export function getAccessToken(): string | null {
-  return inMemoryAccessToken;
-}
-
-export function onSessionExpired(handler: () => void): void {
-  unauthorizedHandler = handler;
+export function getAccessToken(): string | null { return accessToken; }
+export function onSessionExpired(handler: (() => void) | null): void {
+  expiredHandler = handler;
 }
 
 export class ApiClientError extends Error {
-  public readonly status: number;
-  public readonly code: string;
-  public readonly details?: string[];
-
-  constructor(status: number, message: string, code = 'API_ERROR', details?: string[]) {
+  constructor(
+    public readonly status: number,
+    message: string,
+    public readonly code: string = 'API_ERROR',
+    public readonly details?: string[],
+  ) {
     super(message);
     this.name = 'ApiClientError';
-    this.status = status;
-    this.code = code;
-    this.details = details;
   }
 }
 
-function mapStatusToSafeMessage(status: number, serverMessage?: string): string {
+function errorText(status: number, message?: string): string {
   switch (status) {
-    case 400:
-      return serverMessage || 'Invalid request data. Please review the form fields and try again.';
-    case 401:
-      return 'Your session has expired or credentials are invalid. Please sign in again.';
-    case 403:
-      return 'You do not have permission to perform this action.';
-    case 404:
-      return serverMessage || 'The requested resource could not be found.';
-    case 409:
-      return serverMessage || 'A record with these details already exists.';
-    case 429:
-      return 'Too many requests. Please wait a moment before trying again.';
-    default:
-      return 'An unexpected server error occurred. Please try again later.';
+    case 400: return message || 'Please check the submitted values.';
+    case 401: return 'Please sign in again.';
+    case 403: return 'You do not have permission to perform this action.';
+    case 404: return message || 'Resource not found.';
+    case 409: return message || 'This record conflicts with an existing record.';
+    case 422: return message || 'Some fields are invalid.';
+    case 429: return 'Too many requests. Please try later.';
+    case 502: case 503: return 'The API is temporarily unavailable.';
+    default: return status >= 500 ? 'Server error. Please try again.' : (message || 'Request failed.');
   }
 }
 
-async function parseErrorPayload(response: Response): Promise<ApiClientError> {
-  let serverMessage: string | undefined;
+async function responseError(res: Response): Promise<ApiClientError> {
+  let message: string | undefined;
   let details: string[] | undefined;
-
   try {
-    const body = (await response.json()) as Record<string, unknown>;
-    if (typeof body.message === 'string') {
-      serverMessage = body.message;
-    } else if (Array.isArray(body.message)) {
-      details = body.message.filter((item): item is string => typeof item === 'string');
-      serverMessage = details[0];
+    const payload: unknown = await res.json();
+    if (payload && typeof payload === 'object') {
+      const body = payload as { message?: unknown };
+      if (typeof body.message === 'string') message = body.message;
+      else if (Array.isArray(body.message)) {
+        details = body.message.filter((x): x is string => typeof x === 'string');
+        message = details[0];
+      }
     }
-  } catch {
-    // Ignore non-JSON error bodies
-  }
+  } catch { /* Non-JSON response */ }
+  return new ApiClientError(res.status, errorText(res.status, message), `HTTP_${res.status}`, details);
+}
 
-  const safeServerMsg = response.status < 500 ? serverMessage : undefined;
-  const safeMessage = mapStatusToSafeMessage(response.status, safeServerMsg);
-
-  return new ApiClientError(response.status, safeMessage, `HTTP_${response.status}`, details);
+async function decodeResponse<T>(res: Response): Promise<T> {
+  if (!res.ok) throw await responseError(res);
+  if (res.status === 204) return undefined as T;
+  const text = await res.text();
+  if (!text) return undefined as T;
+  try { return JSON.parse(text) as T; }
+  catch { throw new ApiClientError(res.status, 'Invalid API response', 'INVALID_JSON'); }
 }
 
 export async function refreshAccessToken(): Promise<string | null> {
-  if (refreshPromise) {
-    return refreshPromise;
-  }
-
-  refreshPromise = (async () => {
+  if (refreshInFlight) return refreshInFlight;
+  refreshInFlight = (async () => {
     try {
-      const response = await fetch(`${AUTH_API_BASE_URL}/admin/auth/refresh`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-        },
+      const res = await fetch(`${AUTH_BASE}/admin/auth/refresh`, {
+        method: 'POST', credentials: 'same-origin', cache: 'no-store',
+        headers: { accept: 'application/json' },
       });
-
-      if (!response.ok) {
-        setAccessToken(null);
-        return null;
-      }
-
-      const data = (await response.json()) as RefreshResponseDto;
-      if (data && typeof data.accessToken === 'string') {
-        setAccessToken(data.accessToken);
-        return data.accessToken;
-      }
-      setAccessToken(null);
-      return null;
+      if (!res.ok) { accessToken = null; return null; }
+      const data = await res.json() as RefreshResponseDto;
+      accessToken = typeof data.accessToken === 'string' ? data.accessToken : null;
+      return accessToken;
     } catch {
-      setAccessToken(null);
+      accessToken = null;
       return null;
-    } finally {
-      refreshPromise = null;
-    }
+    } finally { refreshInFlight = null; }
   })();
-
-  return refreshPromise;
+  return refreshInFlight;
 }
 
 export interface ApiRequestOptions extends Omit<RequestInit, 'headers'> {
@@ -123,91 +93,41 @@ export interface ApiRequestOptions extends Omit<RequestInit, 'headers'> {
   skipAuthRefresh?: boolean;
 }
 
-export async function apiRequest<T>(
-  endpoint: string,
-  options: ApiRequestOptions = {}
-): Promise<T> {
-  const normalizedPath = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const baseUrl = normalizedPath.startsWith('/admin/auth/')
-    ? AUTH_API_BASE_URL
-    : API_BASE_URL;
-  const url = `${baseUrl}${normalizedPath}`;
-  const { headers = {}, skipAuthRefresh = false, ...restOptions } = options;
+export async function apiRequest<T>(endpoint: string, opts: ApiRequestOptions = {}): Promise<T> {
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const isAuth = path.startsWith('/admin/auth/');
+  const url = `${isAuth ? AUTH_BASE : DATA_BASE}${path}`;
+  const { headers = {}, skipAuthRefresh = false, ...init } = opts;
+  const authOperation = /^\/admin\/auth\/(login|refresh|logout|logout-all)(\/|$)/.test(path);
 
-  const buildHeaders = (token: string | null): Record<string, string> => {
-    const reqHeaders: Record<string, string> = {
-      Accept: 'application/json',
-      ...headers,
-    };
-
-    if (restOptions.body && !(restOptions.body instanceof FormData)) {
-      reqHeaders['Content-Type'] = 'application/json';
+  const buildHeaders = (token: string | null): Headers => {
+    const result = new Headers(headers);
+    if (!result.has('accept')) result.set('accept', 'application/json');
+    if (init.body && !(init.body instanceof FormData) && !result.has('content-type')) {
+      result.set('content-type', 'application/json');
     }
-
-    if (token) {
-      reqHeaders['Authorization'] = `Bearer ${token}`;
-    }
-
-    return reqHeaders;
+    if (token && !result.has('authorization')) result.set('authorization', `Bearer ${token}`);
+    return result;
   };
 
+  const send = async (token: string | null) => fetch(url, {
+    ...init, credentials: 'same-origin', cache: 'no-store', headers: buildHeaders(token),
+  });
+
   let response: Response;
-  try {
-    response = await fetch(url, {
-      ...restOptions,
-      credentials: 'include',
-      headers: buildHeaders(inMemoryAccessToken),
-    });
-  } catch {
-    throw new ApiClientError(
-      0,
-      'Unable to reach the backend API. Ensure the NestJS server is running.',
-      'NETWORK_ERROR'
-    );
-  }
+  try { response = await send(accessToken); }
+  catch { throw new ApiClientError(0, 'Unable to reach the API.', 'NETWORK_ERROR'); }
 
-  const isAuthEndpoint =
-    normalizedPath.startsWith('/admin/auth/login') ||
-    normalizedPath.startsWith('/admin/auth/refresh') ||
-    normalizedPath.startsWith('/admin/auth/logout');
-
-  if (response.status === 401 && !skipAuthRefresh && !isAuthEndpoint) {
-    const newToken = await refreshAccessToken();
-
-    if (newToken) {
-      const retryResponse = await fetch(url, {
-        ...restOptions,
-        credentials: 'include',
-        headers: buildHeaders(newToken),
-      });
-
-      if (!retryResponse.ok) {
-        if (retryResponse.status === 401 && unauthorizedHandler) {
-          unauthorizedHandler();
-        }
-        throw await parseErrorPayload(retryResponse);
-      }
-
-      if (retryResponse.status === 204) {
-        return undefined as T;
-      }
-      return (await retryResponse.json()) as T;
+  if (response.status === 401 && !skipAuthRefresh && !authOperation) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      try { response = await send(refreshed); }
+      catch { throw new ApiClientError(0, 'Unable to reach the API.', 'NETWORK_ERROR'); }
     } else {
-      if (unauthorizedHandler && !isAuthEndpoint) {
-        unauthorizedHandler();
-      }
-      throw await parseErrorPayload(response);
+      expiredHandler?.();
+      throw await responseError(response);
     }
+    if (response.status === 401) expiredHandler?.();
   }
-
-  if (!response.ok) {
-    throw await parseErrorPayload(response);
-  }
-
-  if (response.status === 204) {
-    return undefined as T;
-  }
-
-  const text = await response.text();
-  return (text ? JSON.parse(text) : undefined) as T;
+  return decodeResponse<T>(response);
 }

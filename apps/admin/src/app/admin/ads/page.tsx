@@ -1,250 +1,803 @@
-'use client';
 
-import React, { useEffect, useState } from 'react';
-import { DollarSign, Plus, Trash2, Edit3, X, CheckCircle, XCircle } from 'lucide-react';
-import { useAppLevel } from '@/lib/auth/app-level-context';
-import { getAdsConfigs, createAdConfig, updateAdConfig, deleteAdConfig, type AdConfig, type AdProvider } from '@/lib/api/ads';
-import { ErrorState, LoadingState } from '@/components/feedback/state-views';
+"use client";
+
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type FormEvent,
+} from "react";
+
+import {
+  BadgeCheck,
+  Ban,
+  CircleHelp,
+  Copy,
+  Megaphone,
+  Pencil,
+  Plus,
+  RefreshCw,
+  Save,
+  Search,
+  Trash2,
+} from "lucide-react";
+
+import { useAuth } from "@/lib/auth/auth-context";
+import { useAppLevel } from "@/lib/auth/app-level-context";
+import { Pagination } from "@/components/ui/pagination";
+
+import {
+  getAdsConfigsPage,
+  createAdConfig,
+  updateAdConfig,
+  deleteAdConfig,
+  type AdConfig,
+  type AdProvider,
+  type AdPlatform,
+  type AdConfigInput,
+  type AdsPage,
+} from "@/lib/api/ads";
+
+type FormState = {
+  provider: AdProvider;
+  platform: AdPlatform;
+  appAdId: string;
+  bannerAdUnitId: string;
+  interstitialAdUnitId: string;
+  rewardedAdUnitId: string;
+  nativeAdUnitId: string;
+  isEnabled: boolean;
+};
+
+const PAGE_SIZE = 10;
+
+const EMPTY_PAGINATION: AdsPage["pagination"] = {
+  page: 1,
+  limit: PAGE_SIZE,
+  total: 0,
+  totalPages: 1,
+};
+
+function emptyForm(): FormState {
+  return {
+    provider: "ADMOB",
+    platform: "android",
+    appAdId: "",
+    bannerAdUnitId: "",
+    interstitialAdUnitId: "",
+    rewardedAdUnitId: "",
+    nativeAdUnitId: "",
+    isEnabled: false,
+  };
+}
+
+function toForm(config: AdConfig): FormState {
+  return {
+    provider: config.provider,
+    platform:
+      config.platform === "ios" ? "ios" : "android",
+    appAdId: config.appAdId ?? "",
+    bannerAdUnitId: config.bannerAdUnitId ?? "",
+    interstitialAdUnitId:
+      config.interstitialAdUnitId ?? "",
+    rewardedAdUnitId: config.rewardedAdUnitId ?? "",
+    nativeAdUnitId: config.nativeAdUnitId ?? "",
+    isEnabled: config.isEnabled,
+  };
+}
+
+function getError(error: unknown): string {
+  return error instanceof Error
+    ? error.message
+    : "Request failed. Please try again.";
+}
+
+function createPayload(
+  appId: string,
+  form: FormState,
+): AdConfigInput {
+  return {
+    appId,
+    provider: form.provider,
+    platform: form.platform,
+    appAdId: form.appAdId.trim() || null,
+    bannerAdUnitId:
+      form.bannerAdUnitId.trim() || null,
+    interstitialAdUnitId:
+      form.interstitialAdUnitId.trim() || null,
+    rewardedAdUnitId:
+      form.rewardedAdUnitId.trim() || null,
+    nativeAdUnitId:
+      form.nativeAdUnitId.trim() || null,
+    isEnabled: form.isEnabled,
+  };
+}
 
 export default function AdminAdsPage() {
+  const { admin } = useAuth();
   const { selectedApp, isLoadingApps } = useAppLevel();
-  const [adsConfigs, setAdsConfigs] = useState<AdConfig[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingConfig, setEditingConfig] = useState<AdConfig | null>(null);
-  const [submitting, setSubmitting] = useState(false);
+  const canManage =
+    admin?.role === "SUPER_ADMIN" ||
+    admin?.role === "ADMIN";
 
-  // Form States
-  const [provider, setProvider] = useState<AdProvider>('ADMOB');
-  const [platform, setPlatform] = useState('android');
-  const [appAdId, setAppAdId] = useState('');
-  const [bannerAdUnitId, setBannerAdUnitId] = useState('');
-  const [interstitialAdUnitId, setInterstitialAdUnitId] = useState('');
-  const [rewardedAdUnitId, setRewardedAdUnitId] = useState('');
-  const [nativeAdUnitId, setNativeAdUnitId] = useState('');
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [configs, setConfigs] = useState<AdConfig[]>([]);
 
-  useEffect(() => {
-    if (selectedApp) loadAds();
-  }, [selectedApp]);
+  const [pagination, setPagination] =
+    useState<AdsPage["pagination"]>(
+      EMPTY_PAGINATION,
+    );
 
-  const loadAds = async () => {
-    if (!selectedApp) return;
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(PAGE_SIZE);
+  const [search, setSearch] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [processingId, setProcessingId] =
+    useState<string | null>(null);
+
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [form, setForm] = useState<FormState>(
+    emptyForm,
+  );
+
+  const [editing, setEditing] =
+    useState<AdConfig | null>(null);
+
+  const [editorOpen, setEditorOpen] = useState(true);
+
+  const appId = selectedApp?.id ?? "";
+
+  const reload = useCallback(async () => {
+    if (!appId) {
+      setConfigs([]);
+      setPagination(EMPTY_PAGINATION);
+      return;
+    }
+
     setLoading(true);
+
     try {
-      const data = await getAdsConfigs(selectedApp.id);
-      setAdsConfigs(data);
+      const response = await getAdsConfigsPage({
+        appId,
+        page,
+        limit,
+      });
+
+      setConfigs(response.data);
+      setPagination(response.pagination);
+      setError("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load ad configurations');
+      setError(getError(err));
     } finally {
       setLoading(false);
     }
-  };
+  }, [appId, page, limit]);
 
-  const openCreateModal = () => {
-    setEditingConfig(null);
-    setProvider('ADMOB');
-    setPlatform('android');
-    setAppAdId('');
-    setBannerAdUnitId('');
-    setInterstitialAdUnitId('');
-    setRewardedAdUnitId('');
-    setNativeAdUnitId('');
-    setIsEnabled(true);
-    setIsModalOpen(true);
-  };
+  useEffect(() => {
+    void reload();
+  }, [reload]);
 
-  const openEditModal = (config: AdConfig) => {
-    setEditingConfig(config);
-    setProvider(config.provider);
-    setPlatform(config.platform);
-    setAppAdId(config.appAdId || '');
-    setBannerAdUnitId(config.bannerAdUnitId || '');
-    setInterstitialAdUnitId(config.interstitialAdUnitId || '');
-    setRewardedAdUnitId(config.rewardedAdUnitId || '');
-    setNativeAdUnitId(config.nativeAdUnitId || '');
-    setIsEnabled(config.isEnabled);
-    setIsModalOpen(true);
-  };
+  const filteredConfigs = useMemo(() => {
+    const query = search.toLowerCase().trim();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedApp) return;
-    setSubmitting(true);
+    if (!query) return configs;
 
-    const payload = {
-      appId: selectedApp.id,
-      provider,
-      platform,
-      appAdId: appAdId.trim() || null,
-      bannerAdUnitId: bannerAdUnitId.trim() || null,
-      interstitialAdUnitId: interstitialAdUnitId.trim() || null,
-      rewardedAdUnitId: rewardedAdUnitId.trim() || null,
-      nativeAdUnitId: nativeAdUnitId.trim() || null,
-      isEnabled,
-    };
+    return configs.filter((config) => {
+      const content = [
+        config.provider,
+        config.platform,
+        config.appAdId,
+        config.bannerAdUnitId,
+        config.interstitialAdUnitId,
+        config.rewardedAdUnitId,
+        config.nativeAdUnitId,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return content.includes(query);
+    });
+  }, [configs, search]);
+
+  const enabledCount = configs.filter(
+    (config) => config.isEnabled,
+  ).length;
+
+  function startCreate() {
+    setEditing(null);
+    setForm(emptyForm());
+    setEditorOpen(true);
+    setError("");
+    setMessage("");
+  }
+
+  function startEdit(config: AdConfig) {
+    setEditing(config);
+    setForm(toForm(config));
+    setEditorOpen(true);
+    setError("");
+    setMessage("");
+  }
+
+  function setField<K extends keyof FormState>(
+    key: K,
+    value: FormState[K],
+  ) {
+    setForm((old) => ({
+      ...old,
+      [key]: value,
+    }));
+  }
+
+  async function saveConfig(
+    event: FormEvent<HTMLFormElement>,
+  ) {
+    event.preventDefault();
+
+    if (!canManage || !appId) return;
+
+    setSaving(true);
+    setError("");
+    setMessage("");
 
     try {
-      if (editingConfig) {
-        await updateAdConfig(editingConfig.id, payload);
+      const payload = createPayload(
+        editing?.appId ?? appId,
+        form,
+      );
+
+      const hasAdUnit = [
+        payload.bannerAdUnitId,
+        payload.interstitialAdUnitId,
+        payload.rewardedAdUnitId,
+        payload.nativeAdUnitId,
+      ].some(Boolean);
+
+      if (
+        payload.isEnabled &&
+        !hasAdUnit
+      ) {
+        throw new Error(
+          "Add at least one ad unit before enabling this configuration.",
+        );
+      }
+
+      if (editing) {
+        const {
+          appId: _appId,
+          ...changes
+        } = payload;
+
+        void _appId;
+
+        await updateAdConfig(
+          editing.id,
+          changes,
+        );
       } else {
         await createAdConfig(payload);
       }
-      await loadAds();
-      setIsModalOpen(false);
+
+      setMessage(
+        editing
+          ? "Ad configuration updated successfully."
+          : "Ad configuration created successfully.",
+      );
+
+      setEditing(null);
+      setForm(emptyForm());
+      await reload();
     } catch (err) {
-      alert('Failed to save ad configuration');
+      setError(getError(err));
     } finally {
-      setSubmitting(false);
+      setSaving(false);
     }
-  };
+  }
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this ad configuration?')) return;
+  async function toggleConfig(
+    config: AdConfig,
+  ) {
+    if (!canManage) return;
+
+    const next = !config.isEnabled;
+
+    if (
+      next &&
+      !window.confirm(
+        "Enable this ad configuration? Ads may appear after the client SDK is integrated.",
+      )
+    ) {
+      return;
+    }
+
+    setProcessingId(config.id);
+    setError("");
+    setMessage("");
+
     try {
-      await deleteAdConfig(id);
-      setAdsConfigs(adsConfigs.filter(a => a.id !== id));
-    } catch (err) {
-      alert('Failed to delete ad configuration');
-    }
-  };
+      await updateAdConfig(config.id, {
+        isEnabled: next,
+      });
 
-  if (isLoadingApps || !selectedApp) return <LoadingState label="Loading..." />;
-  if (error) return <ErrorState message={error} onRetry={loadAds} />;
+      setMessage(
+        next
+          ? "Ad configuration enabled."
+          : "Ad configuration disabled.",
+      );
+
+      await reload();
+    } catch (err) {
+      setError(getError(err));
+    } finally {
+      setProcessingId(null);
+    }
+  }
+
+  async function disableConfig(config: AdConfig) {
+    if (!canManage) return;
+
+    if (
+      !window.confirm(
+        `Disable ${config.provider} configuration for ${config.platform}?`,
+      )
+    ) {
+      return;
+    }
+
+    setProcessingId(config.id);
+    setError("");
+
+    try {
+      await deleteAdConfig(config.id);
+      setMessage("Ad configuration disabled.");
+
+      if (editing?.id === config.id) {
+        setEditing(null);
+        setForm(emptyForm());
+      }
+
+      await reload();
+    } catch (err) {
+      setError(getError(err));
+    } finally {
+      setProcessingId(null);
+    }
+  }
+
+  async function copyValue(value: string) {
+    try {
+      await navigator.clipboard.writeText(value);
+      setMessage("Ad unit ID copied.");
+    } catch {
+      setError("Unable to copy the ID.");
+    }
+  }
+
+  if (isLoadingApps) {
+    return (
+      <p className="p-6 text-sm text-slate-500">
+        Loading applications...
+      </p>
+    );
+  }
+
+  if (!selectedApp) {
+    return (
+      <div className="rounded-xl border bg-white p-6">
+        Select an application from the top navigation.
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <DollarSign className="h-6 w-6 text-indigo-600" /> Ads Management (AdMob) — {selectedApp.name}
-          </h1>
-          <p className="text-sm text-slate-500 mt-1">Configure banner, interstitial, and rewarded ad unit IDs for mobile apps.</p>
-        </div>
-        <button onClick={openCreateModal} className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
-          <Plus className="h-4 w-4" /> Add Ad Config
-        </button>
-      </div>
+    <div className="mx-auto max-w-[1800px] space-y-5">
+      <header className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <Megaphone className="h-7 w-7 text-indigo-600" />
 
-      {adsConfigs.length === 0 ? (
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-12 text-center text-slate-500">
-          No ad configurations found for this app. Click "Add Ad Config" to create one.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {adsConfigs.map((config) => (
-            <div key={config.id} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-900 text-lg">{config.provider}</span>
-                  <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-semibold uppercase text-slate-600">{config.platform}</span>
-                </div>
-                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                  config.isEnabled ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-                }`}>
-                  {config.isEnabled ? <CheckCircle className="h-3 w-3" /> : <XCircle className="h-3 w-3" />}
-                  {config.isEnabled ? 'Active' : 'Disabled'}
-                </span>
-              </div>
-
-              <div className="space-y-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100 font-mono">
-                <div><span className="text-slate-400">App ID:</span> {config.appAdId || 'Not Set'}</div>
-                <div><span className="text-slate-400">Banner:</span> {config.bannerAdUnitId || 'Not Set'}</div>
-                <div><span className="text-slate-400">Interstitial:</span> {config.interstitialAdUnitId || 'Not Set'}</div>
-                <div><span className="text-slate-400">Rewarded:</span> {config.rewardedAdUnitId || 'Not Set'}</div>
-                <div><span className="text-slate-400">Native:</span> {config.nativeAdUnitId || 'Not Set'}</div>
-              </div>
-
-              <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
-                <button onClick={() => openEditModal(config)} className="p-2 text-slate-400 hover:text-indigo-600 rounded border border-slate-200">
-                  <Edit3 className="h-4 w-4" />
-                </button>
-                <button onClick={() => handleDelete(config.id)} className="p-2 text-slate-400 hover:text-rose-600 rounded border border-slate-200">
-                  <Trash2 className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* CREATE / EDIT MODAL */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg rounded-2xl bg-white shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-              <h2 className="text-lg font-bold text-slate-900">{editingConfig ? 'Edit Ad Config' : 'Create Ad Config'}</h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600"><X className="h-5 w-5" /></button>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Provider</label>
-                  <select value={provider} onChange={(e) => setProvider(e.target.value as AdProvider)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm">
-                    <option value="ADMOB">AdMob</option>
-                    <option value="FACEBOOK">Facebook Audience</option>
-                    <option value="STARTAPP">StartApp</option>
-                    <option value="UNITY">Unity Ads</option>
-                    <option value="CUSTOM">Custom</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Platform</label>
-                  <select value={platform} onChange={(e) => setPlatform(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm">
-                    <option value="android">Android</option>
-                    <option value="ios">iOS</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">App Ad ID (Optional)</label>
-                <input type="text" value={appAdId} onChange={(e) => setAppAdId(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm font-mono" placeholder="ca-app-pub-xxxxxxxx~xxxxxxxx" />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Banner Unit ID</label>
-                  <input type="text" value={bannerAdUnitId} onChange={(e) => setBannerAdUnitId(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm font-mono" placeholder="ca-app-pub-..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Interstitial Unit ID</label>
-                  <input type="text" value={interstitialAdUnitId} onChange={(e) => setInterstitialAdUnitId(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm font-mono" placeholder="ca-app-pub-..." />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Rewarded Unit ID</label>
-                  <input type="text" value={rewardedAdUnitId} onChange={(e) => setRewardedAdUnitId(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm font-mono" placeholder="ca-app-pub-..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Native Unit ID</label>
-                  <input type="text" value={nativeAdUnitId} onChange={(e) => setNativeAdUnitId(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm font-mono" placeholder="ca-app-pub-..." />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Status</label>
-                <select value={isEnabled ? 'true' : 'false'} onChange={(e) => setIsEnabled(e.target.value === 'true')} className="w-full rounded-md border border-slate-300 p-2.5 text-sm">
-                  <option value="true">Enabled (Show Ads)</option>
-                  <option value="false">Disabled (Hide Ads)</option>
-                </select>
-              </div>
-
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-semibold text-slate-600">Cancel</button>
-                <button type="submit" disabled={submitting} className="rounded-md bg-indigo-600 px-6 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500">
-                  {submitting ? 'Saving...' : editingConfig ? 'Save Changes' : 'Create Config'}
-                </button>
-              </div>
-            </form>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">
+              Ads Management
+            </h1>
+            <p className="mt-1 text-sm text-slate-500">
+              {selectedApp.name} · Android & iOS
+            </p>
           </div>
         </div>
+
+        <button
+          type="button"
+          onClick={() => void reload()}
+          className="inline-flex items-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm"
+        >
+          <RefreshCw className="h-4 w-4" />
+          Refresh
+        </button>
+      </header>
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border bg-white p-4">
+          <p className="text-xs text-slate-500">
+            Configurations on this page
+          </p>
+          <p className="mt-1 text-2xl font-bold">
+            {configs.length}
+          </p>
+        </div>
+
+        <div className="rounded-xl border bg-white p-4">
+          <p className="text-xs text-slate-500">
+            Enabled on this page
+          </p>
+          <p className="mt-1 text-2xl font-bold text-emerald-700">
+            {enabledCount}
+          </p>
+        </div>
+
+        <div className="rounded-xl border bg-white p-4">
+          <p className="text-xs text-slate-500">
+            Total configurations
+          </p>
+          <p className="mt-1 text-2xl font-bold">
+            {pagination.total}
+          </p>
+        </div>
+      </div>
+
+      {error && (
+        <p
+          role="alert"
+          className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700"
+        >
+          {error}
+        </p>
       )}
+
+      {message && (
+        <p
+          role="status"
+          className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-700"
+        >
+          {message}
+        </p>
+      )}
+
+      <div className="grid items-start gap-5 lg:grid-cols-[340px_minmax(0,1fr)]">
+        <aside className="rounded-xl border bg-white p-4 lg:sticky lg:top-5">
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="font-bold">
+              {editing
+                ? "Edit Ad Configuration"
+                : "Ad Configuration"}
+            </h2>
+
+            {canManage && (
+              <button
+                type="button"
+                onClick={startCreate}
+                title="New configuration"
+                className="rounded-lg border p-2"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+
+          {!editorOpen ? (
+            <button
+              type="button"
+              onClick={() => setEditorOpen(true)}
+              className="mt-4 rounded-lg border px-4 py-2 text-sm"
+            >
+              Open Editor
+            </button>
+          ) : (
+            <form
+              onSubmit={(event) => void saveConfig(event)}
+              className="mt-4 space-y-4"
+            >
+              <label className="block space-y-1 text-sm">
+                <span className="font-medium">Provider</span>
+                <select
+                  value={form.provider}
+                  disabled={Boolean(editing) || !canManage}
+                  onChange={(event) =>
+                    setField(
+                      "provider",
+                      event.target.value as AdProvider,
+                    )
+                  }
+                  className="w-full rounded-lg border p-2.5"
+                >
+                  <option value="ADMOB">Google AdMob</option>
+                  <option value="OTHER">Other Provider</option>
+                </select>
+              </label>
+
+              <label className="block space-y-1 text-sm">
+                <span className="font-medium">Platform</span>
+                <select
+                  value={form.platform}
+                  disabled={Boolean(editing) || !canManage}
+                  onChange={(event) =>
+                    setField(
+                      "platform",
+                      event.target.value as AdPlatform,
+                    )
+                  }
+                  className="w-full rounded-lg border p-2.5"
+                >
+                  <option value="android">Android</option>
+                  <option value="ios">iOS</option>
+                </select>
+              </label>
+
+              {(
+                [
+                  ["appAdId", "Application Ad ID"],
+                  ["bannerAdUnitId", "Banner Ad Unit ID"],
+                  ["interstitialAdUnitId", "Interstitial Ad Unit ID"],
+                  ["rewardedAdUnitId", "Rewarded Ad Unit ID"],
+                  ["nativeAdUnitId", "Native Ad Unit ID"],
+                ] as const
+              ).map(([key, label]) => (
+                <label
+                  key={key}
+                  className="block space-y-1 text-sm"
+                >
+                  <span className="font-medium">
+                    {label}
+                  </span>
+
+                  <input
+                    value={form[key]}
+                    disabled={!canManage}
+                    onChange={(event) =>
+                      setField(key, event.target.value)
+                    }
+                    placeholder={
+                      key === "appAdId"
+                        ? "App-level identifier"
+                        : "Enter ad unit ID"
+                    }
+                    className="w-full rounded-lg border p-2.5"
+                  />
+                </label>
+              ))}
+
+              <label className="flex items-center gap-3 rounded-lg bg-slate-50 p-3 text-sm">
+                <input
+                  type="checkbox"
+                  checked={form.isEnabled}
+                  disabled={!canManage}
+                  onChange={(event) =>
+                    setField(
+                      "isEnabled",
+                      event.target.checked,
+                    )
+                  }
+                />
+                <span className="font-medium">
+                  Enable ad configuration
+                </span>
+              </label>
+
+              <div className="flex items-start gap-2 text-xs text-slate-500">
+                <CircleHelp className="mt-0.5 h-4 w-4 shrink-0" />
+                <p>
+                  Keep configurations disabled until
+                  ad unit IDs and the mobile SDK have
+                  been tested.
+                </p>
+              </div>
+
+              {canManage && (
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50"
+                >
+                  <Save className="h-4 w-4" />
+                  {saving
+                    ? "Saving..."
+                    : editing
+                      ? "Update Configuration"
+                      : "Create Configuration"}
+                </button>
+              )}
+            </form>
+          )}
+        </aside>
+
+        <section className="min-w-0 overflow-hidden rounded-xl border bg-white">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b p-4">
+            <div>
+              <h2 className="font-bold">
+                Ad Configurations
+              </h2>
+              <p className="text-xs text-slate-500">
+                Manage advertising IDs for the selected app.
+              </p>
+            </div>
+
+            <div className="relative w-full max-w-xs">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <input
+                value={search}
+                onChange={(event) =>
+                  setSearch(event.target.value)
+                }
+                placeholder="Search on this page..."
+                className="w-full rounded-lg border p-2.5 pl-9 text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-3 p-4">
+            {loading && (
+              <p className="py-8 text-center text-sm text-slate-500">
+                Loading configurations...
+              </p>
+            )}
+
+            {!loading &&
+              filteredConfigs.length === 0 && (
+                <div className="py-12 text-center text-sm text-slate-500">
+                  No ad configurations found.
+                </div>
+              )}
+
+            {filteredConfigs.map((config) => (
+              <div
+                key={config.id}
+                className="space-y-3 rounded-xl border p-4"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold">
+                        {config.provider === "ADMOB"
+                          ? "Google AdMob"
+                          : "Other Provider"}
+                      </h3>
+
+                      <span className="rounded-full bg-slate-100 px-2 py-1 text-xs uppercase">
+                        {config.platform}
+                      </span>
+                    </div>
+
+                    <p className="mt-1 text-xs text-slate-500">
+                      {config.isEnabled
+                        ? "Enabled"
+                        : "Disabled"}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    {canManage && (
+                      <>
+                        <button
+                          type="button"
+                          title="Edit"
+                          aria-label="Edit ad configuration"
+                          onClick={() => startEdit(config)}
+                          className="rounded-lg border p-2"
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </button>
+
+                        <button
+                          type="button"
+                          title={
+                            config.isEnabled
+                              ? "Disable"
+                              : "Enable"
+                          }
+                          aria-label="Toggle ad configuration"
+                          disabled={
+                            processingId === config.id
+                          }
+                          onClick={() =>
+                            void toggleConfig(config)
+                          }
+                          className="rounded-lg border p-2 disabled:opacity-40"
+                        >
+                          {config.isEnabled ? (
+                            <Ban className="h-4 w-4 text-amber-600" />
+                          ) : (
+                            <BadgeCheck className="h-4 w-4 text-emerald-600" />
+                          )}
+                        </button>
+
+                        <button
+                          type="button"
+                          title="Disable configuration"
+                          aria-label="Disable ad configuration"
+                          disabled={
+                            processingId === config.id
+                          }
+                          onClick={() =>
+                            void disableConfig(config)
+                          }
+                          className="rounded-lg border p-2 text-red-600 disabled:opacity-40"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {(
+                    [
+                      ["appAdId", "App"],
+                      ["bannerAdUnitId", "Banner"],
+                      ["interstitialAdUnitId", "Interstitial"],
+                      ["rewardedAdUnitId", "Rewarded"],
+                      ["nativeAdUnitId", "Native"],
+                    ] as const
+                  ).map(([key, label]) => {
+                    const value = config[key];
+
+                    return (
+                      <div
+                        key={key}
+                        className="min-w-0 rounded-lg bg-slate-50 p-3"
+                      >
+                        <p className="text-xs font-semibold text-slate-500">
+                          {label}
+                        </p>
+
+                        <div className="mt-1 flex items-center gap-2">
+                          <p
+                            title={value ?? ""}
+                            className="min-w-0 flex-1 truncate font-mono text-xs"
+                          >
+                            {value || "Not configured"}
+                          </p>
+
+                          {value && (
+                            <button
+                              type="button"
+                              title={`Copy ${label} ID`}
+                              aria-label={`Copy ${label} ID`}
+                              onClick={() =>
+                                void copyValue(value)
+                              }
+                              className="rounded p-1 text-slate-500 hover:text-indigo-600"
+                            >
+                              <Copy className="h-3.5 w-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t p-4">
+            <Pagination
+              pagination={pagination}
+              onPageChange={setPage}
+              onPageSizeChange={(size) => {
+                setPage(1);
+                setLimit(size);
+              }}
+              isLoading={loading}
+            />
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

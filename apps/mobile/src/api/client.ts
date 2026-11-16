@@ -1,27 +1,62 @@
-import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
 
-const BASE_URL = 'http://192.168.0.139:4000/api'; 
+import axios from "axios";
+
+export const API_BASE_URL =
+  "https://learning-api.mochiflix.com/api";
 
 export const apiClient = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
+  baseURL: API_BASE_URL,
+  timeout: 15000,
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
 });
 
-apiClient.interceptors.request.use(
-  async (config) => {
-    // সেভ করা টোকেন খুঁজে বের করে হেডারে বসিয়ে দেওয়া
-    const token = await SecureStore.getItemAsync('user_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+let accessToken: string | null = null;
+
+export function setApiAccessToken(token: string | null) {
+  accessToken = token;
+}
+
+apiClient.interceptors.request.use((config) => {
+  if (accessToken) {
+    config.headers.set(
+      "Authorization",
+      `Bearer ${accessToken}`
+    );
   }
-);
+
+  return config;
+});
+
+export function getApiError(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const status = error.response?.status;
+    const data = error.response?.data as
+      | { message?: string | string[] }
+      | undefined;
+
+    if (status === 429) {
+      return "Too many requests. Please try again later.";
+    }
+
+    if (!error.response) {
+      return "Cannot connect to the server. Check your internet connection.";
+    }
+
+    if (Array.isArray(data?.message)) {
+      return data.message.join(". ");
+    }
+
+    if (typeof data?.message === "string") {
+      return data.message;
+    }
+
+    return `Request failed (${status}).`;
+  }
+
+  return error instanceof Error
+    ? error.message
+    : "Something went wrong. Please try again.";
+}
