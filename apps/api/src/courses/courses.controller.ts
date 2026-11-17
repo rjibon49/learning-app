@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -14,7 +13,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import { CoursesService } from './courses.service.js';
 
@@ -41,20 +39,10 @@ import { AdminRolesGuard } from '../admin-auth/admin-roles.guard.js';
 
 import { AdminRoles } from '../admin-auth/admin-roles.decorator.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 // ========================================
 // PUBLIC COURSE API
@@ -128,6 +116,7 @@ export class CoursesController {
 export class AdminCoursesController {
   constructor(
     private readonly courses: CoursesService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   // ======================================
@@ -199,10 +188,21 @@ export class AdminCoursesController {
 
   @Delete(':id')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  archiveCourse(@Param('id') rawId: string) {
-    return this.courses.archiveCourse(
-      validate(idSchema, rawId),
-    );
+  archiveCourse(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'Course', id, (tx) =>
+        tx.course.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.courses.archiveCourse(id);
   }
 
   @Post(':id/apps')
@@ -241,10 +241,21 @@ export class AdminCoursesController {
 
   @Delete('modules/:id')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  archiveModule(@Param('id') rawId: string) {
-    return this.courses.archiveModule(
-      validate(idSchema, rawId),
-    );
+  archiveModule(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'CourseModule', id, (tx) =>
+        tx.courseModule.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.courses.archiveModule(id);
   }
 
   // ======================================
@@ -271,10 +282,21 @@ export class AdminCoursesController {
 
   @Delete('lessons/:id')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  archiveLesson(@Param('id') rawId: string) {
-    return this.courses.archiveLesson(
-      validate(idSchema, rawId),
-    );
+  archiveLesson(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'Lesson', id, (tx) =>
+        tx.lesson.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.courses.archiveLesson(id);
   }
 
   // ======================================

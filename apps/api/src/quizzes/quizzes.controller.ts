@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -12,7 +11,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import { AdminJwtGuard } from
   '../admin-auth/admin-jwt.guard.js';
@@ -34,20 +32,10 @@ import {
   QuizListQuerySchema,
 } from './dto/quiz.dto.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 // ==========================================
 // PUBLIC QUIZ API
@@ -88,6 +76,7 @@ export class PublicQuizzesController {
 export class AdminQuizzesController {
   constructor(
     private readonly quizzes: QuizzesService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -124,10 +113,21 @@ export class AdminQuizzesController {
 
   @Delete(':id')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  archive(@Param('id') rawId: string) {
-    return this.quizzes.archiveQuiz(
-      validate(quizIdSchema, rawId),
-    );
+  archive(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(quizIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'Quiz', id, (tx) =>
+        tx.quiz.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.quizzes.archiveQuiz(id);
   }
 
   @Get(':quizId/questions')
@@ -161,9 +161,18 @@ export class AdminQuizzesController {
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
   deleteQuestion(
     @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
   ) {
-    return this.quizzes.deleteQuestion(
-      validate(quizIdSchema, rawId),
-    );
+    const id = validate(quizIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'QuizQuestion', id, (tx) =>
+        tx.quizQuestion.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.quizzes.deleteQuestion(id);
   }
 }

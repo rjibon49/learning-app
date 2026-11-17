@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Controller,
   Get,
   Param,
@@ -12,7 +11,6 @@ import {
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import {
   LearnerJwtGuard,
@@ -35,20 +33,7 @@ import type {
   NotificationInboxQuery,
 } from './notification-inbox.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('auth/learner/notifications')
 @UseGuards(LearnerJwtGuard)

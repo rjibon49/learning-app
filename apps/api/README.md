@@ -1,132 +1,112 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Learning Platform API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+One NestJS API (+ MySQL/Prisma) that serves the Admin CMS, the website and every
+language app (German A1, A2, B1, B2, C1 … later other languages).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- Base URL: `/api` (e.g. `https://api.your-domain.com/api/health`)
+- Admin routes need `Authorization: Bearer <admin access token>`
+- Learner routes need `Authorization: Bearer <learner access token>`
+- Full route list: `../../docs/API_FInal.md`
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Run locally
 
 ```bash
-$ npm install
+cp .env.example .env          # fill in values (openssl rand -hex 32 for secrets)
+npm install
+npx prisma migrate deploy     # or: npm run db:migrate (dev)
+npm run seed && npm run seed:admin
+npm run start:dev
 ```
 
-## Compile and run the project
+Checks before every deploy:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npx tsc --noEmit && npm run lint && npm test && npm run build
 ```
 
-## Run tests
+## Folder layout
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+src/
+  common/           shared helpers used by every module
+    validation.ts            validate(schema, input), idSchema, ?permanent=true parser
+    prisma-exception.filter  DB errors -> 404 / 409 instead of 500
+    permanent-delete.service Super-Admin hard delete + audit log
+    bigint-json.ts           BigInt columns serialise to JSON
+  <feature>/        one folder per feature: controller (routes) + service (logic) + schemas (Zod)
 ```
 
-## Deployment
+New controllers: import `validate` from `common/validation.js`; do not copy a local helper.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Delete rules (same for every resource)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+| Request | Who | What happens |
+|---|---|---|
+| `DELETE /api/<resource>/:id` | role of that resource | **Safe delete** – archive / deactivate. Reversible, learners keep progress. |
+| `DELETE /api/<resource>/:id?permanent=true` | **SUPER_ADMIN only** | **Permanent delete** – row and its children are removed, an `PERMANENT_DELETE` audit-log row is written. Returns **409** if something still uses it (e.g. a language that still has courses). |
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+| Resource | Safe delete does | Permanent delete also removes |
+|---|---|---|
+| `/admin/courses/:id` | status → ARCHIVED | modules, lessons, translations, resources, learner lesson progress |
+| `/admin/courses/modules/:id` | status → ARCHIVED | lessons (+ above) |
+| `/admin/courses/lessons/:id` | status → ARCHIVED | translations, resources, learner progress |
+| `/admin/vocabulary/:id` | status → ARCHIVED | translations, examples, deck items, learner progress |
+| `/admin/vocabulary/categories/:id` | isActive → false | translations (words keep, category emptied) |
+| `/admin/quizzes/:id` | status → ARCHIVED | questions, options, attempts |
+| `/admin/quizzes/questions/:id` | delete (draft quiz, no answers) | also when learners answered |
+| `/admin/flashcards/decks/:id` | unpublish | deck items |
+| `/admin/apps/:id` **(new)** | isActive → false | config, ad config, decks, course links (409 if subscriptions exist) |
+| `/admin/languages/:code` **(new)** | isActive → false | level assignments (409 if any content uses it) |
+| `/admin/languages/:code/levels/:levelId` **(new)** | level disabled | assignment row |
+| `/admin/ads/:id` | disabled | ad config |
+| `/admin/promotions/codes/:id` | disabled | promo code (409 if redeemed) |
+| `/admin/web-ads/placements/:id` | archived | placement (409 while campaigns use it) |
+| `/admin/web-ads/campaigns/:id` | archived | campaign + its click/impression events |
+| `/admin/announcements/:id` **(new)** | archived | translations, targets, inbox copies |
+| `/admin/audiences/:id` **(new)** | deactivated | audience (409 if targeted) |
+| `/admin/consent/policies/:id` **(new)** | deactivated | policy (409 if learners accepted) |
+| `/admin/notification-templates/:id` **(new)** | deactivated | template |
+| `/admin/notification-providers/:id` **(new)** | disabled | provider config |
+| `/admins/:id` | deactivated | admin (must be deactivated first, not yourself) |
+| `/users/:id` **(new)** | blocked + logged out everywhere | learner account; anonymised instead if payments exist |
+| `/media/:id` | — | file in R2 + row (409 while used by vocabulary, lessons, announcements) |
+| `/imports/jobs/:id` **(new)** | — | finished import job history (words stay) |
+| `/admin/documents/jobs/:id` **(new)** | — | finished conversion job (PDF stays in media) |
+
+### Learner: delete my account (new)
+
+Apple App Store and Google Play require in-app account deletion.
+
+```http
+DELETE /api/auth/learner/me
+Authorization: Bearer <learner access token>
+Content-Type: application/json
+
+{ "password": "current password" }
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Response: `{ "success": true, "mode": "deleted" }` (or `"anonymized"` when the
+learner has payment records that must be kept for accounting).
 
-## Observability
+## Mobile apps (React Native) – staying logged in
 
-In production applications, observability is essential for understanding how your system behaves, detecting issues early, and maintaining reliable performance.
+Browsers keep the refresh token in an HttpOnly cookie. React Native apps should
+send `X-Client-Type: mobile` instead:
 
-[NestJS Observe](https://observe.nestjs.com) automatically instruments your NestJS application, giving you deep visibility into your system with minimal setup:
+1. `POST /api/auth/learner/login` with header `X-Client-Type: mobile`
+   → response also contains `refreshToken`. Save it in SecureStore/Keychain.
+2. When the access token expires (15 min):
+   `POST /api/auth/learner/refresh` with header `X-Client-Type: mobile` and body
+   `{ "refreshToken": "<saved token>" }` → new `accessToken` **and a new
+   `refreshToken`** (rotate: always save the new one).
+3. Logout: `POST /api/auth/learner/logout` with body `{ "refreshToken": "..." }`.
 
-- **Distributed tracing:** Follow requests across services and understand how they flow through your system.
-- **Waterfall analysis:** Visualize request execution and identify slow operations, bottlenecks, and unexpected delays.
-- **Performance analysis:** Analyze application performance in real time and quickly pinpoint areas that need optimization.
-- **Metrics:** Track key application and infrastructure metrics to understand system health and performance trends.
-- **Logging:** Centralize and correlate logs with traces and other telemetry to make debugging easier.
-- **Error tracking:** Detect errors quickly and investigate their root causes with the surrounding context.
-- **SLA monitoring:** Track service-level objectives and identify when your application is approaching or exceeding defined thresholds.
-- **Alarms and alerts:** Set up alerts for critical errors, performance degradation, SLA violations, and other anomalies so your team can react quickly.
+The website does not need any change.
 
-To add it to this project, run this and approve the code it prints at [observe.nestjs.com/link](https://observe.nestjs.com/link) - signing up for free if you have no account:
+## Production notes (Hostinger VPS)
 
-```bash
-$ npx @nestjs/observe link
-```
-
-It installs `@nestjs/observe`, wires it into `AppModule` and `main.ts`, and writes the app key and secret into `.env`, which every `nest start` script (`start`, `start:dev`, `start:debug`) then loads. In production, set `OBSERVE_APP_KEY` and `OBSERVE_APP_SECRET` in the environment instead.
-
-Or do it by hand:
-
-```bash
-$ npm install @nestjs/observe
-```
-
-Then follow the [setup guide](https://docs.nestjs.com/observability/sdk) - it takes a single import and an app key.
-
-The free plan needs no payment details and covers 300,000 events a month. You can also browse the [live demo](https://www.observe-demo.nestjs.com/dashboard) first - the whole dashboard over a busy service's data, with nothing to install.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Auto-instrument your application with [NestJS Observe](https://observe.nestjs.com). Distributed tracing, metrics, and logging made easy. Error tracking and performance monitoring for your NestJS applications.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Never commit `.env`. Rotate any secret that was ever pushed to GitHub.
+- The API trusts Docker/private-network proxies (Traefik) for the client IP, so
+  rate limits work per user. Override with `TRUST_PROXY` if your proxy differs.
+- Payments are **not live** (`paymentReady: false`) until store/Stripe receipt
+  verification is implemented.

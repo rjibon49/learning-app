@@ -1,16 +1,16 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import { AdminJwtGuard } from '../admin-auth/admin-jwt.guard.js';
 import { AdminRolesGuard } from '../admin-auth/admin-roles.guard.js';
@@ -25,20 +25,10 @@ import {
   assignLevelsSchema,
 } from './languages.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { idSchema, isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 // ==========================================
 // Public language catalog
@@ -76,6 +66,7 @@ export class PublicLanguagesController {
 export class AdminLanguagesController {
   constructor(
     private readonly languages: LanguagesService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -124,6 +115,50 @@ export class AdminLanguagesController {
     return this.languages.assignLevels(
       validate(languageCodeSchema, rawCode),
       validate(assignLevelsSchema, body),
+    );
+  }
+
+  /**
+   * DELETE /admin/languages/:code                -> deactivate (hidden from apps/website)
+   * DELETE /admin/languages/:code?permanent=true -> SUPER_ADMIN: delete. Refused (409)
+   *   while any app, course, vocabulary or translation still uses the language.
+   */
+  @Delete(':code')
+  @AdminRoles('SUPER_ADMIN', 'ADMIN')
+  async remove(
+    @Param('code') rawCode: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const code = validate(languageCodeSchema, rawCode);
+
+    if (!isPermanent(query)) {
+      return this.languages.update(code, { isActive: false });
+    }
+
+    const language = await this.languages.findByCodeOrThrow(code);
+
+    return this.permanentDelete.run(admin, 'Language', language.id, (tx) =>
+      tx.language.delete({ where: { id: language.id }, select: { id: true } }),
+      { code },
+    );
+  }
+
+  /**
+   * DELETE /admin/languages/:code/levels/:levelId                -> disable this level for the language
+   * DELETE /admin/languages/:code/levels/:levelId?permanent=true -> remove the assignment row
+   */
+  @Delete(':code/levels/:levelId')
+  @AdminRoles('SUPER_ADMIN', 'ADMIN')
+  removeLevel(
+    @Param('code') rawCode: string,
+    @Param('levelId') rawLevelId: string,
+    @Query() query: unknown,
+  ) {
+    return this.languages.removeLevel(
+      validate(languageCodeSchema, rawCode),
+      validate(idSchema, rawLevelId),
+      isPermanent(query),
     );
   }
 }

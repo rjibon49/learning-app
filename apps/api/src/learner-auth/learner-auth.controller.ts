@@ -1,9 +1,11 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Post,
   Req,
   Res,
@@ -19,7 +21,6 @@ import type {
   Response,
 } from 'express';
 
-import { z } from 'zod';
 
 import { LearnerAuthService } from './learner-auth.service.js';
 import { LearnerJwtGuard } from './learner-jwt.guard.js';
@@ -32,31 +33,47 @@ import {
   loginSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
+  refreshBodySchema,
+  deleteAccountSchema,
 } from './learner-auth.schemas.js';
+import { LearnerAccountDeletionService } from './account-deletion.service.js';
+
+import { validate } from '../common/validation.js';
 
 const COOKIE_NAME = 'learning_refresh';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
 
 @Controller('auth/learner')
 export class LearnerAuthController {
   constructor(
     private readonly service: LearnerAuthService,
     private readonly config: ConfigService,
+    private readonly accountDeletion: LearnerAccountDeletionService,
   ) {}
+
+  /**
+   * React Native apps cannot rely on HttpOnly cookies.
+   * They send `X-Client-Type: mobile`, receive `refreshToken` in the JSON body,
+   * store it in SecureStore/Keychain and send it back in the body.
+   * The website keeps using the HttpOnly cookie (no change).
+   */
+  private isMobile(request: Request): boolean {
+    return (
+      String(request.headers['x-client-type'] ?? '').toLowerCase() ===
+      'mobile'
+    );
+  }
+
+  private readRefreshToken(
+    request: Request,
+    body: unknown,
+  ): string | undefined {
+    const fromCookie = request.cookies?.[COOKIE_NAME] as string | undefined;
+
+    if (fromCookie) return fromCookie;
+
+    return validate(refreshBodySchema, body ?? {}).refreshToken;
+  }
 
   private secureCookie() {
     return this.config.get<string>(
@@ -151,6 +168,9 @@ export class LearnerAuthController {
       user: result.user,
       accessToken: result.accessToken,
       expiresIn: result.expiresIn,
+      ...(this.isMobile(request)
+        ? { refreshToken: result.refreshToken }
+        : {}),
     };
   }
 
@@ -164,14 +184,12 @@ export class LearnerAuthController {
   })
   async refresh(
     @Req() request: Request,
+    @Body() body: unknown,
     @Res({ passthrough: true }) response: Response,
   ) {
     this.verifyOrigin(request);
 
-    const token =
-      request.cookies?.[COOKIE_NAME] as
-        | string
-        | undefined;
+    const token = this.readRefreshToken(request, body);
 
     if (!token) {
       throw new UnauthorizedException(
@@ -194,6 +212,9 @@ export class LearnerAuthController {
     return {
       accessToken: result.accessToken,
       expiresIn: result.expiresIn,
+      ...(this.isMobile(request)
+        ? { refreshToken: result.refreshToken }
+        : {}),
     };
   }
 
@@ -204,14 +225,12 @@ export class LearnerAuthController {
   @Post('logout')
   async logout(
     @Req() request: Request,
+    @Body() body: unknown,
     @Res({ passthrough: true }) response: Response,
   ) {
     this.verifyOrigin(request);
 
-    const token =
-      request.cookies?.[COOKIE_NAME] as
-        | string
-        | undefined;
+    const token = this.readRefreshToken(request, body);
 
     const result = await this.service.logout(token);
 
@@ -236,6 +255,40 @@ export class LearnerAuthController {
     }
 
     return this.service.me(learner.id);
+  }
+
+  // ======================================
+  // DELETE MY ACCOUNT
+  // Apple App Store & Google Play require in-app account deletion.
+  // Body: { "password": "..." }
+  // ======================================
+
+  @Delete('me')
+  @UseGuards(LearnerJwtGuard)
+  @HttpCode(HttpStatus.OK)
+  @Throttle({
+    short: { limit: 3, ttl: 60000 },
+  })
+  async deleteMe(
+    @Req() request: LearnerRequest,
+    @Body() body: unknown,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const learnerId = request.learner?.id;
+
+    if (!learnerId) {
+      throw new UnauthorizedException('Learner authentication required');
+    }
+
+    const input = validate(deleteAccountSchema, body);
+
+    await this.service.verifyPassword(learnerId, input.password);
+
+    const result = await this.accountDeletion.deleteAccount(learnerId);
+
+    this.clearRefreshCookie(response);
+
+    return result;
   }
 
   // ======================================

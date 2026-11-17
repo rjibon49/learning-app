@@ -1,8 +1,8 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -13,7 +13,6 @@ import {
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import { AdminJwtGuard } from
   '../admin-auth/admin-jwt.guard.js';
@@ -32,20 +31,7 @@ import {
   importJobsQuerySchema,
 } from './imports.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('imports')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
@@ -96,6 +82,16 @@ export class ImportsController {
   @Get('jobs/:id')
   findJob(@Param('id') rawId: string) {
     return this.imports.findJob(
+      validate(importIdSchema, rawId),
+    );
+  }
+
+
+  /** Remove a finished import job from history (running jobs cannot be deleted). */
+  @Delete('jobs/:id')
+  @AdminRoles('SUPER_ADMIN', 'ADMIN')
+  deleteJob(@Param('id') rawId: string) {
+    return this.imports.deleteJob(
       validate(importIdSchema, rawId),
     );
   }

@@ -653,7 +653,7 @@ export class MediaService {
       );
     }
 
-    const [vocabularyCount, lessonCount] =
+    const [vocabularyCount, lessonCount, announcementCount] =
       await this.prisma.$transaction([
         this.prisma.vocabulary.count({
           where: {
@@ -669,11 +669,23 @@ export class MediaService {
             assetId: id,
           },
         }),
+
+        this.prisma.announcement.count({
+          where: {
+            imageAssetId: id,
+          },
+        }),
       ]);
 
-    if (vocabularyCount + lessonCount > 0) {
+    const inUse = [
+      vocabularyCount && `${vocabularyCount} vocabulary item(s)`,
+      lessonCount && `${lessonCount} lesson resource(s)`,
+      announcementCount && `${announcementCount} announcement(s)`,
+    ].filter(Boolean);
+
+    if (inUse.length > 0) {
       throw new ConflictException(
-        'Media is in use. Detach it before deleting.',
+        `Media is in use by ${inUse.join(', ')}. Detach it before deleting.`,
       );
     }
 

@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -12,7 +11,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import {
   AdminRole,
@@ -42,20 +40,10 @@ import {
   vocabularyListQuerySchema,
 } from './vocabulary.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 const CONTENT_ROLES = [
   AdminRole.SUPER_ADMIN,
@@ -103,6 +91,7 @@ export class VocabularyController {
 export class AdminVocabularyController {
   constructor(
     private readonly service: VocabularyService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   // Categories
@@ -135,10 +124,21 @@ export class AdminVocabularyController {
     AdminRole.SUPER_ADMIN,
     AdminRole.ADMIN,
   )
-  deleteCategory(@Param('id') rawId: string) {
-    return this.service.deleteCategory(
-      validate(vocabularyIdSchema, rawId),
-    );
+  deleteCategory(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(vocabularyIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'VocabularyCategory', id, (tx) =>
+        tx.vocabularyCategory.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.service.deleteCategory(id);
   }
 
   @Post('categories/:id/translations')
@@ -202,10 +202,21 @@ export class AdminVocabularyController {
     AdminRole.SUPER_ADMIN,
     AdminRole.ADMIN,
   )
-  archive(@Param('id') rawId: string) {
-    return this.service.deleteVocabulary(
-      validate(vocabularyIdSchema, rawId),
-    );
+  archive(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(vocabularyIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'Vocabulary', id, (tx) =>
+        tx.vocabulary.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.service.deleteVocabulary(id);
   }
 
   // Translations

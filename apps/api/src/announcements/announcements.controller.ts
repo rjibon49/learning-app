@@ -1,8 +1,8 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -33,20 +33,10 @@ import {
   announcementListQuerySchema,
 } from './announcements.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  data: unknown,
-): z.output<T> {
-  const result = schema.safeParse(data);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 const idSchema = z.string().trim().min(1).max(191);
 
@@ -56,6 +46,7 @@ const idSchema = z.string().trim().min(1).max(191);
 export class AnnouncementsController {
   constructor(
     private readonly service: AnnouncementsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -115,5 +106,29 @@ export class AnnouncementsController {
     return this.service.archive(
       validate(idSchema, id),
     );
+  }
+
+
+  /**
+   * DELETE /admin/announcements/:id                -> archive (stops showing)
+   * DELETE /admin/announcements/:id?permanent=true -> SUPER_ADMIN: delete with
+   *   translations, placements, targets and learner inbox copies.
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'Announcement', id, (tx) =>
+        tx.announcement.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.service.archive(id);
   }
 }

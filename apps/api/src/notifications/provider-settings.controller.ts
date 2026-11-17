@@ -1,17 +1,17 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import {
   AdminJwtGuard,
@@ -35,20 +35,10 @@ import {
   providerSettingsUpdateSchema,
 } from './provider-settings.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 @Controller('admin/notification-providers')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
@@ -56,6 +46,7 @@ function validate<T extends z.ZodType>(
 export class ProviderSettingsController {
   constructor(
     private readonly providers: ProviderSettingsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -106,5 +97,28 @@ export class ProviderSettingsController {
     return this.providers.disable(
       validate(providerIdSchema, id),
     );
+  }
+
+
+  /**
+   * DELETE /admin/notification-providers/:id                -> disable
+   * DELETE /admin/notification-providers/:id?permanent=true -> SUPER_ADMIN: delete
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(providerIdSchema, rawId);
+
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'NotificationProviderConfig', id, (tx) =>
+        tx.notificationProviderConfig.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.providers.disable(id);
   }
 }

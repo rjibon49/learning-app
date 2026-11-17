@@ -1,17 +1,18 @@
 
 import {
-  BadRequestException,
   Body,
+  ConflictException,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import {
   AdminJwtGuard,
@@ -35,20 +36,10 @@ import {
   consentPolicyParamsSchema,
 } from './admin-consent.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 @Controller('admin/consent/policies')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
@@ -57,6 +48,7 @@ export class AdminConsentController {
   constructor(
     private readonly policies:
       AdminConsentService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -123,5 +115,39 @@ export class AdminConsentController {
     );
 
     return this.policies.deactivate(params.id);
+  }
+
+
+  /**
+   * DELETE /admin/consent/policies/:id                -> deactivate
+   * DELETE /admin/consent/policies/:id?permanent=true -> SUPER_ADMIN: delete only
+   *   if no learner has accepted it (consent records are legal evidence).
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const { id } = validate(consentPolicyParamsSchema, { id: rawId });
+
+    if (!isPermanent(query)) {
+      return this.policies.deactivate(id);
+    }
+
+    return this.permanentDelete.run(admin, 'ConsentPolicy', id, async (tx) => {
+      const accepted = await tx.marketingConsent.count({
+        where: { policyId: id },
+      });
+
+      if (accepted > 0) {
+        throw new ConflictException(
+          'Learners have accepted this policy. Deactivate it instead of deleting.',
+        );
+      }
+
+      await tx.consentPolicy.delete({ where: { id }, select: { id: true } });
+    });
   }
 }

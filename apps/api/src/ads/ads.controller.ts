@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -14,7 +13,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import { Throttle } from '@nestjs/throttler';
 
@@ -40,20 +38,10 @@ import {
   AdminAdQuerySchema,
 } from './dto/ad-config.dto.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 @Controller('ads')
 export class PublicAdsController {
@@ -90,7 +78,10 @@ export class PublicAdsController {
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
 @AdminRoles('SUPER_ADMIN', 'ADMIN')
 export class AdminAdsController {
-  constructor(private readonly ads: AdsService) {}
+  constructor(
+    private readonly ads: AdsService,
+    private readonly permanentDelete: PermanentDeleteService,
+  ) {}
 
   @Get()
   findAll(@Query() query: unknown) {
@@ -125,9 +116,20 @@ export class AdminAdsController {
   }
 
   @Delete(':id')
-  disable(@Param('id') id: string) {
-    return this.ads.deleteAdConfig(
-      validate(adIdSchema, id),
-    );
+  disable(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(adIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'AdConfig', id, (tx) =>
+        tx.adConfig.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.ads.deleteAdConfig(id);
   }
 }

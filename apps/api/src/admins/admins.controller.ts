@@ -1,10 +1,12 @@
 
 import {
-  BadRequestException,
   Body,
+  ConflictException,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -12,8 +14,6 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
-
-import { z } from 'zod';
 
 import { AdminsService } from './admins.service.js';
 
@@ -30,21 +30,8 @@ import { AdminRoles } from '../admin-auth/admin-roles.decorator.js';
 import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
 
 import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
-
-function parse<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
+import { isPermanent, validate as parse } from '../common/validation.js';
 
 @Controller('admins')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
@@ -52,6 +39,7 @@ function parse<T extends z.ZodType>(
 export class AdminsController {
   constructor(
     private readonly admins: AdminsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   private actorId(admin?: AuthenticatedAdmin): string {
@@ -92,14 +80,45 @@ export class AdminsController {
     );
   }
 
+  /**
+   * DELETE /admins/:id                -> deactivate (default, keeps audit history)
+   * DELETE /admins/:id?permanent=true -> delete an admin that is ALREADY deactivated.
+   *   Their audit-log rows stay (admin link becomes empty).
+   */
   @Delete(':id')
-  deactivate(
+  async deactivate(
     @CurrentAdmin() admin: AuthenticatedAdmin,
     @Param('id') rawId: string,
+    @Query() query: unknown,
   ) {
-    return this.admins.deactivateAdmin(
-      this.actorId(admin),
-      parse(adminIdSchema, rawId),
-    );
+    const actorId = this.actorId(admin);
+    const id = parse(adminIdSchema, rawId);
+
+    if (!isPermanent(query)) {
+      return this.admins.deactivateAdmin(actorId, id);
+    }
+
+    if (actorId === id) {
+      throw new ForbiddenException('You cannot delete your own account');
+    }
+
+    return this.permanentDelete.run(admin, 'AdminUser', id, async (tx) => {
+      const target = await tx.adminUser.findUnique({
+        where: { id },
+        select: { isActive: true },
+      });
+
+      if (!target) {
+        throw new NotFoundException('Admin not found');
+      }
+
+      if (target.isActive) {
+        throw new ConflictException(
+          'Deactivate this admin first, then delete permanently.',
+        );
+      }
+
+      await tx.adminUser.delete({ where: { id }, select: { id: true } });
+    });
   }
 }

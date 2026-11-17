@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -13,7 +12,6 @@ import {
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import { LearnerJwtGuard } from
   '../learner-auth/learner-jwt.guard.js';
@@ -39,20 +37,7 @@ import {
   subscriptionListSchema,
 } from './dto/subscription.dto.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('subscriptions')
 export class SubscriptionsController {

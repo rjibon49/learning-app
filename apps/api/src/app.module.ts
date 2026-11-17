@@ -13,6 +13,7 @@ import { AppService } from './app.service.js';
 import { AppsModule } from './apps/apps.module.js';
 import { envSchema } from './env.schema.js';
 import { PrismaModule } from './prisma.module.js';
+import { CommonModule } from './common/permanent-delete.service.js';
 import { VocabularyModule } from './vocabulary/vocabulary.module.js';
 import { CoursesModule } from './courses/courses.module.js';
 import { MediaModule } from './media/media.module.js';
@@ -94,6 +95,7 @@ import { BillingManagementModule } from './billing/billing.module.js';
     ]),
 
     PrismaModule,
+    CommonModule,
     AdminsModule,
     AdminAuthModule,
     AppsModule,

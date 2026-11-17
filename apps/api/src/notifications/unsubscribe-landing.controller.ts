@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
 import { z } from 'zod';
 import { UnsubscribeService } from './unsubscribe.service.js';
 const body = z.strictObject({ token: z.string().min(20).max(2048) });

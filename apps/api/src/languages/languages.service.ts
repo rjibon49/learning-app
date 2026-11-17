@@ -313,4 +313,52 @@ export class LanguagesService {
 
     return language;
   }
+
+  async findByCodeOrThrow(code: string) {
+    const language = await this.prisma.language.findUnique({
+      where: { code },
+      select: { id: true, code: true },
+    });
+
+    if (!language) {
+      throw new NotFoundException('Language not found');
+    }
+
+    return language;
+  }
+
+  async removeLevel(
+    code: string,
+    levelId: string,
+    permanent: boolean,
+  ) {
+    const language = await this.findByCodeOrThrow(code);
+
+    const where = {
+      languageId_levelId: {
+        languageId: language.id,
+        levelId,
+      },
+    };
+
+    const assignment =
+      await this.prisma.languageProficiencyLevel.findUnique({ where });
+
+    if (!assignment) {
+      throw new NotFoundException(
+        'This level is not assigned to the language',
+      );
+    }
+
+    if (permanent) {
+      await this.prisma.languageProficiencyLevel.delete({ where });
+    } else {
+      await this.prisma.languageProficiencyLevel.update({
+        where,
+        data: { isActive: false },
+      });
+    }
+
+    return this.findLevelsAdmin(code);
+  }
 }

@@ -3,19 +3,19 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
   Query,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
-  UploadedFile,
 } from '@nestjs/common';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { memoryStorage } from 'multer';
-import { z } from 'zod';
 
 import { AdminJwtGuard } from
   '../admin-auth/admin-jwt.guard.js';
@@ -34,20 +34,7 @@ import {
   uploadDocumentSchema,
 } from './documents.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('admin/documents')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)
@@ -102,6 +89,16 @@ export class DocumentsController {
   @Get('jobs/:id')
   findJob(@Param('id') rawId: string) {
     return this.documents.findJob(
+      validate(documentIdSchema, rawId),
+    );
+  }
+
+
+  /** Remove a finished conversion job. The converted PDF stays in the media library. */
+  @Delete('jobs/:id')
+  @AdminRoles('SUPER_ADMIN', 'ADMIN')
+  deleteJob(@Param('id') rawId: string) {
+    return this.documents.deleteJob(
       validate(documentIdSchema, rawId),
     );
   }

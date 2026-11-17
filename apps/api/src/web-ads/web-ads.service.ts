@@ -4,7 +4,6 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
-  ServiceUnavailableException,
 } from "@nestjs/common";
 
 import { ConfigService } from "@nestjs/config";

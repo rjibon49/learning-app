@@ -333,6 +333,27 @@ export class LearnerAuthService {
   }
 
   // =========================================
+  // DELETE OWN ACCOUNT (password re-check)
+  // =========================================
+
+  async verifyPassword(
+    userId: string,
+    password: string,
+  ): Promise<void> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { passwordHash: true },
+    });
+
+    if (
+      !user?.passwordHash ||
+      !(await argon2.verify(user.passwordHash, password))
+    ) {
+      throw new UnauthorizedException('Password is incorrect');
+    }
+  }
+
+  // =========================================
   // FORGOT PASSWORD
   // =========================================
 

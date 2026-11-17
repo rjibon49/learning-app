@@ -41,6 +41,15 @@ export const envSchema = z
 
     ADMIN_JWT_SECRET: z.string().min(32),
 
+    // All secrets are validated here so a bad .env fails at startup,
+    // not on the first login / registration request.
+    LEARNER_JWT_SECRET: z.string().min(32),
+    REGISTRATION_OTP_SECRET: z.string().min(32),
+    WEB_AD_EVENT_SECRET: z.string().min(32),
+
+    // Express "trust proxy" value. Default trusts Docker/local proxies (Traefik).
+    TRUST_PROXY: z.string().trim().min(1).optional(),
+
     ADMIN_ACCESS_TOKEN_TTL_SECONDS: z.coerce
       .number()
       .int()
@@ -96,6 +105,14 @@ export const envSchema = z
   })
   .passthrough()
   .superRefine((env, ctx) => {
+    if (env.ADMIN_JWT_SECRET === env.LEARNER_JWT_SECRET) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['LEARNER_JWT_SECRET'],
+        message: 'Learner and admin JWT secrets must be different',
+      });
+    }
+
     if (
       env.NODE_ENV === 'production' &&
       env.CORS_ORIGINS.length === 0

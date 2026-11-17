@@ -1,8 +1,8 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -35,20 +35,10 @@ import {
   announcementTargetsSchema,
 } from './audience.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  data: unknown,
-): z.output<T> {
-  const result = schema.safeParse(data);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 const idSchema = z.string().trim().min(1).max(191);
 
@@ -58,6 +48,7 @@ const idSchema = z.string().trim().min(1).max(191);
 export class AudienceController {
   constructor(
     private readonly audiences: AudienceService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -111,6 +102,30 @@ export class AudienceController {
       validate(idSchema, id),
       false,
     );
+  }
+
+
+  /**
+   * DELETE /admin/audiences/:id                -> deactivate
+   * DELETE /admin/audiences/:id?permanent=true -> SUPER_ADMIN: delete. Refused (409)
+   *   while an announcement still targets this audience.
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'AudienceSegment', id, (tx) =>
+        tx.audienceSegment.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.audiences.setActive(id, false);
   }
 }
 

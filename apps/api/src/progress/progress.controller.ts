@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -12,7 +11,6 @@ import {
 
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import { LearnerJwtGuard } from '../learner-auth/learner-jwt.guard.js';
 
@@ -29,20 +27,7 @@ submitQuizSchema,
 progressPaginationSchema,
 } from './dto/progress.dto.js';
 
-function validate<T extends z.ZodType>(
-schema: T,
-value: unknown,
-): z.output<T> {
-const result = schema.safeParse(value);
-
-if (!result.success) {
-throw new BadRequestException(
-z.flattenError(result.error),
-);
-}
-
-return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('learner/progress')
 @UseGuards(LearnerJwtGuard)

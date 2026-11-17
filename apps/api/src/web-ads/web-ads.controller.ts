@@ -16,7 +16,6 @@ import {
 } from "@nestjs/common";
 
 import { Throttle } from "@nestjs/throttler";
-import { z } from "zod";
 
 import type { Response } from "express";
 
@@ -43,20 +42,10 @@ import {
   IdSchema,
 } from "./web-ads.schemas.js";
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from "../admin-auth/current-admin.decorator.js";
+import type { AuthenticatedAdmin } from "../admin-auth/admin-auth.types.js";
+import { PermanentDeleteService } from "../common/permanent-delete.service.js";
 
 // ==========================================
 // PROTECTED ADMIN API
@@ -68,6 +57,7 @@ function validate<T extends z.ZodType>(
 export class AdminWebAdsController {
   constructor(
     private readonly ads: WebAdsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get("placements")
@@ -97,11 +87,20 @@ export class AdminWebAdsController {
 
   @Delete("placements/:id")
   archivePlacement(
-    @Param("id") id: string,
+    @Param("id") rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
   ) {
-    return this.ads.archivePlacement(
-      validate(IdSchema, id),
-    );
+    const id = validate(IdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, "WebAdPlacement", id, (tx) =>
+        tx.webAdPlacement.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.ads.archivePlacement(id);
   }
 
   @Get("campaigns")
@@ -137,10 +136,21 @@ export class AdminWebAdsController {
   }
 
   @Delete("campaigns/:id")
-  archiveCampaign(@Param("id") id: string) {
-    return this.ads.archiveCampaign(
-      validate(IdSchema, id),
-    );
+  archiveCampaign(
+    @Param("id") rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(IdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, "WebAdCampaign", id, (tx) =>
+        tx.webAdCampaign.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.ads.archiveCampaign(id);
   }
 
   @Get("report")

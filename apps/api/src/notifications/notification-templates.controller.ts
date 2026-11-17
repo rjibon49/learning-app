@@ -1,8 +1,8 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -29,20 +29,10 @@ import {
   templatePreviewSchema,
 } from './notification-templates.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 const idSchema = z.string().trim().min(1).max(191);
 
@@ -52,6 +42,7 @@ const idSchema = z.string().trim().min(1).max(191);
 export class NotificationTemplatesController {
   constructor(
     private readonly service: NotificationTemplatesService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -119,5 +110,29 @@ export class NotificationTemplatesController {
       validate(idSchema, id),
       false,
     );
+  }
+
+
+  /**
+   * DELETE /admin/notification-templates/:id                -> deactivate
+   * DELETE /admin/notification-templates/:id?permanent=true -> SUPER_ADMIN: delete
+   *   (past delivery logs are kept, their template link becomes empty).
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(idSchema, rawId);
+
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'NotificationTemplate', id, (tx) =>
+        tx.notificationTemplate.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.service.setActive(id, false);
   }
 }

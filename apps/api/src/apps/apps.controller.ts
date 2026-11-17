@@ -1,8 +1,8 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -27,20 +27,10 @@ import { AdminJwtGuard } from '../admin-auth/admin-jwt.guard.js';
 import { AdminRolesGuard } from '../admin-auth/admin-roles.guard.js';
 import { AdminRoles } from '../admin-auth/admin-roles.decorator.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 const appIdSchema = z.cuid();
 
@@ -91,6 +81,7 @@ export class AppsController {
 export class AdminAppsController {
   constructor(
     private readonly appsService: AppsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get()
@@ -162,5 +153,29 @@ export class AdminAppsController {
       id,
       data.isActive,
     );
+  }
+
+  /**
+   * DELETE /admin/apps/:id                -> deactivate the app (safe, reversible)
+   * DELETE /admin/apps/:id?permanent=true -> SUPER_ADMIN: delete app + its config,
+   *   ad settings, flashcard decks and course links. Refused (409) while
+   *   subscriptions exist for the app.
+   */
+  @Delete(':id')
+  @AdminRoles('SUPER_ADMIN', 'ADMIN')
+  remove(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(appIdSchema, rawId);
+
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'App', id, (tx) =>
+        tx.app.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.appsService.setActive(id, false);
   }
 }

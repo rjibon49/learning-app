@@ -26,6 +26,19 @@ export const resetPasswordSchema = z.object({
     .max(128),
 }).strict();
 
+/** Mobile apps send the refresh token in the body instead of a cookie. */
+export const refreshBodySchema = z
+  .object({
+    refreshToken: z.string().regex(/^[a-f0-9]{64}$/i).optional(),
+  })
+  .strict();
+
+export const deleteAccountSchema = z
+  .object({
+    password: z.string().min(1).max(128),
+  })
+  .strict();
+
 export type LoginInput =
   z.infer<typeof loginSchema>;
 

@@ -20,7 +20,6 @@ import { FileInterceptor } from
 import { Throttle } from '@nestjs/throttler';
 
 import { memoryStorage } from 'multer';
-import { z } from 'zod';
 
 import { AdminJwtGuard } from
   '../admin-auth/admin-jwt.guard.js';
@@ -39,20 +38,7 @@ import {
   mediaListSchema,
 } from './media.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 // =======================================
 // PUBLIC MEDIA DELIVERY

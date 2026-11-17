@@ -1,129 +1,57 @@
-
-import { StandardSchemaValidationPipe } from '@nestjs/common';
+import { Logger, StandardSchemaValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
 import { AppModule } from './app.module.js';
+import { enableBigIntJson } from './common/bigint-json.js';
+import { PrismaExceptionFilter } from './common/prisma-exception.filter.js';
 
 async function bootstrap(): Promise<void> {
-  // ==========================================
-  // 1. Create NestJS Application
-  // ==========================================
-  const app = await NestFactory.create(AppModule, {
+  enableBigIntJson();
+
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });
 
-  // ==========================================
-  // 2. Read Environment Configuration
-  // ==========================================
   const config = app.get(ConfigService);
 
-  const host =
-    config.get<string>('HOST') ?? '0.0.0.0';
+  const host = config.get<string>('HOST') ?? '0.0.0.0';
+  const port = Number(config.get<number | string>('PORT') ?? 4000);
+  const apiPrefix = config.get<string>('API_PREFIX') ?? 'api';
+  const allowedOrigins = config.get<string[]>('CORS_ORIGINS') ?? [];
 
-  const port =
-    Number(config.get<number | string>('PORT') ?? 4000);
-
-  const apiPrefix =
-    config.get<string>('API_PREFIX') ?? 'api';
-
-  // ==========================================
-  // 3. Configure CORS Origins
-  // ==========================================
-  const defaultOrigins = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:3001',
-  ];
-
-  const configuredOrigins = config.get<
-    string | string[]
-  >('CORS_ORIGINS');
-
-  let allowedOrigins: string[];
-
-  if (Array.isArray(configuredOrigins)) {
-    allowedOrigins = configuredOrigins;
-  } else if (typeof configuredOrigins === 'string') {
-    allowedOrigins = configuredOrigins
-      .split(',')
-      .map((origin: string) => origin.trim())
-      .filter((origin: string) => origin.length > 0);
-  } else {
-    allowedOrigins = defaultOrigins;
-  }
-
-  // ==========================================
-  // 4. Cookie Parser
-  // ==========================================
-  app.use(cookieParser());
-
-  // ==========================================
-  // 5. HTTP Security Headers
-  // ==========================================
-  app.use(
-    helmet({
-      crossOriginResourcePolicy: {
-        policy: 'cross-origin',
-      },
-    }),
+  // The API runs behind Traefik/Nginx on the VPS. Without this, every request
+  // looks like it comes from the proxy IP, so rate limits (login: 5/min) are
+  // shared by ALL users and audit logs store the proxy IP.
+  // Default trusts only private-network proxies (Docker / localhost).
+  app.set(
+    'trust proxy',
+    config.get<string>('TRUST_PROXY') ?? 'loopback, linklocal, uniquelocal',
   );
 
-  // Helmet automatically removes X-Powered-By.
-  // No Express-specific app.disable() is needed.
+  // HTTP_BODY_LIMIT was defined in .env but never applied before.
+  const bodyLimit = config.get<string>('HTTP_BODY_LIMIT') ?? '1mb';
+  app.useBodyParser('json', { limit: bodyLimit });
+  app.useBodyParser('urlencoded', { limit: bodyLimit, extended: true });
 
-  // ==========================================
-  // 6. CORS Configuration
-  // ==========================================
+  app.use(cookieParser());
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+
   app.enableCors({
-    origin: (
-      origin: string | undefined,
-      callback: (
-        error: Error | null,
-        allow?: boolean,
-      ) => void,
-    ): void => {
-      // Allow requests without an Origin header,
-      // such as native apps and server-to-server calls.
-      if (!origin) {
-        callback(null, true);
-        return;
-      }
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
-
-      callback(null, false);
-    },
-
-    methods: [
-      'GET',
-      'POST',
-      'PUT',
-      'PATCH',
-      'DELETE',
-      'OPTIONS',
-    ],
-
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Accept',
-    ],
-
+    // Requests without Origin (React Native apps, server-to-server) are allowed;
+    // browsers must come from CORS_ORIGINS.
+    origin: (origin, callback) =>
+      callback(null, !origin || allowedOrigins.includes(origin)),
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Client-Type'],
     credentials: true,
-
     maxAge: 600,
   });
 
-  // ==========================================
-  // 7. Global Request Validation
-  // ==========================================
   app.useGlobalPipes(
     new StandardSchemaValidationPipe({
       transform: true,
@@ -131,35 +59,19 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
-  // ==========================================
-  // 8. API Prefix
-  // ==========================================
-  // Keep existing Admin CMS compatibility.
-  app.setGlobalPrefix(apiPrefix);
+  // Database errors -> clean 404 / 409 instead of 500.
+  app.useGlobalFilters(
+    new PrismaExceptionFilter(app.get(HttpAdapterHost).httpAdapter),
+  );
 
-  // ==========================================
-  // 9. Graceful Shutdown
-  // ==========================================
+  app.setGlobalPrefix(apiPrefix);
   app.enableShutdownHooks();
 
-  // ==========================================
-  // 10. Start API Server
-  // ==========================================
   await app.listen(port, host);
 
-  console.log('');
-  console.log('===================================');
-  console.log(' Learning API Started');
-  console.log('===================================');
-  console.log(` Environment : ${process.env.NODE_ENV ?? 'development'}`);
-  console.log(` Host        : ${host}`);
-  console.log(` Port        : ${port}`);
-  console.log(` API Prefix  : /${apiPrefix}`);
-  console.log(
-    ` Health URL  : http://127.0.0.1:${port}/${apiPrefix}/health`,
+  new Logger('Bootstrap').log(
+    `Learning API (${process.env.NODE_ENV ?? 'development'}) listening on http://${host}:${port}/${apiPrefix} — health: /${apiPrefix}/health`,
   );
-  console.log('===================================');
-  console.log('');
 }
 
 void bootstrap().catch((error: unknown) => {

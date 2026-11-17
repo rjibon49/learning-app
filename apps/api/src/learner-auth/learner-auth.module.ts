@@ -8,6 +8,7 @@ import { LearnerAuthController } from './learner-auth.controller.js';
 import { LearnerAuthService } from './learner-auth.service.js';
 import { LearnerJwtGuard } from './learner-jwt.guard.js';
 import { PasswordResetMailService } from './password-reset-mail.service.js';
+import { LearnerAccountDeletionService } from './account-deletion.service.js';
 
 @Module({
   imports: [
@@ -23,11 +24,13 @@ import { PasswordResetMailService } from './password-reset-mail.service.js';
     LearnerAuthService,
     LearnerJwtGuard,
     PasswordResetMailService,
+    LearnerAccountDeletionService,
   ],
 
   exports: [
     LearnerJwtGuard,
     LearnerAuthService,
+    LearnerAccountDeletionService,
   ],
 })
 export class LearnerAuthModule {}

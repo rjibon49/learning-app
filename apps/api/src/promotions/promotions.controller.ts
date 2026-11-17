@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -15,7 +14,6 @@ import {
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import { LearnerJwtGuard } from
   '../learner-auth/learner-jwt.guard.js';
@@ -42,18 +40,10 @@ import {
   promoListSchema,
 } from './promotions.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 @Controller('promotions')
 export class PromotionsController {
@@ -109,6 +99,7 @@ export class PromotionsController {
 export class AdminPromotionsController {
   constructor(
     private readonly promotions: PromotionsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get('codes')
@@ -150,9 +141,20 @@ export class AdminPromotionsController {
   }
 
   @Delete('codes/:id')
-  disable(@Param('id') id: string) {
-    return this.promotions.deletePromoCode(
-      validate(promotionIdSchema, id),
-    );
+  disable(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(promotionIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'PromoCode', id, (tx) =>
+        tx.promoCode.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.promotions.deletePromoCode(id);
   }
 }

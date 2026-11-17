@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -11,7 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { Throttle } from '@nestjs/throttler';
-import { z } from 'zod';
 
 import {
   AdminJwtGuard,
@@ -35,20 +33,7 @@ import {
   deliveryIdSchema,
 } from './notification-queue.schemas.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  value: unknown,
-): z.output<T> {
-  const result = schema.safeParse(value);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { validate } from '../common/validation.js';
 
 @Controller('admin/notification-queue')
 @UseGuards(AdminJwtGuard, AdminRolesGuard)

@@ -1,6 +1,7 @@
 
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
   ServiceUnavailableException,
@@ -805,5 +806,26 @@ export class DocumentsService {
         force: true,
       });
     }
+  }
+
+  async deleteJob(id: string) {
+    const job = await this.prisma.backgroundJob.findFirst({
+      where: { id, type: 'PROCESS_DOCUMENT' },
+      select: { id: true, status: true },
+    });
+
+    if (!job) {
+      throw new NotFoundException('Job not found');
+    }
+
+    if (job.status === 'PENDING' || job.status === 'PROCESSING') {
+      throw new ConflictException(
+        'This conversion is still running. Wait until it finishes.',
+      );
+    }
+
+    await this.prisma.backgroundJob.delete({ where: { id } });
+
+    return { success: true };
   }
 }

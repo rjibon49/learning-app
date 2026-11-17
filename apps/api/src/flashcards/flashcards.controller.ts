@@ -1,6 +1,5 @@
 
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -12,7 +11,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { z } from 'zod';
 
 import { AdminJwtGuard } from
   '../admin-auth/admin-jwt.guard.js';
@@ -35,20 +33,10 @@ import {
   PaginationSchema,
 } from './dto/flashcard.dto.js';
 
-function validate<T extends z.ZodType>(
-  schema: T,
-  input: unknown,
-): z.output<T> {
-  const result = schema.safeParse(input);
-
-  if (!result.success) {
-    throw new BadRequestException(
-      z.flattenError(result.error),
-    );
-  }
-
-  return result.data;
-}
+import { isPermanent, validate } from '../common/validation.js';
+import { CurrentAdmin } from '../admin-auth/current-admin.decorator.js';
+import type { AuthenticatedAdmin } from '../admin-auth/admin-auth.types.js';
+import { PermanentDeleteService } from '../common/permanent-delete.service.js';
 
 // ==========================================
 // PUBLIC FLASHCARD API
@@ -100,6 +88,7 @@ export class PublicFlashcardsController {
 export class AdminFlashcardsController {
   constructor(
     private readonly service: FlashcardsService,
+    private readonly permanentDelete: PermanentDeleteService,
   ) {}
 
   @Get('decks')
@@ -136,10 +125,21 @@ export class AdminFlashcardsController {
 
   @Delete('decks/:id')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  unpublishDeck(@Param('id') rawId: string) {
-    return this.service.unpublishDeck(
-      validate(flashcardIdSchema, rawId),
-    );
+  unpublishDeck(
+    @Param('id') rawId: string,
+    @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
+  ) {
+    const id = validate(flashcardIdSchema, rawId);
+
+    // ?permanent=true -> Super Admin hard delete (audit-logged)
+    if (isPermanent(query)) {
+      return this.permanentDelete.run(admin, 'FlashcardDeck', id, (tx) =>
+        tx.flashcardDeck.delete({ where: { id }, select: { id: true } }),
+      );
+    }
+
+    return this.service.unpublishDeck(id);
   }
 
   @Get('decks/:id/items')

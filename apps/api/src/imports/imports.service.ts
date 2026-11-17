@@ -1,6 +1,7 @@
 
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -562,5 +563,32 @@ export class ImportsService {
         },
       });
     });
+  }
+
+  async deleteJob(id: string) {
+    const job = await this.prisma.bulkImportJob.findUnique({
+      where: { id },
+      select: { id: true, status: true },
+    });
+
+    if (!job) {
+      throw new NotFoundException('Import job not found');
+    }
+
+    if (job.status === 'PENDING' || job.status === 'PROCESSING') {
+      throw new ConflictException(
+        'This import is still running. Wait until it finishes.',
+      );
+    }
+
+    // Imported vocabulary is NOT removed — only the job history.
+    await this.prisma.$transaction([
+      this.prisma.backgroundJob.deleteMany({
+        where: { entityType: 'BulkImportJob', entityId: id, type: JOB_TYPE },
+      }),
+      this.prisma.bulkImportJob.delete({ where: { id } }),
+    ]);
+
+    return { success: true };
   }
 }
