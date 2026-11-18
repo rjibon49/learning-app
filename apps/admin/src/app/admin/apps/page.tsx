@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 
 import { DeleteActions } from "@/components/ui/delete-actions";
@@ -131,9 +132,7 @@ export default function AdminAppsPage() {
     }
   }, [page, limit, search, filterLanguage]);
 
-  useEffect(() => {
-    void loadApps();
-  }, [loadApps]);
+  useRunOnChange(loadApps);
 
   useEffect(() => {
     void getLanguages()

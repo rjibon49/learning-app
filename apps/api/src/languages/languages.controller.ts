@@ -146,19 +146,40 @@ export class AdminLanguagesController {
 
   /**
    * DELETE /admin/languages/:code/levels/:levelId                -> disable this level for the language
-   * DELETE /admin/languages/:code/levels/:levelId?permanent=true -> remove the assignment row
+   * DELETE /admin/languages/:code/levels/:levelId?permanent=true -> SUPER_ADMIN: remove the
+   *   assignment row (audit-logged, same rule as every other permanent delete)
    */
   @Delete(':code/levels/:levelId')
   @AdminRoles('SUPER_ADMIN', 'ADMIN')
-  removeLevel(
+  async removeLevel(
     @Param('code') rawCode: string,
     @Param('levelId') rawLevelId: string,
     @Query() query: unknown,
+    @CurrentAdmin() admin: AuthenticatedAdmin,
   ) {
-    return this.languages.removeLevel(
-      validate(languageCodeSchema, rawCode),
-      validate(idSchema, rawLevelId),
-      isPermanent(query),
+    const code = validate(languageCodeSchema, rawCode);
+    const levelId = validate(idSchema, rawLevelId);
+
+    if (!isPermanent(query)) {
+      return this.languages.disableLevel(code, levelId);
+    }
+
+    // Super Admin check + delete + audit row in one transaction.
+    // A missing assignment raises P2025 -> 404 via PrismaExceptionFilter.
+    const language = await this.languages.findByCodeOrThrow(code);
+
+    await this.permanentDelete.run(
+      admin,
+      'LanguageProficiencyLevel',
+      `${language.id}:${levelId}`,
+      (tx) =>
+        tx.languageProficiencyLevel.delete({
+          where: { languageId_levelId: { languageId: language.id, levelId } },
+          select: { languageId: true },
+        }),
+      { code, levelId },
     );
+
+    return this.languages.findLevelsAdmin(code);
   }
 }

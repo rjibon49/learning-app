@@ -1,10 +1,10 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 import { DeleteActions } from "@/components/ui/delete-actions";
 
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type FormEvent,
@@ -16,7 +16,6 @@ import {
   Plus,
   RefreshCw,
   Search,
-  Trash2,
 } from "lucide-react";
 
 import { useAuth } from "@/lib/auth/auth-context";
@@ -114,9 +113,7 @@ export function WebAdPlacementManager() {
     }
   }, [siteKey, page, limit]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();

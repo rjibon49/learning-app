@@ -1,9 +1,9 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -52,9 +52,7 @@ export function WebAdReportManager() {
     }
   }, [siteKey, days]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const ctr = useMemo(() => {
     if (!report || report.totals.impressions === 0) return 0;
@@ -200,9 +198,9 @@ export function WebAdReportManager() {
       </section>
 
       <p className="text-xs text-slate-500">
-        These figures use the Website Ads API's own event records.
+        These figures use the Website Ads API&apos;s own event records.
         AdSense and Google Ad Manager revenue and provider-verified
-        impressions must be checked in those providers' reports.
+        impressions must be checked in those providers&apos; reports.
       </p>
     </div>
   );

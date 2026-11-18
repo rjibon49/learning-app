@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   createContext,
@@ -112,9 +113,7 @@ export function AppLevelProvider({
     }
   }, []);
 
-  useEffect(() => {
-    void reloadApps();
-  }, [reloadApps]);
+  useRunOnChange(reloadApps);
 
   useEffect(() => {
     try {

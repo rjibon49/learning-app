@@ -1,9 +1,9 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type FormEvent,
@@ -14,7 +14,6 @@ import { useParams } from "next/navigation";
 import {
   FileAudio,
   ImageIcon,
-  Link2,
   Search,
   X,
 } from "lucide-react";
@@ -283,9 +282,8 @@ function QuizMediaPicker({
     [],
   );
 
-  useEffect(() => {
-    void loadMedia(1);
-  }, [loadMedia]);
+  const loadMediaFirstPage = useCallback(() => loadMedia(1), [loadMedia]);
+  useRunOnChange(loadMediaFirstPage);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -590,9 +588,7 @@ export default function QuizQuestionsPage() {
     }
   }, [quizId]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   function resetForm() {
     setForm(emptyForm());

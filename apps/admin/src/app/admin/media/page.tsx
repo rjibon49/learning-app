@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import {
@@ -455,9 +456,7 @@ export default function AdminMediaPage() {
     }
   }, [scope, selectedApp, currentAppId, page, limit]);
 
-  useEffect(() => {
-    void loadMedia();
-  }, [loadMedia]);
+  useRunOnChange(loadMedia);
 
   // ==================================================
   // CLIENT-SIDE FILTER FOR CURRENT PAGE

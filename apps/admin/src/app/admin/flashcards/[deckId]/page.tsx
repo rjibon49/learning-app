@@ -1,9 +1,9 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
-  useEffect,
   useState,
 } from "react";
 
@@ -65,7 +65,6 @@ export default function DeckItemsPage() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
 
   const canEdit = Boolean(admin) && deck?.isPublished === false;
 
@@ -90,9 +89,7 @@ export default function DeckItemsPage() {
     }
   }, [deckId, page, limit]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const loadVocabulary = useCallback(async () => {
     if (!selectedApp || !pickerOpen) return;
@@ -115,9 +112,7 @@ export default function DeckItemsPage() {
 
   }, [selectedApp, pickerOpen, wordSearch, wordPage, toast]);
 
-  useEffect(() => {
-    void loadVocabulary();
-  }, [loadVocabulary]);
+  useRunOnChange(loadVocabulary);
 
   async function addWords() {
     if (!canEdit || selectedIds.length === 0) return;
@@ -210,12 +205,6 @@ export default function DeckItemsPage() {
       {error && (
         <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
           {error}
-        </p>
-      )}
-
-      {message && (
-        <p role="status" className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">
-          {message}
         </p>
       )}
 

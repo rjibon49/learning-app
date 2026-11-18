@@ -327,10 +327,14 @@ export class LanguagesService {
     return language;
   }
 
-  async removeLevel(
+  /**
+   * Safe delete: the level stays assigned but is no longer offered.
+   * Permanent removal is done by the controller through PermanentDeleteService
+   * (Super Admin only + audit log).
+   */
+  async disableLevel(
     code: string,
     levelId: string,
-    permanent: boolean,
   ) {
     const language = await this.findByCodeOrThrow(code);
 
@@ -350,14 +354,10 @@ export class LanguagesService {
       );
     }
 
-    if (permanent) {
-      await this.prisma.languageProficiencyLevel.delete({ where });
-    } else {
-      await this.prisma.languageProficiencyLevel.update({
-        where,
-        data: { isActive: false },
-      });
-    }
+    await this.prisma.languageProficiencyLevel.update({
+      where,
+      data: { isActive: false },
+    });
 
     return this.findLevelsAdmin(code);
   }

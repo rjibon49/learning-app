@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
@@ -84,7 +85,6 @@ export function GlobalCategoryManager() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -119,9 +119,7 @@ export function GlobalCategoryManager() {
     }
   }, []);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   useEffect(() => {
     let active = true;
@@ -353,12 +351,6 @@ export function GlobalCategoryManager() {
       {error && (
         <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
           {error}
-        </p>
-      )}
-
-      {notice && (
-        <p role="status" className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">
-          {notice}
         </p>
       )}
 

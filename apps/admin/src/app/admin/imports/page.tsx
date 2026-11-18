@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 import { DeleteActions } from "@/components/ui/delete-actions";
 import { deleteResource } from "@/lib/api/delete";
 import { useAuth } from "@/lib/auth/auth-context";
@@ -537,9 +538,7 @@ export default function BulkImportPage() {
     }
   }, [selectedApp, jobPage]);
 
-  useEffect(() => {
-    void loadJobs();
-  }, [loadJobs]);
+  useRunOnChange(loadJobs);
 
   useEffect(() => {
     let active = true;

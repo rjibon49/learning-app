@@ -1,9 +1,9 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
-  useEffect,
   useState,
   type FormEvent,
 } from "react";
@@ -108,9 +108,7 @@ export default function FlashcardsPage() {
     }
   }, [selectedApp, search, page, limit]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   function openCreate() {
     setEditing(null);

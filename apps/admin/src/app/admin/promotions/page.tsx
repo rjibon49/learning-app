@@ -1,12 +1,12 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 
 import { DeleteActions } from "@/components/ui/delete-actions";
 import { useConfirm } from "@/components/ui/feedback-provider";
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type FormEvent,
@@ -18,7 +18,6 @@ import {
   Plus,
   RefreshCw,
   Search,
-  ShieldOff,
   TicketPercent,
 } from "lucide-react";
 
@@ -198,9 +197,7 @@ export default function AdminPromotionsPage() {
     }
   }, [page, limit]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();

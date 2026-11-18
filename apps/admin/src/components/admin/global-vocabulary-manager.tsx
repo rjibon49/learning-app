@@ -366,7 +366,6 @@ function LessonSelector({
 
   const [courseId, setCourseId] = useState("");
   const [moduleId, setModuleId] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -513,7 +512,7 @@ function LessonSelector({
             value={
               hasSelectedLesson ? value : ""
             }
-            disabled={!moduleId || loading}
+            disabled={!moduleId}
             onChange={(event) =>
               onChange(event.target.value)
             }
@@ -542,11 +541,6 @@ function LessonSelector({
         </p>
       )}
 
-      {loading && (
-        <p className="text-xs text-slate-500">
-          Loading lessons...
-        </p>
-      )}
     </section>
   );
 }

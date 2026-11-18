@@ -1,5 +1,6 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 import {
   useCallback,
@@ -144,9 +145,7 @@ export default function QuizzesPage() {
     }
   }, [selectedApp, page, limit, search, status]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   useEffect(() => {
     let active = true;
@@ -276,15 +275,15 @@ export default function QuizzesPage() {
       for (const course of courseList) {
         const moduleList = await getModules(course.id);
 
-        for (const module of moduleList) {
-          const lessonList = await getLessons(module.id);
+        for (const moduleItem of moduleList) {
+          const lessonList = await getLessons(moduleItem.id);
           const found = lessonList.find(
             (lesson) => lesson.id === quiz.lessonId,
           );
 
           if (found) {
             matchCourse = course.id;
-            matchModule = module.id;
+            matchModule = moduleItem.id;
             matchLesson = found;
             matchModules = moduleList;
             matchLessons = lessonList;

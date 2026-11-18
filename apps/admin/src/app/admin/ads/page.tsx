@@ -1,12 +1,12 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 
 
 import { DeleteActions } from "@/components/ui/delete-actions";
 import { useConfirm } from "@/components/ui/feedback-provider";
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type FormEvent,
@@ -23,7 +23,6 @@ import {
   RefreshCw,
   Save,
   Search,
-  Trash2,
 } from "lucide-react";
 
 import { useAuth } from "@/lib/auth/auth-context";
@@ -182,9 +181,7 @@ export default function AdminAdsPage() {
     }
   }, [appId, page, limit]);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const filteredConfigs = useMemo(() => {
     const query = search.toLowerCase().trim();

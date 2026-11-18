@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useRunOnChange } from '@/lib/hooks/use-run-on-change';
 import { Shield, Plus, Edit3, X, UserCheck, UserX } from 'lucide-react';
 import { useAuth } from '@/lib/auth/auth-context';
 import { DeleteActions } from '@/components/ui/delete-actions';
 import { useToast } from '@/components/ui/feedback-provider';
 import { apiFieldErrors } from '@/components/ui/form-field';
 import { getAdmins, createAdmin, updateAdmin, deleteAdmin, type AdminUser, type AdminRole } from '@/lib/api/admins';
-import { EmptyState, ErrorState, LoadingState } from '@/components/feedback/state-views';
+import { ErrorState, LoadingState } from '@/components/feedback/state-views';
 
 export default function AdminManagementPage() {
   const { admin: currentAdmin } = useAuth();
@@ -29,20 +30,19 @@ export default function AdminManagementPage() {
   const [role, setRole] = useState<AdminRole>('CONTENT_EDITOR');
   const [isActive, setIsActive] = useState(true);
 
-  useEffect(() => {
-    loadAdmins();
-  }, []);
-
-  const loadAdmins = async () => {
+  const loadAdmins = useCallback(async () => {
     try {
       const data = await getAdmins();
       setAdmins(data);
+      setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load administrators');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useRunOnChange(loadAdmins);
 
   const openCreateModal = () => {
     setEditingAdmin(null);

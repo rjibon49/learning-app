@@ -1,10 +1,10 @@
 
 "use client";
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
 import { DeleteActions } from "@/components/ui/delete-actions";
 
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
   type FormEvent,
@@ -12,12 +12,10 @@ import {
 
 import Link from "next/link";
 import {
-  Copy,
   ImageIcon,
   Pencil,
   RefreshCw,
   Search,
-  Trash2,
   X,
 } from "lucide-react";
 
@@ -33,7 +31,6 @@ import {
   type WebAdPlacement,
   type WebAdCampaign,
   type WebAdKind,
-  type WebAdStatus,
   type WebAdPagination,
   type CampaignInput,
 } from "@/lib/api/web-ads";
@@ -178,9 +175,8 @@ function WebAdImagePicker({
     }
   }, []);
 
-  useEffect(() => {
-    void load(1);
-  }, [load]);
+  const loadFirstPage = useCallback(() => load(1), [load]);
+  useRunOnChange(loadFirstPage);
 
   const available = useMemo(() => assets.filter((asset) => {
     if (
@@ -360,13 +356,9 @@ export function WebAdCampaignManager() {
     }
   }, [siteKey, placementFilter, page, limit]);
 
-  useEffect(() => {
-    void loadPlacements();
-  }, [loadPlacements]);
+  useRunOnChange(loadPlacements);
 
-  useEffect(() => {
-    void reload();
-  }, [reload]);
+  useRunOnChange(reload);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();

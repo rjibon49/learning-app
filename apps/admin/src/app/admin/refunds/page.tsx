@@ -1,5 +1,6 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useRunOnChange } from "@/lib/hooks/use-run-on-change";
+import { useCallback, useState } from 'react';
 import { apiRequest } from '@/lib/api/client';
 import { useConfirm } from '@/components/ui/feedback-provider';
 type Refund = { id: string; paymentId: string; userId: string; status: string; amountMinor: string; currency: string; reason: string; adminNote?: string|null };
@@ -8,7 +9,7 @@ export default function RefundsPage() {
   const [rows, setRows] = useState<Refund[]>([]); const [page, setPage] = useState(1);
   const [note, setNote] = useState<Record<string,string>>({}); const [message, setMessage] = useState('');
   const refresh = useCallback(async()=>{ try { const result = await apiRequest<{data:Refund[]}>(`/admin/billing/refunds?page=${page}&limit=20`); setRows(result.data); } catch(e){ setMessage(e instanceof Error?e.message:'Request failed'); } },[page]);
-  useEffect(()=>{ void refresh(); },[refresh]);
+  useRunOnChange(refresh);
   async function review(id: string, decision: 'APPROVE'|'REJECT') {
     const ok = await confirm({
       title: decision === 'APPROVE' ? 'Approve this refund review?' : 'Reject this refund request?',
