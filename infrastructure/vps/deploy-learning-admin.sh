@@ -106,9 +106,16 @@ git -C "$BUILD_DIR" checkout --quiet --force --detach "$SHA"
 git -C "$BUILD_DIR" clean -fdxq
 
 # 2. Keep the running image as :previous, then build the new one.
-if docker image inspect "$IMAGE:release" >/dev/null 2>&1; then
-  docker tag "$IMAGE:release" "$IMAGE:previous"
-fi
+# Back up the image actually running in production.
+RUNNING_IMAGE="$(docker inspect \
+  --format '{{.Image}}' "$CONTAINER")" \
+  || fail "Running admin container not found"
+
+docker image inspect "$RUNNING_IMAGE" >/dev/null \
+  || fail "Running admin image not found"
+
+docker tag "$RUNNING_IMAGE" "$IMAGE:previous"
+log "Previous running image backed up"
 
 log "Building $IMAGE:$SHORT"
 BUILD_LOG="$(mktemp)"
@@ -131,6 +138,18 @@ log "Starting new container"
 restart_with_release
 
 if wait_healthy; then
+  EXPECTED_IMAGE="$(docker image inspect \
+    "$IMAGE:$SHORT" --format '{{.Id}}')"
+
+  ACTUAL_IMAGE="$(docker inspect \
+    "$CONTAINER" --format '{{.Image}}')"
+
+  if [[ "$EXPECTED_IMAGE" != "$ACTUAL_IMAGE" ]]; then
+    log "ERROR: Running image differs from deployment image"
+    rollback
+    fail "Admin deployment image mismatch"
+  fi
+
   log "Deploy OK: $SHA is live"
 else
   log "New container is not healthy. Last logs:"
