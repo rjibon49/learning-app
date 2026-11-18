@@ -5,8 +5,11 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
+  TextInput,
   View,
+  type TextInputProps,
   type StyleProp,
   type TextProps,
   type TextStyle,
@@ -15,6 +18,7 @@ import {
 import { SafeAreaView, type Edge } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
 
 import { play, setSpeed, useNowPlaying, useSpeed, type Speed } from "../lib/audio";
 import { germanVoiceStatus } from "../lib/german-speech";
@@ -374,6 +378,154 @@ export function IconTile({
 }
 
 /* ------------------------------------------------------------------ */
+/* Screen header, forms and settings rows                              */
+/* ------------------------------------------------------------------ */
+
+/** Back arrow + title for pushed screens (settings, word detail ...). */
+export function TopBar({ title, right }: { title: string; right?: ReactNode }) {
+  return (
+    <View style={styles.topBar}>
+      <IconButton icon="arrow-back" label="Back" onPress={() => router.back()} />
+      <Txt variant="title" style={{ flex: 1 }} numberOfLines={1}>{title}</Txt>
+      {right}
+    </View>
+  );
+}
+
+/** Labelled input with the error shown right under it. */
+export function TextField({
+  label,
+  error,
+  hint,
+  ...input
+}: TextInputProps & { label: string; error?: string; hint?: string }) {
+  return (
+    <View style={{ gap: 6 }}>
+      <Txt variant="label">{label}</Txt>
+      <TextInput
+        placeholderTextColor={COLORS.faint}
+        accessibilityLabel={label}
+        {...input}
+        style={[styles.input, error ? { borderColor: COLORS.wrong } : null, input.style]}
+      />
+      {error ? (
+        <Txt variant="caption" style={{ color: COLORS.wrongText }} accessibilityLiveRegion="polite">{error}</Txt>
+      ) : hint ? (
+        <Txt variant="caption">{hint}</Txt>
+      ) : null}
+    </View>
+  );
+}
+
+/** Tappable row with icon, title, optional subtitle and a chevron. */
+export function ListRow({
+  icon,
+  iconColor = COLORS.primary,
+  iconBg = COLORS.primarySoft,
+  title,
+  subtitle,
+  onPress,
+  right,
+  danger = false,
+}: {
+  icon: keyof typeof Ionicons.glyphMap;
+  iconColor?: string;
+  iconBg?: string;
+  title: string;
+  subtitle?: string;
+  onPress?: () => void;
+  right?: ReactNode;
+  danger?: boolean;
+}) {
+  const body = (
+    <>
+      <IconTile icon={icon} bg={danger ? COLORS.wrongSoft : iconBg} color={danger ? COLORS.wrong : iconColor} size={36} />
+      <View style={{ flex: 1 }}>
+        <Txt variant="label" style={danger && { color: COLORS.wrongText }}>{title}</Txt>
+        {subtitle ? <Txt variant="caption">{subtitle}</Txt> : null}
+      </View>
+      {right ?? (onPress ? <Ionicons name="chevron-forward" size={20} color={COLORS.faint} /> : null)}
+    </>
+  );
+  if (!onPress) return <View style={styles.listRow}>{body}</View>;
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={subtitle ? `${title}, ${subtitle}` : title}
+      style={({ pressed }) => [styles.listRow, pressed && styles.pressed]}
+    >
+      {body}
+    </Pressable>
+  );
+}
+
+/** On/off setting. The whole row is the touch target. */
+export function SwitchRow({
+  title,
+  subtitle,
+  value,
+  onChange,
+  disabled = false,
+}: {
+  title: string;
+  subtitle?: string;
+  value: boolean;
+  onChange: (value: boolean) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <Pressable
+      onPress={() => !disabled && onChange(!value)}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: value, disabled }}
+      accessibilityLabel={title}
+      style={[styles.listRow, disabled && { opacity: 0.55 }]}
+    >
+      <View style={{ flex: 1 }}>
+        <Txt variant="label">{title}</Txt>
+        {subtitle ? <Txt variant="caption">{subtitle}</Txt> : null}
+      </View>
+      <Switch
+        value={value}
+        onValueChange={onChange}
+        disabled={disabled}
+        trackColor={{ true: COLORS.primary, false: COLORS.track }}
+        thumbColor="#FFFFFF"
+        accessibilityElementsHidden
+        importantForAccessibility="no"
+      />
+    </Pressable>
+  );
+}
+
+/** Selectable pill (filters, goal choice). */
+export function Chip({
+  label,
+  selected,
+  onPress,
+}: {
+  label: string;
+  selected: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityState={{ selected }}
+      style={({ pressed }) => [
+        styles.chip,
+        selected ? { backgroundColor: COLORS.primary, borderColor: COLORS.primary } : null,
+        pressed && styles.pressed,
+      ]}
+    >
+      <Text style={[styles.chipText, selected && { color: "#FFFFFF" }]}>{label}</Text>
+    </Pressable>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* States                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -419,6 +571,46 @@ export function EmptyView({
 }
 
 const styles = StyleSheet.create({
+  topBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.sm,
+    marginLeft: -SPACING.md,
+    marginTop: -SPACING.md,
+  },
+  input: {
+    minHeight: 52,
+    borderWidth: 2,
+    borderColor: COLORS.borderStrong,
+    borderRadius: RADIUS.md,
+    paddingHorizontal: SPACING.lg,
+    fontFamily: FONTS.body,
+    fontSize: 16,
+    color: COLORS.ink,
+    backgroundColor: COLORS.surface,
+  },
+  listRow: {
+    minHeight: 60,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.md,
+    paddingVertical: SPACING.sm,
+  },
+  chip: {
+    minHeight: 40,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: RADIUS.pill,
+    borderWidth: 1.5,
+    borderColor: COLORS.borderStrong,
+    backgroundColor: COLORS.surface,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chipText: {
+    fontFamily: FONTS.bodySemi,
+    fontSize: 14,
+    color: COLORS.ink,
+  },
   content: {
     padding: SPACING.xl,
     paddingBottom: SPACING.xxxl,

@@ -9,6 +9,8 @@ import { getApiError } from "../../api/client";
 import { answerMode, fetchQuiz, submitQuiz, type QuizQuestion, type QuizResult } from "../../api/quizzes";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { useLearnerAuth } from "../../lib/auth-context";
+import { recordStep } from "../../lib/preferences";
 
 const PROMPT: Record<string, string> = {
   MULTIPLE_CHOICE: "Choose the right answer",
@@ -21,6 +23,7 @@ const PROMPT: Record<string, string> = {
 };
 
 export default function QuizScreen() {
+  const { user } = useLearnerAuth();
   const { id } = useLocalSearchParams<{ id: string }>();
   const quizId = typeof id === "string" ? id : "";
   const state = useAsync(() => fetchQuiz(quizId), [quizId]);
@@ -61,6 +64,7 @@ export default function QuizScreen() {
         res.passed ? Haptics.NotificationFeedbackType.Success : Haptics.NotificationFeedbackType.Warning,
       ).catch(() => undefined);
       setResult(res);
+      void recordStep(user?.id);
     } catch (e) {
       setSubmitError(getApiError(e));
     } finally {

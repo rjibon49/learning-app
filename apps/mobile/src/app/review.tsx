@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import * as Haptics from "expo-haptics";
@@ -32,6 +32,8 @@ import { play, stopAudio } from "../lib/audio";
 import { useAsync } from "../lib/use-async";
 import { exampleOf, meaningOf, pluralOf, splitArticle } from "../lib/words";
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from "../styles/theme";
+import { useLearnerAuth } from "../lib/auth-context";
+import { recordStep } from "../lib/preferences";
 
 type Mode = "due" | "deck" | "lesson";
 
@@ -73,6 +75,15 @@ export default function ReviewScreen() {
   const cards = queue ?? state.data ?? [];
   const card = cards[index];
   const finished = cards.length > 0 && index >= cards.length;
+  const { user } = useLearnerAuth();
+  const counted = useRef(false);
+  useEffect(() => {
+    // One finished review session = one step toward the daily goal.
+    if (finished && !counted.current) {
+      counted.current = true;
+      void recordStep(user?.id);
+    }
+  }, [finished, user?.id]);
 
   // Leaving the session stops audio.
   useEffect(() => () => void stopAudio(), []);

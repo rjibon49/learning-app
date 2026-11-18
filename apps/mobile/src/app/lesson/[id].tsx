@@ -28,6 +28,7 @@ import { stopAudio } from "../../lib/audio";
 import { annotateGerman } from "../../lib/german-text";
 import { ListenPanel, lessonMarkdownRules } from "../../components/lesson-audio";
 import { markLessonCompleted } from "../../lib/lesson-progress";
+import { recordStep } from "../../lib/preferences";
 import { loadLearningPath } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
@@ -90,6 +91,7 @@ export default function LessonScreen() {
     try {
       await saveLessonProgress(lessonId, 100);
       await markLessonCompleted(user.id, lessonId);
+      void recordStep(user.id);
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       setFinished(true);
       // Find the next lesson on the path so the learner can go straight on.

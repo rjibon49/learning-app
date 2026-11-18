@@ -44,6 +44,13 @@ function RootNavigator() {
         <Stack.Screen name="review" options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="quiz/[id]" options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="delete-account" options={{ headerShown: false }} />
+        <Stack.Screen name="word/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="notifications" options={{ headerShown: false }} />
+        <Stack.Screen name="settings/index" options={{ headerShown: false }} />
+        <Stack.Screen name="settings/profile" options={{ headerShown: false }} />
+        <Stack.Screen name="settings/password" options={{ headerShown: false }} />
+        <Stack.Screen name="premium" options={{ headerShown: false, presentation: "modal" }} />
+        <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
       </Stack.Protected>
 
       <Stack.Protected guard={!signedIn}>

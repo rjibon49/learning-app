@@ -1,15 +1,18 @@
 import React, { useCallback, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Button, Card, ErrorView, IconTile, LoadingView, ProgressBar, Screen, StreakPill, Txt } from "../../components/ui";
+import { AdSlot } from "../../components/AdSlot";
+import { fetchUnreadCount } from "../../api/inbox";
+import { GOALS, usePrefs } from "../../lib/preferences";
 import { fetchActiveDays, fetchDashboard, utcDayKey } from "../../api/progress";
 import { fetchQuizzes } from "../../api/quizzes";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { loadLearningPath } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
-import { COLORS, RADIUS, SPACING } from "../../styles/theme";
+import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 
 function greeting(): string {
   const h = new Date().getHours();
@@ -21,6 +24,7 @@ function greeting(): string {
 export default function TodayScreen() {
   const { user } = useLearnerAuth();
   const userId = user?.id ?? "";
+  const { prefs, steps } = usePrefs(user?.id);
 
   const state = useAsync(async () => {
     const [path, dashboard, activeDays] = await Promise.all([
@@ -28,8 +32,12 @@ export default function TodayScreen() {
       fetchDashboard(),
       fetchActiveDays(1).catch(() => new Set<string>()),
     ]);
-    const quizzes = await fetchQuizzes(path.app.id).catch(() => []);
+    const [quizzes, unread] = await Promise.all([
+      fetchQuizzes(path.app.id).catch(() => []),
+      fetchUnreadCount(path.app.id).catch(() => 0),
+    ]);
     return {
+      unread,
       path,
       dashboard,
       practicedToday: activeDays.has(utcDayKey(new Date())),
@@ -52,7 +60,10 @@ export default function TodayScreen() {
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 
-  const { path, dashboard, practicedToday, quiz } = state.data;
+  const { path, dashboard, practicedToday, quiz, unread } = state.data;
+  const goal = prefs.dailyGoal;
+  const goalDone = steps >= goal;
+  const goalLabel = GOALS.find((g) => g.value === goal)?.title ?? "";
   const next = path.next;
   const moduleOfNext = next ? path.modules.find((m) => m.lessons.some((l) => l.id === next.id)) : null;
   const firstName = (dashboard.user.displayName || user?.displayName || "").split(" ")[0];
@@ -64,23 +75,50 @@ export default function TodayScreen() {
           <Txt variant="caption" style={{ fontSize: 14 }}>{greeting()},</Txt>
           <Txt variant="h1" numberOfLines={1}>{firstName || "there"}</Txt>
         </View>
-        <StreakPill days={dashboard.streak.current} />
+        <View style={styles.headerRight}>
+          <StreakPill days={dashboard.streak.current} />
+          <Pressable
+            onPress={() => router.push("/notifications")}
+            accessibilityRole="button"
+            accessibilityLabel={unread > 0 ? `Notifications, ${unread} unread` : "Notifications"}
+            hitSlop={8}
+            style={styles.bell}
+          >
+            <Ionicons name="notifications-outline" size={24} color={COLORS.ink} />
+            {unread > 0 ? (
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{unread > 9 ? "9+" : unread}</Text>
+              </View>
+            ) : null}
+          </Pressable>
+          <Pressable
+            onPress={() => router.push("/settings")}
+            accessibilityRole="button"
+            accessibilityLabel="Settings"
+            hitSlop={8}
+            style={styles.bell}
+          >
+            <Ionicons name="settings-outline" size={24} color={COLORS.ink} />
+          </Pressable>
+        </View>
       </View>
 
-      <Card style={styles.goal}>
-        <View style={[styles.goalRing, practicedToday && { borderColor: COLORS.correct }]}>
-          <Ionicons
-            name={practicedToday ? "checkmark" : "flag-outline"}
-            size={28}
-            color={practicedToday ? COLORS.correct : COLORS.primary}
-          />
+      <Card style={styles.goal} onPress={() => router.push("/settings")} accessibilityLabel={`Daily goal ${Math.min(steps, goal)} of ${goal}. Change goal`}>
+        <View style={[styles.goalRing, goalDone && { borderColor: COLORS.correct }]}>
+          {goalDone ? (
+            <Ionicons name="checkmark" size={28} color={COLORS.correct} />
+          ) : (
+            <Txt variant="title" style={{ color: COLORS.primary }}>{Math.min(steps, goal)}/{goal}</Txt>
+          )}
         </View>
         <View style={{ flex: 1, gap: 4 }}>
-          <Txt variant="title">{practicedToday ? "Goal done today" : "Today's goal"}</Txt>
+          <Txt variant="title">{goalDone ? "Goal done today" : `Today's goal · ${goalLabel}`}</Txt>
           <Txt variant="caption" style={{ fontSize: 14, lineHeight: 20 }}>
-            {practicedToday
-              ? "Your streak is safe. Extra practice still helps!"
-              : "Finish one lesson, review or quiz to keep your streak."}
+            {goalDone
+              ? "Great work! Extra practice still helps."
+              : practicedToday
+                ? `Streak safe. ${goal - steps} more step${goal - steps === 1 ? "" : "s"} for your goal.`
+                : "Finish a lesson, review or quiz to keep your streak."}
           </Txt>
         </View>
       </Card>
@@ -146,6 +184,8 @@ export default function TodayScreen() {
           </Txt>
         </Card>
       </View>
+
+      <AdSlot appId={path.app.id} />
     </Screen>
   );
 }
@@ -156,6 +196,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     gap: SPACING.md,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.xs,
+  },
+  bell: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badge: {
+    position: "absolute",
+    top: 4,
+    right: 2,
+    minWidth: 18,
+    height: 18,
+    paddingHorizontal: 4,
+    borderRadius: 9,
+    backgroundColor: COLORS.wrong,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badgeText: {
+    color: "#FFFFFF",
+    fontSize: 11,
+    fontFamily: FONTS.bodySemi,
   },
   goal: {
     flexDirection: "row",

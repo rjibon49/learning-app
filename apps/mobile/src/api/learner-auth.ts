@@ -32,6 +32,19 @@ export async function refreshLearnerSession(refreshToken: string) {
   return response.data;
 }
 
+export async function updateLearnerProfile(displayName: string) {
+  const response = await apiClient.patch<LearnerProfile>("/auth/learner/me", { displayName });
+  return response.data;
+}
+
+export async function changeLearnerPassword(currentPassword: string, newPassword: string) {
+  const response = await apiClient.post<RefreshResult>("/auth/learner/change-password", {
+    currentPassword,
+    newPassword,
+  });
+  return response.data;
+}
+
 /** Google Play / App Store require in-app account deletion. */
 export async function deleteLearnerAccount(password: string) {
   const response = await apiClient.delete<{ success: boolean; mode: "deleted" | "anonymized" }>(

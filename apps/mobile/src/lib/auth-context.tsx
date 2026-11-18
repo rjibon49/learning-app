@@ -12,7 +12,9 @@ import React, {
 import * as SecureStore from "expo-secure-store";
 
 import {
+  changeLearnerPassword,
   getLearnerProfile,
+  updateLearnerProfile,
   loginLearner,
   logoutLearner,
   refreshLearnerSession,
@@ -38,6 +40,10 @@ type AuthContextValue = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  /** Save a changed name. */
+  updateDisplayName: (displayName: string) => Promise<void>;
+  /** Change password; other devices are signed out, this one keeps going. */
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -177,9 +183,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const updateDisplayName = useCallback(async (displayName: string) => {
+    const profile = await updateLearnerProfile(displayName);
+    const next = { ...(sessionRef.current?.user ?? profile), ...profile };
+    setUser(next);
+    if (sessionRef.current) {
+      sessionRef.current = { ...sessionRef.current, user: next };
+      await writeSession(sessionRef.current);
+    }
+  }, []);
+
+  const changePassword = useCallback(async (currentPassword: string, newPassword: string) => {
+    const result = await changeLearnerPassword(currentPassword, newPassword);
+    const current = sessionRef.current;
+    if (!current) return;
+    // The API revoked every old session and returned a new one for this device.
+    const next: StoredSession = {
+      ...current,
+      accessToken: result.accessToken,
+      expiresAt: Date.now() + result.expiresIn * 1000,
+      refreshToken: result.refreshToken ?? null,
+    };
+    sessionRef.current = next;
+    setApiAccessToken(next.accessToken);
+    await writeSession(next);
+  }, []);
+
   const value = useMemo<AuthContextValue>(
-    () => ({ user, loading, signIn, signOut, refreshProfile }),
-    [user, loading, signIn, signOut, refreshProfile],
+    () => ({ user, loading, signIn, signOut, refreshProfile, updateDisplayName, changePassword }),
+    [user, loading, signIn, signOut, refreshProfile, updateDisplayName, changePassword],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

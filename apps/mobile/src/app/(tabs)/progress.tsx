@@ -131,13 +131,8 @@ export default function ProgressScreen() {
       <Card style={{ gap: SPACING.md }}>
         <Txt variant="title">Account</Txt>
         <Txt variant="caption" style={{ fontSize: 14 }}>{user?.displayName} · {user?.email}</Txt>
+        <Button title="Settings" variant="secondary" icon="settings-outline" onPress={() => router.push("/settings")} />
         <Button title="Sign out" variant="secondary" icon="log-out-outline" onPress={confirmSignOut} />
-        <Button
-          title="Delete account"
-          variant="secondary"
-          onPress={() => router.push("/delete-account")}
-          style={{ borderColor: COLORS.wrongSoft }}
-        />
       </Card>
     </Screen>
   );
