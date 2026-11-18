@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Linking, StyleSheet, View } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import Markdown from "react-native-markdown-display";
 import * as Haptics from "expo-haptics";
@@ -24,7 +24,9 @@ import { saveLessonProgress } from "../../api/progress";
 import { fetchQuizzes } from "../../api/quizzes";
 import { MEANING_LANGUAGE } from "../../config";
 import { useLearnerAuth } from "../../lib/auth-context";
-import { parseSpeechLink, speakGerman } from "../../lib/german-speech";
+import { stopAudio } from "../../lib/audio";
+import { annotateGerman } from "../../lib/german-text";
+import { ListenPanel, lessonMarkdownRules } from "../../components/lesson-audio";
 import { markLessonCompleted } from "../../lib/lesson-progress";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
@@ -39,20 +41,6 @@ function pickContent(lesson: LessonDetail) {
     t[0] ??
     null
   );
-}
-
-async function onMarkdownLink(url: string): Promise<boolean> {
-  const german = parseSpeechLink(url);
-  if (german !== null) {
-    await speakGerman(german).catch(() => undefined);
-    return false;
-  }
-  try {
-    if (new URL(url).protocol === "https:") await Linking.openURL(url);
-  } catch {
-    // Ignore invalid links.
-  }
-  return false;
 }
 
 export default function LessonScreen() {
@@ -71,6 +59,27 @@ export default function LessonScreen() {
     ]);
     return { lesson, words, quiz: quizzes[0] ?? null };
   }, [lessonId]);
+
+  // Leaving the lesson stops any pronunciation that is still playing.
+  useEffect(() => () => void stopAudio(), []);
+
+  // Mark every German phrase in the text as tappable audio.
+  const annotated = useMemo(() => {
+    const data = state.data;
+    if (!data) return null;
+    const content = pickContent(data.lesson);
+    const known = data.words.map((w) => w.term);
+    const result = content ? annotateGerman(content.content, known) : { markdown: "", phrases: [] };
+    // Lesson words that the text does not mention are still worth hearing.
+    const extra = data.words
+      .map((w) => w.term)
+      .filter((t) => !result.phrases.some((p) => p.toLowerCase() === t.toLowerCase()));
+    const recordings = data.lesson.resources
+      .filter((r) => (r.type === "AUDIO" || r.asset?.mimeType?.startsWith("audio/")) && r.asset?.publicUrl)
+      .sort((a, b) => a.sortOrder - b.sortOrder)
+      .map((r) => ({ id: r.id, title: r.title, url: r.asset?.publicUrl ?? "" }));
+    return { content, markdown: result.markdown, phrases: [...result.phrases, ...extra], recordings };
+  }, [state.data]);
 
   async function finish() {
     if (finishing || !user) return;
@@ -106,7 +115,7 @@ export default function LessonScreen() {
   if (!state.data) return null;
 
   const { lesson, words, quiz } = state.data;
-  const content = pickContent(lesson);
+  const content = annotated?.content ?? null;
 
   if (finished) {
     return (
@@ -160,9 +169,11 @@ export default function LessonScreen() {
         <Txt variant="h1" style={{ marginTop: 4 }}>{content?.title?.trim() || lesson.title}</Txt>
       </View>
 
+      <ListenPanel phrases={annotated?.phrases ?? []} recordings={annotated?.recordings ?? []} />
+
       {content ? (
-        <Markdown style={markdownStyles} onLinkPress={(url) => { void onMarkdownLink(url); return false; }}>
-          {content.content}
+        <Markdown style={markdownStyles} rules={lessonMarkdownRules}>
+          {annotated?.markdown ?? content.content}
         </Markdown>
       ) : (
         <Card style={{ backgroundColor: COLORS.tipSoft }}>
@@ -178,7 +189,7 @@ export default function LessonScreen() {
             const meaning = meaningOf(word);
             return (
               <View key={word.id} style={styles.wordRow}>
-                <SpeakButton text={article ? `${article} ${noun}` : noun} />
+                <SpeakButton text={article ? `${article} ${noun}` : noun} url={word.audioUrl} />
                 <View style={{ flex: 1, gap: 2 }}>
                   <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                     {article ? <ArticleChip article={article} /> : null}

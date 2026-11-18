@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import * as Haptics from "expo-haptics";
@@ -14,6 +14,7 @@ import {
   ProgressBar,
   Screen,
   SpeakButton,
+  SpeedToggle,
   Txt,
 } from "../components/ui";
 import { getCurrentApp } from "../api/app";
@@ -27,6 +28,7 @@ import {
   type PracticeWord,
   type RatingKey,
 } from "../api/practice";
+import { play, stopAudio } from "../lib/audio";
 import { useAsync } from "../lib/use-async";
 import { exampleOf, meaningOf, pluralOf, splitArticle } from "../lib/words";
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from "../styles/theme";
@@ -72,6 +74,9 @@ export default function ReviewScreen() {
   const card = cards[index];
   const finished = cards.length > 0 && index >= cards.length;
 
+  // Leaving the session stops audio.
+  useEffect(() => () => void stopAudio(), []);
+
   const view = useMemo(() => {
     if (!card) return null;
     const { article, noun } = splitArticle(card);
@@ -84,6 +89,17 @@ export default function ReviewScreen() {
       example: exampleOf(card),
     };
   }, [card]);
+
+  // Each new card says its word once, so the learner hears it before answering.
+  const cardKey = card ? `${card.id}:${index}` : "";
+  useEffect(() => {
+    if (!card || !view) return;
+    const t = setTimeout(() => {
+      void play({ text: view.spoken, url: card.audioUrl, key: view.spoken }).catch(() => undefined);
+    }, 250);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once per card
+  }, [cardKey]);
 
   async function rate(key: RatingKey) {
     if (!card || saving) return;
@@ -129,6 +145,7 @@ export default function ReviewScreen() {
           <Txt variant="caption">Card {index + 1} of {cards.length}</Txt>
         ) : null}
       </View>
+      {cards.length > 0 && !finished ? <SpeedToggle /> : null}
     </View>
   );
 
@@ -192,7 +209,7 @@ export default function ReviewScreen() {
               {[view.plural ? `Plural: die ${view.plural.replace(/^die\s+/i, "")}` : null, card.pronunciation].filter(Boolean).join(" · ")}
             </Txt>
           ) : null}
-          <SpeakButton text={view.spoken} size={52} />
+          <SpeakButton text={view.spoken} url={card.audioUrl} size={52} />
 
           {revealed ? (
             <View style={styles.answer} accessibilityLiveRegion="polite">

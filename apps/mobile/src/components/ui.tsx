@@ -1,4 +1,4 @@
-import React, { useState, type ReactNode } from "react";
+import React, { useEffect, useState, type ReactNode } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -16,7 +16,8 @@ import { SafeAreaView, type Edge } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 
-import { speakGerman } from "../lib/german-speech";
+import { play, setSpeed, useNowPlaying, useSpeed, type Speed } from "../lib/audio";
+import { germanVoiceStatus } from "../lib/german-speech";
 import { ARTICLE_COLORS, COLORS, FONTS, RADIUS, SHADOW, SPACING, TOUCH, type Article } from "../styles/theme";
 
 /* ------------------------------------------------------------------ */
@@ -200,45 +201,99 @@ export function IconButton({
   );
 }
 
-/** Speaks German text with the device voice. */
+/**
+ * Plays German: the recording when `url` is set, otherwise the device voice.
+ * Highlights while playing; tap again to stop.
+ */
 export function SpeakButton({
   text,
+  url,
   size = 44,
   filled = false,
 }: {
   text: string;
+  url?: string | null;
   size?: number;
   filled?: boolean;
 }) {
-  const [busy, setBusy] = useState(false);
+  const playing = useNowPlaying() === text;
+  const solid = filled || playing;
 
-  async function play() {
-    if (busy) return;
-    setBusy(true);
+  function onPress() {
     void Haptics.selectionAsync().catch(() => undefined);
-    try {
-      await speakGerman(text);
-    } catch {
-      // No German voice installed: nothing to play.
-    } finally {
-      setBusy(false);
-    }
+    void play({ text, url, key: text }).catch(() => undefined);
   }
 
   return (
     <Pressable
-      onPress={() => void play()}
+      onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`Play ${text}`}
+      accessibilityLabel={playing ? `Stop ${text}` : `Play ${text}`}
+      accessibilityState={{ selected: playing }}
       hitSlop={6}
       style={({ pressed }) => [
         styles.speak,
-        { width: size, height: size, backgroundColor: filled ? COLORS.primary : COLORS.primarySoft },
+        { width: size, height: size, backgroundColor: solid ? COLORS.primary : COLORS.primarySoft },
         pressed && styles.pressed,
       ]}
     >
-      <Ionicons name="volume-high" size={size * 0.48} color={filled ? "#FFFFFF" : COLORS.primary} />
+      <Ionicons name={playing ? "stop" : "volume-high"} size={size * 0.46} color={solid ? "#FFFFFF" : COLORS.primary} />
     </Pressable>
+  );
+}
+
+/** Normal / Slow pronunciation speed (remembered on the device). */
+export function SpeedToggle() {
+  const speed = useSpeed();
+  const options: { key: Speed; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+    { key: "normal", label: "Normal", icon: "speedometer-outline" },
+    { key: "slow", label: "Slow", icon: "walk-outline" },
+  ];
+  return (
+    <View style={styles.segment} accessibilityRole="radiogroup" accessibilityLabel="Pronunciation speed">
+      {options.map((o) => {
+        const active = speed === o.key;
+        return (
+          <Pressable
+            key={o.key}
+            onPress={() => setSpeed(o.key)}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: active }}
+            style={[styles.segmentItem, active && styles.segmentActive]}
+          >
+            <Ionicons name={o.icon} size={16} color={active ? COLORS.primary : COLORS.muted} />
+            <Text style={[styles.segmentText, active && { color: COLORS.primary }]}>{o.label}</Text>
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+}
+
+/**
+ * Shown when the phone has no German voice: explains how to add one
+ * (recordings from the CMS still play).
+ */
+export function GermanVoiceNotice() {
+  const [missing, setMissing] = useState(false);
+  useEffect(() => {
+    let live = true;
+    void germanVoiceStatus().then((s) => {
+      if (live) setMissing(s === "missing");
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  if (!missing) return null;
+  return (
+    <View style={styles.notice} accessibilityRole="alert">
+      <Ionicons name="information-circle" size={20} color={COLORS.tipText} />
+      <Text style={styles.noticeText}>
+        No German voice on this phone yet. Open Settings → Accessibility → Text-to-speech (or Languages &amp; input),
+        choose Google Speech Services and install “Deutsch (Deutschland)”.
+      </Text>
+    </View>
   );
 }
 
@@ -405,6 +460,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  segment: { flexDirection: "row", backgroundColor: COLORS.track, borderRadius: RADIUS.pill, padding: 3 },
+  segmentItem: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 12, minHeight: 36, borderRadius: RADIUS.pill },
+  segmentActive: { backgroundColor: COLORS.surface },
+  segmentText: { fontFamily: FONTS.bodySemi, fontSize: 13, color: COLORS.muted },
+  notice: { flexDirection: "row", gap: SPACING.sm, backgroundColor: COLORS.tipSoft, borderRadius: RADIUS.lg, padding: SPACING.md },
+  noticeText: { flex: 1, fontFamily: FONTS.body, fontSize: 14, lineHeight: 20, color: COLORS.tipText },
   streak: {
     flexDirection: "row",
     alignItems: "center",
