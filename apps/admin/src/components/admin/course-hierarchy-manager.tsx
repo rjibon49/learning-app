@@ -39,6 +39,9 @@ import {
 
 import type { LearningLanguage } from "@/types/app";
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { FormField, apiFieldErrors } from "@/components/ui/form-field";
+import { useToast } from "@/components/ui/feedback-provider";
 
 type Mode = "courses" | "modules" | "lessons";
 type RecordItem = Course | CourseModule | Lesson;
@@ -73,7 +76,36 @@ function slugify(value: string): string {
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+/** Non-Latin titles (Japanese, Bangla...) give an empty slug; fall back to a short unique one. */
+function slugOrFallback(title: string, prefix: string): string {
+  return slugify(title) || `${prefix}-${Date.now().toString(36)}`;
+}
+
+const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+type FormErrors = Partial<Record<keyof EditorForm, string>>;
+
+function validateForm(form: EditorForm, mode: Mode): FormErrors {
+  const errors: FormErrors = {};
+  if (!form.title.trim()) errors.title = "Title is required.";
+  else if (form.title.trim().length > 200) errors.title = "Keep the title under 200 characters.";
+  if (form.slug.trim() && !SLUG_PATTERN.test(form.slug.trim())) {
+    errors.slug = "Use lowercase English letters, numbers and single dashes (e.g. greetings-1).";
+  }
+  if (!Number.isInteger(form.sortOrder) || form.sortOrder < 0) {
+    errors.sortOrder = "Order must be 0 or a positive whole number.";
+  }
+  if (mode === "lessons" && form.estimatedMinutes.trim()) {
+    const minutes = Number(form.estimatedMinutes);
+    if (!Number.isInteger(minutes) || minutes < 1 || minutes > 600) {
+      errors.estimatedMinutes = "Enter whole minutes between 1 and 600.";
+    }
+  }
+  return errors;
 }
 
 function errorText(error: unknown): string {
@@ -97,6 +129,7 @@ export function CourseHierarchyManager({
 }) {
   const { admin } = useAuth();
   const { selectedApp, isLoadingApps } = useAppLevel();
+  const toast = useToast();
 
   const canEdit =
     admin?.role === "SUPER_ADMIN" ||
@@ -127,10 +160,18 @@ export function CourseHierarchyManager({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [form, setForm] = useState<EditorForm>(initialForm);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [slugTouched, setSlugTouched] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [addAnother, setAddAnother] = useState(false);
 
   const [translationLessonId, setTranslationLessonId] = useState("");
   const [translationLanguageId, setTranslationLanguageId] = useState("");
   const [translationContent, setTranslationContent] = useState("");
+  const [translationTitle, setTranslationTitle] = useState("");
+  const [lessonTranslations, setLessonTranslations] = useState<
+    Array<{ languageId: string; content: string }>
+  >([]);
   const [savingTranslation, setSavingTranslation] = useState(false);
 
   const title =
@@ -312,12 +353,19 @@ export function CourseHierarchyManager({
     }
   }
 
+  function nextSortOrder(): number {
+    return records.reduce((max, item) => Math.max(max, item.sortOrder + 1), 0);
+  }
+
   function openCreate() {
     setEditingId(null);
     setForm({
       ...initialForm,
-      sortOrder: records.length,
+      sortOrder: nextSortOrder(),
     });
+    setFormErrors({});
+    setSlugTouched(false);
+    setShowAdvanced(false);
     setNotice("");
     setError("");
     setFormOpen(true);
@@ -338,6 +386,9 @@ export function CourseHierarchyManager({
         ? String(item.estimatedMinutes ?? "")
         : "",
     });
+    setFormErrors({});
+    setSlugTouched(true);
+    setShowAdvanced(false);
     setNotice("");
     setError("");
     setFormOpen(true);
@@ -345,16 +396,24 @@ export function CourseHierarchyManager({
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!selectedApp || !canEdit) return;
+    if (!selectedApp || !canEdit || saving) return;
+
+    const errors = validateForm(form, mode);
+    setFormErrors(errors);
+    if (Object.keys(errors).length) {
+      if (errors.slug || errors.sortOrder) setShowAdvanced(true);
+      return;
+    }
 
     setSaving(true);
     setError("");
     setNotice("");
+    const keepOpen = addAnother && !editingId;
 
     try {
       const basic = {
         title: form.title.trim(),
-        slug: form.slug.trim(),
+        slug: form.slug.trim() || slugOrFallback(form.title, mode.slice(0, -1)),
         status: form.status,
         sortOrder: form.sortOrder,
       };
@@ -409,15 +468,6 @@ export function CourseHierarchyManager({
           ? Number(form.estimatedMinutes)
           : null;
 
-        if (
-          minutes !== null &&
-          (!Number.isInteger(minutes) || minutes < 1)
-        ) {
-          throw new Error(
-            "Estimated minutes must be a positive whole number.",
-          );
-        }
-
         if (editingId) {
           await updateLesson(editingId, {
             ...basic,
@@ -432,39 +482,43 @@ export function CourseHierarchyManager({
         }
       }
 
-      setFormOpen(false);
+      const savedTitle = basic.title;
       await reload();
-      setNotice((previous) => previous || `${title.slice(0, -1)} saved.`);
+      toast.success(
+        editingId
+          ? `"${savedTitle}" updated.`
+          : keepOpen
+            ? `"${savedTitle}" created. Add the next one.`
+            : `"${savedTitle}" created${mode === "lessons" ? ". Click Content to add the lesson text." : "."}`,
+      );
+
+      if (keepOpen) {
+        // Keep status and minutes, clear the rest, move to the next order number.
+        setForm((current) => ({
+          ...initialForm,
+          status: current.status,
+          sortOrder: current.sortOrder + 1,
+          estimatedMinutes: current.estimatedMinutes,
+        }));
+        setSlugTouched(false);
+        setFormErrors({});
+        window.setTimeout(() => document.getElementById("hierarchy-title")?.focus(), 0);
+      } else {
+        setFormOpen(false);
+      }
     } catch (err) {
+      const fields = apiFieldErrors(err) as FormErrors;
+      if (Object.keys(fields).length) setFormErrors(fields);
       setError(errorText(err));
     } finally {
       setSaving(false);
     }
   }
 
-  async function archive(item: RecordItem) {
-    if (!canArchive) return;
-
-    if (
-      !window.confirm(
-        `Archive "${item.title}"? It will be hidden from published content.`,
-      )
-    ) {
-      return;
-    }
-
-    setError("");
-
-    try {
-      if (mode === "courses") await deleteCourse(item.id);
-      else if (mode === "modules") await deleteModule(item.id);
-      else await deleteLesson(item.id);
-
-      await reload();
-      setNotice(`${item.title} archived.`);
-    } catch (err) {
-      setError(errorText(err));
-    }
+  async function removeItem(item: RecordItem, permanent: boolean) {
+    if (mode === "courses") await deleteCourse(item.id, permanent);
+    else if (mode === "modules") await deleteModule(item.id, permanent);
+    else await deleteLesson(item.id, permanent);
   }
 
   async function editTranslations(lesson: Lesson) {
@@ -472,13 +526,22 @@ export function CourseHierarchyManager({
 
     try {
       const detail = await getLesson(lesson.id);
-      const first = detail.translations?.[0];
+      const existing = (detail.translations ?? []).map((t) => ({
+        languageId: t.languageId,
+        content: t.content ?? "",
+      }));
+      // Prefer the app's own language, then the first saved translation.
+      const preferred =
+        existing.find((t) => t.languageId === selectedApp?.languageId) ??
+        existing[0];
 
+      setLessonTranslations(existing);
+      setTranslationTitle(lesson.title);
       setTranslationLessonId(lesson.id);
       setTranslationLanguageId(
-        first?.languageId ?? selectedApp?.languageId ?? "",
+        preferred?.languageId ?? selectedApp?.languageId ?? "",
       );
-      setTranslationContent(first?.content ?? "");
+      setTranslationContent(preferred?.content ?? "");
     } catch (err) {
       setError(errorText(err));
     }
@@ -487,7 +550,11 @@ export function CourseHierarchyManager({
   async function saveTranslation(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!translationLessonId || !translationLanguageId) return;
+    if (!translationLessonId || !translationLanguageId || savingTranslation) return;
+    if (!translationContent.trim()) {
+      setError("Lesson content cannot be empty.");
+      return;
+    }
 
     setSavingTranslation(true);
     setError("");
@@ -499,7 +566,7 @@ export function CourseHierarchyManager({
         format: "MARKDOWN",
       });
 
-      setNotice("Lesson translation saved.");
+      toast.success(`Content for "${translationTitle}" saved.`);
       setTranslationLessonId("");
       await reload();
     } catch (err) {
@@ -698,15 +765,22 @@ export function CourseHierarchyManager({
                         </button>
                       )}
 
-                      {canArchive && (
-                        <button
-                          type="button"
-                          onClick={() => void archive(item)}
-                          className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-700"
-                        >
-                          Archive
-                        </button>
-                      )}
+                      <DeleteActions
+                        itemName={item.title}
+                        entity={title.slice(0, -1).toLowerCase()}
+                        canArchive={canArchive}
+                        hideArchive={item.status === "ARCHIVED"}
+                        archiveHelp="Status becomes ARCHIVED and it is hidden from learners. Learners keep their progress. You can publish it again later."
+                        permanentHelp={
+                          mode === "courses"
+                            ? "All modules, lessons, lesson content and learner progress inside this course are removed too."
+                            : mode === "modules"
+                              ? "All lessons in this module, their content and learner progress are removed too."
+                              : "Lesson content, resources and learner progress for this lesson are removed too."
+                        }
+                        onDelete={(permanent) => removeItem(item, permanent)}
+                        onDone={() => void reload()}
+                      />
                     </div>
                   </td>
                 </tr>
@@ -756,125 +830,176 @@ export function CourseHierarchyManager({
               {editingId ? "Edit" : "Create"} {title.slice(0, -1)}
             </h2>
 
-            <form onSubmit={(e) => void save(e)} className="space-y-4">
-              <label className="block space-y-1 text-sm">
-                <span className="font-semibold">Title</span>
-                <input
-                  required
-                  value={form.title}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      title: e.target.value,
-                      slug: editingId ? f.slug : slugify(e.target.value),
-                    }))
-                  }
-                  className="w-full rounded-lg border p-2.5"
-                />
-              </label>
-
-              <label className="block space-y-1 text-sm">
-                <span className="font-semibold">Slug</span>
-                <input
-                  required
-                  pattern="[a-z0-9]+(-[a-z0-9]+)*"
-                  value={form.slug}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, slug: e.target.value }))
-                  }
-                  className="w-full rounded-lg border p-2.5"
-                />
-              </label>
-
-              {mode !== "lessons" && (
-                <label className="block space-y-1 text-sm">
-                  <span className="font-semibold">Description</span>
-                  <textarea
-                    rows={3}
-                    value={form.description}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        description: e.target.value,
-                      }))
-                    }
-                    className="w-full rounded-lg border p-2.5"
-                  />
-                </label>
+            <form onSubmit={(e) => void save(e)} noValidate className="space-y-4">
+              {mode !== "courses" && (
+                <p className="rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
+                  Adding to{" "}
+                  <strong>
+                    {mode === "modules"
+                      ? courses.find((c) => c.id === courseId)?.title
+                      : modules.find((m) => m.id === moduleId)?.title}
+                  </strong>
+                </p>
               )}
 
-              {mode === "lessons" && (
-                <label className="block space-y-1 text-sm">
-                  <span className="font-semibold">Estimated minutes</span>
+              <FormField label="Title" required error={formErrors.title}>
+                {(props) => (
                   <input
-                    type="number"
-                    min="1"
-                    value={form.estimatedMinutes}
-                    onChange={(e) =>
+                    {...props}
+                    id="hierarchy-title"
+                    autoFocus
+                    value={form.title}
+                    maxLength={200}
+                    placeholder={mode === "lessons" ? "e.g. Greetings and introductions" : "e.g. Beginner Japanese"}
+                    onChange={(e) => {
+                      const value = e.target.value;
                       setForm((f) => ({
                         ...f,
-                        estimatedMinutes: e.target.value,
-                      }))
-                    }
-                    className="w-full rounded-lg border p-2.5"
+                        title: value,
+                        slug: slugTouched ? f.slug : slugify(value),
+                      }));
+                      if (formErrors.title) setFormErrors((x) => ({ ...x, title: undefined }));
+                    }}
                   />
-                </label>
+                )}
+              </FormField>
+
+              {mode !== "lessons" && (
+                <FormField label="Description" hint="Optional. One or two sentences learners will see.">
+                  {(props) => (
+                    <textarea
+                      {...props}
+                      rows={3}
+                      value={form.description}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, description: e.target.value }))
+                      }
+                    />
+                  )}
+                </FormField>
               )}
 
               <div className="grid grid-cols-2 gap-4">
-                <label className="block space-y-1 text-sm">
-                  <span className="font-semibold">Status</span>
-                  <select
-                    value={form.status}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        status: e.target.value as PublicationStatus,
-                      }))
-                    }
-                    className="w-full rounded-lg border p-2.5"
-                  >
-                    {statusOptions.map((status) => (
-                      <option key={status} value={status}>
-                        {status}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <FormField
+                  label="Status"
+                  hint={form.status === "PUBLISHED" ? "Learners can see it." : "Hidden from learners."}
+                >
+                  {(props) => (
+                    <select
+                      {...props}
+                      value={form.status}
+                      onChange={(e) =>
+                        setForm((f) => ({
+                          ...f,
+                          status: e.target.value as PublicationStatus,
+                        }))
+                      }
+                    >
+                      {statusOptions.map((status) => (
+                        <option key={status} value={status}>
+                          {status.charAt(0) + status.slice(1).toLowerCase()}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </FormField>
 
-                <label className="block space-y-1 text-sm">
-                  <span className="font-semibold">Sort order</span>
-                  <input
-                    type="number"
-                    min="0"
-                    value={form.sortOrder}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        sortOrder: Number(e.target.value),
-                      }))
-                    }
-                    className="w-full rounded-lg border p-2.5"
-                  />
-                </label>
+                {mode === "lessons" ? (
+                  <FormField label="Minutes" hint="Optional" error={formErrors.estimatedMinutes}>
+                    {(props) => (
+                      <input
+                        {...props}
+                        type="number"
+                        min="1"
+                        max="600"
+                        inputMode="numeric"
+                        placeholder="e.g. 10"
+                        value={form.estimatedMinutes}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, estimatedMinutes: e.target.value }))
+                        }
+                      />
+                    )}
+                  </FormField>
+                ) : (
+                  <div />
+                )}
               </div>
 
-              <div className="flex justify-end gap-2 pt-3">
-                <button
-                  type="button"
-                  onClick={() => setFormOpen(false)}
-                  className="rounded-lg border px-4 py-2 text-sm"
-                >
-                  Cancel
-                </button>
+              <details
+                open={showAdvanced}
+                onToggle={(e) => setShowAdvanced((e.currentTarget as HTMLDetailsElement).open)}
+                className="rounded-lg border border-slate-200 px-3 py-2"
+              >
+                <summary className="cursor-pointer text-sm font-semibold text-slate-600">
+                  Advanced: URL slug{" "}
+                  {form.slug ? <span className="font-mono font-normal text-slate-400">({form.slug})</span> : null}
+                  {" "}· order {form.sortOrder}
+                </summary>
+                <div className="mt-3 grid grid-cols-2 gap-4">
+                  <FormField
+                    label="Slug"
+                    hint="Made from the title automatically."
+                    error={formErrors.slug}
+                  >
+                    {(props) => (
+                      <input
+                        {...props}
+                        value={form.slug}
+                        placeholder="auto"
+                        onChange={(e) => {
+                          setSlugTouched(true);
+                          setForm((f) => ({ ...f, slug: e.target.value.toLowerCase() }));
+                        }}
+                      />
+                    )}
+                  </FormField>
+                  <FormField label="Order" hint="Lower shows first." error={formErrors.sortOrder}>
+                    {(props) => (
+                      <input
+                        {...props}
+                        type="number"
+                        min="0"
+                        value={form.sortOrder}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, sortOrder: Number(e.target.value) }))
+                        }
+                      />
+                    )}
+                  </FormField>
+                </div>
+              </details>
 
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
-                >
-                  {saving ? "Saving..." : "Save"}
-                </button>
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3">
+                {!editingId ? (
+                  <label className="flex items-center gap-2 text-sm text-slate-600">
+                    <input
+                      type="checkbox"
+                      checked={addAnother}
+                      onChange={(e) => setAddAnother(e.target.checked)}
+                    />
+                    Add another after saving
+                  </label>
+                ) : (
+                  <span />
+                )}
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setFormOpen(false)}
+                    className="rounded-lg border px-4 py-2 text-sm"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+                  >
+                    {saving ? "Saving..." : editingId ? "Save changes" : `Create ${title.slice(0, -1).toLowerCase()}`}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -885,8 +1010,9 @@ export function CourseHierarchyManager({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
           <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6 shadow-xl">
             <h2 className="mb-4 text-lg font-bold">
-              Lesson Content / Translation
+              Lesson content
             </h2>
+            <p className="-mt-3 mb-4 text-sm text-slate-500">{translationTitle}</p>
 
             <form
               onSubmit={(e) => void saveTranslation(e)}
@@ -898,8 +1024,13 @@ export function CourseHierarchyManager({
                   required
                   value={translationLanguageId}
                   onChange={(e) => {
-                    setTranslationLanguageId(e.target.value);
-                    setTranslationContent("");
+                    const languageId = e.target.value;
+                    setTranslationLanguageId(languageId);
+                    // Load what is already saved for this language instead of
+                    // an empty box (saving empty would overwrite it).
+                    setTranslationContent(
+                      lessonTranslations.find((t) => t.languageId === languageId)?.content ?? "",
+                    );
                   }}
                   className="w-full rounded-lg border p-2.5"
                 >
@@ -907,6 +1038,7 @@ export function CourseHierarchyManager({
                   {languages.map((language) => (
                     <option key={language.id} value={language.id}>
                       {language.name}
+                      {lessonTranslations.some((t) => t.languageId === language.id) ? " (saved)" : ""}
                     </option>
                   ))}
                 </select>

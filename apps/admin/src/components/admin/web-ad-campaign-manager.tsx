@@ -1,5 +1,6 @@
 
 "use client";
+import { DeleteActions } from "@/components/ui/delete-actions";
 
 import {
   useCallback,
@@ -499,18 +500,6 @@ export function WebAdCampaignManager() {
     }
   }
 
-  async function archive(item: WebAdCampaign) {
-    if (!canManage) return;
-    if (!window.confirm(`Archive "${item.name}"?`)) return;
-    try {
-      await archiveWebCampaign(item.id);
-      setMessage("Campaign archived.");
-      await reload();
-    } catch (err) {
-      setError(getError(err));
-    }
-  }
-
   return (
     <div className="mx-auto max-w-[1800px] space-y-5">
       <header className="flex flex-wrap items-center justify-between gap-3">
@@ -919,16 +908,17 @@ export function WebAdCampaignManager() {
                                   ? "Pause" : "Activate"}
                               </button>
                             )}
-                            {item.status !== "ARCHIVED" && (
-                              <button
-                                type="button"
-                                title="Archive"
-                                onClick={() => void archive(item)}
-                                className="rounded-lg border p-2 text-red-600"
-                              >
-                                <Trash2 className="h-4 w-4"/>
-                              </button>
-                            )}
+                            <DeleteActions
+                              compact
+                              itemName={item.name}
+                              entity="campaign"
+                              canArchive={canManage}
+                              hideArchive={item.status === "ARCHIVED"}
+                              archiveHelp="The campaign stops showing. Its reports are kept."
+                              permanentHelp="The campaign and all its click / impression events are removed."
+                              onDelete={(permanent) => archiveWebCampaign(item.id, permanent)}
+                              onDone={() => void reload()}
+                            />
                           </>
                         )}
                       </div>

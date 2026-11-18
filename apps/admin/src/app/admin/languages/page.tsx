@@ -1,5 +1,7 @@
 
 "use client";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { deleteResource } from "@/lib/api/delete";
 
 import {
   useCallback,
@@ -489,6 +491,18 @@ export default function LanguagesPage() {
         setLoadingLevelsCode(null);
       }
     }
+  }
+
+  /** Forget cached levels so the next "View Levels" loads fresh data. */
+  function forgetLevels(code: string) {
+    levelRequestRef.current += 1;
+    setLevelsByCode((previous) => {
+      const next = { ...previous };
+      delete next[code];
+      return next;
+    });
+    setExpandedCode(null);
+    setLoadingLevelsCode(null);
   }
 
   async function refresh() {
@@ -1143,6 +1157,20 @@ export default function LanguagesPage() {
                             Edit Language
                           </button>
                         )}
+
+                        <DeleteActions
+                          itemName={`${language.name} (${language.code})`}
+                          entity="language"
+                          archiveLabel="Deactivate"
+                          canArchive={canManage}
+                          hideArchive={!active}
+                          archiveHelp="Hidden from apps and the website. Courses and words stay. Edit the language to activate it again."
+                          permanentHelp="Refused while any course, word or app still uses this language — deactivate it instead."
+                          onDelete={(permanent) =>
+                            deleteResource(`/admin/languages/${encodeURIComponent(language.code)}`, permanent)
+                          }
+                          onDone={() => void load(true)}
+                        />
                       </div>
                     </div>
 
@@ -1201,6 +1229,25 @@ export default function LanguagesPage() {
                                     {level.framework.code}
                                   </p>
                                 )}
+
+                                <div className="mt-1.5">
+                                  <DeleteActions
+                                    compact
+                                    itemName={`${level.code} for ${language.name}`}
+                                    entity="level"
+                                    archiveLabel="Disable"
+                                    canArchive={canManage}
+                                    archiveHelp="This level is no longer offered for the language. Content stays."
+                                    permanentHelp="The level assignment row is removed."
+                                    onDelete={(permanent) =>
+                                      deleteResource(
+                                        `/admin/languages/${encodeURIComponent(language.code)}/levels/${encodeURIComponent(level.id)}`,
+                                        permanent,
+                                      )
+                                    }
+                                    onDone={() => forgetLevels(language.code)}
+                                  />
+                                </div>
                               </div>
                             ))}
                           </div>

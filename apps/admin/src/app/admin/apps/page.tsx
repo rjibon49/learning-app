@@ -1,6 +1,10 @@
 
 "use client";
 
+
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
+import { deleteResource } from "@/lib/api/delete";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -65,6 +69,8 @@ const emptyForm: AppForm = {
 
 export default function AdminAppsPage() {
   const { admin } = useAuth();
+  const confirm = useConfirm();
+  const toast = useToast();
 
   const {
     selectedApp,
@@ -225,9 +231,14 @@ export default function AdminAppsPage() {
 
     const desired = !app.isActive;
 
-    const confirmed = window.confirm(
-      `${desired ? "Activate" : "Deactivate"} ${app.name}?`,
-    );
+    const confirmed = await confirm({
+      title: `${desired ? "Activate" : "Deactivate"} ${app.name}?`,
+      message: desired
+        ? "The app becomes available to learners again."
+        : "Learners can no longer use this app. Content and subscriptions are kept.",
+      confirmLabel: desired ? "Activate" : "Deactivate",
+      tone: desired ? "default" : "danger",
+    });
 
     if (!confirmed) return;
 
@@ -546,6 +557,19 @@ export default function AdminAppsPage() {
                                 : "Activate"}
                             </button>
                           )}
+
+                          <DeleteActions
+                            compact
+                            itemName={app.name}
+                            entity="app"
+                            hideArchive
+                            permanentHelp="Its configuration, ad config, flashcard decks and course links are removed. Refused while subscriptions exist."
+                            onDelete={(permanent) => deleteResource(`/admin/apps/${encodeURIComponent(app.id)}`, permanent)}
+                            onDone={() => {
+                              toast.info("Reloading app list...");
+                              void Promise.all([loadApps(), reloadApps()]);
+                            }}
+                          />
                         </div>
                       </td>
                     </tr>

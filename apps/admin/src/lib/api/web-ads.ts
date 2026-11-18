@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export type WebAdKind =
   | "LOCAL_IMAGE"
@@ -214,10 +215,9 @@ export function updateWebPlacement(
 }
 
 export function disableWebPlacement(
-  id: string,
-): Promise<WebAdPlacement> {
+  id: string, permanent = false): Promise<WebAdPlacement> {
   return apiRequest(
-    `/admin/web-ads/placements/${encoded(id)}`,
+    withPermanent(`/admin/web-ads/placements/${encoded(id)}`, permanent),
     { method: "DELETE" },
   );
 }
@@ -266,10 +266,9 @@ export function updateWebCampaign(
 }
 
 export function archiveWebCampaign(
-  id: string,
-): Promise<WebAdCampaign> {
+  id: string, permanent = false): Promise<WebAdCampaign> {
   return apiRequest(
-    `/admin/web-ads/campaigns/${encoded(id)}`,
+    withPermanent(`/admin/web-ads/campaigns/${encoded(id)}`, permanent),
     { method: "DELETE" },
   );
 }

@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export type VocabularyDifficulty = "EASY" | "MEDIUM" | "HARD";
 
@@ -228,10 +229,9 @@ export function updateGlobalVocabulary(
 }
 
 export function archiveGlobalVocabulary(
-  id: string,
-): Promise<GlobalVocabularyItem> {
+  id: string, permanent = false): Promise<GlobalVocabularyItem> {
   return apiRequest<GlobalVocabularyItem>(
-    `/admin/vocabulary/${idPath(id)}`,
+    withPermanent(`/admin/vocabulary/${idPath(id)}`, permanent),
     { method: "DELETE" },
   );
 }
@@ -350,10 +350,9 @@ export function updateGlobalCategory(
 }
 
 export function archiveGlobalCategory(
-  id: string,
-): Promise<GlobalVocabularyCategory> {
+  id: string, permanent = false): Promise<GlobalVocabularyCategory> {
   return apiRequest(
-    `/admin/vocabulary/categories/${idPath(id)}`,
+    withPermanent(`/admin/vocabulary/categories/${idPath(id)}`, permanent),
     { method: "DELETE" },
   );
 }

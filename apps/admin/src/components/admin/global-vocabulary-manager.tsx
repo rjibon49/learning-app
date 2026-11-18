@@ -32,6 +32,9 @@ import { useAuth } from "@/lib/auth/auth-context";
 import { useAppLevel } from "@/lib/auth/app-level-context";
 import { getPublicLanguages } from "@/lib/api/languages";
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { FormField, apiFieldErrors } from "@/components/ui/form-field";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import {
   getCourses,
@@ -102,6 +105,11 @@ type FormState = {
 
   imageAssetId: string;
   audioAssetId: string;
+
+  /* Quick add (create only): saved as the first translation / example. */
+  meaning: string;
+  meaningLanguageId: string;
+  exampleText: string;
 };
 
 type MediaPickerType = "IMAGE" | "AUDIO";
@@ -158,7 +166,28 @@ function emptyForm(): FormState {
     advancedGrammar: [],
     imageAssetId: "",
     audioAssetId: "",
+    meaning: "",
+    meaningLanguageId: "",
+    exampleText: "",
   };
+}
+
+const MEANING_LANGUAGE_KEY = "cms.vocabulary.meaningLanguageId";
+
+function rememberedMeaningLanguage(): string {
+  try {
+    return window.localStorage.getItem(MEANING_LANGUAGE_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+function rememberMeaningLanguage(id: string) {
+  try {
+    if (id) window.localStorage.setItem(MEANING_LANGUAGE_KEY, id);
+  } catch {
+    /* storage blocked: ignore */
+  }
 }
 
 function getError(error: unknown): string {
@@ -225,6 +254,9 @@ function toForm(item: GlobalVocabularyItem): FormState {
 
     imageAssetId: item.imageAssetId ?? "",
     audioAssetId: item.audioAssetId ?? "",
+    meaning: "",
+    meaningLanguageId: "",
+    exampleText: "",
   };
 }
 
@@ -919,6 +951,8 @@ export function GlobalVocabularyManager({
 }: EditorProps) {
   const router = useRouter();
   const { admin } = useAuth();
+  const confirm = useConfirm();
+  const toast = useToast();
 
   const {
     selectedApp,
@@ -1011,11 +1045,29 @@ export function GlobalVocabularyManager({
   const [editingExampleId, setEditingExampleId] =
     useState<string | null>(null);
 
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<"term" | "meaning" | "meaningLanguageId" | "translation" | "example", string>>
+  >({});
+
+  const [addAnother, setAddAnother] = useState(false);
+  const termInputRef = useRef<HTMLInputElement>(null);
+
   const activeLanguageId =
     selectedApp?.languageId ?? "";
 
   const isGerman =
     selectedApp?.language?.code === "de";
+
+  /** Remembered meaning language, else the first language that is not the one being taught. */
+  const defaultMeaningLanguage = useCallback((): string => {
+    const remembered = rememberedMeaningLanguage();
+    if (remembered && languages.some((l) => l.id === remembered)) return remembered;
+    return (
+      languages.find((l) => l.id !== activeLanguageId && l.code === "en")?.id ??
+      languages.find((l) => l.id !== activeLanguageId)?.id ??
+      ""
+    );
+  }, [languages, activeLanguageId]);
 
   const loadVocabulary = useCallback(async () => {
     if (!selectedApp) {
@@ -1132,16 +1184,17 @@ useEffect(() => {
   }, []);
 
   const clearRelatedForms = useCallback(() => {
-    setTranslationLanguage("");
+    setTranslationLanguage(defaultMeaningLanguage());
     setTranslationMeaning("");
     setTranslationNotes("");
     setEditingTranslationId(null);
 
-    setExampleLanguage("");
+    setExampleLanguage(activeLanguageId);
     setExampleText("");
     setExampleGroup("");
     setEditingExampleId(null);
-  }, []);
+    setFieldErrors({});
+  }, [defaultMeaningLanguage, activeLanguageId]);
 
   const openEditor = useCallback(
     async (id: string) => {
@@ -1194,7 +1247,7 @@ useEffect(() => {
   function createNew() {
     setEditingId(null);
     setDetail(null);
-    setForm(emptyForm());
+    setForm({ ...emptyForm(), meaningLanguageId: defaultMeaningLanguage() });
     setSelectedImage(null);
     setSelectedAudio(null);
     setEditorOpen(true);
@@ -1202,6 +1255,17 @@ useEffect(() => {
     setError("");
     setNotice("");
   }
+
+  useEffect(() => {
+    if (editingId || !languages.length) return;
+    const fallback = defaultMeaningLanguage();
+    // Fill an empty default once languages have loaded (direct /vocabulary/new visits).
+    void Promise.resolve().then(() =>
+      setForm((current) =>
+        current.meaningLanguageId ? current : { ...current, meaningLanguageId: fallback },
+      ),
+    );
+  }, [languages, editingId, defaultMeaningLanguage]);
 
   function setField<K extends keyof FormState>(
     key: K,
@@ -1211,6 +1275,10 @@ useEffect(() => {
       ...current,
       [key]: value,
     }));
+
+    if (key in fieldErrors) {
+      setFieldErrors((current) => ({ ...current, [key]: undefined }));
+    }
   }
 
   function addGrammarField() {
@@ -1259,7 +1327,19 @@ useEffect(() => {
   ) {
     event.preventDefault();
 
-    if (!canWrite || !selectedApp) return;
+    if (!canWrite || !selectedApp || saving) return;
+
+    const creating = !editingId;
+    const errors: typeof fieldErrors = {};
+    if (!form.term.trim()) errors.term = "Enter the word or phrase.";
+    if (creating && form.meaning.trim() && !form.meaningLanguageId) {
+      errors.meaningLanguageId = "Choose the meaning language.";
+    }
+    setFieldErrors(errors);
+    if (Object.keys(errors).length) {
+      termInputRef.current?.focus();
+      return;
+    }
 
     setSaving(true);
     setError("");
@@ -1298,12 +1378,6 @@ useEffect(() => {
           form.audioAssetId || null,
       };
 
-      if (!input.term) {
-        throw new Error(
-          "Vocabulary term is required.",
-        );
-      }
-
       let saved: GlobalVocabularyItem;
 
       if (editingId) {
@@ -1318,44 +1392,78 @@ useEffect(() => {
         );
       } else {
         saved = await createGlobalVocabulary(input);
-        setEditingId(saved.id);
       }
 
-      await reloadDetail(saved.id);
+      // Quick add: first meaning + example in the same save.
+      const extraErrors: string[] = [];
+      if (creating && form.meaning.trim() && form.meaningLanguageId) {
+        rememberMeaningLanguage(form.meaningLanguageId);
+        try {
+          await addVocabularyTranslation(saved.id, {
+            languageId: form.meaningLanguageId,
+            meaning: form.meaning.trim(),
+            notes: null,
+            sortOrder: 0,
+          });
+        } catch (err) {
+          extraErrors.push(`meaning not saved (${getError(err)})`);
+        }
+      }
+      if (creating && form.exampleText.trim() && activeLanguageId) {
+        try {
+          await addVocabularyExample(saved.id, {
+            languageId: activeLanguageId,
+            text: form.exampleText.trim(),
+            translationGroupId: null,
+            sortOrder: 0,
+          });
+        } catch (err) {
+          extraErrors.push(`example not saved (${getError(err)})`);
+        }
+      }
+
       await loadVocabulary();
 
-      setNotice(
-        "Vocabulary saved. You can now manage translations and examples.",
-      );
+      if (extraErrors.length) {
+        toast.error(`"${saved.term}" was saved, but ${extraErrors.join(" and ")}. Add it below.`);
+      }
+
+      if (creating && addAnother) {
+        // Batch entry: keep category, lesson, difficulty, status and meaning language.
+        setForm((current) => ({
+          ...emptyForm(),
+          categoryId: current.categoryId,
+          lessonId: current.lessonId,
+          difficulty: current.difficulty,
+          status: current.status,
+          meaningLanguageId: current.meaningLanguageId,
+        }));
+        setSelectedImage(null);
+        setSelectedAudio(null);
+        setDetail(null);
+        setEditingId(null);
+        if (!extraErrors.length) toast.success(`"${saved.term}" added. Type the next word.`);
+        window.setTimeout(() => termInputRef.current?.focus(), 0);
+        return;
+      }
+
+      setEditingId(saved.id);
+      await reloadDetail(saved.id);
+      if (!creating) setForm((current) => ({ ...current, meaning: "", exampleText: "" }));
+
+      if (!extraErrors.length) {
+        toast.success(
+          creating
+            ? `"${saved.term}" created. Add more meanings or examples below, or close.`
+            : `"${saved.term}" saved.`,
+        );
+      }
     } catch (err) {
+      const apiErrors = apiFieldErrors(err);
+      if (apiErrors.term) setFieldErrors((current) => ({ ...current, term: apiErrors.term }));
       setError(getError(err));
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function archiveItem(
-    item: GlobalVocabularyItem,
-  ) {
-    if (!canArchive) return;
-
-    if (!window.confirm(
-      `Archive "${item.term}"?`,
-    )) {
-      return;
-    }
-
-    try {
-      await archiveGlobalVocabulary(item.id);
-      await loadVocabulary();
-
-      if (editingId === item.id) {
-        setEditorOpen(false);
-      }
-
-      setNotice("Vocabulary archived.");
-    } catch (err) {
-      setError(getError(err));
     }
   }
 
@@ -1364,10 +1472,18 @@ useEffect(() => {
   ) {
     event.preventDefault();
 
-    if (!editingId || !translationLanguage) return;
+    if (!editingId || saving) return;
+    if (!translationLanguage || !translationMeaning.trim()) {
+      setFieldErrors((current) => ({
+        ...current,
+        translation: !translationLanguage ? "Choose a language." : "Enter the meaning.",
+      }));
+      return;
+    }
 
     setSaving(true);
     setError("");
+    setFieldErrors((current) => ({ ...current, translation: undefined }));
 
     const payload: TranslationInput = {
       languageId: translationLanguage,
@@ -1391,27 +1507,34 @@ useEffect(() => {
       }
 
       await reloadDetail(editingId);
+      rememberMeaningLanguage(translationLanguage);
 
-      setTranslationLanguage("");
+      // Keep the language selected so the next meaning is quick to add.
       setTranslationMeaning("");
       setTranslationNotes("");
       setEditingTranslationId(null);
 
-      setNotice("Translation saved.");
+      toast.success("Meaning saved.");
     } catch (err) {
-      setError(getError(err));
+      const apiErrors = apiFieldErrors(err);
+      setFieldErrors((current) => ({
+        ...current,
+        translation: apiErrors.meaning ?? apiErrors.languageId ?? getError(err),
+      }));
     } finally {
       setSaving(false);
     }
   }
 
-  async function removeTranslation(id: string) {
-    if (
-      !editingId ||
-      !window.confirm("Delete translation?")
-    ) {
-      return;
-    }
+  async function removeTranslation(id: string, label: string) {
+    if (!editingId) return;
+    const ok = await confirm({
+      title: "Delete this meaning?",
+      message: <p><strong>{label}</strong> will be removed from this word.</p>,
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     try {
       await deleteVocabularyTranslation(
@@ -1419,8 +1542,14 @@ useEffect(() => {
         id,
       );
       await reloadDetail(editingId);
+      if (editingTranslationId === id) {
+        setEditingTranslationId(null);
+        setTranslationMeaning("");
+        setTranslationNotes("");
+      }
+      toast.success("Meaning deleted.");
     } catch (err) {
-      setError(getError(err));
+      toast.error(getError(err));
     }
   }
 
@@ -1429,10 +1558,18 @@ useEffect(() => {
   ) {
     event.preventDefault();
 
-    if (!editingId || !exampleLanguage) return;
+    if (!editingId || saving) return;
+    if (!exampleLanguage || !exampleText.trim()) {
+      setFieldErrors((current) => ({
+        ...current,
+        example: !exampleLanguage ? "Choose a language." : "Enter the example sentence.",
+      }));
+      return;
+    }
 
     setSaving(true);
     setError("");
+    setFieldErrors((current) => ({ ...current, example: undefined }));
 
     const payload: ExampleInput = {
       languageId: exampleLanguage,
@@ -1458,26 +1595,31 @@ useEffect(() => {
 
       await reloadDetail(editingId);
 
-      setExampleLanguage("");
       setExampleText("");
       setExampleGroup("");
       setEditingExampleId(null);
 
-      setNotice("Example saved.");
+      toast.success("Example saved.");
     } catch (err) {
-      setError(getError(err));
+      const apiErrors = apiFieldErrors(err);
+      setFieldErrors((current) => ({
+        ...current,
+        example: apiErrors.text ?? apiErrors.languageId ?? getError(err),
+      }));
     } finally {
       setSaving(false);
     }
   }
 
-  async function removeExample(id: string) {
-    if (
-      !editingId ||
-      !window.confirm("Delete example?")
-    ) {
-      return;
-    }
+  async function removeExample(id: string, text: string) {
+    if (!editingId) return;
+    const ok = await confirm({
+      title: "Delete this example?",
+      message: <p className="break-words">{text}</p>,
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     try {
       await deleteVocabularyExample(
@@ -1485,12 +1627,29 @@ useEffect(() => {
         id,
       );
       await reloadDetail(editingId);
+      if (editingExampleId === id) {
+        setEditingExampleId(null);
+        setExampleText("");
+        setExampleGroup("");
+      }
+      toast.success("Example deleted.");
     } catch (err) {
-      setError(getError(err));
+      toast.error(getError(err));
     }
   }
 
+  function afterDelete(id: string) {
+    void loadVocabulary();
+    if (editingId === id) closeEditor();
+  }
+
+  const archiveHelp =
+    "Status becomes ARCHIVED: learners stop seeing it but keep their progress. Change the status back to restore it.";
+  const permanentHelp =
+    "Its meanings, examples, flashcard deck items and learner progress are removed too.";
+
   function closeEditor() {
+    setFieldErrors({});
     setEditorOpen(false);
     setEditingId(null);
     setDetail(null);
@@ -1705,18 +1864,19 @@ useEffect(() => {
                       {canWrite ? "Edit" : "View"}
                     </button>
 
-                    {canArchive &&
-                      item.status !== "ARCHIVED" && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            void archiveItem(item)
-                          }
-                          className="ml-2 rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
-                        >
-                          Archive
-                        </button>
-                      )}
+                    <span className="ml-2 inline-flex">
+                      <DeleteActions
+                        compact
+                        itemName={item.term}
+                        entity="word"
+                        canArchive={canArchive}
+                        hideArchive={item.status === "ARCHIVED"}
+                        archiveHelp={archiveHelp}
+                        permanentHelp={permanentHelp}
+                        onDelete={(permanent) => archiveGlobalVocabulary(item.id, permanent)}
+                        onDone={() => afterDelete(item.id)}
+                      />
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -1771,15 +1931,35 @@ useEffect(() => {
                   : "Create Vocabulary"}
               </h2>
 
-              <button
-                type="button"
-                onClick={closeEditor}
-                className="rounded-lg border p-2"
-                aria-label="Close editor"
-              >
-                <X className="h-4 w-4" />
-              </button>
+              <div className="flex items-center gap-2">
+                {editingId && detail && (
+                  <DeleteActions
+                    itemName={detail.term}
+                    entity="word"
+                    canArchive={canArchive}
+                    hideArchive={detail.status === "ARCHIVED"}
+                    archiveHelp={archiveHelp}
+                    permanentHelp={permanentHelp}
+                    onDelete={(permanent) => archiveGlobalVocabulary(detail.id, permanent)}
+                    onDone={() => afterDelete(detail.id)}
+                  />
+                )}
+                <button
+                  type="button"
+                  onClick={closeEditor}
+                  className="rounded-lg border p-2"
+                  aria-label="Close editor"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
             </div>
+
+            {error && (
+              <p role="alert" className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {error}
+              </p>
+            )}
 
             <form
               onSubmit={(event) =>
@@ -1790,29 +1970,83 @@ useEffect(() => {
               {/* MAIN FIELDS */}
 
               <div className="grid gap-3 md:grid-cols-2">
-                <label className="space-y-1 text-sm">
-                  <span className="font-medium">
-                    Term
-                  </span>
+                <FormField
+                  label={`Word / phrase (${selectedApp.language.name})`}
+                  required
+                  error={fieldErrors.term}
+                >
+                  {(props) => (
+                    <input
+                      {...props}
+                      ref={termInputRef}
+                      autoFocus
+                      maxLength={500}
+                      value={form.term}
+                      onChange={(event) => setField("term", event.target.value)}
+                      placeholder={isGerman ? "Bär" : "Type the word"}
+                    />
+                  )}
+                </FormField>
 
-                  <input
-                    required
-                    maxLength={500}
-                    value={form.term}
-                    onChange={(event) =>
-                      setField(
-                        "term",
-                        event.target.value,
-                      )
-                    }
-                    placeholder={
-                      isGerman
-                        ? "Bär"
-                        : "Vocabulary term"
-                    }
-                    className="w-full rounded-lg border p-2.5"
-                  />
-                </label>
+                {!editingId ? (
+                  <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,9rem)] gap-2">
+                    <FormField
+                      label="Meaning"
+                      hint="Optional — saved as the first translation."
+                      error={fieldErrors.meaning}
+                    >
+                      {(props) => (
+                        <input
+                          {...props}
+                          maxLength={500}
+                          value={form.meaning}
+                          onChange={(event) => setField("meaning", event.target.value)}
+                          placeholder={isGerman ? "bear" : "e.g. bear"}
+                        />
+                      )}
+                    </FormField>
+                    <FormField label="in" error={fieldErrors.meaningLanguageId}>
+                      {(props) => (
+                        <select
+                          {...props}
+                          value={form.meaningLanguageId}
+                          onChange={(event) => setField("meaningLanguageId", event.target.value)}
+                        >
+                          <option value="">Language</option>
+                          {languages
+                            .filter((language) => language.id !== activeLanguageId)
+                            .map((language) => (
+                              <option key={language.id} value={language.id}>
+                                {language.name}
+                              </option>
+                            ))}
+                        </select>
+                      )}
+                    </FormField>
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-dashed border-slate-200 p-3 text-xs text-slate-500">
+                    Meanings and examples are edited in the sections at the bottom.
+                  </div>
+                )}
+
+                {!editingId && (
+                  <FormField
+                    label={`Example sentence (${selectedApp.language.name})`}
+                    hint="Optional. More examples can be added after saving."
+                    className="md:col-span-2"
+                  >
+                    {(props) => (
+                      <input
+                        {...props}
+                        maxLength={1000}
+                        value={form.exampleText}
+                        onChange={(event) => setField("exampleText", event.target.value)}
+                        placeholder={isGerman ? "Der Bär schläft." : "Use the word in a short sentence"}
+                      />
+                    )}
+                  </FormField>
+                )}
 
                 <label className="space-y-1 text-sm">
                   <span className="font-medium">
@@ -2074,9 +2308,17 @@ useEffect(() => {
                 </section>
               )}
 
-              {/* ADVANCED GRAMMAR */}
+              {/* ADVANCED GRAMMAR + NOTES (rarely needed: collapsed) */}
 
-              <section className="space-y-3 rounded-xl border p-4">
+              <details
+                open={form.advancedGrammar.length > 0 || Boolean(form.notes)}
+                className="rounded-xl border p-4"
+              >
+                <summary className="cursor-pointer text-sm font-bold text-slate-700">
+                  More options: extra grammar and notes
+                </summary>
+                <div className="mt-4 space-y-4">
+              <section className="space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h3 className="text-sm font-bold">
@@ -2170,17 +2412,47 @@ useEffect(() => {
                   className="w-full rounded-lg border p-2.5"
                 />
               </label>
+                </div>
+              </details>
 
               {canWrite && (
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-50"
-                >
-                  {saving
-                    ? "Saving..."
-                    : "Save Vocabulary"}
-                </button>
+                <div className="sticky bottom-0 -mx-5 flex flex-wrap items-center justify-between gap-3 border-t bg-white/95 px-5 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+                  {!editingId ? (
+                    <label className="flex items-center gap-2 text-sm text-slate-600">
+                      <input
+                        type="checkbox"
+                        checked={addAnother}
+                        onChange={(event) => setAddAnother(event.target.checked)}
+                      />
+                      Save and add the next word (keeps category, lesson and language)
+                    </label>
+                  ) : (
+                    <span className="text-xs text-slate-500">Changes are saved only when you click Save.</span>
+                  )}
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={closeEditor}
+                      className="rounded-lg border px-4 py-2.5 text-sm"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={saving}
+                      className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-50"
+                    >
+                      {saving && <Loader2 className="h-4 w-4 animate-spin" />}
+                      {saving
+                        ? "Saving..."
+                        : editingId
+                          ? "Save changes"
+                          : addAnother
+                            ? "Save & add next"
+                            : "Create word"}
+                    </button>
+                  </div>
+                </div>
               )}
             </form>
 
@@ -2190,8 +2462,13 @@ useEffect(() => {
               <div className="grid gap-5 border-t pt-5 lg:grid-cols-2">
                 <section className="space-y-3">
                   <h3 className="font-bold">
-                    Translations
+                    Meanings
                   </h3>
+                  {(detail.translations?.length ?? 0) === 0 && (
+                    <p className="text-xs text-amber-700">
+                      No meaning yet. Learners need at least one.
+                    </p>
+                  )}
 
                   {detail.translations?.map(
                     (translation) => (
@@ -2239,6 +2516,7 @@ useEffect(() => {
                               onClick={() =>
                                 void removeTranslation(
                                   translation.id,
+                                  translation.meaning,
                                 )
                               }
                               className="text-red-600"
@@ -2259,17 +2537,23 @@ useEffect(() => {
                       className="space-y-3 rounded-lg bg-slate-50 p-3"
                     >
                       <select
-                        required
+                        aria-label="Meaning language"
                         value={translationLanguage}
-                        onChange={(event) =>
-                          setTranslationLanguage(
-                            event.target.value,
-                          )
-                        }
+                        onChange={(event) => {
+                          const languageId = event.target.value;
+                          setTranslationLanguage(languageId);
+                          // One meaning per language: open the saved one for editing.
+                          const existing = detail.translations?.find(
+                            (t) => t.languageId === languageId,
+                          );
+                          setEditingTranslationId(existing?.id ?? null);
+                          setTranslationMeaning(existing?.meaning ?? "");
+                          setTranslationNotes(existing?.notes ?? "");
+                        }}
                         className="w-full rounded-lg border bg-white p-2.5"
                       >
                         <option value="">
-                          Translation language
+                          Meaning language
                         </option>
 
                         {languages.map((language) => (
@@ -2283,7 +2567,8 @@ useEffect(() => {
                       </select>
 
                       <input
-                        required
+                        aria-label="Meaning"
+                        aria-invalid={Boolean(fieldErrors.translation)}
                         value={translationMeaning}
                         onChange={(event) =>
                           setTranslationMeaning(
@@ -2301,9 +2586,14 @@ useEffect(() => {
                             event.target.value,
                           )
                         }
-                        placeholder="Translation notes"
+                        placeholder="Notes (optional)"
+                        rows={2}
                         className="w-full rounded-lg border p-2.5"
                       />
+
+                      {fieldErrors.translation && (
+                        <p className="text-xs font-medium text-rose-600">{fieldErrors.translation}</p>
+                      )}
 
                       <button
                         type="submit"
@@ -2311,9 +2601,22 @@ useEffect(() => {
                         className="rounded-lg bg-slate-900 px-4 py-2 text-xs font-semibold text-white"
                       >
                         {editingTranslationId
-                          ? "Update Translation"
-                          : "Add Translation"}
+                          ? "Update meaning"
+                          : "Add meaning"}
                       </button>
+                      {editingTranslationId && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEditingTranslationId(null);
+                            setTranslationMeaning("");
+                            setTranslationNotes("");
+                          }}
+                          className="ml-2 text-xs text-slate-500 underline"
+                        >
+                          Cancel edit
+                        </button>
+                      )}
                     </form>
                   )}
                 </section>
@@ -2372,6 +2675,7 @@ useEffect(() => {
                             onClick={() =>
                               void removeExample(
                                 example.id,
+                                example.text,
                               )
                             }
                             className="text-red-600"
@@ -2391,7 +2695,7 @@ useEffect(() => {
                       className="space-y-3 rounded-lg bg-slate-50 p-3"
                     >
                       <select
-                        required
+                        aria-label="Example language"
                         value={exampleLanguage}
                         onChange={(event) =>
                           setExampleLanguage(
@@ -2415,7 +2719,9 @@ useEffect(() => {
                       </select>
 
                       <textarea
-                        required
+                        aria-label="Example sentence"
+                        aria-invalid={Boolean(fieldErrors.example)}
+                        rows={2}
                         value={exampleText}
                         onChange={(event) =>
                           setExampleText(
@@ -2433,9 +2739,14 @@ useEffect(() => {
                             event.target.value,
                           )
                         }
-                        placeholder="Translation Group (example-1)"
+                        placeholder="Translation group (optional, e.g. example-1)"
+                        title="Give the same group to a sentence and its translation so apps can show them together."
                         className="w-full rounded-lg border p-2.5"
                       />
+
+                      {fieldErrors.example && (
+                        <p className="text-xs font-medium text-rose-600">{fieldErrors.example}</p>
+                      )}
 
                       <button
                         type="submit"
@@ -2443,21 +2754,29 @@ useEffect(() => {
                         className="rounded-lg bg-slate-900 px-4 py-2 text-xs font-semibold text-white"
                       >
                         {editingExampleId
-                          ? "Update Example"
-                          : "Add Example"}
+                          ? "Update example"
+                          : "Add example"}
                       </button>
+                      {editingExampleId && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEditingExampleId(null);
+                            setExampleText("");
+                            setExampleGroup("");
+                          }}
+                          className="ml-2 text-xs text-slate-500 underline"
+                        >
+                          Cancel edit
+                        </button>
+                      )}
                     </form>
                   )}
                 </section>
               </div>
             )}
 
-            {!editingId && (
-              <p className="border-t pt-3 text-xs text-slate-500">
-                Save the vocabulary first to add
-                translations and example sentences.
-              </p>
-            )}
+
           </div>
         </div>
       )}

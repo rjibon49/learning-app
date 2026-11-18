@@ -1,5 +1,8 @@
 
 "use client";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { deleteResource } from "@/lib/api/delete";
+import { useAuth } from "@/lib/auth/auth-context";
 
 import {
   useCallback,
@@ -474,6 +477,8 @@ function downloadSample() {
 export default function BulkImportPage() {
   const { selectedApp, isLoadingApps } =
     useAppLevel();
+  const { admin } = useAuth();
+  const canRemoveJobs = admin?.role === "SUPER_ADMIN" || admin?.role === "ADMIN";
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -1304,6 +1309,7 @@ export default function BulkImportPage() {
                     <th className="px-4 py-3">Total</th>
                     <th className="px-4 py-3">Success</th>
                     <th className="px-4 py-3">Failed</th>
+                    <th className="px-4 py-3 text-right"><span className="sr-only">Actions</span></th>
                   </tr>
                 </thead>
 
@@ -1351,13 +1357,31 @@ export default function BulkImportPage() {
                       <td className="px-4 py-3 text-red-600">
                         {job.failedRows}
                       </td>
+
+                      <td className="px-4 py-3 text-right">
+                        {(job.status === "COMPLETED" || job.status === "FAILED") && (
+                          <DeleteActions
+                            compact
+                            itemName={job.filename}
+                            entity="import job"
+                            archiveLabel="Remove"
+                            canArchive={canRemoveJobs}
+                            archiveHelp="Only the job history row is removed. Words that were imported stay."
+                            permanentHelp="Only the job history row is removed. Words that were imported stay."
+                            onDelete={(permanent) =>
+                              deleteResource(`/imports/jobs/${encodeURIComponent(job.id)}`, permanent)
+                            }
+                            onDone={() => void loadJobs()}
+                          />
+                        )}
+                      </td>
                     </tr>
                   ))}
 
                   {jobs.length === 0 && (
                     <tr>
                       <td
-                        colSpan={5}
+                        colSpan={6}
                         className="p-10 text-center text-slate-500"
                       >
                         No import jobs found.

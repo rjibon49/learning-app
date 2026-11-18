@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 import type {
   Difficulty,
@@ -130,10 +131,9 @@ export function updateDeck(
 }
 
 export function deleteDeck(
-  deckId: string,
-): Promise<FlashcardDeck> {
+  deckId: string, permanent = false): Promise<FlashcardDeck> {
   return apiRequest(
-    `/admin/flashcards/decks/${encode(deckId)}`,
+    withPermanent(`/admin/flashcards/decks/${encode(deckId)}`, permanent),
     { method: "DELETE" },
   );
 }

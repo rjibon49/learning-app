@@ -1,4 +1,5 @@
 import { apiRequest } from './client';
+import { withPermanent } from "@/lib/api/delete";
 
 export type AdminRole = 'SUPER_ADMIN' | 'ADMIN' | 'CONTENT_EDITOR';
 
@@ -24,6 +25,6 @@ export async function updateAdmin(id: string, payload: any): Promise<AdminUser> 
   return apiRequest<AdminUser>(`/admins/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(payload) });
 }
 
-export async function deleteAdmin(id: string): Promise<void> {
-  return apiRequest<void>(`/admins/${encodeURIComponent(id)}`, { method: 'DELETE' });
+export async function deleteAdmin(id: string, permanent = false): Promise<void> {
+  return apiRequest<void>(withPermanent(`/admins/${encodeURIComponent(id)}`, permanent), { method: 'DELETE' });
 }

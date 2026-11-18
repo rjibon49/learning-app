@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export type PublicationStatus =
   | "DRAFT"
@@ -235,8 +236,8 @@ export function updateCourse(
   });
 }
 
-export function deleteCourse(id: string) {
-  return apiRequest<void>(`/admin/courses/${pathId(id)}`, {
+export function deleteCourse(id: string, permanent = false) {
+  return apiRequest<void>(withPermanent(`/admin/courses/${pathId(id)}`, permanent), {
     method: "DELETE",
   });
 }
@@ -290,9 +291,9 @@ export function updateModule(
   );
 }
 
-export function deleteModule(id: string) {
+export function deleteModule(id: string, permanent = false) {
   return apiRequest<void>(
-    `/admin/courses/modules/${pathId(id)}`,
+    withPermanent(`/admin/courses/modules/${pathId(id)}`, permanent),
     { method: "DELETE" },
   );
 }
@@ -339,9 +340,9 @@ export function updateLesson(
   );
 }
 
-export function deleteLesson(id: string) {
+export function deleteLesson(id: string, permanent = false) {
   return apiRequest<void>(
-    `/admin/courses/lessons/${pathId(id)}`,
+    withPermanent(`/admin/courses/lessons/${pathId(id)}`, permanent),
     { method: "DELETE" },
   );
 }

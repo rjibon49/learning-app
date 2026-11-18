@@ -18,6 +18,7 @@ import {
 } from "@/lib/auth/auth-context";
 
 import { AdminShell } from "@/components/layout/admin-shell";
+import { FeedbackProvider } from "@/components/ui/feedback-provider";
 
 const LOGIN_PATH = "/admin/login";
 const DASHBOARD_PATH = "/admin/dashboard";
@@ -102,9 +103,11 @@ export default function AdminRootLayout({
 }) {
   return (
     <AuthProvider>
-      <Suspense fallback={<LoadingScreen />}>
-        <AdminGuard>{children}</AdminGuard>
-      </Suspense>
+      <FeedbackProvider>
+        <Suspense fallback={<LoadingScreen />}>
+          <AdminGuard>{children}</AdminGuard>
+        </Suspense>
+      </FeedbackProvider>
     </AuthProvider>
   );
 }

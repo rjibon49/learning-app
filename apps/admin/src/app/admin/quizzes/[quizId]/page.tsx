@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useToast } from "@/components/ui/feedback-provider";
 import { useAuth } from "@/lib/auth/auth-context";
 
 import {
@@ -559,6 +561,8 @@ export default function QuizQuestionsPage() {
     quiz.status !== "PUBLISHED" &&
     quiz.status !== "ARCHIVED";
 
+  const toast = useToast();
+
   const canDelete =
     canWrite &&
     (
@@ -829,29 +833,18 @@ export default function QuizQuestionsPage() {
         });
       }
 
+      const wasEditing = Boolean(editingId);
       resetForm();
-      setMessage("Question saved successfully.");
+      toast.success(
+        wasEditing
+          ? "Question updated."
+          : "Question added. The form is cleared for the next one.",
+      );
       await reload();
     } catch (err) {
       setError(getError(err));
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function removeQuestion(id: string) {
-    if (!canDelete) return;
-
-    if (!window.confirm("Delete this question?")) {
-      return;
-    }
-
-    try {
-      await deleteQuestion(id);
-      await reload();
-      setMessage("Question deleted.");
-    } catch (err) {
-      setError(getError(err));
     }
   }
 
@@ -1434,19 +1427,16 @@ export default function QuizQuestionsPage() {
                   Edit
                 </button>
 
-                {canDelete && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      void removeQuestion(
-                        question.id,
-                      )
-                    }
-                    className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
-                  >
-                    Delete
-                  </button>
-                )}
+                <DeleteActions
+                  itemName={question.questionText || "Media-based question"}
+                  entity="question"
+                  archiveLabel="Delete"
+                  canArchive={canDelete}
+                  archiveHelp="The question is removed from this draft quiz. If learners already answered it, the API refuses — a Super Admin can delete it permanently instead."
+                  permanentHelp="Its answer options and every learner answer to it are removed too."
+                  onDelete={(permanent) => deleteQuestion(question.id, permanent)}
+                  onDone={() => void reload()}
+                />
               </div>
             )}
           </div>

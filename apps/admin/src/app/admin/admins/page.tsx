@@ -1,11 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Shield, Plus, Trash2, Edit3, X, UserCheck, UserX } from 'lucide-react';
+import { Shield, Plus, Edit3, X, UserCheck, UserX } from 'lucide-react';
+import { useAuth } from '@/lib/auth/auth-context';
+import { DeleteActions } from '@/components/ui/delete-actions';
+import { useToast } from '@/components/ui/feedback-provider';
+import { apiFieldErrors } from '@/components/ui/form-field';
 import { getAdmins, createAdmin, updateAdmin, deleteAdmin, type AdminUser, type AdminRole } from '@/lib/api/admins';
 import { EmptyState, ErrorState, LoadingState } from '@/components/feedback/state-views';
 
 export default function AdminManagementPage() {
+  const { admin: currentAdmin } = useAuth();
+  const toast = useToast();
+  const [formError, setFormError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,6 +51,8 @@ export default function AdminManagementPage() {
     setPassword('');
     setRole('CONTENT_EDITOR');
     setIsActive(true);
+    setFormError('');
+    setFieldErrors({});
     setIsModalOpen(true);
   };
 
@@ -53,37 +63,49 @@ export default function AdminManagementPage() {
     setPassword(''); // Leave blank unless changing
     setRole(admin.role);
     setIsActive(admin.isActive);
+    setFormError('');
+    setFieldErrors({});
     setIsModalOpen(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+
+    const problems: Record<string, string> = {};
+    if (!editingAdmin && !/^\S+@\S+\.\S+$/.test(email.trim())) problems.email = 'Enter a valid email address.';
+    if (displayName.trim().length < 2) problems.displayName = 'Enter a display name (at least 2 characters).';
+    if (!editingAdmin && !password) problems.password = 'Set a password for the new admin.';
+    if (password && password.length < 12) problems.password = 'Use at least 12 characters.';
+    if (editingAdmin && editingAdmin.id === currentAdmin?.id && (role !== editingAdmin.role || !isActive)) {
+      problems.role = 'You cannot change your own role or block yourself.';
+    }
+    setFieldErrors(problems);
+    setFormError('');
+    if (Object.keys(problems).length) return;
+
     setSubmitting(true);
 
     try {
       if (editingAdmin) {
-        const payload: any = { displayName, role, isActive };
+        const payload: { displayName: string; role: AdminRole; isActive: boolean; password?: string } = {
+          displayName: displayName.trim(), role, isActive,
+        };
         if (password) payload.password = password;
         await updateAdmin(editingAdmin.id, payload);
       } else {
-        await createAdmin({ email, displayName, password, role });
+        await createAdmin({ email: email.trim().toLowerCase(), displayName: displayName.trim(), password, role });
       }
       await loadAdmins();
       setIsModalOpen(false);
+      setPassword('');
+      toast.success(editingAdmin ? 'Administrator updated.' : 'Administrator created. Share the password with them securely.');
     } catch (err) {
-      alert('Failed to save administrator');
+      // Show the real reason (duplicate email, weak password...) instead of a generic alert.
+      setFieldErrors(apiFieldErrors(err));
+      setFormError(err instanceof Error ? err.message : 'Failed to save administrator');
     } finally {
       setSubmitting(false);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this administrator?')) return;
-    try {
-      await deleteAdmin(id);
-      setAdmins(admins.filter(a => a.id !== id));
-    } catch (err) {
-      alert('Failed to delete administrator');
     }
   };
 
@@ -143,12 +165,26 @@ export default function AdminManagementPage() {
                   {admin.lastLoginAt ? new Date(admin.lastLoginAt).toLocaleString() : 'Never'}
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <button onClick={() => openEditModal(admin)} className="p-2 text-slate-400 hover:text-indigo-600 rounded mr-1">
+                  <div className="inline-flex items-center gap-1">
+                  <button type="button" aria-label={`Edit ${admin.email}`} onClick={() => openEditModal(admin)} className="p-2 text-slate-400 hover:text-indigo-600 rounded mr-1">
                     <Edit3 className="h-4 w-4" />
                   </button>
-                  <button onClick={() => handleDelete(admin.id)} className="p-2 text-slate-400 hover:text-rose-600 rounded">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                  {admin.id !== currentAdmin?.id && (
+                    <DeleteActions
+                      compact
+                      itemName={admin.email}
+                      entity="administrator"
+                      archiveLabel="Deactivate"
+                      hideArchive={!admin.isActive}
+                      archiveHelp="They are signed out and cannot log in. Their audit history stays. You can activate them again from Edit."
+                      permanentHelp={admin.isActive
+                        ? 'Deactivate first — the API only permanently deletes admins that are already deactivated.'
+                        : 'Their audit-log entries are kept, but no longer linked to an admin account.'}
+                      onDelete={(permanent) => deleteAdmin(admin.id, permanent)}
+                      onDone={() => void loadAdmins()}
+                    />
+                  )}
+                  </div>
                 </td>
               </tr>
             ))}
@@ -165,22 +201,28 @@ export default function AdminManagementPage() {
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600"><X className="h-5 w-5" /></button>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="p-6 space-y-4">
+              {formError && (
+                <p role="alert" className="rounded-md border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">{formError}</p>
+              )}
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
-                <input required type="email" disabled={!!editingAdmin} value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm disabled:bg-slate-100" placeholder="admin@cms.com" />
+                <input required type="email" disabled={!!editingAdmin} value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" className="w-full rounded-md border border-slate-300 p-2.5 text-sm disabled:bg-slate-100" placeholder="admin@cms.com" />
+                {fieldErrors.email && <p className="mt-1 text-xs font-medium text-rose-600">{fieldErrors.email}</p>}
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Display Name *</label>
                 <input required type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm" placeholder="John Doe" />
+                {fieldErrors.displayName && <p className="mt-1 text-xs font-medium text-rose-600">{fieldErrors.displayName}</p>}
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">
                   Password {editingAdmin ? '(Leave blank to keep current)' : '*'}
                 </label>
-                <input type="password" required={!editingAdmin} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm" placeholder="••••••••" />
+                <input type="password" autoComplete="new-password" required={!editingAdmin} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-md border border-slate-300 p-2.5 text-sm" placeholder="At least 12 characters" />
+                {fieldErrors.password && <p className="mt-1 text-xs font-medium text-rose-600">{fieldErrors.password}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -191,6 +233,7 @@ export default function AdminManagementPage() {
                     <option value="ADMIN">Admin</option>
                     <option value="SUPER_ADMIN">Super Admin</option>
                   </select>
+                  {fieldErrors.role && <p className="mt-1 text-xs font-medium text-rose-600">{fieldErrors.role}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Status</label>

@@ -1,7 +1,13 @@
 import { apiRequest } from './client';
 
-export type SubscriptionPlatform = 'GOOGLE_PLAY' | 'APPLE_APP_STORE' | 'STRIPE' | 'MANUAL';
-export type SubscriptionStatus = 'ACTIVE' | 'TRIALING' | 'EXPIRED' | 'CANCELED' | 'GRACE_PERIOD';
+export type SubscriptionPlatform = string;
+export type SubscriptionStatus =
+  | 'PENDING'
+  | 'ACTIVE'
+  | 'EXPIRED'
+  | 'CANCELLED'
+  | 'TRIAL'
+  | 'REFUNDED';
 
 export interface Subscription {
   id: string;
@@ -12,18 +18,35 @@ export interface Subscription {
   productId: string;
   externalId?: string | null;
   status: SubscriptionStatus;
-  startedAt: string;
+  startedAt?: string | null;
   expiresAt?: string | null;
   autoRenew: boolean;
-  user?: { email: string };
-  app?: { name: string };
+  cancelAtPeriodEnd?: boolean;
+  user?: { id: string; email: string | null; displayName?: string | null };
+  app?: { id: string; name: string };
 }
 
-export async function getSubscriptions(appId?: string): Promise<Subscription[]> {
-  const query = appId ? `?appId=${encodeURIComponent(appId)}` : '';
-  return apiRequest<Subscription[]>(`/subscriptions${query}`);
+export interface SubscriptionPage {
+  data: Subscription[];
+  pagination: { page: number; limit: number; total: number; totalPages: number };
 }
 
-export async function deleteSubscription(id: string): Promise<void> {
-  return apiRequest<void>(`/subscriptions/${encodeURIComponent(id)}`, { method: 'DELETE' });
+/**
+ * Admin list: GET /admin/subscriptions (paginated).
+ * Subscriptions are billing records and have no delete route on purpose;
+ * cancellations and refunds have their own pages.
+ */
+export async function getSubscriptions(params: {
+  appId?: string;
+  status?: SubscriptionStatus;
+  page?: number;
+  limit?: number;
+} = {}): Promise<SubscriptionPage> {
+  const query = new URLSearchParams({
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 20),
+  });
+  if (params.appId) query.set('appId', params.appId);
+  if (params.status) query.set('status', params.status);
+  return apiRequest<SubscriptionPage>(`/admin/subscriptions?${query.toString()}`);
 }

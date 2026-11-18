@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export type Difficulty = "EASY" | "MEDIUM" | "HARD";
 export type PublicationStatus =
@@ -172,9 +173,9 @@ export function updateQuiz(
   );
 }
 
-export function deleteQuiz(quizId: string): Promise<Quiz> {
+export function deleteQuiz(quizId: string, permanent = false): Promise<Quiz> {
   return apiRequest<Quiz>(
-    `/admin/quizzes/${id(quizId)}`,
+    withPermanent(`/admin/quizzes/${id(quizId)}`, permanent),
     { method: "DELETE" },
   );
 }
@@ -213,10 +214,9 @@ export function updateQuestion(
 }
 
 export function deleteQuestion(
-  questionId: string,
-): Promise<unknown> {
+  questionId: string, permanent = false): Promise<unknown> {
   return apiRequest(
-    `/admin/quizzes/questions/${id(questionId)}`,
+    withPermanent(`/admin/quizzes/questions/${id(questionId)}`, permanent),
     { method: "DELETE" },
   );
 }

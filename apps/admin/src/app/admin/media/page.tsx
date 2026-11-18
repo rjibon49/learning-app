@@ -1,5 +1,6 @@
 
 "use client";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import {
   useCallback,
@@ -362,6 +363,8 @@ function MediaCard({
 
 export default function AdminMediaPage() {
   const { admin } = useAuth();
+  const confirm = useConfirm();
+  const toast = useToast();
   const { selectedApp } = useAppLevel();
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -597,9 +600,19 @@ export default function AdminMediaPage() {
   async function handleDelete(asset: MediaAsset) {
     if (!canDelete) return;
 
-    const confirmed = window.confirm(
-      `Delete "${asset.originalName ?? asset.id}"?\n\nThis cannot be undone.`,
-    );
+    const name = asset.originalName ?? asset.id;
+    const confirmed = await confirm({
+      title: "Delete this file?",
+      message: (
+        <>
+          <p><strong className="break-all">{name}</strong> is removed from storage. This cannot be undone.</p>
+          <p className="mt-2">If a word, lesson or announcement still uses it, the delete is refused — remove it there first.</p>
+        </>
+      ),
+      confirmLabel: "Delete file",
+      tone: "danger",
+      requireText: "DELETE",
+    });
 
     if (!confirmed) return;
 
@@ -608,12 +621,10 @@ export default function AdminMediaPage() {
 
     try {
       await deleteMediaAsset(asset.id);
-
-      setMessage("Media deleted successfully.");
-
+      toast.success(`"${name}" deleted.`);
       await loadMedia();
     } catch (err) {
-      setError(getError(err));
+      toast.error(getError(err));
     }
   }
 

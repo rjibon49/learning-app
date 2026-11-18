@@ -1,6 +1,9 @@
 
 "use client";
 
+
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm } from "@/components/ui/feedback-provider";
 import {
   useCallback,
   useEffect,
@@ -146,6 +149,7 @@ function getAvailability(item: PromoCode): string {
 
 export default function AdminPromotionsPage() {
   const { admin } = useAuth();
+  const confirm = useConfirm();
 
   const canManage =
     admin?.role === "SUPER_ADMIN" ||
@@ -355,10 +359,11 @@ export default function AdminPromotionsPage() {
     const next = !item.isActive;
 
     if (
-      next &&
-      !window.confirm(
-        `Enable promotion "${item.code}"?`,
-      )
+      !(await confirm(
+        next
+          ? { title: `Enable promotion "${item.code}"?`, message: "Learners can redeem it right away.", confirmLabel: "Enable" }
+          : { title: `Disable promotion "${item.code}"?`, message: "It can no longer be redeemed. Usage history stays.", confirmLabel: "Disable" },
+      ))
     ) {
       return;
     }
@@ -373,31 +378,6 @@ export default function AdminPromotionsPage() {
           ? "Promotion enabled."
           : "Promotion disabled.",
       );
-      await reload();
-    } catch (err) {
-      setError(errorMessage(err));
-    } finally {
-      setProcessingId(null);
-    }
-  }
-
-  async function disable(item: PromoCode) {
-    if (!canManage || !item.isActive) return;
-
-    if (
-      !window.confirm(
-        `Disable "${item.code}"? Existing usage history will remain.`,
-      )
-    ) {
-      return;
-    }
-
-    setProcessingId(item.id);
-    setError("");
-
-    try {
-      await deletePromoCode(item.id);
-      setMessage("Promotion disabled.");
       await reload();
     } catch (err) {
       setError(errorMessage(err));
@@ -804,22 +784,16 @@ export default function AdminPromotionsPage() {
                               : "Enable"}
                           </button>
 
-                          {item.isActive && (
-                            <button
-                              type="button"
-                              title="Disable promotion"
-                              aria-label={`Disable ${item.code}`}
-                              disabled={
-                                processingId === item.id
-                              }
-                              onClick={() =>
-                                void disable(item)
-                              }
-                              className="rounded-lg border p-2 text-red-600 disabled:opacity-40"
-                            >
-                              <ShieldOff className="h-4 w-4" />
-                            </button>
-                          )}
+                          <DeleteActions
+                            compact
+                            itemName={item.code}
+                            entity="promotion"
+                            hideArchive
+                            permanentHelp="Refused if the code was already redeemed — disable it instead to keep the history."
+                            disabled={processingId === item.id}
+                            onDelete={(permanent) => deletePromoCode(item.id, permanent)}
+                            onDone={() => void reload()}
+                          />
                         </div>
                       )}
                     </td>

@@ -73,9 +73,12 @@ async function proxy(request: NextRequest, segments: string[]) {
     const responseHeaders = new Headers({ 'cache-control': 'no-store, private' });
     const type = upstreamResponse.headers.get('content-type');
     if (type) responseHeaders.set('content-type', type);
-    // Preserve the upstream HttpOnly refresh cookie and its Path attributes.
-    const setCookie = upstreamResponse.headers.get('set-cookie');
-    if (setCookie) responseHeaders.append('set-cookie', setCookie);
+    // Preserve the upstream HttpOnly refresh cookie(s) and their Path attributes.
+    // headers.get() joins several Set-Cookie headers with ", " which breaks
+    // cookies whose Expires contains a comma; forward each one separately.
+    for (const cookieHeader of upstreamResponse.headers.getSetCookie()) {
+      responseHeaders.append('set-cookie', cookieHeader);
+    }
 
     return new NextResponse(upstreamResponse.body, {
       status: upstreamResponse.status,

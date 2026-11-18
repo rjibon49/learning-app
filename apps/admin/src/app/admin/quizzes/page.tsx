@@ -8,6 +8,9 @@ import {
   type FormEvent,
 } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import { useAuth } from "@/lib/auth/auth-context";
 import { useAppLevel } from "@/lib/auth/app-level-context";
@@ -73,6 +76,10 @@ function errorText(error: unknown): string {
 export default function QuizzesPage() {
   const { admin } = useAuth();
   const { selectedApp } = useAppLevel();
+  const router = useRouter();
+  const confirm = useConfirm();
+  const toast = useToast();
+  const [formError, setFormError] = useState("");
 
   const canEdit = Boolean(admin);
   const canArchive =
@@ -311,10 +318,11 @@ export default function QuizzesPage() {
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!selectedApp || !canEdit) return;
+    if (!selectedApp || !canEdit || saving) return;
 
     setSaving(true);
     setError("");
+    setFormError("");
     setMessage("");
 
     try {
@@ -349,19 +357,23 @@ export default function QuizzesPage() {
 
       if (editing) {
         await updateQuiz(editing.id, payload);
+        setShowEditor(false);
+        toast.success(`Quiz "${title}" updated.`);
+        await reload();
       } else {
-        await createQuiz({
+        const created = await createQuiz({
           ...payload,
           appId: selectedApp.id,
           status: "DRAFT",
         });
+        setShowEditor(false);
+        toast.success(`Quiz "${title}" created. Now add its questions.`);
+        // The next step is always adding questions.
+        router.push(`/admin/quizzes/${created.id}`);
       }
-
-      setShowEditor(false);
-      setMessage("Quiz saved successfully.");
-      await reload();
     } catch (err) {
-      setError(errorText(err));
+      // Inside the dialog: the page message is hidden behind the overlay.
+      setFormError(errorText(err));
     } finally {
       setSaving(false);
     }
@@ -373,22 +385,35 @@ export default function QuizzesPage() {
   ) {
     if (!canEdit) return;
 
+    const questionCount = quiz._count?.questions ?? 0;
+    const ok = await confirm(
+      next === "PUBLISHED"
+        ? {
+            title: `Publish "${quiz.title}"?`,
+            message:
+              questionCount === 0
+                ? "This quiz has no questions yet. Learners would see an empty quiz."
+                : `Learners will see this quiz (${questionCount} question${questionCount === 1 ? "" : "s"}).`,
+            confirmLabel: "Publish",
+            tone: questionCount === 0 ? "danger" : "default",
+          }
+        : {
+            title: `Unpublish "${quiz.title}"?`,
+            message: "It goes back to Draft and learners stop seeing it.",
+            confirmLabel: "Unpublish",
+          },
+    );
+    if (!ok) return;
+
     setError("");
     setMessage("");
 
     try {
-      if (next === "ARCHIVED") {
-        if (!canArchive) return;
-        if (!window.confirm(`Archive "${quiz.title}"?`)) return;
-        await deleteQuiz(quiz.id);
-      } else {
-        await updateQuiz(quiz.id, { status: next });
-      }
-
-      setMessage(`Quiz status changed to ${next}.`);
+      await updateQuiz(quiz.id, { status: next });
+      toast.success(next === "PUBLISHED" ? "Quiz published." : "Quiz moved back to Draft.");
       await reload();
     } catch (err) {
-      setError(errorText(err));
+      toast.error(errorText(err));
     }
   }
 
@@ -534,19 +559,19 @@ export default function QuizzesPage() {
                               : "Publish"}
                           </button>
 
-                          {canArchive && (
-                            <button
-                              type="button"
-                              onClick={() =>
-                                void changeStatus(quiz, "ARCHIVED")
-                              }
-                              className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
-                            >
-                              Archive
-                            </button>
-                          )}
                         </>
                       )}
+
+                      <DeleteActions
+                        itemName={quiz.title}
+                        entity="quiz"
+                        canArchive={canArchive}
+                        hideArchive={quiz.status === "ARCHIVED"}
+                        archiveHelp="Status becomes ARCHIVED: learners stop seeing it, past attempts are kept."
+                        permanentHelp="All questions, answer options and learner attempts for this quiz are removed too."
+                        onDelete={(permanent) => deleteQuiz(quiz.id, permanent)}
+                        onDone={() => void reload()}
+                      />
                     </div>
                   </td>
                 </tr>
@@ -594,6 +619,12 @@ export default function QuizzesPage() {
             <h2 className="text-lg font-bold">
               {editing ? "Edit Quiz" : "Create Quiz"}
             </h2>
+
+            {formError && (
+              <p role="alert" className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {formError}
+              </p>
+            )}
 
             <label className="block space-y-1 text-sm">
               <span>Title</span>
@@ -803,7 +834,7 @@ export default function QuizzesPage() {
             </section>
 
             <p className="text-xs text-slate-500">
-              New quizzes start as Draft. Add questions before publishing.
+              New quizzes start as Draft. After saving you go straight to adding questions.
             </p>
 
             <div className="flex justify-end gap-2">
@@ -820,7 +851,7 @@ export default function QuizzesPage() {
                 disabled={saving || linkLoading}
                 className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white disabled:opacity-50"
               >
-                {saving ? "Saving..." : "Save Quiz"}
+                {saving ? "Saving..." : editing ? "Save changes" : "Create & add questions"}
               </button>
             </div>
           </form>

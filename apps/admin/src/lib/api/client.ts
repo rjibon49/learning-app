@@ -22,6 +22,8 @@ export class ApiClientError extends Error {
     message: string,
     public readonly code: string = 'API_ERROR',
     public readonly details?: string[],
+    /** Field-level messages from API validation (Zod flattenError). */
+    public readonly fieldErrors: Record<string, string> = {},
   ) {
     super(message);
     this.name = 'ApiClientError';
@@ -45,18 +47,39 @@ function errorText(status: number, message?: string): string {
 async function responseError(res: Response): Promise<ApiClientError> {
   let message: string | undefined;
   let details: string[] | undefined;
+  const fieldErrors: Record<string, string> = {};
   try {
     const payload: unknown = await res.json();
     if (payload && typeof payload === 'object') {
-      const body = payload as { message?: unknown };
+      const body = payload as { message?: unknown; formErrors?: unknown; fieldErrors?: unknown };
       if (typeof body.message === 'string') message = body.message;
       else if (Array.isArray(body.message)) {
         details = body.message.filter((x): x is string => typeof x === 'string');
         message = details[0];
       }
+      // API validation errors: { formErrors: string[], fieldErrors: { field: string[] } }
+      if (body.fieldErrors && typeof body.fieldErrors === 'object') {
+        for (const [key, value] of Object.entries(body.fieldErrors as Record<string, unknown>)) {
+          const first = Array.isArray(value) ? value.find((x) => typeof x === 'string') : undefined;
+          if (typeof first === 'string') fieldErrors[key] = first;
+        }
+      }
+      if (Array.isArray(body.formErrors) && !message) {
+        const first = body.formErrors.find((x): x is string => typeof x === 'string');
+        if (first) message = first;
+      }
+      const fieldList = Object.entries(fieldErrors).map(([k, v]) => `${k}: ${v}`);
+      if (fieldList.length) {
+        details = [...(details ?? []), ...fieldList];
+        if (!message) {
+          message = fieldList.length === 1
+            ? fieldList[0]
+            : `Please fix ${fieldList.length} fields: ${Object.keys(fieldErrors).join(', ')}`;
+        }
+      }
     }
   } catch { /* Non-JSON response */ }
-  return new ApiClientError(res.status, errorText(res.status, message), `HTTP_${res.status}`, details);
+  return new ApiClientError(res.status, errorText(res.status, message), `HTTP_${res.status}`, details, fieldErrors);
 }
 
 async function decodeResponse<T>(res: Response): Promise<T> {

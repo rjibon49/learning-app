@@ -1,6 +1,9 @@
 
 "use client";
 
+
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm } from "@/components/ui/feedback-provider";
 import {
   useCallback,
   useEffect,
@@ -116,6 +119,7 @@ function createPayload(
 
 export default function AdminAdsPage() {
   const { admin } = useAuth();
+  const confirm = useConfirm();
   const { selectedApp, isLoadingApps } = useAppLevel();
 
   const canManage =
@@ -309,9 +313,11 @@ export default function AdminAdsPage() {
 
     if (
       next &&
-      !window.confirm(
-        "Enable this ad configuration? Ads may appear after the client SDK is integrated.",
-      )
+      !(await confirm({
+        title: "Enable this ad configuration?",
+        message: "Ads may appear in the app once the client SDK is integrated.",
+        confirmLabel: "Enable",
+      }))
     ) {
       return;
     }
@@ -339,35 +345,13 @@ export default function AdminAdsPage() {
     }
   }
 
-  async function disableConfig(config: AdConfig) {
-    if (!canManage) return;
-
-    if (
-      !window.confirm(
-        `Disable ${config.provider} configuration for ${config.platform}?`,
-      )
-    ) {
-      return;
+  /** Called by DeleteActions after a safe or permanent delete. */
+  async function afterDelete(config: AdConfig) {
+    if (editing?.id === config.id) {
+      setEditing(null);
+      setForm(emptyForm());
     }
-
-    setProcessingId(config.id);
-    setError("");
-
-    try {
-      await deleteAdConfig(config.id);
-      setMessage("Ad configuration disabled.");
-
-      if (editing?.id === config.id) {
-        setEditing(null);
-        setForm(emptyForm());
-      }
-
-      await reload();
-    } catch (err) {
-      setError(getError(err));
-    } finally {
-      setProcessingId(null);
-    }
+    await reload();
   }
 
   async function copyValue(value: string) {
@@ -715,20 +699,18 @@ export default function AdminAdsPage() {
                           )}
                         </button>
 
-                        <button
-                          type="button"
-                          title="Disable configuration"
-                          aria-label="Disable ad configuration"
-                          disabled={
-                            processingId === config.id
-                          }
-                          onClick={() =>
-                            void disableConfig(config)
-                          }
-                          className="rounded-lg border p-2 text-red-600 disabled:opacity-40"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
+                        <DeleteActions
+                          compact
+                          itemName={`${config.provider} · ${config.platform}`}
+                          entity="ad configuration"
+                          archiveLabel="Disable"
+                          hideArchive={!config.isEnabled}
+                          archiveHelp="No ads are served with this configuration. You can enable it again later."
+                          permanentHelp="The ad configuration is removed."
+                          disabled={processingId === config.id}
+                          onDelete={(permanent) => deleteAdConfig(config.id, permanent)}
+                          onDone={() => void afterDelete(config)}
+                        />
                       </>
                     )}
                   </div>

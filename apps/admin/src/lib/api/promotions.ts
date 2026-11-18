@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export interface PromoCode {
   id: string;
@@ -118,10 +119,9 @@ export function togglePromoCodeStatus(
 
 // Current backend soft-disables the code.
 export async function deletePromoCode(
-  id: string,
-): Promise<void> {
+  id: string, permanent = false): Promise<void> {
   await apiRequest(
-    `${BASE}/${encodeURIComponent(id)}`,
+    withPermanent(`${BASE}/${encodeURIComponent(id)}`, permanent),
     { method: "DELETE" },
   );
 }

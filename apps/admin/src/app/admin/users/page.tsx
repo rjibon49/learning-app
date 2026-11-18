@@ -2,65 +2,95 @@
 
 import React, { useEffect, useState } from 'react';
 import { Ban, CheckCircle, Search, Users, Flame } from 'lucide-react';
-import { getUsers, toggleUserStatus, type User } from '@/lib/api/users';
+import { getUsers, toggleUserStatus, USERS_PAGE_SIZE, type User } from '@/lib/api/users';
+import { deleteResource } from '@/lib/api/delete';
+import { DeleteActions } from '@/components/ui/delete-actions';
+import { useConfirm, useToast } from '@/components/ui/feedback-provider';
 import { EmptyState, ErrorState, LoadingState } from '@/components/feedback/state-views';
 
 export default function AdminUsersPage() {
+  const confirm = useConfirm();
+  const toast = useToast();
   const [users, setUsers] = useState<User[]>([]);
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('');
   const [processingId, setProcessingId] = useState<string | null>(null);
+  const [revision, setRevision] = useState(0);
+
+  // Debounce typing, then search on the server (the list is no longer limited
+  // to the first 100 learners that happened to be loaded).
+  useEffect(() => {
+    const timer = window.setTimeout(() => setQuery(search.trim()), 350);
+    return () => window.clearTimeout(timer);
+  }, [search]);
 
   useEffect(() => {
-    loadUsers();
-  }, []);
+    let live = true;
+    void getUsers({ search: query })
+      .then((data) => {
+        if (!live) return;
+        setUsers(data);
+        setHasMore(data.length === USERS_PAGE_SIZE);
+        setError(null);
+      })
+      .catch((err: unknown) => {
+        if (live) setError(err instanceof Error ? err.message : 'Failed to load users');
+      })
+      .finally(() => {
+        if (live) setLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [query, revision]);
 
-  useEffect(() => {
-    if (!search.trim()) {
-      setFilteredUsers(users);
-    } else {
-      const lower = search.toLowerCase();
-      setFilteredUsers(
-        users.filter(
-          (u) =>
-            u.displayName?.toLowerCase().includes(lower) ||
-            u.email?.toLowerCase().includes(lower) ||
-            u.referralCode?.toLowerCase().includes(lower) // Search by referral code as well
-        )
-      );
-    }
-  }, [search, users]);
+  const loadUsers = () => setRevision((n) => n + 1);
 
-  const loadUsers = async () => {
+  const loadMore = async () => {
+    setLoadingMore(true);
     try {
-      const data = await getUsers();
-      setUsers(data);
-      setFilteredUsers(data);
+      const data = await getUsers({ search: query, skip: users.length });
+      setUsers((current) => [...current, ...data.filter((u) => !current.some((c) => c.id === u.id))]);
+      setHasMore(data.length === USERS_PAGE_SIZE);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load users');
+      toast.error(err instanceof Error ? err.message : 'Failed to load more users');
     } finally {
-      setLoading(false);
+      setLoadingMore(false);
     }
   };
 
-  const handleToggleStatus = async (id: string, currentStatus: boolean) => {
-    if (!confirm(`Are you sure you want to ${currentStatus ? 'block' : 'unblock'} this user?`)) return;
-    
-    setProcessingId(id);
+  const filteredUsers = users;
+
+  const handleToggleStatus = async (user: User) => {
+    const blocking = user.isActive;
+    const ok = await confirm({
+      title: `${blocking ? 'Block' : 'Unblock'} ${user.email ?? user.displayName ?? 'this learner'}?`,
+      message: blocking
+        ? 'They are signed out on every device and cannot log in. Progress is kept.'
+        : 'They can sign in again.',
+      confirmLabel: blocking ? 'Block' : 'Unblock',
+      tone: blocking ? 'danger' : 'default',
+    });
+    if (!ok) return;
+
+    setProcessingId(user.id);
     try {
-      const updatedUser = await toggleUserStatus(id, !currentStatus);
-      setUsers(users.map((u) => (u.id === id ? updatedUser : u)));
+      const updatedUser = await toggleUserStatus(user.id, !blocking);
+      setUsers((current) => current.map((u) => (u.id === user.id ? { ...u, ...updatedUser } : u)));
+      toast.success(blocking ? 'Learner blocked.' : 'Learner unblocked.');
     } catch (err) {
-      alert('Failed to update user status');
+      toast.error(err instanceof Error ? err.message : 'Failed to update user status');
     } finally {
       setProcessingId(null);
     }
   };
 
   if (loading) return <LoadingState label="Loading users..." />;
-  if (error) return <ErrorState message={error} onRetry={loadUsers} />;
+  if (error && users.length === 0) return <ErrorState message={error} onRetry={loadUsers} />;
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
@@ -78,7 +108,7 @@ export default function AdminUsersPage() {
         <Search className="h-5 w-5 text-slate-400" />
         <input
           type="text"
-          placeholder="Search by name, email, or referral code..."
+          placeholder="Search by name or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1 text-sm outline-none placeholder:text-slate-400 bg-transparent"
@@ -103,8 +133,8 @@ export default function AdminUsersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
-              {filteredUsers.map((user: any) => {
-                const isAdFree = user.adFreeUntil && new Date(user.adFreeUntil) > new Date();
+              {filteredUsers.map((user) => {
+                const isAdFree = Boolean(user.adFreeUntil && new Date(user.adFreeUntil) > new Date());
                 
                 return (
                   <tr key={user.id} className="hover:bg-slate-50 transition-colors">
@@ -151,7 +181,7 @@ export default function AdminUsersPage() {
                         </div>
                         {isAdFree ? (
                           <div className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full shadow-sm">
-                            Ad-Free till: {new Date(user.adFreeUntil).toLocaleDateString()}
+                            Ad-Free till: {new Date(user.adFreeUntil ?? '').toLocaleDateString()}
                           </div>
                         ) : (
                           <div className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
@@ -161,8 +191,10 @@ export default function AdminUsersPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
+                      <div className="flex flex-col items-end gap-2">
                       <button
-                        onClick={() => handleToggleStatus(user.id, user.isActive)}
+                        type="button"
+                        onClick={() => void handleToggleStatus(user)}
                         disabled={processingId === user.id}
                         className={`inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-xs font-bold transition-colors shadow-sm disabled:opacity-50 border ${
                           user.isActive
@@ -176,12 +208,33 @@ export default function AdminUsersPage() {
                           <><CheckCircle className="h-4 w-4" /> Unblock Access</>
                         )}
                       </button>
+                      <DeleteActions
+                        itemName={user.email ?? user.displayName ?? user.id}
+                        entity="learner account"
+                        hideArchive
+                        permanentHelp="Their account and personal data are deleted. If they have payments, the account is anonymised instead so billing records stay valid."
+                        onDelete={(permanent) => deleteResource(`/users/${encodeURIComponent(user.id)}`, permanent)}
+                        onDone={() => setUsers((current) => current.filter((u) => u.id !== user.id))}
+                      />
+                      </div>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          {hasMore && (
+            <div className="border-t border-slate-100 p-4 text-center">
+              <button
+                type="button"
+                disabled={loadingMore}
+                onClick={() => void loadMore()}
+                className="rounded-md border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
+              >
+                {loadingMore ? 'Loading...' : `Load more (showing ${users.length})`}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

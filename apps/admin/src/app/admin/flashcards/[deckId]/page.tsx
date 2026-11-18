@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import { useAuth } from "@/lib/auth/auth-context";
 import { useAppLevel } from "@/lib/auth/app-level-context";
 import { Pagination } from "@/components/ui/pagination";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import {
   getDeck,
@@ -42,6 +43,8 @@ export default function DeckItemsPage() {
   const deckId = params.deckId;
   const { admin } = useAuth();
   const { selectedApp } = useAppLevel();
+  const confirm = useConfirm();
+  const toast = useToast();
 
   const [deck, setDeck] = useState<FlashcardDeck | null>(null);
   const [items, setItems] = useState<FlashcardDeckItem[]>([]);
@@ -105,11 +108,12 @@ export default function DeckItemsPage() {
       setWords(result.data);
       setWordPagination(result.pagination);
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Vocabulary search failed",
       );
     }
-  }, [selectedApp, pickerOpen, wordSearch, wordPage]);
+
+  }, [selectedApp, pickerOpen, wordSearch, wordPage, toast]);
 
   useEffect(() => {
     void loadVocabulary();
@@ -122,13 +126,15 @@ export default function DeckItemsPage() {
     setError("");
 
     try {
+      const count = selectedIds.length;
       await addDeckItems(deckId, selectedIds);
       setSelectedIds([]);
       setPickerOpen(false);
-      setMessage("Vocabulary added to deck.");
+      toast.success(`${count} word${count === 1 ? "" : "s"} added to the deck.`);
       await reload();
     } catch (err) {
-      setError(
+      // Keep the picker open with the selection so nothing is lost.
+      toast.error(
         err instanceof Error ? err.message : "Unable to add vocabulary",
       );
     } finally {
@@ -136,16 +142,22 @@ export default function DeckItemsPage() {
     }
   }
 
-  async function removeWord(itemId: string) {
-    if (!canEdit || !window.confirm("Remove this word from the deck?")) {
-      return;
-    }
+  async function removeWord(itemId: string, term: string) {
+    if (!canEdit) return;
+    const ok = await confirm({
+      title: "Remove this card from the deck?",
+      message: <p><strong>{term}</strong> is removed from this deck only. The word stays in the vocabulary list.</p>,
+      confirmLabel: "Remove",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     try {
       await removeDeckItem(deckId, itemId);
+      toast.success(`"${term}" removed from the deck.`);
       await reload();
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Unable to remove word",
       );
     }
@@ -240,7 +252,7 @@ export default function DeckItemsPage() {
                 {canEdit && (
                   <button
                     type="button"
-                    onClick={() => void removeWord(item.id)}
+                    onClick={() => void removeWord(item.id, vocab.term)}
                     className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
                   >
                     Remove
@@ -289,6 +301,7 @@ export default function DeckItemsPage() {
 
             <div className="border-b p-4">
               <input
+                autoFocus
                 value={wordSearch}
                 onChange={(event) => {
                   setWordPage(1);
@@ -340,8 +353,29 @@ export default function DeckItemsPage() {
             </div>
 
             <footer className="flex items-center justify-between gap-2 border-t p-4">
-              <span className="text-xs text-slate-500">
+              <span className="flex items-center gap-3 text-xs text-slate-500">
                 {selectedIds.length} selected
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedIds((old) => [
+                      ...old,
+                      ...words.map((w) => w.id).filter((id) => !old.includes(id)),
+                    ])
+                  }
+                  className="font-semibold text-indigo-600 hover:underline"
+                >
+                  Select all on this page
+                </button>
+                {selectedIds.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedIds([])}
+                    className="text-slate-500 hover:underline"
+                  >
+                    Clear
+                  </button>
+                )}
               </span>
 
               <button
@@ -350,7 +384,7 @@ export default function DeckItemsPage() {
                 disabled={saving || selectedIds.length === 0}
                 className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white disabled:opacity-50"
               >
-                {saving ? "Adding..." : "Add Selected"}
+                {saving ? "Adding..." : `Add ${selectedIds.length || ""} selected`}
               </button>
             </footer>
           </div>

@@ -1,5 +1,6 @@
 
 import { apiRequest } from "@/lib/api/client";
+import { withPermanent } from "@/lib/api/delete";
 
 export type AdProvider = "ADMOB" | "OTHER";
 export type AdPlatform = "android" | "ios";
@@ -165,10 +166,9 @@ export function updateAdConfig(
 }
 
 export async function deleteAdConfig(
-  id: string,
-): Promise<void> {
+  id: string, permanent = false): Promise<void> {
   await apiRequest(
-    `/admin/ads/${encodeURIComponent(id)}`,
+    withPermanent(`/admin/ads/${encodeURIComponent(id)}`, permanent),
     { method: "DELETE" },
   );
 }

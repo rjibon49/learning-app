@@ -14,6 +14,8 @@ import Link from "next/link";
 import { useAuth } from "@/lib/auth/auth-context";
 import { getPublicLanguages } from "@/lib/api/languages";
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import type { LearningLanguage } from "@/types/app";
 
@@ -48,7 +50,8 @@ function slugify(value: string) {
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
 }
 
 function getError(error: unknown) {
@@ -59,6 +62,8 @@ function getError(error: unknown) {
 
 export function GlobalCategoryManager() {
   const { admin } = useAuth();
+  const confirm = useConfirm();
+  const toast = useToast();
 
   const canManage = [
     "SUPER_ADMIN",
@@ -90,6 +95,7 @@ export function GlobalCategoryManager() {
     useState<string | null>(null);
   const [form, setForm] =
     useState<CategoryForm>(emptyForm);
+  const [formError, setFormError] = useState("");
 
   const [translationCategory, setTranslationCategory] =
     useState<GlobalVocabularyCategory | null>(null);
@@ -157,7 +163,11 @@ export function GlobalCategoryManager() {
 
   function createNew() {
     setEditingId(null);
-    setForm(emptyForm);
+    setForm({
+      ...emptyForm,
+      sortOrder: categories.reduce((max, c) => Math.max(max, c.sortOrder + 1), 0),
+    });
+    setFormError("");
     setEditorOpen(true);
     setError("");
   }
@@ -171,20 +181,32 @@ export function GlobalCategoryManager() {
       sortOrder: category.sortOrder,
       isActive: category.isActive,
     });
+    setFormError("");
     setEditorOpen(true);
     setError("");
   }
 
   async function save(event: FormEvent) {
     event.preventDefault();
-    if (!canManage) return;
+    if (!canManage || saving) return;
+
+    if (!form.name.trim()) {
+      setFormError("Enter a category name.");
+      return;
+    }
+    const slug = form.slug.trim().toLowerCase() || slugify(form.name) || `category-${Date.now().toString(36)}`;
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) {
+      setFormError("Slug: use lowercase English letters, numbers and single dashes.");
+      return;
+    }
 
     setSaving(true);
     setError("");
+    setFormError("");
 
     const payload = {
       name: form.name.trim(),
-      slug: form.slug.trim().toLowerCase(),
+      slug,
       description: form.description.trim() || null,
       sortOrder: form.sortOrder,
       isActive: form.isActive,
@@ -198,28 +220,13 @@ export function GlobalCategoryManager() {
       }
 
       setEditorOpen(false);
-      setNotice("Category saved successfully.");
+      toast.success(`Category "${payload.name}" ${editingId ? "updated" : "created"}.`);
       await reload();
     } catch (err) {
-      setError(getError(err));
+      // Shown inside the dialog so it is not hidden behind the overlay.
+      setFormError(getError(err));
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function disable(category: GlobalVocabularyCategory) {
-    if (!canDisable) return;
-
-    if (!window.confirm(`Disable category "${category.name}"?`)) {
-      return;
-    }
-
-    try {
-      await archiveGlobalCategory(category.id);
-      await reload();
-      setNotice("Category disabled.");
-    } catch (err) {
-      setError(getError(err));
     }
   }
 
@@ -233,7 +240,11 @@ export function GlobalCategoryManager() {
   async function saveTranslation(event: FormEvent) {
     event.preventDefault();
 
-    if (!translationCategory || !translationLanguage) {
+    if (!translationCategory || !translationLanguage || saving) {
+      return;
+    }
+    if (!translationName.trim()) {
+      toast.error("Enter the translated category name.");
       return;
     }
 
@@ -261,9 +272,9 @@ export function GlobalCategoryManager() {
       setTranslationName("");
       setTranslationDescription("");
 
-      setNotice("Category translation saved.");
+      toast.success("Category translation saved.");
     } catch (err) {
-      setError(getError(err));
+      toast.error(getError(err));
     } finally {
       setSaving(false);
     }
@@ -272,9 +283,13 @@ export function GlobalCategoryManager() {
   async function removeTranslation(languageId: string) {
     if (!translationCategory) return;
 
-    if (!window.confirm("Remove this category translation?")) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Remove this translation?",
+      message: "The category name in this language will be removed.",
+      confirmLabel: "Remove",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     try {
       await removeGlobalCategoryTranslation(
@@ -289,8 +304,9 @@ export function GlobalCategoryManager() {
           (item) => item.id === translationCategory.id,
         ) ?? null,
       );
+      toast.success("Translation removed.");
     } catch (err) {
-      setError(getError(err));
+      toast.error(getError(err));
     }
   }
 
@@ -411,15 +427,17 @@ export function GlobalCategoryManager() {
                         </button>
                       )}
 
-                      {canDisable && category.isActive && (
-                        <button
-                          type="button"
-                          onClick={() => void disable(category)}
-                          className="rounded-lg border border-red-200 px-3 py-1.5 text-xs text-red-600"
-                        >
-                          Disable
-                        </button>
-                      )}
+                      <DeleteActions
+                        itemName={category.name}
+                        entity="category"
+                        archiveLabel="Disable"
+                        canArchive={canDisable}
+                        hideArchive={!category.isActive}
+                        archiveHelp="The category is hidden from apps. Words keep their category, and you can enable it again by editing it."
+                        permanentHelp="Its translations are removed. Words in this category are kept but become uncategorised."
+                        onDelete={(permanent) => archiveGlobalCategory(category.id, permanent)}
+                        onDone={() => void reload()}
+                      />
                     </div>
                   </td>
                 </tr>
@@ -469,11 +487,16 @@ export function GlobalCategoryManager() {
               {editingId ? "Edit Category" : "Create Category"}
             </h2>
 
-            <form className="space-y-3" onSubmit={(e) => void save(e)}>
+            <form className="space-y-3" noValidate onSubmit={(e) => void save(e)}>
+              {formError && (
+                <p role="alert" className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                  {formError}
+                </p>
+              )}
               <label className="block space-y-1 text-sm">
-                <span>Name</span>
+                <span className="font-semibold">Name <span className="text-rose-600">*</span></span>
                 <input
-                  required
+                  autoFocus
                   value={form.name}
                   onChange={(e) => setForm((old) => ({
                     ...old,
@@ -485,10 +508,11 @@ export function GlobalCategoryManager() {
               </label>
 
               <label className="block space-y-1 text-sm">
-                <span>Slug</span>
+                <span className="font-semibold">Slug</span>
+                <span className="block text-xs text-slate-500">Made from the name automatically. Leave as is unless you need a specific URL.</span>
                 <input
-                  required
                   value={form.slug}
+                  placeholder="auto"
                   onChange={(e) => setForm((old) => ({
                     ...old,
                     slug: e.target.value,

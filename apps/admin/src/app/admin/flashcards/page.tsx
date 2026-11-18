@@ -9,10 +9,13 @@ import {
 } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/lib/auth/auth-context";
 import { useAppLevel } from "@/lib/auth/app-level-context";
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteActions } from "@/components/ui/delete-actions";
+import { useConfirm, useToast } from "@/components/ui/feedback-provider";
 
 import {
   getDecksPage,
@@ -51,6 +54,9 @@ const emptyForm: DeckForm = {
 export default function FlashcardsPage() {
   const { admin } = useAuth();
   const { selectedApp } = useAppLevel();
+  const router = useRouter();
+  const confirm = useConfirm();
+  const toast = useToast();
 
   const canEdit = Boolean(admin);
   const canUnpublish =
@@ -72,6 +78,7 @@ export default function FlashcardsPage() {
   const [editing, setEditing] = useState<FlashcardDeck | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [form, setForm] = useState<DeckForm>(emptyForm);
+  const [formError, setFormError] = useState("");
 
   const reload = useCallback(async () => {
     if (!selectedApp) {
@@ -107,7 +114,11 @@ export default function FlashcardsPage() {
 
   function openCreate() {
     setEditing(null);
-    setForm(emptyForm);
+    setForm({
+      ...emptyForm,
+      sortOrder: decks.reduce((max, d) => Math.max(max, d.sortOrder + 1), 0),
+    });
+    setFormError("");
     setEditorOpen(true);
   }
 
@@ -119,15 +130,22 @@ export default function FlashcardsPage() {
       difficulty: deck.difficulty,
       sortOrder: deck.sortOrder,
     });
+    setFormError("");
     setEditorOpen(true);
   }
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!selectedApp || !canEdit) return;
+    if (!selectedApp || !canEdit || saving) return;
+
+    if (form.title.trim().length < 2) {
+      setFormError("Deck title needs at least 2 characters.");
+      return;
+    }
 
     setSaving(true);
     setError("");
+    setFormError("");
 
     try {
       const input = {
@@ -139,19 +157,23 @@ export default function FlashcardsPage() {
 
       if (editing) {
         await updateDeck(editing.id, input);
+        setEditorOpen(false);
+        toast.success(`Deck "${input.title}" updated.`);
+        await reload();
       } else {
-        await createDeck({
+        const created = await createDeck({
           ...input,
           appId: selectedApp.id,
           isPublished: false,
         });
+        setEditorOpen(false);
+        toast.success(`Deck "${input.title}" created. Now add words to it.`);
+        // Next step is always adding words: go straight there.
+        router.push(`/admin/flashcards/${created.id}`);
       }
-
-      setEditorOpen(false);
-      setMessage("Flashcard deck saved.");
-      await reload();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed");
+      // Shown inside the dialog (the page message is hidden behind it).
+      setFormError(err instanceof Error ? err.message : "Save failed");
     } finally {
       setSaving(false);
     }
@@ -159,6 +181,26 @@ export default function FlashcardsPage() {
 
   async function togglePublished(deck: FlashcardDeck) {
     if (!canEdit) return;
+
+    const itemCount = deck._count?.items ?? 0;
+    const ok = await confirm(
+      deck.isPublished
+        ? {
+            title: `Unpublish "${deck.title}"?`,
+            message: "Learners will no longer see this deck. You can publish it again later.",
+            confirmLabel: "Unpublish",
+          }
+        : {
+            title: `Publish "${deck.title}"?`,
+            message:
+              itemCount === 0
+                ? "This deck has no words yet. Learners would see an empty deck."
+                : `Learners will see this deck with ${itemCount} card${itemCount === 1 ? "" : "s"}.`,
+            confirmLabel: "Publish",
+            tone: itemCount === 0 ? "danger" : "default",
+          },
+    );
+    if (!ok) return;
 
     setError("");
     setMessage("");
@@ -171,12 +213,12 @@ export default function FlashcardsPage() {
         await updateDeck(deck.id, { isPublished: true });
       }
 
-      setMessage(
+      toast.success(
         deck.isPublished ? "Deck unpublished." : "Deck published.",
       );
       await reload();
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Unable to update status",
       );
     }
@@ -277,6 +319,15 @@ export default function FlashcardsPage() {
                     )}
                   </>
                 )}
+
+                <DeleteActions
+                  itemName={deck.title}
+                  entity="deck"
+                  hideArchive
+                  permanentHelp="All cards in this deck are removed. The words themselves stay in the vocabulary list."
+                  onDelete={(permanent) => deleteDeck(deck.id, permanent)}
+                  onDone={() => void reload()}
+                />
               </div>
             </div>
           ))}
@@ -307,18 +358,24 @@ export default function FlashcardsPage() {
 
       {editorOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4">
-          <form onSubmit={(event) => void save(event)}
+          <form onSubmit={(event) => void save(event)} noValidate
             className="w-full max-w-lg space-y-4 rounded-xl bg-white p-6">
             <h2 className="text-lg font-bold">
               {editing ? "Edit Deck" : "Create Flashcard Deck"}
             </h2>
 
+            {formError && (
+              <p role="alert" className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {formError}
+              </p>
+            )}
+
             <label className="block space-y-1 text-sm">
-              <span>Deck Title</span>
+              <span className="font-semibold">Deck title <span className="text-rose-600">*</span></span>
               <input
-                required
-                minLength={2}
+                autoFocus
                 maxLength={200}
+                placeholder="e.g. Animals"
                 value={form.title}
                 onChange={(event) => setForm((old) => ({
                   ...old,
@@ -373,7 +430,7 @@ export default function FlashcardsPage() {
             </div>
 
             <p className="text-xs text-slate-500">
-              New decks start as Draft. Add published vocabulary before publishing the deck.
+              New decks start as Draft. After saving you go straight to adding words; publish when it is ready.
             </p>
 
             <div className="flex justify-end gap-2">
@@ -384,7 +441,7 @@ export default function FlashcardsPage() {
               </button>
               <button type="submit" disabled={saving}
                 className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white disabled:opacity-50">
-                {saving ? "Saving..." : "Save Deck"}
+                {saving ? "Saving..." : editing ? "Save changes" : "Create & add words"}
               </button>
             </div>
           </form>

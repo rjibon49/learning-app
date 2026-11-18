@@ -1,5 +1,6 @@
 
 "use client";
+import { DeleteActions } from "@/components/ui/delete-actions";
 
 import {
   useCallback,
@@ -209,19 +210,6 @@ export function WebAdPlacementManager() {
       setError(errorText(err));
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function disable(item: WebAdPlacement) {
-    if (!canManage) return;
-    if (!window.confirm(`Disable "${item.name}"?`)) return;
-
-    try {
-      await disableWebPlacement(item.id);
-      setMessage("Placement disabled.");
-      await reload();
-    } catch (err) {
-      setError(errorText(err));
     }
   }
 
@@ -457,16 +445,18 @@ export function WebAdPlacementManager() {
                             <Pencil className="h-4 w-4"/>
                           </button>
 
-                          {item.isActive && (
-                            <button
-                              type="button"
-                              title="Disable"
-                              onClick={() => void disable(item)}
-                              className="rounded-lg border p-2 text-red-600"
-                            >
-                              <Trash2 className="h-4 w-4"/>
-                            </button>
-                          )}
+                          <DeleteActions
+                            compact
+                            itemName={item.name}
+                            entity="placement"
+                            archiveLabel="Disable"
+                            canArchive={canManage}
+                            hideArchive={!item.isActive}
+                            archiveHelp="No ads are shown in this slot. You can enable it again by editing it."
+                            permanentHelp="Refused while campaigns still use this placement."
+                            onDelete={(permanent) => disableWebPlacement(item.id, permanent)}
+                            onDone={() => void reload()}
+                          />
                         </div>
                       )}
                     </td>
