@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { Button, Card, ErrorView, IconTile, LoadingView, ProgressBar, Screen, StreakPill, Txt } from "../../components/ui";
 import { AdSlot } from "../../components/AdSlot";
+import { PathCard, StatsRow, WeekStrip, WordOfDay, pickWordOfDay } from "../../components/TodayExtras";
+import { fetchAppWords } from "../../api/vocabulary";
 import { fetchUnreadCount } from "../../api/inbox";
 import { GOALS, usePrefs } from "../../lib/preferences";
 import { fetchActiveDays, fetchDashboard, utcDayKey } from "../../api/progress";
@@ -30,14 +32,17 @@ export default function TodayScreen() {
     const [path, dashboard, activeDays] = await Promise.all([
       loadLearningPath(userId),
       fetchDashboard(),
-      fetchActiveDays(1).catch(() => new Set<string>()),
+      fetchActiveDays(7).catch(() => new Set<string>()),
     ]);
-    const [quizzes, unread] = await Promise.all([
+    const [quizzes, unread, words] = await Promise.all([
       fetchQuizzes(path.app.id).catch(() => []),
       fetchUnreadCount(path.app.id).catch(() => 0),
+      fetchAppWords(path.app.id).catch(() => []),
     ]);
     return {
       unread,
+      activeDays,
+      wordOfDay: pickWordOfDay(words),
       path,
       dashboard,
       practicedToday: activeDays.has(utcDayKey(new Date())),
@@ -60,7 +65,7 @@ export default function TodayScreen() {
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 
-  const { path, dashboard, practicedToday, quiz, unread } = state.data;
+  const { path, dashboard, practicedToday, quiz, unread, activeDays, wordOfDay } = state.data;
   const goal = prefs.dailyGoal;
   const goalDone = steps >= goal;
   const goalLabel = GOALS.find((g) => g.value === goal)?.title ?? "";
@@ -103,25 +108,30 @@ export default function TodayScreen() {
         </View>
       </View>
 
-      <Card style={styles.goal} onPress={() => router.push("/settings")} accessibilityLabel={`Daily goal ${Math.min(steps, goal)} of ${goal}. Change goal`}>
-        <View style={[styles.goalRing, goalDone && { borderColor: COLORS.correct }]}>
-          {goalDone ? (
-            <Ionicons name="checkmark" size={28} color={COLORS.correct} />
-          ) : (
-            <Txt variant="title" style={{ color: COLORS.primary }}>{Math.min(steps, goal)}/{goal}</Txt>
-          )}
-        </View>
-        <View style={{ flex: 1, gap: 4 }}>
-          <Txt variant="title">{goalDone ? "Goal done today" : `Today's goal · ${goalLabel}`}</Txt>
-          <Txt variant="caption" style={{ fontSize: 14, lineHeight: 20 }}>
-            {goalDone
-              ? "Great work! Extra practice still helps."
-              : practicedToday
-                ? `Streak safe. ${goal - steps} more step${goal - steps === 1 ? "" : "s"} for your goal.`
-                : "Finish a lesson, review or quiz to keep your streak."}
-          </Txt>
-        </View>
+      <Card style={{ gap: SPACING.lg }}>
+        <Pressable style={styles.goal} onPress={() => router.push("/settings")} accessibilityRole="button" accessibilityLabel={`Daily goal ${Math.min(steps, goal)} of ${goal}. Change goal`}>
+          <View style={[styles.goalRing, goalDone && { borderColor: COLORS.correct }]}>
+            {goalDone ? (
+              <Ionicons name="checkmark" size={28} color={COLORS.correct} />
+            ) : (
+              <Txt variant="title" style={{ color: COLORS.primary }}>{Math.min(steps, goal)}/{goal}</Txt>
+            )}
+          </View>
+          <View style={{ flex: 1, gap: 4 }}>
+            <Txt variant="title">{goalDone ? "Goal done today" : `Today's goal · ${goalLabel}`}</Txt>
+            <Txt variant="caption" style={{ fontSize: 14, lineHeight: 20 }}>
+              {goalDone
+                ? "Great work! Extra practice still helps."
+                : practicedToday
+                  ? `Streak safe. ${goal - steps} more step${goal - steps === 1 ? "" : "s"} for your goal.`
+                  : "Finish a lesson, review or quiz to keep your streak."}
+            </Txt>
+          </View>
+        </Pressable>
+        <WeekStrip active={activeDays} />
       </Card>
+
+      <StatsRow dashboard={dashboard} path={path} />
 
       {next && moduleOfNext ? (
         <View style={styles.hero}>
@@ -184,6 +194,10 @@ export default function TodayScreen() {
           </Txt>
         </Card>
       </View>
+
+      {wordOfDay ? <WordOfDay word={wordOfDay} /> : null}
+
+      {path.totalLessons > 0 ? <PathCard path={path} /> : null}
 
       <AdSlot appId={path.app.id} />
     </Screen>

@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
 
+import { FlashCard, type FlashCardHandle, type SwipeDirection } from "../components/FlashCard";
 import {
-  ArticleChip,
   Button,
   EmptyView,
   ErrorView,
@@ -13,7 +13,6 @@ import {
   LoadingView,
   ProgressBar,
   Screen,
-  SpeakButton,
   SpeedToggle,
   Txt,
 } from "../components/ui";
@@ -30,8 +29,8 @@ import {
 } from "../api/practice";
 import { play, stopAudio } from "../lib/audio";
 import { useAsync } from "../lib/use-async";
-import { exampleOf, meaningOf, pluralOf, splitArticle } from "../lib/words";
-import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from "../styles/theme";
+import { splitArticle } from "../lib/words";
+import { COLORS, FONTS, RADIUS, SPACING } from "../styles/theme";
 import { useLearnerAuth } from "../lib/auth-context";
 import { recordStep } from "../lib/preferences";
 
@@ -67,7 +66,6 @@ export default function ReviewScreen() {
   const [queue, setQueue] = useState<PracticeWord[] | null>(null);
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [known, setKnown] = useState(0);
   const [retried, setRetried] = useState<Set<string>>(new Set());
@@ -91,15 +89,11 @@ export default function ReviewScreen() {
   const view = useMemo(() => {
     if (!card) return null;
     const { article, noun } = splitArticle(card);
-    return {
-      article,
-      noun,
-      spoken: article ? `${article} ${noun}` : noun,
-      meaning: meaningOf(card),
-      plural: pluralOf(card),
-      example: exampleOf(card),
-    };
+    return { spoken: article ? `${article} ${noun}` : noun };
   }, [card]);
+
+  const cardRef = useRef<FlashCardHandle>(null);
+  const pending = useRef<RatingKey | null>(null);
 
   // Each new card says its word once, so the learner hears it before answering.
   const cardKey = card ? `${card.id}:${index}` : "";
@@ -112,21 +106,29 @@ export default function ReviewScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once per card
   }, [cardKey]);
 
-  async function rate(key: RatingKey) {
-    if (!card || saving) return;
+  /** Button press: the card flies out the matching way, then it is rated. */
+  function choose(key: RatingKey) {
+    if (!card) return;
+    pending.current = key;
+    if (cardRef.current) cardRef.current.swipe(key === "again" ? "left" : "right");
+    else rate(key);
+  }
+
+  /** Swipe: right = "Good" (I knew it), left = "Again". */
+  function onSwiped(direction: SwipeDirection) {
+    const key = pending.current ?? (direction === "right" ? "good" : "again");
+    pending.current = null;
+    rate(key);
+  }
+
+  function rate(key: RatingKey) {
+    if (!card) return;
     const rating = RATINGS.find((r) => r.key === key);
     if (!rating) return;
 
-    setSaving(true);
+    // Move on at once; the result is saved in the background.
     setError("");
-    try {
-      await reviewWord(card.id, rating.quality);
-    } catch (e) {
-      // Keep going; the word simply stays due on the server.
-      setError(`Not saved: ${getApiError(e)}`);
-    } finally {
-      setSaving(false);
-    }
+    reviewWord(card.id, rating.quality).catch((e: unknown) => setError(`Not saved: ${getApiError(e)}`));
 
     let nextLength = cards.length;
     if (key === "again" && !retried.has(card.id)) {
@@ -200,43 +202,15 @@ export default function ReviewScreen() {
       {topBar}
       <ProgressBar value={(index / cards.length) * 100} label="Session progress" />
 
-      <Pressable
-        onPress={() => setRevealed(true)}
-        disabled={revealed}
-        accessibilityRole="button"
-        accessibilityHint={revealed ? undefined : "Shows the meaning"}
-        style={styles.card}
-      >
-        {card.imageUrl ? (
-          <Image source={{ uri: card.imageUrl }} style={styles.image} resizeMode="cover" accessibilityIgnoresInvertColors />
-        ) : null}
-        <View style={styles.cardBody}>
-          <View style={styles.termRow}>
-            {view.article ? <ArticleChip article={view.article} size="lg" /> : null}
-            <Txt style={styles.term} adjustsFontSizeToFit numberOfLines={2}>{view.noun}</Txt>
-          </View>
-          {card.pronunciation || view.plural ? (
-            <Txt variant="caption" style={{ fontSize: 15, textAlign: "center" }}>
-              {[view.plural ? `Plural: die ${view.plural.replace(/^die\s+/i, "")}` : null, card.pronunciation].filter(Boolean).join(" · ")}
-            </Txt>
-          ) : null}
-          <SpeakButton text={view.spoken} url={card.audioUrl} size={52} />
-
-          {revealed ? (
-            <View style={styles.answer} accessibilityLiveRegion="polite">
-              <Txt style={styles.meaning}>{view.meaning ?? "No meaning added yet"}</Txt>
-              {view.example ? (
-                <View style={styles.exampleRow}>
-                  <Txt variant="caption" style={{ fontSize: 15, flexShrink: 1, textAlign: "center" }}>„{view.example}“</Txt>
-                  <SpeakButton text={view.example} size={36} />
-                </View>
-              ) : null}
-            </View>
-          ) : (
-            <Txt variant="caption" style={{ marginTop: SPACING.md }}>Tap the card to see the meaning</Txt>
-          )}
-        </View>
-      </Pressable>
+      <View style={{ flex: 1 }}>
+        <FlashCard
+          key={cardKey}
+          ref={cardRef}
+          word={card}
+          onFlip={setRevealed}
+          onSwiped={onSwiped}
+        />
+      </View>
 
       {error ? <Txt variant="caption" style={{ color: COLORS.wrongText, textAlign: "center" }}>{error}</Txt> : null}
 
@@ -249,11 +223,10 @@ export default function ReviewScreen() {
               return (
                 <Pressable
                   key={r.key}
-                  disabled={saving}
-                  onPress={() => void rate(r.key)}
+                  onPress={() => choose(r.key)}
                   accessibilityRole="button"
                   accessibilityLabel={`${r.label}, review ${s.hint.toLowerCase()}`}
-                  style={({ pressed }) => [styles.rating, { backgroundColor: s.bg }, (pressed || saving) && { opacity: 0.7 }]}
+                  style={({ pressed }) => [styles.rating, { backgroundColor: s.bg }, pressed && { opacity: 0.7 }]}
                 >
                   <Txt style={[styles.ratingLabel, { color: s.fg }]}>{r.label}</Txt>
                   <Txt style={[styles.ratingHint, { color: s.fg }]}>{s.hint}</Txt>
@@ -263,7 +236,30 @@ export default function ReviewScreen() {
           </View>
         </View>
       ) : (
-        <Button title="Show answer" onPress={() => setRevealed(true)} />
+        <View style={{ gap: SPACING.sm }}>
+          <View style={styles.quickRow}>
+            <Pressable
+              onPress={() => choose("again")}
+              accessibilityRole="button"
+              accessibilityLabel="Again"
+              style={({ pressed }) => [styles.round, { backgroundColor: COLORS.wrongSoft }, pressed && { opacity: 0.7 }]}
+            >
+              <Ionicons name="refresh" size={26} color={COLORS.wrong} />
+            </Pressable>
+            <Button title="Show details" icon="sync-outline" onPress={() => cardRef.current?.flip()} style={{ flex: 1 }} />
+            <Pressable
+              onPress={() => choose("good")}
+              accessibilityRole="button"
+              accessibilityLabel="I know it"
+              style={({ pressed }) => [styles.round, { backgroundColor: COLORS.correctSoft }, pressed && { opacity: 0.7 }]}
+            >
+              <Ionicons name="checkmark" size={28} color={COLORS.correct} />
+            </Pressable>
+          </View>
+          <Txt variant="caption" style={{ textAlign: "center" }}>
+            Swipe ← again · Swipe → I know it
+          </Txt>
+        </View>
       )}
     </Screen>
   );
@@ -277,59 +273,17 @@ const styles = StyleSheet.create({
     marginLeft: -SPACING.md,
     marginTop: -SPACING.md,
   },
-  card: {
-    flex: 1,
-    backgroundColor: COLORS.surface,
-    borderRadius: 28,
-    overflow: "hidden",
-    ...SHADOW.raised,
-  },
-  image: {
-    width: "100%",
-    height: 180,
-    backgroundColor: COLORS.track,
-  },
-  cardBody: {
-    flex: 1,
-    padding: SPACING.xxl,
+  quickRow: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     gap: SPACING.md,
   },
-  termRow: {
-    flexDirection: "row",
+  round: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
-    gap: 10,
-    flexWrap: "wrap",
-  },
-  term: {
-    fontFamily: FONTS.display,
-    fontSize: 40,
-    lineHeight: 48,
-    color: COLORS.ink,
-    textAlign: "center",
-  },
-  answer: {
-    alignSelf: "stretch",
-    borderTopWidth: 1,
-    borderTopColor: COLORS.borderStrong,
-    borderStyle: "dashed",
-    paddingTop: SPACING.md,
-    alignItems: "center",
-    gap: SPACING.sm,
-  },
-  meaning: {
-    fontFamily: FONTS.title,
-    fontSize: 22,
-    lineHeight: 28,
-    color: COLORS.ink,
-    textAlign: "center",
-  },
-  exampleRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: SPACING.sm,
   },
   ratings: {
     flexDirection: "row",
