@@ -14,14 +14,16 @@ import {
   type KeyboardTypeOptions,
 } from "react-native";
 
+import { COLORS, FONTS, RADIUS } from "../styles/theme";
+
 export const colors = {
-  primary: "#4f46e5",
-  dark: "#0f172a",
-  secondary: "#64748b",
-  border: "#cbd5e1",
-  background: "#f8fafc",
-  white: "#ffffff",
-  error: "#b91c1c",
+  primary: COLORS.primary,
+  dark: COLORS.ink,
+  secondary: COLORS.muted,
+  border: COLORS.borderStrong,
+  background: COLORS.ground,
+  white: COLORS.surface,
+  error: COLORS.wrongText,
 };
 
 export function AuthLayout({
@@ -43,7 +45,7 @@ export function AuthLayout({
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.brand}>
-          <Text style={styles.brandText}>GL</Text>
+          <Text style={styles.brandText}>A1</Text>
         </View>
 
         <Text style={styles.title}>{title}</Text>
@@ -52,7 +54,7 @@ export function AuthLayout({
         <View style={styles.card}>{children}</View>
 
         <Text style={styles.footer}>
-          Global Learning · German A1
+          German A1
         </Text>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -86,7 +88,7 @@ export function Field({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor="#94a3b8"
+        placeholderTextColor={COLORS.faint}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
@@ -196,17 +198,18 @@ const styles = StyleSheet.create({
   },
   brandText: {
     color: "#fff",
-    fontWeight: "900",
+    fontFamily: FONTS.display,
     fontSize: 22,
   },
   title: {
     fontSize: 30,
-    fontWeight: "800",
+    fontFamily: FONTS.display,
     color: colors.dark,
   },
   subtitle: {
     color: colors.secondary,
-    fontSize: 14,
+    fontFamily: FONTS.body,
+    fontSize: 15,
     lineHeight: 22,
     marginTop: 8,
     marginBottom: 24,
@@ -214,33 +217,34 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     borderWidth: 1,
-    borderColor: "#e2e8f0",
-    borderRadius: 20,
+    borderColor: COLORS.border,
+    borderRadius: RADIUS.xl,
     padding: 20,
   },
   field: {
     marginBottom: 16,
   },
   label: {
-    color: "#334155",
-    fontSize: 13,
-    fontWeight: "700",
+    color: COLORS.ink,
+    fontSize: 14,
+    fontFamily: FONTS.bodySemi,
     marginBottom: 7,
   },
   input: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: RADIUS.md,
     backgroundColor: "#fff",
     paddingHorizontal: 14,
-    minHeight: 50,
-    fontSize: 15,
+    minHeight: 52,
+    fontSize: 16,
+    fontFamily: FONTS.body,
     color: colors.dark,
   },
   button: {
     backgroundColor: colors.primary,
-    minHeight: 51,
-    borderRadius: 12,
+    minHeight: 54,
+    borderRadius: RADIUS.lg,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 8,
@@ -250,21 +254,22 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 15,
-    fontWeight: "700",
+    fontSize: 17,
+    fontFamily: FONTS.display,
   },
   textAction: {
     alignItems: "center",
     paddingVertical: 13,
   },
   actionText: {
-    fontSize: 13,
-    fontWeight: "700",
+    fontSize: 14,
+    fontFamily: FONTS.bodySemi,
     color: colors.primary,
     textAlign: "center",
   },
   footer: {
-    color: "#94a3b8",
+    color: COLORS.muted,
+    fontFamily: FONTS.body,
     textAlign: "center",
     fontSize: 12,
     marginTop: 24,
@@ -275,14 +280,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   errorBox: {
-    backgroundColor: "#fef2f2",
+    backgroundColor: COLORS.wrongSoft,
   },
   successBox: {
-    backgroundColor: "#ecfdf5",
+    backgroundColor: COLORS.correctSoft,
   },
   feedbackText: {
-    color: "#047857",
-    fontSize: 13,
+    color: COLORS.correctText,
+    fontFamily: FONTS.body,
+    fontSize: 14,
     lineHeight: 19,
   },
 });

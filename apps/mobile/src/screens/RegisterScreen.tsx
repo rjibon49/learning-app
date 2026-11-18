@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 
 import React, { useState } from "react";
 
@@ -8,11 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-import type { NativeStackScreenProps } from
-  "@react-navigation/native-stack";
 
-import type { RootStackParamList } from
-  "../navigation/AppNavigator";
 
 import { registerLearner } from "../api/learner-auth";
 import { getApiError } from "../api/client";
@@ -25,14 +22,8 @@ import {
   TextAction,
 } from "../components/AuthUI";
 
-type Props = NativeStackScreenProps<
-  RootStackParamList,
-  "Register"
->;
 
-export default function RegisterScreen({
-  navigation,
-}: Props) {
+export default function RegisterScreen() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -98,9 +89,9 @@ export default function RegisterScreen({
         },
       });
 
-      navigation.navigate("VerifyEmail", {
+      router.push({ pathname: "/verify-email", params: {
         email: email.trim().toLowerCase(),
-      });
+      } });
     } catch (err) {
       setError(getApiError(err));
     } finally {
@@ -199,7 +190,7 @@ export default function RegisterScreen({
 
       <TextAction
         title="Already have an account? Sign In"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => router.dismissTo("/login")}
       />
     </AuthLayout>
   );

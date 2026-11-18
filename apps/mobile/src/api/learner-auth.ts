@@ -14,7 +14,39 @@ export type LoginResult = {
   user: LearnerProfile;
   accessToken: string;
   expiresIn: number;
+  /** Returned because the client sends X-Client-Type: mobile. */
+  refreshToken?: string;
 };
+
+export type RefreshResult = {
+  accessToken: string;
+  expiresIn: number;
+  refreshToken?: string;
+};
+
+export async function refreshLearnerSession(refreshToken: string) {
+  const response = await apiClient.post<RefreshResult>(
+    "/auth/learner/refresh",
+    { refreshToken },
+  );
+  return response.data;
+}
+
+/** Google Play / App Store require in-app account deletion. */
+export async function deleteLearnerAccount(password: string) {
+  const response = await apiClient.delete<{ success: boolean; mode: "deleted" | "anonymized" }>(
+    "/auth/learner/me",
+    { data: { password } },
+  );
+  return response.data;
+}
+
+export async function logoutLearner(refreshToken: string | null) {
+  await apiClient.post(
+    "/auth/learner/logout",
+    refreshToken ? { refreshToken } : {},
+  );
+}
 
 export type RegistrationInput = {
   displayName: string;

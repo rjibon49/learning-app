@@ -1,3 +1,4 @@
+import { router, useLocalSearchParams } from "expo-router";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -7,11 +8,7 @@ import {
   Pressable,
 } from "react-native";
 
-import type { NativeStackScreenProps } from
-  "@react-navigation/native-stack";
 
-import type { RootStackParamList } from
-  "../navigation/AppNavigator";
 
 import {
   verifyEmail,
@@ -28,16 +25,10 @@ import {
   TextAction,
 } from "../components/AuthUI";
 
-type Props = NativeStackScreenProps<
-  RootStackParamList,
-  "VerifyEmail"
->;
 
-export default function VerifyEmailScreen({
-  route,
-  navigation,
-}: Props) {
-  const { email } = route.params;
+export default function VerifyEmailScreen() {
+  const params = useLocalSearchParams<{ email?: string }>();
+  const email = typeof params.email === "string" ? params.email : "";
 
   const [code, setCode] = useState("");
   const [verifying, setVerifying] = useState(false);
@@ -84,7 +75,7 @@ export default function VerifyEmailScreen({
       setVerified(true);
       setNotice("Email verified successfully.");
 
-      navigation.navigate("Login");
+      router.dismissTo("/login");
     } catch (err) {
       setError(getApiError(err));
     } finally {
@@ -146,7 +137,7 @@ export default function VerifyEmailScreen({
 
       <View style={styles.resendBox}>
         <Text style={styles.helpText}>
-          Didn't receive the verification email?
+          Didn&apos;t receive the verification email?
         </Text>
 
         <Text style={styles.helpText}>
@@ -181,7 +172,7 @@ export default function VerifyEmailScreen({
 
       <TextAction
         title="Back to Sign In"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => router.dismissTo("/login")}
       />
     </AuthLayout>
   );
