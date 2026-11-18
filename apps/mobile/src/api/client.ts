@@ -97,6 +97,11 @@ export function getApiError(error: unknown): string {
       return "Cannot reach the server. Check your internet connection.";
     }
 
+    // Server faults: "Internal server error" means nothing to a learner.
+    if (status && status >= 500) {
+      return "Our server had a problem saving this. Please try again in a moment.";
+    }
+
     if (Array.isArray(data?.message)) return data.message.join(". ");
     if (typeof data?.message === "string") return data.message;
 
@@ -107,7 +112,6 @@ export function getApiError(error: unknown): string {
     if (firstField) return firstField;
     if (data?.formErrors?.[0]) return data.formErrors[0];
 
-    if (status && status >= 500) return "Server problem. Please try again later.";
     return `Request failed (${status}).`;
   }
 

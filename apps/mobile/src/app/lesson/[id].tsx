@@ -28,6 +28,7 @@ import { stopAudio } from "../../lib/audio";
 import { annotateGerman } from "../../lib/german-text";
 import { ListenPanel, lessonMarkdownRules } from "../../components/lesson-audio";
 import { markLessonCompleted } from "../../lib/lesson-progress";
+import { loadLearningPath } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
@@ -50,6 +51,7 @@ export default function LessonScreen() {
   const [finishing, setFinishing] = useState(false);
   const [finished, setFinished] = useState(false);
   const [finishError, setFinishError] = useState("");
+  const [nextLesson, setNextLesson] = useState<{ id: string; title: string } | null>(null);
 
   const state = useAsync(async () => {
     const [lesson, app] = await Promise.all([fetchLesson(lessonId), getCurrentApp()]);
@@ -90,6 +92,14 @@ export default function LessonScreen() {
       await markLessonCompleted(user.id, lessonId);
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       setFinished(true);
+      // Find the next lesson on the path so the learner can go straight on.
+      void loadLearningPath(user.id)
+        .then((path) => {
+          if (path.next && path.next.id !== lessonId) {
+            setNextLesson({ id: path.next.id, title: path.next.title });
+          }
+        })
+        .catch(() => undefined);
     } catch (e) {
       setFinishError(getApiError(e));
     } finally {
@@ -128,17 +138,25 @@ export default function LessonScreen() {
           You finished “{lesson.title}”.{words.length > 0 ? ` Practise its ${words.length} words now so they stick.` : ""}
         </Txt>
         <View style={{ gap: SPACING.md, marginTop: SPACING.lg }}>
+          {nextLesson ? (
+            <Button
+              title={`Next: ${nextLesson.title}`}
+              icon="arrow-forward"
+              onPress={() => router.replace(`/lesson/${nextLesson.id}`)}
+            />
+          ) : null}
           {words.length > 0 ? (
             <Button
               title="Practise these words"
               icon="albums-outline"
+              variant={nextLesson ? "secondary" : "primary"}
               onPress={() => router.replace({ pathname: "/review", params: { mode: "lesson", lessonId, title: lesson.title } })}
             />
           ) : null}
           {quiz ? (
             <Button
               title="Take the lesson quiz"
-              variant={words.length > 0 ? "secondary" : "primary"}
+              variant={nextLesson || words.length > 0 ? "secondary" : "primary"}
               onPress={() => router.replace(`/quiz/${quiz.id}`)}
             />
           ) : null}
