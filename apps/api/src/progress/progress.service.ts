@@ -59,6 +59,27 @@ export class ProgressService {
   // Must run inside a transaction.
   // =========================================
 
+  /**
+   * Locks the learner's row so concurrent progress writes for the same
+   * learner run one after another.
+   *
+   * The table is `User` (Prisma model name, no @@map). MySQL on Linux treats
+   * table names as case-sensitive, so `user` fails there with
+   * "Table … doesn't exist" (500 on lesson finish / review / quiz), even
+   * though it works on Windows and macOS development machines.
+   */
+  private async lockLearner(
+    tx: Prisma.TransactionClient,
+    userId: string,
+  ): Promise<void> {
+    await tx.$queryRaw`
+      SELECT id
+      FROM \`User\`
+      WHERE id = ${userId}
+      FOR UPDATE
+    `;
+  }
+
   private async recordActivity(
     tx: Prisma.TransactionClient,
     userId: string,
@@ -67,14 +88,7 @@ export class ProgressService {
     const today = this.utcDay(now);
     const yesterday = this.addDays(today, -1);
 
-    // Lock the learner row to serialize
-    // concurrent progress writes for this user.
-    await tx.$queryRaw`
-      SELECT id
-      FROM \`user\`
-      WHERE id = ${userId}
-      FOR UPDATE
-    `;
+    await this.lockLearner(tx, userId);
 
     const existing = await tx.userActivity.findUnique({
       where: {
@@ -268,12 +282,7 @@ export class ProgressService {
       const now = new Date();
 
       // Serialize writes for the same learner.
-      await tx.$queryRaw`
-        SELECT id
-        FROM \`user\`
-        WHERE id = ${userId}
-        FOR UPDATE
-      `;
+      await this.lockLearner(tx, userId);
 
       const existing =
         await tx.vocabularyProgress.findUnique({
@@ -451,12 +460,7 @@ export class ProgressService {
     return this.prisma.$transaction(async (tx) => {
       const now = new Date();
 
-      await tx.$queryRaw`
-        SELECT id
-        FROM \`user\`
-        WHERE id = ${userId}
-        FOR UPDATE
-      `;
+      await this.lockLearner(tx, userId);
 
       const current = await tx.lessonProgress.findUnique({
         where: {
