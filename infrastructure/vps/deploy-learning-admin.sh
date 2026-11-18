@@ -69,6 +69,15 @@ wait_healthy() {
 }
 
 restart_with_release() {
+  # The first CMS container may have been started by hand (docker run) or by
+  # another Compose project. Compose cannot replace a container it does not
+  # own, so remove that one container right before starting the new one.
+  local project
+  project="$(docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}' "$CONTAINER" 2>/dev/null || true)"
+  if docker inspect "$CONTAINER" >/dev/null 2>&1 && [[ "$project" != "learning-admin-stack" ]]; then
+    log "Replacing $CONTAINER that was started outside this stack (project: '${project:-none}')"
+    docker rm -f "$CONTAINER" >/dev/null
+  fi
   compose up -d --no-deps --force-recreate admin
 }
 
