@@ -328,6 +328,25 @@ export class VocabularyService {
       }
 
       where.languageId = app.languageId;
+
+      if (query.inApp) {
+        where.OR = [
+          {
+            lesson: {
+              module: {
+                course: {
+                  apps: { some: { appId: query.appId } },
+                },
+              },
+            },
+          },
+          {
+            flashcardItems: {
+              some: { deck: { appId: query.appId } },
+            },
+          },
+        ];
+      }
     }
 
     if (query.lessonId) {

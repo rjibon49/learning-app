@@ -131,6 +131,12 @@ export const vocabularyListQuerySchema = z.object({
 
   search: z.string().trim().max(100).optional(),
 
+  // With appId: only words used by this app (its course lessons or its
+  // flashcard decks). Without it, appId only filters by the app's language,
+  // which would show A2–C1 words in the A1 app.
+  inApp: z.enum(['true', 'false']).optional()
+    .transform((v) => v === 'true'),
+
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(100).default(20),
 }).strict();

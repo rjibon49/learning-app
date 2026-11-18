@@ -33,6 +33,23 @@ export const refreshBodySchema = z
   })
   .strict();
 
+export const updateProfileSchema = z
+  .object({
+    displayName: z.string().trim().min(1).max(80),
+  })
+  .strict();
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1).max(128),
+    newPassword: z.string().min(12).max(128),
+  })
+  .strict()
+  .refine((v) => v.currentPassword !== v.newPassword, {
+    path: ['newPassword'],
+    message: 'New password must be different from the current one',
+  });
+
 export const deleteAccountSchema = z
   .object({
     password: z.string().min(1).max(128),

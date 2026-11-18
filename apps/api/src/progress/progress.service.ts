@@ -880,4 +880,15 @@ export class ProgressService {
       },
     };
   }
+
+  async completedLessons(userId: string) {
+    const rows = await this.prisma.lessonProgress.findMany({
+      where: { userId, completedAt: { not: null } },
+      select: { lessonId: true, completedAt: true },
+      orderBy: { completedAt: 'asc' },
+      take: 5000,
+    });
+
+    return { data: rows };
+  }
 }

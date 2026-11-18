@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Patch,
   Post,
   Req,
   Res,
@@ -35,6 +36,8 @@ import {
   resetPasswordSchema,
   refreshBodySchema,
   deleteAccountSchema,
+  updateProfileSchema,
+  changePasswordSchema,
 } from './learner-auth.schemas.js';
 import { LearnerAccountDeletionService } from './account-deletion.service.js';
 
@@ -255,6 +258,65 @@ export class LearnerAuthController {
     }
 
     return this.service.me(learner.id);
+  }
+
+  /** PATCH /auth/learner/me  { "displayName": "..." } */
+  @Patch('me')
+  @UseGuards(LearnerJwtGuard)
+  updateMe(@Req() request: LearnerRequest, @Body() body: unknown) {
+    const learnerId = request.learner?.id;
+
+    if (!learnerId) {
+      throw new UnauthorizedException('Learner authentication required');
+    }
+
+    return this.service.updateProfile(
+      learnerId,
+      validate(updateProfileSchema, body).displayName,
+    );
+  }
+
+  /**
+   * POST /auth/learner/change-password
+   * { "currentPassword": "...", "newPassword": "..." }
+   * Other devices are logged out; this device gets a new session.
+   */
+  @Post('change-password')
+  @UseGuards(LearnerJwtGuard)
+  @HttpCode(HttpStatus.OK)
+  @Throttle({
+    short: { limit: 5, ttl: 60000 },
+  })
+  async changePassword(
+    @Req() request: LearnerRequest,
+    @Body() body: unknown,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const learnerId = request.learner?.id;
+
+    if (!learnerId) {
+      throw new UnauthorizedException('Learner authentication required');
+    }
+
+    const input = validate(changePasswordSchema, body);
+
+    const result = await this.service.changePassword(
+      learnerId,
+      input.currentPassword,
+      input.newPassword,
+      this.metadata(request),
+    );
+
+    this.setRefreshCookie(response, result.refreshToken);
+    response.setHeader('Cache-Control', 'no-store');
+
+    return {
+      accessToken: result.accessToken,
+      expiresIn: result.expiresIn,
+      ...(this.isMobile(request)
+        ? { refreshToken: result.refreshToken }
+        : {}),
+    };
   }
 
   // ======================================
