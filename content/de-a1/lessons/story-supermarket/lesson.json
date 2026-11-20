@@ -1,0 +1,215 @@
+{
+  "slug": "story-supermarket",
+  "title": "Folge 7 · Pfand und Kasse",
+  "titles": {
+    "en": "Episode 7: Bottle Deposit and the Till",
+    "bn": "পর্ব ৭: বোতলের জামানত আর ক্যাশ কাউন্টার"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "leer",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "leːɐ̯",
+      "meanings": {
+        "en": "empty",
+        "bn": "খালি"
+      },
+      "example": {
+        "de": "Die Flasche ist leer.",
+        "en": "The bottle is empty.",
+        "bn": "বোতলটা খালি।"
+      }
+    },
+    {
+      "term": "Pfand",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "p͡fant",
+      "meanings": {
+        "en": "deposit (on bottles)",
+        "bn": "জামানত (বোতলের)"
+      },
+      "example": {
+        "de": "Auf die Flasche gibt es Pfand.",
+        "en": "There's a deposit on the bottle.",
+        "bn": "বোতলটায় জামানত আছে।"
+      }
+    },
+    {
+      "term": "Dose",
+      "article": "die",
+      "plural": "Dosen",
+      "pos": "NOUN",
+      "ipa": "ˈdoːzə",
+      "meanings": {
+        "en": "can / tin",
+        "bn": "ক্যান / টিন"
+      },
+      "example": {
+        "de": "Eine Dose Cola, bitte.",
+        "en": "A can of cola, please.",
+        "bn": "এক ক্যান কোলা, দয়া করে।"
+      }
+    },
+    {
+      "term": "Eingang",
+      "article": "der",
+      "plural": "Eingänge",
+      "pos": "NOUN",
+      "ipa": "ˈaɪ̯nˌɡaŋ",
+      "meanings": {
+        "en": "entrance",
+        "bn": "প্রবেশপথ"
+      },
+      "example": {
+        "de": "Der Automat ist neben dem Eingang.",
+        "en": "The machine is next to the entrance.",
+        "bn": "মেশিনটা প্রবেশপথের পাশে।"
+      }
+    },
+    {
+      "term": "Schlange",
+      "article": "die",
+      "plural": "Schlangen",
+      "pos": "NOUN",
+      "ipa": "ˈʃlaŋə",
+      "meanings": {
+        "en": "queue / snake",
+        "bn": "লাইন / সাপ"
+      },
+      "example": {
+        "de": "An der Kasse ist eine lange Schlange.",
+        "en": "There's a long queue at the till.",
+        "bn": "ক্যাশে লম্বা লাইন।"
+      }
+    },
+    {
+      "term": "Kassenbon",
+      "article": "der",
+      "plural": "Kassenbons",
+      "pos": "NOUN",
+      "ipa": "ˈkasn̩ˌbɔŋ",
+      "meanings": {
+        "en": "receipt",
+        "bn": "রসিদ"
+      },
+      "example": {
+        "de": "Brauchen Sie den Kassenbon?",
+        "en": "Do you need the receipt?",
+        "bn": "রসিদ লাগবে?"
+      }
+    },
+    {
+      "term": "Schein",
+      "article": "der",
+      "plural": "Scheine",
+      "pos": "NOUN",
+      "ipa": "ʃaɪ̯n",
+      "meanings": {
+        "en": "(bank) note",
+        "bn": "নোট (টাকার)"
+      },
+      "example": {
+        "de": "Ich habe nur einen 50-Euro-Schein.",
+        "en": "I only have a 50-euro note.",
+        "bn": "আমার কাছে শুধু একটা ৫০ ইউরোর নোট।"
+      }
+    },
+    {
+      "term": "zurückbekommen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "t͡suˈʁʏkbəˌkɔmən",
+      "meanings": {
+        "en": "to get back",
+        "bn": "ফেরত পাওয়া"
+      },
+      "example": {
+        "de": "Sie bekommen 2 Euro zurück.",
+        "en": "You get 2 euros back.",
+        "bn": "আপনি ২ ইউরো ফেরত পাবেন।"
+      }
+    },
+    {
+      "term": "schnell",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃnɛl",
+      "meanings": {
+        "en": "fast / quick",
+        "bn": "দ্রুত"
+      },
+      "example": {
+        "de": "Die Kassiererin ist sehr schnell.",
+        "en": "The cashier is very fast.",
+        "bn": "ক্যাশিয়ার খুব দ্রুত।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 7",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is \"Pfand\"?",
+        "options": [
+          "a deposit on bottles and cans",
+          "a discount card",
+          "a shopping bag"
+        ],
+        "answer": 0,
+        "explanation": "Auf viele Flaschen und Dosen zahlt man Pfand."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How many bottles does Rafi take?",
+        "options": [
+          "14",
+          "4",
+          "40"
+        ],
+        "answer": 0,
+        "explanation": "Rafi packt 14 Flaschen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How much money does the deposit machine give?",
+        "options": [
+          "3.50 euros",
+          "2.30 euros",
+          "7.70 euros"
+        ],
+        "answer": 0,
+        "explanation": "einen Bon: 3,50 Euro."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How much change does Rafi get?",
+        "options": [
+          "2.30 euros",
+          "3.50 euros",
+          "1.20 euros"
+        ],
+        "answer": 0,
+        "explanation": "Sie bekommen 2,30 Euro zurück."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why does Rafi pack quickly?",
+        "options": [
+          "Many people are waiting.",
+          "He is late for class.",
+          "It is raining."
+        ],
+        "answer": 0,
+        "explanation": "Hinter ihm warten schon viele Leute."
+      }
+    ]
+  }
+}

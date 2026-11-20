@@ -1,0 +1,215 @@
+{
+  "slug": "story-registration",
+  "title": "Folge 3 · Beim Bürgeramt",
+  "titles": {
+    "en": "Episode 3: At the Citizens' Office",
+    "bn": "পর্ব ৩: নাগরিক অফিসে"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Bürgeramt",
+      "article": "das",
+      "plural": "Bürgerämter",
+      "pos": "NOUN",
+      "ipa": "ˈbʏʁɡɐˌʔamt",
+      "meanings": {
+        "en": "citizens' office",
+        "bn": "নাগরিক সেবা অফিস"
+      },
+      "example": {
+        "de": "Ich habe einen Termin beim Bürgeramt.",
+        "en": "I have an appointment at the citizens' office.",
+        "bn": "Bürgeramt-এ আমার একটা অ্যাপয়েন্টমেন্ট আছে।"
+      }
+    },
+    {
+      "term": "anmelden",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌmɛldn̩",
+      "meanings": {
+        "en": "to register",
+        "bn": "নিবন্ধন করা"
+      },
+      "example": {
+        "de": "Ich möchte mich anmelden.",
+        "en": "I'd like to register.",
+        "bn": "আমি নিবন্ধন করতে চাই।"
+      }
+    },
+    {
+      "term": "Bestätigung",
+      "article": "die",
+      "plural": "Bestätigungen",
+      "pos": "NOUN",
+      "ipa": "bəˈʃtɛːtɪɡʊŋ",
+      "meanings": {
+        "en": "confirmation",
+        "bn": "নিশ্চয়তাপত্র"
+      },
+      "example": {
+        "de": "Ich brauche eine Bestätigung.",
+        "en": "I need a confirmation.",
+        "bn": "আমার একটা নিশ্চয়তাপত্র লাগবে।"
+      }
+    },
+    {
+      "term": "Bildschirm",
+      "article": "der",
+      "plural": "Bildschirme",
+      "pos": "NOUN",
+      "ipa": "ˈbɪltˌʃɪʁm",
+      "meanings": {
+        "en": "screen",
+        "bn": "স্ক্রিন"
+      },
+      "example": {
+        "de": "Die Nummer steht auf dem Bildschirm.",
+        "en": "The number is on the screen.",
+        "bn": "নম্বরটা স্ক্রিনে আছে।"
+      }
+    },
+    {
+      "term": "warten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvaʁtn̩",
+      "meanings": {
+        "en": "to wait",
+        "bn": "অপেক্ষা করা"
+      },
+      "example": {
+        "de": "Bitte warten Sie hier.",
+        "en": "Please wait here.",
+        "bn": "দয়া করে এখানে অপেক্ষা করুন।"
+      }
+    },
+    {
+      "term": "Meldebescheinigung",
+      "article": "die",
+      "plural": "Meldebescheinigungen",
+      "pos": "NOUN",
+      "ipa": "ˈmɛldəbəˌʃaɪ̯nɪɡʊŋ",
+      "meanings": {
+        "en": "registration certificate",
+        "bn": "নিবন্ধন সার্টিফিকেট"
+      },
+      "example": {
+        "de": "Die Bank braucht die Meldebescheinigung.",
+        "en": "The bank needs the registration certificate.",
+        "bn": "ব্যাংকের নিবন্ধন সার্টিফিকেট লাগবে।"
+      }
+    },
+    {
+      "term": "aufheben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fˌheːbn̩",
+      "meanings": {
+        "en": "to keep (safe)",
+        "bn": "যত্ন করে রাখা"
+      },
+      "example": {
+        "de": "Bitte heben Sie das Papier gut auf.",
+        "en": "Please keep the paper safe.",
+        "bn": "দয়া করে কাগজটা যত্ন করে রাখুন।"
+      }
+    },
+    {
+      "term": "stolz",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃtɔlt͡s",
+      "meanings": {
+        "en": "proud",
+        "bn": "গর্বিত"
+      },
+      "example": {
+        "de": "Ich bin stolz auf dich.",
+        "en": "I'm proud of you.",
+        "bn": "আমি তোমাকে নিয়ে গর্বিত।"
+      }
+    },
+    {
+      "term": "drucken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈdʁʊkn̩",
+      "meanings": {
+        "en": "to print",
+        "bn": "প্রিন্ট করা"
+      },
+      "example": {
+        "de": "Der Mann druckt ein Papier.",
+        "en": "The man prints a paper.",
+        "bn": "লোকটি একটা কাগজ প্রিন্ট করেন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 3",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How does Rafi get to the Bürgeramt?",
+        "options": [
+          "by tram",
+          "by bus",
+          "on foot"
+        ],
+        "answer": 0,
+        "explanation": "mit der Straßenbahn."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Rafi's number?",
+        "options": [
+          "B47",
+          "B6",
+          "A47"
+        ],
+        "answer": 0,
+        "explanation": "Rafi hat die Nummer B47."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Since when has Rafi lived in Lindenstraße?",
+        "options": [
+          "since 3 October",
+          "since Monday",
+          "since 2020"
+        ],
+        "answer": 0,
+        "explanation": "Seit dem 3. Oktober."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Rafi need the Meldebescheinigung for?",
+        "options": [
+          "the bank and work",
+          "the doctor",
+          "the cinema"
+        ],
+        "answer": 0,
+        "explanation": "für die Bank und für die Arbeit."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How does Rafi feel at the end?",
+        "options": [
+          "proud",
+          "angry",
+          "tired"
+        ],
+        "answer": 0,
+        "explanation": "Rafi ist stolz."
+      }
+    ]
+  }
+}

@@ -209,6 +209,53 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "de-a1-stories",
+      "title": "Geschichten · Rafi in Köln",
+      "description": "Twelve short stories in easy German: follow Rafi from Bangladesh through his first year in Cologne — and learn real everyday German along the way.",
+      "modules": [
+        {
+          "slug": "stories-arrival",
+          "title": "Ankommen · Arriving",
+          "description": "The flight, the first room in a shared flat and registering at the Bürgeramt.",
+          "lessons": [
+            "story-arrival",
+            "story-first-room",
+            "story-registration"
+          ]
+        },
+        {
+          "slug": "stories-new-people",
+          "title": "Neue Leute · New People",
+          "description": "The German course, the neighbour and a dinner with friends.",
+          "lessons": [
+            "story-german-course",
+            "story-neighbour",
+            "story-dinner-friends"
+          ]
+        },
+        {
+          "slug": "stories-everyday",
+          "title": "Alltag · Everyday Life",
+          "description": "Bottle deposit, being ill and a train that leaves without Rafi.",
+          "lessons": [
+            "story-supermarket",
+            "story-ill",
+            "story-missed-train"
+          ]
+        },
+        {
+          "slug": "stories-new-goals",
+          "title": "Neue Ziele · New Goals",
+          "description": "An email home, a job interview and one year in Cologne.",
+          "lessons": [
+            "story-email-home",
+            "story-job-interview",
+            "story-one-year"
+          ]
+        }
+      ]
     }
   ]
 }

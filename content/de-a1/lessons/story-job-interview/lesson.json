@@ -1,0 +1,231 @@
+{
+  "slug": "story-job-interview",
+  "title": "Folge 11 · Das Vorstellungsgespräch",
+  "titles": {
+    "en": "Episode 11: The Job Interview",
+    "bn": "পর্ব ১১: চাকরির ইন্টারভিউ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Vorstellungsgespräch",
+      "article": "das",
+      "plural": "Vorstellungsgespräche",
+      "pos": "NOUN",
+      "ipa": "ˈfoːɐ̯ʃtɛlʊŋsɡəˌʃpʁɛːç",
+      "meanings": {
+        "en": "job interview",
+        "bn": "চাকরির ইন্টারভিউ"
+      },
+      "example": {
+        "de": "Morgen habe ich ein Vorstellungsgespräch.",
+        "en": "Tomorrow I have a job interview.",
+        "bn": "কাল আমার একটা চাকরির ইন্টারভিউ।"
+      }
+    },
+    {
+      "term": "pünktlich",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈpʏŋktlɪç",
+      "meanings": {
+        "en": "punctual / on time",
+        "bn": "সময়মতো"
+      },
+      "example": {
+        "de": "Bitte seien Sie pünktlich.",
+        "en": "Please be on time.",
+        "bn": "দয়া করে সময়মতো আসবেন।"
+      }
+    },
+    {
+      "term": "Büro",
+      "article": "das",
+      "plural": "Büros",
+      "pos": "NOUN",
+      "ipa": "byˈʁoː",
+      "meanings": {
+        "en": "office",
+        "bn": "অফিস"
+      },
+      "example": {
+        "de": "Das Büro ist im ersten Stock.",
+        "en": "The office is on the first floor.",
+        "bn": "অফিসটা দোতলায়।"
+      }
+    },
+    {
+      "term": "bestehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "bəˈʃteːən",
+      "meanings": {
+        "en": "to pass (an exam)",
+        "bn": "পাস করা"
+      },
+      "example": {
+        "de": "Ich habe die Prüfung bestanden!",
+        "en": "I passed the exam!",
+        "bn": "আমি পরীক্ষায় পাস করেছি!"
+      }
+    },
+    {
+      "term": "bedienen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "bəˈdiːnən",
+      "meanings": {
+        "en": "to serve",
+        "bn": "পরিবেশন করা"
+      },
+      "example": {
+        "de": "Ich bediene die Gäste.",
+        "en": "I serve the guests.",
+        "bn": "আমি অতিথিদের পরিবেশন করি।"
+      }
+    },
+    {
+      "term": "verbessern",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈbɛsɐn",
+      "meanings": {
+        "en": "to improve",
+        "bn": "উন্নত করা"
+      },
+      "example": {
+        "de": "Ich möchte mein Deutsch verbessern.",
+        "en": "I want to improve my German.",
+        "bn": "আমি আমার জার্মান উন্নত করতে চাই।"
+      }
+    },
+    {
+      "term": "Stelle",
+      "article": "die",
+      "plural": "Stellen",
+      "pos": "NOUN",
+      "ipa": "ˈʃtɛlə",
+      "meanings": {
+        "en": "job / position",
+        "bn": "পদ / চাকরি"
+      },
+      "example": {
+        "de": "Die Stelle ist an der Rezeption.",
+        "en": "The job is at reception.",
+        "bn": "চাকরিটা রিসেপশনে।"
+      }
+    },
+    {
+      "term": "in Ordnung",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɪn ˈɔʁdnʊŋ",
+      "meanings": {
+        "en": "OK / fine",
+        "bn": "ঠিক আছে"
+      },
+      "example": {
+        "de": "Ist das für Sie in Ordnung?",
+        "en": "Is that OK for you?",
+        "bn": "এটা কি আপনার জন্য ঠিক আছে?"
+      }
+    },
+    {
+      "term": "einstellen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaɪ̯nˌʃtɛlən",
+      "meanings": {
+        "en": "to hire",
+        "bn": "নিয়োগ দেওয়া"
+      },
+      "example": {
+        "de": "Wir möchten Sie einstellen.",
+        "en": "We'd like to hire you.",
+        "bn": "আমরা আপনাকে নিয়োগ দিতে চাই।"
+      }
+    },
+    {
+      "term": "Freude",
+      "article": "die",
+      "plural": "Freuden",
+      "pos": "NOUN",
+      "ipa": "ˈfʁɔɪ̯də",
+      "meanings": {
+        "en": "joy",
+        "bn": "আনন্দ"
+      },
+      "example": {
+        "de": "Er springt vor Freude.",
+        "en": "He jumps for joy.",
+        "bn": "সে আনন্দে লাফিয়ে ওঠে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 11",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "When does Rafi arrive at the hotel?",
+        "options": [
+          "at 9:50, before the interview",
+          "at 10:15, late",
+          "at 9:00"
+        ],
+        "answer": 0,
+        "explanation": "Er ist um 9:50 Uhr im Hotel. Pünktlich sein ist wichtig."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What did Rafi study in Dhaka?",
+        "options": [
+          "tourism",
+          "medicine",
+          "computer science"
+        ],
+        "answer": 0,
+        "explanation": "In Dhaka habe ich Tourismus studiert."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How long has he worked in the café?",
+        "options": [
+          "eight months",
+          "one year",
+          "three months"
+        ],
+        "answer": 0,
+        "explanation": "seit acht Monaten."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where is the new job?",
+        "options": [
+          "at reception",
+          "in the kitchen",
+          "in the café"
+        ],
+        "answer": 0,
+        "explanation": "Die Stelle ist an der Rezeption."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "When can Rafi start?",
+        "options": [
+          "on 1 June",
+          "on Friday",
+          "in March"
+        ],
+        "answer": 0,
+        "explanation": "Können Sie am 1. Juni anfangen?"
+      }
+    ]
+  }
+}

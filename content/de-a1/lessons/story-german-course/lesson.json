@@ -1,0 +1,215 @@
+{
+  "slug": "story-german-course",
+  "title": "Folge 4 · Der erste Kurstag",
+  "titles": {
+    "en": "Episode 4: The First Day of the Course",
+    "bn": "পর্ব ৪: কোর্সের প্রথম দিন"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Kurs",
+      "article": "der",
+      "plural": "Kurse",
+      "pos": "NOUN",
+      "ipa": "kʊʁs",
+      "meanings": {
+        "en": "course",
+        "bn": "কোর্স"
+      },
+      "example": {
+        "de": "Der Kurs beginnt um 9 Uhr.",
+        "en": "The course starts at 9.",
+        "bn": "কোর্স ৯টায় শুরু হয়।"
+      }
+    },
+    {
+      "term": "Tafel",
+      "article": "die",
+      "plural": "Tafeln",
+      "pos": "NOUN",
+      "ipa": "ˈtaːfl̩",
+      "meanings": {
+        "en": "board",
+        "bn": "বোর্ড"
+      },
+      "example": {
+        "de": "Die Lehrerin schreibt an die Tafel.",
+        "en": "The teacher writes on the board.",
+        "bn": "শিক্ষিকা বোর্ডে লেখেন।"
+      }
+    },
+    {
+      "term": "vorstellen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfoːɐ̯ˌʃtɛlən",
+      "meanings": {
+        "en": "to introduce",
+        "bn": "পরিচয় করানো"
+      },
+      "example": {
+        "de": "Bitte stellen Sie sich vor.",
+        "en": "Please introduce yourself.",
+        "bn": "দয়া করে নিজের পরিচয় দিন।"
+      }
+    },
+    {
+      "term": "nervös",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "nɛʁˈvøːs",
+      "meanings": {
+        "en": "nervous",
+        "bn": "নার্ভাস"
+      },
+      "example": {
+        "de": "Vor der Prüfung bin ich nervös.",
+        "en": "Before the exam I'm nervous.",
+        "bn": "পরীক্ষার আগে আমি নার্ভাস থাকি।"
+      }
+    },
+    {
+      "term": "erklären",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɛɐ̯ˈklɛːʁən",
+      "meanings": {
+        "en": "to explain",
+        "bn": "বুঝিয়ে বলা"
+      },
+      "example": {
+        "de": "Kannst du mir das erklären?",
+        "en": "Can you explain that to me?",
+        "bn": "তুমি কি এটা আমাকে বুঝিয়ে বলবে?"
+      }
+    },
+    {
+      "term": "Pause",
+      "article": "die",
+      "plural": "Pausen",
+      "pos": "NOUN",
+      "ipa": "ˈpaʊ̯zə",
+      "meanings": {
+        "en": "break",
+        "bn": "বিরতি"
+      },
+      "example": {
+        "de": "In der Pause trinken wir Kaffee.",
+        "en": "In the break we drink coffee.",
+        "bn": "বিরতিতে আমরা কফি খাই।"
+      }
+    },
+    {
+      "term": "schwer",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃveːɐ̯",
+      "meanings": {
+        "en": "difficult / heavy",
+        "bn": "কঠিন / ভারী"
+      },
+      "example": {
+        "de": "Deutsch ist nicht so schwer.",
+        "en": "German isn't that hard.",
+        "bn": "জার্মান অত কঠিন না।"
+      }
+    },
+    {
+      "term": "Hausaufgabe",
+      "article": "die",
+      "plural": "Hausaufgaben",
+      "pos": "NOUN",
+      "ipa": "ˈhaʊ̯sˌʔaʊ̯fɡaːbə",
+      "meanings": {
+        "en": "homework",
+        "bn": "বাড়ির কাজ"
+      },
+      "example": {
+        "de": "Ich mache meine Hausaufgaben.",
+        "en": "I'm doing my homework.",
+        "bn": "আমি বাড়ির কাজ করছি।"
+      }
+    },
+    {
+      "term": "froh",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "fʁoː",
+      "meanings": {
+        "en": "glad",
+        "bn": "খুশি"
+      },
+      "example": {
+        "de": "Ich bin froh, dass du da bist.",
+        "en": "I'm glad you're here.",
+        "bn": "তুমি এসেছ বলে আমি খুশি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 4",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "When does Rafi arrive at the course?",
+        "options": [
+          "at 8:45",
+          "at 9:00",
+          "at 9:15"
+        ],
+        "answer": 0,
+        "explanation": "Rafi ist schon um 8:45 Uhr da."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Elena's job?",
+        "options": [
+          "doctor",
+          "teacher",
+          "nurse"
+        ],
+        "answer": 0,
+        "explanation": "Ich bin Ärztin."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How long has Omar lived in Cologne?",
+        "options": [
+          "six months",
+          "six years",
+          "two months"
+        ],
+        "answer": 0,
+        "explanation": "seit sechs Monaten."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is difficult for Rafi?",
+        "options": [
+          "the articles",
+          "the numbers",
+          "the alphabet"
+        ],
+        "answer": 0,
+        "explanation": "Die Artikel sind schwer."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Omar's tip?",
+        "options": [
+          "learn ten words a day with the article",
+          "watch films",
+          "read the newspaper"
+        ],
+        "answer": 0,
+        "explanation": "Ich lerne jeden Tag zehn Wörter. Mit Artikel!"
+      }
+    ]
+  }
+}

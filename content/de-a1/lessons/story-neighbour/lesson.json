@@ -1,0 +1,215 @@
+{
+  "slug": "story-neighbour",
+  "title": "Folge 5 · Frau Becker von nebenan",
+  "titles": {
+    "en": "Episode 5: Mrs Becker Next Door",
+    "bn": "পর্ব ৫: পাশের বাসার ফ্রাউ বেকার"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Nachbar",
+      "article": "der",
+      "plural": "Nachbarn",
+      "pos": "NOUN",
+      "ipa": "ˈnaxbaːɐ̯",
+      "meanings": {
+        "en": "neighbour",
+        "bn": "প্রতিবেশী"
+      },
+      "example": {
+        "de": "Mein Nachbar ist sehr nett.",
+        "en": "My neighbour is very nice.",
+        "bn": "আমার প্রতিবেশী খুব ভালো।"
+      }
+    },
+    {
+      "term": "Postbote",
+      "article": "der",
+      "plural": "Postboten",
+      "pos": "NOUN",
+      "ipa": "ˈpɔstˌboːtə",
+      "meanings": {
+        "en": "postman",
+        "bn": "ডাকপিয়ন"
+      },
+      "example": {
+        "de": "Der Postbote bringt ein Paket.",
+        "en": "The postman brings a parcel.",
+        "bn": "ডাকপিয়ন একটা পার্সেল আনে।"
+      }
+    },
+    {
+      "term": "nicken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈnɪkn̩",
+      "meanings": {
+        "en": "to nod",
+        "bn": "মাথা নাড়া"
+      },
+      "example": {
+        "de": "Sie nickt und lächelt.",
+        "en": "She nods and smiles.",
+        "bn": "তিনি মাথা নেড়ে হাসেন।"
+      }
+    },
+    {
+      "term": "Mitternacht",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈmɪtɐˌnaxt",
+      "meanings": {
+        "en": "midnight",
+        "bn": "মাঝরাত"
+      },
+      "example": {
+        "de": "Um Mitternacht schlafe ich.",
+        "en": "At midnight I'm asleep.",
+        "bn": "মাঝরাতে আমি ঘুমাই।"
+      }
+    },
+    {
+      "term": "Ruhezeit",
+      "article": "die",
+      "plural": "Ruhezeiten",
+      "pos": "NOUN",
+      "ipa": "ˈʁuːəˌt͡saɪ̯t",
+      "meanings": {
+        "en": "quiet hours",
+        "bn": "নীরবতার সময়"
+      },
+      "example": {
+        "de": "Ab 22 Uhr ist Ruhezeit.",
+        "en": "From 10 p.m. it's quiet time.",
+        "bn": "রাত ১০টা থেকে নীরবতার সময়।"
+      }
+    },
+    {
+      "term": "ruhig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈʁuːɪç",
+      "meanings": {
+        "en": "quiet / calm",
+        "bn": "শান্ত"
+      },
+      "example": {
+        "de": "Die Straße ist sehr ruhig.",
+        "en": "The street is very quiet.",
+        "bn": "রাস্তাটা খুব শান্ত।"
+      }
+    },
+    {
+      "term": "backen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈbakn̩",
+      "meanings": {
+        "en": "to bake",
+        "bn": "বেক করা"
+      },
+      "example": {
+        "de": "Ich backe einen Kuchen.",
+        "en": "I'm baking a cake.",
+        "bn": "আমি একটা কেক বানাচ্ছি।"
+      }
+    },
+    {
+      "term": "Keks",
+      "article": "der",
+      "plural": "Kekse",
+      "pos": "NOUN",
+      "ipa": "keːks",
+      "meanings": {
+        "en": "biscuit / cookie",
+        "bn": "বিস্কুট"
+      },
+      "example": {
+        "de": "Möchtest du einen Keks?",
+        "en": "Would you like a biscuit?",
+        "bn": "একটা বিস্কুট খাবে?"
+      }
+    },
+    {
+      "term": "sich freuen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "zɪç ˈfʁɔɪ̯ən",
+      "meanings": {
+        "en": "to be pleased",
+        "bn": "খুশি হওয়া"
+      },
+      "example": {
+        "de": "Sie freut sich sehr.",
+        "en": "She is very pleased.",
+        "bn": "তিনি খুব খুশি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 5",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why does Frau Becker come?",
+        "options": [
+          "She has a parcel for Rafi.",
+          "She wants sugar.",
+          "She is angry about music."
+        ],
+        "answer": 0,
+        "explanation": "Das Paket ist für Sie."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the real problem?",
+        "options": [
+          "Rafi showers at midnight.",
+          "Rafi's music is too loud.",
+          "Rafi doesn't clean."
+        ],
+        "answer": 0,
+        "explanation": "Sie duschen um Mitternacht."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "When are the quiet hours?",
+        "options": [
+          "from 10 p.m. to 6 a.m.",
+          "from 8 p.m. to 8 a.m.",
+          "only on Saturday"
+        ],
+        "answer": 0,
+        "explanation": "Von 22 Uhr bis 6 Uhr."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How long has Frau Becker lived in the house?",
+        "options": [
+          "40 years",
+          "4 years",
+          "14 years"
+        ],
+        "answer": 0,
+        "explanation": "Ich wohne schon 40 Jahre in diesem Haus."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Rafi bring Frau Becker?",
+        "options": [
+          "a plate of biscuits",
+          "flowers",
+          "a parcel"
+        ],
+        "answer": 0,
+        "explanation": "Er bringt Frau Becker einen Teller (Kekse)."
+      }
+    ]
+  }
+}

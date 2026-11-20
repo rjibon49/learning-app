@@ -1,0 +1,215 @@
+{
+  "slug": "story-first-room",
+  "title": "Folge 2 · Ein Zimmer in der WG",
+  "titles": {
+    "en": "Episode 2: A Room in a Shared Flat",
+    "bn": "পর্ব ২: শেয়ার করা ফ্ল্যাটে একটা ঘর"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "WG",
+      "article": "die",
+      "plural": "WGs",
+      "pos": "NOUN",
+      "ipa": "veːˈɡeː",
+      "meanings": {
+        "en": "shared flat",
+        "bn": "শেয়ার করা ফ্ল্যাট"
+      },
+      "example": {
+        "de": "Ich wohne in einer WG.",
+        "en": "I live in a shared flat.",
+        "bn": "আমি একটা শেয়ার ফ্ল্যাটে থাকি।"
+      }
+    },
+    {
+      "term": "klingeln",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈklɪŋl̩n",
+      "meanings": {
+        "en": "to ring (the bell)",
+        "bn": "বেল বাজানো"
+      },
+      "example": {
+        "de": "Es klingelt an der Tür.",
+        "en": "Someone is ringing at the door.",
+        "bn": "দরজায় বেল বাজছে।"
+      }
+    },
+    {
+      "term": "öffnen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈœfnən",
+      "meanings": {
+        "en": "to open",
+        "bn": "খোলা"
+      },
+      "example": {
+        "de": "Kannst du die Tür öffnen?",
+        "en": "Can you open the door?",
+        "bn": "তুমি কি দরজাটা খুলতে পারবে?"
+      }
+    },
+    {
+      "term": "benutzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "bəˈnʊt͡sn̩",
+      "meanings": {
+        "en": "to use",
+        "bn": "ব্যবহার করা"
+      },
+      "example": {
+        "de": "Wir benutzen die Küche zusammen.",
+        "en": "We use the kitchen together.",
+        "bn": "আমরা রান্নাঘর একসাথে ব্যবহার করি।"
+      }
+    },
+    {
+      "term": "putzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈpʊt͡sn̩",
+      "meanings": {
+        "en": "to clean",
+        "bn": "পরিষ্কার করা"
+      },
+      "example": {
+        "de": "Heute putze ich das Bad.",
+        "en": "Today I'm cleaning the bathroom.",
+        "bn": "আজ আমি বাথরুম পরিষ্কার করছি।"
+      }
+    },
+    {
+      "term": "Putzplan",
+      "article": "der",
+      "plural": "Putzpläne",
+      "pos": "NOUN",
+      "ipa": "ˈpʊt͡sˌplaːn",
+      "meanings": {
+        "en": "cleaning rota",
+        "bn": "পরিষ্কারের তালিকা"
+      },
+      "example": {
+        "de": "Der Putzplan hängt an der Tür.",
+        "en": "The cleaning rota hangs on the door.",
+        "bn": "পরিষ্কারের তালিকা দরজায় ঝোলানো।"
+      }
+    },
+    {
+      "term": "Mitbewohner",
+      "article": "der",
+      "plural": "Mitbewohner",
+      "pos": "NOUN",
+      "ipa": "ˈmɪtbəˌvoːnɐ",
+      "meanings": {
+        "en": "flatmate",
+        "bn": "রুমমেট"
+      },
+      "example": {
+        "de": "Meine Mitbewohner sind nett.",
+        "en": "My flatmates are nice.",
+        "bn": "আমার রুমমেটরা ভালো।"
+      }
+    },
+    {
+      "term": "Ich bin dran.",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɪç bɪn dʁan",
+      "meanings": {
+        "en": "It's my turn.",
+        "bn": "এবার আমার পালা।"
+      },
+      "example": {
+        "de": "Diese Woche bin ich dran.",
+        "en": "This week it's my turn.",
+        "bn": "এ সপ্তাহে আমার পালা।"
+      }
+    },
+    {
+      "term": "Tür",
+      "article": "die",
+      "plural": "Türen",
+      "pos": "NOUN",
+      "ipa": "tyːɐ̯",
+      "meanings": {
+        "en": "door",
+        "bn": "দরজা"
+      },
+      "example": {
+        "de": "Bitte mach die Tür zu.",
+        "en": "Please close the door.",
+        "bn": "দয়া করে দরজাটা বন্ধ করো।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 2",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Jana's job?",
+        "options": [
+          "nurse",
+          "student",
+          "teacher"
+        ],
+        "answer": 0,
+        "explanation": "Jana ist Krankenpflegerin."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Lukas study?",
+        "options": [
+          "computer science",
+          "medicine",
+          "German"
+        ],
+        "answer": 0,
+        "explanation": "Lukas studiert Informatik."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Rafi's room like?",
+        "options": [
+          "small but bright",
+          "big and dark",
+          "small and noisy"
+        ],
+        "answer": 0,
+        "explanation": "klein, aber hell."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is a \"Putzplan\"?",
+        "options": [
+          "a cleaning rota",
+          "a shopping list",
+          "a timetable for trains"
+        ],
+        "answer": 0,
+        "explanation": "Jede Woche putzt eine Person."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Who does Rafi call in the evening?",
+        "options": [
+          "his mother",
+          "Jana",
+          "his teacher"
+        ],
+        "answer": 0,
+        "explanation": "Er ruft seine Mutter in Dhaka an."
+      }
+    ]
+  }
+}
