@@ -64,21 +64,39 @@ async function askPassword() {
 }
 
 let token = "";
+// The API allows about 200 requests a minute, so requests are spaced out and a
+// "429 Too Many Requests" answer is waited out and retried.
+const GAP_MS = 320;
+let lastRequest = 0;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+async function send(method, url, body) {
+  for (let attempt = 1; ; attempt++) {
+    const wait = lastRequest + GAP_MS - Date.now();
+    if (wait > 0) await sleep(wait);
+    lastRequest = Date.now();
+    const res = await fetch(`${API}${url}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Origin: ORIGIN,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+    if (res.status !== 429 || attempt >= 8) return res;
+    const retryAfter = Number(res.headers.get("retry-after"));
+    const pause = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 20000;
+    log(`  (API busy, waiting ${Math.round(pause / 1000)} s …)`);
+    await sleep(pause);
+  }
+}
 async function api(method, url, body) {
   // Signing in changes nothing, so a dry run still does it (it needs the token to read).
   if (DRY && method !== "GET" && url !== "/admin/auth/login") {
     log(`  [dry-run] ${method} ${url}`);
     return { id: `dry-${Math.random().toString(36).slice(2, 10)}` };
   }
-  const res = await fetch(`${API}${url}`, {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      Origin: ORIGIN,
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
+  const res = await send(method, url, body);
   const text = await res.text();
   const data = text ? JSON.parse(text) : null;
   if (!res.ok) {
@@ -256,19 +274,30 @@ async function importWords(meta, lessonRow, langId, target) {
     };
     let row = existing.find((v) => v.term === w.term);
     if (row) {
-      await api("PATCH", `/admin/vocabulary/${row.id}`, body);
+      // PATCH answers with the word's meanings and examples, so anything missing
+      // (for example after an interrupted run) is added and changed text is updated.
+      row = await api("PATCH", `/admin/vocabulary/${row.id}`, body);
       stats.updated++;
-      continue; // meanings/examples were added the first time
+    } else {
+      row = await api("POST", "/admin/vocabulary", { ...body, languageId: target });
+      stats.created++;
     }
-    row = await api("POST", "/admin/vocabulary", { ...body, languageId: target });
-    stats.created++;
+    const codeOf = (x) => x.language?.code ?? Object.keys(langId).find((c) => langId[c] === x.languageId);
+    const meanings = row.translations ?? [];
     for (const [code, meaning] of Object.entries(w.meanings ?? {})) {
-      if (langId[code]) await api("POST", `/admin/vocabulary/${row.id}/translations`, { languageId: langId[code], meaning });
+      if (!langId[code]) continue;
+      const have = meanings.find((t) => codeOf(t) === code);
+      if (!have) await api("POST", `/admin/vocabulary/${row.id}/translations`, { languageId: langId[code], meaning });
+      else if (have.meaning !== meaning) await api("PATCH", `/admin/vocabulary/${row.id}/translations/${have.id}`, { meaning });
     }
     if (w.example) {
-      const group = `${lessonRow.id}-${i}`;
+      const examples = row.examples ?? [];
+      const group = examples[0]?.translationGroupId ?? `${lessonRow.id}-${i}`;
       for (const [code, text] of Object.entries(w.example)) {
-        if (langId[code]) await api("POST", `/admin/vocabulary/${row.id}/examples`, { languageId: langId[code], text, translationGroupId: group });
+        if (!langId[code]) continue;
+        const have = examples.find((e) => codeOf(e) === code);
+        if (!have) await api("POST", `/admin/vocabulary/${row.id}/examples`, { languageId: langId[code], text, translationGroupId: group });
+        else if (have.text !== text) await api("PATCH", `/admin/vocabulary/${row.id}/examples/${have.id}`, { text });
       }
     }
   }
