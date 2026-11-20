@@ -7,7 +7,6 @@
  *
  *   node tools/content/import.mjs --pack content/de-a1 \
  *     --api https://learning-api.mochiflix.com/api \
- *     --origin https://<your-cms-domain> \
  *     --email admin@example.com            # password is asked for
  *
  * Options
@@ -34,7 +33,9 @@ const flag = (name) => args.includes(`--${name}`);
 
 const PACK = path.resolve(opt("pack", "content/de-a1"));
 const API = (opt("api", process.env.CONTENT_API_URL) ?? "").replace(/\/+$/, "");
-const ORIGIN = opt("origin", process.env.CONTENT_CMS_ORIGIN);
+// The CMS signs in through its own server, which sends the API's own origin.
+// That origin is always allowed, so it is the default here as well.
+const ORIGIN = (opt("origin", process.env.CONTENT_CMS_ORIGIN) ?? (API ? new URL(API).origin : "")).replace(/\/+$/, "");
 const EMAIL = opt("email", process.env.CONTENT_ADMIN_EMAIL);
 const ONLY = many("only");
 const PUBLISH = flag("publish");
@@ -43,7 +44,7 @@ const DRY = flag("dry-run");
 const STATUS = PUBLISH ? "PUBLISHED" : "DRAFT";
 
 if (!API || !ORIGIN || !EMAIL) {
-  console.error("Missing --api, --origin or --email (see the top of this file).");
+  console.error("Missing --api or --email (see the top of this file).");
   process.exit(1);
 }
 

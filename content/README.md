@@ -34,7 +34,7 @@ ANTHROPIC_API_KEY=... node tools/content/translate.mjs --pack content/de-a1 --to
 
 # 3. push to the CMS (asks for the password). First as DRAFT, look at it, then --publish
 node tools/content/import.mjs --pack content/de-a1 \
-  --api https://learning-api.mochiflix.com/api --origin https://<cms-domain> --email <admin-email>
+  --api https://learning-api.mochiflix.com/api --email <admin-email>
 node tools/content/import.mjs ... --publish
 node tools/content/import.mjs ... --publish --archive-old   # also archive the app's old courses
 ```
