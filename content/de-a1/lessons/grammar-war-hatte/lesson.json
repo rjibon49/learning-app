@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-war-hatte",
+  "title": "Präteritum · war und hatte",
+  "titles": {
+    "en": "Past of sein and haben: war, hatte",
+    "bn": "sein আর haben-এর অতীত: war, hatte"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "war",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "vaːɐ̯",
+      "meanings": {
+        "en": "was (past of sein)",
+        "bn": "ছিল (sein-এর অতীত)"
+      },
+      "example": {
+        "de": "Gestern war ich krank.",
+        "en": "Yesterday I was ill.",
+        "bn": "গতকাল আমি অসুস্থ ছিলাম।"
+      }
+    },
+    {
+      "term": "hatte",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈhatə",
+      "meanings": {
+        "en": "had (past of haben)",
+        "bn": "ছিল (haben-এর অতীত)"
+      },
+      "example": {
+        "de": "Ich hatte keine Zeit.",
+        "en": "I had no time.",
+        "bn": "আমার সময় ছিল না।"
+      }
+    },
+    {
+      "term": "krank",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "kʁaŋk",
+      "meanings": {
+        "en": "ill / sick",
+        "bn": "অসুস্থ"
+      },
+      "example": {
+        "de": "Mein Sohn ist krank.",
+        "en": "My son is ill.",
+        "bn": "আমার ছেলে অসুস্থ।"
+      }
+    },
+    {
+      "term": "Spaß",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ʃpaːs",
+      "meanings": {
+        "en": "fun",
+        "bn": "মজা"
+      },
+      "example": {
+        "de": "Wir hatten viel Spaß.",
+        "en": "We had a lot of fun.",
+        "bn": "আমরা অনেক মজা করেছি।"
+      }
+    },
+    {
+      "term": "Kopfschmerzen",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈkɔp͡fˌʃmɛʁt͡sn̩",
+      "meanings": {
+        "en": "headache",
+        "bn": "মাথাব্যথা"
+      },
+      "example": {
+        "de": "Ich habe Kopfschmerzen.",
+        "en": "I have a headache.",
+        "bn": "আমার মাথাব্যথা করছে।"
+      }
+    },
+    {
+      "term": "musste",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmʊstə",
+      "meanings": {
+        "en": "had to (past of müssen)",
+        "bn": "করতে হয়েছিল"
+      },
+      "example": {
+        "de": "Ich musste lange arbeiten.",
+        "en": "I had to work late.",
+        "bn": "আমাকে অনেকক্ষণ কাজ করতে হয়েছিল।"
+      }
+    },
+    {
+      "term": "konnte",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkɔntə",
+      "meanings": {
+        "en": "could (past of können)",
+        "bn": "পেরেছিল"
+      },
+      "example": {
+        "de": "Ich konnte nicht schlafen.",
+        "en": "I couldn't sleep.",
+        "bn": "আমি ঘুমাতে পারিনি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: war and hatte",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Gestern ___ ich im Kino.",
+        "options": [
+          "war",
+          "hatte",
+          "bin"
+        ],
+        "answer": 0,
+        "explanation": "sein → war."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wo ___ du gestern?",
+        "options": [
+          "warst",
+          "war",
+          "wart"
+        ],
+        "answer": 0,
+        "explanation": "du warst."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir ___ keine Zeit.",
+        "options": [
+          "hatten",
+          "hatte",
+          "waren"
+        ],
+        "answer": 0,
+        "explanation": "wir hatten."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich konnte nicht kommen\" means …",
+        "options": [
+          "I couldn't come.",
+          "I can't come.",
+          "I didn't want to come."
+        ],
+        "answer": 0,
+        "explanation": "konnte = past of können."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das Essen ___ sehr gut.",
+        "options": [
+          "war",
+          "hatte",
+          "waren"
+        ],
+        "answer": 0,
+        "explanation": "das Essen (singular) → war."
+      }
+    ]
+  }
+}

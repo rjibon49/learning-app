@@ -1,0 +1,210 @@
+{
+  "slug": "grammar-articles",
+  "title": "Artikel · der, die, das, ein, eine",
+  "titles": {
+    "en": "Articles: der/die/das and ein/eine",
+    "bn": "আর্টিকেল: der/die/das ও ein/eine"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Mann",
+      "article": "der",
+      "plural": "Männer",
+      "pos": "NOUN",
+      "ipa": "man",
+      "meanings": {
+        "en": "man",
+        "bn": "পুরুষ / লোক"
+      },
+      "example": {
+        "de": "Der Mann heißt Peter.",
+        "en": "The man is called Peter.",
+        "bn": "লোকটির নাম পিটার।"
+      }
+    },
+    {
+      "term": "Hund",
+      "article": "der",
+      "plural": "Hunde",
+      "pos": "NOUN",
+      "ipa": "hʊnt",
+      "meanings": {
+        "en": "dog",
+        "bn": "কুকুর"
+      },
+      "example": {
+        "de": "Ich habe einen Hund.",
+        "en": "I have a dog.",
+        "bn": "আমার একটি কুকুর আছে।"
+      }
+    },
+    {
+      "term": "Mädchen",
+      "article": "das",
+      "plural": "Mädchen",
+      "pos": "NOUN",
+      "ipa": "ˈmɛːtçən",
+      "meanings": {
+        "en": "girl",
+        "bn": "মেয়ে"
+      },
+      "example": {
+        "de": "Das Mädchen liest ein Buch.",
+        "en": "The girl is reading a book.",
+        "bn": "মেয়েটি একটি বই পড়ছে।"
+      }
+    },
+    {
+      "term": "Brötchen",
+      "article": "das",
+      "plural": "Brötchen",
+      "pos": "NOUN",
+      "ipa": "ˈbʁøːtçən",
+      "meanings": {
+        "en": "bread roll",
+        "bn": "ছোট রুটি"
+      },
+      "example": {
+        "de": "Ich kaufe vier Brötchen.",
+        "en": "I am buying four bread rolls.",
+        "bn": "আমি চারটি রুটি কিনছি।"
+      }
+    },
+    {
+      "term": "Freiheit",
+      "article": "die",
+      "plural": "Freiheiten",
+      "pos": "NOUN",
+      "ipa": "ˈfʁaɪ̯haɪ̯t",
+      "meanings": {
+        "en": "freedom",
+        "bn": "স্বাধীনতা"
+      },
+      "example": {
+        "de": "Freiheit ist wichtig.",
+        "en": "Freedom is important.",
+        "bn": "স্বাধীনতা গুরুত্বপূর্ণ।"
+      }
+    },
+    {
+      "term": "Museum",
+      "article": "das",
+      "plural": "Museen",
+      "pos": "NOUN",
+      "ipa": "muˈzeːʊm",
+      "meanings": {
+        "en": "museum",
+        "bn": "জাদুঘর"
+      },
+      "example": {
+        "de": "Das Museum ist montags geschlossen.",
+        "en": "The museum is closed on Mondays.",
+        "bn": "জাদুঘরটি সোমবার বন্ধ থাকে।"
+      }
+    },
+    {
+      "term": "Dokument",
+      "article": "das",
+      "plural": "Dokumente",
+      "pos": "NOUN",
+      "ipa": "dokuˈmɛnt",
+      "meanings": {
+        "en": "document",
+        "bn": "নথি / ডকুমেন্ট"
+      },
+      "example": {
+        "de": "Bitte bringen Sie alle Dokumente mit.",
+        "en": "Please bring all documents.",
+        "bn": "দয়া করে সব কাগজপত্র নিয়ে আসবেন।"
+      }
+    },
+    {
+      "term": "Sonne",
+      "article": "die",
+      "plural": "Sonnen",
+      "pos": "NOUN",
+      "ipa": "ˈzɔnə",
+      "meanings": {
+        "en": "sun",
+        "bn": "সূর্য"
+      },
+      "example": {
+        "de": "Die Sonne scheint.",
+        "en": "The sun is shining.",
+        "bn": "রোদ উঠেছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Articles",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ Katze.",
+        "options": [
+          "eine",
+          "ein",
+          "die"
+        ],
+        "answer": 0,
+        "explanation": "Something new + feminine → eine."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe einen Hund. ___ Hund heißt Bello.",
+        "options": [
+          "Der",
+          "Ein",
+          "Die"
+        ],
+        "answer": 0,
+        "explanation": "Already mentioned → definite article der."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the gender of \"Zeitung\"?",
+        "options": [
+          "die",
+          "der",
+          "das"
+        ],
+        "answer": 0,
+        "explanation": "-ung is always feminine."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why is it \"das Mädchen\"?",
+        "options": [
+          "-chen words are always das",
+          "girls are neuter",
+          "it is a mistake"
+        ],
+        "answer": 0,
+        "explanation": "Nouns ending in -chen are neuter."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"a child\" in German is …",
+        "options": [
+          "ein Kind",
+          "eine Kind",
+          "einen Kind"
+        ],
+        "answer": 0,
+        "explanation": "das Kind → ein Kind."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which one has NO indefinite article?",
+        "options": [
+          "plural",
+          "masculine",
+          "neuter"
+        ],
+        "answer": 0,
+        "explanation": "Plural: Ich habe Kinder. (no ein)"
+      }
+    ]
+  }
+}

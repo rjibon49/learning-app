@@ -1,0 +1,194 @@
+{
+  "slug": "grammar-dative",
+  "title": "Dativ · The Receiver",
+  "titles": {
+    "en": "Dative: To Whom? For Whom?",
+    "bn": "Dativ: কাকে? কার জন্য?"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "helfen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈhɛlfn̩",
+      "meanings": {
+        "en": "to help",
+        "bn": "সাহায্য করা"
+      },
+      "example": {
+        "de": "Kannst du mir helfen?",
+        "en": "Can you help me?",
+        "bn": "তুমি কি আমাকে সাহায্য করতে পারো?"
+      }
+    },
+    {
+      "term": "schenken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃɛŋkn̩",
+      "meanings": {
+        "en": "to give (as a present)",
+        "bn": "উপহার দেওয়া"
+      },
+      "example": {
+        "de": "Er schenkt der Frau Blumen.",
+        "en": "He gives the woman flowers.",
+        "bn": "সে মহিলাকে ফুল উপহার দেয়।"
+      }
+    },
+    {
+      "term": "zeigen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡saɪ̯ɡn̩",
+      "meanings": {
+        "en": "to show",
+        "bn": "দেখানো"
+      },
+      "example": {
+        "de": "Ich zeige dir die Stadt.",
+        "en": "I'll show you the city.",
+        "bn": "আমি তোমাকে শহরটা দেখাব।"
+      }
+    },
+    {
+      "term": "gefallen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈfalən",
+      "meanings": {
+        "en": "to please / to like",
+        "bn": "ভালো লাগা"
+      },
+      "example": {
+        "de": "Das Kleid gefällt mir.",
+        "en": "I like the dress.",
+        "bn": "জামাটা আমার ভালো লাগে।"
+      }
+    },
+    {
+      "term": "gehören",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈhøːʁən",
+      "meanings": {
+        "en": "to belong to",
+        "bn": "কারো হওয়া"
+      },
+      "example": {
+        "de": "Das Handy gehört mir.",
+        "en": "The phone is mine.",
+        "bn": "ফোনটা আমার।"
+      }
+    },
+    {
+      "term": "schmecken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃmɛkn̩",
+      "meanings": {
+        "en": "to taste",
+        "bn": "স্বাদ লাগা"
+      },
+      "example": {
+        "de": "Die Suppe schmeckt gut.",
+        "en": "The soup tastes good.",
+        "bn": "স্যুপটা খেতে ভালো।"
+      }
+    },
+    {
+      "term": "danken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈdaŋkn̩",
+      "meanings": {
+        "en": "to thank",
+        "bn": "ধন্যবাদ দেওয়া"
+      },
+      "example": {
+        "de": "Ich danke dir.",
+        "en": "I thank you.",
+        "bn": "তোমাকে ধন্যবাদ।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Dativ",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gebe ___ Frau das Buch.",
+        "options": [
+          "der",
+          "die",
+          "dem"
+        ],
+        "answer": 0,
+        "explanation": "feminine Dativ = der."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er hilft ___ Kind.",
+        "options": [
+          "dem",
+          "das",
+          "den"
+        ],
+        "answer": 0,
+        "explanation": "helfen + Dativ; neuter = dem."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Dativ of \"ich\" is …",
+        "options": [
+          "mir",
+          "mich",
+          "mein"
+        ],
+        "answer": 0,
+        "explanation": "ich → mir."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das Auto gehört ___ Vater.",
+        "options": [
+          "meinem",
+          "meinen",
+          "mein"
+        ],
+        "answer": 0,
+        "explanation": "masculine Dativ = meinem."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir danken ___ Kindern.",
+        "options": [
+          "den",
+          "die",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "Plural Dativ = den + -n."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das gefällt mir\" means …",
+        "options": [
+          "I like that.",
+          "I give that.",
+          "That falls on me."
+        ],
+        "answer": 0,
+        "explanation": "gefallen + Dativ = to like."
+      }
+    ]
+  }
+}

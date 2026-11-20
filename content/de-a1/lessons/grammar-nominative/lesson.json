@@ -1,0 +1,167 @@
+{
+  "slug": "grammar-nominative",
+  "title": "Nominativ · The Subject",
+  "titles": {
+    "en": "Nominative: The Subject of the Sentence",
+    "bn": "Nominativ: বাক্যের কর্তা"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Tisch",
+      "article": "der",
+      "plural": "Tische",
+      "pos": "NOUN",
+      "ipa": "tɪʃ",
+      "meanings": {
+        "en": "table",
+        "bn": "টেবিল"
+      },
+      "example": {
+        "de": "Der Tisch ist neu.",
+        "en": "The table is new.",
+        "bn": "টেবিলটা নতুন।"
+      }
+    },
+    {
+      "term": "Lampe",
+      "article": "die",
+      "plural": "Lampen",
+      "pos": "NOUN",
+      "ipa": "ˈlampə",
+      "meanings": {
+        "en": "lamp",
+        "bn": "বাতি"
+      },
+      "example": {
+        "de": "Die Lampe ist kaputt.",
+        "en": "The lamp is broken.",
+        "bn": "বাতিটা নষ্ট।"
+      }
+    },
+    {
+      "term": "Bett",
+      "article": "das",
+      "plural": "Betten",
+      "pos": "NOUN",
+      "ipa": "bɛt",
+      "meanings": {
+        "en": "bed",
+        "bn": "বিছানা"
+      },
+      "example": {
+        "de": "Das Bett ist bequem.",
+        "en": "The bed is comfortable.",
+        "bn": "বিছানাটা আরামদায়ক।"
+      }
+    },
+    {
+      "term": "Stuhl",
+      "article": "der",
+      "plural": "Stühle",
+      "pos": "NOUN",
+      "ipa": "ʃtuːl",
+      "meanings": {
+        "en": "chair",
+        "bn": "চেয়ার"
+      },
+      "example": {
+        "de": "Der Stuhl ist frei.",
+        "en": "The chair is free.",
+        "bn": "চেয়ারটা খালি।"
+      }
+    },
+    {
+      "term": "Problem",
+      "article": "das",
+      "plural": "Probleme",
+      "pos": "NOUN",
+      "ipa": "pʁoˈbleːm",
+      "meanings": {
+        "en": "problem",
+        "bn": "সমস্যা"
+      },
+      "example": {
+        "de": "Das ist kein Problem.",
+        "en": "That's no problem.",
+        "bn": "এটা কোনো সমস্যা না।"
+      }
+    },
+    {
+      "term": "warten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvaʁtn̩",
+      "meanings": {
+        "en": "to wait",
+        "bn": "অপেক্ষা করা"
+      },
+      "example": {
+        "de": "Ich warte auf den Bus.",
+        "en": "I'm waiting for the bus.",
+        "bn": "আমি বাসের জন্য অপেক্ষা করছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Nominativ",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Lampe ist neu.",
+        "options": [
+          "Die",
+          "Der",
+          "Das"
+        ],
+        "answer": 0,
+        "explanation": "die Lampe."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das ist ___ Tisch. (indefinite)",
+        "options": [
+          "ein",
+          "einen",
+          "eine"
+        ],
+        "answer": 0,
+        "explanation": "After sein → Nominativ: ein Tisch."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In \"Heute kommt der Arzt\" the subject is …",
+        "options": [
+          "der Arzt",
+          "heute",
+          "kommt"
+        ],
+        "answer": 0,
+        "explanation": "Wer kommt? der Arzt."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das ist ___ Problem. (negative)",
+        "options": [
+          "kein",
+          "keine",
+          "keinen"
+        ],
+        "answer": 0,
+        "explanation": "das Problem → kein."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural Nominativ article is …",
+        "options": [
+          "die",
+          "der",
+          "den"
+        ],
+        "answer": 0,
+        "explanation": "Plural is always die in Nominativ."
+      }
+    ]
+  }
+}

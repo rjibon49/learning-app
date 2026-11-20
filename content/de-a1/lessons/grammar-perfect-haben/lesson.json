@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-perfect-haben",
+  "title": "Perfekt mit haben · I have done",
+  "titles": {
+    "en": "Perfect Tense with haben",
+    "bn": "Perfekt (অতীত কাল) — haben দিয়ে"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "gestern",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈɡɛstɐn",
+      "meanings": {
+        "en": "yesterday",
+        "bn": "গতকাল"
+      },
+      "example": {
+        "de": "Gestern habe ich gearbeitet.",
+        "en": "Yesterday I worked.",
+        "bn": "গতকাল আমি কাজ করেছি।"
+      }
+    },
+    {
+      "term": "gemacht",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈmaxt",
+      "meanings": {
+        "en": "done / made (participle of machen)",
+        "bn": "করেছি (machen-এর অতীত)"
+      },
+      "example": {
+        "de": "Was hast du gemacht?",
+        "en": "What did you do?",
+        "bn": "তুমি কী করেছ?"
+      }
+    },
+    {
+      "term": "gegessen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈɡɛsn̩",
+      "meanings": {
+        "en": "eaten (participle of essen)",
+        "bn": "খেয়েছি (essen-এর অতীত)"
+      },
+      "example": {
+        "de": "Ich habe Pizza gegessen.",
+        "en": "I ate pizza.",
+        "bn": "আমি পিৎজা খেয়েছি।"
+      }
+    },
+    {
+      "term": "gesehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈzeːən",
+      "meanings": {
+        "en": "seen (participle of sehen)",
+        "bn": "দেখেছি (sehen-এর অতীত)"
+      },
+      "example": {
+        "de": "Hast du den Film gesehen?",
+        "en": "Have you seen the film?",
+        "bn": "তুমি কি ছবিটা দেখেছ?"
+      }
+    },
+    {
+      "term": "geschrieben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈʃʁiːbn̩",
+      "meanings": {
+        "en": "written (participle of schreiben)",
+        "bn": "লিখেছি (schreiben-এর অতীত)"
+      },
+      "example": {
+        "de": "Ich habe eine E-Mail geschrieben.",
+        "en": "I wrote an email.",
+        "bn": "আমি একটা ইমেইল লিখেছি।"
+      }
+    },
+    {
+      "term": "geschlafen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈʃlaːfn̩",
+      "meanings": {
+        "en": "slept (participle of schlafen)",
+        "bn": "ঘুমিয়েছি (schlafen-এর অতীত)"
+      },
+      "example": {
+        "de": "Hast du gut geschlafen?",
+        "en": "Did you sleep well?",
+        "bn": "তুমি কি ভালো ঘুমিয়েছ?"
+      }
+    },
+    {
+      "term": "schon",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ʃoːn",
+      "meanings": {
+        "en": "already / yet",
+        "bn": "ইতিমধ্যে"
+      },
+      "example": {
+        "de": "Hast du schon gegessen?",
+        "en": "Have you eaten yet?",
+        "bn": "তুমি কি খেয়েছ?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Perfekt with haben",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe Deutsch ___.",
+        "options": [
+          "gelernt",
+          "gelernen",
+          "lernt"
+        ],
+        "answer": 0,
+        "explanation": "lernen → gelernt."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Participle of \"trinken\"?",
+        "options": [
+          "getrunken",
+          "getrinkt",
+          "trunken"
+        ],
+        "answer": 0,
+        "explanation": "Irregular: getrunken."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which word order is correct?",
+        "options": [
+          "Wir haben gestern Fußball gespielt.",
+          "Wir haben gespielt gestern Fußball.",
+          "Wir gespielt haben gestern Fußball."
+        ],
+        "answer": 0,
+        "explanation": "haben in position 2, participle at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ du den Brief geschrieben?",
+        "options": [
+          "Hast",
+          "Hat",
+          "Habt"
+        ],
+        "answer": 0,
+        "explanation": "du hast."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Participle of \"arbeiten\"?",
+        "options": [
+          "gearbeitet",
+          "gearbeitt",
+          "arbeitet"
+        ],
+        "answer": 0,
+        "explanation": "Stem ends in -t → add -et."
+      }
+    ]
+  }
+}

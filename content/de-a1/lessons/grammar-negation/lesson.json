@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-negation",
+  "title": "Verneinung · nicht und kein",
+  "titles": {
+    "en": "Saying No: nicht and kein",
+    "bn": "না-বাচক: nicht ও kein"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "kein",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "kaɪ̯n",
+      "meanings": {
+        "en": "no / not a",
+        "bn": "কোনো … না"
+      },
+      "example": {
+        "de": "Ich habe kein Auto.",
+        "en": "I don't have a car.",
+        "bn": "আমার কোনো গাড়ি নেই।"
+      }
+    },
+    {
+      "term": "nicht",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "nɪçt",
+      "meanings": {
+        "en": "not",
+        "bn": "না"
+      },
+      "example": {
+        "de": "Ich komme heute nicht.",
+        "en": "I'm not coming today.",
+        "bn": "আমি আজ আসছি না।"
+      }
+    },
+    {
+      "term": "doch",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "dɔx",
+      "meanings": {
+        "en": "yes (to a negative question)",
+        "bn": "অবশ্যই / হ্যাঁ তো"
+      },
+      "example": {
+        "de": "Hast du keinen Hunger? – Doch!",
+        "en": "Aren't you hungry? – Yes, I am!",
+        "bn": "তোমার কি ক্ষুধা পায়নি? – পেয়েছে তো!"
+      }
+    },
+    {
+      "term": "Zeit",
+      "article": "die",
+      "plural": "Zeiten",
+      "pos": "NOUN",
+      "ipa": "t͡saɪ̯t",
+      "meanings": {
+        "en": "time",
+        "bn": "সময়"
+      },
+      "example": {
+        "de": "Ich habe keine Zeit.",
+        "en": "I have no time.",
+        "bn": "আমার সময় নেই।"
+      }
+    },
+    {
+      "term": "Schlüssel",
+      "article": "der",
+      "plural": "Schlüssel",
+      "pos": "NOUN",
+      "ipa": "ˈʃlʏsl̩",
+      "meanings": {
+        "en": "key",
+        "bn": "চাবি"
+      },
+      "example": {
+        "de": "Ich finde den Schlüssel nicht.",
+        "en": "I can't find the key.",
+        "bn": "আমি চাবিটা খুঁজে পাচ্ছি না।"
+      }
+    },
+    {
+      "term": "teuer",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈtɔɪ̯ɐ",
+      "meanings": {
+        "en": "expensive",
+        "bn": "দামি"
+      },
+      "example": {
+        "de": "Das ist nicht teuer.",
+        "en": "That is not expensive.",
+        "bn": "এটা দামি না।"
+      }
+    },
+    {
+      "term": "Hunger",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈhʊŋɐ",
+      "meanings": {
+        "en": "hunger",
+        "bn": "ক্ষুধা"
+      },
+      "example": {
+        "de": "Ich habe Hunger.",
+        "en": "I'm hungry.",
+        "bn": "আমার ক্ষুধা লেগেছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: nicht and kein",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ Auto.",
+        "options": [
+          "kein",
+          "nicht",
+          "keine"
+        ],
+        "answer": 0,
+        "explanation": "das Auto → ein Auto → kein Auto."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das ist ___ teuer.",
+        "options": [
+          "nicht",
+          "kein",
+          "keine"
+        ],
+        "answer": 0,
+        "explanation": "Before an adjective: nicht."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir haben ___ Zeit.",
+        "options": [
+          "keine",
+          "nicht",
+          "kein"
+        ],
+        "answer": 0,
+        "explanation": "Zeit has no article here and is feminine → keine."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich komme heute ___.",
+        "options": [
+          "nicht",
+          "kein",
+          "keinen"
+        ],
+        "answer": 0,
+        "explanation": "Negating a verb: nicht at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Kommst du nicht?\" – You are coming. You answer …",
+        "options": [
+          "Doch!",
+          "Ja!",
+          "Nein!"
+        ],
+        "answer": 0,
+        "explanation": "Doch = yes to a negative question."
+      }
+    ]
+  }
+}

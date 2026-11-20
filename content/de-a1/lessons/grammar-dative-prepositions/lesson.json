@@ -1,0 +1,226 @@
+{
+  "slug": "grammar-dative-prepositions",
+  "title": "Präpositionen mit Dativ · mit, bei, aus, zu …",
+  "titles": {
+    "en": "Prepositions with Dative: aus, bei, mit, nach, seit, von, zu",
+    "bn": "Dativ নেয় এমন অব্যয়: aus, bei, mit, nach, seit, von, zu"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "aus",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "aʊ̯s",
+      "meanings": {
+        "en": "from / out of",
+        "bn": "থেকে"
+      },
+      "example": {
+        "de": "Ich komme aus Bangladesch.",
+        "en": "I come from Bangladesh.",
+        "bn": "আমি বাংলাদেশ থেকে এসেছি।"
+      }
+    },
+    {
+      "term": "bei",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "baɪ̯",
+      "meanings": {
+        "en": "at (someone's place) / near",
+        "bn": "কাছে / বাসায়"
+      },
+      "example": {
+        "de": "Ich wohne bei meiner Tante.",
+        "en": "I live at my aunt's.",
+        "bn": "আমি খালার বাসায় থাকি।"
+      }
+    },
+    {
+      "term": "mit",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "mɪt",
+      "meanings": {
+        "en": "with / by",
+        "bn": "সাথে / দিয়ে"
+      },
+      "example": {
+        "de": "Ich fahre mit dem Bus.",
+        "en": "I go by bus.",
+        "bn": "আমি বাসে যাই।"
+      }
+    },
+    {
+      "term": "nach",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "naːx",
+      "meanings": {
+        "en": "after / to (cities)",
+        "bn": "পরে / -তে (শহর)"
+      },
+      "example": {
+        "de": "Wir fahren nach Berlin.",
+        "en": "We're going to Berlin.",
+        "bn": "আমরা বার্লিন যাচ্ছি।"
+      }
+    },
+    {
+      "term": "seit",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "zaɪ̯t",
+      "meanings": {
+        "en": "since / for",
+        "bn": "থেকে (ধরে)"
+      },
+      "example": {
+        "de": "Ich lerne seit drei Monaten Deutsch.",
+        "en": "I've been learning German for three months.",
+        "bn": "আমি তিন মাস ধরে জার্মান শিখছি।"
+      }
+    },
+    {
+      "term": "von",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "fɔn",
+      "meanings": {
+        "en": "from / of",
+        "bn": "থেকে / -এর"
+      },
+      "example": {
+        "de": "Das ist ein Brief von Anna.",
+        "en": "This is a letter from Anna.",
+        "bn": "এটা আনার কাছ থেকে একটা চিঠি।"
+      }
+    },
+    {
+      "term": "zu",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "t͡suː",
+      "meanings": {
+        "en": "to",
+        "bn": "কাছে / -তে"
+      },
+      "example": {
+        "de": "Ich gehe zum Arzt.",
+        "en": "I'm going to the doctor.",
+        "bn": "আমি ডাক্তারের কাছে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "nach Hause",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "naːx ˈhaʊ̯zə",
+      "meanings": {
+        "en": "(going) home",
+        "bn": "বাড়ি (যাওয়া)"
+      },
+      "example": {
+        "de": "Ich gehe jetzt nach Hause.",
+        "en": "I'm going home now.",
+        "bn": "আমি এখন বাড়ি যাচ্ছি।"
+      }
+    },
+    {
+      "term": "zu Hause",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "t͡suː ˈhaʊ̯zə",
+      "meanings": {
+        "en": "at home",
+        "bn": "বাড়িতে"
+      },
+      "example": {
+        "de": "Heute bleibe ich zu Hause.",
+        "en": "Today I'm staying at home.",
+        "bn": "আজ আমি বাড়িতে থাকছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Dative prepositions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich fahre mit ___ Zug.",
+        "options": [
+          "dem",
+          "den",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "mit + Dativ, der Zug → dem."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gehe ___ Post. (zu + der)",
+        "options": [
+          "zur",
+          "zum",
+          "zu die"
+        ],
+        "answer": 0,
+        "explanation": "zu der = zur."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir fliegen ___ Spanien.",
+        "options": [
+          "nach",
+          "zu",
+          "bei"
+        ],
+        "answer": 0,
+        "explanation": "Countries → nach."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich wohne ___ einem Jahr hier.",
+        "options": [
+          "seit",
+          "vor",
+          "ab"
+        ],
+        "answer": 0,
+        "explanation": "seit + present = for (until now)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich bin zu Hause\" means …",
+        "options": [
+          "I'm at home.",
+          "I'm going home.",
+          "I'm from home."
+        ],
+        "answer": 0,
+        "explanation": "zu Hause = at home."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das Geschenk ist ___ meinem Vater.",
+        "options": [
+          "von",
+          "für",
+          "ohne"
+        ],
+        "answer": 0,
+        "explanation": "von + Dativ: from my father."
+      }
+    ]
+  }
+}

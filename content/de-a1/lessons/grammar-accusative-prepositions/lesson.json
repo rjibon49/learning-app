@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-accusative-prepositions",
+  "title": "Präpositionen mit Akkusativ · für, ohne, durch …",
+  "titles": {
+    "en": "Prepositions with Accusative: für, ohne, durch, gegen, um",
+    "bn": "Akkusativ নেয় এমন অব্যয়: für, ohne, durch, gegen, um"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "für",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "fyːɐ̯",
+      "meanings": {
+        "en": "for",
+        "bn": "জন্য"
+      },
+      "example": {
+        "de": "Das ist für dich.",
+        "en": "This is for you.",
+        "bn": "এটা তোমার জন্য।"
+      }
+    },
+    {
+      "term": "ohne",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈoːnə",
+      "meanings": {
+        "en": "without",
+        "bn": "ছাড়া"
+      },
+      "example": {
+        "de": "Kaffee ohne Zucker, bitte.",
+        "en": "Coffee without sugar, please.",
+        "bn": "চিনি ছাড়া কফি, দয়া করে।"
+      }
+    },
+    {
+      "term": "durch",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "dʊʁç",
+      "meanings": {
+        "en": "through",
+        "bn": "ভেতর দিয়ে"
+      },
+      "example": {
+        "de": "Wir gehen durch den Park.",
+        "en": "We walk through the park.",
+        "bn": "আমরা পার্কের ভেতর দিয়ে হাঁটি।"
+      }
+    },
+    {
+      "term": "gegen",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈɡeːɡn̩",
+      "meanings": {
+        "en": "against / around (time)",
+        "bn": "বিরুদ্ধে / প্রায়"
+      },
+      "example": {
+        "de": "Ich komme gegen 8 Uhr.",
+        "en": "I'll come around 8.",
+        "bn": "আমি প্রায় ৮টায় আসব।"
+      }
+    },
+    {
+      "term": "Geschenk",
+      "article": "das",
+      "plural": "Geschenke",
+      "pos": "NOUN",
+      "ipa": "ɡəˈʃɛŋk",
+      "meanings": {
+        "en": "present / gift",
+        "bn": "উপহার"
+      },
+      "example": {
+        "de": "Das Geschenk ist für dich.",
+        "en": "The present is for you.",
+        "bn": "উপহারটা তোমার জন্য।"
+      }
+    },
+    {
+      "term": "Zucker",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈt͡sʊkɐ",
+      "meanings": {
+        "en": "sugar",
+        "bn": "চিনি"
+      },
+      "example": {
+        "de": "Ich trinke Tee ohne Zucker.",
+        "en": "I drink tea without sugar.",
+        "bn": "আমি চিনি ছাড়া চা খাই।"
+      }
+    },
+    {
+      "term": "Schirm",
+      "article": "der",
+      "plural": "Schirme",
+      "pos": "NOUN",
+      "ipa": "ʃɪʁm",
+      "meanings": {
+        "en": "umbrella",
+        "bn": "ছাতা"
+      },
+      "example": {
+        "de": "Ich gehe ohne Schirm.",
+        "en": "I'm going without an umbrella.",
+        "bn": "আমি ছাতা ছাড়া যাচ্ছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Accusative prepositions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das ist für ___ Lehrer.",
+        "options": [
+          "den",
+          "dem",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "für + Akkusativ, masculine → den."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir laufen durch ___ Wald. (der Wald)",
+        "options": [
+          "den",
+          "dem",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "durch + Akkusativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gehe nicht ohne ___. (du)",
+        "options": [
+          "dich",
+          "dir",
+          "du"
+        ],
+        "answer": 0,
+        "explanation": "ohne + Akkusativ: dich."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which preposition is NOT always Akkusativ?",
+        "options": [
+          "mit",
+          "für",
+          "ohne"
+        ],
+        "answer": 0,
+        "explanation": "mit takes Dativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"gegen 8 Uhr\" means …",
+        "options": [
+          "around 8",
+          "against 8",
+          "after 8"
+        ],
+        "answer": 0,
+        "explanation": "gegen + time = approximately."
+      }
+    ]
+  }
+}

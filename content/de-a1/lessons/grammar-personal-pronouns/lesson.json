@@ -1,0 +1,199 @@
+{
+  "slug": "grammar-personal-pronouns",
+  "title": "Personalpronomen · ich, du, er …",
+  "titles": {
+    "en": "Personal Pronouns: ich, du, er, sie, es …",
+    "bn": "পুরুষবাচক সর্বনাম: ich, du, er, sie, es …"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "ich",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ɪç",
+      "meanings": {
+        "en": "I",
+        "bn": "আমি"
+      },
+      "example": {
+        "de": "Ich bin Karim.",
+        "en": "I am Karim.",
+        "bn": "আমি করিম।"
+      }
+    },
+    {
+      "term": "du",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "duː",
+      "meanings": {
+        "en": "you (informal)",
+        "bn": "তুমি"
+      },
+      "example": {
+        "de": "Wie heißt du?",
+        "en": "What's your name?",
+        "bn": "তোমার নাম কী?"
+      }
+    },
+    {
+      "term": "er",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "eːɐ̯",
+      "meanings": {
+        "en": "he / it",
+        "bn": "সে (ছেলে) / এটি"
+      },
+      "example": {
+        "de": "Der Tisch ist neu. Er ist schön.",
+        "en": "The table is new. It is nice.",
+        "bn": "টেবিলটি নতুন। এটি সুন্দর।"
+      }
+    },
+    {
+      "term": "sie",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ziː",
+      "meanings": {
+        "en": "she / it / they",
+        "bn": "সে (মেয়ে) / তারা"
+      },
+      "example": {
+        "de": "Sie wohnt in Köln.",
+        "en": "She lives in Cologne.",
+        "bn": "সে কোলনে থাকে।"
+      }
+    },
+    {
+      "term": "es",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ɛs",
+      "meanings": {
+        "en": "it",
+        "bn": "এটি"
+      },
+      "example": {
+        "de": "Das Buch ist gut. Es ist spannend.",
+        "en": "The book is good. It's exciting.",
+        "bn": "বইটি ভালো। এটি রোমাঞ্চকর।"
+      }
+    },
+    {
+      "term": "wir",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "viːɐ̯",
+      "meanings": {
+        "en": "we",
+        "bn": "আমরা"
+      },
+      "example": {
+        "de": "Wir lernen Deutsch.",
+        "en": "We are learning German.",
+        "bn": "আমরা জার্মান শিখছি।"
+      }
+    },
+    {
+      "term": "ihr",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "iːɐ̯",
+      "meanings": {
+        "en": "you (plural, informal)",
+        "bn": "তোমরা"
+      },
+      "example": {
+        "de": "Kommt ihr mit?",
+        "en": "Are you (all) coming along?",
+        "bn": "তোমরা কি সাথে আসছ?"
+      }
+    },
+    {
+      "term": "Sie",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ziː",
+      "meanings": {
+        "en": "you (formal)",
+        "bn": "আপনি"
+      },
+      "example": {
+        "de": "Woher kommen Sie?",
+        "en": "Where are you from?",
+        "bn": "আপনি কোথা থেকে এসেছেন?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Personal pronouns",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Die Lampe ist neu. ___ ist schön.\"",
+        "options": [
+          "Sie",
+          "Er",
+          "Es"
+        ],
+        "answer": 0,
+        "explanation": "die Lampe → sie."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Computer ist alt. ___ ist langsam.\"",
+        "options": [
+          "Er",
+          "Es",
+          "Sie"
+        ],
+        "answer": 0,
+        "explanation": "der Computer → er (even for things)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You speak to two friends: \"Kommt ___ mit?\"",
+        "options": [
+          "ihr",
+          "du",
+          "Sie"
+        ],
+        "answer": 0,
+        "explanation": "ihr = you, several friends."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Sie sind\" with a capital S in the middle of a sentence means …",
+        "options": [
+          "you (formal)",
+          "she is",
+          "they are (always)"
+        ],
+        "answer": 0,
+        "explanation": "Capital Sie = polite you."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das Kind spielt. ___ ist fünf.\"",
+        "options": [
+          "Es",
+          "Er",
+          "Sie"
+        ],
+        "answer": 0,
+        "explanation": "das Kind → es."
+      }
+    ]
+  }
+}

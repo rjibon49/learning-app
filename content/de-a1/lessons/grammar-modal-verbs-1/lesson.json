@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-modal-verbs-1",
+  "title": "Modalverben 1 · können, müssen, wollen",
+  "titles": {
+    "en": "Modal Verbs 1: können, müssen, wollen",
+    "bn": "মোডাল ক্রিয়া ১: können, müssen, wollen"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "können",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkœnən",
+      "meanings": {
+        "en": "can / to be able to",
+        "bn": "পারা"
+      },
+      "example": {
+        "de": "Kannst du schwimmen?",
+        "en": "Can you swim?",
+        "bn": "তুমি কি সাঁতার কাটতে পারো?"
+      }
+    },
+    {
+      "term": "müssen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmʏsn̩",
+      "meanings": {
+        "en": "must / to have to",
+        "bn": "বাধ্য হওয়া"
+      },
+      "example": {
+        "de": "Ich muss heute arbeiten.",
+        "en": "I have to work today.",
+        "bn": "আজ আমাকে কাজ করতে হবে।"
+      }
+    },
+    {
+      "term": "wollen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvɔlən",
+      "meanings": {
+        "en": "to want to",
+        "bn": "চাওয়া"
+      },
+      "example": {
+        "de": "Wir wollen nach Berlin fahren.",
+        "en": "We want to go to Berlin.",
+        "bn": "আমরা বার্লিন যেতে চাই।"
+      }
+    },
+    {
+      "term": "schwimmen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃvɪmən",
+      "meanings": {
+        "en": "to swim",
+        "bn": "সাঁতার কাটা"
+      },
+      "example": {
+        "de": "Ich kann gut schwimmen.",
+        "en": "I can swim well.",
+        "bn": "আমি ভালো সাঁতার কাটতে পারি।"
+      }
+    },
+    {
+      "term": "parken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈpaʁkn̩",
+      "meanings": {
+        "en": "to park",
+        "bn": "গাড়ি রাখা"
+      },
+      "example": {
+        "de": "Hier kann man parken.",
+        "en": "You can park here.",
+        "bn": "এখানে গাড়ি রাখা যায়।"
+      }
+    },
+    {
+      "term": "aufstehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fˌʃteːən",
+      "meanings": {
+        "en": "to get up",
+        "bn": "ঘুম থেকে ওঠা"
+      },
+      "example": {
+        "de": "Ich muss früh aufstehen.",
+        "en": "I have to get up early.",
+        "bn": "আমাকে তাড়াতাড়ি উঠতে হবে।"
+      }
+    },
+    {
+      "term": "man",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "man",
+      "meanings": {
+        "en": "one / you (in general)",
+        "bn": "যে কেউ / সাধারণভাবে"
+      },
+      "example": {
+        "de": "Hier darf man nicht rauchen.",
+        "en": "You can't smoke here.",
+        "bn": "এখানে ধূমপান করা যাবে না।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: können, müssen, wollen",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Ich kann gut kochen.",
+          "Ich kann kochen gut.",
+          "Ich kochen kann gut."
+        ],
+        "answer": 0,
+        "explanation": "Modal in position 2, infinitive at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ___ heute arbeiten. (müssen)",
+        "options": [
+          "muss",
+          "müsst",
+          "musst"
+        ],
+        "answer": 0,
+        "explanation": "er muss — no ending."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ du Deutsch sprechen? (können)",
+        "options": [
+          "Kannst",
+          "Kann",
+          "Könnt"
+        ],
+        "answer": 0,
+        "explanation": "du kannst."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich will kommen\" means …",
+        "options": [
+          "I want to come",
+          "I will come",
+          "I must come"
+        ],
+        "answer": 0,
+        "explanation": "wollen = want."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Du musst nicht kommen\" means …",
+        "options": [
+          "You don't have to come",
+          "You must not come",
+          "You can't come"
+        ],
+        "answer": 0,
+        "explanation": "nicht müssen = not necessary."
+      }
+    ]
+  }
+}

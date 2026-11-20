@@ -1,0 +1,151 @@
+{
+  "slug": "grammar-cases-intro",
+  "title": "Die Fälle · What Are Cases?",
+  "titles": {
+    "en": "What Are Cases? Who Does What to Whom",
+    "bn": "কারক (Kasus) কী? কে কাকে কী করে"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Fall",
+      "article": "der",
+      "plural": "Fälle",
+      "pos": "NOUN",
+      "ipa": "fal",
+      "meanings": {
+        "en": "case (grammar)",
+        "bn": "কারক"
+      },
+      "example": {
+        "de": "Der Akkusativ ist ein Fall.",
+        "en": "The accusative is a case.",
+        "bn": "Akkusativ একটি কারক।"
+      }
+    },
+    {
+      "term": "geben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈɡeːbn̩",
+      "meanings": {
+        "en": "to give",
+        "bn": "দেওয়া"
+      },
+      "example": {
+        "de": "Ich gebe dir das Buch.",
+        "en": "I give you the book.",
+        "bn": "আমি তোমাকে বইটা দিই।"
+      }
+    },
+    {
+      "term": "Apfel",
+      "article": "der",
+      "plural": "Äpfel",
+      "pos": "NOUN",
+      "ipa": "ˈapfl̩",
+      "meanings": {
+        "en": "apple",
+        "bn": "আপেল"
+      },
+      "example": {
+        "de": "Das Kind isst einen Apfel.",
+        "en": "The child is eating an apple.",
+        "bn": "শিশুটি একটি আপেল খাচ্ছে।"
+      }
+    },
+    {
+      "term": "Hund",
+      "article": "der",
+      "plural": "Hunde",
+      "pos": "NOUN",
+      "ipa": "hʊnt",
+      "meanings": {
+        "en": "dog",
+        "bn": "কুকুর"
+      },
+      "example": {
+        "de": "Der Hund ist groß.",
+        "en": "The dog is big.",
+        "bn": "কুকুরটি বড়।"
+      }
+    },
+    {
+      "term": "sehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈzeːən",
+      "meanings": {
+        "en": "to see",
+        "bn": "দেখা"
+      },
+      "example": {
+        "de": "Ich sehe den Bus.",
+        "en": "I see the bus.",
+        "bn": "আমি বাসটা দেখছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: What are cases?",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which case answers the question \"Wer?\"",
+        "options": [
+          "Nominativ",
+          "Akkusativ",
+          "Dativ"
+        ],
+        "answer": 0,
+        "explanation": "Wer? = subject = Nominativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which case answers \"Wem?\"",
+        "options": [
+          "Dativ",
+          "Akkusativ",
+          "Nominativ"
+        ],
+        "answer": 0,
+        "explanation": "Wem? = to whom = Dativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In \"Der Hund sieht den Mann\", who sees?",
+        "options": [
+          "the dog",
+          "the man",
+          "both"
+        ],
+        "answer": 0,
+        "explanation": "der Hund = Nominativ = subject."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which gender changes its article from Nominativ to Akkusativ?",
+        "options": [
+          "masculine",
+          "feminine",
+          "neuter"
+        ],
+        "answer": 0,
+        "explanation": "der → den, ein → einen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Dativ of \"das Kind\" is …",
+        "options": [
+          "dem Kind",
+          "den Kind",
+          "der Kind"
+        ],
+        "answer": 0,
+        "explanation": "neuter Dativ = dem."
+      }
+    ]
+  }
+}

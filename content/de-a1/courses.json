@@ -50,6 +50,88 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "de-a1-grammar",
+      "title": "A1 Grammatik · Grammar Step by Step",
+      "description": "All A1 grammar in small steps: nouns and articles, verbs, questions, word order, modal and separable verbs, cases, prepositions and the past tense.",
+      "modules": [
+        {
+          "slug": "grammar-nouns-articles",
+          "title": "Nomen & Artikel · Nouns and Articles",
+          "description": "der, die, das, ein, kein, plurals and how to say no.",
+          "lessons": [
+            "grammar-nouns",
+            "grammar-articles",
+            "grammar-negation"
+          ]
+        },
+        {
+          "slug": "grammar-verbs-present",
+          "title": "Verben im Präsens · Verbs in the Present",
+          "description": "Pronouns, verb endings, sein and haben, irregular verbs.",
+          "lessons": [
+            "grammar-personal-pronouns",
+            "grammar-verb-conjugation",
+            "grammar-sein-haben",
+            "grammar-irregular-verbs"
+          ]
+        },
+        {
+          "slug": "grammar-sentences",
+          "title": "Sätze & Fragen · Sentences and Questions",
+          "description": "W-questions, yes/no questions, word order and the imperative.",
+          "lessons": [
+            "grammar-w-questions",
+            "grammar-yes-no-questions",
+            "grammar-word-order",
+            "grammar-imperative"
+          ]
+        },
+        {
+          "slug": "grammar-modal-separable",
+          "title": "Modalverben & Trennbare Verben · Modal and Separable Verbs",
+          "description": "können, müssen, wollen, dürfen, sollen, möchten and verbs that split.",
+          "lessons": [
+            "grammar-modal-verbs-1",
+            "grammar-modal-verbs-2",
+            "grammar-separable-verbs"
+          ]
+        },
+        {
+          "slug": "grammar-cases",
+          "title": "Die Fälle · Cases",
+          "description": "Nominativ, Akkusativ, Dativ and possessive articles.",
+          "lessons": [
+            "grammar-cases-intro",
+            "grammar-nominative",
+            "grammar-accusative",
+            "grammar-dative",
+            "grammar-possessive-articles"
+          ]
+        },
+        {
+          "slug": "grammar-prepositions",
+          "title": "Präpositionen · Prepositions",
+          "description": "Time, accusative, dative and two-way prepositions.",
+          "lessons": [
+            "grammar-time-prepositions",
+            "grammar-accusative-prepositions",
+            "grammar-dative-prepositions",
+            "grammar-place-prepositions"
+          ]
+        },
+        {
+          "slug": "grammar-past",
+          "title": "Vergangenheit · Talking About the Past",
+          "description": "Perfekt with haben and sein, war and hatte.",
+          "lessons": [
+            "grammar-perfect-haben",
+            "grammar-perfect-sein-participle",
+            "grammar-war-hatte"
+          ]
+        }
+      ]
     }
   ]
 }

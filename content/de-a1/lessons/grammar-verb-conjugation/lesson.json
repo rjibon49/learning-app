@@ -1,0 +1,210 @@
+{
+  "slug": "grammar-verb-conjugation",
+  "title": "Verben konjugieren · Present Tense",
+  "titles": {
+    "en": "Verbs in the Present Tense",
+    "bn": "ক্রিয়ার রূপ: বর্তমান কাল (Präsens)"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "lernen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈlɛʁnən",
+      "meanings": {
+        "en": "to learn",
+        "bn": "শেখা"
+      },
+      "example": {
+        "de": "Ich lerne jeden Tag.",
+        "en": "I learn every day.",
+        "bn": "আমি প্রতিদিন শিখি।"
+      }
+    },
+    {
+      "term": "spielen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃpiːlən",
+      "meanings": {
+        "en": "to play",
+        "bn": "খেলা"
+      },
+      "example": {
+        "de": "Die Kinder spielen Fußball.",
+        "en": "The children play football.",
+        "bn": "বাচ্চারা ফুটবল খেলে।"
+      }
+    },
+    {
+      "term": "kochen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkɔxn̩",
+      "meanings": {
+        "en": "to cook",
+        "bn": "রান্না করা"
+      },
+      "example": {
+        "de": "Er kocht Reis.",
+        "en": "He is cooking rice.",
+        "bn": "সে ভাত রান্না করছে।"
+      }
+    },
+    {
+      "term": "kaufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkaʊ̯fn̩",
+      "meanings": {
+        "en": "to buy",
+        "bn": "কেনা"
+      },
+      "example": {
+        "de": "Wir kaufen Brot.",
+        "en": "We are buying bread.",
+        "bn": "আমরা রুটি কিনছি।"
+      }
+    },
+    {
+      "term": "arbeiten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʁbaɪ̯tn̩",
+      "meanings": {
+        "en": "to work",
+        "bn": "কাজ করা"
+      },
+      "example": {
+        "de": "Wo arbeitest du?",
+        "en": "Where do you work?",
+        "bn": "তুমি কোথায় কাজ করো?"
+      }
+    },
+    {
+      "term": "finden",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfɪndn̩",
+      "meanings": {
+        "en": "to find",
+        "bn": "খুঁজে পাওয়া"
+      },
+      "example": {
+        "de": "Er findet seinen Schlüssel nicht.",
+        "en": "He can't find his key.",
+        "bn": "সে তার চাবি খুঁজে পাচ্ছে না।"
+      }
+    },
+    {
+      "term": "tanzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈtant͡sn̩",
+      "meanings": {
+        "en": "to dance",
+        "bn": "নাচা"
+      },
+      "example": {
+        "de": "Du tanzt sehr gut!",
+        "en": "You dance very well!",
+        "bn": "তুমি খুব ভালো নাচো!"
+      }
+    },
+    {
+      "term": "machen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmaxn̩",
+      "meanings": {
+        "en": "to do / make",
+        "bn": "করা"
+      },
+      "example": {
+        "de": "Was machst du?",
+        "en": "What are you doing?",
+        "bn": "তুমি কী করছ?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Present tense",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: du ___ (wohnen)",
+        "options": [
+          "wohnst",
+          "wohnt",
+          "wohne"
+        ],
+        "answer": 0,
+        "explanation": "du → -st."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: er ___ (arbeiten)",
+        "options": [
+          "arbeitet",
+          "arbeitt",
+          "arbeiten"
+        ],
+        "answer": 0,
+        "explanation": "Stem ends in -t → add e: arbeitet."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: wir ___ (kaufen)",
+        "options": [
+          "kaufen",
+          "kauft",
+          "kaufst"
+        ],
+        "answer": 0,
+        "explanation": "wir = infinitive form."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: du ___ (heißen)",
+        "options": [
+          "heißt",
+          "heißst",
+          "heißen"
+        ],
+        "answer": 0,
+        "explanation": "Stem ends in ß → du only adds -t."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ihr ___ (spielen)",
+        "options": [
+          "spielt",
+          "spielen",
+          "spielst"
+        ],
+        "answer": 0,
+        "explanation": "ihr → -t."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich lerne Deutsch.\" can mean …",
+        "options": [
+          "I learn / I am learning German",
+          "only I learned German",
+          "only I will learn German"
+        ],
+        "answer": 0,
+        "explanation": "One present tense for both English forms."
+      }
+    ]
+  }
+}

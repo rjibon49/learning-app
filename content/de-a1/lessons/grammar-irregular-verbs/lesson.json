@@ -1,0 +1,226 @@
+{
+  "slug": "grammar-irregular-verbs",
+  "title": "Unregelmäßige Verben · e→i, a→ä",
+  "titles": {
+    "en": "Verbs That Change Their Vowel",
+    "bn": "যেসব ক্রিয়ার স্বর বদলায় (e→i, a→ä)"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "essen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈɛsn̩",
+      "meanings": {
+        "en": "to eat",
+        "bn": "খাওয়া"
+      },
+      "example": {
+        "de": "Er isst gern Fisch.",
+        "en": "He likes eating fish.",
+        "bn": "সে মাছ খেতে পছন্দ করে।"
+      }
+    },
+    {
+      "term": "geben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈɡeːbn̩",
+      "meanings": {
+        "en": "to give",
+        "bn": "দেওয়া"
+      },
+      "example": {
+        "de": "Gibst du mir das Buch?",
+        "en": "Will you give me the book?",
+        "bn": "তুমি কি আমাকে বইটা দেবে?"
+      }
+    },
+    {
+      "term": "nehmen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈneːmən",
+      "meanings": {
+        "en": "to take",
+        "bn": "নেওয়া"
+      },
+      "example": {
+        "de": "Er nimmt den Bus.",
+        "en": "He takes the bus.",
+        "bn": "সে বাসে যায়।"
+      }
+    },
+    {
+      "term": "lesen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈleːzn̩",
+      "meanings": {
+        "en": "to read",
+        "bn": "পড়া"
+      },
+      "example": {
+        "de": "Sie liest ein Buch.",
+        "en": "She is reading a book.",
+        "bn": "সে একটি বই পড়ছে।"
+      }
+    },
+    {
+      "term": "sehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈzeːən",
+      "meanings": {
+        "en": "to see",
+        "bn": "দেখা"
+      },
+      "example": {
+        "de": "Siehst du das?",
+        "en": "Do you see that?",
+        "bn": "তুমি কি ওটা দেখছ?"
+      }
+    },
+    {
+      "term": "fahren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfaːʁən",
+      "meanings": {
+        "en": "to go (by vehicle) / drive",
+        "bn": "যাওয়া (যানবাহনে) / চালানো"
+      },
+      "example": {
+        "de": "Sie fährt mit dem Bus.",
+        "en": "She goes by bus.",
+        "bn": "সে বাসে যায়।"
+      }
+    },
+    {
+      "term": "schlafen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃlaːfn̩",
+      "meanings": {
+        "en": "to sleep",
+        "bn": "ঘুমানো"
+      },
+      "example": {
+        "de": "Das Baby schläft.",
+        "en": "The baby is sleeping.",
+        "bn": "শিশুটি ঘুমাচ্ছে।"
+      }
+    },
+    {
+      "term": "wissen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvɪsn̩",
+      "meanings": {
+        "en": "to know (a fact)",
+        "bn": "জানা"
+      },
+      "example": {
+        "de": "Ich weiß es nicht.",
+        "en": "I don't know.",
+        "bn": "আমি জানি না।"
+      }
+    },
+    {
+      "term": "helfen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈhɛlfn̩",
+      "meanings": {
+        "en": "to help",
+        "bn": "সাহায্য করা"
+      },
+      "example": {
+        "de": "Hilfst du mir?",
+        "en": "Will you help me?",
+        "bn": "তুমি কি আমাকে সাহায্য করবে?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Vowel-changing verbs",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ du Deutsch? (sprechen)",
+        "options": [
+          "Sprichst",
+          "Sprechst",
+          "Spricht"
+        ],
+        "answer": 0,
+        "explanation": "e → i with du: sprichst."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ___ mit dem Auto. (fahren)",
+        "options": [
+          "fährt",
+          "fahrt",
+          "fähren"
+        ],
+        "answer": 0,
+        "explanation": "a → ä with er: fährt."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir ___ Pizza. (essen)",
+        "options": [
+          "essen",
+          "isst",
+          "esst"
+        ],
+        "answer": 0,
+        "explanation": "wir does not change."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Sie (she) ___ ein Buch. (lesen)",
+        "options": [
+          "liest",
+          "lest",
+          "lieset"
+        ],
+        "answer": 0,
+        "explanation": "e → ie: liest."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich ___ es nicht. (wissen)",
+        "options": [
+          "weiß",
+          "wisse",
+          "wissen"
+        ],
+        "answer": 0,
+        "explanation": "wissen: ich weiß."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which forms change their vowel?",
+        "options": [
+          "du and er/sie/es",
+          "ich and wir",
+          "all forms"
+        ],
+        "answer": 0,
+        "explanation": "Only du and er/sie/es."
+      }
+    ]
+  }
+}
