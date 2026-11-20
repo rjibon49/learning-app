@@ -64,7 +64,8 @@ async function askPassword() {
 
 let token = "";
 async function api(method, url, body) {
-  if (DRY && method !== "GET") {
+  // Signing in changes nothing, so a dry run still does it (it needs the token to read).
+  if (DRY && method !== "GET" && url !== "/admin/auth/login") {
     log(`  [dry-run] ${method} ${url}`);
     return { id: `dry-${Math.random().toString(36).slice(2, 10)}` };
   }
@@ -97,7 +98,7 @@ async function main() {
   const password = await askPassword();
 
   const login = await api("POST", "/admin/auth/login", { email: EMAIL, password });
-  token = login.accessToken;
+  token = login?.accessToken ?? login?.data?.accessToken;
   if (!token) throw new Error("Login did not return an access token.");
   log(`Signed in as ${EMAIL}${DRY ? " (dry run: nothing will be changed)" : ""}`);
 
