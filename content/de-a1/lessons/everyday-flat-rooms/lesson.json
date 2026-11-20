@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-flat-rooms",
+  "title": "Meine Wohnung · My Flat",
+  "titles": {
+    "en": "My Flat and Its Rooms",
+    "bn": "আমার ফ্ল্যাট ও ঘরগুলো"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Wohnung",
+      "article": "die",
+      "plural": "Wohnungen",
+      "pos": "NOUN",
+      "ipa": "ˈvoːnʊŋ",
+      "meanings": {
+        "en": "flat / apartment",
+        "bn": "ফ্ল্যাট"
+      },
+      "example": {
+        "de": "Die Wohnung ist hell.",
+        "en": "The flat is bright.",
+        "bn": "ফ্ল্যাটটা আলোকিত।"
+      }
+    },
+    {
+      "term": "Zimmer",
+      "article": "das",
+      "plural": "Zimmer",
+      "pos": "NOUN",
+      "ipa": "ˈt͡sɪmɐ",
+      "meanings": {
+        "en": "room",
+        "bn": "ঘর / রুম"
+      },
+      "example": {
+        "de": "Mein Zimmer ist klein.",
+        "en": "My room is small.",
+        "bn": "আমার ঘরটা ছোট।"
+      }
+    },
+    {
+      "term": "Küche",
+      "article": "die",
+      "plural": "Küchen",
+      "pos": "NOUN",
+      "ipa": "ˈkʏçə",
+      "meanings": {
+        "en": "kitchen",
+        "bn": "রান্নাঘর"
+      },
+      "example": {
+        "de": "Die Küche ist neu.",
+        "en": "The kitchen is new.",
+        "bn": "রান্নাঘরটা নতুন।"
+      }
+    },
+    {
+      "term": "Bad",
+      "article": "das",
+      "plural": "Bäder",
+      "pos": "NOUN",
+      "ipa": "baːt",
+      "meanings": {
+        "en": "bathroom",
+        "bn": "বাথরুম"
+      },
+      "example": {
+        "de": "Das Bad ist rechts.",
+        "en": "The bathroom is on the right.",
+        "bn": "বাথরুমটা ডানদিকে।"
+      }
+    },
+    {
+      "term": "Schlafzimmer",
+      "article": "das",
+      "plural": "Schlafzimmer",
+      "pos": "NOUN",
+      "ipa": "ˈʃlaːfˌt͡sɪmɐ",
+      "meanings": {
+        "en": "bedroom",
+        "bn": "শোবার ঘর"
+      },
+      "example": {
+        "de": "Das Schlafzimmer ist ruhig.",
+        "en": "The bedroom is quiet.",
+        "bn": "শোবার ঘরটা শান্ত।"
+      }
+    },
+    {
+      "term": "Balkon",
+      "article": "der",
+      "plural": "Balkone",
+      "pos": "NOUN",
+      "ipa": "balˈkoːn",
+      "meanings": {
+        "en": "balcony",
+        "bn": "বারান্দা"
+      },
+      "example": {
+        "de": "Die Wohnung hat einen Balkon.",
+        "en": "The flat has a balcony.",
+        "bn": "ফ্ল্যাটে একটা বারান্দা আছে।"
+      }
+    },
+    {
+      "term": "Miete",
+      "article": "die",
+      "plural": "Mieten",
+      "pos": "NOUN",
+      "ipa": "ˈmiːtə",
+      "meanings": {
+        "en": "rent",
+        "bn": "ভাড়া"
+      },
+      "example": {
+        "de": "Die Miete ist sehr teuer.",
+        "en": "The rent is very expensive.",
+        "bn": "ভাড়া খুব বেশি।"
+      }
+    },
+    {
+      "term": "hell",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "hɛl",
+      "meanings": {
+        "en": "bright",
+        "bn": "আলোকিত"
+      },
+      "example": {
+        "de": "Das Wohnzimmer ist hell.",
+        "en": "The living room is bright.",
+        "bn": "বসার ঘরটা আলোকিত।"
+      }
+    },
+    {
+      "term": "laut",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "laʊ̯t",
+      "meanings": {
+        "en": "loud / noisy",
+        "bn": "কোলাহলপূর্ণ / জোরে"
+      },
+      "example": {
+        "de": "Die Straße ist laut.",
+        "en": "The street is noisy.",
+        "bn": "রাস্তাটা কোলাহলপূর্ণ।"
+      }
+    },
+    {
+      "term": "leider",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈlaɪ̯dɐ",
+      "meanings": {
+        "en": "unfortunately",
+        "bn": "দুঃখের বিষয়"
+      },
+      "example": {
+        "de": "Leider habe ich keine Zeit.",
+        "en": "Unfortunately I have no time.",
+        "bn": "দুঃখের বিষয়, আমার সময় নেই।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: My flat",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where do you cook?",
+        "options": [
+          "in der Küche",
+          "im Schlafzimmer",
+          "im Flur"
+        ],
+        "answer": 0,
+        "explanation": "die Küche = kitchen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Die Miete ist teuer\" means …",
+        "options": [
+          "The rent is expensive.",
+          "The flat is big.",
+          "The room is cheap."
+        ],
+        "answer": 0,
+        "explanation": "Miete = rent, teuer = expensive."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The opposite of \"hell\" is …",
+        "options": [
+          "dunkel",
+          "laut",
+          "klein"
+        ],
+        "answer": 0,
+        "explanation": "hell ↔ dunkel."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "das Erdgeschoss is …",
+        "options": [
+          "the ground floor",
+          "the basement",
+          "the first floor up"
+        ],
+        "answer": 0,
+        "explanation": "EG = ground floor."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Mein Zimmer ___ mir.",
+        "options": [
+          "gefällt",
+          "gefallen",
+          "gefällst"
+        ],
+        "answer": 0,
+        "explanation": "das Zimmer gefällt mir."
+      }
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "slug": "everyday-countries-languages",
+  "title": "Länder & Sprachen · Countries and Languages",
+  "titles": {
+    "en": "Countries and Languages",
+    "bn": "দেশ ও ভাষা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Land",
+      "article": "das",
+      "plural": "Länder",
+      "pos": "NOUN",
+      "ipa": "lant",
+      "meanings": {
+        "en": "country",
+        "bn": "দেশ"
+      },
+      "example": {
+        "de": "Deutschland ist ein schönes Land.",
+        "en": "Germany is a beautiful country.",
+        "bn": "জার্মানি একটি সুন্দর দেশ।"
+      }
+    },
+    {
+      "term": "Sprache",
+      "article": "die",
+      "plural": "Sprachen",
+      "pos": "NOUN",
+      "ipa": "ˈʃpʁaːxə",
+      "meanings": {
+        "en": "language",
+        "bn": "ভাষা"
+      },
+      "example": {
+        "de": "Welche Sprachen sprichst du?",
+        "en": "Which languages do you speak?",
+        "bn": "তুমি কোন কোন ভাষা বলো?"
+      }
+    },
+    {
+      "term": "sprechen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃpʁɛçn̩",
+      "meanings": {
+        "en": "to speak",
+        "bn": "বলা"
+      },
+      "example": {
+        "de": "Ich spreche ein bisschen Deutsch.",
+        "en": "I speak a little German.",
+        "bn": "আমি একটু জার্মান বলি।"
+      }
+    },
+    {
+      "term": "woher",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "voˈheːɐ̯",
+      "meanings": {
+        "en": "where from",
+        "bn": "কোথা থেকে"
+      },
+      "example": {
+        "de": "Woher kommen Sie?",
+        "en": "Where are you from?",
+        "bn": "আপনি কোথা থেকে এসেছেন?"
+      }
+    },
+    {
+      "term": "Muttersprache",
+      "article": "die",
+      "plural": "Muttersprachen",
+      "pos": "NOUN",
+      "ipa": "ˈmʊtɐˌʃpʁaːxə",
+      "meanings": {
+        "en": "mother tongue",
+        "bn": "মাতৃভাষা"
+      },
+      "example": {
+        "de": "Meine Muttersprache ist Bengali.",
+        "en": "My mother tongue is Bengali.",
+        "bn": "আমার মাতৃভাষা বাংলা।"
+      }
+    },
+    {
+      "term": "ein bisschen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "aɪ̯n ˈbɪsçən",
+      "meanings": {
+        "en": "a little",
+        "bn": "একটু"
+      },
+      "example": {
+        "de": "Ich spreche ein bisschen Deutsch.",
+        "en": "I speak a little German.",
+        "bn": "আমি একটু জার্মান বলি।"
+      }
+    },
+    {
+      "term": "Schweiz",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ʃvaɪ̯t͡s",
+      "meanings": {
+        "en": "Switzerland",
+        "bn": "সুইজারল্যান্ড"
+      },
+      "example": {
+        "de": "Er kommt aus der Schweiz.",
+        "en": "He comes from Switzerland.",
+        "bn": "সে সুইজারল্যান্ড থেকে এসেছে।"
+      }
+    },
+    {
+      "term": "Österreich",
+      "article": null,
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈøːstəʁaɪ̯ç",
+      "meanings": {
+        "en": "Austria",
+        "bn": "অস্ট্রিয়া"
+      },
+      "example": {
+        "de": "Wien liegt in Österreich.",
+        "en": "Vienna is in Austria.",
+        "bn": "ভিয়েনা অস্ট্রিয়ায়।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Countries and languages",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich komme ___ Indien.",
+        "options": [
+          "aus",
+          "in",
+          "nach"
+        ],
+        "answer": 0,
+        "explanation": "Woher? → aus."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Sie kommt aus ___ Türkei.",
+        "options": [
+          "der",
+          "die",
+          "–"
+        ],
+        "answer": 0,
+        "explanation": "die Türkei → aus der Türkei (Dativ)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich wohne ___ Berlin.",
+        "options": [
+          "in",
+          "aus",
+          "zu"
+        ],
+        "answer": 0,
+        "explanation": "Wo? → in."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Muttersprache\" means …",
+        "options": [
+          "mother tongue",
+          "foreign language",
+          "mother's name"
+        ],
+        "answer": 0,
+        "explanation": "Mutter + Sprache."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Welche Sprachen ___ du?",
+        "options": [
+          "sprichst",
+          "sprechst",
+          "spricht"
+        ],
+        "answer": 0,
+        "explanation": "sprechen → du sprichst."
+      }
+    ]
+  }
+}

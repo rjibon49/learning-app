@@ -132,6 +132,83 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "de-a1-everyday",
+      "title": "Alltag auf Deutsch · Everyday German",
+      "description": "Real situations from life in Germany: family, your flat, food and shopping, your day, the town, the doctor, work, clothes and forms.",
+      "modules": [
+        {
+          "slug": "everyday-people",
+          "title": "Menschen & Familie · People and Family",
+          "description": "Talk about your family, where you come from and what people are like.",
+          "lessons": [
+            "everyday-family",
+            "everyday-countries-languages",
+            "everyday-describing-people"
+          ]
+        },
+        {
+          "slug": "everyday-home",
+          "title": "Wohnen · Home",
+          "description": "Rooms, furniture and finding a flat.",
+          "lessons": [
+            "everyday-flat-rooms",
+            "everyday-furniture",
+            "everyday-looking-for-flat"
+          ]
+        },
+        {
+          "slug": "everyday-food",
+          "title": "Essen & Einkaufen · Food and Shopping",
+          "description": "Food and drinks, the supermarket, cafés and restaurants.",
+          "lessons": [
+            "everyday-food-drinks",
+            "everyday-supermarket",
+            "everyday-cafe-restaurant"
+          ]
+        },
+        {
+          "slug": "everyday-free-time",
+          "title": "Alltag & Freizeit · Daily Life and Free Time",
+          "description": "Your daily routine, hobbies and making plans with friends.",
+          "lessons": [
+            "everyday-daily-routine",
+            "everyday-hobbies",
+            "everyday-making-plans"
+          ]
+        },
+        {
+          "slug": "everyday-town",
+          "title": "Stadt & Verkehr · Town and Transport",
+          "description": "Places in town, asking the way, buses, trains and tickets.",
+          "lessons": [
+            "everyday-places-in-town",
+            "everyday-directions",
+            "everyday-transport-tickets"
+          ]
+        },
+        {
+          "slug": "everyday-health",
+          "title": "Gesundheit · Health",
+          "description": "The body, visiting the doctor and making appointments by phone.",
+          "lessons": [
+            "everyday-body",
+            "everyday-at-the-doctor",
+            "everyday-appointments-phone"
+          ]
+        },
+        {
+          "slug": "everyday-work",
+          "title": "Arbeit & Kleidung · Work and Clothes",
+          "description": "Jobs, buying clothes and filling in forms.",
+          "lessons": [
+            "everyday-jobs",
+            "everyday-clothes-shopping",
+            "everyday-forms-documents"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,215 @@
+{
+  "slug": "everyday-making-plans",
+  "title": "Verabredungen · Making Plans",
+  "titles": {
+    "en": "Making Plans: Invite, Accept, Decline",
+    "bn": "পরিকল্পনা: দাওয়াত, রাজি হওয়া, না বলা"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Zeit",
+      "article": "die",
+      "plural": "Zeiten",
+      "pos": "NOUN",
+      "ipa": "t͡saɪ̯t",
+      "meanings": {
+        "en": "time",
+        "bn": "সময়"
+      },
+      "example": {
+        "de": "Hast du heute Zeit?",
+        "en": "Are you free today?",
+        "bn": "আজ তোমার সময় আছে?"
+      }
+    },
+    {
+      "term": "Lust",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "lʊst",
+      "meanings": {
+        "en": "desire / wish (to do)",
+        "bn": "ইচ্ছা"
+      },
+      "example": {
+        "de": "Hast du Lust auf Kino?",
+        "en": "Do you fancy the cinema?",
+        "bn": "সিনেমায় যেতে ইচ্ছে করছে?"
+      }
+    },
+    {
+      "term": "Kino",
+      "article": "das",
+      "plural": "Kinos",
+      "pos": "NOUN",
+      "ipa": "ˈkiːno",
+      "meanings": {
+        "en": "cinema",
+        "bn": "সিনেমা হল"
+      },
+      "example": {
+        "de": "Wir gehen ins Kino.",
+        "en": "We're going to the cinema.",
+        "bn": "আমরা সিনেমা দেখতে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "Idee",
+      "article": "die",
+      "plural": "Ideen",
+      "pos": "NOUN",
+      "ipa": "iˈdeː",
+      "meanings": {
+        "en": "idea",
+        "bn": "ধারণা / বুদ্ধি"
+      },
+      "example": {
+        "de": "Das ist eine gute Idee!",
+        "en": "That's a good idea!",
+        "bn": "এটা একটা ভালো বুদ্ধি!"
+      }
+    },
+    {
+      "term": "passen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈpasn̩",
+      "meanings": {
+        "en": "to suit / fit",
+        "bn": "মানানো / ঠিক হওয়া"
+      },
+      "example": {
+        "de": "Samstag passt mir gut.",
+        "en": "Saturday suits me well.",
+        "bn": "শনিবার আমার জন্য ভালো।"
+      }
+    },
+    {
+      "term": "vielleicht",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "fiˈlaɪ̯çt",
+      "meanings": {
+        "en": "maybe",
+        "bn": "হয়তো"
+      },
+      "example": {
+        "de": "Vielleicht am Sonntag?",
+        "en": "Maybe on Sunday?",
+        "bn": "হয়তো রবিবার?"
+      }
+    },
+    {
+      "term": "Tut mir leid.",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "tuːt miːɐ̯ laɪ̯t",
+      "meanings": {
+        "en": "I'm sorry.",
+        "bn": "দুঃখিত।"
+      },
+      "example": {
+        "de": "Tut mir leid, ich kann nicht.",
+        "en": "Sorry, I can't.",
+        "bn": "দুঃখিত, আমি পারব না।"
+      }
+    },
+    {
+      "term": "zusammen",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "t͡suˈzamən",
+      "meanings": {
+        "en": "together",
+        "bn": "একসাথে"
+      },
+      "example": {
+        "de": "Wir essen zusammen.",
+        "en": "We eat together.",
+        "bn": "আমরা একসাথে খাই।"
+      }
+    },
+    {
+      "term": "Party",
+      "article": "die",
+      "plural": "Partys",
+      "pos": "NOUN",
+      "ipa": "ˈpaːɐ̯ti",
+      "meanings": {
+        "en": "party",
+        "bn": "পার্টি"
+      },
+      "example": {
+        "de": "Kommst du zu meiner Party?",
+        "en": "Are you coming to my party?",
+        "bn": "তুমি কি আমার পার্টিতে আসছ?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Making plans",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Hast du Lust auf Kaffee?\" means …",
+        "options": [
+          "Do you fancy a coffee?",
+          "Do you have coffee?",
+          "Do you like coffee?"
+        ],
+        "answer": 0,
+        "explanation": "Lust auf = feel like."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "A polite way to say no:",
+        "options": [
+          "Leider kann ich nicht.",
+          "Nein.",
+          "Das passt."
+        ],
+        "answer": 0,
+        "explanation": "leider + reason is polite."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das passt gut\" means …",
+        "options": [
+          "That suits me.",
+          "That fits badly.",
+          "That's a pass."
+        ],
+        "answer": 0,
+        "explanation": "passen = to suit."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wollen wir ins Kino ___?",
+        "options": [
+          "gehen",
+          "gehe",
+          "geht"
+        ],
+        "answer": 0,
+        "explanation": "Modal + infinitive at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Vielleicht ein anderes Mal?\" means …",
+        "options": [
+          "Maybe another time?",
+          "Maybe many times?",
+          "Always another time?"
+        ],
+        "answer": 0,
+        "explanation": "ein anderes Mal = another time."
+      }
+    ]
+  }
+}

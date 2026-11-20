@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-daily-routine",
+  "title": "Mein Tag · My Daily Routine",
+  "titles": {
+    "en": "My Daily Routine",
+    "bn": "আমার দৈনন্দিন রুটিন"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "aufwachen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fˌvaxn̩",
+      "meanings": {
+        "en": "to wake up",
+        "bn": "ঘুম ভাঙা"
+      },
+      "example": {
+        "de": "Ich wache um 6 Uhr auf.",
+        "en": "I wake up at 6.",
+        "bn": "আমার ৬টায় ঘুম ভাঙে।"
+      }
+    },
+    {
+      "term": "duschen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈduːʃn̩",
+      "meanings": {
+        "en": "to shower",
+        "bn": "গোসল করা"
+      },
+      "example": {
+        "de": "Ich dusche jeden Morgen.",
+        "en": "I shower every morning.",
+        "bn": "আমি প্রতিদিন সকালে গোসল করি।"
+      }
+    },
+    {
+      "term": "frühstücken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfʁyːˌʃtʏkn̩",
+      "meanings": {
+        "en": "to have breakfast",
+        "bn": "নাশতা করা"
+      },
+      "example": {
+        "de": "Wir frühstücken um 7 Uhr.",
+        "en": "We have breakfast at 7.",
+        "bn": "আমরা ৭টায় নাশতা করি।"
+      }
+    },
+    {
+      "term": "Arbeit",
+      "article": "die",
+      "plural": "Arbeiten",
+      "pos": "NOUN",
+      "ipa": "ˈaʁbaɪ̯t",
+      "meanings": {
+        "en": "work",
+        "bn": "কাজ"
+      },
+      "example": {
+        "de": "Ich fahre zur Arbeit.",
+        "en": "I'm going to work.",
+        "bn": "আমি কাজে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "zuerst",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "t͡suˈʔeːɐ̯st",
+      "meanings": {
+        "en": "first",
+        "bn": "প্রথমে"
+      },
+      "example": {
+        "de": "Zuerst trinke ich Tee.",
+        "en": "First I drink tea.",
+        "bn": "প্রথমে আমি চা খাই।"
+      }
+    },
+    {
+      "term": "danach",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "daˈnaːx",
+      "meanings": {
+        "en": "after that",
+        "bn": "এরপর"
+      },
+      "example": {
+        "de": "Danach gehe ich einkaufen.",
+        "en": "After that I go shopping.",
+        "bn": "এরপর আমি বাজারে যাই।"
+      }
+    },
+    {
+      "term": "oft",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ɔft",
+      "meanings": {
+        "en": "often",
+        "bn": "প্রায়ই"
+      },
+      "example": {
+        "de": "Ich koche oft Reis.",
+        "en": "I often cook rice.",
+        "bn": "আমি প্রায়ই ভাত রান্না করি।"
+      }
+    },
+    {
+      "term": "manchmal",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈmançmaːl",
+      "meanings": {
+        "en": "sometimes",
+        "bn": "মাঝে মাঝে"
+      },
+      "example": {
+        "de": "Manchmal sehe ich fern.",
+        "en": "Sometimes I watch TV.",
+        "bn": "মাঝে মাঝে আমি টিভি দেখি।"
+      }
+    },
+    {
+      "term": "nie",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "niː",
+      "meanings": {
+        "en": "never",
+        "bn": "কখনো না"
+      },
+      "example": {
+        "de": "Ich trinke nie Kaffee.",
+        "en": "I never drink coffee.",
+        "bn": "আমি কখনো কফি খাই না।"
+      }
+    },
+    {
+      "term": "Morgen",
+      "article": "der",
+      "plural": "Morgen",
+      "pos": "NOUN",
+      "ipa": "ˈmɔʁɡn̩",
+      "meanings": {
+        "en": "morning",
+        "bn": "সকাল"
+      },
+      "example": {
+        "de": "Guten Morgen!",
+        "en": "Good morning!",
+        "bn": "সুপ্রভাত!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: My daily routine",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Zuerst ___ ich. (duschen)",
+        "options": [
+          "dusche",
+          "ich dusche",
+          "duschen"
+        ],
+        "answer": 0,
+        "explanation": "Verb in position 2: Zuerst dusche ich."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich stehe um 7 Uhr ___.",
+        "options": [
+          "auf",
+          "an",
+          "ein"
+        ],
+        "answer": 0,
+        "explanation": "aufstehen → stehe … auf."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"manchmal\" means …",
+        "options": [
+          "sometimes",
+          "never",
+          "always"
+        ],
+        "answer": 0,
+        "explanation": "manchmal = sometimes."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which order is logical?",
+        "options": [
+          "zuerst – dann – zum Schluss",
+          "zum Schluss – zuerst – dann",
+          "dann – zum Schluss – zuerst"
+        ],
+        "answer": 0,
+        "explanation": "first – then – finally."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Am Abend ___ ich fern.",
+        "options": [
+          "sehe",
+          "sieht",
+          "sehen"
+        ],
+        "answer": 0,
+        "explanation": "fernsehen → ich sehe … fern."
+      }
+    ]
+  }
+}

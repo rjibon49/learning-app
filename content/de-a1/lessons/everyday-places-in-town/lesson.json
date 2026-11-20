@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-places-in-town",
+  "title": "In der Stadt · Places in Town",
+  "titles": {
+    "en": "Places in Town",
+    "bn": "শহরের জায়গাগুলো"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Haltestelle",
+      "article": "die",
+      "plural": "Haltestellen",
+      "pos": "NOUN",
+      "ipa": "ˈhaltəˌʃtɛlə",
+      "meanings": {
+        "en": "stop (bus/tram)",
+        "bn": "স্টপ (বাস/ট্রাম)"
+      },
+      "example": {
+        "de": "Wo ist die Haltestelle?",
+        "en": "Where is the stop?",
+        "bn": "স্টপটা কোথায়?"
+      }
+    },
+    {
+      "term": "Apotheke",
+      "article": "die",
+      "plural": "Apotheken",
+      "pos": "NOUN",
+      "ipa": "apoˈteːkə",
+      "meanings": {
+        "en": "pharmacy",
+        "bn": "ফার্মেসি"
+      },
+      "example": {
+        "de": "Gibt es hier eine Apotheke?",
+        "en": "Is there a pharmacy here?",
+        "bn": "এখানে কি ফার্মেসি আছে?"
+      }
+    },
+    {
+      "term": "Post",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "pɔst",
+      "meanings": {
+        "en": "post office",
+        "bn": "ডাকঘর"
+      },
+      "example": {
+        "de": "Ich gehe zur Post.",
+        "en": "I'm going to the post office.",
+        "bn": "আমি ডাকঘরে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "Bank",
+      "article": "die",
+      "plural": "Banken",
+      "pos": "NOUN",
+      "ipa": "baŋk",
+      "meanings": {
+        "en": "bank",
+        "bn": "ব্যাংক"
+      },
+      "example": {
+        "de": "Die Bank ist um 16 Uhr zu.",
+        "en": "The bank closes at 4.",
+        "bn": "ব্যাংক ৪টায় বন্ধ হয়।"
+      }
+    },
+    {
+      "term": "Krankenhaus",
+      "article": "das",
+      "plural": "Krankenhäuser",
+      "pos": "NOUN",
+      "ipa": "ˈkʁaŋkn̩ˌhaʊ̯s",
+      "meanings": {
+        "en": "hospital",
+        "bn": "হাসপাতাল"
+      },
+      "example": {
+        "de": "Das Krankenhaus ist in der Nähe.",
+        "en": "The hospital is nearby.",
+        "bn": "হাসপাতালটা কাছেই।"
+      }
+    },
+    {
+      "term": "Rathaus",
+      "article": "das",
+      "plural": "Rathäuser",
+      "pos": "NOUN",
+      "ipa": "ˈʁaːtˌhaʊ̯s",
+      "meanings": {
+        "en": "town hall",
+        "bn": "পৌরসভা ভবন"
+      },
+      "example": {
+        "de": "Im Rathaus melde ich mich an.",
+        "en": "I register at the town hall.",
+        "bn": "আমি পৌরসভায় নিবন্ধন করি।"
+      }
+    },
+    {
+      "term": "Flughafen",
+      "article": "der",
+      "plural": "Flughäfen",
+      "pos": "NOUN",
+      "ipa": "ˈfluːkˌhaːfn̩",
+      "meanings": {
+        "en": "airport",
+        "bn": "বিমানবন্দর"
+      },
+      "example": {
+        "de": "Wie komme ich zum Flughafen?",
+        "en": "How do I get to the airport?",
+        "bn": "বিমানবন্দরে কীভাবে যাব?"
+      }
+    },
+    {
+      "term": "Bibliothek",
+      "article": "die",
+      "plural": "Bibliotheken",
+      "pos": "NOUN",
+      "ipa": "biblioˈteːk",
+      "meanings": {
+        "en": "library",
+        "bn": "লাইব্রেরি"
+      },
+      "example": {
+        "de": "Die Bibliothek ist kostenlos.",
+        "en": "The library is free.",
+        "bn": "লাইব্রেরিটা বিনামূল্যে।"
+      }
+    },
+    {
+      "term": "Moschee",
+      "article": "die",
+      "plural": "Moscheen",
+      "pos": "NOUN",
+      "ipa": "mɔˈʃeː",
+      "meanings": {
+        "en": "mosque",
+        "bn": "মসজিদ"
+      },
+      "example": {
+        "de": "Die Moschee ist neben dem Park.",
+        "en": "The mosque is next to the park.",
+        "bn": "মসজিদটা পার্কের পাশে।"
+      }
+    },
+    {
+      "term": "Paket",
+      "article": "das",
+      "plural": "Pakete",
+      "pos": "NOUN",
+      "ipa": "paˈkeːt",
+      "meanings": {
+        "en": "parcel",
+        "bn": "পার্সেল"
+      },
+      "example": {
+        "de": "Ich schicke ein Paket nach Dhaka.",
+        "en": "I'm sending a parcel to Dhaka.",
+        "bn": "আমি ঢাকায় একটা পার্সেল পাঠাচ্ছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Places in town",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where do you buy medicine?",
+        "options": [
+          "in der Apotheke",
+          "auf der Post",
+          "im Rathaus"
+        ],
+        "answer": 0,
+        "explanation": "Apotheke = pharmacy."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gehe ___ Bank.",
+        "options": [
+          "zur",
+          "zum",
+          "zu der Bank zu"
+        ],
+        "answer": 0,
+        "explanation": "die Bank → zur."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gehe ___ Bahnhof.",
+        "options": [
+          "zum",
+          "zur",
+          "zu"
+        ],
+        "answer": 0,
+        "explanation": "der Bahnhof → zum."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"die Haltestelle\" is …",
+        "options": [
+          "a bus or tram stop",
+          "a hotel",
+          "a car park"
+        ],
+        "answer": 0,
+        "explanation": "Haltestelle = stop."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where do you register your address?",
+        "options": [
+          "im Rathaus / Bürgeramt",
+          "in der Bibliothek",
+          "im Park"
+        ],
+        "answer": 0,
+        "explanation": "Anmeldung at the Bürgeramt."
+      }
+    ]
+  }
+}

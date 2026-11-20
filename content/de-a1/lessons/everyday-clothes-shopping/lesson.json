@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-clothes-shopping",
+  "title": "Kleidung kaufen · Buying Clothes",
+  "titles": {
+    "en": "Clothes and Shopping for Them",
+    "bn": "জামাকাপড় ও কেনাকাটা"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Kleidung",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈklaɪ̯dʊŋ",
+      "meanings": {
+        "en": "clothes",
+        "bn": "জামাকাপড়"
+      },
+      "example": {
+        "de": "Ich kaufe neue Kleidung.",
+        "en": "I'm buying new clothes.",
+        "bn": "আমি নতুন জামাকাপড় কিনছি।"
+      }
+    },
+    {
+      "term": "Hose",
+      "article": "die",
+      "plural": "Hosen",
+      "pos": "NOUN",
+      "ipa": "ˈhoːzə",
+      "meanings": {
+        "en": "trousers",
+        "bn": "প্যান্ট"
+      },
+      "example": {
+        "de": "Die Hose ist zu lang.",
+        "en": "The trousers are too long.",
+        "bn": "প্যান্টটা বেশি লম্বা।"
+      }
+    },
+    {
+      "term": "Hemd",
+      "article": "das",
+      "plural": "Hemden",
+      "pos": "NOUN",
+      "ipa": "hɛmt",
+      "meanings": {
+        "en": "shirt",
+        "bn": "শার্ট"
+      },
+      "example": {
+        "de": "Er trägt ein weißes Hemd.",
+        "en": "He's wearing a white shirt.",
+        "bn": "সে সাদা শার্ট পরেছে।"
+      }
+    },
+    {
+      "term": "Jacke",
+      "article": "die",
+      "plural": "Jacken",
+      "pos": "NOUN",
+      "ipa": "ˈjakə",
+      "meanings": {
+        "en": "jacket",
+        "bn": "জ্যাকেট"
+      },
+      "example": {
+        "de": "Ich suche eine warme Jacke.",
+        "en": "I'm looking for a warm jacket.",
+        "bn": "আমি একটা গরম জ্যাকেট খুঁজছি।"
+      }
+    },
+    {
+      "term": "Kleid",
+      "article": "das",
+      "plural": "Kleider",
+      "pos": "NOUN",
+      "ipa": "klaɪ̯t",
+      "meanings": {
+        "en": "dress",
+        "bn": "ড্রেস"
+      },
+      "example": {
+        "de": "Das Kleid ist schön.",
+        "en": "The dress is beautiful.",
+        "bn": "ড্রেসটা সুন্দর।"
+      }
+    },
+    {
+      "term": "Schuh",
+      "article": "der",
+      "plural": "Schuhe",
+      "pos": "NOUN",
+      "ipa": "ʃuː",
+      "meanings": {
+        "en": "shoe",
+        "bn": "জুতা"
+      },
+      "example": {
+        "de": "Die Schuhe sind bequem.",
+        "en": "The shoes are comfortable.",
+        "bn": "জুতাগুলো আরামদায়ক।"
+      }
+    },
+    {
+      "term": "Größe",
+      "article": "die",
+      "plural": "Größen",
+      "pos": "NOUN",
+      "ipa": "ˈɡʁøːsə",
+      "meanings": {
+        "en": "size",
+        "bn": "সাইজ"
+      },
+      "example": {
+        "de": "Welche Größe haben Sie?",
+        "en": "What size are you?",
+        "bn": "আপনার সাইজ কত?"
+      }
+    },
+    {
+      "term": "anprobieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanpʁoˌbiːʁən",
+      "meanings": {
+        "en": "to try on",
+        "bn": "পরে দেখা"
+      },
+      "example": {
+        "de": "Kann ich das anprobieren?",
+        "en": "Can I try this on?",
+        "bn": "এটা কি পরে দেখতে পারি?"
+      }
+    },
+    {
+      "term": "tragen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈtʁaːɡn̩",
+      "meanings": {
+        "en": "to wear / carry",
+        "bn": "পরা / বহন করা"
+      },
+      "example": {
+        "de": "Sie trägt einen Mantel.",
+        "en": "She's wearing a coat.",
+        "bn": "সে কোট পরেছে।"
+      }
+    },
+    {
+      "term": "umtauschen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʊmˌtaʊ̯ʃn̩",
+      "meanings": {
+        "en": "to exchange",
+        "bn": "বদলানো (ফেরত দিয়ে)"
+      },
+      "example": {
+        "de": "Ich möchte die Schuhe umtauschen.",
+        "en": "I'd like to exchange the shoes.",
+        "bn": "আমি জুতাগুলো বদলাতে চাই।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Buying clothes",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Kann ich das anprobieren?\" means …",
+        "options": [
+          "Can I try this on?",
+          "Can I buy this?",
+          "Can I pay for this?"
+        ],
+        "answer": 0,
+        "explanation": "anprobieren = try on."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Wie findest du den Rock? — Ich finde ___ schön.",
+        "options": [
+          "ihn",
+          "sie",
+          "es"
+        ],
+        "answer": 0,
+        "explanation": "der Rock → ihn."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Wie findest du die Hose? — Ich finde ___ zu teuer.",
+        "options": [
+          "sie",
+          "ihn",
+          "es"
+        ],
+        "answer": 0,
+        "explanation": "die Hose → sie."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Welche Größe haben Sie?\" asks about your …",
+        "options": [
+          "size",
+          "colour",
+          "money"
+        ],
+        "answer": 0,
+        "explanation": "Größe = size."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Die Jacke steht Ihnen gut\" means …",
+        "options": [
+          "The jacket suits you.",
+          "The jacket is standing.",
+          "The jacket is good quality."
+        ],
+        "answer": 0,
+        "explanation": "stehen + Dativ = to suit."
+      }
+    ]
+  }
+}

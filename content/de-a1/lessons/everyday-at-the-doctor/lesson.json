@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-at-the-doctor",
+  "title": "Beim Arzt · At the Doctor's",
+  "titles": {
+    "en": "At the Doctor's",
+    "bn": "ডাক্তারের কাছে"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Arzt",
+      "article": "der",
+      "plural": "Ärzte",
+      "pos": "NOUN",
+      "ipa": "aːɐ̯t͡st",
+      "meanings": {
+        "en": "doctor (m)",
+        "bn": "ডাক্তার (পুরুষ)"
+      },
+      "example": {
+        "de": "Ich gehe heute zum Arzt.",
+        "en": "I'm going to the doctor today.",
+        "bn": "আজ আমি ডাক্তারের কাছে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "Ärztin",
+      "article": "die",
+      "plural": "Ärztinnen",
+      "pos": "NOUN",
+      "ipa": "ˈɛːɐ̯t͡stɪn",
+      "meanings": {
+        "en": "doctor (f)",
+        "bn": "ডাক্তার (মহিলা)"
+      },
+      "example": {
+        "de": "Die Ärztin ist sehr freundlich.",
+        "en": "The doctor is very friendly.",
+        "bn": "ডাক্তার খুব আন্তরিক।"
+      }
+    },
+    {
+      "term": "Rezept",
+      "article": "das",
+      "plural": "Rezepte",
+      "pos": "NOUN",
+      "ipa": "ʁeˈt͡sɛpt",
+      "meanings": {
+        "en": "prescription / recipe",
+        "bn": "প্রেসক্রিপশন"
+      },
+      "example": {
+        "de": "Ich brauche ein Rezept.",
+        "en": "I need a prescription.",
+        "bn": "আমার একটা প্রেসক্রিপশন লাগবে।"
+      }
+    },
+    {
+      "term": "Tablette",
+      "article": "die",
+      "plural": "Tabletten",
+      "pos": "NOUN",
+      "ipa": "taˈblɛtə",
+      "meanings": {
+        "en": "tablet / pill",
+        "bn": "ট্যাবলেট"
+      },
+      "example": {
+        "de": "Nehmen Sie eine Tablette.",
+        "en": "Take one tablet.",
+        "bn": "একটা ট্যাবলেট খান।"
+      }
+    },
+    {
+      "term": "Medikament",
+      "article": "das",
+      "plural": "Medikamente",
+      "pos": "NOUN",
+      "ipa": "medikaˈmɛnt",
+      "meanings": {
+        "en": "medicine",
+        "bn": "ওষুধ"
+      },
+      "example": {
+        "de": "Das Medikament hilft.",
+        "en": "The medicine helps.",
+        "bn": "ওষুধটা কাজ করছে।"
+      }
+    },
+    {
+      "term": "Krankmeldung",
+      "article": "die",
+      "plural": "Krankmeldungen",
+      "pos": "NOUN",
+      "ipa": "ˈkʁaŋkˌmɛldʊŋ",
+      "meanings": {
+        "en": "sick note",
+        "bn": "অসুস্থতার সার্টিফিকেট"
+      },
+      "example": {
+        "de": "Ich brauche eine Krankmeldung.",
+        "en": "I need a sick note.",
+        "bn": "আমার একটা অসুস্থতার সার্টিফিকেট লাগবে।"
+      }
+    },
+    {
+      "term": "Versichertenkarte",
+      "article": "die",
+      "plural": "Versichertenkarten",
+      "pos": "NOUN",
+      "ipa": "fɛɐ̯ˈzɪçɐtn̩ˌkaʁtə",
+      "meanings": {
+        "en": "health insurance card",
+        "bn": "স্বাস্থ্য বীমা কার্ড"
+      },
+      "example": {
+        "de": "Hier ist meine Versichertenkarte.",
+        "en": "Here is my insurance card.",
+        "bn": "এই নিন আমার বীমা কার্ড।"
+      }
+    },
+    {
+      "term": "Erkältung",
+      "article": "die",
+      "plural": "Erkältungen",
+      "pos": "NOUN",
+      "ipa": "ɛɐ̯ˈkɛltʊŋ",
+      "meanings": {
+        "en": "cold (illness)",
+        "bn": "ঠান্ডা লাগা"
+      },
+      "example": {
+        "de": "Ich habe eine Erkältung.",
+        "en": "I have a cold.",
+        "bn": "আমার ঠান্ডা লেগেছে।"
+      }
+    },
+    {
+      "term": "untersuchen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ʊntɐˈzuːxn̩",
+      "meanings": {
+        "en": "to examine",
+        "bn": "পরীক্ষা করা"
+      },
+      "example": {
+        "de": "Die Ärztin untersucht den Patienten.",
+        "en": "The doctor examines the patient.",
+        "bn": "ডাক্তার রোগীকে পরীক্ষা করেন।"
+      }
+    },
+    {
+      "term": "täglich",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈtɛːklɪç",
+      "meanings": {
+        "en": "daily",
+        "bn": "প্রতিদিন"
+      },
+      "example": {
+        "de": "Dreimal täglich eine Tablette.",
+        "en": "One tablet three times a day.",
+        "bn": "দিনে তিনবার একটা ট্যাবলেট।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: At the doctor's",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Was fehlt Ihnen?\" means …",
+        "options": [
+          "What's wrong with you?",
+          "What are you missing?",
+          "What do you want?"
+        ],
+        "answer": 0,
+        "explanation": "The doctor asks about your problem."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"das Rezept\" from the doctor is …",
+        "options": [
+          "a prescription",
+          "a bill",
+          "an appointment"
+        ],
+        "answer": 0,
+        "explanation": "Rezept = prescription (also recipe)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"dreimal täglich\" means …",
+        "options": [
+          "three times a day",
+          "every three days",
+          "for three days"
+        ],
+        "answer": 0,
+        "explanation": "täglich = daily."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Sie ___ viel Wasser trinken. (advice)",
+        "options": [
+          "sollen",
+          "sollt",
+          "soll"
+        ],
+        "answer": 0,
+        "explanation": "Sie sollen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The emergency number in Germany is …",
+        "options": [
+          "112",
+          "911",
+          "999"
+        ],
+        "answer": 0,
+        "explanation": "112 for ambulance and fire."
+      }
+    ]
+  }
+}

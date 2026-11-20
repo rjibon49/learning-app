@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-jobs",
+  "title": "Berufe · Jobs and Work",
+  "titles": {
+    "en": "Jobs and Work",
+    "bn": "পেশা ও কাজ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Beruf",
+      "article": "der",
+      "plural": "Berufe",
+      "pos": "NOUN",
+      "ipa": "bəˈʁuːf",
+      "meanings": {
+        "en": "job / profession",
+        "bn": "পেশা"
+      },
+      "example": {
+        "de": "Was sind Sie von Beruf?",
+        "en": "What do you do for a living?",
+        "bn": "আপনার পেশা কী?"
+      }
+    },
+    {
+      "term": "arbeiten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʁbaɪ̯tn̩",
+      "meanings": {
+        "en": "to work",
+        "bn": "কাজ করা"
+      },
+      "example": {
+        "de": "Ich arbeite bei der Post.",
+        "en": "I work at the post office.",
+        "bn": "আমি ডাকঘরে কাজ করি।"
+      }
+    },
+    {
+      "term": "Krankenpfleger",
+      "article": "der",
+      "plural": "Krankenpfleger",
+      "pos": "NOUN",
+      "ipa": "ˈkʁaŋkn̩ˌp͡fleːɡɐ",
+      "meanings": {
+        "en": "nurse (m)",
+        "bn": "নার্স (পুরুষ)"
+      },
+      "example": {
+        "de": "Er ist Krankenpfleger.",
+        "en": "He is a nurse.",
+        "bn": "সে নার্স।"
+      }
+    },
+    {
+      "term": "Ingenieur",
+      "article": "der",
+      "plural": "Ingenieure",
+      "pos": "NOUN",
+      "ipa": "ɪnʒeˈni̯øːɐ̯",
+      "meanings": {
+        "en": "engineer",
+        "bn": "প্রকৌশলী"
+      },
+      "example": {
+        "de": "Mein Vater ist Ingenieur.",
+        "en": "My father is an engineer.",
+        "bn": "আমার বাবা প্রকৌশলী।"
+      }
+    },
+    {
+      "term": "Verkäuferin",
+      "article": "die",
+      "plural": "Verkäuferinnen",
+      "pos": "NOUN",
+      "ipa": "fɛɐ̯ˈkɔɪ̯fəʁɪn",
+      "meanings": {
+        "en": "shop assistant (f)",
+        "bn": "বিক্রেতা (মহিলা)"
+      },
+      "example": {
+        "de": "Sie ist Verkäuferin.",
+        "en": "She is a shop assistant.",
+        "bn": "সে বিক্রেতা।"
+      }
+    },
+    {
+      "term": "Kollege",
+      "article": "der",
+      "plural": "Kollegen",
+      "pos": "NOUN",
+      "ipa": "kɔˈleːɡə",
+      "meanings": {
+        "en": "colleague",
+        "bn": "সহকর্মী"
+      },
+      "example": {
+        "de": "Meine Kollegen sind nett.",
+        "en": "My colleagues are nice.",
+        "bn": "আমার সহকর্মীরা ভালো।"
+      }
+    },
+    {
+      "term": "arbeitslos",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈaʁbaɪ̯t͡sˌloːs",
+      "meanings": {
+        "en": "unemployed",
+        "bn": "বেকার"
+      },
+      "example": {
+        "de": "Er ist seit Mai arbeitslos.",
+        "en": "He has been unemployed since May.",
+        "bn": "সে মে মাস থেকে বেকার।"
+      }
+    },
+    {
+      "term": "Ausbildung",
+      "article": "die",
+      "plural": "Ausbildungen",
+      "pos": "NOUN",
+      "ipa": "ˈaʊ̯sˌbɪldʊŋ",
+      "meanings": {
+        "en": "vocational training",
+        "bn": "কারিগরি প্রশিক্ষণ"
+      },
+      "example": {
+        "de": "Ich mache eine Ausbildung als Koch.",
+        "en": "I'm training to be a cook.",
+        "bn": "আমি রাঁধুনি হওয়ার প্রশিক্ষণ নিচ্ছি।"
+      }
+    },
+    {
+      "term": "Teilzeit",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈtaɪ̯lˌt͡saɪ̯t",
+      "meanings": {
+        "en": "part-time",
+        "bn": "খণ্ডকালীন"
+      },
+      "example": {
+        "de": "Ich arbeite Teilzeit.",
+        "en": "I work part-time.",
+        "bn": "আমি খণ্ডকালীন কাজ করি।"
+      }
+    },
+    {
+      "term": "verdienen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈdiːnən",
+      "meanings": {
+        "en": "to earn",
+        "bn": "আয় করা"
+      },
+      "example": {
+        "de": "Wie viel verdienst du?",
+        "en": "How much do you earn?",
+        "bn": "তুমি কত আয় করো?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Jobs and work",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "A female teacher is …",
+        "options": [
+          "die Lehrerin",
+          "die Lehrer",
+          "die Lehrin"
+        ],
+        "answer": 0,
+        "explanation": "Add -in: Lehrerin."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Ich bin Ingenieur.",
+          "Ich bin ein Ingenieur von Beruf.",
+          "Ich bin der Ingenieur."
+        ],
+        "answer": 0,
+        "explanation": "No article for jobs."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich arbeite ___ Siemens.",
+        "options": [
+          "bei",
+          "in",
+          "an"
+        ],
+        "answer": 0,
+        "explanation": "bei + company."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"arbeitslos\" means …",
+        "options": [
+          "unemployed",
+          "hard-working",
+          "on holiday"
+        ],
+        "answer": 0,
+        "explanation": "ohne Arbeit = arbeitslos."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Was sind Sie von Beruf?\" asks about your …",
+        "options": [
+          "job",
+          "age",
+          "address"
+        ],
+        "answer": 0,
+        "explanation": "Beruf = profession."
+      }
+    ]
+  }
+}

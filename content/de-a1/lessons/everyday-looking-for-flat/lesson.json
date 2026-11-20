@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-looking-for-flat",
+  "title": "Wohnungssuche · Looking for a Flat",
+  "titles": {
+    "en": "Looking for a Flat: Ads and Viewings",
+    "bn": "ফ্ল্যাট খোঁজা: বিজ্ঞাপন ও দেখতে যাওয়া"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Nebenkosten",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈneːbn̩ˌkɔstn̩",
+      "meanings": {
+        "en": "extra costs (utilities)",
+        "bn": "বাড়তি খরচ (পানি, হিটিং ইত্যাদি)"
+      },
+      "example": {
+        "de": "Die Nebenkosten sind 150 Euro.",
+        "en": "The extra costs are 150 euros.",
+        "bn": "বাড়তি খরচ ১৫০ ইউরো।"
+      }
+    },
+    {
+      "term": "Kaltmiete",
+      "article": "die",
+      "plural": "Kaltmieten",
+      "pos": "NOUN",
+      "ipa": "ˈkaltˌmiːtə",
+      "meanings": {
+        "en": "basic rent (without utilities)",
+        "bn": "মূল ভাড়া (খরচ ছাড়া)"
+      },
+      "example": {
+        "de": "Die Kaltmiete ist 650 Euro.",
+        "en": "The basic rent is 650 euros.",
+        "bn": "মূল ভাড়া ৬৫০ ইউরো।"
+      }
+    },
+    {
+      "term": "Warmmiete",
+      "article": "die",
+      "plural": "Warmmieten",
+      "pos": "NOUN",
+      "ipa": "ˈvaʁmˌmiːtə",
+      "meanings": {
+        "en": "total rent (with utilities)",
+        "bn": "মোট ভাড়া"
+      },
+      "example": {
+        "de": "Die Warmmiete ist 800 Euro.",
+        "en": "The total rent is 800 euros.",
+        "bn": "মোট ভাড়া ৮০০ ইউরো।"
+      }
+    },
+    {
+      "term": "Kaution",
+      "article": "die",
+      "plural": "Kautionen",
+      "pos": "NOUN",
+      "ipa": "kaʊ̯ˈt͡si̯oːn",
+      "meanings": {
+        "en": "deposit",
+        "bn": "জামানত"
+      },
+      "example": {
+        "de": "Die Kaution ist drei Monatsmieten.",
+        "en": "The deposit is three months' rent.",
+        "bn": "জামানত তিন মাসের ভাড়া।"
+      }
+    },
+    {
+      "term": "Vermieter",
+      "article": "der",
+      "plural": "Vermieter",
+      "pos": "NOUN",
+      "ipa": "fɛɐ̯ˈmiːtɐ",
+      "meanings": {
+        "en": "landlord",
+        "bn": "বাড়িওয়ালা"
+      },
+      "example": {
+        "de": "Der Vermieter ist sehr nett.",
+        "en": "The landlord is very nice.",
+        "bn": "বাড়িওয়ালা খুব ভালো।"
+      }
+    },
+    {
+      "term": "Mieter",
+      "article": "der",
+      "plural": "Mieter",
+      "pos": "NOUN",
+      "ipa": "ˈmiːtɐ",
+      "meanings": {
+        "en": "tenant",
+        "bn": "ভাড়াটে"
+      },
+      "example": {
+        "de": "Die Mieter zahlen pünktlich.",
+        "en": "The tenants pay on time.",
+        "bn": "ভাড়াটেরা সময়মতো টাকা দেয়।"
+      }
+    },
+    {
+      "term": "ansehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌzeːən",
+      "meanings": {
+        "en": "to view / look at",
+        "bn": "দেখা (দেখতে যাওয়া)"
+      },
+      "example": {
+        "de": "Kann ich die Wohnung ansehen?",
+        "en": "Can I view the flat?",
+        "bn": "আমি কি ফ্ল্যাটটা দেখতে পারি?"
+      }
+    },
+    {
+      "term": "frei",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "fʁaɪ̯",
+      "meanings": {
+        "en": "free / available",
+        "bn": "খালি"
+      },
+      "example": {
+        "de": "Ist die Wohnung noch frei?",
+        "en": "Is the flat still available?",
+        "bn": "ফ্ল্যাটটা কি এখনো খালি?"
+      }
+    },
+    {
+      "term": "Aufzug",
+      "article": "der",
+      "plural": "Aufzüge",
+      "pos": "NOUN",
+      "ipa": "ˈaʊ̯fˌt͡suːk",
+      "meanings": {
+        "en": "lift / elevator",
+        "bn": "লিফট"
+      },
+      "example": {
+        "de": "Gibt es einen Aufzug?",
+        "en": "Is there a lift?",
+        "bn": "লিফট আছে?"
+      }
+    },
+    {
+      "term": "erlaubt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɛɐ̯ˈlaʊ̯pt",
+      "meanings": {
+        "en": "allowed",
+        "bn": "অনুমোদিত"
+      },
+      "example": {
+        "de": "Haustiere sind nicht erlaubt.",
+        "en": "Pets are not allowed.",
+        "bn": "পোষা প্রাণী রাখা নিষেধ।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Looking for a flat",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"KM\" in a flat ad means …",
+        "options": [
+          "Kaltmiete",
+          "Kilometer",
+          "Küche mit Möbeln"
+        ],
+        "answer": 0,
+        "explanation": "KM = Kaltmiete (basic rent)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Kaltmiete + Nebenkosten = …",
+        "options": [
+          "Warmmiete",
+          "Kaution",
+          "Miete frei"
+        ],
+        "answer": 0,
+        "explanation": "Warmmiete = total rent."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"ab sofort frei\" means …",
+        "options": [
+          "available now",
+          "free of charge",
+          "from next year"
+        ],
+        "answer": 0,
+        "explanation": "sofort = immediately."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you ask if you can see the flat?",
+        "options": [
+          "Kann ich die Wohnung ansehen?",
+          "Kann ich die Wohnung aussehen?",
+          "Kann ich die Wohnung sehen an?"
+        ],
+        "answer": 0,
+        "explanation": "ansehen = to view; with a modal it stays together."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"die Kaution\" is …",
+        "options": [
+          "the deposit",
+          "the landlord",
+          "the kitchen"
+        ],
+        "answer": 0,
+        "explanation": "Kaution = deposit."
+      }
+    ]
+  }
+}

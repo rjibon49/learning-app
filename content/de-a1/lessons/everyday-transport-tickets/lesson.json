@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-transport-tickets",
+  "title": "Verkehr & Fahrkarten · Transport and Tickets",
+  "titles": {
+    "en": "Transport and Tickets",
+    "bn": "যানবাহন ও টিকিট"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Zug",
+      "article": "der",
+      "plural": "Züge",
+      "pos": "NOUN",
+      "ipa": "t͡suːk",
+      "meanings": {
+        "en": "train",
+        "bn": "ট্রেন"
+      },
+      "example": {
+        "de": "Der Zug kommt pünktlich.",
+        "en": "The train is on time.",
+        "bn": "ট্রেনটা সময়মতো আসছে।"
+      }
+    },
+    {
+      "term": "Straßenbahn",
+      "article": "die",
+      "plural": "Straßenbahnen",
+      "pos": "NOUN",
+      "ipa": "ˈʃtʁaːsn̩ˌbaːn",
+      "meanings": {
+        "en": "tram",
+        "bn": "ট্রাম"
+      },
+      "example": {
+        "de": "Ich fahre mit der Straßenbahn.",
+        "en": "I go by tram.",
+        "bn": "আমি ট্রামে যাই।"
+      }
+    },
+    {
+      "term": "Fahrkarte",
+      "article": "die",
+      "plural": "Fahrkarten",
+      "pos": "NOUN",
+      "ipa": "ˈfaːɐ̯ˌkaʁtə",
+      "meanings": {
+        "en": "ticket",
+        "bn": "টিকিট"
+      },
+      "example": {
+        "de": "Eine Fahrkarte nach Köln, bitte.",
+        "en": "A ticket to Cologne, please.",
+        "bn": "কোলনের একটা টিকিট, দয়া করে।"
+      }
+    },
+    {
+      "term": "Gleis",
+      "article": "das",
+      "plural": "Gleise",
+      "pos": "NOUN",
+      "ipa": "ɡlaɪ̯s",
+      "meanings": {
+        "en": "platform / track",
+        "bn": "প্ল্যাটফর্ম"
+      },
+      "example": {
+        "de": "Der Zug fährt von Gleis 3.",
+        "en": "The train leaves from platform 3.",
+        "bn": "ট্রেনটা ৩ নম্বর প্ল্যাটফর্ম থেকে ছাড়ে।"
+      }
+    },
+    {
+      "term": "umsteigen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʊmˌʃtaɪ̯ɡn̩",
+      "meanings": {
+        "en": "to change (trains)",
+        "bn": "গাড়ি বদলানো"
+      },
+      "example": {
+        "de": "In Köln müssen Sie umsteigen.",
+        "en": "You have to change in Cologne.",
+        "bn": "কোলনে আপনাকে ট্রেন বদলাতে হবে।"
+      }
+    },
+    {
+      "term": "Verspätung",
+      "article": "die",
+      "plural": "Verspätungen",
+      "pos": "NOUN",
+      "ipa": "fɛɐ̯ˈʃpɛːtʊŋ",
+      "meanings": {
+        "en": "delay",
+        "bn": "দেরি"
+      },
+      "example": {
+        "de": "Der Bus hat Verspätung.",
+        "en": "The bus is late.",
+        "bn": "বাসটা দেরিতে।"
+      }
+    },
+    {
+      "term": "hin und zurück",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "hɪn ʊnt t͡suˈʁʏk",
+      "meanings": {
+        "en": "return (ticket)",
+        "bn": "যাওয়া-আসা"
+      },
+      "example": {
+        "de": "Hin und zurück, bitte.",
+        "en": "Return, please.",
+        "bn": "যাওয়া-আসা, দয়া করে।"
+      }
+    },
+    {
+      "term": "einfach",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈaɪ̯nfax",
+      "meanings": {
+        "en": "single (ticket) / simple",
+        "bn": "একমুখী / সহজ"
+      },
+      "example": {
+        "de": "Einfach oder hin und zurück?",
+        "en": "Single or return?",
+        "bn": "একমুখী নাকি যাওয়া-আসা?"
+      }
+    },
+    {
+      "term": "Fahrrad",
+      "article": "das",
+      "plural": "Fahrräder",
+      "pos": "NOUN",
+      "ipa": "ˈfaːɐ̯ˌʁaːt",
+      "meanings": {
+        "en": "bicycle",
+        "bn": "সাইকেল"
+      },
+      "example": {
+        "de": "Ich fahre mit dem Fahrrad.",
+        "en": "I go by bike.",
+        "bn": "আমি সাইকেলে যাই।"
+      }
+    },
+    {
+      "term": "Abfahrt",
+      "article": "die",
+      "plural": "Abfahrten",
+      "pos": "NOUN",
+      "ipa": "ˈapˌfaːɐ̯t",
+      "meanings": {
+        "en": "departure",
+        "bn": "ছাড়ার সময়"
+      },
+      "example": {
+        "de": "Die Abfahrt ist um 10:15 Uhr.",
+        "en": "Departure is at 10:15.",
+        "bn": "ছাড়ার সময় ১০:১৫।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Transport and tickets",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich fahre mit ___ U-Bahn.",
+        "options": [
+          "der",
+          "die",
+          "dem"
+        ],
+        "answer": 0,
+        "explanation": "mit + Dativ, die U-Bahn → der."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"hin und zurück\" is …",
+        "options": [
+          "a return ticket",
+          "a single ticket",
+          "a monthly ticket"
+        ],
+        "answer": 0,
+        "explanation": "there and back."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Zug hat Verspätung\" means …",
+        "options": [
+          "The train is late.",
+          "The train is early.",
+          "The train is full."
+        ],
+        "answer": 0,
+        "explanation": "Verspätung = delay."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"umsteigen\" means …",
+        "options": [
+          "to change trains",
+          "to get off",
+          "to buy a ticket"
+        ],
+        "answer": 0,
+        "explanation": "umsteigen = change."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Gleis 7\" tells you …",
+        "options": [
+          "the platform",
+          "the price",
+          "the time"
+        ],
+        "answer": 0,
+        "explanation": "Gleis = platform."
+      }
+    ]
+  }
+}
