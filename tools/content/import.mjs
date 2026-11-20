@@ -64,6 +64,13 @@ async function askPassword() {
 }
 
 let token = "";
+let PASSWORD = "";
+async function signIn() {
+  token = "";
+  const login = await api("POST", "/admin/auth/login", { email: EMAIL, password: PASSWORD });
+  token = login?.accessToken ?? login?.data?.accessToken;
+  if (!token) throw new Error("Login did not return an access token.");
+}
 // The API allows about 200 requests a minute, so requests are spaced out and a
 // "429 Too Many Requests" answer is waited out and retried.
 const GAP_MS = 320;
@@ -83,6 +90,12 @@ async function send(method, url, body) {
       },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
+    // The access token lives at most an hour; a long import signs in again.
+    if (res.status === 401 && url !== "/admin/auth/login" && PASSWORD && attempt < 3) {
+      log("  (session expired, signing in again …)");
+      await signIn();
+      continue;
+    }
     if (res.status !== 429 || attempt >= 8) return res;
     const retryAfter = Number(res.headers.get("retry-after"));
     const pause = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 20000;
@@ -114,11 +127,8 @@ async function readJson(file) {
 // ---------------------------------------------------------------- main
 async function main() {
   const pack = await readJson(path.join(PACK, "courses.json"));
-  const password = await askPassword();
-
-  const login = await api("POST", "/admin/auth/login", { email: EMAIL, password });
-  token = login?.accessToken ?? login?.data?.accessToken;
-  if (!token) throw new Error("Login did not return an access token.");
+  PASSWORD = await askPassword();
+  await signIn();
   log(`Signed in as ${EMAIL}${DRY ? " (dry run: nothing will be changed)" : ""}`);
 
   // Languages: code → id
