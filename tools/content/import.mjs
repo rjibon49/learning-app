@@ -227,7 +227,8 @@ async function main() {
   }
 
   log(`\nDone. created ${stats.created}, updated ${stats.updated}, skipped ${stats.skipped}. Languages: ${[...contentLangs].join(", ")}`);
-  if (!PUBLISH) log("Everything is DRAFT. Check it in the CMS, then run again with --publish.");
+  if (DRY) log("Dry run: nothing was changed. Run again without --dry-run to import.");
+  else if (!PUBLISH) log("Everything is DRAFT. Check it in the CMS, then run again with --publish.");
 }
 
 /** Lesson words: created once (matched by term), meanings + example per language. */
