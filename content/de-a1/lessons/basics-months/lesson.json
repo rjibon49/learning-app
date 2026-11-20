@@ -1,0 +1,231 @@
+{
+  "slug": "basics-months",
+  "title": "Die Monate · Months",
+  "titles": {
+    "en": "The Months",
+    "bn": "মাসের নাম"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Monat",
+      "article": "der",
+      "plural": "Monate",
+      "pos": "NOUN",
+      "ipa": "ˈmoːnat",
+      "meanings": {
+        "en": "month",
+        "bn": "মাস"
+      },
+      "example": {
+        "de": "Das Jahr hat zwölf Monate.",
+        "en": "The year has twelve months.",
+        "bn": "বছরে বারো মাস।"
+      }
+    },
+    {
+      "term": "Januar",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈjanu̯aːɐ̯",
+      "meanings": {
+        "en": "January",
+        "bn": "জানুয়ারি"
+      },
+      "example": {
+        "de": "Im Januar ist es kalt.",
+        "en": "It is cold in January.",
+        "bn": "জানুয়ারিতে ঠান্ডা থাকে।"
+      }
+    },
+    {
+      "term": "März",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "mɛʁt͡s",
+      "meanings": {
+        "en": "March",
+        "bn": "মার্চ"
+      },
+      "example": {
+        "de": "Der Kurs beginnt im März.",
+        "en": "The course starts in March.",
+        "bn": "কোর্সটি মার্চে শুরু হয়।"
+      }
+    },
+    {
+      "term": "Mai",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "maɪ̯",
+      "meanings": {
+        "en": "May",
+        "bn": "মে"
+      },
+      "example": {
+        "de": "Im Mai ist es warm.",
+        "en": "It is warm in May.",
+        "bn": "মে মাসে আবহাওয়া উষ্ণ।"
+      }
+    },
+    {
+      "term": "Juli",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈjuːli",
+      "meanings": {
+        "en": "July",
+        "bn": "জুলাই"
+      },
+      "example": {
+        "de": "Im Juli habe ich Urlaub.",
+        "en": "In July I'm on holiday.",
+        "bn": "জুলাইয়ে আমার ছুটি।"
+      }
+    },
+    {
+      "term": "Oktober",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ɔkˈtoːbɐ",
+      "meanings": {
+        "en": "October",
+        "bn": "অক্টোবর"
+      },
+      "example": {
+        "de": "Mein Geburtstag ist im Oktober.",
+        "en": "My birthday is in October.",
+        "bn": "আমার জন্মদিন অক্টোবরে।"
+      }
+    },
+    {
+      "term": "Dezember",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "deˈt͡sɛmbɐ",
+      "meanings": {
+        "en": "December",
+        "bn": "ডিসেম্বর"
+      },
+      "example": {
+        "de": "Im Dezember feiern wir Weihnachten.",
+        "en": "In December we celebrate Christmas.",
+        "bn": "ডিসেম্বরে আমরা বড়দিন উদযাপন করি।"
+      }
+    },
+    {
+      "term": "Anfang",
+      "article": "der",
+      "plural": "Anfänge",
+      "pos": "NOUN",
+      "ipa": "ˈanfaŋ",
+      "meanings": {
+        "en": "beginning",
+        "bn": "শুরু"
+      },
+      "example": {
+        "de": "Ich komme Anfang Mai.",
+        "en": "I'm coming at the beginning of May.",
+        "bn": "আমি মে মাসের শুরুতে আসব।"
+      }
+    },
+    {
+      "term": "Ende",
+      "article": "das",
+      "plural": "Enden",
+      "pos": "NOUN",
+      "ipa": "ˈɛndə",
+      "meanings": {
+        "en": "end",
+        "bn": "শেষ"
+      },
+      "example": {
+        "de": "Der Kurs ist Ende Juni fertig.",
+        "en": "The course ends at the end of June.",
+        "bn": "কোর্সটি জুনের শেষে শেষ হয়।"
+      }
+    },
+    {
+      "term": "Weihnachten",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈvaɪ̯naxtn̩",
+      "meanings": {
+        "en": "Christmas",
+        "bn": "বড়দিন"
+      },
+      "example": {
+        "de": "Frohe Weihnachten!",
+        "en": "Merry Christmas!",
+        "bn": "শুভ বড়দিন!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: The months",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"in May\" in German is …",
+        "options": [
+          "im Mai",
+          "am Mai",
+          "um Mai"
+        ],
+        "answer": 0,
+        "explanation": "Months: im + month."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which month is \"März\"?",
+        "options": [
+          "March",
+          "May",
+          "Mars"
+        ],
+        "answer": 0,
+        "explanation": "März = March."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ 3. Mai Geburtstag.",
+        "options": [
+          "am",
+          "im",
+          "um"
+        ],
+        "answer": 0,
+        "explanation": "A date (day) takes am."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ende Dezember\" means …",
+        "options": [
+          "at the end of December",
+          "after December",
+          "the 10th of December"
+        ],
+        "answer": 0,
+        "explanation": "Anfang / Mitte / Ende + month."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the article of the months?",
+        "options": [
+          "der",
+          "die",
+          "das"
+        ],
+        "answer": 0,
+        "explanation": "All months are masculine."
+      }
+    ]
+  }
+}

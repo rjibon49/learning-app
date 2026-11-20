@@ -1,0 +1,241 @@
+{
+  "slug": "basics-numbers-big",
+  "title": "Zahlen ab 20 · Numbers, Prices, Years",
+  "titles": {
+    "en": "Numbers from 20: Prices, Ages and Years",
+    "bn": "২০ এর পরের সংখ্যা: দাম, বয়স ও সাল"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "dreißig",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈdʁaɪ̯sɪç",
+      "meanings": {
+        "en": "thirty",
+        "bn": "ত্রিশ"
+      },
+      "example": {
+        "de": "Der Kurs hat dreißig Stunden.",
+        "en": "The course has thirty hours.",
+        "bn": "কোর্সটি ত্রিশ ঘণ্টার।"
+      }
+    },
+    {
+      "term": "vierzig",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈfɪʁt͡sɪç",
+      "meanings": {
+        "en": "forty",
+        "bn": "চল্লিশ"
+      },
+      "example": {
+        "de": "Mein Vater ist vierzig.",
+        "en": "My father is forty.",
+        "bn": "আমার বাবার বয়স চল্লিশ।"
+      }
+    },
+    {
+      "term": "fünfzig",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈfʏnft͡sɪç",
+      "meanings": {
+        "en": "fifty",
+        "bn": "পঞ্চাশ"
+      },
+      "example": {
+        "de": "Das kostet fünfzig Cent.",
+        "en": "That costs fifty cents.",
+        "bn": "এটার দাম পঞ্চাশ সেন্ট।"
+      }
+    },
+    {
+      "term": "hundert",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈhʊndɐt",
+      "meanings": {
+        "en": "hundred",
+        "bn": "একশ"
+      },
+      "example": {
+        "de": "Das Hotel hat hundert Zimmer.",
+        "en": "The hotel has a hundred rooms.",
+        "bn": "হোটেলটিতে একশ রুম আছে।"
+      }
+    },
+    {
+      "term": "tausend",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈtaʊ̯znt",
+      "meanings": {
+        "en": "thousand",
+        "bn": "হাজার"
+      },
+      "example": {
+        "de": "Das Auto kostet zehntausend Euro.",
+        "en": "The car costs ten thousand euros.",
+        "bn": "গাড়িটার দাম দশ হাজার ইউরো।"
+      }
+    },
+    {
+      "term": "Euro",
+      "article": "der",
+      "plural": "Euro",
+      "pos": "NOUN",
+      "ipa": "ˈɔɪ̯ʁo",
+      "meanings": {
+        "en": "euro",
+        "bn": "ইউরো"
+      },
+      "example": {
+        "de": "Das macht zwölf Euro.",
+        "en": "That comes to twelve euros.",
+        "bn": "মোট বারো ইউরো হয়েছে।"
+      }
+    },
+    {
+      "term": "Cent",
+      "article": "der",
+      "plural": "Cent",
+      "pos": "NOUN",
+      "ipa": "t͡sɛnt",
+      "meanings": {
+        "en": "cent",
+        "bn": "সেন্ট"
+      },
+      "example": {
+        "de": "Ein Brötchen kostet 50 Cent.",
+        "en": "A bread roll costs 50 cents.",
+        "bn": "একটি রোল রুটির দাম ৫০ সেন্ট।"
+      }
+    },
+    {
+      "term": "kosten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkɔstn̩",
+      "meanings": {
+        "en": "to cost",
+        "bn": "দাম হওয়া"
+      },
+      "example": {
+        "de": "Wie viel kostet das?",
+        "en": "How much does that cost?",
+        "bn": "এটার দাম কত?"
+      }
+    },
+    {
+      "term": "Telefonnummer",
+      "article": "die",
+      "plural": "Telefonnummern",
+      "pos": "NOUN",
+      "ipa": "teleˈfoːnˌnʊmɐ",
+      "meanings": {
+        "en": "phone number",
+        "bn": "ফোন নম্বর"
+      },
+      "example": {
+        "de": "Wie ist Ihre Telefonnummer?",
+        "en": "What is your phone number?",
+        "bn": "আপনার ফোন নম্বর কত?"
+      }
+    },
+    {
+      "term": "alt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "alt",
+      "meanings": {
+        "en": "old",
+        "bn": "বয়স্ক / পুরনো"
+      },
+      "example": {
+        "de": "Wie alt bist du?",
+        "en": "How old are you?",
+        "bn": "তোমার বয়স কত?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Numbers, prices, years",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is 45 in German?",
+        "options": [
+          "fünfundvierzig",
+          "vierundfünfzig",
+          "vierzigfünf"
+        ],
+        "answer": 0,
+        "explanation": "Ones first, then tens: fünf-und-vierzig."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"dreiundsechzig\" is …",
+        "options": [
+          "63",
+          "36",
+          "33"
+        ],
+        "answer": 0,
+        "explanation": "drei (3) und sechzig (60) = 63."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say 30?",
+        "options": [
+          "dreißig",
+          "dreizig",
+          "dreizehn"
+        ],
+        "answer": 0,
+        "explanation": "30 = dreißig (with ß)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say the price 4,50 €?",
+        "options": [
+          "vier Euro fünfzig",
+          "vier Komma fünfzig",
+          "fünfzig Euro vier"
+        ],
+        "answer": 0,
+        "explanation": "Prices: Euro first, then the cents."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say the year 1998?",
+        "options": [
+          "neunzehnhundertachtundneunzig",
+          "eintausendneunhundertachtundneunzig",
+          "neunzehnachtundneunzig"
+        ],
+        "answer": 0,
+        "explanation": "Years before 2000 are read in hundreds."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Ich bin 2020 nach Deutschland gekommen.",
+          "Ich bin in 2020 nach Deutschland gekommen."
+        ],
+        "answer": 0,
+        "explanation": "German does not use \"in\" before a year."
+      }
+    ]
+  }
+}

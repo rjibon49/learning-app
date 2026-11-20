@@ -1,0 +1,258 @@
+{
+  "slug": "basics-weekdays",
+  "title": "Die Wochentage · Days of the Week",
+  "titles": {
+    "en": "Days of the Week",
+    "bn": "সপ্তাহের দিন"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Montag",
+      "article": "der",
+      "plural": "Montage",
+      "pos": "NOUN",
+      "ipa": "ˈmoːntaːk",
+      "meanings": {
+        "en": "Monday",
+        "bn": "সোমবার"
+      },
+      "example": {
+        "de": "Am Montag arbeite ich.",
+        "en": "On Monday I work.",
+        "bn": "সোমবার আমি কাজ করি।"
+      }
+    },
+    {
+      "term": "Dienstag",
+      "article": "der",
+      "plural": "Dienstage",
+      "pos": "NOUN",
+      "ipa": "ˈdiːnstaːk",
+      "meanings": {
+        "en": "Tuesday",
+        "bn": "মঙ্গলবার"
+      },
+      "example": {
+        "de": "Der Kurs ist am Dienstag.",
+        "en": "The course is on Tuesday.",
+        "bn": "কোর্সটি মঙ্গলবারে।"
+      }
+    },
+    {
+      "term": "Mittwoch",
+      "article": "der",
+      "plural": "Mittwoche",
+      "pos": "NOUN",
+      "ipa": "ˈmɪtvɔx",
+      "meanings": {
+        "en": "Wednesday",
+        "bn": "বুধবার"
+      },
+      "example": {
+        "de": "Heute ist Mittwoch.",
+        "en": "Today is Wednesday.",
+        "bn": "আজ বুধবার।"
+      }
+    },
+    {
+      "term": "Donnerstag",
+      "article": "der",
+      "plural": "Donnerstage",
+      "pos": "NOUN",
+      "ipa": "ˈdɔnɐstaːk",
+      "meanings": {
+        "en": "Thursday",
+        "bn": "বৃহস্পতিবার"
+      },
+      "example": {
+        "de": "Am Donnerstag gehe ich zum Arzt.",
+        "en": "On Thursday I'm going to the doctor.",
+        "bn": "বৃহস্পতিবার আমি ডাক্তারের কাছে যাব।"
+      }
+    },
+    {
+      "term": "Freitag",
+      "article": "der",
+      "plural": "Freitage",
+      "pos": "NOUN",
+      "ipa": "ˈfʁaɪ̯taːk",
+      "meanings": {
+        "en": "Friday",
+        "bn": "শুক্রবার"
+      },
+      "example": {
+        "de": "Am Freitag gehen wir ins Kino.",
+        "en": "On Friday we're going to the cinema.",
+        "bn": "শুক্রবার আমরা সিনেমা দেখতে যাব।"
+      }
+    },
+    {
+      "term": "Samstag",
+      "article": "der",
+      "plural": "Samstage",
+      "pos": "NOUN",
+      "ipa": "ˈzamstaːk",
+      "meanings": {
+        "en": "Saturday",
+        "bn": "শনিবার"
+      },
+      "example": {
+        "de": "Am Samstag kaufe ich ein.",
+        "en": "On Saturday I go shopping.",
+        "bn": "শনিবার আমি বাজার করি।"
+      }
+    },
+    {
+      "term": "Sonntag",
+      "article": "der",
+      "plural": "Sonntage",
+      "pos": "NOUN",
+      "ipa": "ˈzɔntaːk",
+      "meanings": {
+        "en": "Sunday",
+        "bn": "রবিবার"
+      },
+      "example": {
+        "de": "Am Sonntag ist alles geschlossen.",
+        "en": "On Sunday everything is closed.",
+        "bn": "রবিবার সব বন্ধ থাকে।"
+      }
+    },
+    {
+      "term": "Woche",
+      "article": "die",
+      "plural": "Wochen",
+      "pos": "NOUN",
+      "ipa": "ˈvɔxə",
+      "meanings": {
+        "en": "week",
+        "bn": "সপ্তাহ"
+      },
+      "example": {
+        "de": "Die Woche hat sieben Tage.",
+        "en": "The week has seven days.",
+        "bn": "সপ্তাহে সাত দিন।"
+      }
+    },
+    {
+      "term": "heute",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈhɔɪ̯tə",
+      "meanings": {
+        "en": "today",
+        "bn": "আজ"
+      },
+      "example": {
+        "de": "Heute ist Freitag.",
+        "en": "Today is Friday.",
+        "bn": "আজ শুক্রবার।"
+      }
+    },
+    {
+      "term": "gestern",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈɡɛstɐn",
+      "meanings": {
+        "en": "yesterday",
+        "bn": "গতকাল"
+      },
+      "example": {
+        "de": "Gestern war Montag.",
+        "en": "Yesterday was Monday.",
+        "bn": "গতকাল সোমবার ছিল।"
+      }
+    },
+    {
+      "term": "morgen",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈmɔʁɡn̩",
+      "meanings": {
+        "en": "tomorrow",
+        "bn": "আগামীকাল"
+      },
+      "example": {
+        "de": "Morgen habe ich frei.",
+        "en": "Tomorrow I'm off.",
+        "bn": "কাল আমার ছুটি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Days of the week",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the article of all weekdays?",
+        "options": [
+          "der",
+          "die",
+          "das"
+        ],
+        "answer": 0,
+        "explanation": "All days are masculine: der Montag, der Freitag …"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"on Friday\" in German is …",
+        "options": [
+          "am Freitag",
+          "im Freitag",
+          "um Freitag"
+        ],
+        "answer": 0,
+        "explanation": "Days: am + day."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Mi.\" stands for …",
+        "options": [
+          "Mittwoch",
+          "Montag",
+          "Mittag"
+        ],
+        "answer": 0,
+        "explanation": "Mi. = Mittwoch (Wednesday)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"montags\" means …",
+        "options": [
+          "every Monday",
+          "on one Monday only",
+          "since Monday"
+        ],
+        "answer": 0,
+        "explanation": "Day + s = regularly on that day."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Heute ist Donnerstag. Morgen ist …",
+        "options": [
+          "Freitag",
+          "Mittwoch",
+          "Samstag"
+        ],
+        "answer": 0,
+        "explanation": "Donnerstag → Freitag."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"So. geschlossen\" on a shop door means …",
+        "options": [
+          "closed on Sunday",
+          "closed on Saturday",
+          "open on Sunday"
+        ],
+        "answer": 0,
+        "explanation": "So. = Sonntag, geschlossen = closed."
+      }
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "slug": "basics-ordinals-dates",
+  "title": "Ordinalzahlen und Datum · Dates",
+  "titles": {
+    "en": "Ordinal Numbers and Dates",
+    "bn": "ক্রমবাচক সংখ্যা ও তারিখ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "erste",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈeːɐ̯stə",
+      "meanings": {
+        "en": "first",
+        "bn": "প্রথম"
+      },
+      "example": {
+        "de": "Heute ist der erste Mai.",
+        "en": "Today is the first of May.",
+        "bn": "আজ পহেলা মে।"
+      }
+    },
+    {
+      "term": "dritte",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈdʁɪtə",
+      "meanings": {
+        "en": "third",
+        "bn": "তৃতীয়"
+      },
+      "example": {
+        "de": "Ich wohne im dritten Stock.",
+        "en": "I live on the third floor.",
+        "bn": "আমি চারতলায় থাকি।"
+      }
+    },
+    {
+      "term": "Datum",
+      "article": "das",
+      "plural": "Daten",
+      "pos": "NOUN",
+      "ipa": "ˈdaːtʊm",
+      "meanings": {
+        "en": "date",
+        "bn": "তারিখ"
+      },
+      "example": {
+        "de": "Welches Datum ist heute?",
+        "en": "What is the date today?",
+        "bn": "আজ কত তারিখ?"
+      }
+    },
+    {
+      "term": "Geburtstag",
+      "article": "der",
+      "plural": "Geburtstage",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbuːɐ̯t͡sˌtaːk",
+      "meanings": {
+        "en": "birthday",
+        "bn": "জন্মদিন"
+      },
+      "example": {
+        "de": "Ich habe am 5. Mai Geburtstag.",
+        "en": "My birthday is on 5 May.",
+        "bn": "৫ মে আমার জন্মদিন।"
+      }
+    },
+    {
+      "term": "Geburtsdatum",
+      "article": "das",
+      "plural": "Geburtsdaten",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbuːɐ̯t͡sˌdaːtʊm",
+      "meanings": {
+        "en": "date of birth",
+        "bn": "জন্মতারিখ"
+      },
+      "example": {
+        "de": "Bitte schreiben Sie Ihr Geburtsdatum.",
+        "en": "Please write your date of birth.",
+        "bn": "দয়া করে আপনার জন্মতারিখ লিখুন।"
+      }
+    },
+    {
+      "term": "Stock",
+      "article": "der",
+      "plural": "Stockwerke",
+      "pos": "NOUN",
+      "ipa": "ʃtɔk",
+      "meanings": {
+        "en": "floor (storey)",
+        "bn": "তলা"
+      },
+      "example": {
+        "de": "Das Büro ist im zweiten Stock.",
+        "en": "The office is on the second floor.",
+        "bn": "অফিসটি তিনতলায়।"
+      }
+    },
+    {
+      "term": "Erdgeschoss",
+      "article": "das",
+      "plural": "Erdgeschosse",
+      "pos": "NOUN",
+      "ipa": "ˈeːɐ̯tɡəˌʃɔs",
+      "meanings": {
+        "en": "ground floor",
+        "bn": "নিচতলা"
+      },
+      "example": {
+        "de": "Die Küche ist im Erdgeschoss.",
+        "en": "The kitchen is on the ground floor.",
+        "bn": "রান্নাঘরটি নিচতলায়।"
+      }
+    },
+    {
+      "term": "geboren",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈboːʁən",
+      "meanings": {
+        "en": "born",
+        "bn": "জন্ম"
+      },
+      "example": {
+        "de": "Ich bin 1998 geboren.",
+        "en": "I was born in 1998.",
+        "bn": "আমার জন্ম ১৯৯৮ সালে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Ordinals and dates",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"1.\" in a date is read …",
+        "options": [
+          "erste",
+          "einte",
+          "einste"
+        ],
+        "answer": 0,
+        "explanation": "1. = erste (irregular)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"7.\" is read …",
+        "options": [
+          "siebte",
+          "siebente",
+          "siebenste"
+        ],
+        "answer": 0,
+        "explanation": "7. = siebte."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ 3. Juli Geburtstag.",
+        "options": [
+          "am",
+          "der",
+          "im"
+        ],
+        "answer": 0,
+        "explanation": "On a date: am + ordinal with -en (am dritten Juli)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Heute ist der 20. März.\" — how do you read 20.?",
+        "options": [
+          "zwanzigste",
+          "zwanzigte",
+          "zwanzig"
+        ],
+        "answer": 0,
+        "explanation": "From 20 the ending is -ste."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "14.06.2026 is …",
+        "options": [
+          "14 June 2026",
+          "6 April 2026",
+          "6 June 2014"
+        ],
+        "answer": 0,
+        "explanation": "German dates go day.month.year."
+      }
+    ]
+  }
+}

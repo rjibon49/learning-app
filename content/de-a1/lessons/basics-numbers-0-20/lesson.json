@@ -1,0 +1,274 @@
+{
+  "slug": "basics-numbers-0-20",
+  "title": "Zahlen 0–20 · Numbers 0–20",
+  "titles": {
+    "en": "Numbers 0 to 20",
+    "bn": "সংখ্যা ০ থেকে ২০"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "null",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "nʊl",
+      "meanings": {
+        "en": "zero",
+        "bn": "শূন্য"
+      },
+      "example": {
+        "de": "Die Vorwahl beginnt mit null.",
+        "en": "The area code starts with zero.",
+        "bn": "এলাকার কোড শূন্য দিয়ে শুরু হয়।"
+      }
+    },
+    {
+      "term": "eins",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "aɪ̯ns",
+      "meanings": {
+        "en": "one",
+        "bn": "এক"
+      },
+      "example": {
+        "de": "Eins, zwei, drei – los!",
+        "en": "One, two, three – go!",
+        "bn": "এক, দুই, তিন – শুরু!"
+      }
+    },
+    {
+      "term": "zwei",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "t͡svaɪ̯",
+      "meanings": {
+        "en": "two",
+        "bn": "দুই"
+      },
+      "example": {
+        "de": "Ich habe zwei Kinder.",
+        "en": "I have two children.",
+        "bn": "আমার দুটি সন্তান।"
+      }
+    },
+    {
+      "term": "fünf",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "fʏnf",
+      "meanings": {
+        "en": "five",
+        "bn": "পাঁচ"
+      },
+      "example": {
+        "de": "Das kostet fünf Euro.",
+        "en": "That costs five euros.",
+        "bn": "এটার দাম পাঁচ ইউরো।"
+      }
+    },
+    {
+      "term": "sechs",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "zɛks",
+      "meanings": {
+        "en": "six",
+        "bn": "ছয়"
+      },
+      "example": {
+        "de": "Wir sind sechs Personen.",
+        "en": "We are six people.",
+        "bn": "আমরা ছয়জন।"
+      }
+    },
+    {
+      "term": "sieben",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈziːbn̩",
+      "meanings": {
+        "en": "seven",
+        "bn": "সাত"
+      },
+      "example": {
+        "de": "Die Woche hat sieben Tage.",
+        "en": "The week has seven days.",
+        "bn": "সপ্তাহে সাত দিন।"
+      }
+    },
+    {
+      "term": "acht",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "axt",
+      "meanings": {
+        "en": "eight",
+        "bn": "আট"
+      },
+      "example": {
+        "de": "Der Kurs beginnt um acht.",
+        "en": "The course starts at eight.",
+        "bn": "কোর্স আটটায় শুরু হয়।"
+      }
+    },
+    {
+      "term": "neun",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "nɔɪ̯n",
+      "meanings": {
+        "en": "nine",
+        "bn": "নয়"
+      },
+      "example": {
+        "de": "Mein Sohn ist neun.",
+        "en": "My son is nine.",
+        "bn": "আমার ছেলের বয়স নয়।"
+      }
+    },
+    {
+      "term": "zehn",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "t͡seːn",
+      "meanings": {
+        "en": "ten",
+        "bn": "দশ"
+      },
+      "example": {
+        "de": "Ich warte zehn Minuten.",
+        "en": "I'm waiting ten minutes.",
+        "bn": "আমি দশ মিনিট অপেক্ষা করছি।"
+      }
+    },
+    {
+      "term": "elf",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ɛlf",
+      "meanings": {
+        "en": "eleven",
+        "bn": "এগারো"
+      },
+      "example": {
+        "de": "Im Team sind elf Spieler.",
+        "en": "There are eleven players in the team.",
+        "bn": "দলে এগারো জন খেলোয়াড়।"
+      }
+    },
+    {
+      "term": "zwölf",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "t͡svœlf",
+      "meanings": {
+        "en": "twelve",
+        "bn": "বারো"
+      },
+      "example": {
+        "de": "Ein Jahr hat zwölf Monate.",
+        "en": "A year has twelve months.",
+        "bn": "এক বছরে বারো মাস।"
+      }
+    },
+    {
+      "term": "zwanzig",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "ˈt͡svant͡sɪç",
+      "meanings": {
+        "en": "twenty",
+        "bn": "বিশ"
+      },
+      "example": {
+        "de": "Ich bin zwanzig Jahre alt.",
+        "en": "I am twenty years old.",
+        "bn": "আমার বয়স বিশ বছর।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Numbers 0–20",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is 16 in German?",
+        "options": [
+          "sechzehn",
+          "sechszehn",
+          "sechsundzehn"
+        ],
+        "answer": 0,
+        "explanation": "16 = sechzehn — the s of sechs disappears."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is 17 in German?",
+        "options": [
+          "siebzehn",
+          "siebenzehn",
+          "siebzig"
+        ],
+        "answer": 0,
+        "explanation": "17 = siebzehn. siebzig is 70."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"zwölf\" is …",
+        "options": [
+          "12",
+          "20",
+          "2"
+        ],
+        "answer": 0,
+        "explanation": "zwölf = 12."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "On the phone people often say \"zwo\" for …",
+        "options": [
+          "2",
+          "12",
+          "20"
+        ],
+        "answer": 0,
+        "explanation": "zwo = zwei, so it is not confused with drei."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das kostet ___ Euro. (8)",
+        "options": [
+          "acht",
+          "achtzehn",
+          "achtzig"
+        ],
+        "answer": 0,
+        "explanation": "8 = acht, 18 = achtzehn, 80 = achtzig."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which number is \"neunzehn\"?",
+        "options": [
+          "19",
+          "90",
+          "9"
+        ],
+        "answer": 0,
+        "explanation": "neun + zehn = 19."
+      }
+    ]
+  }
+}

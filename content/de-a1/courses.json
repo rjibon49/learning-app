@@ -1,0 +1,55 @@
+{
+  "language": "de",
+  "level": "A1",
+  "courses": [
+    {
+      "slug": "de-a1-basics",
+      "title": "Start Here · German Basics",
+      "description": "Letters and sounds, greetings, introducing yourself, numbers, time, days, months, weather and colours — everything for your first days with German.",
+      "modules": [
+        {
+          "slug": "basics-sounds-letters",
+          "title": "Buchstaben & Laute · Letters and Sounds",
+          "description": "Read any German word: alphabet, special sounds, syllables and stress.",
+          "lessons": [
+            "basics-alphabet",
+            "basics-sounds",
+            "basics-syllables-stress"
+          ]
+        },
+        {
+          "slug": "basics-hallo",
+          "title": "Hallo! · Hello and Goodbye",
+          "description": "Greet people, say goodbye politely and introduce yourself.",
+          "lessons": [
+            "basics-greetings",
+            "basics-goodbye",
+            "basics-introduce-yourself"
+          ]
+        },
+        {
+          "slug": "basics-numbers-time",
+          "title": "Zahlen & Zeit · Numbers and Time",
+          "description": "Count, pay, give your phone number, say dates and tell the time.",
+          "lessons": [
+            "basics-numbers-0-20",
+            "basics-numbers-big",
+            "basics-ordinals-dates",
+            "basics-time"
+          ]
+        },
+        {
+          "slug": "basics-calendar-colours",
+          "title": "Kalender & Farben · Calendar and Colours",
+          "description": "Days, months, seasons, weather and colours.",
+          "lessons": [
+            "basics-weekdays",
+            "basics-months",
+            "basics-seasons-weather",
+            "basics-colours"
+          ]
+        }
+      ]
+    }
+  ]
+}

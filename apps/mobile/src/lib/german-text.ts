@@ -121,8 +121,16 @@ function wrapQuoted(text: string, known: Set<string>, found: string[]): string {
 
 const QUOTED = /"[^"\n]*"|„[^“\n]*“/g;
 
+/**
+ * Letters of other scripts (Bengali, Arabic, Cyrillic, Chinese …): a line in
+ * the learner's own language with some German in it is not read aloud as a
+ * whole — only its quoted or "German — meaning" parts are.
+ */
+const OTHER_SCRIPT = /[\u0370-\u1DFF\u2C00-\uFFEF]/;
+
 /** German as a whole line — judged without any quoted words inside it. */
 function wholeLineGerman(text: string, known: Set<string>): boolean {
+  if (OTHER_SCRIPT.test(text)) return false;
   if (!looksGerman(text, known)) return false;
   const outside = text.replace(QUOTED, " ").trim();
   return outside === text.trim() || looksGerman(outside, known);
@@ -201,7 +209,11 @@ export function annotateGerman(markdown: string, extraKnown: string[] = []): Ann
       inCode = !inCode;
       return line;
     }
-    if (inCode || !line.trim()) return line;
+    if (inCode) return line;
+    if (!line.trim()) {
+      headerCol = -1; // a blank line ends a table; the next table has its own header
+      return line;
+    }
 
     // Wrong examples ("Falsch: Ich heißt Anna.") must not be read aloud as models.
     if (WRONG_LABEL.test(line)) {
@@ -222,7 +234,10 @@ export function annotateGerman(markdown: string, extraKnown: string[] = []): Ann
       });
     }
     if (/\]\(/.test(line)) return line; // author's own links: leave alone
-    if (/^\s*#/.test(line) || /^\s*(-{3,}|\*{3,})\s*$/.test(line)) return line;
+    if (/^\s*#/.test(line) || /^\s*(-{3,}|\*{3,})\s*$/.test(line)) {
+      headerCol = -1;
+      return line;
+    }
 
     // Tables: wrap the German column.
     if (/^\s*\|/.test(line)) {

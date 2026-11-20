@@ -1,0 +1,226 @@
+{
+  "slug": "basics-alphabet",
+  "title": "Das Alphabet · The Alphabet",
+  "titles": {
+    "en": "The German Alphabet",
+    "bn": "জার্মান বর্ণমালা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Apfel",
+      "article": "der",
+      "plural": "Äpfel",
+      "pos": "NOUN",
+      "ipa": "ˈapfl̩",
+      "meanings": {
+        "en": "apple",
+        "bn": "আপেল"
+      },
+      "example": {
+        "de": "Der Apfel ist rot.",
+        "en": "The apple is red.",
+        "bn": "আপেলটি লাল।"
+      }
+    },
+    {
+      "term": "Buch",
+      "article": "das",
+      "plural": "Bücher",
+      "pos": "NOUN",
+      "ipa": "buːx",
+      "meanings": {
+        "en": "book",
+        "bn": "বই"
+      },
+      "example": {
+        "de": "Das Buch ist neu.",
+        "en": "The book is new.",
+        "bn": "বইটি নতুন।"
+      }
+    },
+    {
+      "term": "Haus",
+      "article": "das",
+      "plural": "Häuser",
+      "pos": "NOUN",
+      "ipa": "haʊ̯s",
+      "meanings": {
+        "en": "house",
+        "bn": "বাড়ি"
+      },
+      "example": {
+        "de": "Das Haus ist groß.",
+        "en": "The house is big.",
+        "bn": "বাড়িটি বড়।"
+      }
+    },
+    {
+      "term": "Katze",
+      "article": "die",
+      "plural": "Katzen",
+      "pos": "NOUN",
+      "ipa": "ˈkat͡sə",
+      "meanings": {
+        "en": "cat",
+        "bn": "বিড়াল"
+      },
+      "example": {
+        "de": "Die Katze schläft.",
+        "en": "The cat is sleeping.",
+        "bn": "বিড়ালটি ঘুমাচ্ছে।"
+      }
+    },
+    {
+      "term": "Käse",
+      "article": "der",
+      "plural": "Käse",
+      "pos": "NOUN",
+      "ipa": "ˈkɛːzə",
+      "meanings": {
+        "en": "cheese",
+        "bn": "পনির"
+      },
+      "example": {
+        "de": "Der Käse ist lecker.",
+        "en": "The cheese is tasty.",
+        "bn": "পনিরটি সুস্বাদু।"
+      }
+    },
+    {
+      "term": "Tür",
+      "article": "die",
+      "plural": "Türen",
+      "pos": "NOUN",
+      "ipa": "tyːɐ̯",
+      "meanings": {
+        "en": "door",
+        "bn": "দরজা"
+      },
+      "example": {
+        "de": "Die Tür ist offen.",
+        "en": "The door is open.",
+        "bn": "দরজাটি খোলা।"
+      }
+    },
+    {
+      "term": "Straße",
+      "article": "die",
+      "plural": "Straßen",
+      "pos": "NOUN",
+      "ipa": "ˈʃtʁaːsə",
+      "meanings": {
+        "en": "street",
+        "bn": "রাস্তা"
+      },
+      "example": {
+        "de": "Die Straße ist lang.",
+        "en": "The street is long.",
+        "bn": "রাস্তাটি লম্বা।"
+      }
+    },
+    {
+      "term": "Wasser",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈvasɐ",
+      "meanings": {
+        "en": "water",
+        "bn": "পানি"
+      },
+      "example": {
+        "de": "Das Wasser ist kalt.",
+        "en": "The water is cold.",
+        "bn": "পানিটা ঠান্ডা।"
+      }
+    },
+    {
+      "term": "Zug",
+      "article": "der",
+      "plural": "Züge",
+      "pos": "NOUN",
+      "ipa": "t͡suːk",
+      "meanings": {
+        "en": "train",
+        "bn": "ট্রেন"
+      },
+      "example": {
+        "de": "Der Zug kommt.",
+        "en": "The train is coming.",
+        "bn": "ট্রেন আসছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: The Alphabet",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say the German letter W?",
+        "options": [
+          "like English v (\"vay\")",
+          "like English w",
+          "like English f"
+        ],
+        "answer": 0,
+        "explanation": "W sounds like English v: Wasser, Wein."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which German letter sounds like \"ts\"?",
+        "options": [
+          "S",
+          "Z",
+          "C before a"
+        ],
+        "answer": 1,
+        "explanation": "Z = ts: Zeit, zehn, Zug."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which letter never starts a word?",
+        "options": [
+          "ß",
+          "Ü",
+          "J"
+        ],
+        "answer": 0,
+        "explanation": "ß (eszett) only appears inside or at the end of a word: Straße, groß."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Vater\" starts with a sound like …",
+        "options": [
+          "English f",
+          "English v",
+          "English w"
+        ],
+        "answer": 0,
+        "explanation": "V usually sounds like f: Vater, Vogel."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which word is written correctly?",
+        "options": [
+          "das Haus",
+          "das haus",
+          "Das haus"
+        ],
+        "answer": 0,
+        "explanation": "German nouns always start with a capital letter."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wie schreibt man das?\" means …",
+        "options": [
+          "How do you spell that?",
+          "What is that?",
+          "Where is that?"
+        ],
+        "answer": 0,
+        "explanation": "You hear it when someone needs your name letter by letter."
+      }
+    ]
+  }
+}
