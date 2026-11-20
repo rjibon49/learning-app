@@ -22,7 +22,7 @@ import { fetchLesson, type LessonDetail } from "../../api/courses";
 import { fetchLessonWords } from "../../api/practice";
 import { saveLessonProgress } from "../../api/progress";
 import { fetchQuizzes } from "../../api/quizzes";
-import { MEANING_LANGUAGE } from "../../config";
+import { pickByLanguage, useContentLanguage } from "../../lib/content-language";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { stopAudio } from "../../lib/audio";
 import { annotateGerman } from "../../lib/german-text";
@@ -36,19 +36,14 @@ import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 
 /** Lesson text in the learner's language, then German, then anything. */
 function pickContent(lesson: LessonDetail) {
-  const t = lesson.translations;
-  return (
-    t.find((x) => x.language.code === MEANING_LANGUAGE) ??
-    t.find((x) => x.language.code === "de") ??
-    t[0] ??
-    null
-  );
+  return pickByLanguage(lesson.translations, (x) => x.language.code);
 }
 
 export default function LessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const lessonId = typeof id === "string" ? id : "";
   const { user } = useLearnerAuth();
+  const language = useContentLanguage();
   const [finishing, setFinishing] = useState(false);
   const [finished, setFinished] = useState(false);
   const [finishError, setFinishError] = useState("");
@@ -82,7 +77,8 @@ export default function LessonScreen() {
       .sort((a, b) => a.sortOrder - b.sortOrder)
       .map((r) => ({ id: r.id, title: r.title, url: r.asset?.publicUrl ?? "" }));
     return { content, markdown: result.markdown, phrases: [...result.phrases, ...extra], recordings };
-  }, [state.data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- language picks the translation
+  }, [state.data, language]);
 
   async function finish() {
     if (finishing || !user) return;
@@ -113,7 +109,7 @@ export default function LessonScreen() {
     <View style={styles.topBar}>
       <IconButton icon="close" label="Close lesson" onPress={() => router.back()} />
       <Txt variant="label" numberOfLines={1} style={{ flex: 1 }}>
-        {state.data?.lesson.title ?? ""}
+        {annotated?.content?.title ?? state.data?.lesson.title ?? ""}
       </Txt>
     </View>
   );

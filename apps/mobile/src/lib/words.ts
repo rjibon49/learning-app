@@ -1,5 +1,5 @@
 import type { PracticeWord } from "../api/practice";
-import { MEANING_LANGUAGE } from "../config";
+import { pickByLanguage } from "./content-language";
 import type { Article } from "../styles/theme";
 
 const ARTICLES: Article[] = ["der", "die", "das"];
@@ -30,9 +30,7 @@ export function pluralOf(word: Pick<PracticeWord, "grammar">): string | null {
 
 /** Meaning in the learner's language, else the first one. */
 export function meaningOf(word: Pick<PracticeWord, "translations">): string | null {
-  const preferred =
-    word.translations.find((t) => t.language.code === MEANING_LANGUAGE) ?? word.translations[0];
-  return preferred?.meaning ?? null;
+  return pickByLanguage(word.translations, (t) => t.language.code)?.meaning ?? null;
 }
 
 /** First example sentence in German. */

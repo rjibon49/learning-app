@@ -15,7 +15,7 @@ import * as Haptics from "expo-haptics";
 
 import type { PracticeWord } from "../api/practice";
 import { meaningOf, pluralOf, splitArticle } from "../lib/words";
-import { MEANING_LANGUAGE } from "../config";
+import { getContentLanguage, languagePreference, useContentLanguage } from "../lib/content-language";
 import { ARTICLE_COLORS, COLORS, FONTS, RADIUS, SHADOW, SPACING } from "../styles/theme";
 import { ArticleChip, SpeakButton, Txt } from "./ui";
 
@@ -52,11 +52,17 @@ export const FlashCard = forwardRef<
   const [back, setBack] = useState(false);
   const leaving = useRef(false);
 
+  const language = useContentLanguage();
   const view = useMemo(() => {
+    const order = languagePreference();
+    const rank = (code: string) => {
+      const i = order.indexOf(code);
+      return i === -1 ? order.length : i;
+    };
     const { article, noun } = splitArticle(word);
     const meanings = word.translations
       .slice()
-      .sort((a, b) => Number(b.language.code === MEANING_LANGUAGE) - Number(a.language.code === MEANING_LANGUAGE));
+      .sort((a, b) => rank(a.language.code) - rank(b.language.code));
     const germanExamples = word.examples.filter((e) => e.language.code === "de");
     return {
       article,
@@ -74,14 +80,15 @@ export const FlashCard = forwardRef<
               (o) =>
                 o.translationGroupId === ex.translationGroupId &&
                 o.id !== ex.id &&
-                o.language.code === MEANING_LANGUAGE,
+                o.language.code === getContentLanguage(),
             )?.text ??
             word.examples.find((o) => o.translationGroupId === ex.translationGroupId && o.id !== ex.id)?.text ??
             null
           : null,
       })),
     };
-  }, [word]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- language changes the order
+  }, [word, language]);
 
   function flip() {
     if (leaving.current) return;

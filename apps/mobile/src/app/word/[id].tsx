@@ -17,10 +17,12 @@ import {
 import { fetchWord } from "../../api/vocabulary";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, pluralOf, splitArticle } from "../../lib/words";
+import { getContentLanguage, useContentLanguage } from "../../lib/content-language";
 import { ARTICLE_COLORS, COLORS, RADIUS, SPACING } from "../../styles/theme";
 
 export default function WordScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  useContentLanguage();
   const state = useAsync(() => fetchWord(String(id)), [id]);
 
   if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
@@ -40,7 +42,8 @@ export default function WordScreen() {
   // Translation of an example shares its translationGroupId.
   function translationOf(groupId: string | null): string | null {
     if (!groupId) return null;
-    return word.examples.find((e) => e.translationGroupId === groupId && e.language.code !== "de")?.text ?? null;
+    const others = word.examples.filter((e) => e.translationGroupId === groupId && e.language.code !== "de");
+    return (others.find((e) => e.language.code === getContentLanguage()) ?? others.find((e) => e.language.code === "en") ?? others[0])?.text ?? null;
   }
 
   return (

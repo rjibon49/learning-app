@@ -12,9 +12,11 @@ import {
 import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold } from "@expo-google-fonts/inter";
 
 import { AuthProvider, useLearnerAuth } from "../lib/auth-context";
+import { loadContentLanguage } from "../lib/content-language";
 import { COLORS, FONTS } from "../styles/theme";
 
 void SplashScreen.preventAutoHideAsync().catch(() => undefined);
+void loadContentLanguage();
 
 function RootNavigator() {
   const { user, loading } = useLearnerAuth();
@@ -49,6 +51,7 @@ function RootNavigator() {
         <Stack.Screen name="settings/index" options={{ headerShown: false }} />
         <Stack.Screen name="settings/profile" options={{ headerShown: false }} />
         <Stack.Screen name="settings/password" options={{ headerShown: false }} />
+        <Stack.Screen name="settings/language" options={{ headerShown: false }} />
         <Stack.Screen name="premium" options={{ headerShown: false, presentation: "modal" }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
       </Stack.Protected>

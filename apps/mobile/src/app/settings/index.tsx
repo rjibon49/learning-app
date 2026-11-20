@@ -8,12 +8,15 @@ import { getApiError } from "../../api/client";
 import { fetchMarketingPreferences, saveMarketingPreferences, type MarketingPreferences } from "../../api/account";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { GOALS, savePrefs, usePrefs } from "../../lib/preferences";
+import { useContentLanguage } from "../../lib/content-language";
+import { languageLabel } from "../../lib/language-names";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, SPACING } from "../../styles/theme";
 
 export default function SettingsScreen() {
   const { user, signOut } = useLearnerAuth();
   const { prefs } = usePrefs(user?.id);
+  const language = useContentLanguage();
   const marketing = useAsync(fetchMarketingPreferences, []);
   const [saving, setSaving] = useState<keyof MarketingPreferences | null>(null);
   const [override, setOverride] = useState<Partial<Pick<MarketingPreferences, "email" | "whatsapp" | "sms">>>({});
@@ -71,6 +74,14 @@ export default function SettingsScreen() {
       </Card>
 
       <Txt variant="overline">Learning</Txt>
+      <Card style={styles.group}>
+        <ListRow
+          icon="language-outline"
+          title="Explanation language"
+          subtitle={languageLabel(language)}
+          onPress={() => router.push("/settings/language")}
+        />
+      </Card>
       <Card style={{ gap: SPACING.md }}>
         <Txt variant="label">Daily goal</Txt>
         <View style={styles.chips}>

@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { ArticleChip, Button, ProgressBar, Screen, Txt } from "../components/ui";
 import { useLearnerAuth } from "../lib/auth-context";
 import { GOALS, savePrefs, type DailyGoal, type Prefs } from "../lib/preferences";
+import { useContentLanguage } from "../lib/content-language";
+import { languageLabel } from "../lib/language-names";
 import { COLORS, RADIUS, SPACING } from "../styles/theme";
 
 const STEPS = 3;
@@ -58,6 +60,7 @@ export default function OnboardingScreen() {
   const [goal, setGoal] = useState<DailyGoal>(2);
   const [saving, setSaving] = useState(false);
   const firstName = (user?.displayName ?? "").split(" ")[0];
+  const language = useContentLanguage();
 
   async function finish() {
     if (!user) return;
@@ -106,6 +109,19 @@ export default function OnboardingScreen() {
               </View>
             </View>
           ))}
+          <Pressable
+            onPress={() => router.push("/settings/language")}
+            accessibilityRole="button"
+            accessibilityLabel={`Explanation language: ${languageLabel(language)}. Change`}
+            style={({ pressed }) => [styles.option, pressed && { opacity: 0.85 }]}
+          >
+            <Ionicons name="language-outline" size={26} color={COLORS.primary} />
+            <View style={{ flex: 1 }}>
+              <Txt variant="label">Explanations in {languageLabel(language)}</Txt>
+              <Txt variant="caption">Tap to choose another language</Txt>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.faint} />
+          </Pressable>
           <View style={styles.articles}>
             <Txt variant="caption" style={{ flex: 1 }}>Nouns are colour-coded by article:</Txt>
             <ArticleChip article="der" />

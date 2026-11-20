@@ -9,6 +9,7 @@ import { getCurrentApp } from "../../api/app";
 import { fetchAppWords, type WordEntry } from "../../api/vocabulary";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
+import { useContentLanguage } from "../../lib/content-language";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 
 type ArticleFilter = "all" | "der" | "die" | "das" | "other";
@@ -58,6 +59,7 @@ function WordRow({ word }: { word: WordEntry }) {
 }
 
 export default function WordsScreen() {
+  const language = useContentLanguage();
   const [query, setQuery] = useState("");
   const [article, setArticle] = useState<ArticleFilter>("all");
   const [category, setCategory] = useState<string | null>(null);
@@ -118,6 +120,7 @@ export default function WordsScreen() {
       <FlatList
         data={filtered}
         keyExtractor={(w) => w.id}
+        extraData={language}
         renderItem={({ item }) => <WordRow word={item} />}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         keyboardShouldPersistTaps="handled"
