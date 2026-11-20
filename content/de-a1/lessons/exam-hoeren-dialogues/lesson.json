@@ -1,0 +1,167 @@
+{
+  "slug": "exam-hoeren-dialogues",
+  "title": "Hören Teil 1 · Kurze Gespräche",
+  "titles": {
+    "en": "Listening Part 1: Short Conversations",
+    "bn": "শোনা অংশ ১: ছোট কথোপকথন"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Angebot",
+      "article": "das",
+      "plural": "Angebote",
+      "pos": "NOUN",
+      "ipa": "ˈanɡəˌboːt",
+      "meanings": {
+        "en": "special offer",
+        "bn": "অফার / ছাড়"
+      },
+      "example": {
+        "de": "Die Jacke ist im Angebot.",
+        "en": "The jacket is on offer.",
+        "bn": "জ্যাকেটটা অফারে আছে।"
+      }
+    },
+    {
+      "term": "Viertel nach",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈfɪʁtl̩ naːx",
+      "meanings": {
+        "en": "quarter past",
+        "bn": "সোয়া (… টা)"
+      },
+      "example": {
+        "de": "Der Film beginnt um Viertel nach acht.",
+        "en": "The film starts at quarter past eight.",
+        "bn": "ছবি সোয়া আটটায় শুরু।"
+      }
+    },
+    {
+      "term": "Treppe",
+      "article": "die",
+      "plural": "Treppen",
+      "pos": "NOUN",
+      "ipa": "ˈtʁɛpə",
+      "meanings": {
+        "en": "stairs",
+        "bn": "সিঁড়ি"
+      },
+      "example": {
+        "de": "Gehen Sie die Treppe hoch.",
+        "en": "Go up the stairs.",
+        "bn": "সিঁড়ি দিয়ে উপরে যান।"
+      }
+    },
+    {
+      "term": "Schlüssel",
+      "article": "der",
+      "plural": "Schlüssel",
+      "pos": "NOUN",
+      "ipa": "ˈʃlʏsl̩",
+      "meanings": {
+        "en": "key",
+        "bn": "চাবি"
+      },
+      "example": {
+        "de": "Hier ist Ihr Schlüssel.",
+        "en": "Here is your key.",
+        "bn": "এই নিন আপনার চাবি।"
+      }
+    },
+    {
+      "term": "gesund",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈzʊnt",
+      "meanings": {
+        "en": "healthy",
+        "bn": "স্বাস্থ্যকর"
+      },
+      "example": {
+        "de": "Fahrrad fahren ist gesund.",
+        "en": "Cycling is healthy.",
+        "bn": "সাইকেল চালানো স্বাস্থ্যকর।"
+      }
+    },
+    {
+      "term": "Gespräch",
+      "article": "das",
+      "plural": "Gespräche",
+      "pos": "NOUN",
+      "ipa": "ɡəˈʃpʁɛːç",
+      "meanings": {
+        "en": "conversation",
+        "bn": "কথোপকথন"
+      },
+      "example": {
+        "de": "Sie hören fünf kurze Gespräche.",
+        "en": "You hear five short conversations.",
+        "bn": "আপনি পাঁচটা ছোট কথোপকথন শুনবেন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Hören Teil 1",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Kundin: Was kostet die Jacke? — Verkäufer: Die blaue 59 Euro, die schwarze heute nur 45 Euro. — Kundin: Dann nehme ich die schwarze. → Wie viel bezahlt die Kundin?",
+        "options": [
+          "45 Euro",
+          "59 Euro",
+          "54 Euro"
+        ],
+        "answer": 0,
+        "explanation": "She takes the black jacket: 45 euros."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Film beginnt um Viertel nach acht.\" → Wann beginnt der Film?",
+        "options": [
+          "20:15",
+          "19:45",
+          "20:00"
+        ],
+        "answer": 0,
+        "explanation": "Viertel nach acht = 8:15 p.m."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das Auto ist zu teuer, der Bus oft zu spät. Ich fahre mit dem Fahrrad.\" → Wie fährt er?",
+        "options": [
+          "mit dem Fahrrad",
+          "mit dem Auto",
+          "mit dem Bus"
+        ],
+        "answer": 0,
+        "explanation": "The last, real information counts."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wir treffen uns um acht, der Film beginnt um Viertel nach acht.\" → Wann treffen sie sich?",
+        "options": [
+          "um 20:00 Uhr",
+          "um 20:15 Uhr",
+          "um 18:00 Uhr"
+        ],
+        "answer": 0,
+        "explanation": "They meet at 8."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Sie haben Zimmer 214. Im zweiten Stock.\" → Welche Zimmernummer?",
+        "options": [
+          "214",
+          "412",
+          "240"
+        ],
+        "answer": 0,
+        "explanation": "zweihundertvierzehn = 214."
+      }
+    ]
+  }
+}

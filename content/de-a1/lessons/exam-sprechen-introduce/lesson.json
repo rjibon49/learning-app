@@ -1,0 +1,167 @@
+{
+  "slug": "exam-sprechen-introduce",
+  "title": "Sprechen Teil 1 · Sich vorstellen",
+  "titles": {
+    "en": "Speaking Part 1: Introducing Yourself",
+    "bn": "বলা অংশ ১: নিজের পরিচয় দেওয়া"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Alter",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈaltɐ",
+      "meanings": {
+        "en": "age",
+        "bn": "বয়স"
+      },
+      "example": {
+        "de": "Alter: 29 Jahre",
+        "en": "Age: 29",
+        "bn": "বয়স: ২৯ বছর"
+      }
+    },
+    {
+      "term": "buchstabieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "buːxʃtaˈbiːʁən",
+      "meanings": {
+        "en": "to spell",
+        "bn": "বানান করা"
+      },
+      "example": {
+        "de": "Können Sie Ihren Namen buchstabieren?",
+        "en": "Can you spell your name?",
+        "bn": "আপনার নামের বানান বলবেন?"
+      }
+    },
+    {
+      "term": "Telefonnummer",
+      "article": "die",
+      "plural": "Telefonnummern",
+      "pos": "NOUN",
+      "ipa": "teleˈfoːnˌnʊmɐ",
+      "meanings": {
+        "en": "phone number",
+        "bn": "ফোন নম্বর"
+      },
+      "example": {
+        "de": "Wie ist Ihre Telefonnummer?",
+        "en": "What's your phone number?",
+        "bn": "আপনার ফোন নম্বর কত?"
+      }
+    },
+    {
+      "term": "von Beruf",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "fɔn bəˈʁuːf",
+      "meanings": {
+        "en": "by profession",
+        "bn": "পেশায়"
+      },
+      "example": {
+        "de": "Ich bin Lehrerin von Beruf.",
+        "en": "I'm a teacher by profession.",
+        "bn": "আমি পেশায় শিক্ষিকা।"
+      }
+    },
+    {
+      "term": "Prüfer",
+      "article": "der",
+      "plural": "Prüfer",
+      "pos": "NOUN",
+      "ipa": "ˈpʁyːfɐ",
+      "meanings": {
+        "en": "examiner",
+        "bn": "পরীক্ষক"
+      },
+      "example": {
+        "de": "Der Prüfer ist freundlich.",
+        "en": "The examiner is friendly.",
+        "bn": "পরীক্ষক আন্তরিক।"
+      }
+    },
+    {
+      "term": "auswendig lernen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈaʊ̯svɛndɪç ˈlɛʁnən",
+      "meanings": {
+        "en": "to learn by heart",
+        "bn": "মুখস্থ করা"
+      },
+      "example": {
+        "de": "Ich lerne den Text auswendig.",
+        "en": "I'm learning the text by heart.",
+        "bn": "আমি লেখাটা মুখস্থ করছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Sprechen Teil 1",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Keyword \"Wohnort?\" — what do you say?",
+        "options": [
+          "Ich wohne in Köln.",
+          "Ich komme aus Köln.",
+          "Ich bin aus Wohnort."
+        ],
+        "answer": 0,
+        "explanation": "Wohnort = where you live."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Keyword \"Beruf?\" — what do you say?",
+        "options": [
+          "Ich bin Ingenieur von Beruf.",
+          "Ich bin 30 Jahre alt.",
+          "Ich spreche Englisch."
+        ],
+        "answer": 0,
+        "explanation": "Beruf = job."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Können Sie das buchstabieren?\" — you …",
+        "options": [
+          "say the letters one by one",
+          "write it down",
+          "translate it"
+        ],
+        "answer": 0,
+        "explanation": "buchstabieren = spell."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say the letter W in German?",
+        "options": [
+          "weh",
+          "doppel-u",
+          "vau"
+        ],
+        "answer": 0,
+        "explanation": "W = weh; V = fau."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Keyword \"Alter?\" — what do you say?",
+        "options": [
+          "Ich bin 29 Jahre alt.",
+          "Ich bin alt.",
+          "Mein Alter ist Köln."
+        ],
+        "answer": 0,
+        "explanation": "Alter = age."
+      }
+    ]
+  }
+}

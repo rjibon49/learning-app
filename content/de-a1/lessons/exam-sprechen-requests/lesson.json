@@ -1,0 +1,183 @@
+{
+  "slug": "exam-sprechen-requests",
+  "title": "Sprechen Teil 3 · Bitten formulieren",
+  "titles": {
+    "en": "Speaking Part 3: Making Requests",
+    "bn": "বলা অংশ ৩: অনুরোধ করা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Bitte",
+      "article": "die",
+      "plural": "Bitten",
+      "pos": "NOUN",
+      "ipa": "ˈbɪtə",
+      "meanings": {
+        "en": "request",
+        "bn": "অনুরোধ"
+      },
+      "example": {
+        "de": "Ich habe eine Bitte.",
+        "en": "I have a request.",
+        "bn": "আমার একটা অনুরোধ আছে।"
+      }
+    },
+    {
+      "term": "Kuli",
+      "article": "der",
+      "plural": "Kulis",
+      "pos": "NOUN",
+      "ipa": "ˈkuːli",
+      "meanings": {
+        "en": "pen (ballpoint)",
+        "bn": "কলম"
+      },
+      "example": {
+        "de": "Hast du einen Kuli für mich?",
+        "en": "Do you have a pen for me?",
+        "bn": "আমার জন্য একটা কলম আছে?"
+      }
+    },
+    {
+      "term": "natürlich",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "naˈtyːɐ̯lɪç",
+      "meanings": {
+        "en": "of course",
+        "bn": "অবশ্যই"
+      },
+      "example": {
+        "de": "Ja, natürlich!",
+        "en": "Yes, of course!",
+        "bn": "হ্যাঁ, অবশ্যই!"
+      }
+    },
+    {
+      "term": "zumachen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡suːˌmaxn̩",
+      "meanings": {
+        "en": "to close",
+        "bn": "বন্ধ করা"
+      },
+      "example": {
+        "de": "Mach bitte das Fenster zu.",
+        "en": "Please close the window.",
+        "bn": "দয়া করে জানালাটা বন্ধ করো।"
+      }
+    },
+    {
+      "term": "aufmachen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fˌmaxn̩",
+      "meanings": {
+        "en": "to open",
+        "bn": "খোলা"
+      },
+      "example": {
+        "de": "Kannst du die Tür aufmachen?",
+        "en": "Can you open the door?",
+        "bn": "দরজাটা খুলতে পারবে?"
+      }
+    },
+    {
+      "term": "Licht",
+      "article": "das",
+      "plural": "Lichter",
+      "pos": "NOUN",
+      "ipa": "lɪçt",
+      "meanings": {
+        "en": "light",
+        "bn": "আলো / বাতি"
+      },
+      "example": {
+        "de": "Mach bitte das Licht an.",
+        "en": "Please turn the light on.",
+        "bn": "দয়া করে বাতিটা জ্বালাও।"
+      }
+    },
+    {
+      "term": "geben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈɡeːbn̩",
+      "meanings": {
+        "en": "to give",
+        "bn": "দেওয়া"
+      },
+      "example": {
+        "de": "Gib mir bitte das Buch.",
+        "en": "Please give me the book.",
+        "bn": "দয়া করে বইটা দাও।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Sprechen Teil 3",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Card: window. A correct request:",
+        "options": [
+          "Kannst du bitte das Fenster öffnen?",
+          "Fenster öffnen du.",
+          "Du öffnest Fenster?"
+        ],
+        "answer": 0,
+        "explanation": "Kannst du bitte … + infinitive at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Card: water. A correct request:",
+        "options": [
+          "Kannst du mir bitte ein Glas Wasser geben?",
+          "Wasser bitte geben du mir?",
+          "Gibst Wasser?"
+        ],
+        "answer": 0,
+        "explanation": "mir = to me (Dativ)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Someone asks for a pen, but you don't have one. You say:",
+        "options": [
+          "Tut mir leid, ich habe keinen Kuli.",
+          "Nein.",
+          "Kuli ist nicht."
+        ],
+        "answer": 0,
+        "explanation": "Polite refusal + reason."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "A formal request to the examiner:",
+        "options": [
+          "Können Sie das bitte wiederholen?",
+          "Kannst du das wiederholen?",
+          "Wiederhol das!"
+        ],
+        "answer": 0,
+        "explanation": "Sie → Können Sie …?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which word should every request contain?",
+        "options": [
+          "bitte",
+          "danke",
+          "nein"
+        ],
+        "answer": 0,
+        "explanation": "bitte makes it a request."
+      }
+    ]
+  }
+}

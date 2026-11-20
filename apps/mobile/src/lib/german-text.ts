@@ -141,6 +141,19 @@ function annotateText(text: string, known: Set<string>, found: string[]): string
   const trailing = /\s*$/.exec(text)?.[0] ?? ""; // keep Markdown hard breaks ("  ")
   const body = text.slice(0, text.length - trailing.length);
 
+  // Long paragraphs (stories, emails) are read sentence by sentence, so each
+  // sentence can be played on its own.
+  if (body.length > 160) {
+    const parts: string[] = [];
+    for (const piece of body.split(/(?<=[.!?…"“])\s+(?=["„“]?[A-ZÄÖÜ])/)) {
+      // Don't cut inside a quotation: join pieces until the quotes are balanced.
+      const last = parts.length - 1;
+      if (last >= 0 && (parts[last].match(/["„“”]/g)?.length ?? 0) % 2 === 1) parts[last] += ` ${piece}`;
+      else parts.push(piece);
+    }
+    if (parts.length > 1) return parts.map((part) => annotateText(part, known, found)).join(" ") + trailing;
+  }
+
   // Word-order exercises ("heißt / du / Wie / ?") are not sentences to repeat.
   if (/\s\/\s.*\s\/\s/.test(body)) return text;
 

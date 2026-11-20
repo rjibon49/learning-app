@@ -256,6 +256,69 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "de-a1-exam",
+      "title": "Prüfungstraining A1 · Exam Practice",
+      "description": "Get ready for Goethe Start Deutsch 1 and telc Deutsch A1: the format, strategies and original practice tasks for listening, reading, writing and speaking — plus a mock test.",
+      "modules": [
+        {
+          "slug": "exam-intro",
+          "title": "Die Prüfung · The Exam",
+          "description": "What the A1 exam looks like and strategies that work.",
+          "lessons": [
+            "exam-overview",
+            "exam-strategies"
+          ]
+        },
+        {
+          "slug": "exam-hoeren",
+          "title": "Hören · Listening",
+          "description": "Short conversations, announcements and phone messages.",
+          "lessons": [
+            "exam-hoeren-dialogues",
+            "exam-hoeren-announcements",
+            "exam-hoeren-phone"
+          ]
+        },
+        {
+          "slug": "exam-lesen",
+          "title": "Lesen · Reading",
+          "description": "Emails and notes, ads and websites, signs and notices.",
+          "lessons": [
+            "exam-lesen-messages",
+            "exam-lesen-ads",
+            "exam-lesen-signs"
+          ]
+        },
+        {
+          "slug": "exam-schreiben",
+          "title": "Schreiben · Writing",
+          "description": "Filling in a form and writing a short message.",
+          "lessons": [
+            "exam-schreiben-form",
+            "exam-schreiben-message"
+          ]
+        },
+        {
+          "slug": "exam-sprechen",
+          "title": "Sprechen · Speaking",
+          "description": "Introducing yourself, asking and answering, making requests.",
+          "lessons": [
+            "exam-sprechen-introduce",
+            "exam-sprechen-questions",
+            "exam-sprechen-requests"
+          ]
+        },
+        {
+          "slug": "exam-mock",
+          "title": "Modelltest · Mock Test",
+          "description": "A mixed practice test to check where you stand.",
+          "lessons": [
+            "exam-mock-test"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,236 @@
+{
+  "slug": "exam-mock-test",
+  "title": "Modelltest · Practice Test",
+  "titles": {
+    "en": "Mock Test: Check Yourself",
+    "bn": "মডেল টেস্ট: নিজেকে যাচাই করুন"
+  },
+  "minutes": 20,
+  "words": [
+    {
+      "term": "Wörterbuch",
+      "article": "das",
+      "plural": "Wörterbücher",
+      "pos": "NOUN",
+      "ipa": "ˈvœʁtɐˌbuːx",
+      "meanings": {
+        "en": "dictionary",
+        "bn": "অভিধান"
+      },
+      "example": {
+        "de": "Bring dein Wörterbuch mit!",
+        "en": "Bring your dictionary!",
+        "bn": "তোমার অভিধানটা নিয়ে এসো!"
+      }
+    },
+    {
+      "term": "Flohmarkt",
+      "article": "der",
+      "plural": "Flohmärkte",
+      "pos": "NOUN",
+      "ipa": "ˈfloːˌmaʁkt",
+      "meanings": {
+        "en": "flea market",
+        "bn": "পুরোনো জিনিসের বাজার"
+      },
+      "example": {
+        "de": "Am Samstag ist Flohmarkt.",
+        "en": "There's a flea market on Saturday.",
+        "bn": "শনিবার পুরোনো জিনিসের বাজার।"
+      }
+    },
+    {
+      "term": "Bauarbeiten",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈbaʊ̯ˌʔaʁbaɪ̯tn̩",
+      "meanings": {
+        "en": "construction work",
+        "bn": "নির্মাণকাজ"
+      },
+      "example": {
+        "de": "Wegen Bauarbeiten fährt kein Zug.",
+        "en": "No trains because of construction work.",
+        "bn": "নির্মাণকাজের জন্য ট্রেন চলছে না।"
+      }
+    },
+    {
+      "term": "Konzert",
+      "article": "das",
+      "plural": "Konzerte",
+      "pos": "NOUN",
+      "ipa": "kɔnˈt͡sɛʁt",
+      "meanings": {
+        "en": "concert",
+        "bn": "কনসার্ট"
+      },
+      "example": {
+        "de": "Das Konzert beginnt um 20 Uhr.",
+        "en": "The concert starts at 8 p.m.",
+        "bn": "কনসার্ট রাত ৮টায় শুরু।"
+      }
+    },
+    {
+      "term": "vorher",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈfoːɐ̯heːɐ̯",
+      "meanings": {
+        "en": "before (that)",
+        "bn": "আগে"
+      },
+      "example": {
+        "de": "Wir essen vorher zusammen.",
+        "en": "We'll eat together before.",
+        "bn": "আমরা আগে একসাথে খাব।"
+      }
+    },
+    {
+      "term": "wegen",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈveːɡn̩",
+      "meanings": {
+        "en": "because of",
+        "bn": "কারণে"
+      },
+      "example": {
+        "de": "Wegen des Wetters bleibe ich zu Hause.",
+        "en": "Because of the weather I'm staying home.",
+        "bn": "আবহাওয়ার কারণে আমি বাসায় থাকছি।"
+      }
+    },
+    {
+      "term": "Viel Erfolg!",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "fiːl ɛɐ̯ˈfɔlk",
+      "meanings": {
+        "en": "Good luck!",
+        "bn": "শুভকামনা!"
+      },
+      "example": {
+        "de": "Viel Erfolg bei der Prüfung!",
+        "en": "Good luck in the exam!",
+        "bn": "পরীক্ষার জন্য শুভকামনা!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Mock test: 10 questions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 1: In welchem Raum ist der Kurs morgen?",
+        "options": [
+          "Raum 21",
+          "Raum 12",
+          "Raum 2"
+        ],
+        "answer": 0,
+        "explanation": "nicht im Raum 12, sondern im Raum 21."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 1: Wann beginnt der Kurs morgen?",
+        "options": [
+          "um 9:30 Uhr",
+          "um 9:00 Uhr",
+          "um 10:00 Uhr"
+        ],
+        "answer": 0,
+        "explanation": "eine halbe Stunde später, um 9:30 Uhr."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 1: Was soll Jonas mitbringen?",
+        "options": [
+          "sein Wörterbuch",
+          "einen Kuli",
+          "sein Handy"
+        ],
+        "answer": 0,
+        "explanation": "Bring bitte dein Wörterbuch mit!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 2: Man muss für den Flohmarkt Eintritt bezahlen.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "Der Eintritt ist frei."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 2: Die Bücher kosten 1 Euro.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "Alle Bücher nur 1 Euro."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 3: Die Straßenbahn Linie 4 fährt heute …",
+        "options": [
+          "nur bis zum Rathaus",
+          "gar nicht",
+          "wie immer"
+        ],
+        "answer": 0,
+        "explanation": "nur bis zum Rathaus."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 3: Ab dem Rathaus nehmen Sie …",
+        "options": [
+          "den Bus Linie 14",
+          "die Straßenbahn Linie 14",
+          "ein Taxi"
+        ],
+        "answer": 0,
+        "explanation": "den Bus Linie 14."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 4: Wann beginnt das Konzert?",
+        "options": [
+          "um 20 Uhr",
+          "um 18 Uhr",
+          "am Samstag"
+        ],
+        "answer": 0,
+        "explanation": "Es beginnt um 20 Uhr."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Text 4: Was soll man machen?",
+        "options": [
+          "eine SMS schreiben",
+          "anrufen",
+          "Karten kaufen"
+        ],
+        "answer": 0,
+        "explanation": "Schreib mir eine SMS!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Card \"Tür\": which request is correct?",
+        "options": [
+          "Kannst du bitte die Tür zumachen?",
+          "Tür zu du bitte?",
+          "Du machst Tür?"
+        ],
+        "answer": 0,
+        "explanation": "Kannst du bitte … + verb at the end."
+      }
+    ]
+  }
+}

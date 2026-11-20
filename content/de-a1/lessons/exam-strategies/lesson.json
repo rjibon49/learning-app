@@ -1,0 +1,183 @@
+{
+  "slug": "exam-strategies",
+  "title": "Prüfungstipps · Strategies That Work",
+  "titles": {
+    "en": "Exam Strategies That Work",
+    "bn": "পরীক্ষার কার্যকর কৌশল"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Schlüsselwort",
+      "article": "das",
+      "plural": "Schlüsselwörter",
+      "pos": "NOUN",
+      "ipa": "ˈʃlʏsl̩ˌvɔʁt",
+      "meanings": {
+        "en": "key word",
+        "bn": "মূল শব্দ"
+      },
+      "example": {
+        "de": "Unterstreichen Sie die Schlüsselwörter.",
+        "en": "Underline the key words.",
+        "bn": "মূল শব্দগুলোতে দাগ দিন।"
+      }
+    },
+    {
+      "term": "unterstreichen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ʊntɐˈʃtʁaɪ̯çn̩",
+      "meanings": {
+        "en": "to underline",
+        "bn": "দাগ দেওয়া"
+      },
+      "example": {
+        "de": "Ich unterstreiche das Wort.",
+        "en": "I underline the word.",
+        "bn": "আমি শব্দটায় দাগ দিই।"
+      }
+    },
+    {
+      "term": "noch einmal",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "nɔx ˈaɪ̯nmaːl",
+      "meanings": {
+        "en": "once more",
+        "bn": "আরেকবার"
+      },
+      "example": {
+        "de": "Noch einmal, bitte.",
+        "en": "Once more, please.",
+        "bn": "আরেকবার, দয়া করে।"
+      }
+    },
+    {
+      "term": "verstehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈʃteːən",
+      "meanings": {
+        "en": "to understand",
+        "bn": "বোঝা"
+      },
+      "example": {
+        "de": "Ich verstehe das nicht.",
+        "en": "I don't understand that.",
+        "bn": "আমি এটা বুঝছি না।"
+      }
+    },
+    {
+      "term": "Lösung",
+      "article": "die",
+      "plural": "Lösungen",
+      "pos": "NOUN",
+      "ipa": "ˈløːzʊŋ",
+      "meanings": {
+        "en": "solution / answer",
+        "bn": "সমাধান / উত্তর"
+      },
+      "example": {
+        "de": "Die Lösung ist b.",
+        "en": "The answer is b.",
+        "bn": "উত্তর হলো b।"
+      }
+    },
+    {
+      "term": "leer",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "leːɐ̯",
+      "meanings": {
+        "en": "empty / blank",
+        "bn": "খালি"
+      },
+      "example": {
+        "de": "Lassen Sie keine Antwort leer.",
+        "en": "Don't leave any answer blank.",
+        "bn": "কোনো উত্তর খালি রাখবেন না।"
+      }
+    },
+    {
+      "term": "nur",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "nuːɐ̯",
+      "meanings": {
+        "en": "only",
+        "bn": "শুধু"
+      },
+      "example": {
+        "de": "Der Laden ist nur am Montag zu.",
+        "en": "The shop is only closed on Monday.",
+        "bn": "দোকানটা শুধু সোমবার বন্ধ।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Exam strategies",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What should you do first in Hören and Lesen?",
+        "options": [
+          "Read the question.",
+          "Read the whole text slowly.",
+          "Write the answer sheet."
+        ],
+        "answer": 0,
+        "explanation": "Know what you're looking for."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wir treffen uns um 3 Uhr — nein, lieber um 4.\" When do they meet?",
+        "options": [
+          "at 4",
+          "at 3",
+          "at 7"
+        ],
+        "answer": 0,
+        "explanation": "Watch for changes: the last time counts."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In a richtig/falsch task, which small word can change everything?",
+        "options": [
+          "nicht",
+          "und",
+          "die"
+        ],
+        "answer": 0,
+        "explanation": "nicht, kein, nur, nie … change the meaning."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You don't know an answer. You …",
+        "options": [
+          "guess",
+          "leave it empty",
+          "write two answers"
+        ],
+        "answer": 0,
+        "explanation": "An empty box gets no points."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In Schreiben, what costs points?",
+        "options": [
+          "missing a point from the task",
+          "short sentences",
+          "simple words"
+        ],
+        "answer": 0,
+        "explanation": "Write about all points."
+      }
+    ]
+  }
+}

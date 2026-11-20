@@ -1,0 +1,167 @@
+{
+  "slug": "exam-schreiben-message",
+  "title": "Schreiben Teil 2 · Eine kurze Nachricht",
+  "titles": {
+    "en": "Writing Part 2: A Short Message",
+    "bn": "লেখা অংশ ২: ছোট একটি মেসেজ"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "schicken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃɪkn̩",
+      "meanings": {
+        "en": "to send",
+        "bn": "পাঠানো"
+      },
+      "example": {
+        "de": "Können Sie mir die Hausaufgaben schicken?",
+        "en": "Can you send me the homework?",
+        "bn": "আমাকে বাড়ির কাজ পাঠাতে পারবেন?"
+      }
+    },
+    {
+      "term": "Kursleiterin",
+      "article": "die",
+      "plural": "Kursleiterinnen",
+      "pos": "NOUN",
+      "ipa": "ˈkʊʁsˌlaɪ̯təʁɪn",
+      "meanings": {
+        "en": "course teacher (f)",
+        "bn": "কোর্সের শিক্ষিকা"
+      },
+      "example": {
+        "de": "Ich schreibe meiner Kursleiterin.",
+        "en": "I'm writing to my course teacher.",
+        "bn": "আমি কোর্সের শিক্ষিকাকে লিখছি।"
+      }
+    },
+    {
+      "term": "Viele Grüße",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈfiːlə ˈɡʁyːsə",
+      "meanings": {
+        "en": "Best regards",
+        "bn": "শুভেচ্ছাসহ"
+      },
+      "example": {
+        "de": "Viele Grüße, Karim",
+        "en": "Best regards, Karim",
+        "bn": "শুভেচ্ছাসহ, করিম"
+      }
+    },
+    {
+      "term": "Sehr geehrte Damen und Herren",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "zeːɐ̯ ɡəˈʔeːɐ̯tə ˈdaːmən ʊnt ˈhɛʁən",
+      "meanings": {
+        "en": "Dear Sir or Madam",
+        "bn": "জনাব / মহোদয়"
+      },
+      "example": {
+        "de": "Sehr geehrte Damen und Herren, ich habe eine Frage.",
+        "en": "Dear Sir or Madam, I have a question.",
+        "bn": "মহোদয়, আমার একটা প্রশ্ন আছে।"
+      }
+    },
+    {
+      "term": "Picknick",
+      "article": "das",
+      "plural": "Picknicks",
+      "pos": "NOUN",
+      "ipa": "ˈpɪknɪk",
+      "meanings": {
+        "en": "picnic",
+        "bn": "পিকনিক"
+      },
+      "example": {
+        "de": "Wir machen am Sonntag ein Picknick.",
+        "en": "We're having a picnic on Sunday.",
+        "bn": "রবিবার আমরা পিকনিক করছি।"
+      }
+    },
+    {
+      "term": "Nachricht",
+      "article": "die",
+      "plural": "Nachrichten",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxˌʁɪçt",
+      "meanings": {
+        "en": "message",
+        "bn": "মেসেজ / বার্তা"
+      },
+      "example": {
+        "de": "Schreiben Sie eine kurze Nachricht.",
+        "en": "Write a short message.",
+        "bn": "একটা ছোট মেসেজ লিখুন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Schreiben Teil 2",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You write to your teacher. Which greeting is right?",
+        "options": [
+          "Liebe Frau Schulz,",
+          "Hallo Schulz,",
+          "Liebe Grüße Frau Schulz,"
+        ],
+        "answer": 0,
+        "explanation": "Formal: Liebe Frau … / Sehr geehrte …"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How many points from the task should you write about?",
+        "options": [
+          "all three",
+          "one is enough",
+          "only the first two"
+        ],
+        "answer": 0,
+        "explanation": "Each missing point costs points."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "About how many words should the message have?",
+        "options": [
+          "about 30",
+          "about 150",
+          "about 10"
+        ],
+        "answer": 0,
+        "explanation": "About 30 words."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which ending fits a message to a friend?",
+        "options": [
+          "Liebe Grüße",
+          "Sehr geehrte Damen und Herren",
+          "Hochachtungsvoll"
+        ],
+        "answer": 0,
+        "explanation": "Liebe Grüße is friendly."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence asks politely for something?",
+        "options": [
+          "Können Sie mir bitte die Hausaufgaben schicken?",
+          "Schicken Sie die Hausaufgaben!",
+          "Hausaufgaben, sofort."
+        ],
+        "answer": 0,
+        "explanation": "Können Sie … bitte …? is polite."
+      }
+    ]
+  }
+}

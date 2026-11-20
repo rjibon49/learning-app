@@ -1,0 +1,195 @@
+{
+  "slug": "exam-lesen-ads",
+  "title": "Lesen Teil 2 · Anzeigen",
+  "titles": {
+    "en": "Reading Part 2: Ads and Websites",
+    "bn": "পড়া অংশ ২: বিজ্ঞাপন ও ওয়েবসাইট"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Öffnungszeiten",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈœfnʊŋsˌt͡saɪ̯tn̩",
+      "meanings": {
+        "en": "opening hours",
+        "bn": "খোলার সময়"
+      },
+      "example": {
+        "de": "Wie sind die Öffnungszeiten?",
+        "en": "What are the opening hours?",
+        "bn": "খোলার সময় কখন?"
+      }
+    },
+    {
+      "term": "geschlossen",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈʃlɔsn̩",
+      "meanings": {
+        "en": "closed",
+        "bn": "বন্ধ"
+      },
+      "example": {
+        "de": "Am Sonntag ist geschlossen.",
+        "en": "It's closed on Sunday.",
+        "bn": "রবিবার বন্ধ।"
+      }
+    },
+    {
+      "term": "geöffnet",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈʔœfnət",
+      "meanings": {
+        "en": "open",
+        "bn": "খোলা"
+      },
+      "example": {
+        "de": "Die Bank ist bis 16 Uhr geöffnet.",
+        "en": "The bank is open until 4.",
+        "bn": "ব্যাংক ৪টা পর্যন্ত খোলা।"
+      }
+    },
+    {
+      "term": "Eintritt",
+      "article": "der",
+      "plural": "Eintritte",
+      "pos": "NOUN",
+      "ipa": "ˈaɪ̯nˌtʁɪt",
+      "meanings": {
+        "en": "admission / entry",
+        "bn": "প্রবেশমূল্য"
+      },
+      "example": {
+        "de": "Der Eintritt kostet 4 Euro.",
+        "en": "Admission costs 4 euros.",
+        "bn": "প্রবেশমূল্য ৪ ইউরো।"
+      }
+    },
+    {
+      "term": "günstig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈɡʏnstɪç",
+      "meanings": {
+        "en": "cheap / good value",
+        "bn": "সস্তা / সাশ্রয়ী"
+      },
+      "example": {
+        "de": "Das Fahrrad ist sehr günstig.",
+        "en": "The bike is very cheap.",
+        "bn": "সাইকেলটা খুব সস্তা।"
+      }
+    },
+    {
+      "term": "verkaufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈkaʊ̯fn̩",
+      "meanings": {
+        "en": "to sell",
+        "bn": "বিক্রি করা"
+      },
+      "example": {
+        "de": "Ich verkaufe mein Fahrrad.",
+        "en": "I'm selling my bike.",
+        "bn": "আমি আমার সাইকেল বিক্রি করছি।"
+      }
+    },
+    {
+      "term": "Anzeige",
+      "article": "die",
+      "plural": "Anzeigen",
+      "pos": "NOUN",
+      "ipa": "ˈanˌt͡saɪ̯ɡə",
+      "meanings": {
+        "en": "advertisement",
+        "bn": "বিজ্ঞাপন"
+      },
+      "example": {
+        "de": "Ich lese die Anzeigen in der Zeitung.",
+        "en": "I read the ads in the newspaper.",
+        "bn": "আমি পত্রিকার বিজ্ঞাপন পড়ি।"
+      }
+    },
+    {
+      "term": "zum Mitnehmen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "t͡sʊm ˈmɪtˌneːmən",
+      "meanings": {
+        "en": "to take away",
+        "bn": "নিয়ে যাওয়ার জন্য"
+      },
+      "example": {
+        "de": "Eine Pizza zum Mitnehmen, bitte.",
+        "en": "A pizza to take away, please.",
+        "bn": "একটা পিৎজা পার্সেল, দয়া করে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Lesen Teil 2",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You want to swim on Sunday. a) Hallenbad: Sonntag geschlossen. b) Freibad: täglich 10–20 Uhr.",
+        "options": [
+          "b",
+          "a"
+        ],
+        "answer": 0,
+        "explanation": "a is closed on Sunday."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You want to buy a cheap bike. a) Verkaufe Damenrad, 80 Euro. b) Fahrradwerkstatt: wir reparieren alle Fahrräder.",
+        "options": [
+          "a",
+          "b"
+        ],
+        "answer": 0,
+        "explanation": "b only repairs bikes."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You work 8–17 Uhr and want a German course. a) Mo–Fr 9–13 Uhr. b) Di und Do 18–21 Uhr.",
+        "options": [
+          "b",
+          "a"
+        ],
+        "answer": 0,
+        "explanation": "The evening course fits."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You have little money for dinner. a) Menü ab 45 Euro. b) Pizza ab 7,50 Euro.",
+        "options": [
+          "b",
+          "a"
+        ],
+        "answer": 0,
+        "explanation": "The pizzeria is cheap."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Sonntag geschlossen\" means …",
+        "options": [
+          "closed on Sunday",
+          "open on Sunday",
+          "only Sunday"
+        ],
+        "answer": 0,
+        "explanation": "geschlossen = closed."
+      }
+    ]
+  }
+}

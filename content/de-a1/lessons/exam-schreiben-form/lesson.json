@@ -1,0 +1,167 @@
+{
+  "slug": "exam-schreiben-form",
+  "title": "Schreiben Teil 1 · Ein Formular ausfüllen",
+  "titles": {
+    "en": "Writing Part 1: Filling in a Form",
+    "bn": "লেখা অংশ ১: ফর্ম পূরণ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Überweisung",
+      "article": "die",
+      "plural": "Überweisungen",
+      "pos": "NOUN",
+      "ipa": "yːbɐˈvaɪ̯zʊŋ",
+      "meanings": {
+        "en": "bank transfer",
+        "bn": "ব্যাংক ট্রান্সফার"
+      },
+      "example": {
+        "de": "Ich bezahle per Überweisung.",
+        "en": "I'll pay by bank transfer.",
+        "bn": "আমি ব্যাংক ট্রান্সফারে দেব।"
+      }
+    },
+    {
+      "term": "Familienstand",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "faˈmiːli̯ənˌʃtant",
+      "meanings": {
+        "en": "marital status",
+        "bn": "বৈবাহিক অবস্থা"
+      },
+      "example": {
+        "de": "Familienstand: verheiratet",
+        "en": "Marital status: married",
+        "bn": "বৈবাহিক অবস্থা: বিবাহিত"
+      }
+    },
+    {
+      "term": "Geburtsort",
+      "article": "der",
+      "plural": "Geburtsorte",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbuːɐ̯t͡sˌʔɔʁt",
+      "meanings": {
+        "en": "place of birth",
+        "bn": "জন্মস্থান"
+      },
+      "example": {
+        "de": "Mein Geburtsort ist Sylhet.",
+        "en": "My place of birth is Sylhet.",
+        "bn": "আমার জন্মস্থান সিলেট।"
+      }
+    },
+    {
+      "term": "Wohnort",
+      "article": "der",
+      "plural": "Wohnorte",
+      "pos": "NOUN",
+      "ipa": "ˈvoːnˌʔɔʁt",
+      "meanings": {
+        "en": "place of residence",
+        "bn": "বসবাসের শহর"
+      },
+      "example": {
+        "de": "Mein Wohnort ist Düsseldorf.",
+        "en": "I live in Düsseldorf.",
+        "bn": "আমি ডুসেলডর্ফে থাকি।"
+      }
+    },
+    {
+      "term": "Zahlung",
+      "article": "die",
+      "plural": "Zahlungen",
+      "pos": "NOUN",
+      "ipa": "ˈt͡saːlʊŋ",
+      "meanings": {
+        "en": "payment",
+        "bn": "পরিশোধ"
+      },
+      "example": {
+        "de": "Die Zahlung ist bar.",
+        "en": "Payment is in cash.",
+        "bn": "পরিশোধ নগদে।"
+      }
+    },
+    {
+      "term": "Volkshochschule",
+      "article": "die",
+      "plural": "Volkshochschulen",
+      "pos": "NOUN",
+      "ipa": "ˈfɔlksˌhoːxʃuːlə",
+      "meanings": {
+        "en": "adult education centre",
+        "bn": "প্রাপ্তবয়স্ক শিক্ষাকেন্দ্র"
+      },
+      "example": {
+        "de": "Ich mache einen Kurs an der Volkshochschule.",
+        "en": "I'm doing a course at the adult education centre.",
+        "bn": "আমি ফোকসহখশুলেতে একটা কোর্স করছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Schreiben Teil 1",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Er ist in Sylhet geboren und wohnt in Düsseldorf.\" → Geburtsort?",
+        "options": [
+          "Sylhet",
+          "Düsseldorf",
+          "Bergstraße"
+        ],
+        "answer": 0,
+        "explanation": "Geburtsort = place of birth."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Er ist verheiratet und hat ein Kind.\" → Familienstand?",
+        "options": [
+          "verheiratet",
+          "ein Kind",
+          "ledig"
+        ],
+        "answer": 0,
+        "explanation": "Familienstand = marital status."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Er möchte mit Überweisung bezahlen.\" → Zahlung?",
+        "options": [
+          "Überweisung",
+          "bar",
+          "Karte"
+        ],
+        "answer": 0,
+        "explanation": "Copy the information exactly."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which information is NOT needed for the form?",
+        "options": [
+          "Seine Frau spricht gut Deutsch.",
+          "Er wohnt in Düsseldorf.",
+          "Er möchte den Abendkurs."
+        ],
+        "answer": 0,
+        "explanation": "Extra information is a trap."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"PLZ\" means …",
+        "options": [
+          "postcode",
+          "place of birth",
+          "phone number"
+        ],
+        "answer": 0,
+        "explanation": "Postleitzahl."
+      }
+    ]
+  }
+}
