@@ -65,7 +65,6 @@ export default function ReviewScreen() {
   // The queue grows when a card is rated "Again" (seen once more at the end).
   const [queue, setQueue] = useState<PracticeWord[] | null>(null);
   const [index, setIndex] = useState(0);
-  const [revealed, setRevealed] = useState(false);
   const [error, setError] = useState("");
   const [known, setKnown] = useState(0);
   const [retried, setRetried] = useState<Set<string>>(new Set());
@@ -106,19 +105,30 @@ export default function ReviewScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once per card
   }, [cardKey]);
 
-  /** Button press: the card flies out the matching way, then it is rated. */
+  /** Rating button: the card flies out to the left (next), then it is rated. */
   function choose(key: RatingKey) {
     if (!card) return;
     pending.current = key;
-    if (cardRef.current) cardRef.current.swipe(key === "again" ? "left" : "right");
+    if (cardRef.current) cardRef.current.swipe("left");
     else rate(key);
   }
 
-  /** Swipe: right = "Good" (I knew it), left = "Again". */
+  /** Swipe left = next card, swipe right = previous card. */
   function onSwiped(direction: SwipeDirection) {
-    const key = pending.current ?? (direction === "right" ? "good" : "again");
+    const key = pending.current;
     pending.current = null;
-    rate(key);
+    if (key) {
+      rate(key);
+      return;
+    }
+    if (direction === "right") {
+      setIndex((i) => Math.max(0, i - 1));
+      return;
+    }
+    if (index + 1 >= cards.length) {
+      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+    }
+    setIndex((i) => i + 1);
   }
 
   function rate(key: RatingKey) {
@@ -145,7 +155,6 @@ export default function ReviewScreen() {
       : Haptics.selectionAsync()
     ).catch(() => undefined);
 
-    setRevealed(false);
     setIndex((i) => i + 1);
   }
 
@@ -207,60 +216,47 @@ export default function ReviewScreen() {
           key={cardKey}
           ref={cardRef}
           word={card}
-          onFlip={setRevealed}
+          canGoBack={index > 0}
           onSwiped={onSwiped}
         />
       </View>
 
       {error ? <Txt variant="caption" style={{ color: COLORS.wrongText, textAlign: "center" }}>{error}</Txt> : null}
 
-      {revealed ? (
-        <View style={{ gap: SPACING.sm }}>
-          <Txt variant="caption" style={{ textAlign: "center" }}>How well did you know it?</Txt>
-          <View style={styles.ratings}>
-            {RATINGS.map((r) => {
-              const s = RATING_STYLE[r.key];
-              return (
-                <Pressable
-                  key={r.key}
-                  onPress={() => choose(r.key)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`${r.label}, review ${s.hint.toLowerCase()}`}
-                  style={({ pressed }) => [styles.rating, { backgroundColor: s.bg }, pressed && { opacity: 0.7 }]}
-                >
-                  <Txt style={[styles.ratingLabel, { color: s.fg }]}>{r.label}</Txt>
-                  <Txt style={[styles.ratingHint, { color: s.fg }]}>{s.hint}</Txt>
-                </Pressable>
-              );
-            })}
-          </View>
-        </View>
-      ) : (
-        <View style={{ gap: SPACING.sm }}>
-          <View style={styles.quickRow}>
-            <Pressable
-              onPress={() => choose("again")}
-              accessibilityRole="button"
-              accessibilityLabel="Again"
-              style={({ pressed }) => [styles.round, { backgroundColor: COLORS.wrongSoft }, pressed && { opacity: 0.7 }]}
-            >
-              <Ionicons name="refresh" size={26} color={COLORS.wrong} />
-            </Pressable>
-            <Button title="Show details" icon="sync-outline" onPress={() => cardRef.current?.flip()} style={{ flex: 1 }} />
-            <Pressable
-              onPress={() => choose("good")}
-              accessibilityRole="button"
-              accessibilityLabel="I know it"
-              style={({ pressed }) => [styles.round, { backgroundColor: COLORS.correctSoft }, pressed && { opacity: 0.7 }]}
-            >
-              <Ionicons name="checkmark" size={28} color={COLORS.correct} />
-            </Pressable>
-          </View>
-          <Txt variant="caption" style={{ textAlign: "center" }}>
-            Swipe ← again · Swipe → I know it
+      <View style={{ gap: SPACING.sm }}>
+        <View style={styles.navRow}>
+          <IconButton
+            icon="chevron-back"
+            label="Previous card"
+            color={index === 0 ? COLORS.faint : COLORS.muted}
+            onPress={() => {
+              if (index > 0) cardRef.current?.swipe("right");
+            }}
+          />
+          <Txt variant="caption" style={{ flex: 1, textAlign: "center" }}>
+            Swipe ← next · Swipe → back
           </Txt>
+          <IconButton icon="chevron-forward" label="Next card" onPress={() => cardRef.current?.swipe("left")} />
         </View>
-      )}
+        <Txt variant="caption" style={{ textAlign: "center" }}>How well did you know it?</Txt>
+        <View style={styles.ratings}>
+          {RATINGS.map((r) => {
+            const s = RATING_STYLE[r.key];
+            return (
+              <Pressable
+                key={r.key}
+                onPress={() => choose(r.key)}
+                accessibilityRole="button"
+                accessibilityLabel={`${r.label}, review ${s.hint.toLowerCase()}`}
+                style={({ pressed }) => [styles.rating, { backgroundColor: s.bg }, pressed && { opacity: 0.7 }]}
+              >
+                <Txt style={[styles.ratingLabel, { color: s.fg }]}>{r.label}</Txt>
+                <Txt style={[styles.ratingHint, { color: s.fg }]}>{s.hint}</Txt>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
     </Screen>
   );
 }
@@ -273,17 +269,10 @@ const styles = StyleSheet.create({
     marginLeft: -SPACING.md,
     marginTop: -SPACING.md,
   },
-  quickRow: {
+  navRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: SPACING.md,
-  },
-  round: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignItems: "center",
-    justifyContent: "center",
+    gap: SPACING.sm,
   },
   ratings: {
     flexDirection: "row",

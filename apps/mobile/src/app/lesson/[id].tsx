@@ -29,7 +29,7 @@ import { annotateGerman } from "../../lib/german-text";
 import { ListenPanel, lessonMarkdownRules } from "../../components/lesson-audio";
 import { markLessonCompleted } from "../../lib/lesson-progress";
 import { recordStep } from "../../lib/preferences";
-import { loadLearningPath } from "../../lib/learning-path";
+import { loadLearningPath, nextLessonAfter } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
@@ -93,9 +93,8 @@ export default function LessonScreen() {
       // Find the next lesson on the path so the learner can go straight on.
       void loadLearningPath(user.id)
         .then((path) => {
-          if (path.next && path.next.id !== lessonId) {
-            setNextLesson({ id: path.next.id, title: path.next.title });
-          }
+          const next = nextLessonAfter(path, lessonId);
+          if (next && next.id !== lessonId) setNextLesson({ id: next.id, title: next.title });
         })
         .catch(() => undefined);
     } catch (e) {

@@ -1,11 +1,11 @@
-import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Card, EmptyView, ErrorView, LoadingView, ProgressBar, Screen, Txt } from "../../components/ui";
 import { useLearnerAuth } from "../../lib/auth-context";
-import { loadLearningPath, type PathLesson, type PathModule } from "../../lib/learning-path";
+import { loadLearningPath, type PathCourse, type PathLesson, type PathModule } from "../../lib/learning-path";
 import { useAsync, useRefreshOnFocus } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 
@@ -63,7 +63,7 @@ function ModuleCard({ mod, index }: { mod: PathModule; index: number }) {
       <Card style={styles.lockedCard}>
         <View style={{ flex: 1 }}>
           <Txt variant="title" style={{ fontSize: 17 }}>Module {index + 1} · {mod.title}</Txt>
-          <Txt variant="caption" style={{ marginTop: 2 }}>{total} lessons · opens after the module before</Txt>
+          <Txt variant="caption" style={{ marginTop: 2 }}>{total} lessons · opens after the module before in this course</Txt>
         </View>
         <Ionicons name="lock-closed-outline" size={22} color={COLORS.faint} accessibilityLabel="Locked" />
       </Card>
@@ -87,38 +87,127 @@ function ModuleCard({ mod, index }: { mod: PathModule; index: number }) {
   );
 }
 
+/** Horizontal list of all courses; the chosen one is shown below. */
+function CoursePicker({
+  courses,
+  selected,
+  onSelect,
+}: {
+  courses: PathCourse[];
+  selected: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.chips}
+      style={{ marginHorizontal: -SPACING.xl, flexGrow: 0 }}
+      accessibilityRole="tablist"
+    >
+      {courses.map((c) => {
+        const active = c.id === selected;
+        const finished = c.totalLessons > 0 && c.doneLessons === c.totalLessons;
+        return (
+          <Pressable
+            key={c.id}
+            onPress={() => onSelect(c.id)}
+            accessibilityRole="tab"
+            accessibilityState={{ selected: active }}
+            accessibilityLabel={`${c.title}, ${c.doneLessons} of ${c.totalLessons} lessons done`}
+            style={({ pressed }) => [styles.chip, active && styles.chipActive, pressed && { opacity: 0.8 }]}
+          >
+            {finished ? <Ionicons name="checkmark-circle" size={16} color={active ? "#FFFFFF" : COLORS.correct} /> : null}
+            <Txt style={[styles.chipText, active && { color: "#FFFFFF" }]} numberOfLines={1}>
+              {c.title.split(" · ")[0]}
+            </Txt>
+          </Pressable>
+        );
+      })}
+    </ScrollView>
+  );
+}
+
+function CourseHeader({ course, number, count }: { course: PathCourse; number: number; count: number }) {
+  const pct = (course.doneLessons / Math.max(1, course.totalLessons)) * 100;
+  return (
+    <Card style={{ gap: SPACING.sm }}>
+      <Txt variant="overline">Course {number} of {count}</Txt>
+      <Txt variant="h2">{course.title}</Txt>
+      {course.description ? <Txt variant="caption" style={{ fontSize: 14 }}>{course.description}</Txt> : null}
+      <ProgressBar value={pct} label={`${course.title} progress`} />
+      <Txt variant="caption">
+        {course.doneLessons} of {course.totalLessons} lessons · {course.modules.length} modules
+      </Txt>
+    </Card>
+  );
+}
+
 export default function LearnScreen() {
   const { user } = useLearnerAuth();
   const state = useAsync(() => loadLearningPath(user?.id ?? ""), [user?.id]);
   useRefreshOnFocus(state.refresh);
+  const [chosen, setChosen] = useState<string | null>(null);
 
   if (state.loading && !state.data) return <Screen scroll={false}><LoadingView label="Loading your path…" /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 
-  const { app, modules } = state.data;
+  const { app, courses, next } = state.data;
+  const selectedId =
+    (chosen && courses.some((c) => c.id === chosen) ? chosen : null) ?? next?.courseId ?? courses[0]?.id ?? "";
+  const index = courses.findIndex((c) => c.id === selectedId);
+  const course = courses[index];
 
   return (
     <Screen onRefresh={() => void state.refresh()} refreshing={state.refreshing}>
       <View>
         <Txt variant="overline">{app.name}</Txt>
-        <Txt variant="h1" style={{ marginTop: 2 }}>Your path</Txt>
+        <Txt variant="h1" style={{ marginTop: 2 }}>Courses</Txt>
       </View>
 
-      {modules.length === 0 ? (
+      {!course ? (
         <EmptyView
           icon="book-outline"
           title="No lessons yet"
           message="Lessons appear here as soon as they are published in the CMS."
         />
       ) : (
-        modules.map((mod, i) => <ModuleCard key={mod.id} mod={mod} index={i} />)
+        <>
+          {courses.length > 1 ? <CoursePicker courses={courses} selected={course.id} onSelect={setChosen} /> : null}
+          <CourseHeader course={course} number={index + 1} count={courses.length} />
+          {course.modules.map((mod, i) => <ModuleCard key={mod.id} mod={mod} index={i} />)}
+        </>
       )}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  chips: {
+    gap: SPACING.sm,
+    paddingHorizontal: SPACING.xl,
+  },
+  chip: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    minHeight: 40,
+    paddingHorizontal: SPACING.md,
+    borderRadius: RADIUS.pill,
+    borderWidth: 1,
+    borderColor: COLORS.borderStrong,
+    backgroundColor: COLORS.surface,
+  },
+  chipActive: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  chipText: {
+    fontFamily: FONTS.bodySemi,
+    fontSize: 14,
+    color: COLORS.ink,
+  },
   moduleHead: {
     flexDirection: "row",
     justifyContent: "space-between",

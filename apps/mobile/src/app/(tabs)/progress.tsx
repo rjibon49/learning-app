@@ -107,15 +107,13 @@ export default function ProgressScreen() {
       {path ? (
         <Card style={{ gap: SPACING.md }}>
           <Txt variant="title">{path.app.name}</Txt>
-          {path.modules.map((m) => (
-            <View key={m.id} style={{ gap: 6 }}>
+          {path.courses.map((c) => (
+            <View key={c.id} style={{ gap: 6 }}>
               <View style={styles.modRow}>
-                <Txt variant="body" style={{ fontSize: 14, flex: 1 }} numberOfLines={1}>{m.title}</Txt>
-                <Txt variant="caption">
-                  {m.locked ? "Locked" : `${Math.round((m.done / Math.max(1, m.lessons.length)) * 100)}%`}
-                </Txt>
+                <Txt variant="body" style={{ fontSize: 14, flex: 1 }} numberOfLines={1}>{c.title}</Txt>
+                <Txt variant="caption">{c.doneLessons}/{c.totalLessons}</Txt>
               </View>
-              <ProgressBar value={m.locked ? 0 : (m.done / Math.max(1, m.lessons.length)) * 100} label={`${m.title} progress`} />
+              <ProgressBar value={(c.doneLessons / Math.max(1, c.totalLessons)) * 100} label={`${c.title} progress`} />
             </View>
           ))}
           <View style={styles.modRow}>

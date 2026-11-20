@@ -1,10 +1,9 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
 import {
   Animated,
   Easing,
   Image,
   PanResponder,
-  Pressable,
   ScrollView,
   StyleSheet,
   useWindowDimensions,
@@ -22,18 +21,17 @@ import { ArticleChip, SpeakButton, Txt } from "./ui";
 export type SwipeDirection = "left" | "right";
 
 export type FlashCardHandle = {
-  /** Fly the card out (used by the rating buttons). */
+  /** Fly the card out (used by the buttons below the card). */
   swipe: (direction: SwipeDirection) => void;
-  flip: () => void;
 };
 
-const SWIPE_DISTANCE = 0.28; // of the screen width
+const SWIPE_DISTANCE = 0.25; // of the screen width
 const SWIPE_VELOCITY = 0.6;
 
 /**
- * One flashcard.
- *  - Tap: turns the card over to the details (meaning, plural, examples, tip).
- *  - Swipe right: "I knew it" · Swipe left: "Again".
+ * One flashcard with all details at once: word, article, plural,
+ * pronunciation, meaning and examples.
+ *  - Swipe left: next card · Swipe right: previous card (like turning pages).
  * Buttons outside the card do the same, so it also works without gestures
  * (screen readers, switch control).
  */
@@ -42,15 +40,19 @@ export const FlashCard = forwardRef<
   {
     word: PracticeWord;
     disabled?: boolean;
-    onFlip?: (showingBack: boolean) => void;
+    /** False on the first card: a swipe right springs back. */
+    canGoBack?: boolean;
     onSwiped: (direction: SwipeDirection) => void;
   }
->(function FlashCard({ word, disabled = false, onFlip, onSwiped }, ref) {
+>(function FlashCard({ word, disabled = false, canGoBack = true, onSwiped }, ref) {
   const { width } = useWindowDimensions();
   const position = useRef(new Animated.ValueXY()).current;
-  const turn = useRef(new Animated.Value(0)).current;
-  const [back, setBack] = useState(false);
+  const appear = useRef(new Animated.Value(0)).current;
   const leaving = useRef(false);
+
+  React.useEffect(() => {
+    Animated.timing(appear, { toValue: 1, duration: 180, easing: Easing.out(Easing.quad), useNativeDriver: false }).start();
+  }, [appear]);
 
   const language = useContentLanguage();
   const view = useMemo(() => {
@@ -90,137 +92,93 @@ export const FlashCard = forwardRef<
     // eslint-disable-next-line react-hooks/exhaustive-deps -- language changes the order
   }, [word, language]);
 
-  function flip() {
-    if (leaving.current) return;
-    const next = !back;
-    setBack(next);
-    onFlip?.(next);
-    void Haptics.selectionAsync().catch(() => undefined);
-    Animated.timing(turn, {
-      toValue: next ? 1 : 0,
-      duration: 320,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
+  function springBack() {
+    Animated.spring(position, { toValue: { x: 0, y: 0 }, friction: 6, useNativeDriver: false }).start();
   }
 
   function flyOut(direction: SwipeDirection) {
     if (leaving.current) return;
+    if (direction === "right" && !canGoBack) {
+      springBack();
+      return;
+    }
     leaving.current = true;
-    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => undefined);
+    void Haptics.selectionAsync().catch(() => undefined);
     Animated.timing(position, {
       toValue: { x: (direction === "right" ? 1.5 : -1.5) * width, y: 0 },
-      duration: 220,
+      duration: 200,
       easing: Easing.in(Easing.quad),
       // The drag (Animated.event) runs on JS, so this value must too.
       useNativeDriver: false,
     }).start(() => onSwiped(direction));
   }
 
-  function springBack() {
-    Animated.spring(position, { toValue: { x: 0, y: 0 }, friction: 6, useNativeDriver: false }).start();
-  }
-
-  useImperativeHandle(ref, () => ({ swipe: flyOut, flip }));
+  useImperativeHandle(ref, () => ({ swipe: flyOut }));
 
   const pan = useMemo(
     () =>
       PanResponder.create({
-        // Only horizontal drags; taps and vertical scrolling stay with the card content.
+        // Only horizontal drags; vertical scrolling stays with the card content.
         onMoveShouldSetPanResponder: (_e, g) =>
           !disabled && !leaving.current && Math.abs(g.dx) > 10 && Math.abs(g.dx) > Math.abs(g.dy) * 1.5,
-        onPanResponderMove: Animated.event([null, { dx: position.x, dy: position.y }], { useNativeDriver: false }),
+        onPanResponderMove: Animated.event([null, { dx: position.x }], { useNativeDriver: false }),
         onPanResponderRelease: (_e, g) => {
           const far = Math.abs(g.dx) > width * SWIPE_DISTANCE;
           const fast = Math.abs(g.vx) > SWIPE_VELOCITY && Math.abs(g.dx) > 40;
-          if (far || fast) flyOut(g.dx > 0 ? "right" : "left");
+          if (far || fast) flyOut(g.dx < 0 ? "left" : "right");
           else springBack();
         },
         onPanResponderTerminate: springBack,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- handlers read refs
-    [disabled, width],
+    [disabled, width, canGoBack],
   );
 
   const rotate = position.x.interpolate({
     inputRange: [-width, 0, width],
-    outputRange: ["-12deg", "0deg", "12deg"],
+    outputRange: ["-8deg", "0deg", "8deg"],
     extrapolate: "clamp",
   });
-  const knowOpacity = position.x.interpolate({ inputRange: [20, width * SWIPE_DISTANCE], outputRange: [0, 1], extrapolate: "clamp" });
-  const againOpacity = position.x.interpolate({ inputRange: [-width * SWIPE_DISTANCE, -20], outputRange: [1, 0], extrapolate: "clamp" });
-
-  const frontTurn = turn.interpolate({ inputRange: [0, 1], outputRange: ["0deg", "180deg"] });
-  const backTurn = turn.interpolate({ inputRange: [0, 1], outputRange: ["180deg", "360deg"] });
-  // Opacity switch as well: some Android versions ignore backfaceVisibility.
-  const frontOpacity = turn.interpolate({ inputRange: [0, 0.5, 0.501, 1], outputRange: [1, 1, 0, 0] });
-  const backOpacity = turn.interpolate({ inputRange: [0, 0.5, 0.501, 1], outputRange: [0, 0, 1, 1] });
+  const nextOpacity = position.x.interpolate({ inputRange: [-width * SWIPE_DISTANCE, -20], outputRange: [1, 0], extrapolate: "clamp" });
+  const backOpacity = position.x.interpolate({ inputRange: [20, width * SWIPE_DISTANCE], outputRange: [0, 1], extrapolate: "clamp" });
 
   const articleColor = view.article ? ARTICLE_COLORS[view.article] : null;
+  const otherMeanings = view.meanings.filter((t) => t.meaning !== view.meaning);
 
   return (
     <Animated.View
       {...pan.panHandlers}
-      style={[styles.wrap, { transform: [{ translateX: position.x }, { translateY: position.y }, { rotate }] }]}
+      style={[styles.wrap, { opacity: appear, transform: [{ translateX: position.x }, { rotate }] }]}
     >
-      {/* FRONT */}
-      <Animated.View
-        pointerEvents={back ? "none" : "auto"}
-        style={[styles.face, { opacity: frontOpacity, transform: [{ perspective: 1200 }, { rotateY: frontTurn }] }]}
-      >
-        <Pressable
-          onPress={flip}
-          accessibilityRole="button"
-          accessibilityLabel={`${view.spoken}. Tap to see details`}
-          style={{ flex: 1 }}
-        >
-          {articleColor ? <View style={[styles.stripe, { backgroundColor: articleColor.bg }]} /> : null}
+      <View style={styles.face}>
+        {articleColor ? <View style={[styles.stripe, { backgroundColor: articleColor.bg }]} /> : null}
+        <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
           {word.imageUrl ? (
             <Image source={{ uri: word.imageUrl }} style={styles.image} resizeMode="cover" accessibilityIgnoresInvertColors />
           ) : null}
-          <View style={styles.frontBody}>
+
+          {/* Word */}
+          <View style={styles.head}>
             <View style={styles.termRow}>
               {view.article ? <ArticleChip article={view.article} size="lg" /> : null}
               <Txt style={styles.term} adjustsFontSizeToFit numberOfLines={2}>{view.noun}</Txt>
             </View>
-            {word.pronunciation ? (
-              <Txt variant="caption" style={{ fontSize: 15 }}>{word.pronunciation}</Txt>
+            {word.pronunciation ? <Txt variant="caption" style={{ fontSize: 15 }}>{word.pronunciation}</Txt> : null}
+            <SpeakButton text={view.spoken} url={word.audioUrl} size={52} />
+            {articleColor ? (
+              <Txt variant="caption" style={{ color: articleColor.fg }}>{articleColor.label} noun</Txt>
             ) : null}
-            <SpeakButton text={view.spoken} url={word.audioUrl} size={56} />
-            <View style={styles.tapHint}>
-              <Ionicons name="hand-left-outline" size={16} color={COLORS.faint} />
-              <Txt variant="caption">Tap for details</Txt>
-            </View>
           </View>
-        </Pressable>
-      </Animated.View>
 
-      {/* BACK: details */}
-      <Animated.View
-        pointerEvents={back ? "auto" : "none"}
-        style={[styles.face, styles.backFace, { opacity: backOpacity, transform: [{ perspective: 1200 }, { rotateY: backTurn }] }]}
-      >
-        <ScrollView contentContainerStyle={styles.backBody} showsVerticalScrollIndicator={false}>
-          <Pressable onPress={flip} accessibilityRole="button" accessibilityLabel="Turn card back" style={styles.backHead}>
-            {view.article ? <ArticleChip article={view.article} /> : null}
-            <Txt variant="h2" style={{ flexShrink: 1 }}>{view.noun}</Txt>
-            <SpeakButton text={view.spoken} url={word.audioUrl} size={40} />
-          </Pressable>
-
-          {articleColor ? (
-            <Txt variant="caption" style={{ color: articleColor.fg }}>{articleColor.label} noun</Txt>
-          ) : null}
-
+          {/* Meaning */}
           <View style={styles.section}>
             <Txt variant="overline">Meaning</Txt>
             <Txt style={styles.meaning}>{view.meaning ?? "No meaning added yet"}</Txt>
-            {view.meanings
-              .filter((t) => t.meaning !== view.meaning)
-              .map((t) => (
-                <Txt key={`${t.language.code}-${t.meaning}`} variant="body" style={{ color: COLORS.muted }}>
-                  {t.language.code.toUpperCase()}: {t.meaning}
-                </Txt>
-              ))}
+            {otherMeanings.map((t) => (
+              <Txt key={`${t.language.code}-${t.meaning}`} variant="body" style={{ color: COLORS.muted }}>
+                {t.language.code.toUpperCase()}: {t.meaning}
+              </Txt>
+            ))}
           </View>
 
           {view.plural ? (
@@ -249,16 +207,16 @@ export const FlashCard = forwardRef<
             </View>
           ) : null}
         </ScrollView>
-      </Animated.View>
+      </View>
 
       {/* Swipe labels */}
-      <Animated.View pointerEvents="none" style={[styles.stamp, styles.stampRight, { opacity: knowOpacity }]}>
-        <Ionicons name="checkmark-circle" size={22} color={COLORS.correct} />
-        <Txt style={[styles.stampText, { color: COLORS.correct }]}>Know it</Txt>
+      <Animated.View pointerEvents="none" style={[styles.stamp, styles.stampRight, { opacity: nextOpacity }]}>
+        <Txt style={[styles.stampText, { color: COLORS.primary }]}>Next</Txt>
+        <Ionicons name="arrow-forward-circle" size={22} color={COLORS.primary} />
       </Animated.View>
-      <Animated.View pointerEvents="none" style={[styles.stamp, styles.stampLeft, { opacity: againOpacity }]}>
-        <Ionicons name="refresh-circle" size={22} color={COLORS.wrong} />
-        <Txt style={[styles.stampText, { color: COLORS.wrong }]}>Again</Txt>
+      <Animated.View pointerEvents="none" style={[styles.stamp, styles.stampLeft, { opacity: backOpacity }]}>
+        <Ionicons name="arrow-back-circle" size={22} color={COLORS.muted} />
+        <Txt style={[styles.stampText, { color: COLORS.muted }]}>Back</Txt>
       </Animated.View>
     </Animated.View>
   );
@@ -267,26 +225,18 @@ export const FlashCard = forwardRef<
 const styles = StyleSheet.create({
   wrap: { flex: 1 },
   face: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex: 1,
     backgroundColor: COLORS.surface,
     borderRadius: 28,
     overflow: "hidden",
-    backfaceVisibility: "hidden",
     ...SHADOW.raised,
   },
-  backFace: { backgroundColor: COLORS.surface },
   stripe: { height: 8 },
-  image: { width: "100%", height: 170, backgroundColor: COLORS.track },
-  frontBody: { flex: 1, padding: SPACING.xxl, alignItems: "center", justifyContent: "center", gap: SPACING.md },
+  image: { width: "100%", height: 150, borderRadius: RADIUS.lg, backgroundColor: COLORS.track },
+  body: { padding: SPACING.xl, gap: SPACING.lg },
+  head: { alignItems: "center", gap: SPACING.sm },
   termRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10, flexWrap: "wrap" },
-  term: { fontFamily: FONTS.display, fontSize: 40, lineHeight: 48, color: COLORS.ink, textAlign: "center" },
-  tapHint: { flexDirection: "row", alignItems: "center", gap: 6, marginTop: SPACING.sm },
-  backBody: { padding: SPACING.xl, gap: SPACING.lg },
-  backHead: { flexDirection: "row", alignItems: "center", gap: SPACING.sm },
+  term: { fontFamily: FONTS.display, fontSize: 36, lineHeight: 44, color: COLORS.ink, textAlign: "center" },
   section: { gap: 6 },
   meaning: { fontFamily: FONTS.title, fontSize: 22, lineHeight: 28, color: COLORS.ink },
   inline: { flexDirection: "row", alignItems: "center", gap: SPACING.sm },
@@ -303,7 +253,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.surface,
     borderWidth: 2,
   },
-  stampRight: { left: SPACING.xl, borderColor: COLORS.correct, transform: [{ rotate: "-8deg" }] },
-  stampLeft: { right: SPACING.xl, borderColor: COLORS.wrong, transform: [{ rotate: "8deg" }] },
-  stampText: { fontFamily: FONTS.title, fontSize: 18 },
+  stampRight: { right: SPACING.xl, borderColor: COLORS.primary },
+  stampLeft: { left: SPACING.xl, borderColor: COLORS.borderStrong },
+  stampText: { fontFamily: FONTS.title, fontSize: 16 },
 });

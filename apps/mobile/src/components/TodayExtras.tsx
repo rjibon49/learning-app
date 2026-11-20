@@ -115,7 +115,8 @@ export function WordOfDay({ word }: { word: WordEntry }) {
 /** Whole-course progress + the next lessons. */
 export function PathCard({ path }: { path: LearningPath }) {
   const pct = path.totalLessons ? (path.doneLessons / path.totalLessons) * 100 : 0;
-  const current = path.modules.find((m) => m.lessons.some((l) => l.status === "current"));
+  const nextId = path.next?.id;
+  const current = nextId ? path.modules.find((m) => m.lessons.some((l) => l.id === nextId)) : undefined;
   const upcoming = current
     ? current.lessons.filter((l) => l.status === "current" || l.status === "open").slice(0, 3)
     : [];
@@ -128,7 +129,7 @@ export function PathCard({ path }: { path: LearningPath }) {
       </View>
       <ProgressBar value={pct} label="Course progress" />
       <Txt variant="caption">
-        {path.doneLessons} of {path.totalLessons} lessons · {path.modules.filter((m) => m.done === m.lessons.length && m.lessons.length > 0).length} of {path.modules.length} modules done
+        {path.doneLessons} of {path.totalLessons} lessons · {path.courses.length} course{path.courses.length === 1 ? "" : "s"}
       </Txt>
 
       {current && upcoming.length > 0 ? (
