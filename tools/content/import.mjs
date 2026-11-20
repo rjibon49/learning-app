@@ -322,7 +322,10 @@ async function importQuiz(meta, lessonRow, app) {
   };
   let quiz = existing.find((q) => (q.description ?? "").includes(QUIZ_MARK));
   if (quiz) {
-    await api("PATCH", `/admin/quizzes/${quiz.id}`, body);
+    // Scope (app, lesson) can't change on a published quiz, and it is already right.
+    // Status DRAFT is needed here: questions of a published quiz can't be edited.
+    const { appId: _a, lessonId: _l, ...rest } = body;
+    await api("PATCH", `/admin/quizzes/${quiz.id}`, rest);
     const questions = list(await api("GET", `/admin/quizzes/${quiz.id}/questions`));
     for (const q of questions) {
       // Normal delete works while nobody answered; answered questions need a Super Admin.
