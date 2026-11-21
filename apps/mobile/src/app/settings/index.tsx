@@ -62,15 +62,6 @@ export default function SettingsScreen() {
         <ListRow icon="mail-outline" title="Email" subtitle={user?.email} />
         <View style={styles.divider} />
         <ListRow icon="key-outline" title="Change password" onPress={() => router.push("/settings/password")} />
-        <View style={styles.divider} />
-        <ListRow
-          icon="star-outline"
-          iconBg={COLORS.goldSoft}
-          iconColor={COLORS.goldIcon}
-          title="Premium"
-          subtitle="No ads, support new lessons"
-          onPress={() => router.push("/premium")}
-        />
       </Card>
 
       <Txt variant="overline">Learning</Txt>

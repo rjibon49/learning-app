@@ -2,19 +2,17 @@ import { Platform } from "react-native";
 
 import { apiClient } from "./client";
 
+/**
+ * Ads for this learner: whether the app shows ads (CMS → Ads) and whether the
+ * learner is ad-free for a while (e.g. a streak reward). The A1 app has no
+ * paid subscription.
+ */
 export type Entitlement = {
   adFree: boolean;
   adFreeUntil: string | null;
   subscriptionActive: boolean;
   subscriptionsEnabled: boolean;
   adsEnabled: boolean;
-};
-
-export type Plan = {
-  planType: "MONTHLY" | "YEARLY";
-  productId: string;
-  amountMinor: number;
-  currency: string;
 };
 
 export type AdUnits = {
@@ -33,28 +31,9 @@ export async function fetchEntitlement(appId: string): Promise<Entitlement> {
   return res.data;
 }
 
-/** Prices from the CMS. Null when pricing is not set up yet. */
-export async function fetchPlans(): Promise<Plan[] | null> {
-  try {
-    const res = await apiClient.get<Plan[]>("/subscriptions/plans");
-    return res.data;
-  } catch {
-    return null;
-  }
-}
-
 /** AdMob unit ids for this app and platform (empty when the learner is ad-free). */
 export async function fetchAdUnits(appId: string): Promise<AdUnits> {
   const platform = Platform.OS === "ios" ? "ios" : Platform.OS === "android" ? "android" : "web";
   const res = await apiClient.get<AdUnits>("/ads/learner/config", { params: { appId, platform } });
   return res.data;
-}
-
-export function formatPrice(plan: Plan): string {
-  const amount = plan.amountMinor / 100;
-  try {
-    return new Intl.NumberFormat("en", { style: "currency", currency: plan.currency }).format(amount);
-  } catch {
-    return `${amount.toFixed(2)} ${plan.currency}`;
-  }
 }

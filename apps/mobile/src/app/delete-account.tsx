@@ -54,8 +54,7 @@ export default function DeleteAccountScreen() {
         <Card style={{ backgroundColor: COLORS.wrongSoft, gap: 6 }}>
           <Txt variant="label" style={{ color: COLORS.wrongText }}>This is permanent</Txt>
           <Txt variant="body" style={{ color: COLORS.wrongText, fontSize: 15, lineHeight: 22 }}>
-            Your learning progress, streak and personal data will be deleted. If you have paid for a
-            subscription, billing records are kept anonymously as the law requires.
+            Your learning progress, streak and personal data will be deleted. This cannot be undone.
           </Txt>
         </Card>
 

@@ -32,7 +32,7 @@ const KIND_ICON: Record<string, keyof typeof Ionicons.glyphMap> = {
 };
 
 /** App screens a CMS message may open (website paths are ignored). */
-const APP_PATHS = /^\/(premium|words|learn|practice|progress|review|settings|lesson\/[\w-]+|quiz\/[\w-]+|word\/[\w-]+)?$/;
+const APP_PATHS = /^\/(words|learn|practice|progress|review|settings|lesson\/[\w-]+|quiz\/[\w-]+|word\/[\w-]+)?$/;
 
 /** CMS action → where to go. Only our own screens and https links. */
 function openAction(item: InboxItem) {

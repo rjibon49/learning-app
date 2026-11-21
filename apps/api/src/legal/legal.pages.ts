@@ -38,7 +38,7 @@ This policy explains what information {{company}} ("we") collects when you use o
 
 - **Technical data:** app version, device type, operating system and basic error logs, so we can keep the service running and fix problems.
 - **Analytics:** we use Google Analytics for Firebase to understand how the app is used (for example which screens are opened and which lessons are finished). We do not send your email or name to analytics.
-- **Advertising:** the free version shows ads delivered by Google AdMob. AdMob may use your device's advertising identifier and similar data to show and measure ads. Where the law requires it, we ask for your consent first. You can reset or limit the advertising identifier in your device settings.
+- **Advertising:** the app is free and shows ads delivered by Google AdMob. AdMob may use your device's advertising identifier and similar data to show and measure ads. Where the law requires it, we ask for your consent first. You can reset or limit the advertising identifier in your device settings.
 
 ## How we use information
 
@@ -46,17 +46,13 @@ This policy explains what information {{company}} ("we") collects when you use o
 - To save your progress and show you the right lessons and reviews.
 - To send messages you asked for, such as verification codes and password resets.
 - To improve our content and the app, and to fix errors.
-- To show ads in the free version, and to provide Premium if you buy it.
+- To show ads in the app.
 
 We do not sell your personal information.
 
-## Payments
-
-If you buy Premium, the payment is processed by Google Play or the Apple App Store. We receive confirmation of the purchase, not your card details.
-
 ## Sharing
 
-We share information only with service providers that help us run the apps (hosting, email delivery, analytics, advertising, app stores), only as much as they need, or when the law requires it.
+We share information only with service providers that help us run the apps (hosting, email delivery, analytics, advertising), only as much as they need, or when the law requires it.
 
 ## Storage and security
 
@@ -101,13 +97,9 @@ These terms apply when you use the language learning apps of {{company}} (for ex
 - The lessons, texts, audio, quizzes and other content are for your personal learning. Do not copy, publish or sell them.
 - Do not misuse the service, for example by trying to break its security or overload it.
 
-## Premium
+## Free with ads
 
-Some features may need a paid Premium subscription. Prices and billing are shown in the app store before you buy. Subscriptions renew automatically unless you cancel them in Google Play or the App Store; refunds follow the store's rules.
-
-## Ads
-
-The free version may show ads from third parties. We are not responsible for the content of external websites you open from an ad.
+The app is free to use. It shows ads from third parties, for example Google AdMob. We are not responsible for the content of external websites you open from an ad.
 
 ## Content and availability
 

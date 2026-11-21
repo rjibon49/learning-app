@@ -52,7 +52,6 @@ function RootNavigator() {
         <Stack.Screen name="settings/profile" options={{ headerShown: false }} />
         <Stack.Screen name="settings/password" options={{ headerShown: false }} />
         <Stack.Screen name="settings/language" options={{ headerShown: false }} />
-        <Stack.Screen name="premium" options={{ headerShown: false, presentation: "modal" }} />
         <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
       </Stack.Protected>
 
