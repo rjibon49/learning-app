@@ -1,5 +1,4 @@
 import { router } from "expo-router";
-import * as Linking from "expo-linking";
 
 import React, { useState } from "react";
 
@@ -14,7 +13,6 @@ import {
 
 import { registerLearner } from "../api/learner-auth";
 import { getApiError } from "../api/client";
-import { PRIVACY_URL, TERMS_URL } from "../config";
 
 import {
   AuthLayout,
@@ -186,11 +184,11 @@ export default function RegisterScreen() {
 
       <Text style={styles.hint}>
         By creating an account you agree to our{" "}
-        <Text style={styles.link} accessibilityRole="link" onPress={() => void Linking.openURL(TERMS_URL)}>
+        <Text style={styles.link} accessibilityRole="link" onPress={() => router.push("/legal/terms")}>
           Terms of use
         </Text>{" "}
         and{" "}
-        <Text style={styles.link} accessibilityRole="link" onPress={() => void Linking.openURL(PRIVACY_URL)}>
+        <Text style={styles.link} accessibilityRole="link" onPress={() => router.push("/legal/privacy")}>
           Privacy policy
         </Text>
         .

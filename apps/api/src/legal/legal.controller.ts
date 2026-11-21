@@ -1,4 +1,4 @@
-import { Controller, Get, Header } from '@nestjs/common';
+import { Controller, Get, Header, NotFoundException, Param } from '@nestjs/common';
 
 import { LegalService } from './legal.service.js';
 
@@ -19,5 +19,13 @@ export class LegalController {
   @Header('Cache-Control', 'public, max-age=300')
   terms() {
     return this.legal.termsHtml();
+  }
+
+  /** JSON for the apps: { title, company, updated, markdown }. */
+  @Get('content/:doc')
+  @Header('Cache-Control', 'public, max-age=300')
+  content(@Param('doc') doc: string) {
+    if (doc !== 'privacy' && doc !== 'terms') throw new NotFoundException();
+    return this.legal.content(doc);
   }
 }

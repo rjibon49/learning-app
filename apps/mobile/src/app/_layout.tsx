@@ -59,6 +59,9 @@ function RootNavigator() {
       <Stack.Protected guard={!signedIn}>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
+
+      {/* Open with or without an account (linked from sign up). */}
+      <Stack.Screen name="legal/[doc]" options={{ headerShown: false }} />
     </Stack>
   );
 }

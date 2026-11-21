@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { PrismaService } from '../prisma.service.js';
-import { DEFAULT_PRIVACY_MD, DEFAULT_TERMS_MD, legalPage, type LegalContext } from './legal.pages.js';
+import { DEFAULT_PRIVACY_MD, DEFAULT_TERMS_MD, fill, legalPage, type LegalContext } from './legal.pages.js';
 
 /** CMS settings (Settings → Legal pages) that shape the legal pages. */
 export const LEGAL_SETTING_KEYS = [
@@ -53,5 +53,22 @@ export class LegalService {
   async termsHtml() {
     const { value, ctx } = await this.load();
     return legalPage('Terms of use', value('TERMS_OF_USE_TEXT') || DEFAULT_TERMS_MD, ctx('TERMS_OF_USE_TEXT'));
+  }
+
+  /** For the apps: the filled-in Markdown, shown on a native screen. */
+  async content(doc: 'privacy' | 'terms') {
+    const { value, ctx } = await this.load();
+    const key = doc === 'privacy' ? 'PRIVACY_POLICY_TEXT' : 'TERMS_OF_USE_TEXT';
+    const c = ctx(key);
+    const markdown = fill(value(key) || (doc === 'privacy' ? DEFAULT_PRIVACY_MD : DEFAULT_TERMS_MD), c)
+      .replace(/\n{3,}/g, '\n\n')
+      // Keep single line breaks (e.g. the contact block) in Markdown renderers.
+      .replace(/([^\n])\n(?!\n|\s*[-*] |#|\s*\d+[.)] )/g, '$1  \n');
+    return {
+      title: doc === 'privacy' ? 'Privacy policy' : 'Terms of use',
+      company: c.company,
+      updated: c.updated,
+      markdown,
+    };
   }
 }

@@ -133,7 +133,7 @@ function escape(value: string) {
   return value.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 }
 
-function fill(markdown: string, ctx: LegalContext) {
+export function fill(markdown: string, ctx: LegalContext) {
   return markdown.replace(/\{\{\s*(company|email|website|address|updated|app)\s*\}\}/g, (_m, key: keyof LegalContext) => ctx[key] ?? '');
 }
 
