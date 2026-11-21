@@ -4,13 +4,14 @@ import { router, useLocalSearchParams } from "expo-router";
 import * as Haptics from "expo-haptics";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Button, EmptyView, ErrorView, IconButton, LoadingView, ProgressBar, Screen, Txt } from "../../components/ui";
+import { Button, EmptyView, ErrorView, IconButton, ProgressBar, Screen, Txt } from "../../components/ui";
 import { getApiError } from "../../api/client";
 import { answerMode, fetchQuiz, submitQuiz, type QuizQuestion, type QuizResult } from "../../api/quizzes";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { recordStep } from "../../lib/preferences";
+import { QuizSkeleton } from "../../components/Skeleton";
 
 const PROMPT: Record<string, string> = {
   MULTIPLE_CHOICE: "Choose the right answer",
@@ -97,7 +98,7 @@ export default function QuizScreen() {
     </View>
   );
 
-  if (state.loading && !quiz) return <Screen scroll={false} background={COLORS.surface} edges={["top", "bottom"]}>{topBar}<LoadingView label="Loading quiz…" /></Screen>;
+  if (state.loading && !quiz) return <Screen scroll={false} background={COLORS.surface} edges={["top", "bottom"]}>{topBar}<QuizSkeleton /></Screen>;
   if (state.error && !quiz) return <Screen scroll={false} background={COLORS.surface} edges={["top", "bottom"]}>{topBar}<ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!quiz) return null;
 

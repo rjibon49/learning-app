@@ -12,6 +12,8 @@ import { useContentLanguage } from "../../lib/content-language";
 import { languageLabel } from "../../lib/language-names";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, SPACING } from "../../styles/theme";
+import * as Linking from "expo-linking";
+import { PRIVACY_URL, TERMS_URL } from "../../config";
 
 export default function SettingsScreen() {
   const { user, signOut } = useLearnerAuth();
@@ -138,6 +140,10 @@ export default function SettingsScreen() {
 
       <Card style={styles.group}>
         <ListRow icon="notifications-outline" title="Notifications" onPress={() => router.push("/notifications")} />
+        <View style={styles.divider} />
+        <ListRow icon="shield-checkmark-outline" title="Privacy policy" onPress={() => void Linking.openURL(PRIVACY_URL)} />
+        <View style={styles.divider} />
+        <ListRow icon="document-text-outline" title="Terms of use" onPress={() => void Linking.openURL(TERMS_URL)} />
         <View style={styles.divider} />
         <ListRow icon="log-out-outline" title="Sign out" onPress={confirmSignOut} />
         <View style={styles.divider} />

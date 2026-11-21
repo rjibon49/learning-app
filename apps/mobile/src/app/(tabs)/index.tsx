@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Button, Card, ErrorView, IconTile, LoadingView, ProgressBar, Screen, StreakPill, Txt } from "../../components/ui";
+import { Button, Card, ErrorView, IconTile, ProgressBar, Screen, StreakPill, Txt } from "../../components/ui";
 import { AdSlot } from "../../components/AdSlot";
 import { PathCard, StatsRow, WeekStrip, WordOfDay, pickWordOfDay } from "../../components/TodayExtras";
 import { fetchAppWords } from "../../api/vocabulary";
@@ -15,6 +15,7 @@ import { useLearnerAuth } from "../../lib/auth-context";
 import { loadLearningPath } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { HomeSkeleton } from "../../components/Skeleton";
 
 function greeting(): string {
   const h = new Date().getHours();
@@ -61,7 +62,7 @@ export default function TodayScreen() {
     }, [refresh]),
   );
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><HomeSkeleton /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 

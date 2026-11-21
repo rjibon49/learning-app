@@ -11,7 +11,6 @@ import {
   Card,
   ErrorView,
   IconButton,
-  LoadingView,
   Screen,
   SpeakButton,
   Txt,
@@ -33,6 +32,7 @@ import { loadLearningPath, nextLessonAfter } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { LessonSkeleton } from "../../components/Skeleton";
 
 /** Lesson text in the learner's language, then German, then anything. */
 function pickContent(lesson: LessonDetail) {
@@ -114,7 +114,7 @@ export default function LessonScreen() {
   );
 
   if (state.loading && !state.data) {
-    return <Screen scroll={false} background={COLORS.surface}>{header}<LoadingView label="Opening lesson…" /></Screen>;
+    return <Screen scroll={false} background={COLORS.surface}>{header}<LessonSkeleton /></Screen>;
   }
   if (state.error && !state.data) {
     return <Screen scroll={false} background={COLORS.surface}>{header}<ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;

@@ -3,12 +3,13 @@ import { Alert, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Button, Card, ErrorView, IconTile, LoadingView, ProgressBar, Screen, Txt } from "../../components/ui";
+import { Button, Card, ErrorView, IconTile, ProgressBar, Screen, Txt } from "../../components/ui";
 import { fetchActiveDays, fetchDashboard, fetchQuizHistory, utcDayKey } from "../../api/progress";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { loadLearningPath } from "../../lib/learning-path";
 import { useAsync, useRefreshOnFocus } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { ProgressSkeleton } from "../../components/Skeleton";
 
 const DAY = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -46,7 +47,7 @@ export default function ProgressScreen() {
     ]);
   }
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><ProgressSkeleton /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 

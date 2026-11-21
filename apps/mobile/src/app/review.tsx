@@ -10,7 +10,6 @@ import {
   EmptyView,
   ErrorView,
   IconButton,
-  LoadingView,
   ProgressBar,
   Screen,
   SpeedToggle,
@@ -33,6 +32,7 @@ import { splitArticle } from "../lib/words";
 import { COLORS, FONTS, RADIUS, SPACING } from "../styles/theme";
 import { useLearnerAuth } from "../lib/auth-context";
 import { recordStep } from "../lib/preferences";
+import { FlashcardSkeleton } from "../components/Skeleton";
 
 type Mode = "due" | "deck" | "lesson";
 
@@ -171,7 +171,7 @@ export default function ReviewScreen() {
     </View>
   );
 
-  if (state.loading && !state.data) return <Screen scroll={false} edges={["top", "bottom"]}>{topBar}<LoadingView label="Shuffling cards…" /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false} edges={["top", "bottom"]}>{topBar}<FlashcardSkeleton /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false} edges={["top", "bottom"]}>{topBar}<ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
 
   if (cards.length === 0) {

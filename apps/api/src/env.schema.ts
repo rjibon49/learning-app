@@ -18,6 +18,8 @@ export const envSchema = z
       .max(65535)
       .default(4000),
 
+    LEGAL_CONTACT_EMAIL: z.union([z.literal(''), z.string().trim().email()]).optional(),
+
     API_PREFIX: z
       .string()
       .trim()

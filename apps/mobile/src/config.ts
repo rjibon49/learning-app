@@ -15,3 +15,7 @@ export const APP_SLUG = process.env.EXPO_PUBLIC_APP_SLUG ?? "";
 
 /** Language the learner reads meanings in (falls back to any). */
 export const MEANING_LANGUAGE = process.env.EXPO_PUBLIC_MEANING_LANGUAGE ?? "en";
+
+/** Public legal pages (served by the API, linked from the stores too). */
+export const PRIVACY_URL = `${API_BASE_URL}/legal/privacy`;
+export const TERMS_URL = `${API_BASE_URL}/legal/terms`;

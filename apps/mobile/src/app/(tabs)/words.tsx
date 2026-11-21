@@ -4,13 +4,14 @@ import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
-import { ArticleChip, Chip, EmptyView, ErrorView, LoadingView, SpeakButton, Txt } from "../../components/ui";
+import { ArticleChip, Chip, EmptyView, ErrorView, SpeakButton, Txt } from "../../components/ui";
 import { getCurrentApp } from "../../api/app";
 import { fetchAppWords, type WordEntry } from "../../api/vocabulary";
 import { useAsync } from "../../lib/use-async";
 import { meaningOf, splitArticle } from "../../lib/words";
 import { useContentLanguage } from "../../lib/content-language";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { ListSkeleton } from "../../components/Skeleton";
 
 type ArticleFilter = "all" | "der" | "die" | "das" | "other";
 
@@ -103,7 +104,7 @@ export default function WordsScreen() {
   if (state.loading && !state.data) {
     return (
       <SafeAreaView style={styles.safe} edges={["top"]}>
-        <LoadingView label="Loading words…" />
+        <View style={{ padding: SPACING.xl }}><ListSkeleton label="Loading words" /></View>
       </SafeAreaView>
     );
   }

@@ -3,11 +3,12 @@ import { Linking, Pressable, StyleSheet, View } from "react-native";
 import { router, type Href } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Card, EmptyView, ErrorView, LoadingView, Screen, TopBar, Txt } from "../components/ui";
+import { Card, EmptyView, ErrorView, Screen, TopBar, Txt } from "../components/ui";
 import { getCurrentApp } from "../api/app";
 import { dismissInboxItem, fetchInbox, markInboxRead, type InboxItem } from "../api/inbox";
 import { useAsync } from "../lib/use-async";
 import { COLORS, SPACING } from "../styles/theme";
+import { ListSkeleton } from "../components/Skeleton";
 
 function timeAgo(iso: string): string {
   const diff = Date.now() - new Date(iso).getTime();
@@ -65,7 +66,7 @@ export default function NotificationsScreen() {
     await state.refresh();
   }
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><ListSkeleton label="Loading notifications" rows={5} title={false} /></Screen>;
   if (state.error && !state.data) {
     return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   }

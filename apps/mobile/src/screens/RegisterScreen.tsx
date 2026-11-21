@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import * as Linking from "expo-linking";
 
 import React, { useState } from "react";
 
@@ -13,6 +14,7 @@ import {
 
 import { registerLearner } from "../api/learner-auth";
 import { getApiError } from "../api/client";
+import { PRIVACY_URL, TERMS_URL } from "../config";
 
 import {
   AuthLayout,
@@ -182,6 +184,18 @@ export default function RegisterScreen() {
         </Text>
       </View>
 
+      <Text style={styles.hint}>
+        By creating an account you agree to our{" "}
+        <Text style={styles.link} accessibilityRole="link" onPress={() => void Linking.openURL(TERMS_URL)}>
+          Terms of use
+        </Text>{" "}
+        and{" "}
+        <Text style={styles.link} accessibilityRole="link" onPress={() => void Linking.openURL(PRIVACY_URL)}>
+          Privacy policy
+        </Text>
+        .
+      </Text>
+
       <PrimaryButton
         title="Create Account"
         loading={loading}
@@ -222,6 +236,11 @@ function ConsentRow({
 }
 
 const styles = StyleSheet.create({
+  link: {
+    color: "#2747E0",
+    fontWeight: "600",
+    textDecorationLine: "underline",
+  },
   consentSection: {
     borderTopWidth: 1,
     borderColor: "#e2e8f0",

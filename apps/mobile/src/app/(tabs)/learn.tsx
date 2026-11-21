@@ -3,11 +3,12 @@ import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Card, EmptyView, ErrorView, LoadingView, ProgressBar, Screen, Txt } from "../../components/ui";
+import { Card, EmptyView, ErrorView, ProgressBar, Screen, Txt } from "../../components/ui";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { loadLearningPath, type PathCourse, type PathLesson, type PathModule } from "../../lib/learning-path";
 import { useAsync, useRefreshOnFocus } from "../../lib/use-async";
 import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
+import { CoursesSkeleton } from "../../components/Skeleton";
 
 function LessonRow({ lesson }: { lesson: PathLesson }) {
   const minutes = lesson.estimatedMinutes ? `${lesson.estimatedMinutes} min` : null;
@@ -149,7 +150,7 @@ export default function LearnScreen() {
   useRefreshOnFocus(state.refresh);
   const [chosen, setChosen] = useState<string | null>(null);
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView label="Loading your path…" /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><CoursesSkeleton /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 

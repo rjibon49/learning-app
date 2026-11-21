@@ -3,13 +3,14 @@ import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Button, Card, EmptyView, ErrorView, IconTile, LoadingView, Screen, Txt } from "../../components/ui";
+import { Button, Card, EmptyView, ErrorView, IconTile, Screen, Txt } from "../../components/ui";
 import { getCurrentApp } from "../../api/app";
 import { fetchDecks } from "../../api/practice";
 import { fetchDashboard } from "../../api/progress";
 import { fetchQuizzes } from "../../api/quizzes";
 import { useAsync, useRefreshOnFocus } from "../../lib/use-async";
 import { COLORS, SPACING } from "../../styles/theme";
+import { ListSkeleton } from "../../components/Skeleton";
 
 const LEVEL_LABEL = { EASY: "Easy", MEDIUM: "Medium", HARD: "Hard" } as const;
 
@@ -25,7 +26,7 @@ export default function PracticeScreen() {
   }, []);
   useRefreshOnFocus(state.refresh);
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><ListSkeleton label="Loading practice" rows={4} /></Screen>;
   if (state.error && !state.data) return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   if (!state.data) return null;
 

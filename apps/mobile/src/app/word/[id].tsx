@@ -7,7 +7,6 @@ import {
   Button,
   Card,
   ErrorView,
-  LoadingView,
   Screen,
   SpeakButton,
   SpeedToggle,
@@ -19,13 +18,14 @@ import { useAsync } from "../../lib/use-async";
 import { meaningOf, pluralOf, splitArticle } from "../../lib/words";
 import { getContentLanguage, useContentLanguage } from "../../lib/content-language";
 import { ARTICLE_COLORS, COLORS, RADIUS, SPACING } from "../../styles/theme";
+import { DetailSkeleton } from "../../components/Skeleton";
 
 export default function WordScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   useContentLanguage();
   const state = useAsync(() => fetchWord(String(id)), [id]);
 
-  if (state.loading && !state.data) return <Screen scroll={false}><LoadingView /></Screen>;
+  if (state.loading && !state.data) return <Screen scroll={false}><DetailSkeleton label="Loading word" /></Screen>;
   if (state.error && !state.data) {
     return <Screen scroll={false}><ErrorView message={state.error} onRetry={() => void state.reload()} /></Screen>;
   }
