@@ -1,28 +1,23 @@
 import { Controller, Get, Header } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
-import { privacyPage, termsPage } from './legal.pages.js';
+import { LegalService } from './legal.service.js';
 
-/** Public legal pages: /api/legal/privacy and /api/legal/terms. */
+/** Public legal pages: /api/legal/privacy and /api/legal/terms (edited in the CMS). */
 @Controller('legal')
 export class LegalController {
-  constructor(private readonly config: ConfigService) {}
-
-  private contact() {
-    return this.config.get<string>('LEGAL_CONTACT_EMAIL') || 'rjibon49@gmail.com';
-  }
+  constructor(private readonly legal: LegalService) {}
 
   @Get('privacy')
   @Header('Content-Type', 'text/html; charset=utf-8')
-  @Header('Cache-Control', 'public, max-age=3600')
+  @Header('Cache-Control', 'public, max-age=300')
   privacy() {
-    return privacyPage(this.contact());
+    return this.legal.privacyHtml();
   }
 
   @Get('terms')
   @Header('Content-Type', 'text/html; charset=utf-8')
-  @Header('Cache-Control', 'public, max-age=3600')
+  @Header('Cache-Control', 'public, max-age=300')
   terms() {
-    return termsPage(this.contact());
+    return this.legal.termsHtml();
   }
 }

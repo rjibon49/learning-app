@@ -25,3 +25,13 @@ export async function deleteSetting(key: string): Promise<void> {
     method: 'DELETE',
   });
 }
+export interface LegalDefaults {
+  privacy: string;
+  terms: string;
+  placeholders: string[];
+}
+
+/** Built-in privacy / terms Markdown, to start editing from. */
+export async function getLegalDefaults(): Promise<LegalDefaults> {
+  return apiRequest<LegalDefaults>('/settings/legal-defaults');
+}

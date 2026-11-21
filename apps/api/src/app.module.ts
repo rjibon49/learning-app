@@ -10,6 +10,7 @@ import {
 import { AdminAuthModule } from './admin-auth/admin-auth.module.js';
 import { AppController } from './app.controller.js';
 import { LegalController } from './legal/legal.controller.js';
+import { LegalService } from './legal/legal.service.js';
 import { AppService } from './app.service.js';
 import { AppsModule } from './apps/apps.module.js';
 import { envSchema } from './env.schema.js';
@@ -127,6 +128,7 @@ import { BillingManagementModule } from './billing/billing.module.js';
 
   providers: [
     AppService,
+    LegalService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

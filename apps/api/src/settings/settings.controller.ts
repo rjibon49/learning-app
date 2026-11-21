@@ -13,6 +13,7 @@ import {
 import { z } from 'zod';
 
 import { SettingsService } from './settings.service.js';
+import { DEFAULT_PRIVACY_MD, DEFAULT_TERMS_MD } from '../legal/legal.pages.js';
 import {
   settingKeySchema,
   updateSettingSchema,
@@ -57,6 +58,16 @@ export class SettingsController {
   @Get()
   getAll() {
     return this.settings.getAllSettings();
+  }
+
+  /** Built-in legal texts, so the CMS can start editing from them. */
+  @Get('legal-defaults')
+  legalDefaults() {
+    return {
+      privacy: DEFAULT_PRIVACY_MD,
+      terms: DEFAULT_TERMS_MD,
+      placeholders: ['{{company}}', '{{email}}', '{{website}}', '{{address}}', '{{app}}', '{{updated}}'],
+    };
   }
 
   @Put(':key')

@@ -5,6 +5,7 @@ import { RotateCcw, Save, ServerCog } from 'lucide-react';
 import { getSettings, updateSetting, deleteSetting, type SystemSetting } from '@/lib/api/settings';
 import { ErrorState, LoadingState } from '@/components/feedback/state-views';
 import { useConfirm, useToast } from '@/components/ui/feedback-provider';
+import { LegalSettings } from '@/components/admin/legal-settings';
 
 /**
  * Only the keys the API accepts (apps/api/src/settings/settings.schemas.ts).
@@ -229,6 +230,8 @@ export default function AdminSettingsPage() {
           );
         })}
       </div>
+
+      <LegalSettings saved={saved} onChanged={loadData} />
     </div>
   );
 }

@@ -10,10 +10,22 @@ export const settingKeySchema = z.enum([
   'MAINTENANCE_MODE',
   'DEFAULT_LOCALE',
   'REGISTRATION_ENABLED',
+  // Legal pages (/api/legal/privacy, /api/legal/terms)
+  'LEGAL_COMPANY_NAME',
+  'LEGAL_CONTACT_EMAIL',
+  'LEGAL_WEBSITE',
+  'LEGAL_ADDRESS',
+  'LEGAL_APP_NAME',
+  'PRIVACY_POLICY_TEXT',
+  'TERMS_OF_USE_TEXT',
 ]);
 
+/** Settings that hold long Markdown text instead of a short value. */
+export const LONG_TEXT_SETTINGS = new Set<string>(['PRIVACY_POLICY_TEXT', 'TERMS_OF_USE_TEXT']);
+
 export const updateSettingSchema = z.object({
-  value: z.string().trim().max(255),
+  // Short values are limited to 255 characters in validateSettingValue.
+  value: z.string().trim().max(100000),
   description: z.string()
     .trim()
     .max(1000)
@@ -27,6 +39,30 @@ export function validateSettingValue(
   key: SettingKey,
   value: string,
 ): string {
+  if (LONG_TEXT_SETTINGS.has(key)) {
+    if (!value) throw new Error('Text must not be empty (use Reset to go back to the default)');
+    return value;
+  }
+
+  if (value.length > 255) {
+    throw new Error('Value must be at most 255 characters');
+  }
+
+  if (key === 'LEGAL_CONTACT_EMAIL') {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) throw new Error('Enter a valid email address');
+    return value;
+  }
+
+  if (key === 'LEGAL_WEBSITE') {
+    if (!/^https?:\/\/[^\s]+\.[^\s]+$/.test(value)) throw new Error('Enter a full URL starting with https://');
+    return value;
+  }
+
+  if (key === 'LEGAL_COMPANY_NAME' || key === 'LEGAL_ADDRESS' || key === 'LEGAL_APP_NAME') {
+    if (!value) throw new Error('Enter a value');
+    return value;
+  }
+
   if (
     key === 'MAINTENANCE_MODE' ||
     key === 'REGISTRATION_ENABLED'
