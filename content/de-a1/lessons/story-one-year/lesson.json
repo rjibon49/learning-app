@@ -1,0 +1,215 @@
+{
+  "slug": "story-one-year",
+  "title": "Folge 12 · Ein Jahr in Köln",
+  "titles": {
+    "en": "Episode 12: One Year in Cologne",
+    "bn": "পর্ব ১২: কোলনে এক বছর"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "genau",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ɡəˈnaʊ̯",
+      "meanings": {
+        "en": "exactly",
+        "bn": "ঠিক / একদম"
+      },
+      "example": {
+        "de": "Genau vor einem Jahr.",
+        "en": "Exactly one year ago.",
+        "bn": "ঠিক এক বছর আগে।"
+      }
+    },
+    {
+      "term": "feiern",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfaɪ̯ɐn",
+      "meanings": {
+        "en": "to celebrate",
+        "bn": "উদযাপন করা"
+      },
+      "example": {
+        "de": "Wir feiern am Rhein.",
+        "en": "We celebrate by the Rhine.",
+        "bn": "আমরা রাইনের পাড়ে উদযাপন করি।"
+      }
+    },
+    {
+      "term": "Dom",
+      "article": "der",
+      "plural": "Dome",
+      "pos": "NOUN",
+      "ipa": "doːm",
+      "meanings": {
+        "en": "cathedral",
+        "bn": "ক্যাথেড্রাল"
+      },
+      "example": {
+        "de": "Der Kölner Dom ist sehr alt.",
+        "en": "Cologne Cathedral is very old.",
+        "bn": "কোলনের ক্যাথেড্রাল অনেক পুরোনো।"
+      }
+    },
+    {
+      "term": "zuhören",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡suːˌhøːʁən",
+      "meanings": {
+        "en": "to listen",
+        "bn": "মন দিয়ে শোনা"
+      },
+      "example": {
+        "de": "Bitte hör mir zu.",
+        "en": "Please listen to me.",
+        "bn": "দয়া করে আমার কথা শোনো।"
+      }
+    },
+    {
+      "term": "überleben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "yːbɐˈleːbn̩",
+      "meanings": {
+        "en": "to survive",
+        "bn": "বেঁচে থাকা"
+      },
+      "example": {
+        "de": "Er hat das scharfe Essen überlebt.",
+        "en": "He survived the spicy food.",
+        "bn": "সে ঝাল খাবার খেয়েও বেঁচে আছে।"
+      }
+    },
+    {
+      "term": "genug",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ɡəˈnuːk",
+      "meanings": {
+        "en": "enough",
+        "bn": "যথেষ্ট"
+      },
+      "example": {
+        "de": "Ich habe genug Zeit.",
+        "en": "I have enough time.",
+        "bn": "আমার যথেষ্ট সময় আছে।"
+      }
+    },
+    {
+      "term": "Zuhause",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "t͡suˈhaʊ̯zə",
+      "meanings": {
+        "en": "home",
+        "bn": "ঘর / বাড়ি"
+      },
+      "example": {
+        "de": "Köln ist mein Zuhause.",
+        "en": "Cologne is my home.",
+        "bn": "কোলন আমার ঘর।"
+      }
+    },
+    {
+      "term": "besuchen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "bəˈzuːxn̩",
+      "meanings": {
+        "en": "to visit",
+        "bn": "দেখা করতে যাওয়া"
+      },
+      "example": {
+        "de": "Im Sommer besuche ich meine Eltern.",
+        "en": "In summer I'm visiting my parents.",
+        "bn": "গ্রীষ্মে আমি বাবা-মার কাছে যাব।"
+      }
+    },
+    {
+      "term": "Herzlichen Glückwunsch!",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈhɛʁt͡slɪçn̩ ˈɡlʏkvʊnʃ",
+      "meanings": {
+        "en": "Congratulations!",
+        "bn": "অভিনন্দন!"
+      },
+      "example": {
+        "de": "Herzlichen Glückwunsch zur Prüfung!",
+        "en": "Congratulations on the exam!",
+        "bn": "পরীক্ষার জন্য অভিনন্দন!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 12",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the date of the party?",
+        "options": [
+          "3 October",
+          "1 June",
+          "3 March"
+        ],
+        "answer": 0,
+        "explanation": "Heute ist der 3. Oktober."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Who showed Rafi his room?",
+        "options": [
+          "Jana",
+          "Lukas",
+          "Frau Becker"
+        ],
+        "answer": 0,
+        "explanation": "Jana, du hast mir mein Zimmer gezeigt."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is Rafi's next goal?",
+        "options": [
+          "the B1 exam",
+          "a new flat",
+          "a trip to Hamburg"
+        ],
+        "answer": 0,
+        "explanation": "nächstes Jahr mache ich die B1-Prüfung."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich habe kein Wort verstanden\" — the participle is …",
+        "options": [
+          "verstanden",
+          "habe",
+          "Wort"
+        ],
+        "answer": 0,
+        "explanation": "verstehen → verstanden (no ge-)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence uses sein in the Perfekt?",
+        "options": [
+          "Ich bin in Köln angekommen.",
+          "Ich habe Fehler gemacht.",
+          "Du hast Biryani gegessen."
+        ],
+        "answer": 0,
+        "explanation": "ankommen = movement → sein."
+      }
+    ]
+  }
+}

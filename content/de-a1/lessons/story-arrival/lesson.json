@@ -1,0 +1,215 @@
+{
+  "slug": "story-arrival",
+  "title": "Folge 1 · Willkommen in Deutschland",
+  "titles": {
+    "en": "Episode 1: Welcome to Germany",
+    "bn": "পর্ব ১: জার্মানিতে স্বাগতম"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Flugzeug",
+      "article": "das",
+      "plural": "Flugzeuge",
+      "pos": "NOUN",
+      "ipa": "ˈfluːkˌt͡sɔɪ̯k",
+      "meanings": {
+        "en": "plane",
+        "bn": "বিমান"
+      },
+      "example": {
+        "de": "Das Flugzeug landet um 7 Uhr.",
+        "en": "The plane lands at 7.",
+        "bn": "বিমানটি ৭টায় নামে।"
+      }
+    },
+    {
+      "term": "landen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈlandn̩",
+      "meanings": {
+        "en": "to land",
+        "bn": "অবতরণ করা"
+      },
+      "example": {
+        "de": "Wir landen in Frankfurt.",
+        "en": "We land in Frankfurt.",
+        "bn": "আমরা ফ্রাঙ্কফুর্টে নামি।"
+      }
+    },
+    {
+      "term": "müde",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈmyːdə",
+      "meanings": {
+        "en": "tired",
+        "bn": "ক্লান্ত"
+      },
+      "example": {
+        "de": "Nach dem Flug bin ich müde.",
+        "en": "After the flight I'm tired.",
+        "bn": "ফ্লাইটের পর আমি ক্লান্ত।"
+      }
+    },
+    {
+      "term": "glücklich",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈɡlʏklɪç",
+      "meanings": {
+        "en": "happy",
+        "bn": "খুশি"
+      },
+      "example": {
+        "de": "Rafi ist glücklich.",
+        "en": "Rafi is happy.",
+        "bn": "রাফি খুশি।"
+      }
+    },
+    {
+      "term": "Automat",
+      "article": "der",
+      "plural": "Automaten",
+      "pos": "NOUN",
+      "ipa": "aʊ̯toˈmaːt",
+      "meanings": {
+        "en": "machine (vending/ticket)",
+        "bn": "মেশিন"
+      },
+      "example": {
+        "de": "Am Automaten kaufe ich ein Ticket.",
+        "en": "I buy a ticket at the machine.",
+        "bn": "মেশিন থেকে আমি টিকিট কিনি।"
+      }
+    },
+    {
+      "term": "lächeln",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈlɛçl̩n",
+      "meanings": {
+        "en": "to smile",
+        "bn": "মৃদু হাসা"
+      },
+      "example": {
+        "de": "Die Frau lächelt.",
+        "en": "The woman smiles.",
+        "bn": "মহিলাটি হাসেন।"
+      }
+    },
+    {
+      "term": "Fenster",
+      "article": "das",
+      "plural": "Fenster",
+      "pos": "NOUN",
+      "ipa": "ˈfɛnstɐ",
+      "meanings": {
+        "en": "window",
+        "bn": "জানালা"
+      },
+      "example": {
+        "de": "Er schaut aus dem Fenster.",
+        "en": "He looks out of the window.",
+        "bn": "সে জানালা দিয়ে তাকায়।"
+      }
+    },
+    {
+      "term": "Dorf",
+      "article": "das",
+      "plural": "Dörfer",
+      "pos": "NOUN",
+      "ipa": "dɔʁf",
+      "meanings": {
+        "en": "village",
+        "bn": "গ্রাম"
+      },
+      "example": {
+        "de": "Meine Oma wohnt in einem Dorf.",
+        "en": "My grandma lives in a village.",
+        "bn": "আমার দাদি একটা গ্রামে থাকেন।"
+      }
+    },
+    {
+      "term": "Leben",
+      "article": "das",
+      "plural": "Leben",
+      "pos": "NOUN",
+      "ipa": "ˈleːbn̩",
+      "meanings": {
+        "en": "life",
+        "bn": "জীবন"
+      },
+      "example": {
+        "de": "Das ist mein neues Leben.",
+        "en": "This is my new life.",
+        "bn": "এটা আমার নতুন জীবন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 1",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where does the plane come from?",
+        "options": [
+          "Dubai",
+          "Dhaka",
+          "Cologne"
+        ],
+        "answer": 0,
+        "explanation": "Das Flugzeug aus Dubai landet in Frankfurt."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How does Rafi feel?",
+        "options": [
+          "tired but happy",
+          "sad",
+          "ill"
+        ],
+        "answer": 0,
+        "explanation": "Rafi ist müde, aber glücklich."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where is the train station?",
+        "options": [
+          "inside the airport",
+          "in the city centre",
+          "next to the hotel"
+        ],
+        "answer": 0,
+        "explanation": "Der Bahnhof ist im Flughafen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How much is the ticket to Cologne?",
+        "options": [
+          "45 euros",
+          "15 euros",
+          "8 euros"
+        ],
+        "answer": 0,
+        "explanation": "Sie kostet 45 Euro."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Who sits next to Rafi on the train?",
+        "options": [
+          "an old man from Cologne",
+          "a young woman",
+          "a teacher"
+        ],
+        "answer": 0,
+        "explanation": "Ein alter Mann … Ich bin aus Köln."
+      }
+    ]
+  }
+}

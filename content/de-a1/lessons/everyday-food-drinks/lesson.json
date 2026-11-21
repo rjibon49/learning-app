@@ -1,0 +1,247 @@
+{
+  "slug": "everyday-food-drinks",
+  "title": "Essen & Trinken · Food and Drinks",
+  "titles": {
+    "en": "Food and Drinks",
+    "bn": "খাবার ও পানীয়"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Brot",
+      "article": "das",
+      "plural": "Brote",
+      "pos": "NOUN",
+      "ipa": "bʁoːt",
+      "meanings": {
+        "en": "bread",
+        "bn": "রুটি"
+      },
+      "example": {
+        "de": "Ich kaufe ein Brot.",
+        "en": "I'm buying a loaf of bread.",
+        "bn": "আমি একটা রুটি কিনছি।"
+      }
+    },
+    {
+      "term": "Reis",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ʁaɪ̯s",
+      "meanings": {
+        "en": "rice",
+        "bn": "ভাত / চাল"
+      },
+      "example": {
+        "de": "Ich esse gern Reis.",
+        "en": "I like eating rice.",
+        "bn": "আমি ভাত খেতে ভালোবাসি।"
+      }
+    },
+    {
+      "term": "Fleisch",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "flaɪ̯ʃ",
+      "meanings": {
+        "en": "meat",
+        "bn": "মাংস"
+      },
+      "example": {
+        "de": "Ich esse kein Fleisch.",
+        "en": "I don't eat meat.",
+        "bn": "আমি মাংস খাই না।"
+      }
+    },
+    {
+      "term": "Hähnchen",
+      "article": "das",
+      "plural": "Hähnchen",
+      "pos": "NOUN",
+      "ipa": "ˈhɛːnçən",
+      "meanings": {
+        "en": "chicken",
+        "bn": "মুরগি"
+      },
+      "example": {
+        "de": "Heute gibt es Hähnchen mit Reis.",
+        "en": "Today there's chicken with rice.",
+        "bn": "আজ ভাতের সাথে মুরগি।"
+      }
+    },
+    {
+      "term": "Gemüse",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ɡəˈmyːzə",
+      "meanings": {
+        "en": "vegetables",
+        "bn": "সবজি"
+      },
+      "example": {
+        "de": "Gemüse ist gesund.",
+        "en": "Vegetables are healthy.",
+        "bn": "সবজি স্বাস্থ্যকর।"
+      }
+    },
+    {
+      "term": "Obst",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "oːpst",
+      "meanings": {
+        "en": "fruit",
+        "bn": "ফল"
+      },
+      "example": {
+        "de": "Ich esse jeden Tag Obst.",
+        "en": "I eat fruit every day.",
+        "bn": "আমি প্রতিদিন ফল খাই।"
+      }
+    },
+    {
+      "term": "Ei",
+      "article": "das",
+      "plural": "Eier",
+      "pos": "NOUN",
+      "ipa": "aɪ̯",
+      "meanings": {
+        "en": "egg",
+        "bn": "ডিম"
+      },
+      "example": {
+        "de": "Zum Frühstück esse ich ein Ei.",
+        "en": "For breakfast I eat an egg.",
+        "bn": "নাশতায় আমি একটা ডিম খাই।"
+      }
+    },
+    {
+      "term": "Frühstück",
+      "article": "das",
+      "plural": "Frühstücke",
+      "pos": "NOUN",
+      "ipa": "ˈfʁyːˌʃtʏk",
+      "meanings": {
+        "en": "breakfast",
+        "bn": "নাশতা"
+      },
+      "example": {
+        "de": "Das Frühstück ist fertig.",
+        "en": "Breakfast is ready.",
+        "bn": "নাশতা তৈরি।"
+      }
+    },
+    {
+      "term": "Saft",
+      "article": "der",
+      "plural": "Säfte",
+      "pos": "NOUN",
+      "ipa": "zaft",
+      "meanings": {
+        "en": "juice",
+        "bn": "জুস"
+      },
+      "example": {
+        "de": "Ein Orangensaft, bitte.",
+        "en": "An orange juice, please.",
+        "bn": "একটা কমলার জুস, দয়া করে।"
+      }
+    },
+    {
+      "term": "Lieblingsessen",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈliːplɪŋsˌʔɛsn̩",
+      "meanings": {
+        "en": "favourite food",
+        "bn": "প্রিয় খাবার"
+      },
+      "example": {
+        "de": "Mein Lieblingsessen ist Biryani.",
+        "en": "My favourite food is biryani.",
+        "bn": "আমার প্রিয় খাবার বিরিয়ানি।"
+      }
+    },
+    {
+      "term": "lieber",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈliːbɐ",
+      "meanings": {
+        "en": "rather / prefer",
+        "bn": "বেশি পছন্দ"
+      },
+      "example": {
+        "de": "Ich trinke lieber Tee.",
+        "en": "I prefer tea.",
+        "bn": "আমি চা বেশি পছন্দ করি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Food and drinks",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"das Frühstück\" is …",
+        "options": [
+          "breakfast",
+          "lunch",
+          "dinner"
+        ],
+        "answer": 0,
+        "explanation": "Frühstück = breakfast."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich trinke gern Kaffee, aber ___ Tee.",
+        "options": [
+          "lieber",
+          "gern",
+          "liebsten"
+        ],
+        "answer": 0,
+        "explanation": "gern → lieber → am liebsten."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich esse kein Fleisch\" means …",
+        "options": [
+          "I don't eat meat.",
+          "I eat a lot of meat.",
+          "I have no meat."
+        ],
+        "answer": 0,
+        "explanation": "kein = no/not any."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which is a drink?",
+        "options": [
+          "der Saft",
+          "die Kartoffel",
+          "der Käse"
+        ],
+        "answer": 0,
+        "explanation": "Saft = juice."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural of \"das Ei\"?",
+        "options": [
+          "die Eier",
+          "die Eis",
+          "die Eien"
+        ],
+        "answer": 0,
+        "explanation": "das Ei → die Eier."
+      }
+    ]
+  }
+}

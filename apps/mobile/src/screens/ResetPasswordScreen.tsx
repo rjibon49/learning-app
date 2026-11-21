@@ -1,11 +1,8 @@
+import { router } from "expo-router";
 
 import React, { useState } from "react";
 
-import type { NativeStackScreenProps } from
-  "@react-navigation/native-stack";
 
-import type { RootStackParamList } from
-  "../navigation/AppNavigator";
 
 import { resetPassword } from "../api/learner-auth";
 import { getApiError } from "../api/client";
@@ -18,14 +15,8 @@ import {
   TextAction,
 } from "../components/AuthUI";
 
-type Props = NativeStackScreenProps<
-  RootStackParamList,
-  "ResetPassword"
->;
 
-export default function ResetPasswordScreen({
-  navigation,
-}: Props) {
+export default function ResetPasswordScreen() {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] =
@@ -62,7 +53,7 @@ export default function ResetPasswordScreen({
       await resetPassword(token, password);
 
       setNotice("Password changed successfully.");
-      navigation.navigate("Login");
+      router.dismissTo("/login");
     } catch (err) {
       setError(getApiError(err));
     } finally {
@@ -110,7 +101,7 @@ export default function ResetPasswordScreen({
 
       <TextAction
         title="Back to Sign In"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => router.dismissTo("/login")}
       />
     </AuthLayout>
   );

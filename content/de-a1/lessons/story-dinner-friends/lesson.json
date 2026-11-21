@@ -1,0 +1,231 @@
+{
+  "slug": "story-dinner-friends",
+  "title": "Folge 6 · Biryani für alle",
+  "titles": {
+    "en": "Episode 6: Biryani for Everyone",
+    "bn": "পর্ব ৬: সবার জন্য বিরিয়ানি"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Einkaufsliste",
+      "article": "die",
+      "plural": "Einkaufslisten",
+      "pos": "NOUN",
+      "ipa": "ˈaɪ̯nkaʊ̯fsˌlɪstə",
+      "meanings": {
+        "en": "shopping list",
+        "bn": "বাজারের তালিকা"
+      },
+      "example": {
+        "de": "Ich schreibe eine Einkaufsliste.",
+        "en": "I'm writing a shopping list.",
+        "bn": "আমি বাজারের তালিকা লিখছি।"
+      }
+    },
+    {
+      "term": "Gewürz",
+      "article": "das",
+      "plural": "Gewürze",
+      "pos": "NOUN",
+      "ipa": "ɡəˈvʏʁt͡s",
+      "meanings": {
+        "en": "spice",
+        "bn": "মসলা"
+      },
+      "example": {
+        "de": "Biryani hat viele Gewürze.",
+        "en": "Biryani has lots of spices.",
+        "bn": "বিরিয়ানিতে অনেক মসলা থাকে।"
+      }
+    },
+    {
+      "term": "Knoblauch",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈknoːplaʊ̯x",
+      "meanings": {
+        "en": "garlic",
+        "bn": "রসুন"
+      },
+      "example": {
+        "de": "Ich brauche Knoblauch.",
+        "en": "I need garlic.",
+        "bn": "আমার রসুন লাগবে।"
+      }
+    },
+    {
+      "term": "Laden",
+      "article": "der",
+      "plural": "Läden",
+      "pos": "NOUN",
+      "ipa": "ˈlaːdn̩",
+      "meanings": {
+        "en": "shop",
+        "bn": "দোকান"
+      },
+      "example": {
+        "de": "Der Laden ist um die Ecke.",
+        "en": "The shop is around the corner.",
+        "bn": "দোকানটা মোড়ের ওপাশে।"
+      }
+    },
+    {
+      "term": "riechen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʁiːçn̩",
+      "meanings": {
+        "en": "to smell",
+        "bn": "ঘ্রাণ ছড়ানো / গন্ধ পাওয়া"
+      },
+      "example": {
+        "de": "Die Küche riecht wunderbar.",
+        "en": "The kitchen smells wonderful.",
+        "bn": "রান্নাঘরে দারুণ ঘ্রাণ।"
+      }
+    },
+    {
+      "term": "probieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "pʁoˈbiːʁən",
+      "meanings": {
+        "en": "to try / taste",
+        "bn": "চেখে দেখা"
+      },
+      "example": {
+        "de": "Möchtest du probieren?",
+        "en": "Would you like to try?",
+        "bn": "চেখে দেখবে?"
+      }
+    },
+    {
+      "term": "lecker",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈlɛkɐ",
+      "meanings": {
+        "en": "tasty",
+        "bn": "সুস্বাদু"
+      },
+      "example": {
+        "de": "Das Essen ist sehr lecker.",
+        "en": "The food is very tasty.",
+        "bn": "খাবারটা খুব সুস্বাদু।"
+      }
+    },
+    {
+      "term": "Nachtisch",
+      "article": "der",
+      "plural": "Nachtische",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxˌtɪʃ",
+      "meanings": {
+        "en": "dessert",
+        "bn": "মিষ্টান্ন"
+      },
+      "example": {
+        "de": "Zum Nachtisch gibt es Eis.",
+        "en": "There's ice cream for dessert.",
+        "bn": "মিষ্টান্নে আইসক্রিম আছে।"
+      }
+    },
+    {
+      "term": "Fehler",
+      "article": "der",
+      "plural": "Fehler",
+      "pos": "NOUN",
+      "ipa": "ˈfeːlɐ",
+      "meanings": {
+        "en": "mistake",
+        "bn": "ভুল"
+      },
+      "example": {
+        "de": "Fehler sind normal.",
+        "en": "Mistakes are normal.",
+        "bn": "ভুল হওয়া স্বাভাবিক।"
+      }
+    },
+    {
+      "term": "mitbringen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmɪtˌbʁɪŋən",
+      "meanings": {
+        "en": "to bring along",
+        "bn": "সাথে নিয়ে আসা"
+      },
+      "example": {
+        "de": "Ich bringe einen Salat mit.",
+        "en": "I'll bring a salad.",
+        "bn": "আমি একটা সালাদ নিয়ে আসব।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 6",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What can't Rafi find in the supermarket?",
+        "options": [
+          "cardamom and cumin",
+          "rice",
+          "chicken"
+        ],
+        "answer": 0,
+        "explanation": "Kardamom und Kreuzkümmel haben wir nicht."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where is the owner of the Asian shop from?",
+        "options": [
+          "Pakistan",
+          "India",
+          "Bangladesh"
+        ],
+        "answer": 0,
+        "explanation": "Der Besitzer kommt aus Pakistan."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Omar bring?",
+        "options": [
+          "baklava for dessert",
+          "a salad",
+          "drinks"
+        ],
+        "answer": 0,
+        "explanation": "Omar bringt Baklava zum Nachtisch."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Lukas say about the biryani?",
+        "options": [
+          "tasty, but very spicy",
+          "too salty",
+          "cold"
+        ],
+        "answer": 0,
+        "explanation": "Lecker, aber sehr scharf!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Omar promise?",
+        "options": [
+          "He will cook next month.",
+          "He will bring a cake.",
+          "He will clean."
+        ],
+        "answer": 0,
+        "explanation": "Nächsten Monat koche ich!"
+      }
+    ]
+  }
+}

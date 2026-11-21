@@ -1,0 +1,215 @@
+{
+  "slug": "everyday-appointments-phone",
+  "title": "Termine am Telefon · Appointments on the Phone",
+  "titles": {
+    "en": "Making Appointments on the Phone",
+    "bn": "ফোনে অ্যাপয়েন্টমেন্ট নেওয়া"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Termin",
+      "article": "der",
+      "plural": "Termine",
+      "pos": "NOUN",
+      "ipa": "tɛʁˈmiːn",
+      "meanings": {
+        "en": "appointment",
+        "bn": "অ্যাপয়েন্টমেন্ট"
+      },
+      "example": {
+        "de": "Ich habe morgen einen Termin.",
+        "en": "I have an appointment tomorrow.",
+        "bn": "কাল আমার একটা অ্যাপয়েন্টমেন্ট আছে।"
+      }
+    },
+    {
+      "term": "absagen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈapˌzaːɡn̩",
+      "meanings": {
+        "en": "to cancel",
+        "bn": "বাতিল করা"
+      },
+      "example": {
+        "de": "Ich muss den Termin absagen.",
+        "en": "I have to cancel the appointment.",
+        "bn": "আমাকে অ্যাপয়েন্টমেন্টটা বাতিল করতে হবে।"
+      }
+    },
+    {
+      "term": "verschieben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈʃiːbn̩",
+      "meanings": {
+        "en": "to postpone / move",
+        "bn": "পিছিয়ে দেওয়া"
+      },
+      "example": {
+        "de": "Kann ich den Termin verschieben?",
+        "en": "Can I move the appointment?",
+        "bn": "অ্যাপয়েন্টমেন্টটা কি পিছিয়ে দিতে পারি?"
+      }
+    },
+    {
+      "term": "Nachmittag",
+      "article": "der",
+      "plural": "Nachmittage",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxmɪˌtaːk",
+      "meanings": {
+        "en": "afternoon",
+        "bn": "বিকেল"
+      },
+      "example": {
+        "de": "Am Nachmittag habe ich Zeit.",
+        "en": "I'm free in the afternoon.",
+        "bn": "বিকেলে আমার সময় আছে।"
+      }
+    },
+    {
+      "term": "buchstabieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "buːxʃtaˈbiːʁən",
+      "meanings": {
+        "en": "to spell",
+        "bn": "বানান করা"
+      },
+      "example": {
+        "de": "Können Sie das buchstabieren?",
+        "en": "Can you spell that?",
+        "bn": "আপনি কি বানানটা বলতে পারবেন?"
+      }
+    },
+    {
+      "term": "wiederholen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "viːdɐˈhoːlən",
+      "meanings": {
+        "en": "to repeat",
+        "bn": "আবার বলা"
+      },
+      "example": {
+        "de": "Können Sie das bitte wiederholen?",
+        "en": "Can you repeat that, please?",
+        "bn": "আবার বলবেন, দয়া করে?"
+      }
+    },
+    {
+      "term": "langsam",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈlaŋzaːm",
+      "meanings": {
+        "en": "slow",
+        "bn": "ধীরে"
+      },
+      "example": {
+        "de": "Bitte sprechen Sie langsam.",
+        "en": "Please speak slowly.",
+        "bn": "দয়া করে ধীরে বলুন।"
+      }
+    },
+    {
+      "term": "Auf Wiederhören!",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "aʊ̯f ˈviːdɐˌhøːʁən",
+      "meanings": {
+        "en": "Goodbye! (on the phone)",
+        "bn": "আবার কথা হবে! (ফোনে)"
+      },
+      "example": {
+        "de": "Danke, auf Wiederhören!",
+        "en": "Thanks, goodbye!",
+        "bn": "ধন্যবাদ, আবার কথা হবে!"
+      }
+    },
+    {
+      "term": "Patient",
+      "article": "der",
+      "plural": "Patienten",
+      "pos": "NOUN",
+      "ipa": "paˈt͡si̯ɛnt",
+      "meanings": {
+        "en": "patient",
+        "bn": "রোগী"
+      },
+      "example": {
+        "de": "Der Patient wartet.",
+        "en": "The patient is waiting.",
+        "bn": "রোগী অপেক্ষা করছেন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Appointments on the phone",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"einen Termin absagen\" means …",
+        "options": [
+          "to cancel an appointment",
+          "to make an appointment",
+          "to be late"
+        ],
+        "answer": 0,
+        "explanation": "absagen = cancel."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "At the end of a phone call you say …",
+        "options": [
+          "Auf Wiederhören!",
+          "Auf Wiedersehen!",
+          "Guten Tag!"
+        ],
+        "answer": 0,
+        "explanation": "Hören = hear: phone goodbye."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Geht es am Montag?\" asks …",
+        "options": [
+          "if Monday works",
+          "where Monday is",
+          "how Monday was"
+        ],
+        "answer": 0,
+        "explanation": "Geht es …? = Does … work?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You didn't understand. You say …",
+        "options": [
+          "Können Sie das bitte wiederholen?",
+          "Das passt gut.",
+          "Ich bin neu."
+        ],
+        "answer": 0,
+        "explanation": "wiederholen = repeat."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"verschieben\" means …",
+        "options": [
+          "to move to another time",
+          "to cancel completely",
+          "to confirm"
+        ],
+        "answer": 0,
+        "explanation": "verschieben = postpone."
+      }
+    ]
+  }
+}

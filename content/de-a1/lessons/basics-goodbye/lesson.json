@@ -1,0 +1,215 @@
+{
+  "slug": "basics-goodbye",
+  "title": "Abschied · Saying Goodbye",
+  "titles": {
+    "en": "Saying Goodbye and Being Polite",
+    "bn": "বিদায় ও ভদ্রতার শব্দ"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Auf Wiedersehen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "aʊ̯f ˈviːdɐˌzeːən",
+      "meanings": {
+        "en": "Goodbye (formal)",
+        "bn": "আবার দেখা হবে"
+      },
+      "example": {
+        "de": "Vielen Dank und auf Wiedersehen!",
+        "en": "Thank you and goodbye!",
+        "bn": "অনেক ধন্যবাদ, আবার দেখা হবে!"
+      }
+    },
+    {
+      "term": "Tschüss",
+      "article": null,
+      "plural": null,
+      "pos": "INTERJECTION",
+      "ipa": "tʃʏs",
+      "meanings": {
+        "en": "bye",
+        "bn": "বাই / বিদায়"
+      },
+      "example": {
+        "de": "Tschüss, bis morgen!",
+        "en": "Bye, see you tomorrow!",
+        "bn": "বাই, কাল দেখা হবে!"
+      }
+    },
+    {
+      "term": "Bis bald",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "bɪs ˈbalt",
+      "meanings": {
+        "en": "See you soon",
+        "bn": "শীঘ্রই দেখা হবে"
+      },
+      "example": {
+        "de": "Bis bald, Lisa!",
+        "en": "See you soon, Lisa!",
+        "bn": "শীঘ্রই দেখা হবে, লিসা!"
+      }
+    },
+    {
+      "term": "Bis später",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "bɪs ˈʃpɛːtɐ",
+      "meanings": {
+        "en": "See you later",
+        "bn": "পরে দেখা হবে"
+      },
+      "example": {
+        "de": "Ich gehe jetzt. Bis später!",
+        "en": "I'm going now. See you later!",
+        "bn": "আমি এখন যাচ্ছি। পরে দেখা হবে!"
+      }
+    },
+    {
+      "term": "bitte",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈbɪtə",
+      "meanings": {
+        "en": "please / you're welcome",
+        "bn": "দয়া করে"
+      },
+      "example": {
+        "de": "Ein Kaffee, bitte.",
+        "en": "A coffee, please.",
+        "bn": "একটা কফি, দয়া করে।"
+      }
+    },
+    {
+      "term": "Entschuldigung",
+      "article": null,
+      "plural": null,
+      "pos": "INTERJECTION",
+      "ipa": "ɛntˈʃʊldɪɡʊŋ",
+      "meanings": {
+        "en": "Excuse me / Sorry",
+        "bn": "মাফ করবেন"
+      },
+      "example": {
+        "de": "Entschuldigung, wo ist der Bahnhof?",
+        "en": "Excuse me, where is the station?",
+        "bn": "মাফ করবেন, রেলস্টেশন কোথায়?"
+      }
+    },
+    {
+      "term": "Es tut mir leid",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɛs tuːt miːɐ̯ ˈlaɪ̯t",
+      "meanings": {
+        "en": "I'm sorry",
+        "bn": "আমি দুঃখিত"
+      },
+      "example": {
+        "de": "Es tut mir leid, ich bin zu spät.",
+        "en": "I'm sorry, I'm late.",
+        "bn": "দুঃখিত, আমার দেরি হয়ে গেছে।"
+      }
+    },
+    {
+      "term": "Gern geschehen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɡɛʁn ɡəˈʃeːən",
+      "meanings": {
+        "en": "You're welcome",
+        "bn": "আপনাকে স্বাগতম"
+      },
+      "example": {
+        "de": "Danke! – Gern geschehen!",
+        "en": "Thanks! – You're welcome!",
+        "bn": "ধন্যবাদ! – আপনাকে স্বাগতম!"
+      }
+    },
+    {
+      "term": "gleichfalls",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈɡlaɪ̯çfals",
+      "meanings": {
+        "en": "you too / likewise",
+        "bn": "আপনারও"
+      },
+      "example": {
+        "de": "Schönen Tag! – Danke, gleichfalls!",
+        "en": "Have a nice day! – Thanks, you too!",
+        "bn": "দিনটা ভালো কাটুক! – ধন্যবাদ, আপনারও!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Goodbye and polite words",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You end a phone call with an office. You say …",
+        "options": [
+          "Auf Wiederhören!",
+          "Auf Wiedersehen!",
+          "Gute Nacht!"
+        ],
+        "answer": 0,
+        "explanation": "Auf Wiederhören (hören = hear) is only for the phone."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Your friend says \"Danke!\". You answer …",
+        "options": [
+          "Bitte!",
+          "Danke!",
+          "Tschüss!"
+        ],
+        "answer": 0,
+        "explanation": "bitte also means \"you're welcome\"."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Schönen Tag noch!\" – the best answer is …",
+        "options": [
+          "Danke, gleichfalls!",
+          "Guten Tag!",
+          "Entschuldigung!"
+        ],
+        "answer": 0,
+        "explanation": "gleichfalls = you too."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You bump into someone on the bus. You say …",
+        "options": [
+          "Entschuldigung!",
+          "Bitte schön!",
+          "Bis bald!"
+        ],
+        "answer": 0,
+        "explanation": "Entschuldigung = Excuse me / Sorry."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which goodbye is informal?",
+        "options": [
+          "Tschüss!",
+          "Auf Wiedersehen!",
+          "Auf Wiederhören!"
+        ],
+        "answer": 0,
+        "explanation": "Tschüss is for friends and family."
+      }
+    ]
+  }
+}

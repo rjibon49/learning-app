@@ -1,0 +1,247 @@
+{
+  "slug": "everyday-forms-documents",
+  "title": "Formulare · Filling in Forms",
+  "titles": {
+    "en": "Filling in Forms and Personal Details",
+    "bn": "ফর্ম পূরণ ও ব্যক্তিগত তথ্য"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Formular",
+      "article": "das",
+      "plural": "Formulare",
+      "pos": "NOUN",
+      "ipa": "fɔʁmuˈlaːɐ̯",
+      "meanings": {
+        "en": "form",
+        "bn": "ফর্ম"
+      },
+      "example": {
+        "de": "Bitte füllen Sie das Formular aus.",
+        "en": "Please fill in the form.",
+        "bn": "দয়া করে ফর্মটা পূরণ করুন।"
+      }
+    },
+    {
+      "term": "ausfüllen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯sˌfʏlən",
+      "meanings": {
+        "en": "to fill in",
+        "bn": "পূরণ করা"
+      },
+      "example": {
+        "de": "Ich fülle das Formular aus.",
+        "en": "I'm filling in the form.",
+        "bn": "আমি ফর্মটা পূরণ করছি।"
+      }
+    },
+    {
+      "term": "Vorname",
+      "article": "der",
+      "plural": "Vornamen",
+      "pos": "NOUN",
+      "ipa": "ˈfoːɐ̯ˌnaːmə",
+      "meanings": {
+        "en": "first name",
+        "bn": "নামের প্রথম অংশ"
+      },
+      "example": {
+        "de": "Mein Vorname ist Arif.",
+        "en": "My first name is Arif.",
+        "bn": "আমার নামের প্রথম অংশ আরিফ।"
+      }
+    },
+    {
+      "term": "Nachname",
+      "article": "der",
+      "plural": "Nachnamen",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxˌnaːmə",
+      "meanings": {
+        "en": "surname",
+        "bn": "পদবি"
+      },
+      "example": {
+        "de": "Wie ist Ihr Nachname?",
+        "en": "What's your surname?",
+        "bn": "আপনার পদবি কী?"
+      }
+    },
+    {
+      "term": "Geburtsdatum",
+      "article": "das",
+      "plural": "Geburtsdaten",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbuːɐ̯t͡sˌdaːtʊm",
+      "meanings": {
+        "en": "date of birth",
+        "bn": "জন্মতারিখ"
+      },
+      "example": {
+        "de": "Bitte schreiben Sie Ihr Geburtsdatum.",
+        "en": "Please write your date of birth.",
+        "bn": "দয়া করে আপনার জন্মতারিখ লিখুন।"
+      }
+    },
+    {
+      "term": "Staatsangehörigkeit",
+      "article": "die",
+      "plural": "Staatsangehörigkeiten",
+      "pos": "NOUN",
+      "ipa": "ˈʃtaːt͡sʔanɡəˌhøːʁɪçkaɪ̯t",
+      "meanings": {
+        "en": "nationality",
+        "bn": "নাগরিকত্ব"
+      },
+      "example": {
+        "de": "Meine Staatsangehörigkeit ist bangladeschisch.",
+        "en": "My nationality is Bangladeshi.",
+        "bn": "আমার নাগরিকত্ব বাংলাদেশি।"
+      }
+    },
+    {
+      "term": "Postleitzahl",
+      "article": "die",
+      "plural": "Postleitzahlen",
+      "pos": "NOUN",
+      "ipa": "ˈpɔstlaɪ̯tˌt͡saːl",
+      "meanings": {
+        "en": "postcode",
+        "bn": "পোস্ট কোড"
+      },
+      "example": {
+        "de": "Wie ist die Postleitzahl?",
+        "en": "What's the postcode?",
+        "bn": "পোস্ট কোড কত?"
+      }
+    },
+    {
+      "term": "Unterschrift",
+      "article": "die",
+      "plural": "Unterschriften",
+      "pos": "NOUN",
+      "ipa": "ˈʊntɐˌʃʁɪft",
+      "meanings": {
+        "en": "signature",
+        "bn": "স্বাক্ষর"
+      },
+      "example": {
+        "de": "Hier fehlt Ihre Unterschrift.",
+        "en": "Your signature is missing here.",
+        "bn": "এখানে আপনার স্বাক্ষর নেই।"
+      }
+    },
+    {
+      "term": "unterschreiben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ʊntɐˈʃʁaɪ̯bn̩",
+      "meanings": {
+        "en": "to sign",
+        "bn": "স্বাক্ষর করা"
+      },
+      "example": {
+        "de": "Bitte unterschreiben Sie hier.",
+        "en": "Please sign here.",
+        "bn": "দয়া করে এখানে স্বাক্ষর করুন।"
+      }
+    },
+    {
+      "term": "geboren",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈboːʁən",
+      "meanings": {
+        "en": "born",
+        "bn": "জন্ম"
+      },
+      "example": {
+        "de": "Ich bin 1995 geboren.",
+        "en": "I was born in 1995.",
+        "bn": "আমি ১৯৯৫ সালে জন্মেছি।"
+      }
+    },
+    {
+      "term": "Reisepass",
+      "article": "der",
+      "plural": "Reisepässe",
+      "pos": "NOUN",
+      "ipa": "ˈʁaɪ̯zəˌpas",
+      "meanings": {
+        "en": "passport",
+        "bn": "পাসপোর্ট"
+      },
+      "example": {
+        "de": "Haben Sie Ihren Reisepass dabei?",
+        "en": "Do you have your passport with you?",
+        "bn": "আপনার সাথে কি পাসপোর্ট আছে?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Filling in forms",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"der Nachname\" is your …",
+        "options": [
+          "surname",
+          "first name",
+          "nickname"
+        ],
+        "answer": 0,
+        "explanation": "Nachname = family name."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"PLZ\" stands for …",
+        "options": [
+          "Postleitzahl",
+          "Personalzahl",
+          "Platz"
+        ],
+        "answer": 0,
+        "explanation": "PLZ = postcode."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Zutreffendes ankreuzen\" means …",
+        "options": [
+          "tick what applies",
+          "cross everything out",
+          "write in capitals"
+        ],
+        "answer": 0,
+        "explanation": "ankreuzen = tick/mark."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The date 05.08.2001 is …",
+        "options": [
+          "5 August 2001",
+          "8 May 2001",
+          "5 June 2001"
+        ],
+        "answer": 0,
+        "explanation": "German order: day.month.year."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Bitte unterschreiben Sie hier\" means …",
+        "options": [
+          "Please sign here.",
+          "Please write here.",
+          "Please wait here."
+        ],
+        "answer": 0,
+        "explanation": "unterschreiben = to sign."
+      }
+    ]
+  }
+}

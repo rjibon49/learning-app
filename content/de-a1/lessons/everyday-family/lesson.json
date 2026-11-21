@@ -1,0 +1,215 @@
+{
+  "slug": "everyday-family",
+  "title": "Meine Familie · My Family",
+  "titles": {
+    "en": "My Family",
+    "bn": "আমার পরিবার"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Eltern",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈɛltɐn",
+      "meanings": {
+        "en": "parents",
+        "bn": "বাবা-মা"
+      },
+      "example": {
+        "de": "Meine Eltern wohnen in Dhaka.",
+        "en": "My parents live in Dhaka.",
+        "bn": "আমার বাবা-মা ঢাকায় থাকেন।"
+      }
+    },
+    {
+      "term": "Geschwister",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ɡəˈʃvɪstɐ",
+      "meanings": {
+        "en": "siblings",
+        "bn": "ভাইবোন"
+      },
+      "example": {
+        "de": "Hast du Geschwister?",
+        "en": "Do you have siblings?",
+        "bn": "তোমার কি ভাইবোন আছে?"
+      }
+    },
+    {
+      "term": "Sohn",
+      "article": "der",
+      "plural": "Söhne",
+      "pos": "NOUN",
+      "ipa": "zoːn",
+      "meanings": {
+        "en": "son",
+        "bn": "ছেলে"
+      },
+      "example": {
+        "de": "Mein Sohn ist fünf.",
+        "en": "My son is five.",
+        "bn": "আমার ছেলের বয়স পাঁচ।"
+      }
+    },
+    {
+      "term": "Tochter",
+      "article": "die",
+      "plural": "Töchter",
+      "pos": "NOUN",
+      "ipa": "ˈtɔxtɐ",
+      "meanings": {
+        "en": "daughter",
+        "bn": "মেয়ে"
+      },
+      "example": {
+        "de": "Meine Tochter geht zur Schule.",
+        "en": "My daughter goes to school.",
+        "bn": "আমার মেয়ে স্কুলে যায়।"
+      }
+    },
+    {
+      "term": "Großmutter",
+      "article": "die",
+      "plural": "Großmütter",
+      "pos": "NOUN",
+      "ipa": "ˈɡʁoːsˌmʊtɐ",
+      "meanings": {
+        "en": "grandmother",
+        "bn": "দাদি / নানি"
+      },
+      "example": {
+        "de": "Meine Großmutter ist 80.",
+        "en": "My grandmother is 80.",
+        "bn": "আমার দাদির বয়স ৮০।"
+      }
+    },
+    {
+      "term": "Großvater",
+      "article": "der",
+      "plural": "Großväter",
+      "pos": "NOUN",
+      "ipa": "ˈɡʁoːsˌfaːtɐ",
+      "meanings": {
+        "en": "grandfather",
+        "bn": "দাদা / নানা"
+      },
+      "example": {
+        "de": "Mein Großvater liest gern.",
+        "en": "My grandfather likes reading.",
+        "bn": "আমার দাদা পড়তে ভালোবাসেন।"
+      }
+    },
+    {
+      "term": "verheiratet",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "fɛɐ̯ˈhaɪ̯ʁaːtət",
+      "meanings": {
+        "en": "married",
+        "bn": "বিবাহিত"
+      },
+      "example": {
+        "de": "Ich bin verheiratet.",
+        "en": "I'm married.",
+        "bn": "আমি বিবাহিত।"
+      }
+    },
+    {
+      "term": "ledig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈleːdɪç",
+      "meanings": {
+        "en": "single",
+        "bn": "অবিবাহিত"
+      },
+      "example": {
+        "de": "Mein Bruder ist ledig.",
+        "en": "My brother is single.",
+        "bn": "আমার ভাই অবিবাহিত।"
+      }
+    },
+    {
+      "term": "alt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "alt",
+      "meanings": {
+        "en": "old",
+        "bn": "বয়স / পুরোনো"
+      },
+      "example": {
+        "de": "Wie alt bist du?",
+        "en": "How old are you?",
+        "bn": "তোমার বয়স কত?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: My family",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"die Geschwister\" means …",
+        "options": [
+          "brothers and sisters",
+          "parents",
+          "grandparents"
+        ],
+        "answer": 0,
+        "explanation": "Geschwister = siblings."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ Bruder.",
+        "options": [
+          "einen",
+          "ein",
+          "eine"
+        ],
+        "answer": 0,
+        "explanation": "Akkusativ masculine: einen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Your mother's mother is your …",
+        "options": [
+          "Großmutter",
+          "Tochter",
+          "Schwester"
+        ],
+        "answer": 0,
+        "explanation": "Großmutter / Oma."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich bin ledig\" means …",
+        "options": [
+          "I'm single.",
+          "I'm married.",
+          "I'm divorced."
+        ],
+        "answer": 0,
+        "explanation": "ledig = not married."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wie alt ___ deine Kinder?",
+        "options": [
+          "sind",
+          "ist",
+          "bist"
+        ],
+        "answer": 0,
+        "explanation": "Kinder = plural → sind."
+      }
+    ]
+  }
+}

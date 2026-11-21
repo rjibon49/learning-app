@@ -1,0 +1,257 @@
+{
+  "slug": "basics-introduce-yourself",
+  "title": "Sich vorstellen · Introducing Yourself",
+  "titles": {
+    "en": "Introducing Yourself",
+    "bn": "নিজের পরিচয় দেওয়া"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "heißen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈhaɪ̯sn̩",
+      "meanings": {
+        "en": "to be called",
+        "bn": "নাম হওয়া"
+      },
+      "example": {
+        "de": "Ich heiße Karim.",
+        "en": "My name is Karim.",
+        "bn": "আমার নাম করিম।"
+      }
+    },
+    {
+      "term": "kommen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkɔmən",
+      "meanings": {
+        "en": "to come",
+        "bn": "আসা"
+      },
+      "example": {
+        "de": "Ich komme aus Bangladesch.",
+        "en": "I come from Bangladesh.",
+        "bn": "আমি বাংলাদেশ থেকে এসেছি।"
+      }
+    },
+    {
+      "term": "wohnen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvoːnən",
+      "meanings": {
+        "en": "to live (reside)",
+        "bn": "বাস করা / থাকা"
+      },
+      "example": {
+        "de": "Ich wohne in Berlin.",
+        "en": "I live in Berlin.",
+        "bn": "আমি বার্লিনে থাকি।"
+      }
+    },
+    {
+      "term": "sprechen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃpʁɛçn̩",
+      "meanings": {
+        "en": "to speak",
+        "bn": "কথা বলা"
+      },
+      "example": {
+        "de": "Ich spreche ein bisschen Deutsch.",
+        "en": "I speak a little German.",
+        "bn": "আমি একটু জার্মান বলি।"
+      }
+    },
+    {
+      "term": "Name",
+      "article": "der",
+      "plural": "Namen",
+      "pos": "NOUN",
+      "ipa": "ˈnaːmə",
+      "meanings": {
+        "en": "name",
+        "bn": "নাম"
+      },
+      "example": {
+        "de": "Mein Name ist Nadia.",
+        "en": "My name is Nadia.",
+        "bn": "আমার নাম নাদিয়া।"
+      }
+    },
+    {
+      "term": "Land",
+      "article": "das",
+      "plural": "Länder",
+      "pos": "NOUN",
+      "ipa": "lant",
+      "meanings": {
+        "en": "country",
+        "bn": "দেশ"
+      },
+      "example": {
+        "de": "Aus welchem Land kommst du?",
+        "en": "Which country are you from?",
+        "bn": "তুমি কোন দেশ থেকে এসেছ?"
+      }
+    },
+    {
+      "term": "Sprache",
+      "article": "die",
+      "plural": "Sprachen",
+      "pos": "NOUN",
+      "ipa": "ˈʃpʁaːxə",
+      "meanings": {
+        "en": "language",
+        "bn": "ভাষা"
+      },
+      "example": {
+        "de": "Welche Sprachen sprechen Sie?",
+        "en": "Which languages do you speak?",
+        "bn": "আপনি কোন কোন ভাষা বলেন?"
+      }
+    },
+    {
+      "term": "Beruf",
+      "article": "der",
+      "plural": "Berufe",
+      "pos": "NOUN",
+      "ipa": "bəˈʁuːf",
+      "meanings": {
+        "en": "job / profession",
+        "bn": "পেশা"
+      },
+      "example": {
+        "de": "Was sind Sie von Beruf?",
+        "en": "What do you do for a living?",
+        "bn": "আপনার পেশা কী?"
+      }
+    },
+    {
+      "term": "Jahr",
+      "article": "das",
+      "plural": "Jahre",
+      "pos": "NOUN",
+      "ipa": "jaːɐ̯",
+      "meanings": {
+        "en": "year",
+        "bn": "বছর"
+      },
+      "example": {
+        "de": "Ich bin 27 Jahre alt.",
+        "en": "I am 27 years old.",
+        "bn": "আমার বয়স ২৭ বছর।"
+      }
+    },
+    {
+      "term": "Freut mich",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈfʁɔɪ̯t mɪç",
+      "meanings": {
+        "en": "Nice to meet you",
+        "bn": "পরিচিত হয়ে ভালো লাগলো"
+      },
+      "example": {
+        "de": "Ich bin Lisa. – Freut mich!",
+        "en": "I'm Lisa. – Nice to meet you!",
+        "bn": "আমি লিসা। – পরিচিত হয়ে ভালো লাগলো!"
+      }
+    },
+    {
+      "term": "ein bisschen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "aɪ̯n ˈbɪsçən",
+      "meanings": {
+        "en": "a little",
+        "bn": "একটু"
+      },
+      "example": {
+        "de": "Ich spreche ein bisschen Deutsch.",
+        "en": "I speak a little German.",
+        "bn": "আমি একটু জার্মান বলি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Introducing yourself",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich komme ___ Bangladesch.",
+        "options": [
+          "aus",
+          "in",
+          "von"
+        ],
+        "answer": 0,
+        "explanation": "Country of origin: aus + country."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich wohne ___ Dhaka.",
+        "options": [
+          "in",
+          "aus",
+          "nach"
+        ],
+        "answer": 0,
+        "explanation": "Where you live: in + city."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wie heißt du?\" — the right answer is …",
+        "options": [
+          "Ich heiße Anna.",
+          "Ich komme aus Berlin.",
+          "Ich bin 25."
+        ],
+        "answer": 0,
+        "explanation": "heißen = to be called (name)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which question is formal?",
+        "options": [
+          "Woher kommen Sie?",
+          "Woher kommst du?"
+        ],
+        "answer": 0,
+        "explanation": "Sie + kommen = formal."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Ich bin Lehrer.",
+          "Ich bin ein Lehrer.",
+          "Ich Lehrer bin."
+        ],
+        "answer": 0,
+        "explanation": "With jobs German leaves out \"ein\"."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich komme aus ___ Türkei.",
+        "options": [
+          "der",
+          "die",
+          "–"
+        ],
+        "answer": 0,
+        "explanation": "aus der Türkei — a few countries have an article."
+      }
+    ]
+  }
+}

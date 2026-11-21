@@ -1,0 +1,215 @@
+{
+  "slug": "everyday-describing-people",
+  "title": "Wie ist er? · Describing People",
+  "titles": {
+    "en": "Describing People",
+    "bn": "মানুষের বর্ণনা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "groß",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡʁoːs",
+      "meanings": {
+        "en": "tall / big",
+        "bn": "লম্বা / বড়"
+      },
+      "example": {
+        "de": "Mein Bruder ist sehr groß.",
+        "en": "My brother is very tall.",
+        "bn": "আমার ভাই খুব লম্বা।"
+      }
+    },
+    {
+      "term": "klein",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "klaɪ̯n",
+      "meanings": {
+        "en": "short / small",
+        "bn": "খাটো / ছোট"
+      },
+      "example": {
+        "de": "Sie ist klein und schlank.",
+        "en": "She is short and slim.",
+        "bn": "সে খাটো আর রোগা।"
+      }
+    },
+    {
+      "term": "schlank",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃlaŋk",
+      "meanings": {
+        "en": "slim",
+        "bn": "রোগা / ছিপছিপে"
+      },
+      "example": {
+        "de": "Er ist groß und schlank.",
+        "en": "He is tall and slim.",
+        "bn": "সে লম্বা আর ছিপছিপে।"
+      }
+    },
+    {
+      "term": "Haar",
+      "article": "das",
+      "plural": "Haare",
+      "pos": "NOUN",
+      "ipa": "haːɐ̯",
+      "meanings": {
+        "en": "hair",
+        "bn": "চুল"
+      },
+      "example": {
+        "de": "Sie hat lange Haare.",
+        "en": "She has long hair.",
+        "bn": "তার লম্বা চুল।"
+      }
+    },
+    {
+      "term": "Brille",
+      "article": "die",
+      "plural": "Brillen",
+      "pos": "NOUN",
+      "ipa": "ˈbʁɪlə",
+      "meanings": {
+        "en": "glasses",
+        "bn": "চশমা"
+      },
+      "example": {
+        "de": "Ich trage eine Brille.",
+        "en": "I wear glasses.",
+        "bn": "আমি চশমা পরি।"
+      }
+    },
+    {
+      "term": "nett",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "nɛt",
+      "meanings": {
+        "en": "nice",
+        "bn": "ভালো / সদয়"
+      },
+      "example": {
+        "de": "Die Nachbarn sind sehr nett.",
+        "en": "The neighbours are very nice.",
+        "bn": "প্রতিবেশীরা খুব ভালো।"
+      }
+    },
+    {
+      "term": "lustig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈlʊstɪç",
+      "meanings": {
+        "en": "funny",
+        "bn": "মজার"
+      },
+      "example": {
+        "de": "Mein Onkel ist lustig.",
+        "en": "My uncle is funny.",
+        "bn": "আমার চাচা মজার মানুষ।"
+      }
+    },
+    {
+      "term": "fleißig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈflaɪ̯sɪç",
+      "meanings": {
+        "en": "hard-working",
+        "bn": "পরিশ্রমী"
+      },
+      "example": {
+        "de": "Sie ist sehr fleißig.",
+        "en": "She is very hard-working.",
+        "bn": "সে খুব পরিশ্রমী।"
+      }
+    },
+    {
+      "term": "aussehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯sˌzeːən",
+      "meanings": {
+        "en": "to look (like)",
+        "bn": "দেখতে লাগা"
+      },
+      "example": {
+        "de": "Wie sieht er aus?",
+        "en": "What does he look like?",
+        "bn": "সে দেখতে কেমন?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Describing people",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The opposite of \"groß\" (for people) is …",
+        "options": [
+          "klein",
+          "alt",
+          "dick"
+        ],
+        "answer": 0,
+        "explanation": "groß ↔ klein."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wie sieht sie aus?\" asks about …",
+        "options": [
+          "her appearance",
+          "her character",
+          "her age"
+        ],
+        "answer": 0,
+        "explanation": "aussehen = to look like."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ___ eine Brille.",
+        "options": [
+          "trägt",
+          "hat an",
+          "ist"
+        ],
+        "answer": 0,
+        "explanation": "eine Brille tragen = wear glasses."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"fleißig\" means …",
+        "options": [
+          "hard-working",
+          "lazy",
+          "funny"
+        ],
+        "answer": 0,
+        "explanation": "faul is the opposite."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Sie ist nett.",
+          "Sie ist nette.",
+          "Sie ist netter."
+        ],
+        "answer": 0,
+        "explanation": "After sein: no ending."
+      }
+    ]
+  }
+}

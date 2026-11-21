@@ -1,0 +1,242 @@
+{
+  "slug": "grammar-nouns",
+  "title": "Nomen · Nouns and Plural",
+  "titles": {
+    "en": "Nouns: Capital Letters, Gender and Plural",
+    "bn": "বিশেষ্য (Nomen): বড় হাতের অক্ষর, লিঙ্গ ও বহুবচন"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Tisch",
+      "article": "der",
+      "plural": "Tische",
+      "pos": "NOUN",
+      "ipa": "tɪʃ",
+      "meanings": {
+        "en": "table",
+        "bn": "টেবিল"
+      },
+      "example": {
+        "de": "Der Tisch ist neu.",
+        "en": "The table is new.",
+        "bn": "টেবিলটি নতুন।"
+      }
+    },
+    {
+      "term": "Stuhl",
+      "article": "der",
+      "plural": "Stühle",
+      "pos": "NOUN",
+      "ipa": "ʃtuːl",
+      "meanings": {
+        "en": "chair",
+        "bn": "চেয়ার"
+      },
+      "example": {
+        "de": "Wir brauchen vier Stühle.",
+        "en": "We need four chairs.",
+        "bn": "আমাদের চারটি চেয়ার দরকার।"
+      }
+    },
+    {
+      "term": "Lampe",
+      "article": "die",
+      "plural": "Lampen",
+      "pos": "NOUN",
+      "ipa": "ˈlampə",
+      "meanings": {
+        "en": "lamp",
+        "bn": "বাতি"
+      },
+      "example": {
+        "de": "Die Lampe ist kaputt.",
+        "en": "The lamp is broken.",
+        "bn": "বাতিটি নষ্ট।"
+      }
+    },
+    {
+      "term": "Kind",
+      "article": "das",
+      "plural": "Kinder",
+      "pos": "NOUN",
+      "ipa": "kɪnt",
+      "meanings": {
+        "en": "child",
+        "bn": "শিশু"
+      },
+      "example": {
+        "de": "Die Kinder spielen.",
+        "en": "The children are playing.",
+        "bn": "বাচ্চারা খেলছে।"
+      }
+    },
+    {
+      "term": "Auto",
+      "article": "das",
+      "plural": "Autos",
+      "pos": "NOUN",
+      "ipa": "ˈaʊ̯to",
+      "meanings": {
+        "en": "car",
+        "bn": "গাড়ি"
+      },
+      "example": {
+        "de": "Die Autos sind teuer.",
+        "en": "The cars are expensive.",
+        "bn": "গাড়িগুলো দামি।"
+      }
+    },
+    {
+      "term": "Tasche",
+      "article": "die",
+      "plural": "Taschen",
+      "pos": "NOUN",
+      "ipa": "ˈtaʃə",
+      "meanings": {
+        "en": "bag",
+        "bn": "ব্যাগ"
+      },
+      "example": {
+        "de": "Wo ist meine Tasche?",
+        "en": "Where is my bag?",
+        "bn": "আমার ব্যাগ কোথায়?"
+      }
+    },
+    {
+      "term": "Zeitung",
+      "article": "die",
+      "plural": "Zeitungen",
+      "pos": "NOUN",
+      "ipa": "ˈt͡saɪ̯tʊŋ",
+      "meanings": {
+        "en": "newspaper",
+        "bn": "সংবাদপত্র"
+      },
+      "example": {
+        "de": "Er liest die Zeitung.",
+        "en": "He is reading the newspaper.",
+        "bn": "সে সংবাদপত্র পড়ছে।"
+      }
+    },
+    {
+      "term": "Computer",
+      "article": "der",
+      "plural": "Computer",
+      "pos": "NOUN",
+      "ipa": "kɔmˈpjuːtɐ",
+      "meanings": {
+        "en": "computer",
+        "bn": "কম্পিউটার"
+      },
+      "example": {
+        "de": "Der Computer ist langsam.",
+        "en": "The computer is slow.",
+        "bn": "কম্পিউটারটি ধীর।"
+      }
+    },
+    {
+      "term": "Löffel",
+      "article": "der",
+      "plural": "Löffel",
+      "pos": "NOUN",
+      "ipa": "ˈlœfl̩",
+      "meanings": {
+        "en": "spoon",
+        "bn": "চামচ"
+      },
+      "example": {
+        "de": "Ich brauche einen Löffel.",
+        "en": "I need a spoon.",
+        "bn": "আমার একটি চামচ দরকার।"
+      }
+    },
+    {
+      "term": "Gabel",
+      "article": "die",
+      "plural": "Gabeln",
+      "pos": "NOUN",
+      "ipa": "ˈɡaːbl̩",
+      "meanings": {
+        "en": "fork",
+        "bn": "কাঁটাচামচ"
+      },
+      "example": {
+        "de": "Die Gabel liegt links.",
+        "en": "The fork is on the left.",
+        "bn": "কাঁটাচামচটি বাঁ দিকে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Nouns and plural",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is written correctly?",
+        "options": [
+          "Ich habe ein Auto.",
+          "Ich habe ein auto.",
+          "ich habe ein Auto."
+        ],
+        "answer": 0,
+        "explanation": "Nouns and the first word of a sentence start with a capital letter."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The plural article is always …",
+        "options": [
+          "die",
+          "der",
+          "das"
+        ],
+        "answer": 0,
+        "explanation": "Every plural noun takes die."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural of \"die Lampe\"?",
+        "options": [
+          "die Lampen",
+          "die Lampe",
+          "die Lampes"
+        ],
+        "answer": 0,
+        "explanation": "Feminine nouns usually add -n / -en."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural of \"das Auto\"?",
+        "options": [
+          "die Autos",
+          "die Auten",
+          "die Autoe"
+        ],
+        "answer": 0,
+        "explanation": "Many words ending in a vowel take -s."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural of \"die Lehrerin\"?",
+        "options": [
+          "die Lehrerinnen",
+          "die Lehrerins",
+          "die Lehrerinen"
+        ],
+        "answer": 0,
+        "explanation": "-in becomes -innen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why learn nouns with the article?",
+        "options": [
+          "Gender is often not logical",
+          "Articles are optional",
+          "Only for plural"
+        ],
+        "answer": 0,
+        "explanation": "der Löffel, die Gabel, das Messer — no logic, so learn it together."
+      }
+    ]
+  }
+}

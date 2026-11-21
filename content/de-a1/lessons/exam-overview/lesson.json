@@ -1,0 +1,199 @@
+{
+  "slug": "exam-overview",
+  "title": "Die A1-Prüfung · What to Expect",
+  "titles": {
+    "en": "The A1 Exam: What to Expect",
+    "bn": "A1 পরীক্ষা: কী থাকে"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Aufgabe",
+      "article": "die",
+      "plural": "Aufgaben",
+      "pos": "NOUN",
+      "ipa": "ˈaʊ̯fˌɡaːbə",
+      "meanings": {
+        "en": "task / exercise",
+        "bn": "কাজ / প্রশ্ন"
+      },
+      "example": {
+        "de": "Lesen Sie die Aufgabe genau.",
+        "en": "Read the task carefully.",
+        "bn": "প্রশ্নটা ভালো করে পড়ুন।"
+      }
+    },
+    {
+      "term": "ankreuzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌkʁɔɪ̯t͡sn̩",
+      "meanings": {
+        "en": "to tick / mark",
+        "bn": "টিক দেওয়া"
+      },
+      "example": {
+        "de": "Kreuzen Sie a, b oder c an.",
+        "en": "Mark a, b or c.",
+        "bn": "a, b বা c-তে টিক দিন।"
+      }
+    },
+    {
+      "term": "richtig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈʁɪçtɪç",
+      "meanings": {
+        "en": "right / correct",
+        "bn": "ঠিক"
+      },
+      "example": {
+        "de": "Ist das richtig oder falsch?",
+        "en": "Is that right or wrong?",
+        "bn": "এটা ঠিক নাকি ভুল?"
+      }
+    },
+    {
+      "term": "falsch",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "falʃ",
+      "meanings": {
+        "en": "wrong",
+        "bn": "ভুল"
+      },
+      "example": {
+        "de": "Die Antwort ist falsch.",
+        "en": "The answer is wrong.",
+        "bn": "উত্তরটা ভুল।"
+      }
+    },
+    {
+      "term": "Antwortbogen",
+      "article": "der",
+      "plural": "Antwortbögen",
+      "pos": "NOUN",
+      "ipa": "ˈantvɔʁtˌboːɡn̩",
+      "meanings": {
+        "en": "answer sheet",
+        "bn": "উত্তরপত্র"
+      },
+      "example": {
+        "de": "Schreiben Sie die Lösungen auf den Antwortbogen.",
+        "en": "Write the answers on the answer sheet.",
+        "bn": "উত্তরগুলো উত্তরপত্রে লিখুন।"
+      }
+    },
+    {
+      "term": "zweimal",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈt͡svaɪ̯maːl",
+      "meanings": {
+        "en": "twice",
+        "bn": "দুবার"
+      },
+      "example": {
+        "de": "Sie hören den Text zweimal.",
+        "en": "You hear the text twice.",
+        "bn": "লেখাটা দুবার শুনবেন।"
+      }
+    },
+    {
+      "term": "Prüfungsteil",
+      "article": "der",
+      "plural": "Prüfungsteile",
+      "pos": "NOUN",
+      "ipa": "ˈpʁyːfʊŋsˌtaɪ̯l",
+      "meanings": {
+        "en": "part of the exam",
+        "bn": "পরীক্ষার অংশ"
+      },
+      "example": {
+        "de": "Der Prüfungsteil Lesen dauert 25 Minuten.",
+        "en": "The reading part takes 25 minutes.",
+        "bn": "পড়ার অংশ ২৫ মিনিট।"
+      }
+    },
+    {
+      "term": "dauern",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈdaʊ̯ɐn",
+      "meanings": {
+        "en": "to last / take (time)",
+        "bn": "সময় লাগা"
+      },
+      "example": {
+        "de": "Wie lange dauert die Prüfung?",
+        "en": "How long does the exam take?",
+        "bn": "পরীক্ষা কতক্ষণ চলে?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: The A1 exam",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which part is done in a group?",
+        "options": [
+          "Sprechen",
+          "Lesen",
+          "Schreiben"
+        ],
+        "answer": 0,
+        "explanation": "Sprechen is a group exam."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"richtig oder falsch\" means …",
+        "options": [
+          "right or wrong",
+          "read or write",
+          "now or later"
+        ],
+        "answer": 0,
+        "explanation": "richtig = right, falsch = wrong."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Sie hören den Text zweimal\" means …",
+        "options": [
+          "You hear the text twice.",
+          "You hear two texts.",
+          "You read the text twice."
+        ],
+        "answer": 0,
+        "explanation": "zweimal = twice."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "About how many points do you need to pass?",
+        "options": [
+          "60 %",
+          "90 %",
+          "30 %"
+        ],
+        "answer": 0,
+        "explanation": "About 60 % of the total."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In Schreiben you …",
+        "options": [
+          "fill in a form and write a short message",
+          "write an essay of 300 words",
+          "translate a text"
+        ],
+        "answer": 0,
+        "explanation": "Form + short message (~30 words)."
+      }
+    ]
+  }
+}

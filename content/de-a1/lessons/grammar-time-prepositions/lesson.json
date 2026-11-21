@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-time-prepositions",
+  "title": "Zeit-Präpositionen · am, um, im, von … bis",
+  "titles": {
+    "en": "Time Prepositions: am, um, im, von … bis",
+    "bn": "সময়ের অব্যয়: am, um, im, von … bis"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "um",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ʊm",
+      "meanings": {
+        "en": "at (clock time)",
+        "bn": "-টায় (সময়)"
+      },
+      "example": {
+        "de": "Der Kurs beginnt um 9 Uhr.",
+        "en": "The course starts at 9.",
+        "bn": "কোর্স ৯টায় শুরু হয়।"
+      }
+    },
+    {
+      "term": "am",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "am",
+      "meanings": {
+        "en": "on (days) / in the (part of day)",
+        "bn": "-বারে / বেলায়"
+      },
+      "example": {
+        "de": "Am Montag arbeite ich.",
+        "en": "On Monday I work.",
+        "bn": "সোমবার আমি কাজ করি।"
+      }
+    },
+    {
+      "term": "im",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ɪm",
+      "meanings": {
+        "en": "in (months, seasons)",
+        "bn": "-মাসে / ঋতুতে"
+      },
+      "example": {
+        "de": "Im Juli ist es warm.",
+        "en": "In July it's warm.",
+        "bn": "জুলাইয়ে গরম থাকে।"
+      }
+    },
+    {
+      "term": "von … bis",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "fɔn … bɪs",
+      "meanings": {
+        "en": "from … to",
+        "bn": "থেকে … পর্যন্ত"
+      },
+      "example": {
+        "de": "Ich arbeite von 9 bis 17 Uhr.",
+        "en": "I work from 9 to 5.",
+        "bn": "আমি ৯টা থেকে ৫টা পর্যন্ত কাজ করি।"
+      }
+    },
+    {
+      "term": "ab",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ap",
+      "meanings": {
+        "en": "from (on)",
+        "bn": "থেকে (শুরু)"
+      },
+      "example": {
+        "de": "Ab Montag habe ich Urlaub.",
+        "en": "From Monday I'm on holiday.",
+        "bn": "সোমবার থেকে আমার ছুটি।"
+      }
+    },
+    {
+      "term": "Urlaub",
+      "article": "der",
+      "plural": "Urlaube",
+      "pos": "NOUN",
+      "ipa": "ˈuːɐ̯ˌlaʊ̯p",
+      "meanings": {
+        "en": "holiday / vacation",
+        "bn": "ছুটি"
+      },
+      "example": {
+        "de": "Im August habe ich Urlaub.",
+        "en": "I'm on holiday in August.",
+        "bn": "আগস্টে আমার ছুটি।"
+      }
+    },
+    {
+      "term": "Wochenende",
+      "article": "das",
+      "plural": "Wochenenden",
+      "pos": "NOUN",
+      "ipa": "ˈvɔxn̩ˌʔɛndə",
+      "meanings": {
+        "en": "weekend",
+        "bn": "সপ্তাহান্ত"
+      },
+      "example": {
+        "de": "Schönes Wochenende!",
+        "en": "Have a nice weekend!",
+        "bn": "সপ্তাহান্ত ভালো কাটুক!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Time prepositions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich komme ___ 10 Uhr.",
+        "options": [
+          "um",
+          "am",
+          "im"
+        ],
+        "answer": 0,
+        "explanation": "Clock time → um."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Dienstag habe ich Deutschkurs.",
+        "options": [
+          "Am",
+          "Um",
+          "Im"
+        ],
+        "answer": 0,
+        "explanation": "Days → am."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Winter ist es kalt.",
+        "options": [
+          "Im",
+          "Am",
+          "Um"
+        ],
+        "answer": 0,
+        "explanation": "Seasons → im."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir haben ___ Nacht geschlafen.",
+        "options": [
+          "in der",
+          "am",
+          "im"
+        ],
+        "answer": 0,
+        "explanation": "Exception: in der Nacht."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"vor zwei Tagen\" means …",
+        "options": [
+          "two days ago",
+          "in two days",
+          "for two days"
+        ],
+        "answer": 0,
+        "explanation": "vor + time = ago."
+      }
+    ]
+  }
+}

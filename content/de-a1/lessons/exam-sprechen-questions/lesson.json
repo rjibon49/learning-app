@@ -1,0 +1,167 @@
+{
+  "slug": "exam-sprechen-questions",
+  "title": "Sprechen Teil 2 · Fragen und Antworten",
+  "titles": {
+    "en": "Speaking Part 2: Asking and Answering",
+    "bn": "বলা অংশ ২: প্রশ্ন ও উত্তর"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Thema",
+      "article": "das",
+      "plural": "Themen",
+      "pos": "NOUN",
+      "ipa": "ˈteːma",
+      "meanings": {
+        "en": "topic",
+        "bn": "বিষয়"
+      },
+      "example": {
+        "de": "Das Thema ist Freizeit.",
+        "en": "The topic is free time.",
+        "bn": "বিষয় হলো অবসর।"
+      }
+    },
+    {
+      "term": "Karte",
+      "article": "die",
+      "plural": "Karten",
+      "pos": "NOUN",
+      "ipa": "ˈkaʁtə",
+      "meanings": {
+        "en": "card",
+        "bn": "কার্ড"
+      },
+      "example": {
+        "de": "Nehmen Sie eine Karte.",
+        "en": "Take a card.",
+        "bn": "একটা কার্ড নিন।"
+      }
+    },
+    {
+      "term": "Getränk",
+      "article": "das",
+      "plural": "Getränke",
+      "pos": "NOUN",
+      "ipa": "ɡəˈtʁɛŋk",
+      "meanings": {
+        "en": "drink",
+        "bn": "পানীয়"
+      },
+      "example": {
+        "de": "Was ist dein Lieblingsgetränk?",
+        "en": "What's your favourite drink?",
+        "bn": "তোমার প্রিয় পানীয় কী?"
+      }
+    },
+    {
+      "term": "fragen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfʁaːɡn̩",
+      "meanings": {
+        "en": "to ask",
+        "bn": "জিজ্ঞেস করা"
+      },
+      "example": {
+        "de": "Ich frage meinen Partner.",
+        "en": "I ask my partner.",
+        "bn": "আমি আমার সঙ্গীকে জিজ্ঞেস করি।"
+      }
+    },
+    {
+      "term": "antworten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈantvɔʁtn̩",
+      "meanings": {
+        "en": "to answer",
+        "bn": "উত্তর দেওয়া"
+      },
+      "example": {
+        "de": "Bitte antworten Sie mit einem Satz.",
+        "en": "Please answer with a sentence.",
+        "bn": "দয়া করে একটা বাক্যে উত্তর দিন।"
+      }
+    },
+    {
+      "term": "wie oft",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "viː ɔft",
+      "meanings": {
+        "en": "how often",
+        "bn": "কতবার"
+      },
+      "example": {
+        "de": "Wie oft machst du Sport?",
+        "en": "How often do you do sport?",
+        "bn": "তুমি কতবার ব্যায়াম করো?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Sprechen Teil 2",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Thema: Freizeit — card \"Wochenende\". A good question:",
+        "options": [
+          "Was machst du am Wochenende?",
+          "Wochenende du?",
+          "Du machst Wochenende?"
+        ],
+        "answer": 0,
+        "explanation": "W-question + verb + du."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Thema: Essen — card \"Fleisch\". A good question:",
+        "options": [
+          "Isst du gern Fleisch?",
+          "Fleisch isst?",
+          "Du gern Fleisch?"
+        ],
+        "answer": 0,
+        "explanation": "Yes/no question: verb first."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Question: \"Gehst du oft ins Kino?\" — the best answer:",
+        "options": [
+          "Ja, ich gehe einmal pro Woche ins Kino.",
+          "Ja.",
+          "Kino."
+        ],
+        "answer": 0,
+        "explanation": "Full sentence + detail."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Card \"Urlaub\". A good question:",
+        "options": [
+          "Wohin fährst du im Urlaub?",
+          "Urlaub wohin?",
+          "Du Urlaub fährst?"
+        ],
+        "answer": 0,
+        "explanation": "Wohin + verb + du."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In a yes/no question the verb is …",
+        "options": [
+          "in position 1",
+          "at the end",
+          "in position 3"
+        ],
+        "answer": 0,
+        "explanation": "Isst du …? Gehst du …?"
+      }
+    ]
+  }
+}

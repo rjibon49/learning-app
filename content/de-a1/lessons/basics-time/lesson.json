@@ -1,0 +1,242 @@
+{
+  "slug": "basics-time",
+  "title": "Die Uhrzeit · Telling the Time",
+  "titles": {
+    "en": "Telling the Time",
+    "bn": "সময় বলা (Uhrzeit)"
+  },
+  "minutes": 18,
+  "words": [
+    {
+      "term": "Uhr",
+      "article": "die",
+      "plural": "Uhren",
+      "pos": "NOUN",
+      "ipa": "uːɐ̯",
+      "meanings": {
+        "en": "clock / o'clock",
+        "bn": "ঘড়ি / টা"
+      },
+      "example": {
+        "de": "Es ist acht Uhr.",
+        "en": "It is eight o'clock.",
+        "bn": "এখন আটটা বাজে।"
+      }
+    },
+    {
+      "term": "Wie spät ist es?",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "viː ˈʃpɛːt ɪst ɛs",
+      "meanings": {
+        "en": "What time is it?",
+        "bn": "কয়টা বাজে?"
+      },
+      "example": {
+        "de": "Entschuldigung, wie spät ist es?",
+        "en": "Excuse me, what time is it?",
+        "bn": "মাফ করবেন, কয়টা বাজে?"
+      }
+    },
+    {
+      "term": "halb",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "halp",
+      "meanings": {
+        "en": "half",
+        "bn": "আধা"
+      },
+      "example": {
+        "de": "Es ist halb neun.",
+        "en": "It is half past eight.",
+        "bn": "এখন সাড়ে আটটা।"
+      }
+    },
+    {
+      "term": "Viertel",
+      "article": "das",
+      "plural": "Viertel",
+      "pos": "NOUN",
+      "ipa": "ˈfɪʁtl̩",
+      "meanings": {
+        "en": "quarter",
+        "bn": "পৌনে / সোয়া (পনেরো মিনিট)"
+      },
+      "example": {
+        "de": "Es ist Viertel nach drei.",
+        "en": "It is a quarter past three.",
+        "bn": "এখন সোয়া তিনটা।"
+      }
+    },
+    {
+      "term": "nach",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "naːx",
+      "meanings": {
+        "en": "past / after",
+        "bn": "পরে"
+      },
+      "example": {
+        "de": "Es ist zehn nach vier.",
+        "en": "It is ten past four.",
+        "bn": "চারটা বেজে দশ মিনিট।"
+      }
+    },
+    {
+      "term": "vor",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "foːɐ̯",
+      "meanings": {
+        "en": "to / before",
+        "bn": "আগে"
+      },
+      "example": {
+        "de": "Es ist fünf vor zwölf.",
+        "en": "It is five to twelve.",
+        "bn": "বারোটা বাজতে পাঁচ মিনিট বাকি।"
+      }
+    },
+    {
+      "term": "Minute",
+      "article": "die",
+      "plural": "Minuten",
+      "pos": "NOUN",
+      "ipa": "miˈnuːtə",
+      "meanings": {
+        "en": "minute",
+        "bn": "মিনিট"
+      },
+      "example": {
+        "de": "Der Bus kommt in fünf Minuten.",
+        "en": "The bus comes in five minutes.",
+        "bn": "বাস পাঁচ মিনিটে আসবে।"
+      }
+    },
+    {
+      "term": "Stunde",
+      "article": "die",
+      "plural": "Stunden",
+      "pos": "NOUN",
+      "ipa": "ˈʃtʊndə",
+      "meanings": {
+        "en": "hour",
+        "bn": "ঘণ্টা"
+      },
+      "example": {
+        "de": "Der Kurs dauert eine Stunde.",
+        "en": "The course lasts an hour.",
+        "bn": "কোর্সটি এক ঘণ্টা চলে।"
+      }
+    },
+    {
+      "term": "Nachmittag",
+      "article": "der",
+      "plural": "Nachmittage",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxmɪˌtaːk",
+      "meanings": {
+        "en": "afternoon",
+        "bn": "বিকেল"
+      },
+      "example": {
+        "de": "Am Nachmittag habe ich frei.",
+        "en": "In the afternoon I am free.",
+        "bn": "বিকেলে আমার ছুটি।"
+      }
+    },
+    {
+      "term": "Abend",
+      "article": "der",
+      "plural": "Abende",
+      "pos": "NOUN",
+      "ipa": "ˈaːbn̩t",
+      "meanings": {
+        "en": "evening",
+        "bn": "সন্ধ্যা"
+      },
+      "example": {
+        "de": "Am Abend koche ich.",
+        "en": "In the evening I cook.",
+        "bn": "সন্ধ্যায় আমি রান্না করি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Telling the time",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"halb sieben\" is …",
+        "options": [
+          "6:30",
+          "7:30",
+          "7:00"
+        ],
+        "answer": 0,
+        "explanation": "halb + next hour: halb sieben = 6:30."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Viertel vor neun\" is …",
+        "options": [
+          "8:45",
+          "9:15",
+          "8:15"
+        ],
+        "answer": 0,
+        "explanation": "vor = before: a quarter before nine."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "14:30 official time is …",
+        "options": [
+          "vierzehn Uhr dreißig",
+          "halb vierzehn Uhr",
+          "vier Uhr dreißig"
+        ],
+        "answer": 0,
+        "explanation": "Official time: hours + Uhr + minutes."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"zehn nach drei\" is …",
+        "options": [
+          "3:10",
+          "2:50",
+          "10:03"
+        ],
+        "answer": 0,
+        "explanation": "nach = after: ten minutes after three."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Der Kurs beginnt ___ neun Uhr.",
+        "options": [
+          "um",
+          "am",
+          "im"
+        ],
+        "answer": 0,
+        "explanation": "um + clock time."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you ask the time?",
+        "options": [
+          "Wie spät ist es?",
+          "Wie alt ist es?",
+          "Wo ist die Uhr?"
+        ],
+        "answer": 0,
+        "explanation": "Wie spät ist es? / Wie viel Uhr ist es?"
+      }
+    ]
+  }
+}

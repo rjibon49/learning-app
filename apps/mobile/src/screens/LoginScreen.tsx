@@ -1,10 +1,7 @@
+import { router } from "expo-router";
 
 import React, { useState } from "react";
-import type { NativeStackScreenProps } from
-  "@react-navigation/native-stack";
 
-import type { RootStackParamList } from
-  "../navigation/AppNavigator";
 
 import { useLearnerAuth } from "../lib/auth-context";
 import { getApiError } from "../api/client";
@@ -17,14 +14,8 @@ import {
   Feedback,
 } from "../components/AuthUI";
 
-type Props = NativeStackScreenProps<
-  RootStackParamList,
-  "Login"
->;
 
-export default function LoginScreen({
-  navigation,
-}: Props) {
+export default function LoginScreen() {
   const { signIn } = useLearnerAuth();
 
   const [email, setEmail] = useState("");
@@ -84,13 +75,13 @@ export default function LoginScreen({
       <TextAction
         title="Forgot your password?"
         onPress={() =>
-          navigation.navigate("ForgotPassword")
+          router.push("/forgot-password")
         }
       />
 
       <TextAction
         title="Don't have an account? Create one"
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => router.push("/register")}
       />
     </AuthLayout>
   );

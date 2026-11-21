@@ -1,0 +1,178 @@
+{
+  "slug": "exam-hoeren-announcements",
+  "title": "Hören Teil 2 · Durchsagen",
+  "titles": {
+    "en": "Listening Part 2: Announcements",
+    "bn": "শোনা অংশ ২: ঘোষণা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Durchsage",
+      "article": "die",
+      "plural": "Durchsagen",
+      "pos": "NOUN",
+      "ipa": "ˈdʊʁçˌzaːɡə",
+      "meanings": {
+        "en": "announcement",
+        "bn": "ঘোষণা"
+      },
+      "example": {
+        "de": "Hören Sie die Durchsage.",
+        "en": "Listen to the announcement.",
+        "bn": "ঘোষণাটা শুনুন।"
+      }
+    },
+    {
+      "term": "Fahrgast",
+      "article": "der",
+      "plural": "Fahrgäste",
+      "pos": "NOUN",
+      "ipa": "ˈfaːɐ̯ˌɡast",
+      "meanings": {
+        "en": "passenger",
+        "bn": "যাত্রী"
+      },
+      "example": {
+        "de": "Sehr geehrte Fahrgäste!",
+        "en": "Dear passengers!",
+        "bn": "সম্মানিত যাত্রীবৃন্দ!"
+      }
+    },
+    {
+      "term": "sondern",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "ˈzɔndɐn",
+      "meanings": {
+        "en": "but (rather)",
+        "bn": "বরং"
+      },
+      "example": {
+        "de": "Nicht Gleis 5, sondern Gleis 8.",
+        "en": "Not platform 5 but platform 8.",
+        "bn": "৫ নম্বর নয়, বরং ৮ নম্বর প্ল্যাটফর্ম।"
+      }
+    },
+    {
+      "term": "Ausgang",
+      "article": "der",
+      "plural": "Ausgänge",
+      "pos": "NOUN",
+      "ipa": "ˈaʊ̯sˌɡaŋ",
+      "meanings": {
+        "en": "exit",
+        "bn": "বের হওয়ার পথ"
+      },
+      "example": {
+        "de": "Wo ist der Ausgang?",
+        "en": "Where is the exit?",
+        "bn": "বের হওয়ার পথ কোথায়?"
+      }
+    },
+    {
+      "term": "schließen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃliːsn̩",
+      "meanings": {
+        "en": "to close",
+        "bn": "বন্ধ করা / হওয়া"
+      },
+      "example": {
+        "de": "Das Museum schließt um 18 Uhr.",
+        "en": "The museum closes at 6.",
+        "bn": "জাদুঘর সন্ধ্যা ৬টায় বন্ধ হয়।"
+      }
+    },
+    {
+      "term": "ausfallen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯sˌfalən",
+      "meanings": {
+        "en": "to be cancelled",
+        "bn": "বাতিল হওয়া"
+      },
+      "example": {
+        "de": "Der Zug fällt heute aus.",
+        "en": "The train is cancelled today.",
+        "bn": "ট্রেনটা আজ বাতিল।"
+      }
+    },
+    {
+      "term": "bald",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "balt",
+      "meanings": {
+        "en": "soon",
+        "bn": "শীঘ্রই"
+      },
+      "example": {
+        "de": "Der Bus kommt bald.",
+        "en": "The bus is coming soon.",
+        "bn": "বাস শীঘ্রই আসছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Hören Teil 2",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der ICE fährt heute nicht von Gleis 5, sondern von Gleis 8.\" — Der Zug fährt von Gleis 5.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "nicht 5, sondern 8."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ein Kilo Tomaten für nur 1,99 Euro.\" — Die Tomaten kosten 1,99 Euro pro Kilo.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "1,99 pro Kilo."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Flug hat eine Stunde Verspätung.\" — Der Flug ist pünktlich.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "Verspätung = not on time."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das Museum schließt in 15 Minuten.\" — Das Museum schließt bald.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "15 minutes = soon."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Bus Linie 7 fällt heute aus.\" — Der Bus Linie 7 fährt heute nicht.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "ausfallen = cancelled."
+      }
+    ]
+  }
+}

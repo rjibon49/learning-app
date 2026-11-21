@@ -1,0 +1,215 @@
+{
+  "slug": "grammar-place-prepositions",
+  "title": "Wo? Wohin? · Two-Way Prepositions",
+  "titles": {
+    "en": "Where? Where to? Two-Way Prepositions",
+    "bn": "Wo? Wohin? দুই-পথের অব্যয়"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "auf",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "aʊ̯f",
+      "meanings": {
+        "en": "on (top of)",
+        "bn": "উপরে"
+      },
+      "example": {
+        "de": "Das Buch liegt auf dem Tisch.",
+        "en": "The book is on the table.",
+        "bn": "বইটা টেবিলের উপরে।"
+      }
+    },
+    {
+      "term": "unter",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈʊntɐ",
+      "meanings": {
+        "en": "under",
+        "bn": "নিচে"
+      },
+      "example": {
+        "de": "Die Katze ist unter dem Bett.",
+        "en": "The cat is under the bed.",
+        "bn": "বিড়ালটা বিছানার নিচে।"
+      }
+    },
+    {
+      "term": "neben",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈneːbn̩",
+      "meanings": {
+        "en": "next to",
+        "bn": "পাশে"
+      },
+      "example": {
+        "de": "Die Bank ist neben der Post.",
+        "en": "The bank is next to the post office.",
+        "bn": "ব্যাংকটা পোস্ট অফিসের পাশে।"
+      }
+    },
+    {
+      "term": "zwischen",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈt͡svɪʃn̩",
+      "meanings": {
+        "en": "between",
+        "bn": "মাঝখানে"
+      },
+      "example": {
+        "de": "Ich sitze zwischen Anna und Tom.",
+        "en": "I'm sitting between Anna and Tom.",
+        "bn": "আমি আনা আর টমের মাঝখানে বসে আছি।"
+      }
+    },
+    {
+      "term": "hinter",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ˈhɪntɐ",
+      "meanings": {
+        "en": "behind",
+        "bn": "পেছনে"
+      },
+      "example": {
+        "de": "Der Garten ist hinter dem Haus.",
+        "en": "The garden is behind the house.",
+        "bn": "বাগানটা বাড়ির পেছনে।"
+      }
+    },
+    {
+      "term": "legen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈleːɡn̩",
+      "meanings": {
+        "en": "to put / lay (flat)",
+        "bn": "শুইয়ে রাখা"
+      },
+      "example": {
+        "de": "Ich lege das Handy auf den Tisch.",
+        "en": "I put the phone on the table.",
+        "bn": "আমি ফোনটা টেবিলে রাখি।"
+      }
+    },
+    {
+      "term": "liegen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈliːɡn̩",
+      "meanings": {
+        "en": "to lie (be lying)",
+        "bn": "শুয়ে থাকা / পড়ে থাকা"
+      },
+      "example": {
+        "de": "Das Handy liegt auf dem Tisch.",
+        "en": "The phone is on the table.",
+        "bn": "ফোনটা টেবিলে পড়ে আছে।"
+      }
+    },
+    {
+      "term": "stellen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃtɛlən",
+      "meanings": {
+        "en": "to put (upright)",
+        "bn": "দাঁড় করিয়ে রাখা"
+      },
+      "example": {
+        "de": "Ich stelle die Flasche in den Kühlschrank.",
+        "en": "I put the bottle in the fridge.",
+        "bn": "আমি বোতলটা ফ্রিজে রাখি।"
+      }
+    },
+    {
+      "term": "Wand",
+      "article": "die",
+      "plural": "Wände",
+      "pos": "NOUN",
+      "ipa": "vant",
+      "meanings": {
+        "en": "wall",
+        "bn": "দেয়াল"
+      },
+      "example": {
+        "de": "Das Bild hängt an der Wand.",
+        "en": "The picture hangs on the wall.",
+        "bn": "ছবিটা দেয়ালে ঝুলছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Wo? Wohin?",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich bin in ___ Küche. (Wo?)",
+        "options": [
+          "der",
+          "die",
+          "den"
+        ],
+        "answer": 0,
+        "explanation": "Wo? → Dativ, feminine = der."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich gehe in ___ Küche. (Wohin?)",
+        "options": [
+          "die",
+          "der",
+          "dem"
+        ],
+        "answer": 0,
+        "explanation": "Wohin? → Akkusativ, feminine = die."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich lege das Buch auf ___ Tisch.",
+        "options": [
+          "den",
+          "dem",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "legen = movement → Akkusativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das Buch liegt auf ___ Tisch.",
+        "options": [
+          "dem",
+          "den",
+          "das"
+        ],
+        "answer": 0,
+        "explanation": "liegen = position → Dativ."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich gehe ins Kino\" — ins = …",
+        "options": [
+          "in das",
+          "in dem",
+          "in den"
+        ],
+        "answer": 0,
+        "explanation": "ins = in das (Akkusativ)."
+      }
+    ]
+  }
+}

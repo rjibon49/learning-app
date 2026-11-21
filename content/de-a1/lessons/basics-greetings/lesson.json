@@ -1,0 +1,258 @@
+{
+  "slug": "basics-greetings",
+  "title": "Begrüßungen · Greetings",
+  "titles": {
+    "en": "Greetings: Hallo & Guten Tag",
+    "bn": "অভিবাদন: Hallo ও Guten Tag"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Guten Morgen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˌɡuːtn̩ ˈmɔʁɡn̩",
+      "meanings": {
+        "en": "Good morning",
+        "bn": "শুভ সকাল"
+      },
+      "example": {
+        "de": "Guten Morgen, Frau Weber!",
+        "en": "Good morning, Mrs Weber!",
+        "bn": "শুভ সকাল, মিসেস ভেবার!"
+      }
+    },
+    {
+      "term": "Guten Tag",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˌɡuːtn̩ ˈtaːk",
+      "meanings": {
+        "en": "Good day / Hello",
+        "bn": "শুভ দিন"
+      },
+      "example": {
+        "de": "Guten Tag, wie geht es Ihnen?",
+        "en": "Hello, how are you?",
+        "bn": "শুভ দিন, আপনি কেমন আছেন?"
+      }
+    },
+    {
+      "term": "Guten Abend",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˌɡuːtn̩ ˈaːbn̩t",
+      "meanings": {
+        "en": "Good evening",
+        "bn": "শুভ সন্ধ্যা"
+      },
+      "example": {
+        "de": "Guten Abend, Herr Ali!",
+        "en": "Good evening, Mr Ali!",
+        "bn": "শুভ সন্ধ্যা, মিস্টার আলী!"
+      }
+    },
+    {
+      "term": "Gute Nacht",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˌɡuːtə ˈnaxt",
+      "meanings": {
+        "en": "Good night",
+        "bn": "শুভ রাত্রি"
+      },
+      "example": {
+        "de": "Gute Nacht und schlaf gut!",
+        "en": "Good night and sleep well!",
+        "bn": "শুভ রাত্রি, ভালো ঘুমাও!"
+      }
+    },
+    {
+      "term": "Hallo",
+      "article": null,
+      "plural": null,
+      "pos": "INTERJECTION",
+      "ipa": "haˈloː",
+      "meanings": {
+        "en": "hello",
+        "bn": "হ্যালো"
+      },
+      "example": {
+        "de": "Hallo, ich bin Lena.",
+        "en": "Hello, I am Lena.",
+        "bn": "হ্যালো, আমি লেনা।"
+      }
+    },
+    {
+      "term": "Wie geht es Ihnen?",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "viː ˈɡeːt ɛs ˈiːnən",
+      "meanings": {
+        "en": "How are you? (formal)",
+        "bn": "আপনি কেমন আছেন?"
+      },
+      "example": {
+        "de": "Guten Tag, Herr Kim. Wie geht es Ihnen?",
+        "en": "Hello, Mr Kim. How are you?",
+        "bn": "শুভ দিন, মিস্টার কিম। আপনি কেমন আছেন?"
+      }
+    },
+    {
+      "term": "Wie geht's?",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "viː ˈɡeːts",
+      "meanings": {
+        "en": "How are you? (informal)",
+        "bn": "কেমন আছ?"
+      },
+      "example": {
+        "de": "Hallo Tom, wie geht's?",
+        "en": "Hi Tom, how are you?",
+        "bn": "হ্যালো টম, কেমন আছ?"
+      }
+    },
+    {
+      "term": "gut",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡuːt",
+      "meanings": {
+        "en": "good / fine",
+        "bn": "ভালো"
+      },
+      "example": {
+        "de": "Mir geht es gut.",
+        "en": "I am fine.",
+        "bn": "আমি ভালো আছি।"
+      }
+    },
+    {
+      "term": "danke",
+      "article": null,
+      "plural": null,
+      "pos": "INTERJECTION",
+      "ipa": "ˈdaŋkə",
+      "meanings": {
+        "en": "thank you",
+        "bn": "ধন্যবাদ"
+      },
+      "example": {
+        "de": "Gut, danke!",
+        "en": "Fine, thank you!",
+        "bn": "ভালো, ধন্যবাদ!"
+      }
+    },
+    {
+      "term": "Herr",
+      "article": "der",
+      "plural": "Herren",
+      "pos": "NOUN",
+      "ipa": "hɛʁ",
+      "meanings": {
+        "en": "Mr / gentleman",
+        "bn": "মিস্টার / ভদ্রলোক"
+      },
+      "example": {
+        "de": "Guten Tag, Herr Becker.",
+        "en": "Hello, Mr Becker.",
+        "bn": "শুভ দিন, মিস্টার বেকার।"
+      }
+    },
+    {
+      "term": "Frau",
+      "article": "die",
+      "plural": "Frauen",
+      "pos": "NOUN",
+      "ipa": "fʁaʊ̯",
+      "meanings": {
+        "en": "Mrs / Ms / woman",
+        "bn": "মিসেস / মহিলা"
+      },
+      "example": {
+        "de": "Das ist Frau Klein.",
+        "en": "This is Mrs Klein.",
+        "bn": "ইনি মিসেস ক্লাইন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Greetings",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "It is 8 a.m. You enter a bakery. What do you say?",
+        "options": [
+          "Guten Morgen!",
+          "Gute Nacht!",
+          "Guten Abend!"
+        ],
+        "answer": 0,
+        "explanation": "Guten Morgen is used until about 11 a.m."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which greeting do you NOT use when you arrive?",
+        "options": [
+          "Gute Nacht",
+          "Guten Tag",
+          "Hallo"
+        ],
+        "answer": 0,
+        "explanation": "Gute Nacht is only for leaving at night or going to bed."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "You meet your teacher. How do you ask how she is?",
+        "options": [
+          "Wie geht es Ihnen?",
+          "Wie geht's?",
+          "Und dir?"
+        ],
+        "answer": 0,
+        "explanation": "Teachers, officials and strangers: formal Sie / Ihnen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Gut, danke. Und dir?\" — who do you say this to?",
+        "options": [
+          "a friend",
+          "your boss",
+          "a police officer"
+        ],
+        "answer": 0,
+        "explanation": "dir = informal: friends, family, children."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Es geht.\" means …",
+        "options": [
+          "So-so.",
+          "Very good.",
+          "It's going home."
+        ],
+        "answer": 0,
+        "explanation": "Es geht = it's okay / so-so."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where do people say \"Moin!\"?",
+        "options": [
+          "North Germany",
+          "Switzerland",
+          "Austria"
+        ],
+        "answer": 0,
+        "explanation": "Moin is the typical greeting in northern Germany."
+      }
+    ]
+  }
+}

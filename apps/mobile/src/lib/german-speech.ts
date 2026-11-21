@@ -1,91 +1,52 @@
-
 import * as Speech from "expo-speech";
 
-const MAX_PHRASE_LENGTH = 500;
-const SPEECH_URL = "https://tts.invalid/speak";
+import { MAX_PHRASE_LENGTH } from "./speech-links";
 
-export const GERMAN_SPEECH_SETTINGS = {
-  language: "de-DE",
-  rate: 0.68,
-  pitch: 1.0,
-  volume: 1.0,
-} as const;
+export { makeSpeechLink, parseSpeechLink } from "./speech-links";
 
 let cachedVoice: string | null | undefined;
 
-async function getGermanVoice(): Promise<string | null> {
-  if (cachedVoice !== undefined) {
-    return cachedVoice;
-  }
+function isGerman(language: string): boolean {
+  return /^de([-_]|$)/i.test(language);
+}
 
+/** Best German voice on this device (enhanced de-DE first), or null. */
+async function getGermanVoice(): Promise<string | null> {
+  if (cachedVoice !== undefined) return cachedVoice;
+
+  try {
+    const voices = (await Speech.getAvailableVoicesAsync()).filter((v) => isGerman(v.language));
+    const deDE = (v: Speech.Voice) => v.language.replace("_", "-").toLowerCase() === "de-de";
+    const enhanced = (v: Speech.Voice) => v.quality === Speech.VoiceQuality.Enhanced;
+    const preferred =
+      voices.find((v) => deDE(v) && enhanced(v)) ??
+      voices.find(enhanced) ??
+      voices.find(deDE) ??
+      voices[0];
+    // Only cache a real answer: the voice list can be empty right after start-up.
+    if (voices.length > 0) cachedVoice = preferred?.identifier ?? null;
+    return preferred?.identifier ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Whether the phone has a German text-to-speech voice. Some Android phones
+ * report an empty list even though "de-DE" works, so "unknown" is not an error.
+ */
+export async function germanVoiceStatus(): Promise<"available" | "missing" | "unknown"> {
   try {
     const voices = await Speech.getAvailableVoicesAsync();
-
-    const germanVoices = voices.filter((voice) =>
-      /^de([-_]|$)/i.test(voice.language)
-    );
-
-    const preferred =
-      germanVoices.find(
-        (voice) =>
-          voice.language.replace("_", "-").toLowerCase() ===
-            "de-de" &&
-          voice.quality === Speech.VoiceQuality.Enhanced
-      ) ??
-      germanVoices.find(
-        (voice) =>
-          voice.quality === Speech.VoiceQuality.Enhanced
-      ) ??
-      germanVoices.find(
-        (voice) =>
-          voice.language.replace("_", "-").toLowerCase() ===
-          "de-de"
-      ) ??
-      germanVoices[0];
-
-    cachedVoice = preferred?.identifier ?? null;
-    return cachedVoice;
+    if (voices.length === 0) return "unknown";
+    return voices.some((v) => isGerman(v.language)) ? "available" : "missing";
   } catch {
-    // Fall back to the device's default German voice.
-    return null;
-  }
-}
-
-export function makeSpeechLink(text: string): string {
-  return (
-    SPEECH_URL +
-    "?text=" +
-    encodeURIComponent(text.trim())
-  );
-}
-
-export function parseSpeechLink(url: string): string | null {
-  try {
-    const parsed = new URL(url);
-
-    if (
-      parsed.origin !== "https://tts.invalid" ||
-      parsed.pathname !== "/speak"
-    ) {
-      return null;
-    }
-
-    const text = parsed.searchParams.get("text")?.trim();
-
-    if (!text || text.length > MAX_PHRASE_LENGTH) {
-      return null;
-    }
-
-    return text;
-  } catch {
-    return null;
+    return "unknown";
   }
 }
 
 // Remove Markdown formatting before pronunciation.
-export function cleanMarkdownForSpeech(
-  markdown: string
-): string {
+export function cleanMarkdownForSpeech(markdown: string): string {
   return markdown
     .replace(/```[\s\S]*?```/g, " ")
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
@@ -105,32 +66,29 @@ export function cleanMarkdownForSpeech(
     .trim();
 }
 
-export async function speakGerman(
-  text: string
-): Promise<void> {
+/**
+ * Speaks German with the device voice. Resolves when speech ends or is
+ * stopped. `rate`: 1 = device normal speed.
+ */
+export async function speakGerman(text: string, rate = 0.85): Promise<void> {
   const phrase = cleanMarkdownForSpeech(text);
-
-  if (!phrase) {
-    throw new Error("No text available for speech.");
-  }
+  if (!phrase) throw new Error("No text available for speech.");
 
   await Speech.stop();
-
   const voice = await getGermanVoice();
 
-  Speech.speak(
-    phrase.slice(
-      0,
-      Math.min(
-        MAX_PHRASE_LENGTH,
-        Speech.maxSpeechInputLength
-      )
-    ),
-    {
-      ...GERMAN_SPEECH_SETTINGS,
+  await new Promise<void>((resolve, reject) => {
+    Speech.speak(phrase.slice(0, Math.min(MAX_PHRASE_LENGTH, Speech.maxSpeechInputLength)), {
+      language: "de-DE",
+      rate,
+      pitch: 1.0,
+      volume: 1.0,
       ...(voice ? { voice } : {}),
-    }
-  );
+      onDone: () => resolve(),
+      onStopped: () => resolve(),
+      onError: (error) => reject(error instanceof Error ? error : new Error("Speech failed")),
+    });
+  });
 }
 
 export async function stopGermanSpeech(): Promise<void> {

@@ -1,0 +1,324 @@
+{
+  "language": "de",
+  "level": "A1",
+  "courses": [
+    {
+      "slug": "de-a1-basics",
+      "title": "Start Here · German Basics",
+      "description": "Letters and sounds, greetings, introducing yourself, numbers, time, days, months, weather and colours — everything for your first days with German.",
+      "modules": [
+        {
+          "slug": "basics-sounds-letters",
+          "title": "Buchstaben & Laute · Letters and Sounds",
+          "description": "Read any German word: alphabet, special sounds, syllables and stress.",
+          "lessons": [
+            "basics-alphabet",
+            "basics-sounds",
+            "basics-syllables-stress"
+          ]
+        },
+        {
+          "slug": "basics-hallo",
+          "title": "Hallo! · Hello and Goodbye",
+          "description": "Greet people, say goodbye politely and introduce yourself.",
+          "lessons": [
+            "basics-greetings",
+            "basics-goodbye",
+            "basics-introduce-yourself"
+          ]
+        },
+        {
+          "slug": "basics-numbers-time",
+          "title": "Zahlen & Zeit · Numbers and Time",
+          "description": "Count, pay, give your phone number, say dates and tell the time.",
+          "lessons": [
+            "basics-numbers-0-20",
+            "basics-numbers-big",
+            "basics-ordinals-dates",
+            "basics-time"
+          ]
+        },
+        {
+          "slug": "basics-calendar-colours",
+          "title": "Kalender & Farben · Calendar and Colours",
+          "description": "Days, months, seasons, weather and colours.",
+          "lessons": [
+            "basics-weekdays",
+            "basics-months",
+            "basics-seasons-weather",
+            "basics-colours"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "de-a1-grammar",
+      "title": "A1 Grammatik · Grammar Step by Step",
+      "description": "All A1 grammar in small steps: nouns and articles, verbs, questions, word order, modal and separable verbs, cases, prepositions and the past tense.",
+      "modules": [
+        {
+          "slug": "grammar-nouns-articles",
+          "title": "Nomen & Artikel · Nouns and Articles",
+          "description": "der, die, das, ein, kein, plurals and how to say no.",
+          "lessons": [
+            "grammar-nouns",
+            "grammar-articles",
+            "grammar-negation"
+          ]
+        },
+        {
+          "slug": "grammar-verbs-present",
+          "title": "Verben im Präsens · Verbs in the Present",
+          "description": "Pronouns, verb endings, sein and haben, irregular verbs.",
+          "lessons": [
+            "grammar-personal-pronouns",
+            "grammar-verb-conjugation",
+            "grammar-sein-haben",
+            "grammar-irregular-verbs"
+          ]
+        },
+        {
+          "slug": "grammar-sentences",
+          "title": "Sätze & Fragen · Sentences and Questions",
+          "description": "W-questions, yes/no questions, word order and the imperative.",
+          "lessons": [
+            "grammar-w-questions",
+            "grammar-yes-no-questions",
+            "grammar-word-order",
+            "grammar-imperative"
+          ]
+        },
+        {
+          "slug": "grammar-modal-separable",
+          "title": "Modalverben & Trennbare Verben · Modal and Separable Verbs",
+          "description": "können, müssen, wollen, dürfen, sollen, möchten and verbs that split.",
+          "lessons": [
+            "grammar-modal-verbs-1",
+            "grammar-modal-verbs-2",
+            "grammar-separable-verbs"
+          ]
+        },
+        {
+          "slug": "grammar-cases",
+          "title": "Die Fälle · Cases",
+          "description": "Nominativ, Akkusativ, Dativ and possessive articles.",
+          "lessons": [
+            "grammar-cases-intro",
+            "grammar-nominative",
+            "grammar-accusative",
+            "grammar-dative",
+            "grammar-possessive-articles"
+          ]
+        },
+        {
+          "slug": "grammar-prepositions",
+          "title": "Präpositionen · Prepositions",
+          "description": "Time, accusative, dative and two-way prepositions.",
+          "lessons": [
+            "grammar-time-prepositions",
+            "grammar-accusative-prepositions",
+            "grammar-dative-prepositions",
+            "grammar-place-prepositions"
+          ]
+        },
+        {
+          "slug": "grammar-past",
+          "title": "Vergangenheit · Talking About the Past",
+          "description": "Perfekt with haben and sein, war and hatte.",
+          "lessons": [
+            "grammar-perfect-haben",
+            "grammar-perfect-sein-participle",
+            "grammar-war-hatte"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "de-a1-everyday",
+      "title": "Alltag auf Deutsch · Everyday German",
+      "description": "Real situations from life in Germany: family, your flat, food and shopping, your day, the town, the doctor, work, clothes and forms.",
+      "modules": [
+        {
+          "slug": "everyday-people",
+          "title": "Menschen & Familie · People and Family",
+          "description": "Talk about your family, where you come from and what people are like.",
+          "lessons": [
+            "everyday-family",
+            "everyday-countries-languages",
+            "everyday-describing-people"
+          ]
+        },
+        {
+          "slug": "everyday-home",
+          "title": "Wohnen · Home",
+          "description": "Rooms, furniture and finding a flat.",
+          "lessons": [
+            "everyday-flat-rooms",
+            "everyday-furniture",
+            "everyday-looking-for-flat"
+          ]
+        },
+        {
+          "slug": "everyday-food",
+          "title": "Essen & Einkaufen · Food and Shopping",
+          "description": "Food and drinks, the supermarket, cafés and restaurants.",
+          "lessons": [
+            "everyday-food-drinks",
+            "everyday-supermarket",
+            "everyday-cafe-restaurant"
+          ]
+        },
+        {
+          "slug": "everyday-free-time",
+          "title": "Alltag & Freizeit · Daily Life and Free Time",
+          "description": "Your daily routine, hobbies and making plans with friends.",
+          "lessons": [
+            "everyday-daily-routine",
+            "everyday-hobbies",
+            "everyday-making-plans"
+          ]
+        },
+        {
+          "slug": "everyday-town",
+          "title": "Stadt & Verkehr · Town and Transport",
+          "description": "Places in town, asking the way, buses, trains and tickets.",
+          "lessons": [
+            "everyday-places-in-town",
+            "everyday-directions",
+            "everyday-transport-tickets"
+          ]
+        },
+        {
+          "slug": "everyday-health",
+          "title": "Gesundheit · Health",
+          "description": "The body, visiting the doctor and making appointments by phone.",
+          "lessons": [
+            "everyday-body",
+            "everyday-at-the-doctor",
+            "everyday-appointments-phone"
+          ]
+        },
+        {
+          "slug": "everyday-work",
+          "title": "Arbeit & Kleidung · Work and Clothes",
+          "description": "Jobs, buying clothes and filling in forms.",
+          "lessons": [
+            "everyday-jobs",
+            "everyday-clothes-shopping",
+            "everyday-forms-documents"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "de-a1-stories",
+      "title": "Geschichten · Rafi in Köln",
+      "description": "Twelve short stories in easy German: follow Rafi from Bangladesh through his first year in Cologne — and learn real everyday German along the way.",
+      "modules": [
+        {
+          "slug": "stories-arrival",
+          "title": "Ankommen · Arriving",
+          "description": "The flight, the first room in a shared flat and registering at the Bürgeramt.",
+          "lessons": [
+            "story-arrival",
+            "story-first-room",
+            "story-registration"
+          ]
+        },
+        {
+          "slug": "stories-new-people",
+          "title": "Neue Leute · New People",
+          "description": "The German course, the neighbour and a dinner with friends.",
+          "lessons": [
+            "story-german-course",
+            "story-neighbour",
+            "story-dinner-friends"
+          ]
+        },
+        {
+          "slug": "stories-everyday",
+          "title": "Alltag · Everyday Life",
+          "description": "Bottle deposit, being ill and a train that leaves without Rafi.",
+          "lessons": [
+            "story-supermarket",
+            "story-ill",
+            "story-missed-train"
+          ]
+        },
+        {
+          "slug": "stories-new-goals",
+          "title": "Neue Ziele · New Goals",
+          "description": "An email home, a job interview and one year in Cologne.",
+          "lessons": [
+            "story-email-home",
+            "story-job-interview",
+            "story-one-year"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "de-a1-exam",
+      "title": "Prüfungstraining A1 · Exam Practice",
+      "description": "Get ready for Goethe Start Deutsch 1 and telc Deutsch A1: the format, strategies and original practice tasks for listening, reading, writing and speaking — plus a mock test.",
+      "modules": [
+        {
+          "slug": "exam-intro",
+          "title": "Die Prüfung · The Exam",
+          "description": "What the A1 exam looks like and strategies that work.",
+          "lessons": [
+            "exam-overview",
+            "exam-strategies"
+          ]
+        },
+        {
+          "slug": "exam-hoeren",
+          "title": "Hören · Listening",
+          "description": "Short conversations, announcements and phone messages.",
+          "lessons": [
+            "exam-hoeren-dialogues",
+            "exam-hoeren-announcements",
+            "exam-hoeren-phone"
+          ]
+        },
+        {
+          "slug": "exam-lesen",
+          "title": "Lesen · Reading",
+          "description": "Emails and notes, ads and websites, signs and notices.",
+          "lessons": [
+            "exam-lesen-messages",
+            "exam-lesen-ads",
+            "exam-lesen-signs"
+          ]
+        },
+        {
+          "slug": "exam-schreiben",
+          "title": "Schreiben · Writing",
+          "description": "Filling in a form and writing a short message.",
+          "lessons": [
+            "exam-schreiben-form",
+            "exam-schreiben-message"
+          ]
+        },
+        {
+          "slug": "exam-sprechen",
+          "title": "Sprechen · Speaking",
+          "description": "Introducing yourself, asking and answering, making requests.",
+          "lessons": [
+            "exam-sprechen-introduce",
+            "exam-sprechen-questions",
+            "exam-sprechen-requests"
+          ]
+        },
+        {
+          "slug": "exam-mock",
+          "title": "Modelltest · Mock Test",
+          "description": "A mixed practice test to check where you stand.",
+          "lessons": [
+            "exam-mock-test"
+          ]
+        }
+      ]
+    }
+  ]
+}

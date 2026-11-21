@@ -91,6 +91,16 @@ validate(progressPaginationSchema, query),
 // LESSON COMPLETION
 // =======================================
 
+/**
+ * GET /learner/progress/lessons
+ * Lessons this learner finished, so a new phone or a reinstall keeps the
+ * learning path.
+ */
+@Get('lessons')
+completedLessons(@Req() request: LearnerRequest) {
+return this.progress.completedLessons(this.userId(request));
+}
+
 @Post('lessons')
 @Throttle({
 short: { limit: 10, ttl: 1000 },

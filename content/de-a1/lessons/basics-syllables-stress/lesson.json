@@ -1,0 +1,198 @@
+{
+  "slug": "basics-syllables-stress",
+  "title": "Silben und Betonung · Syllables & Stress",
+  "titles": {
+    "en": "Syllables and Word Stress",
+    "bn": "সিলেবল (Silbe) ও শব্দের জোর"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Banane",
+      "article": "die",
+      "plural": "Bananen",
+      "pos": "NOUN",
+      "ipa": "baˈnaːnə",
+      "meanings": {
+        "en": "banana",
+        "bn": "কলা"
+      },
+      "example": {
+        "de": "Die Banane ist gelb.",
+        "en": "The banana is yellow.",
+        "bn": "কলাটি হলুদ।"
+      }
+    },
+    {
+      "term": "Telefon",
+      "article": "das",
+      "plural": "Telefone",
+      "pos": "NOUN",
+      "ipa": "ˈteːləfoːn",
+      "meanings": {
+        "en": "telephone",
+        "bn": "টেলিফোন"
+      },
+      "example": {
+        "de": "Das Telefon klingelt.",
+        "en": "The phone is ringing.",
+        "bn": "টেলিফোন বাজছে।"
+      }
+    },
+    {
+      "term": "Wochenende",
+      "article": "das",
+      "plural": "Wochenenden",
+      "pos": "NOUN",
+      "ipa": "ˈvɔxn̩ˌʔɛndə",
+      "meanings": {
+        "en": "weekend",
+        "bn": "সপ্তাহান্ত"
+      },
+      "example": {
+        "de": "Schönes Wochenende!",
+        "en": "Have a nice weekend!",
+        "bn": "সুন্দর সপ্তাহান্ত কাটুক!"
+      }
+    },
+    {
+      "term": "Hausaufgabe",
+      "article": "die",
+      "plural": "Hausaufgaben",
+      "pos": "NOUN",
+      "ipa": "ˈhaʊ̯sʔaʊ̯fˌɡaːbə",
+      "meanings": {
+        "en": "homework",
+        "bn": "বাড়ির কাজ"
+      },
+      "example": {
+        "de": "Ich mache meine Hausaufgaben.",
+        "en": "I am doing my homework.",
+        "bn": "আমি আমার বাড়ির কাজ করছি।"
+      }
+    },
+    {
+      "term": "Kühlschrank",
+      "article": "der",
+      "plural": "Kühlschränke",
+      "pos": "NOUN",
+      "ipa": "ˈkyːlˌʃʁaŋk",
+      "meanings": {
+        "en": "fridge",
+        "bn": "ফ্রিজ"
+      },
+      "example": {
+        "de": "Die Milch ist im Kühlschrank.",
+        "en": "The milk is in the fridge.",
+        "bn": "দুধ ফ্রিজে আছে।"
+      }
+    },
+    {
+      "term": "Bahnhof",
+      "article": "der",
+      "plural": "Bahnhöfe",
+      "pos": "NOUN",
+      "ipa": "ˈbaːnˌhoːf",
+      "meanings": {
+        "en": "train station",
+        "bn": "রেলস্টেশন"
+      },
+      "example": {
+        "de": "Wo ist der Bahnhof?",
+        "en": "Where is the station?",
+        "bn": "রেলস্টেশন কোথায়?"
+      }
+    },
+    {
+      "term": "Vater",
+      "article": "der",
+      "plural": "Väter",
+      "pos": "NOUN",
+      "ipa": "ˈfaːtɐ",
+      "meanings": {
+        "en": "father",
+        "bn": "বাবা"
+      },
+      "example": {
+        "de": "Mein Vater arbeitet viel.",
+        "en": "My father works a lot.",
+        "bn": "আমার বাবা অনেক কাজ করেন।"
+      }
+    },
+    {
+      "term": "Mutter",
+      "article": "die",
+      "plural": "Mütter",
+      "pos": "NOUN",
+      "ipa": "ˈmʊtɐ",
+      "meanings": {
+        "en": "mother",
+        "bn": "মা"
+      },
+      "example": {
+        "de": "Meine Mutter kocht gern.",
+        "en": "My mother likes to cook.",
+        "bn": "আমার মা রান্না করতে ভালোবাসেন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Syllables and Stress",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How many syllables does \"Banane\" have?",
+        "options": [
+          "3",
+          "2",
+          "4"
+        ],
+        "answer": 0,
+        "explanation": "Ba-na-ne: three vowel sounds, three syllables."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the article of \"Hausaufgabe\"?",
+        "options": [
+          "die (because die Aufgabe)",
+          "das (because das Haus)",
+          "der"
+        ],
+        "answer": 0,
+        "explanation": "In a compound word the last part decides the article."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where is the stress in \"Vater\"?",
+        "options": [
+          "VA-ter",
+          "va-TER"
+        ],
+        "answer": 0,
+        "explanation": "Most German words stress the first syllable."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where is the stress in \"besuchen\"?",
+        "options": [
+          "be-SU-chen",
+          "BE-su-chen",
+          "be-su-CHEN"
+        ],
+        "answer": 0,
+        "explanation": "Words with be-, ge-, ver-, er- stress the syllable after it."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Kühlschrank\" is made of …",
+        "options": [
+          "kühl + Schrank",
+          "Kuh + Schrank",
+          "kühl + Rank"
+        ],
+        "answer": 0,
+        "explanation": "kühl (cool) + Schrank (cupboard) = fridge."
+      }
+    ]
+  }
+}

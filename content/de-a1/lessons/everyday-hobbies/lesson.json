@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-hobbies",
+  "title": "Freizeit & Hobbys · Free Time",
+  "titles": {
+    "en": "Free Time and Hobbies",
+    "bn": "অবসর ও শখ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Freizeit",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈfʁaɪ̯ˌt͡saɪ̯t",
+      "meanings": {
+        "en": "free time",
+        "bn": "অবসর"
+      },
+      "example": {
+        "de": "Was machst du in deiner Freizeit?",
+        "en": "What do you do in your free time?",
+        "bn": "অবসরে তুমি কী করো?"
+      }
+    },
+    {
+      "term": "Hobby",
+      "article": "das",
+      "plural": "Hobbys",
+      "pos": "NOUN",
+      "ipa": "ˈhɔbi",
+      "meanings": {
+        "en": "hobby",
+        "bn": "শখ"
+      },
+      "example": {
+        "de": "Mein Hobby ist Kochen.",
+        "en": "My hobby is cooking.",
+        "bn": "আমার শখ রান্না করা।"
+      }
+    },
+    {
+      "term": "spielen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʃpiːlən",
+      "meanings": {
+        "en": "to play",
+        "bn": "খেলা"
+      },
+      "example": {
+        "de": "Wir spielen am Sonntag Kricket.",
+        "en": "We play cricket on Sunday.",
+        "bn": "আমরা রবিবার ক্রিকেট খেলি।"
+      }
+    },
+    {
+      "term": "lesen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈleːzn̩",
+      "meanings": {
+        "en": "to read",
+        "bn": "পড়া"
+      },
+      "example": {
+        "de": "Ich lese gern Bücher.",
+        "en": "I like reading books.",
+        "bn": "আমি বই পড়তে ভালোবাসি।"
+      }
+    },
+    {
+      "term": "tanzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈtant͡sn̩",
+      "meanings": {
+        "en": "to dance",
+        "bn": "নাচা"
+      },
+      "example": {
+        "de": "Tanzt du gern?",
+        "en": "Do you like dancing?",
+        "bn": "তুমি কি নাচতে ভালোবাসো?"
+      }
+    },
+    {
+      "term": "reisen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʁaɪ̯zn̩",
+      "meanings": {
+        "en": "to travel",
+        "bn": "ভ্রমণ করা"
+      },
+      "example": {
+        "de": "Im Sommer reisen wir nach Italien.",
+        "en": "In summer we travel to Italy.",
+        "bn": "গ্রীষ্মে আমরা ইতালি ভ্রমণে যাই।"
+      }
+    },
+    {
+      "term": "treffen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈtʁɛfn̩",
+      "meanings": {
+        "en": "to meet",
+        "bn": "দেখা করা"
+      },
+      "example": {
+        "de": "Ich treffe meine Freunde.",
+        "en": "I'm meeting my friends.",
+        "bn": "আমি বন্ধুদের সাথে দেখা করছি।"
+      }
+    },
+    {
+      "term": "spazieren gehen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ʃpaˈt͡siːʁən ˈɡeːən",
+      "meanings": {
+        "en": "to go for a walk",
+        "bn": "হাঁটতে যাওয়া"
+      },
+      "example": {
+        "de": "Wir gehen im Park spazieren.",
+        "en": "We go for a walk in the park.",
+        "bn": "আমরা পার্কে হাঁটতে যাই।"
+      }
+    },
+    {
+      "term": "Musik",
+      "article": "die",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "muˈziːk",
+      "meanings": {
+        "en": "music",
+        "bn": "সংগীত / গান"
+      },
+      "example": {
+        "de": "Ich höre gern Musik.",
+        "en": "I like listening to music.",
+        "bn": "আমি গান শুনতে ভালোবাসি।"
+      }
+    },
+    {
+      "term": "einmal",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈaɪ̯nmaːl",
+      "meanings": {
+        "en": "once",
+        "bn": "একবার"
+      },
+      "example": {
+        "de": "Ich jogge einmal pro Woche.",
+        "en": "I jog once a week.",
+        "bn": "আমি সপ্তাহে একবার জগিং করি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Free time",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich koche gern\" means …",
+        "options": [
+          "I like cooking.",
+          "I cook quickly.",
+          "I'm cooking now."
+        ],
+        "answer": 0,
+        "explanation": "verb + gern = like doing."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Was machst du in ___ Freizeit?",
+        "options": [
+          "deiner",
+          "dein",
+          "deine"
+        ],
+        "answer": 0,
+        "explanation": "in + Dativ, die Freizeit → deiner."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"zweimal pro Woche\" means …",
+        "options": [
+          "twice a week",
+          "every two weeks",
+          "two weeks"
+        ],
+        "answer": 0,
+        "explanation": "zweimal = twice."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Am Wochenende ___ ich Freunde.",
+        "options": [
+          "treffe",
+          "trifft",
+          "treffen"
+        ],
+        "answer": 0,
+        "explanation": "ich treffe."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which is a hobby?",
+        "options": [
+          "Rad fahren",
+          "die Miete",
+          "der Flur"
+        ],
+        "answer": 0,
+        "explanation": "Rad fahren = cycling."
+      }
+    ]
+  }
+}

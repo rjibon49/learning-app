@@ -1,0 +1,194 @@
+{
+  "slug": "grammar-accusative",
+  "title": "Akkusativ · The Direct Object",
+  "titles": {
+    "en": "Accusative: The Direct Object",
+    "bn": "Akkusativ: কর্মকারক"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "kaufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkaʊ̯fn̩",
+      "meanings": {
+        "en": "to buy",
+        "bn": "কেনা"
+      },
+      "example": {
+        "de": "Ich kaufe einen Kaffee.",
+        "en": "I'm buying a coffee.",
+        "bn": "আমি একটা কফি কিনছি।"
+      }
+    },
+    {
+      "term": "brauchen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈbʁaʊ̯xn̩",
+      "meanings": {
+        "en": "to need",
+        "bn": "দরকার হওয়া"
+      },
+      "example": {
+        "de": "Wir brauchen eine Wohnung.",
+        "en": "We need a flat.",
+        "bn": "আমাদের একটা ফ্ল্যাট দরকার।"
+      }
+    },
+    {
+      "term": "suchen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈzuːxn̩",
+      "meanings": {
+        "en": "to look for",
+        "bn": "খোঁজা"
+      },
+      "example": {
+        "de": "Ich suche den Bahnhof.",
+        "en": "I'm looking for the station.",
+        "bn": "আমি স্টেশন খুঁজছি।"
+      }
+    },
+    {
+      "term": "nehmen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈneːmən",
+      "meanings": {
+        "en": "to take",
+        "bn": "নেওয়া"
+      },
+      "example": {
+        "de": "Ich nehme den Fisch.",
+        "en": "I'll have the fish.",
+        "bn": "আমি মাছটা নেব।"
+      }
+    },
+    {
+      "term": "Hunger",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈhʊŋɐ",
+      "meanings": {
+        "en": "hunger",
+        "bn": "ক্ষুধা"
+      },
+      "example": {
+        "de": "Ich habe keinen Hunger.",
+        "en": "I'm not hungry.",
+        "bn": "আমার ক্ষুধা নেই।"
+      }
+    },
+    {
+      "term": "Bahnhof",
+      "article": "der",
+      "plural": "Bahnhöfe",
+      "pos": "NOUN",
+      "ipa": "ˈbaːnˌhoːf",
+      "meanings": {
+        "en": "train station",
+        "bn": "রেলস্টেশন"
+      },
+      "example": {
+        "de": "Wo ist der Bahnhof?",
+        "en": "Where is the station?",
+        "bn": "স্টেশনটা কোথায়?"
+      }
+    },
+    {
+      "term": "es gibt",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɛs ɡɪpt",
+      "meanings": {
+        "en": "there is / there are",
+        "bn": "আছে (অস্তিত্ব)"
+      },
+      "example": {
+        "de": "Es gibt einen Park hier.",
+        "en": "There is a park here.",
+        "bn": "এখানে একটা পার্ক আছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Akkusativ",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ Bruder.",
+        "options": [
+          "einen",
+          "ein",
+          "einem"
+        ],
+        "answer": 0,
+        "explanation": "der Bruder → Akkusativ einen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Sie kauft ___ Tasche. (die Tasche)",
+        "options": [
+          "eine",
+          "einen",
+          "einer"
+        ],
+        "answer": 0,
+        "explanation": "Feminine does not change."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich habe ___ Hunger.",
+        "options": [
+          "keinen",
+          "kein",
+          "keine"
+        ],
+        "answer": 0,
+        "explanation": "der Hunger → keinen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Akkusativ of \"er\" is …",
+        "options": [
+          "ihn",
+          "ihm",
+          "er"
+        ],
+        "answer": 0,
+        "explanation": "er → ihn."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich sehe ___ Mann.",
+        "options": [
+          "den",
+          "der",
+          "dem"
+        ],
+        "answer": 0,
+        "explanation": "sehen + Akkusativ: den Mann."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Liebst du ___? (ich)",
+        "options": [
+          "mich",
+          "mir",
+          "ich"
+        ],
+        "answer": 0,
+        "explanation": "ich → mich."
+      }
+    ]
+  }
+}

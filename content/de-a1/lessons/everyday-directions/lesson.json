@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-directions",
+  "title": "Nach dem Weg fragen · Asking the Way",
+  "titles": {
+    "en": "Asking for and Giving Directions",
+    "bn": "পথ জিজ্ঞেস করা ও বলে দেওয়া"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "geradeaus",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ɡəˈʁaːdəˌʔaʊ̯s",
+      "meanings": {
+        "en": "straight on",
+        "bn": "সোজা"
+      },
+      "example": {
+        "de": "Gehen Sie geradeaus.",
+        "en": "Go straight on.",
+        "bn": "সোজা যান।"
+      }
+    },
+    {
+      "term": "links",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "lɪŋks",
+      "meanings": {
+        "en": "left",
+        "bn": "বামে"
+      },
+      "example": {
+        "de": "Die Post ist links.",
+        "en": "The post office is on the left.",
+        "bn": "ডাকঘরটা বামে।"
+      }
+    },
+    {
+      "term": "rechts",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ʁɛçts",
+      "meanings": {
+        "en": "right",
+        "bn": "ডানে"
+      },
+      "example": {
+        "de": "Gehen Sie nach rechts.",
+        "en": "Go to the right.",
+        "bn": "ডান দিকে যান।"
+      }
+    },
+    {
+      "term": "Ampel",
+      "article": "die",
+      "plural": "Ampeln",
+      "pos": "NOUN",
+      "ipa": "ˈampl̩",
+      "meanings": {
+        "en": "traffic lights",
+        "bn": "ট্রাফিক লাইট"
+      },
+      "example": {
+        "de": "An der Ampel links.",
+        "en": "Left at the traffic lights.",
+        "bn": "ট্রাফিক লাইটে বামে।"
+      }
+    },
+    {
+      "term": "Kreuzung",
+      "article": "die",
+      "plural": "Kreuzungen",
+      "pos": "NOUN",
+      "ipa": "ˈkʁɔɪ̯t͡sʊŋ",
+      "meanings": {
+        "en": "crossroads",
+        "bn": "মোড়"
+      },
+      "example": {
+        "de": "An der Kreuzung geradeaus.",
+        "en": "Straight on at the crossroads.",
+        "bn": "মোড়ে সোজা।"
+      }
+    },
+    {
+      "term": "Straße",
+      "article": "die",
+      "plural": "Straßen",
+      "pos": "NOUN",
+      "ipa": "ˈʃtʁaːsə",
+      "meanings": {
+        "en": "street",
+        "bn": "রাস্তা"
+      },
+      "example": {
+        "de": "Nehmen Sie die erste Straße rechts.",
+        "en": "Take the first street on the right.",
+        "bn": "ডানের প্রথম রাস্তা নিন।"
+      }
+    },
+    {
+      "term": "weit",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "vaɪ̯t",
+      "meanings": {
+        "en": "far",
+        "bn": "দূরে"
+      },
+      "example": {
+        "de": "Ist das weit?",
+        "en": "Is it far?",
+        "bn": "এটা কি দূরে?"
+      }
+    },
+    {
+      "term": "in der Nähe",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɪn deːɐ̯ ˈnɛːə",
+      "meanings": {
+        "en": "nearby",
+        "bn": "কাছাকাছি"
+      },
+      "example": {
+        "de": "Gibt es hier in der Nähe eine Bank?",
+        "en": "Is there a bank nearby?",
+        "bn": "কাছাকাছি কি কোনো ব্যাংক আছে?"
+      }
+    },
+    {
+      "term": "zu Fuß",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "t͡suː fuːs",
+      "meanings": {
+        "en": "on foot",
+        "bn": "হেঁটে"
+      },
+      "example": {
+        "de": "Zu Fuß sind es fünf Minuten.",
+        "en": "It's five minutes on foot.",
+        "bn": "হেঁটে পাঁচ মিনিট।"
+      }
+    },
+    {
+      "term": "gegenüber",
+      "article": null,
+      "plural": null,
+      "pos": "PREPOSITION",
+      "ipa": "ɡeːɡn̩ˈʔyːbɐ",
+      "meanings": {
+        "en": "opposite",
+        "bn": "উল্টো দিকে"
+      },
+      "example": {
+        "de": "Die Bank ist gegenüber der Post.",
+        "en": "The bank is opposite the post office.",
+        "bn": "ব্যাংকটা ডাকঘরের উল্টো দিকে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Asking the way",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"geradeaus\" means …",
+        "options": [
+          "straight on",
+          "back",
+          "around the corner"
+        ],
+        "answer": 0,
+        "explanation": "geradeaus = straight ahead."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"die Ampel\" is …",
+        "options": [
+          "the traffic light",
+          "the bridge",
+          "the crossroads"
+        ],
+        "answer": 0,
+        "explanation": "Ampel = traffic light."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wie komme ich ___ Bahnhof?",
+        "options": [
+          "zum",
+          "zur",
+          "nach"
+        ],
+        "answer": 0,
+        "explanation": "der Bahnhof → zum."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Sie die erste Straße links.",
+        "options": [
+          "Nehmen",
+          "Nimm",
+          "Nehmt"
+        ],
+        "answer": 0,
+        "explanation": "Imperative with Sie: Nehmen Sie."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das ist nicht weit\" means …",
+        "options": [
+          "It isn't far.",
+          "It isn't wide.",
+          "It isn't open."
+        ],
+        "answer": 0,
+        "explanation": "weit = far."
+      }
+    ]
+  }
+}

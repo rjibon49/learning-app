@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-supermarket",
+  "title": "Im Supermarkt · Shopping for Food",
+  "titles": {
+    "en": "At the Supermarket",
+    "bn": "সুপারমার্কেটে"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Supermarkt",
+      "article": "der",
+      "plural": "Supermärkte",
+      "pos": "NOUN",
+      "ipa": "ˈzuːpɐˌmaʁkt",
+      "meanings": {
+        "en": "supermarket",
+        "bn": "সুপারমার্কেট"
+      },
+      "example": {
+        "de": "Ich gehe in den Supermarkt.",
+        "en": "I'm going to the supermarket.",
+        "bn": "আমি সুপারমার্কেটে যাচ্ছি।"
+      }
+    },
+    {
+      "term": "Kilo",
+      "article": "das",
+      "plural": "Kilos",
+      "pos": "NOUN",
+      "ipa": "ˈkiːlo",
+      "meanings": {
+        "en": "kilo",
+        "bn": "কেজি"
+      },
+      "example": {
+        "de": "Ein Kilo Äpfel, bitte.",
+        "en": "A kilo of apples, please.",
+        "bn": "এক কেজি আপেল, দয়া করে।"
+      }
+    },
+    {
+      "term": "Gramm",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ɡʁam",
+      "meanings": {
+        "en": "gram",
+        "bn": "গ্রাম"
+      },
+      "example": {
+        "de": "Ich hätte gern 200 Gramm Käse.",
+        "en": "I'd like 200 grams of cheese.",
+        "bn": "আমি ২০০ গ্রাম পনির চাই।"
+      }
+    },
+    {
+      "term": "Flasche",
+      "article": "die",
+      "plural": "Flaschen",
+      "pos": "NOUN",
+      "ipa": "ˈflaʃə",
+      "meanings": {
+        "en": "bottle",
+        "bn": "বোতল"
+      },
+      "example": {
+        "de": "Eine Flasche Wasser, bitte.",
+        "en": "A bottle of water, please.",
+        "bn": "এক বোতল পানি, দয়া করে।"
+      }
+    },
+    {
+      "term": "Packung",
+      "article": "die",
+      "plural": "Packungen",
+      "pos": "NOUN",
+      "ipa": "ˈpakʊŋ",
+      "meanings": {
+        "en": "packet",
+        "bn": "প্যাকেট"
+      },
+      "example": {
+        "de": "Ich brauche eine Packung Reis.",
+        "en": "I need a packet of rice.",
+        "bn": "আমার এক প্যাকেট চাল লাগবে।"
+      }
+    },
+    {
+      "term": "Kasse",
+      "article": "die",
+      "plural": "Kassen",
+      "pos": "NOUN",
+      "ipa": "ˈkasə",
+      "meanings": {
+        "en": "till / checkout",
+        "bn": "ক্যাশ কাউন্টার"
+      },
+      "example": {
+        "de": "Bitte zahlen Sie an der Kasse.",
+        "en": "Please pay at the till.",
+        "bn": "দয়া করে ক্যাশে টাকা দিন।"
+      }
+    },
+    {
+      "term": "bar",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "baːɐ̯",
+      "meanings": {
+        "en": "in cash",
+        "bn": "নগদে"
+      },
+      "example": {
+        "de": "Ich zahle bar.",
+        "en": "I'll pay in cash.",
+        "bn": "আমি নগদে দেব।"
+      }
+    },
+    {
+      "term": "Tüte",
+      "article": "die",
+      "plural": "Tüten",
+      "pos": "NOUN",
+      "ipa": "ˈtyːtə",
+      "meanings": {
+        "en": "bag (plastic/paper)",
+        "bn": "ব্যাগ (থলে)"
+      },
+      "example": {
+        "de": "Brauchen Sie eine Tüte?",
+        "en": "Do you need a bag?",
+        "bn": "ব্যাগ লাগবে?"
+      }
+    },
+    {
+      "term": "zahlen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡saːlən",
+      "meanings": {
+        "en": "to pay",
+        "bn": "টাকা দেওয়া"
+      },
+      "example": {
+        "de": "Kann ich mit Karte zahlen?",
+        "en": "Can I pay by card?",
+        "bn": "কার্ডে দিতে পারি?"
+      }
+    },
+    {
+      "term": "Ich hätte gern …",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɪç ˈhɛtə ɡɛʁn",
+      "meanings": {
+        "en": "I'd like …",
+        "bn": "আমি … চাই"
+      },
+      "example": {
+        "de": "Ich hätte gern ein Brot.",
+        "en": "I'd like a loaf of bread.",
+        "bn": "আমি একটা রুটি চাই।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: At the supermarket",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: eine ___ Wasser",
+        "options": [
+          "Flasche",
+          "Stück",
+          "Kilo"
+        ],
+        "answer": 0,
+        "explanation": "eine Flasche Wasser."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Das macht 12 Euro\" means …",
+        "options": [
+          "That's 12 euros.",
+          "That makes 12 things.",
+          "I'm making 12 euros."
+        ],
+        "answer": 0,
+        "explanation": "Das macht … = the total is …"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The seller asks \"Sonst noch etwas?\" — you answer:",
+        "options": [
+          "Nein, danke. Das ist alles.",
+          "Ja, ich bin alles.",
+          "Bitte schön."
+        ],
+        "answer": 0,
+        "explanation": "Das ist alles = that's all."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"bar zahlen\" means to pay …",
+        "options": [
+          "in cash",
+          "by card",
+          "at the bar"
+        ],
+        "answer": 0,
+        "explanation": "bar = cash."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which is correct?",
+        "options": [
+          "ein Kilo Tomaten",
+          "ein Kilo von Tomaten",
+          "ein Kilo aus Tomaten"
+        ],
+        "answer": 0,
+        "explanation": "No preposition after quantities."
+      }
+    ]
+  }
+}

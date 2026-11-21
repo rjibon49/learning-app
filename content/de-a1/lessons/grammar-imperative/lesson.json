@@ -1,0 +1,167 @@
+{
+  "slug": "grammar-imperative",
+  "title": "Imperativ · Giving Instructions",
+  "titles": {
+    "en": "The Imperative: Instructions and Requests",
+    "bn": "আদেশ ও অনুরোধ (Imperativ)"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "warten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈvaʁtn̩",
+      "meanings": {
+        "en": "to wait",
+        "bn": "অপেক্ষা করা"
+      },
+      "example": {
+        "de": "Warten Sie bitte hier!",
+        "en": "Please wait here!",
+        "bn": "দয়া করে এখানে অপেক্ষা করুন!"
+      }
+    },
+    {
+      "term": "zuhören",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡suːˌhøːʁən",
+      "meanings": {
+        "en": "to listen",
+        "bn": "মন দিয়ে শোনা"
+      },
+      "example": {
+        "de": "Hört bitte zu!",
+        "en": "Please listen!",
+        "bn": "দয়া করে শোনো!"
+      }
+    },
+    {
+      "term": "wiederholen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "viːdɐˈhoːlən",
+      "meanings": {
+        "en": "to repeat",
+        "bn": "পুনরাবৃত্তি করা"
+      },
+      "example": {
+        "de": "Wiederholen Sie bitte!",
+        "en": "Please repeat!",
+        "bn": "দয়া করে আবার বলুন!"
+      }
+    },
+    {
+      "term": "langsam",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈlaŋzaːm",
+      "meanings": {
+        "en": "slow / slowly",
+        "bn": "ধীরে"
+      },
+      "example": {
+        "de": "Sprechen Sie bitte langsam!",
+        "en": "Please speak slowly!",
+        "bn": "দয়া করে ধীরে বলুন!"
+      }
+    },
+    {
+      "term": "sich setzen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "zɪç ˈzɛt͡sn̩",
+      "meanings": {
+        "en": "to sit down",
+        "bn": "বসা"
+      },
+      "example": {
+        "de": "Setzen Sie sich bitte!",
+        "en": "Please sit down!",
+        "bn": "দয়া করে বসুন!"
+      }
+    },
+    {
+      "term": "vorsichtig",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈfoːɐ̯zɪçtɪç",
+      "meanings": {
+        "en": "careful",
+        "bn": "সাবধান"
+      },
+      "example": {
+        "de": "Fahr vorsichtig!",
+        "en": "Drive carefully!",
+        "bn": "সাবধানে চালাও!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Imperative",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Imperative of \"kommen\" for du:",
+        "options": [
+          "Komm!",
+          "Kommst!",
+          "Kommen du!"
+        ],
+        "answer": 0,
+        "explanation": "du-form without du and -st."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Imperative of \"sprechen\" for du:",
+        "options": [
+          "Sprich!",
+          "Sprech!",
+          "Sprichst!"
+        ],
+        "answer": 0,
+        "explanation": "e → i stays: Sprich!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Imperative of \"fahren\" for du:",
+        "options": [
+          "Fahr!",
+          "Fähr!",
+          "Fährst!"
+        ],
+        "answer": 0,
+        "explanation": "a → ä does NOT stay: Fahr!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Polite request to a stranger:",
+        "options": [
+          "Warten Sie bitte!",
+          "Warte bitte!",
+          "Wartet bitte!"
+        ],
+        "answer": 0,
+        "explanation": "Strangers: Sie-form."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Imperative of \"sein\" for ihr:",
+        "options": [
+          "Seid!",
+          "Seien!",
+          "Sei!"
+        ],
+        "answer": 0,
+        "explanation": "sein: Sei! – Seid! – Seien Sie!"
+      }
+    ]
+  }
+}

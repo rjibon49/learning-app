@@ -1,0 +1,226 @@
+{
+  "slug": "basics-sounds",
+  "title": "Laute · Special Sounds",
+  "titles": {
+    "en": "Special Sounds: ä ö ü, ch, sch, ei, ie",
+    "bn": "বিশেষ ধ্বনি: ä ö ü, ch, sch, ei, ie"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "schön",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃøːn",
+      "meanings": {
+        "en": "beautiful",
+        "bn": "সুন্দর"
+      },
+      "example": {
+        "de": "Das Wetter ist schön.",
+        "en": "The weather is nice.",
+        "bn": "আবহাওয়া সুন্দর।"
+      }
+    },
+    {
+      "term": "müde",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈmyːdə",
+      "meanings": {
+        "en": "tired",
+        "bn": "ক্লান্ত"
+      },
+      "example": {
+        "de": "Ich bin müde.",
+        "en": "I am tired.",
+        "bn": "আমি ক্লান্ত।"
+      }
+    },
+    {
+      "term": "drei",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "dʁaɪ̯",
+      "meanings": {
+        "en": "three",
+        "bn": "তিন"
+      },
+      "example": {
+        "de": "Ich habe drei Bücher.",
+        "en": "I have three books.",
+        "bn": "আমার তিনটি বই আছে।"
+      }
+    },
+    {
+      "term": "vier",
+      "article": null,
+      "plural": null,
+      "pos": "NUMERAL",
+      "ipa": "fiːɐ̯",
+      "meanings": {
+        "en": "four",
+        "bn": "চার"
+      },
+      "example": {
+        "de": "Wir sind vier.",
+        "en": "There are four of us.",
+        "bn": "আমরা চারজন।"
+      }
+    },
+    {
+      "term": "neu",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "nɔɪ̯",
+      "meanings": {
+        "en": "new",
+        "bn": "নতুন"
+      },
+      "example": {
+        "de": "Das Handy ist neu.",
+        "en": "The phone is new.",
+        "bn": "ফোনটি নতুন।"
+      }
+    },
+    {
+      "term": "Schule",
+      "article": "die",
+      "plural": "Schulen",
+      "pos": "NOUN",
+      "ipa": "ˈʃuːlə",
+      "meanings": {
+        "en": "school",
+        "bn": "স্কুল"
+      },
+      "example": {
+        "de": "Die Schule beginnt um acht.",
+        "en": "School starts at eight.",
+        "bn": "স্কুল আটটায় শুরু হয়।"
+      }
+    },
+    {
+      "term": "Stadt",
+      "article": "die",
+      "plural": "Städte",
+      "pos": "NOUN",
+      "ipa": "ʃtat",
+      "meanings": {
+        "en": "city",
+        "bn": "শহর"
+      },
+      "example": {
+        "de": "Die Stadt ist schön.",
+        "en": "The city is beautiful.",
+        "bn": "শহরটি সুন্দর।"
+      }
+    },
+    {
+      "term": "ich",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ɪç",
+      "meanings": {
+        "en": "I",
+        "bn": "আমি"
+      },
+      "example": {
+        "de": "Ich lerne Deutsch.",
+        "en": "I am learning German.",
+        "bn": "আমি জার্মান শিখছি।"
+      }
+    },
+    {
+      "term": "Deutsch",
+      "article": null,
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "dɔɪ̯t͡ʃ",
+      "meanings": {
+        "en": "German (language)",
+        "bn": "জার্মান ভাষা"
+      },
+      "example": {
+        "de": "Ich spreche ein bisschen Deutsch.",
+        "en": "I speak a little German.",
+        "bn": "আমি একটু জার্মান বলি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Special Sounds",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say \"ei\" in \"drei\"?",
+        "options": [
+          "like \"eye\"",
+          "like \"ee\"",
+          "like \"ay\""
+        ],
+        "answer": 0,
+        "explanation": "ei = \"eye\": drei, mein, Wein."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you say \"ie\" in \"vier\"?",
+        "options": [
+          "long \"ee\"",
+          "like \"eye\"",
+          "\"i-e\" as two sounds"
+        ],
+        "answer": 0,
+        "explanation": "ie = long \"ee\": vier, Bier, sieben."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"sch\" in \"Schule\" sounds like …",
+        "options": [
+          "English sh",
+          "English sk",
+          "English ch"
+        ],
+        "answer": 0,
+        "explanation": "sch = sh: Schule, schön, Tisch."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "At the start of a word, \"st\" in \"Stadt\" sounds like …",
+        "options": [
+          "sht",
+          "st",
+          "ts"
+        ],
+        "answer": 0,
+        "explanation": "sp- and st- at the start: shp, sht."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which word has the soft \"ch\" (like \"h\" in \"huge\")?",
+        "options": [
+          "ich",
+          "Buch",
+          "acht"
+        ],
+        "answer": 0,
+        "explanation": "After e, i, ä, ö, ü the ch is soft: ich, nicht, Milch."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The final \"d\" in \"Hund\" sounds like …",
+        "options": [
+          "t",
+          "d",
+          "silent"
+        ],
+        "answer": 0,
+        "explanation": "b, d, g at the end sound like p, t, k."
+      }
+    ]
+  }
+}

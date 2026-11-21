@@ -79,25 +79,16 @@ export type LessonDetail = CourseLesson & {
   resources: LessonResource[];
 };
 
-export async function fetchCourses(
-  page = 1,
-  search = ""
-): Promise<CourseListResponse> {
+/** Published courses linked to this CMS app, in their CMS order. */
+export async function fetchAppCourses(
+  appId: string
+): Promise<CourseSummary[]> {
   const response = await apiClient.get<CourseListResponse>(
     "/courses",
-    {
-      params: {
-        language: "de",
-        page,
-        limit: 20,
-        ...(search.trim()
-          ? { search: search.trim() }
-          : {}),
-      },
-    }
+    { params: { appId, limit: 100 } }
   );
 
-  return response.data;
+  return [...response.data.data].sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 export async function fetchCourse(

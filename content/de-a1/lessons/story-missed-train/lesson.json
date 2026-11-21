@@ -1,0 +1,215 @@
+{
+  "slug": "story-missed-train",
+  "title": "Folge 9 · Der verpasste Zug",
+  "titles": {
+    "en": "Episode 9: The Missed Train",
+    "bn": "পর্ব ৯: ট্রেন মিস"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Schalter",
+      "article": "der",
+      "plural": "Schalter",
+      "pos": "NOUN",
+      "ipa": "ˈʃaltɐ",
+      "meanings": {
+        "en": "counter",
+        "bn": "কাউন্টার"
+      },
+      "example": {
+        "de": "Fragen Sie am Schalter.",
+        "en": "Ask at the counter.",
+        "bn": "কাউন্টারে জিজ্ঞেস করুন।"
+      }
+    },
+    {
+      "term": "Anschluss",
+      "article": "der",
+      "plural": "Anschlüsse",
+      "pos": "NOUN",
+      "ipa": "ˈanˌʃlʊs",
+      "meanings": {
+        "en": "connection (train)",
+        "bn": "সংযোগ ট্রেন"
+      },
+      "example": {
+        "de": "Ich habe den Anschluss verpasst.",
+        "en": "I missed the connection.",
+        "bn": "আমি সংযোগ ট্রেনটা মিস করেছি।"
+      }
+    },
+    {
+      "term": "verpassen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈpasn̩",
+      "meanings": {
+        "en": "to miss",
+        "bn": "মিস করা"
+      },
+      "example": {
+        "de": "Ich habe den Bus verpasst.",
+        "en": "I missed the bus.",
+        "bn": "আমি বাসটা মিস করেছি।"
+      }
+    },
+    {
+      "term": "verbringen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈbʁɪŋən",
+      "meanings": {
+        "en": "to spend (time)",
+        "bn": "সময় কাটানো"
+      },
+      "example": {
+        "de": "Wir haben den Tag in Bremen verbracht.",
+        "en": "We spent the day in Bremen.",
+        "bn": "আমরা দিনটা ব্রেমেনে কাটিয়েছি।"
+      }
+    },
+    {
+      "term": "angekommen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanɡəˌkɔmən",
+      "meanings": {
+        "en": "arrived (participle of ankommen)",
+        "bn": "পৌঁছেছে (ankommen-এর অতীত)"
+      },
+      "example": {
+        "de": "Wir sind gut angekommen.",
+        "en": "We arrived safely.",
+        "bn": "আমরা ভালোভাবে পৌঁছেছি।"
+      }
+    },
+    {
+      "term": "aufgestanden",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fɡəˌʃtandn̩",
+      "meanings": {
+        "en": "got up (participle of aufstehen)",
+        "bn": "উঠেছে (aufstehen-এর অতীত)"
+      },
+      "example": {
+        "de": "Ich bin um 6 Uhr aufgestanden.",
+        "en": "I got up at 6.",
+        "bn": "আমি ৬টায় উঠেছি।"
+      }
+    },
+    {
+      "term": "Cousin",
+      "article": "der",
+      "plural": "Cousins",
+      "pos": "NOUN",
+      "ipa": "kuˈzɛ̃ː",
+      "meanings": {
+        "en": "cousin (m)",
+        "bn": "কাজিন (ছেলে)"
+      },
+      "example": {
+        "de": "Mein Cousin wohnt in Hamburg.",
+        "en": "My cousin lives in Hamburg.",
+        "bn": "আমার কাজিন হামবুর্গে থাকে।"
+      }
+    },
+    {
+      "term": "spät",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃpɛːt",
+      "meanings": {
+        "en": "late",
+        "bn": "দেরি"
+      },
+      "example": {
+        "de": "Es ist schon spät.",
+        "en": "It's already late.",
+        "bn": "অনেক দেরি হয়ে গেছে।"
+      }
+    },
+    {
+      "term": "nächstes Mal",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈnɛːçstəs maːl",
+      "meanings": {
+        "en": "next time",
+        "bn": "পরের বার"
+      },
+      "example": {
+        "de": "Nächstes Mal komme ich früher.",
+        "en": "Next time I'll come earlier.",
+        "bn": "পরের বার আমি আগে আসব।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 9",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why does Rafi miss the first train?",
+        "options": [
+          "He arrives one minute late.",
+          "The train is cancelled.",
+          "He has no ticket."
+        ],
+        "answer": 0,
+        "explanation": "Zug um 7:12 — ich war um 7:13 am Gleis."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where must he change trains?",
+        "options": [
+          "Bremen",
+          "Hamburg",
+          "Frankfurt"
+        ],
+        "answer": 0,
+        "explanation": "Sie müssen in Bremen umsteigen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How late is the second train?",
+        "options": [
+          "40 minutes",
+          "4 minutes",
+          "2 hours"
+        ],
+        "answer": 0,
+        "explanation": "Der Zug hatte 40 Minuten Verspätung."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How does the cousin come to Bremen?",
+        "options": [
+          "by car",
+          "by train",
+          "by bus"
+        ],
+        "answer": 0,
+        "explanation": "Er ist mit dem Auto gekommen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is in the Perfekt?",
+        "options": [
+          "Ich bin zum Bahnhof gefahren.",
+          "Ich fahre zum Bahnhof.",
+          "Ich will zum Bahnhof fahren."
+        ],
+        "answer": 0,
+        "explanation": "sein + participle at the end."
+      }
+    ]
+  }
+}

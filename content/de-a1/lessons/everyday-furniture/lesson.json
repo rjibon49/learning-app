@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-furniture",
+  "title": "Möbel · Furniture and Things at Home",
+  "titles": {
+    "en": "Furniture and Things at Home",
+    "bn": "আসবাবপত্র ও ঘরের জিনিস"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Schrank",
+      "article": "der",
+      "plural": "Schränke",
+      "pos": "NOUN",
+      "ipa": "ʃʁaŋk",
+      "meanings": {
+        "en": "cupboard / wardrobe",
+        "bn": "আলমারি"
+      },
+      "example": {
+        "de": "Der Schrank ist im Schlafzimmer.",
+        "en": "The wardrobe is in the bedroom.",
+        "bn": "আলমারিটা শোবার ঘরে।"
+      }
+    },
+    {
+      "term": "Sofa",
+      "article": "das",
+      "plural": "Sofas",
+      "pos": "NOUN",
+      "ipa": "ˈzoːfa",
+      "meanings": {
+        "en": "sofa",
+        "bn": "সোফা"
+      },
+      "example": {
+        "de": "Das Sofa ist sehr bequem.",
+        "en": "The sofa is very comfortable.",
+        "bn": "সোফাটা খুব আরামদায়ক।"
+      }
+    },
+    {
+      "term": "Regal",
+      "article": "das",
+      "plural": "Regale",
+      "pos": "NOUN",
+      "ipa": "ʁeˈɡaːl",
+      "meanings": {
+        "en": "shelf",
+        "bn": "তাক"
+      },
+      "example": {
+        "de": "Die Bücher stehen im Regal.",
+        "en": "The books are on the shelf.",
+        "bn": "বইগুলো তাকে আছে।"
+      }
+    },
+    {
+      "term": "Kühlschrank",
+      "article": "der",
+      "plural": "Kühlschränke",
+      "pos": "NOUN",
+      "ipa": "ˈkyːlˌʃʁaŋk",
+      "meanings": {
+        "en": "fridge",
+        "bn": "ফ্রিজ"
+      },
+      "example": {
+        "de": "Die Milch ist im Kühlschrank.",
+        "en": "The milk is in the fridge.",
+        "bn": "দুধ ফ্রিজে আছে।"
+      }
+    },
+    {
+      "term": "Waschmaschine",
+      "article": "die",
+      "plural": "Waschmaschinen",
+      "pos": "NOUN",
+      "ipa": "ˈvaʃmaˌʃiːnə",
+      "meanings": {
+        "en": "washing machine",
+        "bn": "ওয়াশিং মেশিন"
+      },
+      "example": {
+        "de": "Die Waschmaschine ist kaputt.",
+        "en": "The washing machine is broken.",
+        "bn": "ওয়াশিং মেশিনটা নষ্ট।"
+      }
+    },
+    {
+      "term": "Dusche",
+      "article": "die",
+      "plural": "Duschen",
+      "pos": "NOUN",
+      "ipa": "ˈduːʃə",
+      "meanings": {
+        "en": "shower",
+        "bn": "শাওয়ার"
+      },
+      "example": {
+        "de": "Die Dusche funktioniert nicht.",
+        "en": "The shower doesn't work.",
+        "bn": "শাওয়ারটা কাজ করছে না।"
+      }
+    },
+    {
+      "term": "Spiegel",
+      "article": "der",
+      "plural": "Spiegel",
+      "pos": "NOUN",
+      "ipa": "ˈʃpiːɡl̩",
+      "meanings": {
+        "en": "mirror",
+        "bn": "আয়না"
+      },
+      "example": {
+        "de": "Der Spiegel hängt im Bad.",
+        "en": "The mirror hangs in the bathroom.",
+        "bn": "আয়নাটা বাথরুমে ঝুলছে।"
+      }
+    },
+    {
+      "term": "kaputt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "kaˈpʊt",
+      "meanings": {
+        "en": "broken",
+        "bn": "নষ্ট"
+      },
+      "example": {
+        "de": "Mein Handy ist kaputt.",
+        "en": "My phone is broken.",
+        "bn": "আমার ফোনটা নষ্ট।"
+      }
+    },
+    {
+      "term": "funktionieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fʊŋkt͡si̯oˈniːʁən",
+      "meanings": {
+        "en": "to work / function",
+        "bn": "কাজ করা (যন্ত্র)"
+      },
+      "example": {
+        "de": "Das Licht funktioniert nicht.",
+        "en": "The light doesn't work.",
+        "bn": "বাতিটা কাজ করছে না।"
+      }
+    },
+    {
+      "term": "kosten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈkɔstn̩",
+      "meanings": {
+        "en": "to cost",
+        "bn": "দাম হওয়া"
+      },
+      "example": {
+        "de": "Was kostet das Sofa?",
+        "en": "How much is the sofa?",
+        "bn": "সোফাটার দাম কত?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Furniture",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where do you keep milk cold?",
+        "options": [
+          "im Kühlschrank",
+          "im Schrank",
+          "im Regal"
+        ],
+        "answer": 0,
+        "explanation": "Kühlschrank = fridge."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Das Bild ___ an der Wand.",
+        "options": [
+          "hängt",
+          "liegt",
+          "steht"
+        ],
+        "answer": 0,
+        "explanation": "Things on the wall hängen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Die Heizung ist kaputt\" means the heating is …",
+        "options": [
+          "broken",
+          "new",
+          "on"
+        ],
+        "answer": 0,
+        "explanation": "kaputt = broken."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Was ___ der Tisch?",
+        "options": [
+          "kostet",
+          "kosten",
+          "kostest"
+        ],
+        "answer": 0,
+        "explanation": "der Tisch (er) kostet."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Der Teppich liegt vor ___ Sofa.",
+        "options": [
+          "dem",
+          "das",
+          "den"
+        ],
+        "answer": 0,
+        "explanation": "Wo? → Dativ, neuter: dem."
+      }
+    ]
+  }
+}

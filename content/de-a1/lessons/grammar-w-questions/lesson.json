@@ -1,0 +1,226 @@
+{
+  "slug": "grammar-w-questions",
+  "title": "W-Fragen · Question Words",
+  "titles": {
+    "en": "W-Questions: wer, was, wo, wann …",
+    "bn": "W-প্রশ্ন: wer, was, wo, wann …"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "wer",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "veːɐ̯",
+      "meanings": {
+        "en": "who",
+        "bn": "কে"
+      },
+      "example": {
+        "de": "Wer ist das?",
+        "en": "Who is that?",
+        "bn": "উনি কে?"
+      }
+    },
+    {
+      "term": "was",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "vas",
+      "meanings": {
+        "en": "what",
+        "bn": "কী"
+      },
+      "example": {
+        "de": "Was machst du heute?",
+        "en": "What are you doing today?",
+        "bn": "আজ তুমি কী করছ?"
+      }
+    },
+    {
+      "term": "wo",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "voː",
+      "meanings": {
+        "en": "where",
+        "bn": "কোথায়"
+      },
+      "example": {
+        "de": "Wo ist der Bahnhof?",
+        "en": "Where is the station?",
+        "bn": "রেলস্টেশন কোথায়?"
+      }
+    },
+    {
+      "term": "woher",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "voˈheːɐ̯",
+      "meanings": {
+        "en": "where from",
+        "bn": "কোথা থেকে"
+      },
+      "example": {
+        "de": "Woher kommst du?",
+        "en": "Where are you from?",
+        "bn": "তুমি কোথা থেকে এসেছ?"
+      }
+    },
+    {
+      "term": "wohin",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "voˈhɪn",
+      "meanings": {
+        "en": "where to",
+        "bn": "কোথায় (যাচ্ছ)"
+      },
+      "example": {
+        "de": "Wohin fährst du?",
+        "en": "Where are you going?",
+        "bn": "তুমি কোথায় যাচ্ছ?"
+      }
+    },
+    {
+      "term": "wann",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "van",
+      "meanings": {
+        "en": "when",
+        "bn": "কখন"
+      },
+      "example": {
+        "de": "Wann kommt der Bus?",
+        "en": "When does the bus come?",
+        "bn": "বাস কখন আসবে?"
+      }
+    },
+    {
+      "term": "warum",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "vaˈʁʊm",
+      "meanings": {
+        "en": "why",
+        "bn": "কেন"
+      },
+      "example": {
+        "de": "Warum lernst du Deutsch?",
+        "en": "Why are you learning German?",
+        "bn": "তুমি জার্মান শিখছ কেন?"
+      }
+    },
+    {
+      "term": "wie viele",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "viː ˈfiːlə",
+      "meanings": {
+        "en": "how many",
+        "bn": "কতগুলো"
+      },
+      "example": {
+        "de": "Wie viele Kinder haben Sie?",
+        "en": "How many children do you have?",
+        "bn": "আপনার কয়টি সন্তান?"
+      }
+    },
+    {
+      "term": "weil",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "vaɪ̯l",
+      "meanings": {
+        "en": "because",
+        "bn": "কারণ"
+      },
+      "example": {
+        "de": "Ich lerne Deutsch, weil ich in Berlin wohne.",
+        "en": "I learn German because I live in Berlin.",
+        "bn": "আমি জার্মান শিখছি কারণ আমি বার্লিনে থাকি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: W-questions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "___ kommst du? – Aus Syrien.",
+        "options": [
+          "Woher",
+          "Wohin",
+          "Wo"
+        ],
+        "answer": 0,
+        "explanation": "Origin: woher."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "___ fährst du? – Nach München.",
+        "options": [
+          "Wohin",
+          "Woher",
+          "Wann"
+        ],
+        "answer": 0,
+        "explanation": "Direction: wohin."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "___ kostet das? – 5 Euro.",
+        "options": [
+          "Wie viel",
+          "Wie viele",
+          "Was"
+        ],
+        "answer": 0,
+        "explanation": "Price/amount: wie viel."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which question is correct?",
+        "options": [
+          "Wo wohnst du?",
+          "Wo du wohnst?",
+          "Wohnst wo du?"
+        ],
+        "answer": 0,
+        "explanation": "W-word + verb + subject."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "___ ist das? – Das ist mein Bruder.",
+        "options": [
+          "Wer",
+          "Was",
+          "Wie"
+        ],
+        "answer": 0,
+        "explanation": "Asking about a person: wer."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "___ beginnt der Kurs? – Um 9 Uhr.",
+        "options": [
+          "Wann",
+          "Wo",
+          "Wie"
+        ],
+        "answer": 0,
+        "explanation": "Time: wann."
+      }
+    ]
+  }
+}

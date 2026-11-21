@@ -1,0 +1,194 @@
+{
+  "slug": "exam-lesen-signs",
+  "title": "Lesen Teil 3 · Schilder und Aushänge",
+  "titles": {
+    "en": "Reading Part 3: Signs and Notices",
+    "bn": "পড়া অংশ ৩: সাইনবোর্ড ও নোটিশ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Schild",
+      "article": "das",
+      "plural": "Schilder",
+      "pos": "NOUN",
+      "ipa": "ʃɪlt",
+      "meanings": {
+        "en": "sign",
+        "bn": "সাইনবোর্ড"
+      },
+      "example": {
+        "de": "Was steht auf dem Schild?",
+        "en": "What does the sign say?",
+        "bn": "সাইনবোর্ডে কী লেখা?"
+      }
+    },
+    {
+      "term": "Ruhetag",
+      "article": "der",
+      "plural": "Ruhetage",
+      "pos": "NOUN",
+      "ipa": "ˈʁuːəˌtaːk",
+      "meanings": {
+        "en": "closing day",
+        "bn": "সাপ্তাহিক বন্ধের দিন"
+      },
+      "example": {
+        "de": "Montag ist Ruhetag.",
+        "en": "Monday is the closing day.",
+        "bn": "সোমবার বন্ধ।"
+      }
+    },
+    {
+      "term": "Gebäude",
+      "article": "das",
+      "plural": "Gebäude",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbɔɪ̯də",
+      "meanings": {
+        "en": "building",
+        "bn": "ভবন"
+      },
+      "example": {
+        "de": "Der Parkplatz ist hinter dem Gebäude.",
+        "en": "The car park is behind the building.",
+        "bn": "পার্কিং ভবনের পেছনে।"
+      }
+    },
+    {
+      "term": "dringend",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈdʁɪŋənt",
+      "meanings": {
+        "en": "urgent",
+        "bn": "জরুরি"
+      },
+      "example": {
+        "de": "Das ist dringend!",
+        "en": "That's urgent!",
+        "bn": "এটা জরুরি!"
+      }
+    },
+    {
+      "term": "Bargeld",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈbaːɐ̯ˌɡɛlt",
+      "meanings": {
+        "en": "cash",
+        "bn": "নগদ টাকা"
+      },
+      "example": {
+        "de": "Nur Bargeld, bitte.",
+        "en": "Cash only, please.",
+        "bn": "শুধু নগদ, দয়া করে।"
+      }
+    },
+    {
+      "term": "verboten",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "fɛɐ̯ˈboːtn̩",
+      "meanings": {
+        "en": "forbidden",
+        "bn": "নিষিদ্ধ"
+      },
+      "example": {
+        "de": "Rauchen verboten!",
+        "en": "No smoking!",
+        "bn": "ধূমপান নিষেধ!"
+      }
+    },
+    {
+      "term": "ziehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈt͡siːən",
+      "meanings": {
+        "en": "to pull",
+        "bn": "টানা"
+      },
+      "example": {
+        "de": "Bitte ziehen!",
+        "en": "Please pull!",
+        "bn": "দয়া করে টানুন!"
+      }
+    },
+    {
+      "term": "drücken",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈdʁʏkn̩",
+      "meanings": {
+        "en": "to push / press",
+        "bn": "ঠেলা / চাপা"
+      },
+      "example": {
+        "de": "Drücken Sie den Knopf.",
+        "en": "Press the button.",
+        "bn": "বোতামটা চাপুন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Lesen Teil 3",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Die Praxis ist vom 22.12. bis 02.01. geschlossen.\" — Sie können am 28.12. in die Praxis gehen.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "28.12. is in the closed period."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Heute Ruhetag!\" — Das Café ist heute geöffnet.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "Ruhetag = closed."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Sa 10–14 Uhr\" — Die Bibliothek ist am Samstagnachmittag geöffnet.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "Only until 2 p.m."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Nur Bargeld!\" — Sie können mit Karte bezahlen.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "Cash only."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Fahrradparkplatz hinter dem Gebäude.\" — Sie können Ihr Fahrrad hinter dem Gebäude parken.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "That's exactly what it says."
+      }
+    ]
+  }
+}

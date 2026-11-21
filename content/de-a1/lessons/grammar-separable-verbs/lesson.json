@@ -1,0 +1,215 @@
+{
+  "slug": "grammar-separable-verbs",
+  "title": "Trennbare Verben · Separable Verbs",
+  "titles": {
+    "en": "Separable Verbs: aufstehen, einkaufen, anrufen",
+    "bn": "বিচ্ছেদযোগ্য ক্রিয়া (Trennbare Verben)"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "einkaufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaɪ̯nˌkaʊ̯fn̩",
+      "meanings": {
+        "en": "to go shopping",
+        "bn": "বাজার করা"
+      },
+      "example": {
+        "de": "Wir kaufen am Samstag ein.",
+        "en": "We go shopping on Saturday.",
+        "bn": "আমরা শনিবার বাজার করি।"
+      }
+    },
+    {
+      "term": "anrufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌʁuːfn̩",
+      "meanings": {
+        "en": "to phone / call",
+        "bn": "ফোন করা"
+      },
+      "example": {
+        "de": "Ich rufe dich morgen an.",
+        "en": "I'll call you tomorrow.",
+        "bn": "আমি তোমাকে কাল ফোন করব।"
+      }
+    },
+    {
+      "term": "ankommen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌkɔmən",
+      "meanings": {
+        "en": "to arrive",
+        "bn": "পৌঁছানো"
+      },
+      "example": {
+        "de": "Der Zug kommt um 9 Uhr an.",
+        "en": "The train arrives at 9.",
+        "bn": "ট্রেনটি ৯টায় পৌঁছায়।"
+      }
+    },
+    {
+      "term": "abfahren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈapˌfaːʁən",
+      "meanings": {
+        "en": "to depart",
+        "bn": "ছেড়ে যাওয়া"
+      },
+      "example": {
+        "de": "Der Bus fährt um 8 ab.",
+        "en": "The bus leaves at 8.",
+        "bn": "বাসটি ৮টায় ছাড়ে।"
+      }
+    },
+    {
+      "term": "mitkommen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmɪtˌkɔmən",
+      "meanings": {
+        "en": "to come along",
+        "bn": "সাথে আসা"
+      },
+      "example": {
+        "de": "Kommst du mit?",
+        "en": "Are you coming along?",
+        "bn": "তুমি কি সাথে আসছ?"
+      }
+    },
+    {
+      "term": "fernsehen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈfɛʁnˌzeːən",
+      "meanings": {
+        "en": "to watch TV",
+        "bn": "টিভি দেখা"
+      },
+      "example": {
+        "de": "Am Abend sehe ich fern.",
+        "en": "In the evening I watch TV.",
+        "bn": "সন্ধ্যায় আমি টিভি দেখি।"
+      }
+    },
+    {
+      "term": "aufräumen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaʊ̯fˌʁɔɪ̯mən",
+      "meanings": {
+        "en": "to tidy up",
+        "bn": "গোছানো"
+      },
+      "example": {
+        "de": "Ich räume mein Zimmer auf.",
+        "en": "I'm tidying my room.",
+        "bn": "আমি আমার ঘর গোছাচ্ছি।"
+      }
+    },
+    {
+      "term": "anfangen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈanˌfaŋən",
+      "meanings": {
+        "en": "to begin",
+        "bn": "শুরু হওয়া"
+      },
+      "example": {
+        "de": "Der Kurs fängt um 9 an.",
+        "en": "The course starts at 9.",
+        "bn": "কোর্সটি ৯টায় শুরু হয়।"
+      }
+    },
+    {
+      "term": "einladen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈaɪ̯nˌlaːdn̩",
+      "meanings": {
+        "en": "to invite",
+        "bn": "দাওয়াত দেওয়া"
+      },
+      "example": {
+        "de": "Ich lade dich zum Essen ein.",
+        "en": "I'm inviting you for a meal.",
+        "bn": "আমি তোমাকে খাওয়ার দাওয়াত দিচ্ছি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Separable verbs",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich ___ um 6 Uhr ___. (aufstehen)",
+        "options": [
+          "stehe … auf",
+          "aufstehe … –",
+          "stehe … –"
+        ],
+        "answer": 0,
+        "explanation": "The prefix auf- goes to the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Wir kaufen heute ein.",
+          "Wir einkaufen heute.",
+          "Wir kaufen ein heute."
+        ],
+        "answer": 0,
+        "explanation": "Verb in position 2, prefix at the very end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich muss meine Mutter ___.",
+        "options": [
+          "anrufen",
+          "rufen an",
+          "an rufen"
+        ],
+        "answer": 0,
+        "explanation": "With a modal the verb stays together at the end."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which verb is NOT separable?",
+        "options": [
+          "verstehen",
+          "aufstehen",
+          "ankommen"
+        ],
+        "answer": 0,
+        "explanation": "ver- never separates."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Der Zug fährt um 10 Uhr ab.\" means …",
+        "options": [
+          "The train leaves at 10.",
+          "The train arrives at 10.",
+          "The train goes for 10 hours."
+        ],
+        "answer": 0,
+        "explanation": "abfahren = to depart."
+      }
+    ]
+  }
+}

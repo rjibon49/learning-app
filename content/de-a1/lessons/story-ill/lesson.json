@@ -1,0 +1,215 @@
+{
+  "slug": "story-ill",
+  "title": "Folge 8 · Rafi ist krank",
+  "titles": {
+    "en": "Episode 8: Rafi Is Ill",
+    "bn": "পর্ব ৮: রাফি অসুস্থ"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "regnen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʁeːɡnən",
+      "meanings": {
+        "en": "to rain",
+        "bn": "বৃষ্টি হওয়া"
+      },
+      "example": {
+        "de": "Heute regnet es.",
+        "en": "It's raining today.",
+        "bn": "আজ বৃষ্টি হচ্ছে।"
+      }
+    },
+    {
+      "term": "Nachricht",
+      "article": "die",
+      "plural": "Nachrichten",
+      "pos": "NOUN",
+      "ipa": "ˈnaːxˌʁɪçt",
+      "meanings": {
+        "en": "message / news",
+        "bn": "বার্তা / খবর"
+      },
+      "example": {
+        "de": "Ich schreibe dir eine Nachricht.",
+        "en": "I'll write you a message.",
+        "bn": "আমি তোমাকে একটা বার্তা লিখব।"
+      }
+    },
+    {
+      "term": "klopfen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈklɔp͡fn̩",
+      "meanings": {
+        "en": "to knock",
+        "bn": "টোকা দেওয়া"
+      },
+      "example": {
+        "de": "Jana klopft an die Tür.",
+        "en": "Jana knocks on the door.",
+        "bn": "ইয়ানা দরজায় টোকা দেয়।"
+      }
+    },
+    {
+      "term": "Hausarzt",
+      "article": "der",
+      "plural": "Hausärzte",
+      "pos": "NOUN",
+      "ipa": "ˈhaʊ̯sˌʔaːɐ̯t͡st",
+      "meanings": {
+        "en": "family doctor (GP)",
+        "bn": "পারিবারিক ডাক্তার"
+      },
+      "example": {
+        "de": "Mein Hausarzt ist sehr gut.",
+        "en": "My GP is very good.",
+        "bn": "আমার পারিবারিক ডাক্তার খুব ভালো।"
+      }
+    },
+    {
+      "term": "Grippe",
+      "article": "die",
+      "plural": "Grippen",
+      "pos": "NOUN",
+      "ipa": "ˈɡʁɪpə",
+      "meanings": {
+        "en": "flu",
+        "bn": "ফ্লু"
+      },
+      "example": {
+        "de": "Ich habe eine Grippe.",
+        "en": "I have the flu.",
+        "bn": "আমার ফ্লু হয়েছে।"
+      }
+    },
+    {
+      "term": "Honig",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈhoːnɪç",
+      "meanings": {
+        "en": "honey",
+        "bn": "মধু"
+      },
+      "example": {
+        "de": "Tee mit Honig hilft.",
+        "en": "Tea with honey helps.",
+        "bn": "মধু দিয়ে চা উপকারী।"
+      }
+    },
+    {
+      "term": "Zitrone",
+      "article": "die",
+      "plural": "Zitronen",
+      "pos": "NOUN",
+      "ipa": "t͡siˈtʁoːnə",
+      "meanings": {
+        "en": "lemon",
+        "bn": "লেবু"
+      },
+      "example": {
+        "de": "Ich trinke Wasser mit Zitrone.",
+        "en": "I drink water with lemon.",
+        "bn": "আমি লেবু দিয়ে পানি খাই।"
+      }
+    },
+    {
+      "term": "allein",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "aˈlaɪ̯n",
+      "meanings": {
+        "en": "alone",
+        "bn": "একা"
+      },
+      "example": {
+        "de": "Ich wohne nicht allein.",
+        "en": "I don't live alone.",
+        "bn": "আমি একা থাকি না।"
+      }
+    },
+    {
+      "term": "um die Ecke",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ʊm diː ˈɛkə",
+      "meanings": {
+        "en": "around the corner",
+        "bn": "মোড়ের ওপাশে"
+      },
+      "example": {
+        "de": "Die Apotheke ist um die Ecke.",
+        "en": "The pharmacy is around the corner.",
+        "bn": "ফার্মেসিটা মোড়ের ওপাশে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 8",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What is the weather like?",
+        "options": [
+          "cold and rainy",
+          "sunny and warm",
+          "snowy"
+        ],
+        "answer": 0,
+        "explanation": "Draußen ist es kalt und es regnet."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How high is Rafi's temperature?",
+        "options": [
+          "38.9 degrees",
+          "36.9 degrees",
+          "39.8 degrees"
+        ],
+        "answer": 0,
+        "explanation": "Fieber: 38,9 Grad."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Who gives Rafi the doctor's number?",
+        "options": [
+          "Jana",
+          "Frau Becker",
+          "Omar"
+        ],
+        "answer": 0,
+        "explanation": "Jana gibt ihm eine Telefonnummer."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What illness does Rafi have?",
+        "options": [
+          "flu",
+          "a broken leg",
+          "toothache"
+        ],
+        "answer": 0,
+        "explanation": "Sie haben eine Grippe."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Until when is Rafi's sick note?",
+        "options": [
+          "Friday",
+          "Wednesday",
+          "next Monday"
+        ],
+        "answer": 0,
+        "explanation": "Krankmeldung bis Freitag."
+      }
+    ]
+  }
+}

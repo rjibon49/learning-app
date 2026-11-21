@@ -1,0 +1,231 @@
+{
+  "slug": "everyday-cafe-restaurant",
+  "title": "Im Café & Restaurant · Ordering Food",
+  "titles": {
+    "en": "At the Café and Restaurant",
+    "bn": "ক্যাফে ও রেস্টুরেন্টে"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Speisekarte",
+      "article": "die",
+      "plural": "Speisekarten",
+      "pos": "NOUN",
+      "ipa": "ˈʃpaɪ̯zəˌkaʁtə",
+      "meanings": {
+        "en": "menu",
+        "bn": "মেনু"
+      },
+      "example": {
+        "de": "Die Speisekarte, bitte.",
+        "en": "The menu, please.",
+        "bn": "মেনুটা দিন, দয়া করে।"
+      }
+    },
+    {
+      "term": "Rechnung",
+      "article": "die",
+      "plural": "Rechnungen",
+      "pos": "NOUN",
+      "ipa": "ˈʁɛçnʊŋ",
+      "meanings": {
+        "en": "bill / invoice",
+        "bn": "বিল"
+      },
+      "example": {
+        "de": "Die Rechnung, bitte.",
+        "en": "The bill, please.",
+        "bn": "বিলটা দিন, দয়া করে।"
+      }
+    },
+    {
+      "term": "Kellner",
+      "article": "der",
+      "plural": "Kellner",
+      "pos": "NOUN",
+      "ipa": "ˈkɛlnɐ",
+      "meanings": {
+        "en": "waiter",
+        "bn": "ওয়েটার"
+      },
+      "example": {
+        "de": "Der Kellner bringt das Essen.",
+        "en": "The waiter brings the food.",
+        "bn": "ওয়েটার খাবার নিয়ে আসে।"
+      }
+    },
+    {
+      "term": "Suppe",
+      "article": "die",
+      "plural": "Suppen",
+      "pos": "NOUN",
+      "ipa": "ˈzʊpə",
+      "meanings": {
+        "en": "soup",
+        "bn": "স্যুপ"
+      },
+      "example": {
+        "de": "Die Suppe ist heiß.",
+        "en": "The soup is hot.",
+        "bn": "স্যুপটা গরম।"
+      }
+    },
+    {
+      "term": "scharf",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃaʁf",
+      "meanings": {
+        "en": "spicy / sharp",
+        "bn": "ঝাল"
+      },
+      "example": {
+        "de": "Ist das Essen scharf?",
+        "en": "Is the food spicy?",
+        "bn": "খাবারটা কি ঝাল?"
+      }
+    },
+    {
+      "term": "empfehlen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɛmˈpfeːlən",
+      "meanings": {
+        "en": "to recommend",
+        "bn": "সুপারিশ করা"
+      },
+      "example": {
+        "de": "Was empfehlen Sie?",
+        "en": "What do you recommend?",
+        "bn": "আপনি কী সুপারিশ করেন?"
+      }
+    },
+    {
+      "term": "Trinkgeld",
+      "article": "das",
+      "plural": "Trinkgelder",
+      "pos": "NOUN",
+      "ipa": "ˈtʁɪŋkˌɡɛlt",
+      "meanings": {
+        "en": "tip",
+        "bn": "বকশিশ"
+      },
+      "example": {
+        "de": "Wie viel Trinkgeld gibt man?",
+        "en": "How much tip do you give?",
+        "bn": "কত বকশিশ দেওয়া হয়?"
+      }
+    },
+    {
+      "term": "getrennt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡəˈtʁɛnt",
+      "meanings": {
+        "en": "separately",
+        "bn": "আলাদা"
+      },
+      "example": {
+        "de": "Wir zahlen getrennt.",
+        "en": "We'll pay separately.",
+        "bn": "আমরা আলাদা আলাদা দেব।"
+      }
+    },
+    {
+      "term": "satt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "zat",
+      "meanings": {
+        "en": "full (after eating)",
+        "bn": "পেট ভরা"
+      },
+      "example": {
+        "de": "Danke, ich bin satt.",
+        "en": "Thanks, I'm full.",
+        "bn": "ধন্যবাদ, আমার পেট ভরে গেছে।"
+      }
+    },
+    {
+      "term": "Stimmt so.",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ʃtɪmt zoː",
+      "meanings": {
+        "en": "Keep the change.",
+        "bn": "বাকিটা রেখে দিন।"
+      },
+      "example": {
+        "de": "Hier sind 20 Euro. Stimmt so.",
+        "en": "Here's 20 euros. Keep the change.",
+        "bn": "এই নিন ২০ ইউরো। বাকিটা রেখে দিন।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Café and restaurant",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you ask for the bill?",
+        "options": [
+          "Die Rechnung, bitte.",
+          "Die Speisekarte, bitte.",
+          "Das Trinkgeld, bitte."
+        ],
+        "answer": 0,
+        "explanation": "Rechnung = bill."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Zusammen oder getrennt?\" asks if you pay …",
+        "options": [
+          "together or separately",
+          "cash or card",
+          "now or later"
+        ],
+        "answer": 0,
+        "explanation": "zusammen = together, getrennt = separately."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ist das scharf?\" means …",
+        "options": [
+          "Is it spicy?",
+          "Is it sharp-looking?",
+          "Is it hot (temperature)?"
+        ],
+        "answer": 0,
+        "explanation": "scharf = spicy."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "A normal tip in Germany is about …",
+        "options": [
+          "5–10 %",
+          "25 %",
+          "nothing ever"
+        ],
+        "answer": 0,
+        "explanation": "5–10 % is common."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich ___ das Hähnchen. (I'll have)",
+        "options": [
+          "nehme",
+          "nimmt",
+          "nehmen"
+        ],
+        "answer": 0,
+        "explanation": "ich nehme."
+      }
+    ]
+  }
+}

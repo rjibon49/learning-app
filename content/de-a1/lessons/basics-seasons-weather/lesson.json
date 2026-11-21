@@ -1,0 +1,247 @@
+{
+  "slug": "basics-seasons-weather",
+  "title": "Jahreszeiten und Wetter · Seasons & Weather",
+  "titles": {
+    "en": "Seasons and Weather",
+    "bn": "ঋতু ও আবহাওয়া"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Frühling",
+      "article": "der",
+      "plural": "Frühlinge",
+      "pos": "NOUN",
+      "ipa": "ˈfʁyːlɪŋ",
+      "meanings": {
+        "en": "spring",
+        "bn": "বসন্ত"
+      },
+      "example": {
+        "de": "Im Frühling blühen die Blumen.",
+        "en": "In spring the flowers bloom.",
+        "bn": "বসন্তে ফুল ফোটে।"
+      }
+    },
+    {
+      "term": "Sommer",
+      "article": "der",
+      "plural": "Sommer",
+      "pos": "NOUN",
+      "ipa": "ˈzɔmɐ",
+      "meanings": {
+        "en": "summer",
+        "bn": "গ্রীষ্ম"
+      },
+      "example": {
+        "de": "Im Sommer ist es heiß.",
+        "en": "In summer it is hot.",
+        "bn": "গ্রীষ্মে গরম পড়ে।"
+      }
+    },
+    {
+      "term": "Herbst",
+      "article": "der",
+      "plural": "Herbste",
+      "pos": "NOUN",
+      "ipa": "hɛʁpst",
+      "meanings": {
+        "en": "autumn",
+        "bn": "শরৎ"
+      },
+      "example": {
+        "de": "Im Herbst ist es oft windig.",
+        "en": "In autumn it is often windy.",
+        "bn": "শরতে প্রায়ই বাতাস বয়।"
+      }
+    },
+    {
+      "term": "Winter",
+      "article": "der",
+      "plural": "Winter",
+      "pos": "NOUN",
+      "ipa": "ˈvɪntɐ",
+      "meanings": {
+        "en": "winter",
+        "bn": "শীত"
+      },
+      "example": {
+        "de": "Im Winter schneit es.",
+        "en": "In winter it snows.",
+        "bn": "শীতে তুষার পড়ে।"
+      }
+    },
+    {
+      "term": "Wetter",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈvɛtɐ",
+      "meanings": {
+        "en": "weather",
+        "bn": "আবহাওয়া"
+      },
+      "example": {
+        "de": "Wie ist das Wetter heute?",
+        "en": "What's the weather like today?",
+        "bn": "আজ আবহাওয়া কেমন?"
+      }
+    },
+    {
+      "term": "Sonne",
+      "article": "die",
+      "plural": "Sonnen",
+      "pos": "NOUN",
+      "ipa": "ˈzɔnə",
+      "meanings": {
+        "en": "sun",
+        "bn": "সূর্য / রোদ"
+      },
+      "example": {
+        "de": "Die Sonne scheint.",
+        "en": "The sun is shining.",
+        "bn": "রোদ উঠেছে।"
+      }
+    },
+    {
+      "term": "regnen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʁeːɡnən",
+      "meanings": {
+        "en": "to rain",
+        "bn": "বৃষ্টি হওয়া"
+      },
+      "example": {
+        "de": "Es regnet seit Montag.",
+        "en": "It has been raining since Monday.",
+        "bn": "সোমবার থেকে বৃষ্টি হচ্ছে।"
+      }
+    },
+    {
+      "term": "kalt",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "kalt",
+      "meanings": {
+        "en": "cold",
+        "bn": "ঠান্ডা"
+      },
+      "example": {
+        "de": "Heute ist es kalt.",
+        "en": "Today it is cold.",
+        "bn": "আজ ঠান্ডা।"
+      }
+    },
+    {
+      "term": "warm",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "vaʁm",
+      "meanings": {
+        "en": "warm",
+        "bn": "উষ্ণ"
+      },
+      "example": {
+        "de": "Im Mai ist es warm.",
+        "en": "In May it is warm.",
+        "bn": "মে মাসে আবহাওয়া উষ্ণ।"
+      }
+    },
+    {
+      "term": "Grad",
+      "article": "der",
+      "plural": "Grad",
+      "pos": "NOUN",
+      "ipa": "ɡʁaːt",
+      "meanings": {
+        "en": "degree",
+        "bn": "ডিগ্রি"
+      },
+      "example": {
+        "de": "Es sind 30 Grad.",
+        "en": "It is 30 degrees.",
+        "bn": "এখন ৩০ ডিগ্রি।"
+      }
+    },
+    {
+      "term": "Regenschirm",
+      "article": "der",
+      "plural": "Regenschirme",
+      "pos": "NOUN",
+      "ipa": "ˈʁeːɡn̩ˌʃɪʁm",
+      "meanings": {
+        "en": "umbrella",
+        "bn": "ছাতা"
+      },
+      "example": {
+        "de": "Nimm einen Regenschirm mit!",
+        "en": "Take an umbrella!",
+        "bn": "একটা ছাতা নিয়ে যাও!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Seasons and weather",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"der Herbst\" is …",
+        "options": [
+          "autumn",
+          "spring",
+          "winter"
+        ],
+        "answer": 0,
+        "explanation": "Herbst = autumn (Sept–Nov)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Sommer ist es heiß.",
+        "options": [
+          "Im",
+          "Am",
+          "Um"
+        ],
+        "answer": 0,
+        "explanation": "Seasons: im + season."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Es regnet.\" means …",
+        "options": [
+          "It is raining.",
+          "It is snowing.",
+          "It is sunny."
+        ],
+        "answer": 0,
+        "explanation": "regnen = to rain."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you ask about the weather?",
+        "options": [
+          "Wie ist das Wetter?",
+          "Wie spät ist das Wetter?",
+          "Wo ist das Wetter?"
+        ],
+        "answer": 0,
+        "explanation": "Wie ist das Wetter? = What's the weather like?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ sind 25 Grad.",
+        "options": [
+          "Es",
+          "Das",
+          "Er"
+        ],
+        "answer": 0,
+        "explanation": "Weather sentences start with es."
+      }
+    ]
+  }
+}

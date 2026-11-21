@@ -333,6 +333,54 @@ export class LearnerAuthService {
   }
 
   // =========================================
+  // PROFILE EDIT / CHANGE PASSWORD
+  // =========================================
+
+  async updateProfile(userId: string, displayName: string) {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { displayName },
+      select: { id: true },
+    });
+
+    return this.me(userId);
+  }
+
+  /**
+   * Checks the current password, saves the new one, logs out every other
+   * device and returns a fresh session for this device.
+   */
+  async changePassword(
+    userId: string,
+    currentPassword: string,
+    newPassword: string,
+    metadata: SessionMetadata,
+  ) {
+    await this.verifyPassword(userId, currentPassword);
+
+    const passwordHash = await argon2.hash(newPassword, {
+      type: argon2.argon2id,
+      memoryCost: 19456,
+      timeCost: 2,
+      parallelism: 1,
+    });
+
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: userId },
+        data: { passwordHash },
+        select: { id: true },
+      }),
+      this.prisma.userSession.updateMany({
+        where: { userId, revokedAt: null },
+        data: { revokedAt: new Date() },
+      }),
+    ]);
+
+    return this.issueTokens(userId, metadata);
+  }
+
+  // =========================================
   // DELETE OWN ACCOUNT (password re-check)
   // =========================================
 

@@ -1,10 +1,7 @@
+import { router } from "expo-router";
 
 import React, { useState } from "react";
-import type { NativeStackScreenProps } from
-  "@react-navigation/native-stack";
 
-import type { RootStackParamList } from
-  "../navigation/AppNavigator";
 
 import {
   requestPasswordReset,
@@ -20,14 +17,8 @@ import {
   TextAction,
 } from "../components/AuthUI";
 
-type Props = NativeStackScreenProps<
-  RootStackParamList,
-  "ForgotPassword"
->;
 
-export default function ForgotPasswordScreen({
-  navigation,
-}: Props) {
+export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -78,13 +69,13 @@ export default function ForgotPasswordScreen({
       <TextAction
         title="Already have a reset token? Reset Password"
         onPress={() =>
-          navigation.navigate("ResetPassword")
+          router.push("/reset-password")
         }
       />
 
       <TextAction
         title="Back to Sign In"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => router.dismissTo("/login")}
       />
     </AuthLayout>
   );

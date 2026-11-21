@@ -1,0 +1,215 @@
+{
+  "slug": "story-email-home",
+  "title": "Folge 10 · Eine E-Mail nach Hause",
+  "titles": {
+    "en": "Episode 10: An Email Home",
+    "bn": "পর্ব ১০: বাড়িতে একটা ইমেইল"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Betreff",
+      "article": "der",
+      "plural": "Betreffe",
+      "pos": "NOUN",
+      "ipa": "bəˈtʁɛf",
+      "meanings": {
+        "en": "subject (email)",
+        "bn": "বিষয় (ইমেইলের)"
+      },
+      "example": {
+        "de": "Der Betreff fehlt.",
+        "en": "The subject is missing.",
+        "bn": "বিষয় লেখা নেই।"
+      }
+    },
+    {
+      "term": "toll",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "tɔl",
+      "meanings": {
+        "en": "great",
+        "bn": "দারুণ"
+      },
+      "example": {
+        "de": "Die Party war toll!",
+        "en": "The party was great!",
+        "bn": "পার্টিটা দারুণ ছিল!"
+      }
+    },
+    {
+      "term": "Chef",
+      "article": "der",
+      "plural": "Chefs",
+      "pos": "NOUN",
+      "ipa": "ʃɛf",
+      "meanings": {
+        "en": "boss",
+        "bn": "বস"
+      },
+      "example": {
+        "de": "Mein Chef ist streng.",
+        "en": "My boss is strict.",
+        "bn": "আমার বস কড়া।"
+      }
+    },
+    {
+      "term": "streng",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃtʁɛŋ",
+      "meanings": {
+        "en": "strict",
+        "bn": "কড়া"
+      },
+      "example": {
+        "de": "Die Lehrerin ist nicht streng.",
+        "en": "The teacher isn't strict.",
+        "bn": "শিক্ষিকা কড়া নন।"
+      }
+    },
+    {
+      "term": "selten",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈzɛltn̩",
+      "meanings": {
+        "en": "rarely",
+        "bn": "কদাচিৎ"
+      },
+      "example": {
+        "de": "Im Winter scheint die Sonne selten.",
+        "en": "In winter the sun rarely shines.",
+        "bn": "শীতে রোদ কদাচিৎ ওঠে।"
+      }
+    },
+    {
+      "term": "vermissen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈmɪsn̩",
+      "meanings": {
+        "en": "to miss (someone)",
+        "bn": "মিস করা"
+      },
+      "example": {
+        "de": "Ich vermisse meine Familie.",
+        "en": "I miss my family.",
+        "bn": "আমি আমার পরিবারকে মিস করি।"
+      }
+    },
+    {
+      "term": "niemand",
+      "article": null,
+      "plural": null,
+      "pos": "PRONOUN",
+      "ipa": "ˈniːmant",
+      "meanings": {
+        "en": "nobody",
+        "bn": "কেউ না"
+      },
+      "example": {
+        "de": "Niemand ist zu Hause.",
+        "en": "Nobody is at home.",
+        "bn": "বাড়িতে কেউ নেই।"
+      }
+    },
+    {
+      "term": "Prüfung",
+      "article": "die",
+      "plural": "Prüfungen",
+      "pos": "NOUN",
+      "ipa": "ˈpʁyːfʊŋ",
+      "meanings": {
+        "en": "exam",
+        "bn": "পরীক্ষা"
+      },
+      "example": {
+        "de": "Im März mache ich die Prüfung.",
+        "en": "I'm taking the exam in March.",
+        "bn": "মার্চে আমি পরীক্ষা দেব।"
+      }
+    },
+    {
+      "term": "Liebe Grüße",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈliːbə ˈɡʁyːsə",
+      "meanings": {
+        "en": "Love / Best wishes",
+        "bn": "ভালোবাসাসহ"
+      },
+      "example": {
+        "de": "Liebe Grüße, dein Rafi",
+        "en": "Love, your Rafi",
+        "bn": "ভালোবাসাসহ, তোমার রাফি"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Episode 10",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Why does Rafi write in German?",
+        "options": [
+          "It's his homework.",
+          "Mitu doesn't speak Bengali.",
+          "His teacher reads it."
+        ],
+        "answer": 0,
+        "explanation": "das ist meine Hausaufgabe."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How long has Rafi lived in Cologne?",
+        "options": [
+          "three months",
+          "three weeks",
+          "one year"
+        ],
+        "answer": 0,
+        "explanation": "seit drei Monaten."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Where does Rafi work?",
+        "options": [
+          "in a café",
+          "in a supermarket",
+          "in a hospital"
+        ],
+        "answer": 0,
+        "explanation": "in einem Café."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What does Rafi miss?",
+        "options": [
+          "the sun and his mother's food",
+          "cricket and his friends",
+          "his car"
+        ],
+        "answer": 0,
+        "explanation": "Ich vermisse unsere Sonne und Mamas Essen!"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you start an email to a woman named Anna?",
+        "options": [
+          "Liebe Anna,",
+          "Lieber Anna,",
+          "Liebes Anna,"
+        ],
+        "answer": 0,
+        "explanation": "Liebe for women, Lieber for men."
+      }
+    ]
+  }
+}

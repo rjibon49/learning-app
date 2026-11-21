@@ -1,0 +1,199 @@
+{
+  "slug": "grammar-possessive-articles",
+  "title": "Possessivartikel · mein, dein, sein …",
+  "titles": {
+    "en": "Possessive Articles: my, your, his, her …",
+    "bn": "অধিকারবাচক আর্টিকেল: আমার, তোমার, তার …"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "mein",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "maɪ̯n",
+      "meanings": {
+        "en": "my",
+        "bn": "আমার"
+      },
+      "example": {
+        "de": "Das ist mein Bruder.",
+        "en": "This is my brother.",
+        "bn": "এ আমার ভাই।"
+      }
+    },
+    {
+      "term": "dein",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "daɪ̯n",
+      "meanings": {
+        "en": "your (informal)",
+        "bn": "তোমার"
+      },
+      "example": {
+        "de": "Wie heißt deine Schwester?",
+        "en": "What's your sister's name?",
+        "bn": "তোমার বোনের নাম কী?"
+      }
+    },
+    {
+      "term": "sein",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "zaɪ̯n",
+      "meanings": {
+        "en": "his / its",
+        "bn": "তার (ছেলের)"
+      },
+      "example": {
+        "de": "Er besucht seinen Onkel.",
+        "en": "He visits his uncle.",
+        "bn": "সে তার চাচার কাছে যায়।"
+      }
+    },
+    {
+      "term": "ihr",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "iːɐ̯",
+      "meanings": {
+        "en": "her / their",
+        "bn": "তার (মেয়ের) / তাদের"
+      },
+      "example": {
+        "de": "Sie wohnt bei ihrer Tante.",
+        "en": "She lives with her aunt.",
+        "bn": "সে তার খালার কাছে থাকে।"
+      }
+    },
+    {
+      "term": "unser",
+      "article": null,
+      "plural": null,
+      "pos": "ARTICLE",
+      "ipa": "ˈʊnzɐ",
+      "meanings": {
+        "en": "our",
+        "bn": "আমাদের"
+      },
+      "example": {
+        "de": "Unsere Wohnung ist klein.",
+        "en": "Our flat is small.",
+        "bn": "আমাদের ফ্ল্যাটটা ছোট।"
+      }
+    },
+    {
+      "term": "Koffer",
+      "article": "der",
+      "plural": "Koffer",
+      "pos": "NOUN",
+      "ipa": "ˈkɔfɐ",
+      "meanings": {
+        "en": "suitcase",
+        "bn": "স্যুটকেস"
+      },
+      "example": {
+        "de": "Ist das Ihr Koffer?",
+        "en": "Is that your suitcase?",
+        "bn": "এটা কি আপনার স্যুটকেস?"
+      }
+    },
+    {
+      "term": "Onkel",
+      "article": "der",
+      "plural": "Onkel",
+      "pos": "NOUN",
+      "ipa": "ˈɔŋkl̩",
+      "meanings": {
+        "en": "uncle",
+        "bn": "চাচা / মামা"
+      },
+      "example": {
+        "de": "Mein Onkel wohnt in Hamburg.",
+        "en": "My uncle lives in Hamburg.",
+        "bn": "আমার চাচা হামবুর্গে থাকেন।"
+      }
+    },
+    {
+      "term": "Tante",
+      "article": "die",
+      "plural": "Tanten",
+      "pos": "NOUN",
+      "ipa": "ˈtantə",
+      "meanings": {
+        "en": "aunt",
+        "bn": "খালা / ফুফু"
+      },
+      "example": {
+        "de": "Meine Tante ist Ärztin.",
+        "en": "My aunt is a doctor.",
+        "bn": "আমার খালা ডাক্তার।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Possessive articles",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Anna and ___ Bruder.",
+        "options": [
+          "ihr",
+          "sein",
+          "dein"
+        ],
+        "answer": 0,
+        "explanation": "Anna is female → ihr."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich besuche ___ Vater. (my)",
+        "options": [
+          "meinen",
+          "mein",
+          "meinem"
+        ],
+        "answer": 0,
+        "explanation": "Akkusativ masculine → meinen."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Tom spielt mit ___ Schwester. (his)",
+        "options": [
+          "seiner",
+          "seine",
+          "ihrer"
+        ],
+        "answer": 0,
+        "explanation": "mit + Dativ, feminine → seiner."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Formal \"your\" is …",
+        "options": [
+          "Ihr",
+          "dein",
+          "euer"
+        ],
+        "answer": 0,
+        "explanation": "Sie → Ihr (capital I)."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wo sind ___ Kinder? (your, plural)",
+        "options": [
+          "eure",
+          "euere",
+          "euer"
+        ],
+        "answer": 0,
+        "explanation": "euer + e → eure."
+      }
+    ]
+  }
+}

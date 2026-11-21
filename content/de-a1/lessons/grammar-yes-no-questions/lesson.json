@@ -1,0 +1,151 @@
+{
+  "slug": "grammar-yes-no-questions",
+  "title": "Ja/Nein-Fragen · Yes/No Questions",
+  "titles": {
+    "en": "Yes/No Questions",
+    "bn": "হ্যাঁ/না প্রশ্ন"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "ja",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "jaː",
+      "meanings": {
+        "en": "yes",
+        "bn": "হ্যাঁ"
+      },
+      "example": {
+        "de": "Ja, ich habe Zeit.",
+        "en": "Yes, I have time.",
+        "bn": "হ্যাঁ, আমার সময় আছে।"
+      }
+    },
+    {
+      "term": "nein",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "naɪ̯n",
+      "meanings": {
+        "en": "no",
+        "bn": "না"
+      },
+      "example": {
+        "de": "Nein, danke.",
+        "en": "No, thank you.",
+        "bn": "না, ধন্যবাদ।"
+      }
+    },
+    {
+      "term": "Moment",
+      "article": "der",
+      "plural": "Momente",
+      "pos": "NOUN",
+      "ipa": "moˈmɛnt",
+      "meanings": {
+        "en": "moment",
+        "bn": "মুহূর্ত"
+      },
+      "example": {
+        "de": "Einen Moment, bitte!",
+        "en": "One moment, please!",
+        "bn": "এক মুহূর্ত, দয়া করে!"
+      }
+    },
+    {
+      "term": "frei",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "fʁaɪ̯",
+      "meanings": {
+        "en": "free / vacant",
+        "bn": "খালি"
+      },
+      "example": {
+        "de": "Ist hier noch frei?",
+        "en": "Is this seat free?",
+        "bn": "এখানে কি খালি আছে?"
+      }
+    },
+    {
+      "term": "Englisch",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈɛŋlɪʃ",
+      "meanings": {
+        "en": "English (language)",
+        "bn": "ইংরেজি"
+      },
+      "example": {
+        "de": "Sprechen Sie Englisch?",
+        "en": "Do you speak English?",
+        "bn": "আপনি কি ইংরেজি বলেন?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Yes/no questions",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Make a question from \"Du hast Zeit.\"",
+        "options": [
+          "Hast du Zeit?",
+          "Du hast Zeit?",
+          "Hast Zeit du?"
+        ],
+        "answer": 0,
+        "explanation": "Verb first: Hast du …?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which is a correct yes/no question?",
+        "options": [
+          "Spricht sie Englisch?",
+          "Sie spricht Englisch?",
+          "Spricht Englisch sie?"
+        ],
+        "answer": 0,
+        "explanation": "Verb, then subject."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Hast du keine Zeit?\" – You do have time. You answer …",
+        "options": [
+          "Doch!",
+          "Ja!",
+          "Nein!"
+        ],
+        "answer": 0,
+        "explanation": "Doch contradicts a negative question."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In a yes/no question the voice …",
+        "options": [
+          "goes up at the end",
+          "goes down at the end",
+          "stays flat"
+        ],
+        "answer": 0,
+        "explanation": "Yes/no questions rise."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Sie mir helfen?",
+        "options": [
+          "Können",
+          "Kann",
+          "Kannst"
+        ],
+        "answer": 0,
+        "explanation": "Sie → können."
+      }
+    ]
+  }
+}

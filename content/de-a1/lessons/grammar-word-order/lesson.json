@@ -1,0 +1,167 @@
+{
+  "slug": "grammar-word-order",
+  "title": "Satzbau · Word Order",
+  "titles": {
+    "en": "Word Order: The Verb Is Always Second",
+    "bn": "বাক্য গঠন: ক্রিয়া সবসময় দ্বিতীয় স্থানে"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "heute",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "ˈhɔɪ̯tə",
+      "meanings": {
+        "en": "today",
+        "bn": "আজ"
+      },
+      "example": {
+        "de": "Heute lerne ich Deutsch.",
+        "en": "Today I'm learning German.",
+        "bn": "আজ আমি জার্মান শিখছি।"
+      }
+    },
+    {
+      "term": "denn",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "dɛn",
+      "meanings": {
+        "en": "because",
+        "bn": "কারণ"
+      },
+      "example": {
+        "de": "Ich bleibe zu Hause, denn ich bin krank.",
+        "en": "I'm staying home because I'm ill.",
+        "bn": "আমি বাসায় থাকছি, কারণ আমি অসুস্থ।"
+      }
+    },
+    {
+      "term": "aber",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "ˈaːbɐ",
+      "meanings": {
+        "en": "but",
+        "bn": "কিন্তু"
+      },
+      "example": {
+        "de": "Das ist schön, aber teuer.",
+        "en": "That is nice but expensive.",
+        "bn": "এটা সুন্দর, কিন্তু দামি।"
+      }
+    },
+    {
+      "term": "oder",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "ˈoːdɐ",
+      "meanings": {
+        "en": "or",
+        "bn": "অথবা"
+      },
+      "example": {
+        "de": "Tee oder Kaffee?",
+        "en": "Tea or coffee?",
+        "bn": "চা নাকি কফি?"
+      }
+    },
+    {
+      "term": "und",
+      "article": null,
+      "plural": null,
+      "pos": "CONJUNCTION",
+      "ipa": "ʊnt",
+      "meanings": {
+        "en": "and",
+        "bn": "এবং"
+      },
+      "example": {
+        "de": "Ich trinke Tee und esse Brot.",
+        "en": "I drink tea and eat bread.",
+        "bn": "আমি চা পান করি আর রুটি খাই।"
+      }
+    },
+    {
+      "term": "zusammen",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "t͡suˈzamən",
+      "meanings": {
+        "en": "together",
+        "bn": "একসাথে"
+      },
+      "example": {
+        "de": "Wir kochen zusammen.",
+        "en": "We cook together.",
+        "bn": "আমরা একসাথে রান্না করি।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Word order",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence is correct?",
+        "options": [
+          "Heute lerne ich Deutsch.",
+          "Heute ich lerne Deutsch.",
+          "Heute lerne Deutsch ich."
+        ],
+        "answer": 0,
+        "explanation": "Verb in position 2, subject after it."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Am Montag ___ ich zum Arzt.",
+        "options": [
+          "gehe",
+          "ich gehe",
+          "gehen"
+        ],
+        "answer": 0,
+        "explanation": "Am Montag (1) + verb (2) + ich."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Which sentence follows time – manner – place?",
+        "options": [
+          "Ich fahre morgen mit dem Bus zur Arbeit.",
+          "Ich fahre zur Arbeit mit dem Bus morgen.",
+          "Ich fahre mit dem Bus zur Arbeit morgen."
+        ],
+        "answer": 0,
+        "explanation": "When → how → where."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "After \"denn\" the word order is …",
+        "options": [
+          "normal (verb in position 2)",
+          "verb at the end",
+          "verb first"
+        ],
+        "answer": 0,
+        "explanation": "denn, und, aber, oder do not change the order."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: In Berlin ___ meine Schwester.",
+        "options": [
+          "wohnt",
+          "meine Schwester wohnt",
+          "wohnen"
+        ],
+        "answer": 0,
+        "explanation": "Place in position 1, verb second."
+      }
+    ]
+  }
+}

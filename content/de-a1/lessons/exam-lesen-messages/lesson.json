@@ -1,0 +1,162 @@
+{
+  "slug": "exam-lesen-messages",
+  "title": "Lesen Teil 1 · E-Mails und Notizen",
+  "titles": {
+    "en": "Reading Part 1: Emails and Notes",
+    "bn": "পড়া অংশ ১: ইমেইল ও নোট"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Einladung",
+      "article": "die",
+      "plural": "Einladungen",
+      "pos": "NOUN",
+      "ipa": "ˈaɪ̯nˌlaːdʊŋ",
+      "meanings": {
+        "en": "invitation",
+        "bn": "দাওয়াত"
+      },
+      "example": {
+        "de": "Danke für die Einladung!",
+        "en": "Thanks for the invitation!",
+        "bn": "দাওয়াতের জন্য ধন্যবাদ!"
+      }
+    },
+    {
+      "term": "Geburtstag",
+      "article": "der",
+      "plural": "Geburtstage",
+      "pos": "NOUN",
+      "ipa": "ɡəˈbuːɐ̯t͡sˌtaːk",
+      "meanings": {
+        "en": "birthday",
+        "bn": "জন্মদিন"
+      },
+      "example": {
+        "de": "Oma hat heute Geburtstag.",
+        "en": "It's Grandma's birthday today.",
+        "bn": "আজ দাদির জন্মদিন।"
+      }
+    },
+    {
+      "term": "Notiz",
+      "article": "die",
+      "plural": "Notizen",
+      "pos": "NOUN",
+      "ipa": "noˈtiːt͡s",
+      "meanings": {
+        "en": "note",
+        "bn": "নোট / চিরকুট"
+      },
+      "example": {
+        "de": "Die Notiz hängt am Kühlschrank.",
+        "en": "The note is on the fridge.",
+        "bn": "চিরকুটটা ফ্রিজে লাগানো।"
+      }
+    },
+    {
+      "term": "vergessen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈɡɛsn̩",
+      "meanings": {
+        "en": "to forget",
+        "bn": "ভুলে যাওয়া"
+      },
+      "example": {
+        "de": "Vergiss nicht, Oma anzurufen!",
+        "en": "Don't forget to call Grandma!",
+        "bn": "দাদিকে ফোন করতে ভুলো না!"
+      }
+    },
+    {
+      "term": "erst",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "eːɐ̯st",
+      "meanings": {
+        "en": "not until / only (time)",
+        "bn": "তার আগে নয়"
+      },
+      "example": {
+        "de": "Ich komme erst um 18:30 Uhr.",
+        "en": "I won't arrive until 6:30.",
+        "bn": "আমি সাড়ে ছয়টার আগে আসছি না।"
+      }
+    },
+    {
+      "term": "warm machen",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "vaʁm ˈmaxn̩",
+      "meanings": {
+        "en": "to heat up",
+        "bn": "গরম করা"
+      },
+      "example": {
+        "de": "Mach die Suppe warm.",
+        "en": "Heat up the soup.",
+        "bn": "স্যুপটা গরম করো।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Lesen Teil 1",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich komme gern zu deiner Party, aber ein bisschen später.\" — Sie kommt nicht zur Party.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "She does come, just later."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Oma hat heute Geburtstag. Ruf sie bitte an.\" — Ben soll Oma besuchen.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "anrufen = call, not visit."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich bin erst um 18:30 da, nicht um 18 Uhr.\" — Sie kommt um 18 Uhr.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "erst um 18:30."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Im Kühlschrank ist noch Suppe. Bitte mach sie warm.\" — Ben soll die Suppe warm machen.",
+        "options": [
+          "richtig",
+          "falsch"
+        ],
+        "answer": 0,
+        "explanation": "mach sie warm."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich arbeite bis 19 Uhr.\" — Sie hat um 18 Uhr frei.",
+        "options": [
+          "falsch",
+          "richtig"
+        ],
+        "answer": 0,
+        "explanation": "She works until 7."
+      }
+    ]
+  }
+}

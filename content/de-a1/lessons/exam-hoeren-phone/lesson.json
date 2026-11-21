@@ -1,0 +1,167 @@
+{
+  "slug": "exam-hoeren-phone",
+  "title": "Hören Teil 3 · Telefonnachrichten",
+  "titles": {
+    "en": "Listening Part 3: Phone Messages",
+    "bn": "শোনা অংশ ৩: ফোন মেসেজ"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "Anrufbeantworter",
+      "article": "der",
+      "plural": "Anrufbeantworter",
+      "pos": "NOUN",
+      "ipa": "ˈanʁuːfbəˌʔantvɔʁtɐ",
+      "meanings": {
+        "en": "answering machine",
+        "bn": "আনসারিং মেশিন"
+      },
+      "example": {
+        "de": "Bitte sprechen Sie auf den Anrufbeantworter.",
+        "en": "Please leave a message.",
+        "bn": "দয়া করে মেসেজ রেখে দিন।"
+      }
+    },
+    {
+      "term": "zurückrufen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "t͡suˈʁʏkˌʁuːfn̩",
+      "meanings": {
+        "en": "to call back",
+        "bn": "ফিরতি ফোন করা"
+      },
+      "example": {
+        "de": "Ruf mich bitte zurück.",
+        "en": "Please call me back.",
+        "bn": "দয়া করে আমাকে ফিরতি ফোন করো।"
+      }
+    },
+    {
+      "term": "Vormittag",
+      "article": "der",
+      "plural": "Vormittage",
+      "pos": "NOUN",
+      "ipa": "ˈfoːɐ̯mɪˌtaːk",
+      "meanings": {
+        "en": "morning (before noon)",
+        "bn": "সকাল (দুপুরের আগে)"
+      },
+      "example": {
+        "de": "Am Vormittag habe ich Kurs.",
+        "en": "In the morning I have class.",
+        "bn": "সকালে আমার ক্লাস আছে।"
+      }
+    },
+    {
+      "term": "Ich bin's.",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ɪç bɪns",
+      "meanings": {
+        "en": "It's me.",
+        "bn": "আমি বলছি।"
+      },
+      "example": {
+        "de": "Hallo, ich bin's, Rafi.",
+        "en": "Hello, it's me, Rafi.",
+        "bn": "হ্যালো, আমি রাফি বলছি।"
+      }
+    },
+    {
+      "term": "Schatz",
+      "article": "der",
+      "plural": "Schätze",
+      "pos": "NOUN",
+      "ipa": "ʃat͡s",
+      "meanings": {
+        "en": "darling / treasure",
+        "bn": "প্রিয়তম/প্রিয়তমা"
+      },
+      "example": {
+        "de": "Hallo Schatz, wie geht's?",
+        "en": "Hi darling, how are you?",
+        "bn": "হ্যালো প্রিয়, কেমন আছ?"
+      }
+    },
+    {
+      "term": "noch",
+      "article": null,
+      "plural": null,
+      "pos": "ADVERB",
+      "ipa": "nɔx",
+      "meanings": {
+        "en": "still / yet",
+        "bn": "এখনো"
+      },
+      "example": {
+        "de": "Käse haben wir noch.",
+        "en": "We still have cheese.",
+        "bn": "পনির এখনো আছে।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Practice: Hören Teil 3",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Am Vormittag kann ich nicht. Geht es auch am Nachmittag, so um drei?\" → Wann möchte sie lernen?",
+        "options": [
+          "um 15 Uhr",
+          "am Vormittag",
+          "um 13 Uhr"
+        ],
+        "answer": 0,
+        "explanation": "um drei am Nachmittag = 15 Uhr."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ihr Termin am Donnerstag um 10 Uhr … neuer Termin: Freitag, 11:30 Uhr.\" → Wann ist der neue Termin?",
+        "options": [
+          "Freitag, 11:30 Uhr",
+          "Donnerstag, 10 Uhr",
+          "Freitag, 10 Uhr"
+        ],
+        "answer": 0,
+        "explanation": "The new appointment is on Friday at 11:30."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Wir brauchen Milch, Brot und Eier. Käse haben wir noch.\" → Was soll man nicht kaufen?",
+        "options": [
+          "Käse",
+          "Milch",
+          "Eier"
+        ],
+        "answer": 0,
+        "explanation": "Cheese is still there."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Hallo, ich bin's\" means …",
+        "options": [
+          "Hi, it's me.",
+          "Hi, I'm here.",
+          "Hi, I'm busy."
+        ],
+        "answer": 0,
+        "explanation": "Ich bin's = it's me."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ruf mich bitte zurück\" means …",
+        "options": [
+          "Please call me back.",
+          "Please don't call.",
+          "Please come back."
+        ],
+        "answer": 0,
+        "explanation": "zurückrufen = call back."
+      }
+    ]
+  }
+}

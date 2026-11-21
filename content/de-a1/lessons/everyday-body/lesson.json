@@ -1,0 +1,247 @@
+{
+  "slug": "everyday-body",
+  "title": "Der Körper · The Body",
+  "titles": {
+    "en": "The Body and Saying What Hurts",
+    "bn": "শরীর ও কোথায় ব্যথা বলা"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "Kopf",
+      "article": "der",
+      "plural": "Köpfe",
+      "pos": "NOUN",
+      "ipa": "kɔp͡f",
+      "meanings": {
+        "en": "head",
+        "bn": "মাথা"
+      },
+      "example": {
+        "de": "Mein Kopf tut weh.",
+        "en": "My head hurts.",
+        "bn": "আমার মাথা ব্যথা করছে।"
+      }
+    },
+    {
+      "term": "Bauch",
+      "article": "der",
+      "plural": "Bäuche",
+      "pos": "NOUN",
+      "ipa": "baʊ̯x",
+      "meanings": {
+        "en": "stomach / belly",
+        "bn": "পেট"
+      },
+      "example": {
+        "de": "Ich habe Bauchschmerzen.",
+        "en": "I have a stomach ache.",
+        "bn": "আমার পেটব্যথা।"
+      }
+    },
+    {
+      "term": "Rücken",
+      "article": "der",
+      "plural": "Rücken",
+      "pos": "NOUN",
+      "ipa": "ˈʁʏkn̩",
+      "meanings": {
+        "en": "back",
+        "bn": "পিঠ"
+      },
+      "example": {
+        "de": "Mein Rücken tut weh.",
+        "en": "My back hurts.",
+        "bn": "আমার পিঠ ব্যথা করছে।"
+      }
+    },
+    {
+      "term": "Zahn",
+      "article": "der",
+      "plural": "Zähne",
+      "pos": "NOUN",
+      "ipa": "t͡saːn",
+      "meanings": {
+        "en": "tooth",
+        "bn": "দাঁত"
+      },
+      "example": {
+        "de": "Ich habe Zahnschmerzen.",
+        "en": "I have toothache.",
+        "bn": "আমার দাঁতব্যথা।"
+      }
+    },
+    {
+      "term": "Hals",
+      "article": "der",
+      "plural": "Hälse",
+      "pos": "NOUN",
+      "ipa": "hals",
+      "meanings": {
+        "en": "throat / neck",
+        "bn": "গলা"
+      },
+      "example": {
+        "de": "Ich habe Halsschmerzen.",
+        "en": "I have a sore throat.",
+        "bn": "আমার গলাব্যথা।"
+      }
+    },
+    {
+      "term": "Bein",
+      "article": "das",
+      "plural": "Beine",
+      "pos": "NOUN",
+      "ipa": "baɪ̯n",
+      "meanings": {
+        "en": "leg",
+        "bn": "পা"
+      },
+      "example": {
+        "de": "Mein Bein tut weh.",
+        "en": "My leg hurts.",
+        "bn": "আমার পা ব্যথা করছে।"
+      }
+    },
+    {
+      "term": "Hand",
+      "article": "die",
+      "plural": "Hände",
+      "pos": "NOUN",
+      "ipa": "hant",
+      "meanings": {
+        "en": "hand",
+        "bn": "হাত"
+      },
+      "example": {
+        "de": "Wasch dir die Hände!",
+        "en": "Wash your hands!",
+        "bn": "হাত ধুয়ে নাও!"
+      }
+    },
+    {
+      "term": "Fieber",
+      "article": "das",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈfiːbɐ",
+      "meanings": {
+        "en": "fever / temperature",
+        "bn": "জ্বর"
+      },
+      "example": {
+        "de": "Das Kind hat Fieber.",
+        "en": "The child has a temperature.",
+        "bn": "বাচ্চাটার জ্বর।"
+      }
+    },
+    {
+      "term": "Husten",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "ˈhuːstn̩",
+      "meanings": {
+        "en": "cough",
+        "bn": "কাশি"
+      },
+      "example": {
+        "de": "Ich habe seit drei Tagen Husten.",
+        "en": "I've had a cough for three days.",
+        "bn": "তিন দিন ধরে আমার কাশি।"
+      }
+    },
+    {
+      "term": "wehtun",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈveːˌtuːn",
+      "meanings": {
+        "en": "to hurt",
+        "bn": "ব্যথা করা"
+      },
+      "example": {
+        "de": "Was tut Ihnen weh?",
+        "en": "What hurts?",
+        "bn": "আপনার কোথায় ব্যথা?"
+      }
+    },
+    {
+      "term": "Gute Besserung!",
+      "article": null,
+      "plural": null,
+      "pos": "PHRASE",
+      "ipa": "ˈɡuːtə ˈbɛsəʁʊŋ",
+      "meanings": {
+        "en": "Get well soon!",
+        "bn": "তাড়াতাড়ি সুস্থ হও!"
+      },
+      "example": {
+        "de": "Du bist krank? Gute Besserung!",
+        "en": "You're ill? Get well soon!",
+        "bn": "তুমি অসুস্থ? তাড়াতাড়ি সুস্থ হও!"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: The body",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Ich habe Kopfschmerzen\" means …",
+        "options": [
+          "I have a headache.",
+          "I have a cold.",
+          "I have a fever."
+        ],
+        "answer": 0,
+        "explanation": "Kopf + Schmerzen = headache."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Meine Füße ___ weh.",
+        "options": [
+          "tun",
+          "tut",
+          "tust"
+        ],
+        "answer": 0,
+        "explanation": "Plural → tun weh."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "What do you say to someone who is ill?",
+        "options": [
+          "Gute Besserung!",
+          "Guten Appetit!",
+          "Gute Reise!"
+        ],
+        "answer": 0,
+        "explanation": "Gute Besserung = get well soon."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Plural of \"der Zahn\"?",
+        "options": [
+          "die Zähne",
+          "die Zahnen",
+          "die Zahns"
+        ],
+        "answer": 0,
+        "explanation": "der Zahn → die Zähne."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Mir ist schlecht\" means …",
+        "options": [
+          "I feel sick.",
+          "I'm bad at it.",
+          "I'm angry."
+        ],
+        "answer": 0,
+        "explanation": "Mir ist schlecht = I feel sick."
+      }
+    ]
+  }
+}

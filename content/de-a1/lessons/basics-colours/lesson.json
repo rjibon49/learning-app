@@ -1,0 +1,247 @@
+{
+  "slug": "basics-colours",
+  "title": "Die Farben · Colours",
+  "titles": {
+    "en": "Colours",
+    "bn": "রং"
+  },
+  "minutes": 10,
+  "words": [
+    {
+      "term": "Farbe",
+      "article": "die",
+      "plural": "Farben",
+      "pos": "NOUN",
+      "ipa": "ˈfaʁbə",
+      "meanings": {
+        "en": "colour",
+        "bn": "রং"
+      },
+      "example": {
+        "de": "Welche Farbe magst du?",
+        "en": "Which colour do you like?",
+        "bn": "তুমি কোন রং পছন্দ করো?"
+      }
+    },
+    {
+      "term": "rot",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʁoːt",
+      "meanings": {
+        "en": "red",
+        "bn": "লাল"
+      },
+      "example": {
+        "de": "Die Tomate ist rot.",
+        "en": "The tomato is red.",
+        "bn": "টমেটোটি লাল।"
+      }
+    },
+    {
+      "term": "blau",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "blaʊ̯",
+      "meanings": {
+        "en": "blue",
+        "bn": "নীল"
+      },
+      "example": {
+        "de": "Der Himmel ist blau.",
+        "en": "The sky is blue.",
+        "bn": "আকাশ নীল।"
+      }
+    },
+    {
+      "term": "gelb",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡɛlp",
+      "meanings": {
+        "en": "yellow",
+        "bn": "হলুদ"
+      },
+      "example": {
+        "de": "Die Banane ist gelb.",
+        "en": "The banana is yellow.",
+        "bn": "কলাটি হলুদ।"
+      }
+    },
+    {
+      "term": "grün",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ɡʁyːn",
+      "meanings": {
+        "en": "green",
+        "bn": "সবুজ"
+      },
+      "example": {
+        "de": "Das Gras ist grün.",
+        "en": "The grass is green.",
+        "bn": "ঘাস সবুজ।"
+      }
+    },
+    {
+      "term": "schwarz",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ʃvaʁt͡s",
+      "meanings": {
+        "en": "black",
+        "bn": "কালো"
+      },
+      "example": {
+        "de": "Meine Schuhe sind schwarz.",
+        "en": "My shoes are black.",
+        "bn": "আমার জুতা কালো।"
+      }
+    },
+    {
+      "term": "weiß",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "vaɪ̯s",
+      "meanings": {
+        "en": "white",
+        "bn": "সাদা"
+      },
+      "example": {
+        "de": "Der Schnee ist weiß.",
+        "en": "Snow is white.",
+        "bn": "তুষার সাদা।"
+      }
+    },
+    {
+      "term": "braun",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "bʁaʊ̯n",
+      "meanings": {
+        "en": "brown",
+        "bn": "বাদামি"
+      },
+      "example": {
+        "de": "Der Tisch ist braun.",
+        "en": "The table is brown.",
+        "bn": "টেবিলটি বাদামি।"
+      }
+    },
+    {
+      "term": "hell",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "hɛl",
+      "meanings": {
+        "en": "light / bright",
+        "bn": "হালকা / উজ্জ্বল"
+      },
+      "example": {
+        "de": "Das Zimmer ist hell.",
+        "en": "The room is bright.",
+        "bn": "ঘরটি উজ্জ্বল।"
+      }
+    },
+    {
+      "term": "dunkel",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈdʊŋkl̩",
+      "meanings": {
+        "en": "dark",
+        "bn": "গাঢ় / অন্ধকার"
+      },
+      "example": {
+        "de": "Die Jacke ist dunkelblau.",
+        "en": "The jacket is dark blue.",
+        "bn": "জ্যাকেটটি গাঢ় নীল।"
+      }
+    },
+    {
+      "term": "Lieblingsfarbe",
+      "article": "die",
+      "plural": "Lieblingsfarben",
+      "pos": "NOUN",
+      "ipa": "ˈliːplɪŋsˌfaʁbə",
+      "meanings": {
+        "en": "favourite colour",
+        "bn": "প্রিয় রং"
+      },
+      "example": {
+        "de": "Meine Lieblingsfarbe ist Grün.",
+        "en": "My favourite colour is green.",
+        "bn": "আমার প্রিয় রং সবুজ।"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Colours",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"gelb\" is …",
+        "options": [
+          "yellow",
+          "green",
+          "grey"
+        ],
+        "answer": 0,
+        "explanation": "gelb = yellow."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"dunkelblau\" means …",
+        "options": [
+          "dark blue",
+          "light blue",
+          "blue-black"
+        ],
+        "answer": 0,
+        "explanation": "dunkel + colour = dark colour."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "How do you ask the colour of a car?",
+        "options": [
+          "Welche Farbe hat das Auto?",
+          "Wie viel Farbe ist das Auto?",
+          "Wo ist die Farbe?"
+        ],
+        "answer": 0,
+        "explanation": "Welche Farbe hat …?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Der Schnee ist ___.",
+        "options": [
+          "weiß",
+          "schwarz",
+          "rot"
+        ],
+        "answer": 0,
+        "explanation": "Snow is white."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "The flag of Bangladesh is …",
+        "options": [
+          "grün und rot",
+          "schwarz, rot, gold",
+          "blau und weiß"
+        ],
+        "answer": 0,
+        "explanation": "Bangladesh: green and red."
+      }
+    ]
+  }
+}

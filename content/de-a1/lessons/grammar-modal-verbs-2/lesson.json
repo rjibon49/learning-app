@@ -1,0 +1,183 @@
+{
+  "slug": "grammar-modal-verbs-2",
+  "title": "Modalverben 2 · dürfen, sollen, möchten",
+  "titles": {
+    "en": "Modal Verbs 2: dürfen, sollen, möchten, mögen",
+    "bn": "মোডাল ক্রিয়া ২: dürfen, sollen, möchten, mögen"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "dürfen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈdʏʁfn̩",
+      "meanings": {
+        "en": "may / to be allowed to",
+        "bn": "অনুমতি থাকা"
+      },
+      "example": {
+        "de": "Darf ich hier sitzen?",
+        "en": "May I sit here?",
+        "bn": "আমি কি এখানে বসতে পারি?"
+      }
+    },
+    {
+      "term": "sollen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈzɔlən",
+      "meanings": {
+        "en": "should / to be supposed to",
+        "bn": "উচিত হওয়া"
+      },
+      "example": {
+        "de": "Soll ich das Fenster öffnen?",
+        "en": "Shall I open the window?",
+        "bn": "আমি কি জানালাটা খুলে দেব?"
+      }
+    },
+    {
+      "term": "möchten",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmœçtn̩",
+      "meanings": {
+        "en": "would like (to)",
+        "bn": "চাই (ভদ্রভাবে)"
+      },
+      "example": {
+        "de": "Ich möchte einen Kaffee.",
+        "en": "I'd like a coffee.",
+        "bn": "আমি একটা কফি চাই।"
+      }
+    },
+    {
+      "term": "mögen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈmøːɡn̩",
+      "meanings": {
+        "en": "to like",
+        "bn": "পছন্দ করা"
+      },
+      "example": {
+        "de": "Ich mag Schokolade.",
+        "en": "I like chocolate.",
+        "bn": "আমি চকলেট পছন্দ করি।"
+      }
+    },
+    {
+      "term": "rauchen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈʁaʊ̯xn̩",
+      "meanings": {
+        "en": "to smoke",
+        "bn": "ধূমপান করা"
+      },
+      "example": {
+        "de": "Hier darf man nicht rauchen.",
+        "en": "Smoking is not allowed here.",
+        "bn": "এখানে ধূমপান নিষেধ।"
+      }
+    },
+    {
+      "term": "Termin",
+      "article": "der",
+      "plural": "Termine",
+      "pos": "NOUN",
+      "ipa": "tɛʁˈmiːn",
+      "meanings": {
+        "en": "appointment",
+        "bn": "অ্যাপয়েন্টমেন্ট"
+      },
+      "example": {
+        "de": "Ich möchte einen Termin machen.",
+        "en": "I'd like to make an appointment.",
+        "bn": "আমি একটি অ্যাপয়েন্টমেন্ট নিতে চাই।"
+      }
+    },
+    {
+      "term": "Schokolade",
+      "article": "die",
+      "plural": "Schokoladen",
+      "pos": "NOUN",
+      "ipa": "ʃokoˈlaːdə",
+      "meanings": {
+        "en": "chocolate",
+        "bn": "চকলেট"
+      },
+      "example": {
+        "de": "Magst du Schokolade?",
+        "en": "Do you like chocolate?",
+        "bn": "তুমি কি চকলেট পছন্দ করো?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: dürfen, sollen, möchten, mögen",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "In a café you say politely: \"Ich ___ einen Tee, bitte.\"",
+        "options": [
+          "möchte",
+          "will",
+          "mag"
+        ],
+        "answer": 0,
+        "explanation": "möchten = polite wish."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"Hier darf man nicht parken\" means …",
+        "options": [
+          "Parking is forbidden here.",
+          "You don't have to park here.",
+          "You want to park here."
+        ],
+        "answer": 0,
+        "explanation": "nicht dürfen = not allowed."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ ich das Fenster öffnen? (offering help)",
+        "options": [
+          "Soll",
+          "Darf",
+          "Muss"
+        ],
+        "answer": 0,
+        "explanation": "Soll ich …? = Shall I …?"
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ___ keinen Fisch. (mögen)",
+        "options": [
+          "mag",
+          "möchte",
+          "mögt"
+        ],
+        "answer": 0,
+        "explanation": "er mag."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ Sie etwas trinken?",
+        "options": [
+          "Möchten",
+          "Möchte",
+          "Möchtest"
+        ],
+        "answer": 0,
+        "explanation": "Sie möchten."
+      }
+    ]
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "slug": "grammar-perfect-sein-participle",
+  "title": "Perfekt mit sein · Movement & Change",
+  "titles": {
+    "en": "Perfect Tense with sein + Special Participles",
+    "bn": "Perfekt — sein দিয়ে + বিশেষ participle"
+  },
+  "minutes": 15,
+  "words": [
+    {
+      "term": "gegangen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈɡaŋən",
+      "meanings": {
+        "en": "gone (participle of gehen)",
+        "bn": "গিয়েছি (gehen-এর অতীত)"
+      },
+      "example": {
+        "de": "Ich bin ins Kino gegangen.",
+        "en": "I went to the cinema.",
+        "bn": "আমি সিনেমা দেখতে গিয়েছিলাম।"
+      }
+    },
+    {
+      "term": "gefahren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈfaːʁən",
+      "meanings": {
+        "en": "driven / gone (participle of fahren)",
+        "bn": "গিয়েছি (fahren-এর অতীত)"
+      },
+      "example": {
+        "de": "Wir sind nach Berlin gefahren.",
+        "en": "We went to Berlin.",
+        "bn": "আমরা বার্লিনে গিয়েছিলাম।"
+      }
+    },
+    {
+      "term": "geflogen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈfloːɡn̩",
+      "meanings": {
+        "en": "flown (participle of fliegen)",
+        "bn": "উড়ে গিয়েছি (fliegen-এর অতীত)"
+      },
+      "example": {
+        "de": "Sie ist nach Dhaka geflogen.",
+        "en": "She flew to Dhaka.",
+        "bn": "সে ঢাকায় উড়ে গেছে।"
+      }
+    },
+    {
+      "term": "geblieben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ɡəˈbliːbn̩",
+      "meanings": {
+        "en": "stayed (participle of bleiben)",
+        "bn": "থেকেছি (bleiben-এর অতীত)"
+      },
+      "example": {
+        "de": "Wir sind zu Hause geblieben.",
+        "en": "We stayed at home.",
+        "bn": "আমরা বাড়িতে ছিলাম।"
+      }
+    },
+    {
+      "term": "passieren",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "paˈsiːʁən",
+      "meanings": {
+        "en": "to happen",
+        "bn": "ঘটা"
+      },
+      "example": {
+        "de": "Was ist passiert?",
+        "en": "What happened?",
+        "bn": "কী হয়েছে?"
+      }
+    },
+    {
+      "term": "bezahlen",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "bəˈt͡saːlən",
+      "meanings": {
+        "en": "to pay",
+        "bn": "দাম দেওয়া"
+      },
+      "example": {
+        "de": "Ich habe schon bezahlt.",
+        "en": "I've already paid.",
+        "bn": "আমি আগেই দাম দিয়েছি।"
+      }
+    },
+    {
+      "term": "verstanden",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "fɛɐ̯ˈʃtandn̩",
+      "meanings": {
+        "en": "understood (participle of verstehen)",
+        "bn": "বুঝেছি (verstehen-এর অতীত)"
+      },
+      "example": {
+        "de": "Haben Sie das verstanden?",
+        "en": "Did you understand that?",
+        "bn": "আপনি কি এটা বুঝেছেন?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: Perfekt with sein",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ich ___ nach Köln gefahren.",
+        "options": [
+          "bin",
+          "habe",
+          "ist"
+        ],
+        "answer": 0,
+        "explanation": "Movement → sein: ich bin."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir ___ einen Kuchen gegessen.",
+        "options": [
+          "haben",
+          "sind",
+          "hat"
+        ],
+        "answer": 0,
+        "explanation": "essen → haben."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Participle of \"einkaufen\"?",
+        "options": [
+          "eingekauft",
+          "geeinkauft",
+          "einkauft"
+        ],
+        "answer": 0,
+        "explanation": "Separable: ge- in the middle."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Participle of \"telefonieren\"?",
+        "options": [
+          "telefoniert",
+          "getelefoniert",
+          "telefonieren"
+        ],
+        "answer": 0,
+        "explanation": "-ieren verbs take no ge-."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Was ___ passiert?",
+        "options": [
+          "ist",
+          "hat",
+          "sind"
+        ],
+        "answer": 0,
+        "explanation": "passieren → sein."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ist zu Hause ___.",
+        "options": [
+          "geblieben",
+          "gebleibt",
+          "bleiben"
+        ],
+        "answer": 0,
+        "explanation": "bleiben → ist geblieben."
+      }
+    ]
+  }
+}

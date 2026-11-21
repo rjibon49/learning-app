@@ -1,0 +1,194 @@
+{
+  "slug": "grammar-sein-haben",
+  "title": "sein und haben · to be & to have",
+  "titles": {
+    "en": "The Most Important Verbs: sein and haben",
+    "bn": "সবচেয়ে জরুরি ক্রিয়া: sein ও haben"
+  },
+  "minutes": 12,
+  "words": [
+    {
+      "term": "sein",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "zaɪ̯n",
+      "meanings": {
+        "en": "to be",
+        "bn": "হওয়া"
+      },
+      "example": {
+        "de": "Ich bin müde.",
+        "en": "I am tired.",
+        "bn": "আমি ক্লান্ত।"
+      }
+    },
+    {
+      "term": "haben",
+      "article": null,
+      "plural": null,
+      "pos": "VERB",
+      "ipa": "ˈhaːbn̩",
+      "meanings": {
+        "en": "to have",
+        "bn": "থাকা / আছে"
+      },
+      "example": {
+        "de": "Ich habe zwei Brüder.",
+        "en": "I have two brothers.",
+        "bn": "আমার দুই ভাই আছে।"
+      }
+    },
+    {
+      "term": "Durst",
+      "article": "der",
+      "plural": null,
+      "pos": "NOUN",
+      "ipa": "dʊʁst",
+      "meanings": {
+        "en": "thirst",
+        "bn": "তৃষ্ণা"
+      },
+      "example": {
+        "de": "Ich habe Durst.",
+        "en": "I'm thirsty.",
+        "bn": "আমার তৃষ্ণা পেয়েছে।"
+      }
+    },
+    {
+      "term": "Angst",
+      "article": "die",
+      "plural": "Ängste",
+      "pos": "NOUN",
+      "ipa": "aŋst",
+      "meanings": {
+        "en": "fear",
+        "bn": "ভয়"
+      },
+      "example": {
+        "de": "Hast du Angst?",
+        "en": "Are you afraid?",
+        "bn": "তোমার কি ভয় লাগছে?"
+      }
+    },
+    {
+      "term": "Bruder",
+      "article": "der",
+      "plural": "Brüder",
+      "pos": "NOUN",
+      "ipa": "ˈbʁuːdɐ",
+      "meanings": {
+        "en": "brother",
+        "bn": "ভাই"
+      },
+      "example": {
+        "de": "Mein Bruder ist 20.",
+        "en": "My brother is 20.",
+        "bn": "আমার ভাইয়ের বয়স ২০।"
+      }
+    },
+    {
+      "term": "Schwester",
+      "article": "die",
+      "plural": "Schwestern",
+      "pos": "NOUN",
+      "ipa": "ˈʃvɛstɐ",
+      "meanings": {
+        "en": "sister",
+        "bn": "বোন"
+      },
+      "example": {
+        "de": "Hast du eine Schwester?",
+        "en": "Do you have a sister?",
+        "bn": "তোমার কি বোন আছে?"
+      }
+    },
+    {
+      "term": "müde",
+      "article": null,
+      "plural": null,
+      "pos": "ADJECTIVE",
+      "ipa": "ˈmyːdə",
+      "meanings": {
+        "en": "tired",
+        "bn": "ক্লান্ত"
+      },
+      "example": {
+        "de": "Bist du müde?",
+        "en": "Are you tired?",
+        "bn": "তুমি কি ক্লান্ত?"
+      }
+    }
+  ],
+  "quiz": {
+    "title": "Quiz: sein and haben",
+    "questions": [
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Wir ___ aus Indien.",
+        "options": [
+          "sind",
+          "seid",
+          "haben"
+        ],
+        "answer": 0,
+        "explanation": "wir sind."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: ___ du Zeit?",
+        "options": [
+          "Hast",
+          "Hat",
+          "Bist"
+        ],
+        "answer": 0,
+        "explanation": "du hast."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "\"I am hungry\" in German is …",
+        "options": [
+          "Ich habe Hunger.",
+          "Ich bin Hunger.",
+          "Ich bin hungrig habe."
+        ],
+        "answer": 0,
+        "explanation": "German: haben + Hunger."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Ihr ___ sehr nett.",
+        "options": [
+          "seid",
+          "sind",
+          "habt"
+        ],
+        "answer": 0,
+        "explanation": "ihr seid."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Er ___ 30 Jahre alt.",
+        "options": [
+          "ist",
+          "hat",
+          "sind"
+        ],
+        "answer": 0,
+        "explanation": "Age uses sein: er ist 30."
+      },
+      {
+        "type": "MULTIPLE_CHOICE",
+        "text": "Complete: Sie (she) ___ ein Auto.",
+        "options": [
+          "hat",
+          "habt",
+          "ist"
+        ],
+        "answer": 0,
+        "explanation": "er/sie/es hat."
+      }
+    ]
+  }
+}
