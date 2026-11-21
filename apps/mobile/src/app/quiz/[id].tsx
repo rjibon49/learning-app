@@ -12,6 +12,7 @@ import { COLORS, FONTS, RADIUS, SPACING } from "../../styles/theme";
 import { useLearnerAuth } from "../../lib/auth-context";
 import { recordStep } from "../../lib/preferences";
 import { QuizSkeleton } from "../../components/Skeleton";
+import { maybeShowInterstitial } from "../../lib/ads";
 
 const PROMPT: Record<string, string> = {
   MULTIPLE_CHOICE: "Choose the right answer",
@@ -137,7 +138,14 @@ export default function QuizScreen() {
         </Txt>
         <View style={{ gap: SPACING.md, marginTop: SPACING.lg }}>
           {!result.passed ? <Button title="Try again" onPress={restart} /> : null}
-          <Button title="Done" variant={result.passed ? "primary" : "secondary"} onPress={() => router.back()} />
+          <Button
+            title="Done"
+            variant={result.passed ? "primary" : "secondary"}
+            onPress={() => {
+              maybeShowInterstitial();
+              router.back();
+            }}
+          />
         </View>
       </Screen>
     );

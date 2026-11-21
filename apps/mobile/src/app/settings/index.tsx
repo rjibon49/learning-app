@@ -12,11 +12,13 @@ import { useContentLanguage } from "../../lib/content-language";
 import { languageLabel } from "../../lib/language-names";
 import { useAsync } from "../../lib/use-async";
 import { COLORS, SPACING } from "../../styles/theme";
+import { showAdPrivacyOptions, useAdsState } from "../../lib/ads";
 
 export default function SettingsScreen() {
   const { user, signOut } = useLearnerAuth();
   const { prefs } = usePrefs(user?.id);
   const language = useContentLanguage();
+  const adsPrivacy = useAdsState().privacyOptionsRequired;
   const marketing = useAsync(fetchMarketingPreferences, []);
   const [saving, setSaving] = useState<keyof MarketingPreferences | null>(null);
   const [override, setOverride] = useState<Partial<Pick<MarketingPreferences, "email" | "whatsapp" | "sms">>>({});
@@ -131,6 +133,17 @@ export default function SettingsScreen() {
         <ListRow icon="notifications-outline" title="Notifications" onPress={() => router.push("/notifications")} />
         <View style={styles.divider} />
         <ListRow icon="shield-checkmark-outline" title="Privacy policy" onPress={() => router.push("/legal/privacy")} />
+        {adsPrivacy ? (
+          <>
+            <View style={styles.divider} />
+            <ListRow
+              icon="options-outline"
+              title="Ad privacy choices"
+              subtitle="Change your consent for ads"
+              onPress={() => void showAdPrivacyOptions()}
+            />
+          </>
+        ) : null}
         <View style={styles.divider} />
         <ListRow icon="document-text-outline" title="Terms of use" onPress={() => router.push("/legal/terms")} />
         <View style={styles.divider} />

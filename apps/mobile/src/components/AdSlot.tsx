@@ -1,20 +1,36 @@
-import { fetchEntitlement } from "../api/ads";
-import { useAsync } from "../lib/use-async";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-/** True when this learner should see ads (ads on in the CMS, not ad-free). */
-export function useAdsAllowed(appId: string): boolean {
-  const state = useAsync(() => fetchEntitlement(appId), [appId]);
-  const e = state.data;
-  return Boolean(e && e.adsEnabled && !e.adFree);
-}
+import { adsLib, initAds, useAdsState } from "../lib/ads";
 
 /**
- * Place where a banner ad goes. The AdMob banner is added together with the
- * AdMob SDK (needs a development build and the unit ids from CMS → Ads);
- * until then this renders nothing.
+ * Banner ad (AdMob, anchored adaptive). Renders nothing when ads are off in
+ * the CMS, the learner is ad-free, consent doesn't allow ads, in Expo Go, or
+ * when no ad is available.
  */
 export function AdSlot({ appId }: { appId: string }) {
-  const allowed = useAdsAllowed(appId);
-  if (!allowed) return null;
-  return null;
+  const { ready, units } = useAdsState();
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    void initAds(appId);
+  }, [appId]);
+
+  const ads = adsLib();
+  if (!ads || !ready || !units.banner || failed) return null;
+
+  const { BannerAd, BannerAdSize } = ads;
+  return (
+    <View style={styles.wrap} accessibilityLabel="Advertisement">
+      <BannerAd
+        unitId={units.banner}
+        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        onAdFailedToLoad={() => setFailed(true)}
+      />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  wrap: { alignItems: "center", overflow: "hidden" },
+});
