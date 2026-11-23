@@ -13,6 +13,7 @@ import { useLearnerAuth } from "../../lib/auth-context";
 import { recordStep } from "../../lib/preferences";
 import { QuizSkeleton } from "../../components/Skeleton";
 import { maybeShowInterstitial } from "../../lib/ads";
+import { trackQuizComplete } from "../../lib/analytics";
 
 const PROMPT: Record<string, string> = {
   MULTIPLE_CHOICE: "Choose the right answer",
@@ -66,6 +67,7 @@ export default function QuizScreen() {
         res.passed ? Haptics.NotificationFeedbackType.Success : Haptics.NotificationFeedbackType.Warning,
       ).catch(() => undefined);
       setResult(res);
+      trackQuizComplete(String(quizId), Number(res.percentage), Boolean(res.passed));
       void recordStep(user?.id);
     } catch (e) {
       setSubmitError(getApiError(e));

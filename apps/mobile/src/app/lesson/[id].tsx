@@ -28,6 +28,7 @@ import { annotateGerman } from "../../lib/german-text";
 import { ListenPanel, lessonMarkdownRules } from "../../components/lesson-audio";
 import { markLessonCompleted } from "../../lib/lesson-progress";
 import { maybeShowInterstitial } from "../../lib/ads";
+import { trackLessonComplete } from "../../lib/analytics";
 import { recordStep } from "../../lib/preferences";
 import { loadLearningPath, nextLessonAfter } from "../../lib/learning-path";
 import { useAsync } from "../../lib/use-async";
@@ -91,6 +92,7 @@ export default function LessonScreen() {
       void recordStep(user.id);
       void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       setFinished(true);
+      trackLessonComplete(String(lessonId));
       maybeShowInterstitial();
       // Find the next lesson on the path so the learner can go straight on.
       void loadLearningPath(user.id)

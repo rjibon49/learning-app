@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 import { useLearnerAuth } from "../lib/auth-context";
 import { getApiError } from "../api/client";
+import { trackLogin } from "../lib/analytics";
 
 import {
   AuthLayout,
@@ -36,6 +37,7 @@ export default function LoginScreen() {
 
     try {
       await signIn(email, password);
+      trackLogin();
     } catch (err) {
       setError(getApiError(err));
     } finally {

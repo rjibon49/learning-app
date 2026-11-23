@@ -12,6 +12,7 @@ import {
 
 
 import { registerLearner } from "../api/learner-auth";
+import { trackSignUp } from "../lib/analytics";
 import { getApiError } from "../api/client";
 
 import {
@@ -88,6 +89,7 @@ export default function RegisterScreen() {
           sms: marketingSms,
         },
       });
+      trackSignUp();
 
       router.push({ pathname: "/verify-email", params: {
         email: email.trim().toLowerCase(),

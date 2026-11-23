@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Stack } from "expo-router";
+import { Stack, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -14,6 +14,7 @@ import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold } from "@expo-goog
 import { AuthProvider, useLearnerAuth } from "../lib/auth-context";
 import { loadContentLanguage } from "../lib/content-language";
 import { COLORS, FONTS } from "../styles/theme";
+import { setAnalyticsUser, trackScreen } from "../lib/analytics";
 
 void SplashScreen.preventAutoHideAsync().catch(() => undefined);
 void loadContentLanguage();
@@ -21,6 +22,15 @@ void loadContentLanguage();
 function RootNavigator() {
   const { user, loading } = useLearnerAuth();
   const signedIn = Boolean(user);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!loading) trackScreen(pathname);
+  }, [pathname, loading]);
+
+  useEffect(() => {
+    if (!loading) setAnalyticsUser(user?.id ? String(user.id) : null);
+  }, [user?.id, loading]);
 
   useEffect(() => {
     if (!loading) void SplashScreen.hideAsync().catch(() => undefined);
